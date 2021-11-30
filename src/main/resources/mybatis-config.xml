@@ -7,5 +7,6 @@
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
+		<typeAlias type="kr.or.recipe.model.vo.RecipeBoard" alias="rb"/>
 	</typeAliases>
 </configuration>

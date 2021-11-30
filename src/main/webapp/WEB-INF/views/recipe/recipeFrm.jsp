@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<a href="/recipeBoard.do">레시피게시판</a>
+	
 </body>
 </html>
