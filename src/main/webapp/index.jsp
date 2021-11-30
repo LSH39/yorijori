@@ -14,5 +14,6 @@
 	<h4>태경 setting완료 ㅠ3ㅠ</h4>
 	<h3>민지테스트</h3>
 	<h2>slack test222</h2>
+	<h2>slack push test</h2>
 </body>
 </html>
