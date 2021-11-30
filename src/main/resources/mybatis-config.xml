@@ -7,5 +7,9 @@
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
+		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
+		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
+		<typeAlias type="kr.or.order.model.vo.Order" alias="o"/>
+		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
 	</typeAliases>
 </configuration>
