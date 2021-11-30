@@ -66,7 +66,7 @@
 	
 	<context:component-scan base-package="kr.or.yorijori" />
 	<context:component-scan base-package="kr.or.member" />
-	
+	<context:component-scan base-package="kr.or.coupon" />
 	
 	
 </beans:beans>
