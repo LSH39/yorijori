@@ -57,11 +57,6 @@
 
 	<task:annotation-driven/>
 
-	
-	
-	
-	
-	
 	<aop:aspectj-autoproxy/>
 	
 	<context:component-scan base-package="kr.or.yorijori" />
@@ -74,7 +69,8 @@
 	<context:component-scan base-package="kr.or.dm"/>
 	<context:component-scan base-package="kr.or.store"/>
 	<!-- 성승민 패키지 끝 -->
-	
+	<context:component-scan base-package="kr.or.mypage"/>
+
 		<!-- 김민지 패키지 추가 -->
 	<context:component-scan base-package="kr.or.recipe"/>
 	<context:component-scan base-package="kr.or.milkit"/>
@@ -84,6 +80,5 @@
 	<context:component-scan base-package="kr.or.chat" />
 	<context:component-scan base-package="kr.or.order" />
 	<context:component-scan base-package="kr.or.point" />
-	
 	
 </beans:beans>
