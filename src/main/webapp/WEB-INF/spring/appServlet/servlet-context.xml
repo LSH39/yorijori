@@ -66,7 +66,10 @@
 	
 	<context:component-scan base-package="kr.or.yorijori" />
 	<context:component-scan base-package="kr.or.member" />
-	
+	<context:component-scan base-package="kr.or.cart" />
+	<context:component-scan base-package="kr.or.chat" />
+	<context:component-scan base-package="kr.or.order" />
+	<context:component-scan base-package="kr.or.point" />
 	
 	
 </beans:beans>
