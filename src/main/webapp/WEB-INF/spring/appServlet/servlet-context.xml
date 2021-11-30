@@ -74,7 +74,9 @@
 	<context:component-scan base-package="kr.or.dm"/>
 	<context:component-scan base-package="kr.or.store"/>
 	<!-- 성승민 패키지 끝 -->
-	
+
+		
+
 	
 	
 </beans:beans>
