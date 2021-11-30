@@ -1,4 +1,4 @@
-package kr.or.mypage.vo;
+package kr.or.mypage.model.vo;
 
 import lombok.Data;
 @Data
