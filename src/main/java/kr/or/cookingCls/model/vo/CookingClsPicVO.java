@@ -1,4 +1,4 @@
-package kr.or.cookingCls.model.dao;
+package kr.or.cookingCls.model.vo;
 
 import lombok.Data;
 
