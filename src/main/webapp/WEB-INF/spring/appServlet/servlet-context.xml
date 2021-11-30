@@ -67,6 +67,14 @@
 	<context:component-scan base-package="kr.or.yorijori" />
 	<context:component-scan base-package="kr.or.member" />
 	
+	<!-- 성승민 패키지 추가 -->
+	<context:component-scan base-package="kr.or.cookingCls"/>
+	<context:component-scan base-package="kr.or.cookingRsrv"/>
+	<context:component-scan base-package="kr.or.review"/>
+	<context:component-scan base-package="kr.or.dm"/>
+	<context:component-scan base-package="kr.or.store"/>
+	<!-- 성승민 패키지 끝 -->
+	
 	
 	
 </beans:beans>
