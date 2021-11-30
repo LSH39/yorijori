@@ -23,6 +23,9 @@
 <link href="resources/img/mainpage/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
 <!-- Vendor CSS Files -->
@@ -44,9 +47,18 @@
       <div class="contact-info d-flex align-items-center">
       </div>
       <div class="social-links d-none d-md-block">
+      <c:choose>
+		<c:when test="${empty sessionScope.m }">
         <a href="#" class="join">회원가입</a>
-        <a href="#" class="facebook">로그인</a>
-        <a href="#" class="instagram">1:1 문의하기</a>
+        <a href="#" class="login">로그인</a>
+        </c:when>
+       	<c:otherwise>
+       	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
+       	<a href="#" class="logout">로그아웃</a>
+        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
+        <a href="#" class="qna">1:1문의하기</a>
+       	</c:otherwise>
+       </c:choose>
       </div>
     </div>
   </section>
@@ -56,11 +68,11 @@
     <div class="container d-flex align-items-center">
 
       
-      <a href="index.html" class="logo me-auto"><img src="img/mainpage/logo_header.png" alt="" class="img-fluid"></a>
+      <a href="index.html" class="logo me-auto"><img src="resources/img/mainpage/logo_header.png" alt="" class="img-fluid"></a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">서비스소개</a></li>
+          <li><a class="nav-link scrollto" href="#">서비스소개</a></li>
           <li><a class="nav-link scrollto" href="#">레시피</a></li>
           <li class="dropdown"><a href="#"><span>밀키트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
