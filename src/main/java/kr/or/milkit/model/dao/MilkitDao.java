@@ -1,4 +1,4 @@
-package kr.or.mlikit.model.dao;
+package kr.or.milkit.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
