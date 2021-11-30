@@ -11,17 +11,10 @@
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
 		<typeAlias type="kr.or.order.model.vo.Order" alias="o"/>
 		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
-<<<<<<< HEAD
-		<!-- 태경 alias 추가 -->
-		<typeAlias type="kr.or.recipecontest.vo.RecipeContest" alias="rc"/>
-		<typeAlias type="kr.or.notice.vo.Notice" alias="n"/>
-		<typeAlias type="kr.or.freeboard.vo.FreeBoard" alias="fb"/>
-=======
 		<!-- 태경 alias -->
 		<typeAlias type="kr.or.freeboard.vo.Freeboard" alias="fb"/>
 		<typeAlias type="kr.or.notice.vo.Notice" alias="n"/>
 		<typeAlias type="kr.or.recipecontest.vo.RecipeContest" alias="rc"/>
 		<!-- 태경 alias 끝 -->
->>>>>>> refs/heads/tk-branch
 	</typeAliases>
 </configuration>
