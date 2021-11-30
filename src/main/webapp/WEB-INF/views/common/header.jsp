@@ -12,31 +12,29 @@
   <meta content="" name="keywords">
 
 
-<!-- 글꼴적용(NotoSans 폰트) -->
-<link rel="stylesheet" href="css/font.css">
 <!-- header 및 기본 CSS-->
-<link rel="stylesheet" href="css/mainpage/header.css">
+<link rel="stylesheet" href="resources/css/mainpage/header.css">
 <!-- 부트스트랩용 jQuery -->
-<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- 부트스트랩 icon -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <!-- Favicons -->
-<link href="img/mainpage/favicon.png" rel="icon">
-<link href="img/mainpage/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="resources/img/mainpage/favicon.png" rel="icon">
+<link href="resources/img/mainpage/apple-touch-icon.png" rel="apple-touch-icon">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
 <!-- Vendor CSS Files -->
-<link href="vendor/animate.css/animate.min.css" rel="stylesheet">
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-<link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link href="resources/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="resources/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
 <!-- Template Main CSS File -->
-<link href="css/mainpage/style.css" rel="stylesheet">
+<link href="resources/css/mainpage/style.css" rel="stylesheet">
 
 </head>
 
