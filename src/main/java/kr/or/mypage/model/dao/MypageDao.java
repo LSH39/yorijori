@@ -1,4 +1,4 @@
-package kr.or.mypage.dao;
+package kr.or.mypage.model.dao;
 
 public class MypageDao {
 
