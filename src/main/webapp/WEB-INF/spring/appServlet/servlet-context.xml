@@ -66,7 +66,7 @@
 	
 	<context:component-scan base-package="kr.or.yorijori" />
 	<context:component-scan base-package="kr.or.member" />
-	
+	<context:component-scan base-package="kr.or.coupon" />
 	<!-- 성승민 패키지 추가 -->
 	<context:component-scan base-package="kr.or.cookingCls"/>
 	<context:component-scan base-package="kr.or.cookingRsrv"/>
@@ -75,12 +75,9 @@
 	<context:component-scan base-package="kr.or.store"/>
 	<!-- 성승민 패키지 끝 -->
 	
-	<!-- 김민지 패키지 추가 -->
+		<!-- 김민지 패키지 추가 -->
 	<context:component-scan base-package="kr.or.recipe"/>
 	<context:component-scan base-package="kr.or.milkit"/>
 	<context:component-scan base-package="kr.or.membership"/>
 	<!-- 김민지 패키지 끝 -->
-
-	
-	
 </beans:beans>

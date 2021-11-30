@@ -6,5 +6,6 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
 	</typeAliases>
 </configuration>

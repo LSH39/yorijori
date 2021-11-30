@@ -9,6 +9,7 @@ public class Coupon {
 	private String couponStart;
 	private String couponEnd;
 	private String couponDiscount;
-	private int couponAmount;
+	private int couponAmount;	
+	private String couponDate;
 	
 }
