@@ -1,4 +1,4 @@
-package kr.or.mlikit.model.vo;
+package kr.or.milkit.model.vo;
 
 import lombok.Data;
 
