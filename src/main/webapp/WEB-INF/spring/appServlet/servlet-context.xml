@@ -75,6 +75,14 @@
 	<context:component-scan base-package="kr.or.store"/>
 	<!-- 성승민 패키지 끝 -->
 	
+	<!-- 태경 패키지 추가 -->
+	<context:component-scan base-package="kr.or.recipecontest"/>
+	<context:component-scan base-package="kr.or.notice"/>
+	<context:component-scan base-package="kr.or.freeboard"/>
+	<context:component-scan base-package="kr.or.main"/>
+	<!-- 태경 패키지 끝 -->
+	
+	
 		<!-- 김민지 패키지 추가 -->
 	<context:component-scan base-package="kr.or.recipe"/>
 	<context:component-scan base-package="kr.or.milkit"/>
