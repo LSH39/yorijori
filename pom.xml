@@ -200,8 +200,10 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency> 
+		       
 	</dependencies>
+	
     <build>
         <plugins>
             <plugin>
