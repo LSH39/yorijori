@@ -81,22 +81,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 40px;
   padding: 0;
 }
-#topbar .contact-info a {
-  line-height: 0;
-  color: #444444;
-  transition: 0.3s;
-}
-#topbar .contact-info a:hover {
-  color: #8E44AD;
-}
-#topbar .contact-info i {
-  color: #8E44AD;
-  line-height: 0;
-  margin-right: 5px;
-}
-#topbar .contact-info .phone-icon {
-  margin-left: 15px;
-}
+
 #topbar .social-links a {
   color: #6f6f6f;
   padding: 4px 12px;
@@ -109,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------------------------------------------------
-# Header
+# 헤더
 --------------------------------------------------------------*/
 #header {
   background-color: #C4BFE3;
@@ -118,23 +103,21 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 997;
   height: 80px;
 }
+#header:hover{
+	opacity: 1;
+}
+
 #header.header-scrolled {
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 #header .logo {
-  font-size: 30px;
   margin: 0;
   padding: 0;
   line-height: 1;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
 }
-#header .logo a {
-  color: #8E44AD;
-}
+
 #header .logo img {
-  max-height: 40px;
+  max-height: 50px;
 }
 
 .scrolled-offset {
@@ -142,10 +125,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------------------------------------------------
-# Navigation Menu
+# 네비게이션 메뉴
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* PC 네비게이션
 */
 .navbar {
   padding: 0;
@@ -165,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   padding: 10px 0 10px 30px;
-  font-size: 15px;
+  font-size: 16px;
   color: #222222;
   white-space: nowrap;
   transition: 0.3s;
@@ -178,6 +161,9 @@ h1, h2, h3, h4, h5, h6 {
 .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
   color: #8E44AD;
 }
+.navbar img:hover{
+	filter: opacity(0.3) drop-shadow(0 0 0 lightgray);
+}
 .navbar .getstarted, .navbar .getstarted:focus {
   color: #8E44AD;
   padding: 8px 25px;
@@ -185,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px;
   border: 2px solid #8E44AD;
   transition: 0.3s;
-  font-size: 14px;
+  font-size: 15px;
 }
 .navbar .getstarted:hover, .navbar .getstarted:focus:hover {
   background: #8E44AD;
@@ -201,7 +187,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 99;
   opacity: 0;
   visibility: hidden;
-  background: #fff;
+  background: rgb(246, 240, 255);
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
@@ -223,6 +209,12 @@ h1, h2, h3, h4, h5, h6 {
   top: 100%;
   visibility: visible;
 }
+
+label[for="searchsubmit"]:hover{
+	cursor: pointer;
+}
+
+/*
 .navbar .dropdown .dropdown ul {
   top: 0;
   left: calc(100% - 30px);
@@ -234,6 +226,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 100%;
   visibility: visible;
 }
+*/
 @media (max-width: 1366px) {
   .navbar .dropdown .dropdown ul {
     left: -90%;
@@ -355,7 +348,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero .carousel-item::before {
   content: "";
-  background-color: rgba(45, 103, 60, 0.8);
+  background-color: rgba(240, 240, 240, 0.15);
 }
 #hero .carousel-container {
   display: flex;
@@ -1205,29 +1198,42 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Footer
+# Footer 풋터
 --------------------------------------------------------------*/
 #footer {
   background: rgb(247, 247, 229);
   color: rgb(51, 51, 51);
-  font-size: 14px;
-  text-align: center;
+  font-size: 15px;
+  text-align: left;
   padding: 30px 0;
 }
 #footer h3 {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
-  color: #fff;
+  color: #8E44AD;
+  opacity: 0.9;
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: "Jua", sans-serif;
   padding: 0;
-  margin: 0 0 15px 0;
+  margin: 0;
 }
-#footer p {
-  font-size: 15;
-  font-style: italic;
+.footer-content{
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+.footer-content span{
+  font-size: 16px;
+  color: rgb(51, 51, 51);
   padding: 0;
   margin: 0 0 40px 0;
+}
+.footer-content span:hover{
+  color: #8E44AD;
+}
+.footer-companyinfo>p, .footer-companyinfo>pre{
+  font-size: 16px;
+  font-family: "TmoneyRoundWindRegular";
+  margin: 10px 0;
 }
 #footer .social-links {
   margin: 0 0 40px 0;

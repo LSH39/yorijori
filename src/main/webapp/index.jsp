@@ -19,7 +19,7 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(resources/img/mainpage/slide/slide-1.jpg)">
+        <div class="carousel-item active" style="background-image: url(resources/img/mainpage/mainbanner_1.jpg)">
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Green</span></h2>
