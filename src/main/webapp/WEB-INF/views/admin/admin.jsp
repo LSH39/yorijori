@@ -37,7 +37,7 @@
             <td><a href="#">쿠폰</a></td>
         </tr>
         <tr class="table-warning">
-            <td><a href="#">전체회원조회</a></td>
+            <td><a href="allmember.do">전체회원조회</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
             <td><a href="#">쿠폰발행</a></td>
