@@ -95,9 +95,9 @@
               <li><a href="#">메뉴추천</a></li>
             </ul>
           </li>
-          <li><input type="search" id="mainsearch" placeholder="검색"></li>
-          <li><a class="nav-link scrollto" href="#contact">장바구니</a></li>
-          <li><a class="getstarted scrollto" href="#about">레시피 작성</a></li>
+          <li><input type="search" class="nav-link scrollto" id="mainsearch" placeholder="검색"></li>
+          <li><a class="nav-link scrollto" href="#"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
+          <li><a class="getstarted scrollto" href="#">레시피 작성</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
