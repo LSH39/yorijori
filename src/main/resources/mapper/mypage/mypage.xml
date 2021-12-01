@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypage">
+	<select id="mypage" resultType="m" parameterType="string">
+		select
+		member_id as memberId,
+		member_pw as memberPw,
+		member_name as memberName,
+		address,
+		enroll_date as enrollDate
+		from member where
+		member_id=#{memberId}
+	</select>
+	
+	<update id="updateMember" parameterType="m">
+		update member set
+		address=#{address} where member_id=#{memberId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="m">
+	delete from member where member_id='hyo' and member_pw='1111'
+	
+	</delete>
+	
+</mapper>
+

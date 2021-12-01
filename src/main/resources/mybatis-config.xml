@@ -29,5 +29,6 @@
 		
 		<!-- 김민지 별칭추가 -->
 		<typeAlias type="kr.or.recipe.model.vo.RecipeBoard" alias="rb"/>
+
 	</typeAliases>
 </configuration>
