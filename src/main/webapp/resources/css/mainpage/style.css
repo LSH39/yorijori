@@ -161,6 +161,9 @@ h1, h2, h3, h4, h5, h6 {
 .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
   color: #8E44AD;
 }
+.navbar img:hover{
+	filter: opacity(0.3) drop-shadow(0 0 0 lightgray);
+}
 .navbar .getstarted, .navbar .getstarted:focus {
   color: #8E44AD;
   padding: 8px 25px;
@@ -206,6 +209,11 @@ h1, h2, h3, h4, h5, h6 {
   top: 100%;
   visibility: visible;
 }
+
+label[for="searchsubmit"]:hover{
+	cursor: pointer;
+}
+
 /*
 .navbar .dropdown .dropdown ul {
   top: 0;

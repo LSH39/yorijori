@@ -90,14 +90,20 @@
               <li><a href="#">역대 우승자</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown" style="padding-right:15px;"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">자유게시판</a></li>
               <li><a href="#">공지사항</a></li>
               <li><a href="#">메뉴추천</a></li>
             </ul>
           </li>
-          <li><input type="search" class="nav-link scrollto" id="mainsearch" placeholder="검색"></li>
+          <li>
+          <form action="/mainpagesearch.do" method="get" id="searchBar">
+          <input type="search" class="nav-link scrollto" id="mainsearch" placeholder="검색"></li>
+          <input type="hidden" name="reqPage" value=1>
+          <input type="submit" id="searchsubmit" style="display: none;"></input>
+          <label for="searchsubmit"><img src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
+          </form>
           <li><a class="nav-link scrollto" href="#"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
           <li><a class="getstarted scrollto" href="#">레시피 작성</a></li>
           
