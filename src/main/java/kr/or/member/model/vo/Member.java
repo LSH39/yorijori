@@ -18,7 +18,7 @@ public class Member {
 	private String memberConsent;
 	private String profilePath;
 	private String profileIntro;
-	private String certificate_path;
+	private String certificatePath;
 	private String memberLevel;
 	private int memberPoint;
 	private String enrollDate;

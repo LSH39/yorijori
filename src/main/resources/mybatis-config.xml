@@ -6,6 +6,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.or.admin.model.vo.Member2" alias="m2"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
