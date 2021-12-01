@@ -9,4 +9,7 @@ public class RecipeContent {
 	private String filename;
 	private String filepath;
 	private String recipeContent;
+	
+	private String[] rContentList;
+	private String[] imgList;
 }

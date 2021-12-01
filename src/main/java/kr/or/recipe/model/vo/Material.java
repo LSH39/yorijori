@@ -8,4 +8,7 @@ public class Material {
 	private int recipeNo;
 	private String materialName;
 	private String mAmount;
+	
+	private String[] mNameList;
+	private String[] mAmountList;
 }
