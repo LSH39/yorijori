@@ -19,8 +19,9 @@
 		<label for="subhead">요리 한줄설명</label> <input type="text" name="subhead" placeholder="레시피를 소개할 수 있는 한줄 설명을 입력해주세요">
 		</div>
 		<div class="recipeFrm">
-		<label for="uploadImg">대표이미지</label><input type="file" name="uploadImg"onchange="loadImg(this);" accept=".jpg,.jpeg,.png,.gif" >
-		<img id="previewImg">
+		<label for="uploadImg">대표이미지</label>
+		<input type="file" id="uploadImg" name="uploadImg" onchange="loadImg(this);" accept=".jpg,.jpeg,.png,.gif" style="display:none;">
+		<button id="uploadBtn"><img src="/resources/img/recipe/image.png" id="img" width="300px" ></button>
 		</div>
 		<div class="recipeFrm">
 		<label for="recipeVideo">동영상 링크</label><input type="text" name="recipeVideo" placeholder="동영상이 있으면 온라인 링크만 걸어주세요(선택사항)">
@@ -29,23 +30,24 @@
 		<p>음식정보</p>
 		<div id="recipeFrm1">
 		<label for="foodName">음식이름</label><input type="text" name="foodName" placeholder="음식명을 입력하세요">
-		<input type="text" name="recipeTime" placeholder="조리시간 예)60분">소요
+		<input type="text" name="recipeTime" placeholder="조리시간 예) 60분">소요
 		</div>
 		<div id="recipeFrm2">
 		<p>재료정보</p>
 		<div class="materialBox">
-		<input type="text" name="mNameList[]" placeholder="예) 고추장"> 
-		<input type="text" name="mAmountList[]" placeholder="예) 2T">
+		<input type="text" name="mNameList" placeholder="예) 고추장"> 
+		<input type="text" name="mAmountList" placeholder="예) 2T">
 		</div>
 		<div class="materialBox">
-		<input type="text" name="mNameList[]" placeholder="예) 양파"> 
-		<input type="text" name="mAmountList[]" placeholder="예) 1/2개">
+		<input type="text" name="mNameList" placeholder="예) 양파"> 
+		<input type="text" name="mAmountList" placeholder="예) 1/2개">
 		</div>
 		<div class="materialBox">
-		<input type="text" name="mNameList[]" placeholder="예) 닭가슴살"> 
-		<input type="text" name="mAmountList[]" placeholder="예) 300g">
+		<input type="text" name="mNameList" placeholder="예) 닭가슴살"> 
+		<input type="text" name="mAmountList" placeholder="예) 300g">
 		</div>
-		<button id="plusBtn">재료추가</button>
+		<div id="newInput"></div>
+		<p id="plusBtn">재료추가</p>
 		</div>
 		</div>
 		<div class="recipeFrm">
@@ -77,15 +79,55 @@
 		</div>
 		<div class="recipeFrm">
 		<div class="cookOrder">
-		<p>STEP<span id="num">1</span></p>
-		<textarea name="recipeContent"></textarea>
-		<input type="file" name="contentImg" accept=".jpg,.jpeg,.png,.gif">
+		<p>STEP1</p>
+		<textarea name="rContentList"></textarea>
+		<input type="file" name="files"  accept=".jpg,.jpeg,.png,.gif" multiple>
+		<img class="recipeImg">
 		</div>
-		<button id="plusBtn2" >순서추가</button>>
+		<div class="newContent"></div>
+		<p id="plusBtn2" >순서추가</p>
 		</div>
 		<input type="submit" value="등록하기">
 		</form>
 	</div>
-	<script ></script>
+	<script>
+		function loadImg(obj) {
+		  var files = obj.files;
+		  console.log(files);
+		  if(files.length != 0){
+			  var reader = new FileReader();
+			  reader.readAsDataURL(files[0]);
+			  reader.onload = function(e) {
+				$("#img").attr("src",e.target.result);
+				$("#img").css("height","300px");
+				$("#uploadImg").css("display","none");
+			}
+		  }
+		}
+		
+		$(function() {
+			$("#uploadBtn").click(function(e) {
+				e.preventDefault();
+				$("#uploadImg").click();
+			});	
+			
+			$("#plusBtn").click(function() {
+				var mHTML = "<div class='materialBox'>"
+				+ "<input type='text' name='mNameList'>" 
+				+ " <input type='text' name='mAmountList' > </div>";
+				$("#newInput").append(mHTML);
+			});
+			
+				var orderNum = 1;
+			$("#plusBtn2").click(function() {
+				var contentHTML = "<div class='cookOrder'> <p>STEP"+(++orderNum)+"</p>"
+					+ "<textarea name='rContentList'></textarea >"
+					+ " <input type='file' name='files' accept='.jpg,.jpeg,.png,.gif' multiple>"
+					+ "<img class='recipeImg'></div>";
+				$(".newContent").append(contentHTML);
+				
+		});
+		});
+	</script>
 </body>
 </html>
