@@ -47,3 +47,14 @@
 
  <!-- Template Main JS File -->
  <script src="resources/js/mainpage/main.js"></script>
+<script>
+$(document).ready(function(){
+	var currentPosition = parseInt($(".quickmenu").css("top"));
+	$(window).scroll(function() {
+		var position = $(window).scrollTop();
+		$(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+		
+	});
+	
+	});
+</script>
