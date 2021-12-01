@@ -34,7 +34,7 @@ a {
 }
 
 a:hover {
-  color: #80c792;
+  color: #E0D8EF;
   text-decoration: none;
 }
 
@@ -64,7 +64,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 0;
 }
 .back-to-top:hover {
-  background: #78c48c;
+  background: #E0D8EF;
   color: #fff;
 }
 .back-to-top.active {
@@ -213,6 +213,61 @@ h1, h2, h3, h4, h5, h6 {
 label[for="searchsubmit"]:hover{
 	cursor: pointer;
 }
+#header-mainsearch{
+	border-radius: 15px;
+	border: none;
+}
+
+/*따라다니는 우측 메뉴 설정 */
+
+.quickmenu {
+	position:absolute;
+	width:100px;
+	top:50%;
+	right: 40px;
+	background:#fff;
+	margin: 0;
+	}
+.quickmenu ul {
+	position:relative;
+	float:left;
+	width:100%;
+	display:inline;
+	border:1px solid #ddd;
+	padding: 0;
+	margin: 0;
+	line-height: 8px;
+	}
+.quickmenu img{
+	width: 15px;
+	height: 15px;
+	margin-left: 5px;
+}
+.quickmenu ul li {
+	float:left;
+	width:100%;
+	border-bottom:1px solid #ddd;
+	text-align:center;
+	display:inline-block;
+	display: flex;
+	align-items: center;
+	}
+.quickmenu ul li a {
+	position:relative;
+	float:left;
+	width:100%;
+	height:35px;
+	line-height:30px;
+	text-align: left;
+	color:#999;
+	font-size:9.5pt;
+	}
+.quickmenu ul li a:hover {
+	color:#000;
+	}
+.quickmenu ul li:last-child {
+	border-bottom:0;
+	}
 
 /*
 .navbar .dropdown .dropdown ul {
@@ -327,11 +382,11 @@ label[for="searchsubmit"]:hover{
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# 메인배너 섹션
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 70vh;
+  height: 55vh;
   background-color: rgba(9, 9, 9, 0.8);
   overflow: hidden;
   position: relative;
@@ -348,7 +403,11 @@ label[for="searchsubmit"]:hover{
 }
 #hero .carousel-item::before {
   content: "";
-  background-color: rgba(240, 240, 240, 0.15);
+  background-color: rgba(40, 40, 40, 0.1);
+}
+
+#hero .carousel-item:nth-child(2)::before{
+	background-color: transparent;
 }
 #hero .carousel-container {
   display: flex;
@@ -361,19 +420,24 @@ label[for="searchsubmit"]:hover{
   right: 50px;
 }
 #hero .container {
-  text-align: center;
+  text-align: left;
 }
 #hero h2 {
+  font-family: "TmoneyRoundWindExtraBold";
   color: #fff;
   margin-bottom: 20px;
   font-size: 48px;
   font-weight: 700;
+}
+#hero span{
+	color: rgb(109, 88, 116);
 }
 #hero p {
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
   margin: 0 auto 30px auto;
   color: #fff;
+  font-size: 22px;
 }
 #hero .carousel-inner .carousel-item {
   transition-property: opacity;
@@ -399,7 +463,8 @@ label[for="searchsubmit"]:hover{
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50px;
   transition: 0.3s;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(109, 88, 116, 0.8);
+  border: 1px solid rgba(109, 88, 116, 0.8);
   width: 54px;
   height: 54px;
   display: flex;
@@ -428,7 +493,7 @@ label[for="searchsubmit"]:hover{
 #hero .btn-get-started {
   font-family: "TmoneyRoundWind", sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 1px;
   display: inline-block;
   padding: 14px 32px;
@@ -440,9 +505,19 @@ label[for="searchsubmit"]:hover{
   animation-delay: 0.8s;
   background: #8E44AD;
 }
-#hero .btn-get-started:hover {
-  background: #6ec083;
+#hero .carousel-item:nth-child(2) .btn-get-started{
+	background-color: rgb(192, 57, 43);
 }
+#hero .btn-get-started:hover {
+  background-color: #E0D8EF;
+  color: #8E44AD;
+  font-weight: bolder;
+}
+#hero .carousel-item:nth-child(2) .btn-get-started:hover{
+	background-color: #f1f1f1;
+	color: rgb(192, 57, 43);
+}
+
 @media (max-width: 992px) {
   #hero {
     height: 100vh;
@@ -594,7 +669,7 @@ section {
   display: block;
   font-size: 24px;
   font-weight: 400;
-  color: #6ec083;
+  color:  #C4BFE3;
 }
 .why-us .content-item h4 {
   font-size: 26px;
@@ -886,7 +961,7 @@ section {
   transition: 0.3s;
 }
 .portfolio .portfolio-wrap .portfolio-links a:hover {
-  color: #6ec083;
+  color: #E0D8EF;
 }
 .portfolio .portfolio-wrap:hover::before {
   opacity: 1;
@@ -1132,7 +1207,7 @@ section {
   border-radius: 4px;
 }
 .contact .php-email-form button[type=submit]:hover {
-  background: #6ec083;
+  background: #E0D8EF;
 }
 @-webkit-keyframes animate-loading {
   0% {
@@ -1236,7 +1311,7 @@ section {
   margin: 10px 0;
 }
 #footer .social-links {
-  margin: 0 0 40px 0;
+  margin: 0 0 20px 0;
 }
 #footer .social-links a {
   font-size: 18px;
@@ -1253,7 +1328,7 @@ section {
   transition: 0.3s;
 }
 #footer .social-links a:hover {
-  background: #449d5b;
+  background: #E0D8EF;
   color: #fff;
   text-decoration: none;
 }

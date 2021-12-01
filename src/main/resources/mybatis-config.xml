@@ -6,6 +6,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.or.admin.model.vo.Member2" alias="m2"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
@@ -28,8 +29,6 @@
 		
 		<!-- 김민지 별칭추가 -->
 		<typeAlias type="kr.or.recipe.model.vo.RecipeBoard" alias="rb"/>
-		<!-- 김효원 별칭추가 -->
-		<typeAlias type="kr.or.mypage.model.vo.Follow" alias="fl"/>
-		<typeAlias type="kr.or.mypage.model.vo.ContestWin" alias="ct"/>
+
 	</typeAliases>
 </configuration>

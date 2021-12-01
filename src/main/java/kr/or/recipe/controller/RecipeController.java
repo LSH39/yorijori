@@ -2,10 +2,13 @@ package kr.or.recipe.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.milkit.model.vo.product;
 import kr.or.recipe.model.service.RecipeService;
@@ -29,8 +32,14 @@ public class RecipeController {
 		return "recipe/recipeFrm";
 	}
 	@RequestMapping(value="/recipeFrm.do")
-	public String recipeFrm(RecipeBoard rb, RecipeContent rc, Material m, Model model) {
+	public String recipeFrm(RecipeBoard rb, RecipeContent rc, MultipartFile[] files,Material m, Model model, HttpServletRequest request) {
+		String[] mAmountList = request.getParameterValues("mAmountList");
+		String[] mNameList = request.getParameterValues("mNameList");
+		for(int i = 0; i<mNameList.length; i++) {
+			System.out.println("dds");
+		}
 		
+	
 		return null;
 		
 	}

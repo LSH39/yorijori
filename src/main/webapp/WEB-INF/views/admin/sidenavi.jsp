@@ -81,7 +81,7 @@
             </li>
             <div class="dd" style="display: block;">
                     
-                <a class="nav-link" href="allmember.do">전체회원조회</a>
+                <a class="nav-link" href="allmember.do?reqPage=1">전체회원조회</a>
                 <a class="nav-link" href="#">블랙리스트 관리</a>
                 <a class="nav-link" href="#">전문가 가입 승인</a>
                 <a class="nav-link" href="#">탈퇴 요청 승인</a>
