@@ -93,7 +93,6 @@
 	<context:component-scan base-package="kr.or.chat" />
 	<context:component-scan base-package="kr.or.order" />
 	<context:component-scan base-package="kr.or.point" />
-	<context:component-scan base-package="kr.or.admin" />
 	
 	
 </beans:beans>
