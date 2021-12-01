@@ -51,12 +51,14 @@
 		<c:when test="${empty sessionScope.m }">
         <a href="#" class="join">회원가입</a>
         <a href="#" class="login">로그인</a>
+        <a href="/admin.do">관리자 페이지 </a>
         </c:when>
        	<c:otherwise>
        	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
        	<a href="#" class="logout">로그아웃</a>
         <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
         <a href="#" class="qna">1:1문의하기</a>
+        
        	</c:otherwise>
        </c:choose>
       </div>
@@ -98,6 +100,7 @@
           <li><input type="search" class="nav-link scrollto" id="mainsearch" placeholder="검색"></li>
           <li><a class="nav-link scrollto" href="#"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
           <li><a class="getstarted scrollto" href="#">레시피 작성</a></li>
+          
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
