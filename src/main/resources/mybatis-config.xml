@@ -29,6 +29,12 @@
 		
 		<!-- 김민지 별칭추가 -->
 		<typeAlias type="kr.or.recipe.model.vo.RecipeBoard" alias="rb"/>
+		<typeAlias type="kr.or.recipe.model.vo.RecipeComment" alias="rcomment"/>
+		<typeAlias type="kr.or.recipe.model.vo.Material" alias="material"/>
+		<typeAlias type="kr.or.recipe.model.vo.RecipeContent" alias="rcontent"/>
+		<typeAlias type="kr.or.recipe.model.vo.RecipeReport" alias="report"/>
+		<typeAlias type="kr.or.recipe.model.vo.RecipeLike" alias="rlike"/>
+		
 
 	</typeAliases>
 </configuration>
