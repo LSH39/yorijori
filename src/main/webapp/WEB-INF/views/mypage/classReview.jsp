@@ -5,24 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
+<title>클래스후기</title>
+    <style>
+#header{
+width: 1200px;
+height: 138px;
+background-color: #d696e2;
+margin: 0 auto;
+}
+#footer{
+width: 1100px;
+height: 138px;
+background-color: #d696e2;
+margin: 0 auto;
+}
 
-#delFrm {
+#line2 {
+	background-color: gray;
+	height: 3px;
 	width: 800px;
-	height: 300px;
-	margin-top:20px;
-	margin-bottom: 50px;
-    background-color: rgb(244, 232, 250);
-	
 }
-#confirm {
-	width: 800px;
-	height: 80px;
-	margin-top:30px;
-	margin-bottom: 50px;
-    background-color:rgb(247, 247, 229);
-}
+
 .h_left{
 	width: 350px;
 	height: 300px;
@@ -98,43 +101,35 @@
     font-family: 'ns_b';
     display: none;
 }
-.delete{
-    width: 400px;
-    height: 200px;
-    margin: 0 auto;
- 
-}
-#delbutton{
-    background-color: rgb(224, 224, 224);
-    width:300px;
-    height: 30px;
-    border: none;
-    margin-left: 30px;
-}
-#memberId{
-    width:300px;
-    height: 30px;
-    margin-bottom: 20px;
-    margin-top: 50px;
-    margin-left: 30px;
-}
-#memberPw{
-    width:300px;
-    height: 30px;
-    margin-bottom: 20px;
-    margin-left: 30px;
-}
 
 /* 메인 콘텐츠 설정 */
 .main-content{
     width: 875px;
 }
-
-
+/*후기*/
+.review{
+    width:800px;
+    height:100px;
+   
+}
+.re{
+    width:800px;
+    height:50px; 
+    
+}
+.butt{
+    text-align: right;
+    margin-top: 10px;
+    
+}
+#del,#upd{
+    background-color: rgb(196, 191, 227);
+    border: none;
+}
 </style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<div id="header">header</div>
     <div class="main">
         <div class="main-left-box">
             <h2>마이페이지</h2>
@@ -165,21 +160,33 @@
         </div>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-            <h2 id="h_hotel">회원탈퇴</h2>
+            <h3 id="h_hotel">밀키트 review</h3>
             <div id="line2"></div><br>
-          <div id="confirm">
-              <p>xx님의 정확한 정보확인을 위해 아이디/비밀번호를 다시 확인하겠습니다.</p> </div>
-          <div id="delFrm">
-          <form action="/deleteMember.do" method="post">
-              <div class="delete">
-               <input type="text" id="memberId" placeholder="아이디 입력"><br>
-               <input type="password" id="memberPw" placeholder="비밀번호 입력"><br>
-               <button type="submit" id="delbutton">회원탈퇴하기</button>
+             <c:forEach items="${list}" var="review" varStatus="i">
+             <div class="review">
+              <table border="1" class="re">
+                  <tr>
+                      <td>${review.reviewFlag}</td>
+                      <td>${review.reviewNo}</td>
+                      <td>${review.classNo}</td>
+                      <td>${review.reviewContent}</td>
+                      <td>${review.reviewRate}</td>
+                      <td>${review.reviewDate}</td>
+                  </tr>
+              </table>
+
+              <div class="butt">
+                <input type="button" value="수정" id="upd">
+                <input type="button" value="삭제" id="del">
               </div>
-        </form>
+             
+             </div>
+             </c:forEach>
+         
         </div>
+        
         </div>
-    </div>
- <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+   
+    <div id="footer">footer</div>
 </body>
 </html>
