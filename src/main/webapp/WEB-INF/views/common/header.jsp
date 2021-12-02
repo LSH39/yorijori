@@ -88,15 +88,15 @@
           <li><a class="nav-link scrollto " href="#">클래스</a></li>
            <li class="dropdown"><a href="#"><span>이벤트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">경연대회투표</a></li>
-              <li><a href="#">우승자 발표</a></li>
+              <li><a href="/contestList.do">경연대회투표</a></li>
+              <li><a href="/contestResult.do">우승자 발표</a></li>
               <li><a href="#">역대 우승자</a></li>
             </ul>
           </li>
           <li class="dropdown" style="padding-right:15px;"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/freeboardList.do?reqPage=1">자유게시판</a></li>
-              <li><a href="#">공지사항</a></li>
+              <li><a href="/freeboardList.do">자유게시판</a></li>
+              <li><a href="/noticeList.do">공지사항</a></li>
               <li><a href="#">메뉴추천</a></li>
             </ul>
           </li>
