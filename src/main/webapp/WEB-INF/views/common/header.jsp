@@ -73,7 +73,7 @@
     <div class="container d-flex align-items-center">
 
       
-      <a href="index.html" class="logo me-auto"><img src="resources/img/mainpage/logo_header.png" alt="" class="img-fluid"></a>
+      <a href="/" class="logo me-auto"><img src="resources/img/mainpage/logo_header.png" alt="" class="img-fluid"></a>
 
       <nav id="navbar" class="navbar">
         <ul>
