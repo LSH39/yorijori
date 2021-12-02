@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypage">
+	<select id="mypage" resultType="m" parameterType="string">
+		select
+		MEMBER_NO as memberNo,
+		MEMBER_ID as memberId,
+		MEMBER_PW as memberPw,
+		MEMBER_EMAIL as memberEmail,
+		MEMBER_NAME as memberName,
+		MEMBER_NICKNAME as memberNickname,
+		MEMBER_PHONE as memberPhone,
+		MEMBER_BIRTH as memberBirth,
+		postcode,
+		ADDRESS_ROAD as addressRoad,
+		ADDRESS_DETAIL as addressDetail,
+		MEMBER_CONSENT as memberConsent,
+		PROFILE_PATH as profilePath,
+		PROFILE_INTRO as profileIntro,
+		CERTIFICATE_PATH as certificatePath,
+		MEMBER_LEVEL as memberLevel,
+		MEMBER_POINT as memberPoint,
+		ENROLL_DATE as enrollDate,
+		WITHDRAW_DATE as withdrawDate,
+		MEMBER_BLACK as memberBlack
+		from member where
+		member_id='hyo'
+	</select>
+		<select id="sellerPage" resultType="m" parameterType="string">
+		select
+		MEMBER_NO as memberNo,
+		MEMBER_ID as memberId,
+		MEMBER_PW as memberPw,
+		MEMBER_EMAIL as memberEmail,
+		MEMBER_NAME as memberName,
+		MEMBER_NICKNAME as memberNickname,
+		MEMBER_PHONE as memberPhone,
+		MEMBER_BIRTH as memberBirth,
+		postcode,
+		ADDRESS_ROAD as addressRoad,
+		ADDRESS_DETAIL as addressDetail,
+		MEMBER_CONSENT as memberConsent,
+		PROFILE_PATH as profilePath,
+		PROFILE_INTRO as profileIntro,
+		CERTIFICATE_PATH as certificatePath,
+		MEMBER_LEVEL as memberLevel,
+		MEMBER_POINT as memberPoint,
+		ENROLL_DATE as enrollDate,
+		WITHDRAW_DATE as withdrawDate,
+		MEMBER_BLACK as memberBlack
+		from member where
+		member_id='test0016'
+	</select>
+	<update id="updateMember" parameterType="m">
+		update member set
+		address=#{address} where member_id=#{memberId}
+	</update>
+	
+	<delete id="deleteMember"  parameterType="string">
+	delete from member where member_id='test0026' and member_pw='333'
+	
+	</delete>
+	<select id="classReview" parameterType="review">
+	select 
+	review_no as reviewNo,
+	class_no as classNo,
+	class_no as productNo,
+	class_no as memberNo,
+	class_no as reviewContent,
+	class_no as reviewRate,
+	class_no as reviewFlag,
+	class_no as reviewDate
+	from review where member_id='hyo'
+	
+	</select>
+	<select id="myCoupon" resultType="mcou" parameterType="_int">
+		select 
+		c.coupon_name as couponName,
+		c.coupon_Start as couponStart,
+		c.coupon_end as couponEnd,
+		c.coupon_disCount as couponDiscount,
+		cl.coupon_use as couponUse
+	    from coupon c,coupon_list cl
+	   where c.coupon_No =cl.coupon_no 
+	   and member_No=111 and coupon_use=0
+	</select>
+	
+	<select id="myRecipe" parameterType="_int" resultType="rb">
+	select 
+	RECIPE_NO as recipeNo,
+	RECIPE_WRITER as recipeWriter,
+	RECIPE_TITLE as recipeTitle,
+	filepath,
+	READ_COUNT as readCount,
+	RECIPE_DATE as recipeDate,
+	subhead,
+	RECIPE_VIDEO as recipeVideo,
+	RECIPE_TIME as recipeTime,
+	FOOD_NAME as foodName,
+	RECIPE_LEVEL as recipeLevel,
+	situation,
+	material
+	from recipe_board 
+	where recipe_writer=111
+	
+	</select>
+</mapper>
+

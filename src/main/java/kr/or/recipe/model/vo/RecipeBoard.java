@@ -14,7 +14,7 @@ public class RecipeBoard {
 	private String recipeVideo;
 	private String recipeTime;
 	private String foodName;
-	private String recipeName;
+	private String recipeLevel;
 	private String situation;
 	private String material;
 }
