@@ -25,21 +25,21 @@ margin:0 auto;}
         <div style="padding: 15px;">
             
         <label>회원검색</label>
-        <select name="" id="">
-            <option value="1">아이디</option>
-            <option value="2">닉네임</option>
-            <option value="3">전화번호</option>
+        <select id="searchtype">
+            <option value="memberId">아이디</option>
+            <option id="ff"  value="memberNickname">닉네임</option>
+            <option value="memberPhone">전화번호</option>
             
         </select>
-        <input type="text" >
-        <button>검색</button>
+        <input id="searchtext" type="text" >
+        <button id="searchbtn1">검색</button>
         <button class="detailbtn">상세검색</button>
         </div>
 		
         <div class="detail" style="padding: 15px; display: none;">
 
-            <input type="radio" value="1" id="postspace" name="searchdetail"><label for="postspace">게시글 수</label>
-            <input type="radio" value="2" id="receipespace" name="searchdetail"><label for="postspace">레시피 수</label>
+            <input type="radio" checked value="1" id="postspace" name="searchdetail"><label for="postspace">게시글 수</label>
+            <input type="radio" value="2" id="recipespace" name="searchdetail"><label for="recipespace">레시피 수</label>
             <input type="radio" value="3" id="commentspace" name="searchdetail"><label for="commentspace">댓글 수</label>
             <input type="radio" value="4" id="visitspace" name="searchdetail"><label for="visitspace">방문 수</label>
             <input type="radio" value="5" id="signdate" name="searchdetail"><label for="signdate">가입일</label>
@@ -76,7 +76,7 @@ margin:0 auto;}
         </div>
         
     
-    <span>전체 회원 수</span> <span>${list.size() }</span>
+    <span>조회 된 회원 수</span> <span>${list.size() }</span>
     <hr>
     
    	<div>
@@ -152,13 +152,14 @@ margin:0 auto;}
     $(function(){
     	$(".detailbtn").click(function(){
     		$(".detail").slideToggle();
+    		
     	});
     	
     	$("input[name=searchdetail]").change(function(){
     		$(".detail1").show();
     		$(".detail2").hide();
     		$("#space").html($(this).next().html());
-    		if($(this).val()==4){
+    		if($(this).val()==5){
     			$(".detail2").show();
         		$(".detail1").hide();	
     		}
@@ -174,6 +175,36 @@ margin:0 auto;}
     		}else{
     			$("#recentonemonth").html("");
     		}
+    	});
+    	$("#searchbtn1").click(function(){
+    		
+    		var searchType= $("#searchtype").val();
+    		
+    		var searchText = $("#searchtext").val();
+    		
+    		$.ajax({
+    			url:"allmember.do?reqPage=1",
+    			type:"post",
+    			data : {searchType:searchType,searchText:searchText},
+    			success: function(data){
+    				$("body").html(data);
+    				if(searchType =="memberNickname"){
+    					
+    					$("#ff").prop("selected",true);
+    					
+    				}else if(searchType=="memberPhone"){
+    					$("#ff").next().prop("selected",true);
+    				}else{
+    					$("#ff").prev().prop("selected",true);
+    				}
+    				$("#searchtext").val(searchText);
+    			},
+    			error:function(){
+    				console.log("err");
+    			}
+    			
+    			
+    		});
     	});
     });
     </script>

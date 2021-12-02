@@ -15,12 +15,13 @@ public class AdminService {
 	@Autowired
 	AdminDao dao;
 	
-	public MemberPageData allMemberList(int reqPage) {
+	public MemberPageData allMemberList(int reqPage, String searchType, String searchText) {
 		int numPerPage =30;
 		int end = reqPage*numPerPage;
 		int start = end - numPerPage+1;
 		
-		ArrayList<Member2> list = dao.allMemberList();
+		ArrayList<Member2> list = dao.allMemberList(searchType,searchText);
+		
 		int totalCount = dao.selectTotalCount();
 
 		int totalPage=0;

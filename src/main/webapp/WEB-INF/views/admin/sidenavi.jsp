@@ -17,6 +17,7 @@
             display: inline-block;
             overflow: hidden;
             z-index: 2;
+            transition: all .35s;
         }
         input#menu+label span{
             display: block;
@@ -61,6 +62,11 @@
         input#menu:checked+label+div{
             left: 0;
         }
+        
+        div.slidebar:hover{
+        left:-230px;
+       	
+        }
     </style>
 
     <div>
@@ -73,7 +79,7 @@
         <div class="slidebar navbar">
             <ul class="navbar-nav me auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">관리 홈</a>
+                    <a class="nav-link" href="admin.do">관리 홈</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">회원관리</a>
@@ -102,3 +108,10 @@
 
         </div>
     </div>
+    <script>
+    	$(function(){
+    		$(".slidebar").click(function(){
+    			$("#menu").click();
+    		});
+    	});
+    </script>
