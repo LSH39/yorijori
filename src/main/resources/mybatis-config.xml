@@ -36,6 +36,12 @@
 		<typeAlias type="kr.or.recipe.model.vo.RecipeLike" alias="rlike"/>
 		
 
+		<!-- 김효원 별칭추가 -->
+		<typeAlias type="kr.or.mypage.model.vo.Follow" alias="fl"/>
+		<typeAlias type="kr.or.mypage.model.vo.ContestWin" alias="ct"/>
+		<typeAlias type="kr.or.coupon.model.vo.CouponList" alias="cl"/>
+	    <typeAlias type="kr.or.coupon.model.vo.MyCoupon" alias="mcou"/>
+	    
 	</typeAliases>
 </configuration>
 
