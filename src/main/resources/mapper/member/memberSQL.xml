@@ -31,11 +31,7 @@ from member where memberBlack = 0
 	<select id="selectTotalCount" resultType="_int">
 	select count(*) from member
 	</select>
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
->>>>>>> refs/heads/master
 	<select id="selectOneMember" parameterType="hashmap" resultType="m2">
 	select * from (select member_no as memberNo,
 member_id as memberId,
@@ -188,10 +184,5 @@ order by enrollDate desc
 	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
 	
 	</update>
-<<<<<<< HEAD
 
-=======
-=======
->>>>>>> refs/heads/master
->>>>>>> refs/heads/master
 </mapper>
