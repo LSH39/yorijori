@@ -16,7 +16,7 @@
 		<!-- 태경 alias -->
 		<typeAlias type="kr.or.freeboard.model.vo.Freeboard" alias="fb"/>
 		<typeAlias type="kr.or.notice.model.vo.Notice" alias="n"/>
-		<typeAlias type="kr.or.recipecontest.model.vo.RecipeContest" alias="rc"/>
+		<typeAlias type="kr.or.recipecontest.model.vo.RecipeCocookingRsrvntest" alias="rc"/>
 		<!-- 태경 alias 끝 -->
 		
 		<!-- 성승민 별칭 추가 -->
@@ -41,7 +41,8 @@
 		<typeAlias type="kr.or.mypage.model.vo.ContestWin" alias="ct"/>
 		<typeAlias type="kr.or.coupon.model.vo.CouponList" alias="cl"/>
 	    <typeAlias type="kr.or.coupon.model.vo.MyCoupon" alias="mcou"/>
-	    
+
+	     <typeAlias type="kr.or.cookingRsrv.model.vo.CookingRsrv.MyCookingRsrv" alias="mcr"/>
 	</typeAliases>
 </configuration>
 
