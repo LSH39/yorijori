@@ -21,7 +21,7 @@ public class AdminDao {
 	
 	@Transactional
 
-	public ArrayList<Member2> allMemberList(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2) {
+	public ArrayList<Member2> allMemberList(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2,int level) {
 		
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("searchType", searchType);
@@ -36,6 +36,7 @@ public class AdminDao {
 			map.put("joinEnd", joinEnd);
 			map.put("searchText2", searchText2);
 			map.put("detail", detail);
+			map.put("level",level);
 			List list = sqlSession.selectList("member.selectDetailMember",map);
 			
 			return (ArrayList<Member2>) list;
@@ -53,6 +54,29 @@ public class AdminDao {
 			arr[i]=st.nextToken();
 		}
 		int result = sqlSession.update("member.addBlackMember",arr);
+		return result;
+	}
+
+
+	public int addNormalMember(String memberNo) {
+		StringTokenizer st = new StringTokenizer(memberNo, ",");
+		String[] arr = new String[st.countTokens()];
+		for(int i = 0; i<arr.length;i++) {
+			arr[i]=st.nextToken();
+		}
+		int result = sqlSession.update("member.addNormalMember",arr);
+		return result;
+	
+	}
+
+
+	public int deleteMember(String memberNo) {
+		StringTokenizer st = new StringTokenizer(memberNo, ",");
+		String[] arr = new String[st.countTokens()];
+		for(int i = 0; i<arr.length;i++) {
+			arr[i]=st.nextToken();
+		}
+		int result = sqlSession.delete("member.deleteMember",arr);
 		return result;
 	}
 		

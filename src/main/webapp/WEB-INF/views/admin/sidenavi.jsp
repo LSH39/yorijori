@@ -57,13 +57,35 @@
             transition: all .35s;
             box-shadow: rgb(13,23,36,0.7) 3px 3px 3px;
             padding: 100px;
+            text-align: center;
+            margin : 0 auto;
+            
+        }
+        div.slidebar a{
+        
+       	
+        padding-left: 15px;
+        margin-left: 15px auto;
+        margin-right: 15px auto;
+        width: 120px;
+        color : #fff;
+        text-align: center;
+        border-radius: 5px; 
+        
         }
         input#menu:checked+label+div{
             left: 0;
         }
+       div.slidebar:hover{
+       left:-230px;
+       }
+       .showDrop{
+       background-color: gray;
+       
+       }
     </style>
 
-    <div>
+    <div id="leftnav">
         <input type="checkbox" id="menu">
         <label for="menu">
             <span></span>
@@ -71,34 +93,70 @@
             <span></span>
         </label>
         <div class="slidebar navbar">
-            <ul class="navbar-nav me auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">관리 홈</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">회원관리</a>
+            
                 
-            </li>
-            <div class="dd" style="display: block;">
+                    <a class="nav-link" href="/admin.do">관리 홈</a>
+                
+                
+                    <a class="nav-link showDrop1 showDrop" href="#">회원관리</a>
+                
+            
+            <div class="drop1 navbar" style="display: none;">
                     
                 <a class="nav-link" href="allmember.do?reqPage=1">전체회원조회</a>
-                <a class="nav-link" href="#">블랙리스트 관리</a>
-                <a class="nav-link" href="#">전문가 가입 승인</a>
+                <a class="nav-link" href="blackList.do?reqPage=1">블랙리스트 관리</a>
+                <a class="nav-link" href="permissionJoin.do?reqPage=1">전문가 가입 승인</a>
                 <a class="nav-link" href="#">탈퇴 요청 승인</a>
 
-            
-        </div>
+            	
+       		</div>
+       		
+                <a class="nav-link showDrop2 showDrop" href="#">통계</a>
+                <div class="drop2 navbar" style="display: none;">
+                    
+               <a class="nav-link" href="#">방문자 통계</a>
+                <a class="nav-link" href="#">밀키트 통계</a>
+
+            	
+       		</div>
                 
-                <li><a class="nav-link" href="#">방문자 통계</a></li>
-                <li><a class="nav-link" href="#">밀키트 통계</a></li>
-                <li><a class="nav-link" href="#">쿠폰 관리</a></li>
-                <ul class="navbar-nav me auto">
-                    <li><a class="nav-link" href="#">쿠폰 발행</a></li>
-                    <li><a class="nav-link" href="#">쿠폰 관리</a></li>
+                
+                <a class="nav-link showDrop3 showDrop" href="#">쿠폰 관리</a>
+                
+                <div class="drop3 navbar" style="display: none;">
+                    
+               <a class="nav-link" href="#">쿠폰 발행</a>
+                    <a class="nav-link" href="#">쿠폰 관리</a>
+
+            	
+       		</div>
+                    
                     
 
-                </ul>
-            </ul>
+                
+            
 
         </div>
     </div>
+    <script>
+    
+    
+	$(".slidebar").click(function(){
+		$("#menu").click();
+    	
+    	
+    });
+	$(".showDrop1").click(function(){
+		
+		$(".drop1").slideToggle();
+		$("#menu").click();
+	});
+	$(".showDrop2").click(function(){
+		$(".drop2").slideToggle();
+		$("#menu").click();
+	});
+	$(".showDrop3").click(function(){
+		$(".drop3").slideToggle();
+		$("#menu").click();
+	});
+    </script>

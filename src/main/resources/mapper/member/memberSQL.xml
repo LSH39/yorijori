@@ -85,7 +85,7 @@ member_black as memberBlack,
 (select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
 (select count(*) from freeboard_comment where fc_writer = member_id)fcCount
 
-from member) where memberBlack = 0
+from member) where memberBlack = #{level}
 
 <if test="detail==1">
 
@@ -170,6 +170,9 @@ and memberLevel =1
 and memberLevel =2
 
 </when>
+<when test="memberLevel==4">
+and memberLevel = 4
+</when>
 
 </choose>
 
@@ -184,5 +187,15 @@ order by enrollDate desc
 	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
 	
 	</update>
+		<update id="addNormalMember" parameterType="string" >
+	update member set member_black = 0 where member_no in 
+	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
+	
+	</update>
+	<delete id="deleteMember" parameterType="string" >
+	delete from member where member_no in 
+	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
+	
+	</delete>
 
 </mapper>

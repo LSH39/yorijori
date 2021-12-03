@@ -26,8 +26,9 @@ public class AdminController {
 	}
 	@RequestMapping(value="/allmember.do")
 	public String allmember(Model model,int reqPage,String searchType,String searchText,String searchDetail,String period,String start,String end,String moreless,String joinStart,String joinEnd,String detail,String align,String memberLevel,String searchText2) {
-		
-		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2);
+		int level = 0;
+		String gotothe = "allmember";
+		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
 		
 		model.addAttribute("pageNavi",mpd.getPageNavi());
@@ -41,4 +42,43 @@ public class AdminController {
 		int result = service.addBlackMember(memberNo);
 		return "redirect:/allmember.do?reqPage=1";
 	}
+	
+	@RequestMapping(value="/blackList.do")
+	public String blackList(Model model,int reqPage,String searchType,String searchText,String searchDetail,String period,String start,String end,String moreless,String joinStart,String joinEnd,String detail,String align,String memberLevel,String searchText2) {
+		int level = 1;
+		String gotothe = "blackList";
+		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
+		model.addAttribute("list" ,mpd.getList());
+		
+		model.addAttribute("pageNavi",mpd.getPageNavi());
+		
+		return "admin/blackList";
+	}
+	@RequestMapping(value="/permissionJoin.do")
+	public String permissionJoin(Model model,int reqPage,String searchType,String searchText,String searchDetail,String period,String start,String end,String moreless,String joinStart,String joinEnd,String detail,String align,String memberLevel,String searchText2) {
+		int level = 0;
+		String gotothe = "permissionJoin";
+		memberLevel = "4";
+		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
+		model.addAttribute("list" ,mpd.getList());
+		
+		model.addAttribute("pageNavi",mpd.getPageNavi());
+		
+		return "admin/permissionJoin";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addNormalMember.do")
+	public String addNormalMember(String memberNo) {
+		int result = service.addNormalMember(memberNo);
+		return "redirect:/allmember.do?reqPage=1";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/adminDeleteMember.do")
+	public String deleteMember(String memberNo) {
+		int result = service.deleteMember(memberNo);
+		return "redirect:/allmember.do?reqPage=1";
+	}
+	
 }

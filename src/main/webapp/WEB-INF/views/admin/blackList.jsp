@@ -19,7 +19,7 @@ margin-left : 50%;
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
     <div class="container">
-        <h2>전체 회원 조회</h2>
+        <h2>블랙리스트 회원 조회</h2>
     
     
     <div style="background-color: #F7F7E5; ">
@@ -34,7 +34,7 @@ margin-left : 50%;
         </select>
         <input id="searchtext" type="text" >
         <button class="searchbtn1">검색</button>
-        <button class="detailbtn">상세검색</button>
+        
         </div>
 		
         <div class="detail" style="padding: 15px; display: none;">
@@ -86,8 +86,8 @@ margin-left : 50%;
    	
     <div style="float: left;">
         <span>선택 회원을</span>
-        <button class="addBlack">블랙리스트 추가</button>
-        <button class="deleteMember">강제 탈퇴</button>
+        <button class="addNormal">일반회원으로 변경</button>
+        <button>강제 탈퇴</button>
         <button>쪽지</button>
     </div>
     
@@ -218,15 +218,15 @@ margin-left : 50%;
     	});
 
     	$(".searchbtn1").click(function(){
-    		var gotothe = "allmember";
+    		
     		var searchType= $("#searchtype").val();
     		var detail = 1;
     		var searchText = $("#searchtext").val();
     		var align = $(".align").val();
     		$.ajax({
-    			url:"allmember.do?reqPage=1",
+    			url:"blackList.do?reqPage=1",
     			type:"post",
-    			data : {searchType:searchType,searchText:searchText,detail:detail,align:align,gotothe:gotothe},
+    			data : {searchType:searchType,searchText:searchText,detail:detail,align:align},
     			success: function(data){
     				$("body").html(data);
     				if(searchType =="memberNickname"){
@@ -261,7 +261,6 @@ margin-left : 50%;
     		var joinEnd = $(".date2").val();
     		var align = $(".align").val();
     		var memberLevel = $(".memberLevel").val();
-    		
     		$.ajax({
     			url:"allmember.do?reqPage=1",
     			type:"post",
@@ -323,7 +322,7 @@ margin-left : 50%;
 				
 			});
 			
-			$(".addBlack").click(function(){
+			$(".addNormal").click(function(){
 				var memberNo;
 				
 				for(var i =0; i<$(".amount").html();i++){
@@ -340,11 +339,11 @@ margin-left : 50%;
 				
 				
 				$.ajax({
-	    			url:"addBlackMember.do",
+	    			url:"addNormalMember.do",
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="allmember.do?reqPage=1";
+	    				location.href="blackList.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
@@ -356,8 +355,6 @@ margin-left : 50%;
 	    		});
 				
 			});
-			
-			
 			$(".deleteMember").click(function(){
 				var memberNo;
 				
@@ -379,7 +376,7 @@ margin-left : 50%;
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="allmember.do?reqPage=1";
+	    				location.href="blackList.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
