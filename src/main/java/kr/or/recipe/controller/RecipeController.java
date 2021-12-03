@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import kr.or.milkit.model.vo.product;
 import kr.or.recipe.model.service.RecipeService;
@@ -22,6 +25,7 @@ import kr.or.recipe.model.vo.FileVo;
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeContent;
+import sun.reflect.generics.visitor.Reifier;
 
 @Controller
 public class RecipeController {
@@ -51,13 +55,15 @@ public class RecipeController {
 				rc.setRecipeContent(rc.getRContentList()[i]);
 			}
 			String savepath = request.getSession().getServletContext().getRealPath("/resources/upload/recipe/");
+			
 			FileVo upFile =uploadFile(uploadImg, savepath);
 			rb.setFilepath(upFile.getFilepath());
 			if(files[0].isEmpty()) {
 				
 			}else {
+				String savepath2 = request.getSession().getServletContext().getRealPath("/resources/upload/recipeContent/");
 				for( MultipartFile file2 : files) {
-					upFile = uploadFile(file2 ,savepath);
+					upFile = uploadFile(file2 ,savepath2);
 					rc.setFilename(upFile.getFilename());
 					rc.setFilepath(upFile.getFilepath());	
 					
@@ -110,5 +116,17 @@ public class RecipeController {
 		fv.setFilepath(filepath);
 		return fv;
 	}
-	
+	@RequestMapping(value = "/recipeView.do")
+	   public String recipeView(int recipeNo, Model model) {
+		RecipeBoard rb = service.selectOneRecipe(recipeNo);
+		RecipeContent rc = service.selectContent(recipeNo);
+		Material m = service.selectMaterial(recipeNo);
+		return "recipe/recipeView";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/rCategory1.do", produces = "application/json;charset=utf-8")
+		public String rCategory1(String item){
+		ArrayList<RecipeBoard>list = service.selectCategory1(item);
+		return new Gson().toJson(list);
+	}
 }
