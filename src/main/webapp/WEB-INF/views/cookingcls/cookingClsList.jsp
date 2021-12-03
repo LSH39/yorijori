@@ -14,6 +14,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<h1>쿠킹클래스 목록</h1>
+		<img src="./resources/img/cookingcls/classtest.jpg" width="300px" height="300px"><br>
+		<a href="/cookingClsView.do?classNo=${ccls.classNo}" >너는 절대 못하는</a>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

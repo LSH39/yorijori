@@ -89,34 +89,41 @@
             
             $("#classStart").change(function(){
             	let classStart = $(this).val();
-            	console.log(classStart);
+            	let classEnd = $("#classEnd").val();
             	
             	var date = new Date();
             	var today = date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0"+date.getDate()).slice(-2);
-            	console.log(today);
             	
             	if(classStart <= today){
             		console.log("날짜 오류");
             		$(this).val("");
-            		
-            	}
+            	}else if(classStart == "" || classEnd == ""){            		
+            		console.log("둘 중 하나가 공백");
+            	}else if(classStart >= classEnd){
+            		console.log("시작일이 더 큼");
+            	}else{
+            		console.log("올바르게 입력됨");
+            	} 
             	
             });
             
             $("#classEnd").change(function(){
             	let classEnd = $(this).val();
-            	console.log(classEnd);
+            	let classStart = $("#classStart").val();
             	
             	var date = new Date();
             	var today = date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0"+date.getDate()).slice(-2);
-            	console.log(today);
             	
             	if(classEnd <= today){
             		console.log("날짜 오류");
             		$(this).val("");
-            		
+            	}else if(classStart == "" || classEnd == ""){            		
+            		console.log("둘 중 하나가 공백");
+            	}else if(classStart >= classEnd){
+            		console.log("시작일이 더 큼");
+            	}else{
+            		console.log("올바르게 입력됨");
             	}
-            	
             });
             
             /*
@@ -146,12 +153,12 @@
 				<h5>강의 내용</h5>
 				<textarea name="classContent" id="" cols="30" rows="10"></textarea>
 				<br>
-				<h5>강의 장소</h5>
+				<h5>강의 장소(입력 안할시 비대면)</h5>
 				<input type="text" name="classLocation" id="classLocation">
-				<button type="button" id="addrSearch">주소검색</button>
+				<button type="button" id="addrSearch" class="btn btn-primary">주소검색</button>
 				<br> <input type="text" name="" id="classLocation2"><br>
 				<h5>강의 가격</h5>
-				<input type="text" name="classPrice" id="classPrice" maxlength="10"><br>
+				<input type="text" name="classPrice" id="classPrice" maxlength="10">원<br>
 				<span class="result">　</span>
 				<h5>강의 시간 23글자임 시간10bytes + 4글자12bytes</h5>
 				<h5>오전09:00~오후10:00</h5>
@@ -166,8 +173,8 @@
 				<input type="date" name="classEnd" id="classEnd"><br><br>
 				
 				<input
-					type="submit" value="등록" class="btn-danger">
-				<button type="button" id="chkHidden" class="btn-primary">히든값 확인 버튼</button>
+					type="submit" value="등록" class="btn btn-danger">
+				<button type="button" id="chkHidden" class="btn btn-primary">히든값 확인 버튼</button>
 			</form>
 		</div>
 	</div>
