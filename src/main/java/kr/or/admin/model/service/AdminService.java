@@ -15,11 +15,21 @@ public class AdminService {
 	@Autowired
 	AdminDao dao;
 	
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> refs/heads/master
 	public MemberPageData allMemberList(int reqPage, String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String align, String memberLevel,String searchText2) {
+<<<<<<< HEAD
 
 	
 
+=======
+=======
+	public MemberPageData allMemberList(int reqPage) {
+>>>>>>> refs/heads/master
+>>>>>>> refs/heads/master
 		int numPerPage =30;
 		if(align!=null) {
 			numPerPage = Integer.parseInt(align);
@@ -27,12 +37,22 @@ public class AdminService {
 		int end = reqPage*numPerPage;
 		int start = end - numPerPage+1;
 		
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> refs/heads/master
 		ArrayList<Member2> list = dao.allMemberList(searchType,searchText,searchDetail,period,start2,end2,moreless,joinStart,joinEnd,detail,memberLevel,searchText2);
 		
+<<<<<<< HEAD
 
 		
 
+=======
+=======
+		ArrayList<Member2> list = dao.allMemberList();
+>>>>>>> refs/heads/master
+>>>>>>> refs/heads/master
 		int totalCount = dao.selectTotalCount();
 
 		int totalPage=0;

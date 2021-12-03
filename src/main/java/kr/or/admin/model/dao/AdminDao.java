@@ -1,7 +1,6 @@
 package kr.or.admin.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -20,7 +19,11 @@ public class AdminDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Transactional
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> refs/heads/master
 	public ArrayList<Member2> allMemberList(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2) {
 		
 			HashMap<String,Object> map = new HashMap<String,Object>();
@@ -41,7 +44,17 @@ public class AdminDao {
 			return (ArrayList<Member2>) list;
 		}
 	
+<<<<<<< HEAD
 
+=======
+=======
+	public ArrayList<Member2> allMemberList() {
+		List list = sqlSession.selectList("member.selectAllMember");
+		return (ArrayList<Member2>) list;
+	}
+
+>>>>>>> refs/heads/master
+>>>>>>> refs/heads/master
 	public int selectTotalCount() {
 		int totalCount = sqlSession.selectOne("member.selectTotalCount");
 		return totalCount;
