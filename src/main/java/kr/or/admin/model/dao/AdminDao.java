@@ -20,6 +20,7 @@ public class AdminDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Transactional
+
 	public ArrayList<Member2> allMemberList(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2) {
 		
 			HashMap<String,Object> map = new HashMap<String,Object>();
@@ -40,6 +41,7 @@ public class AdminDao {
 			return (ArrayList<Member2>) list;
 		}
 	
+
 	public int selectTotalCount() {
 		int totalCount = sqlSession.selectOne("member.selectTotalCount");
 		return totalCount;
