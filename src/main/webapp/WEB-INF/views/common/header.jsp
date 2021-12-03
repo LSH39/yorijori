@@ -115,8 +115,9 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       
-              <!-- 레시피 카테고리 -->
-    	<form action="/recipes.do" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+      
+            <!-- 레시피 카테고리 -->
+    	<!-- <form action="/recipes.do" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
 		<div class="row recipe-category">
 			<div class="col">
 			<ul>
@@ -169,7 +170,9 @@
 			</div>
 		</div>
 	</form>
+	-->
 	<!-- //마우스오버시 보이는 레이어메뉴 -->
+	
 
     </div>
     
