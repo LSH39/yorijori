@@ -13,9 +13,10 @@
             <ul>
                 <li>
                     <ul class="subnavi">
-                        <li><a href="/mypage.do?memberId=${sessionScope.m.memberId }">내정보 조회 및 수정<span>&gt;</span></a></li>
+                        <li><a href="/mypage.do?memberId=hyo">내정보 조회 및 수정<span>&gt;</span></a></li>
+                           <li><a href="/mypage.do?memberId=test006">판매자판조회 및 수정<span>&gt;</span></a></li>
                         <li><a href="#" id="lf-click">내 구매내역<span>&gt;</span></a></li>
-                        <li><a href="#">쿠폰함<span>&gt;</span></a></li>
+                        <li><a href="/mycoupon?memberNo=111">쿠폰함<span>&gt;</span></a></li>
                         <li><a href="/deleteFrm.do?">회원탈퇴<span>&gt;</span></a></li>
                         <li><a href="#">참여한 경연대회<span>&gt;</span></a></li>
                         <li><a href="myclass.do?memberNo=111">요리클래스 예약내역<span>&gt;</span></a></li>
@@ -30,7 +31,7 @@
                         <li><a href="#">요리클래스후기<span>&gt;</span></a></li>
                         <li><a href="#">밀키트후기<span>&gt;</span></a></li>
                         <li><a href="#">작성 게시글<span>&gt;</span></a></li>
-                        <li><a href="#">내 작성 레시피<span>&gt;</span></a></li>
+                        <li><a href="/myRecipe?recipeWriter=111">내 작성 레시피<span>&gt;</span></a></li>
                   
                     </ul>
                 </li>
