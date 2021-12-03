@@ -1,7 +1,6 @@
 package kr.or.admin.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,19 +18,8 @@ public class AdminDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Transactional
-	public ArrayList<Member2> allMemberList(String searchType, String searchText) {
-		List list = null;
-		if(searchText ==null) {
-			list = sqlSession.selectList("member.selectAllMember");
-		}else {
-			HashMap<String,Object> map = new HashMap<String,Object>();
-			map.put("searchType", searchType);
-			map.put("searchText", searchText);
-			
-			list = sqlSession.selectList("member.selectOneMember",map);
-			
-		}
-		
+	public ArrayList<Member2> allMemberList() {
+		List list = sqlSession.selectList("member.selectAllMember");
 		return (ArrayList<Member2>) list;
 	}
 

@@ -95,6 +95,7 @@
           </li>
           <li class="dropdown" style="padding-right:15px;"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
+
               <li><a href="/noticeList.do">공지사항</a></li>
               <li><a href="/freeboardList.do">자유게시판</a></li>
               <li><a href="#">메뉴추천</a></li>

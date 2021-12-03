@@ -11,6 +11,7 @@ import kr.or.freeboard.model.service.FreeboardService;
 
 @Controller
 public class FreeboardController {
+
 	@Autowired
 	private FreeboardService service;
 	

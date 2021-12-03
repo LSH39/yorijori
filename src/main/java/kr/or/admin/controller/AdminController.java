@@ -24,11 +24,10 @@ public class AdminController {
 		return "admin/admin";
 	}
 	@RequestMapping(value="/allmember.do")
-	public String allmember(Model model,int reqPage,String searchType,String searchText) {
+	public String allmember(Model model,int reqPage) {
 		
-		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText);
+		MemberPageData mpd =  service.allMemberList(reqPage);
 		model.addAttribute("list" ,mpd.getList());
-		
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/allmember";

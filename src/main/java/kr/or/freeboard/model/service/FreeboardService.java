@@ -7,6 +7,5 @@ import kr.or.freeboard.model.dao.FreeboardDao;
 
 @Service
 public class FreeboardService {
-	@Autowired
-	private FreeboardDao dao;
+
 }

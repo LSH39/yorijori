@@ -8,5 +8,8 @@ import org.springframework.stereotype.Repository;
 public class ProfileDao {
 
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate session;
+	
+	
+	
 }

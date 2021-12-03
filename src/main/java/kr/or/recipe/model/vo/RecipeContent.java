@@ -10,4 +10,6 @@ public class RecipeContent {
 	private String filepath;
 	private String recipeContent;
 	
+	private String[] rContentList;
+	
 }
