@@ -21,15 +21,15 @@
 				<h1>커뮤니티</h1>
 				<div class="sidemenubox">
 					<ul class="nav flex-column">
-						<li class="nav-item"><a href="#">공지사항 <span> &gt;</span></a></li>
-						<li class="nav-item active"><a href="#">자유게시판 <span> &gt;</span></a></li>
+						<li class="nav-item active"><a href="#">공지사항 <span> &gt;</span></a></li>
+						<li class="nav-item"><a href="#">자유게시판 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
 					</ul>
 				</div>
 	      	</div>
 	      	<div class="col-10 main-content">
 	      		<div class="main-content-title">
-	      			<h2>자유게시판 <span> 우리들의 즐거운 커뮤니티 공간!</span></h2>
+	      			<h2>공지게시판 <span> 요리조리의 새로운 소식들과 유용한 정보들을 한 곳에서 확인하세요.</span></h2>
 	      			<a href="freeboard/freeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
 	      		</div>
 	      		<div class="freeboard-table">

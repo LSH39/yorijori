@@ -1,5 +1,13 @@
 package kr.or.recipecontest.model.vo;
 
-public class RecipeContest {
+import lombok.Data;
 
+@Data
+public class RecipeContest {
+	private int contestNo;
+	private int recipeNo;
+	private String enterDate;
+	private int contestResult;
+	private String contestMonth;
+	private int recipeDelete;
 }
