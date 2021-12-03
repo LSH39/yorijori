@@ -24,6 +24,7 @@ public class Member2 {
 	private String enrollDate;
 	private String withdrawDate;
 	private String memberBlack;
-	private String boardCount;
-	private String recipeCount;
+	private int boardCount;
+	private int recipeCount;
+	private int fcCount;
 }
