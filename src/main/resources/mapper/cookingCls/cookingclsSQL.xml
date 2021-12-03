@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cookingcls">
-  
+
+	<!-- 쿠킹클래스 전체 조회 -->
+	<select id="selectAllClass" resultType="ccls">
+		select
+			member_no as memberNo,
+			class_title as classTitle,
+			class_price as classPrice
+		from cooking_class
+	</select>
+	
+	<!-- 쿠킹클래스 조회 -->
+	<select id="selectOneClass" parameterType="_int" resultType="ccls">
+		select 
+			class_no as classNo,
+			class_title as classTitle,
+			member_no as memberNo,
+			class_content as ClassContent,
+			class_start as classStart,
+			class_end as classEnd,
+			class_price as classPrice,
+			class_rate as classRate,
+			class_nop as classNop,
+			class_curr_nop as classCurNop,
+			class_status as classStatus,
+			class_reg_date as classRegDate,
+			class_time as classTime,
+			class_location as classLocation
+		
+		from cooking_class 
+		where class_no=#{classNo}
+	</select>
 </mapper>
