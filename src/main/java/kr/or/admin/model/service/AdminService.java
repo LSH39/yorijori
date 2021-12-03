@@ -15,12 +15,15 @@ public class AdminService {
 	@Autowired
 	AdminDao dao;
 	
-	public MemberPageData allMemberList(int reqPage, String searchType, String searchText) {
+	public MemberPageData allMemberList(int reqPage, String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String align, String memberLevel,String searchText2) {
 		int numPerPage =30;
+		if(align!=null) {
+			numPerPage = Integer.parseInt(align);
+		}
 		int end = reqPage*numPerPage;
 		int start = end - numPerPage+1;
 		
-		ArrayList<Member2> list = dao.allMemberList(searchType,searchText);
+		ArrayList<Member2> list = dao.allMemberList(searchType,searchText,searchDetail,period,start2,end2,moreless,joinStart,joinEnd,detail,memberLevel,searchText2);
 		
 		int totalCount = dao.selectTotalCount();
 
@@ -48,7 +51,7 @@ public class AdminService {
 
 			pageNavi += "<li class='page-item'>";
 
-			pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + (pageNo - 1) + "'>";
+			pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + (pageNo - 1) + "&align="+numPerPage+"'>";
 
 			pageNavi += "&lt;</a></li>";
 
@@ -60,7 +63,7 @@ public class AdminService {
 
 				pageNavi += "<li class='page-item active'>";
 
-				pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + pageNo + "'>";
+				pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + pageNo + "&align="+numPerPage+"'>";
 
 				pageNavi += pageNo + "</a></li>";
 
@@ -68,7 +71,7 @@ public class AdminService {
 
 				pageNavi += "<li class='page-item'>"; 
 
-				pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + pageNo + "'>";
+				pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + pageNo +"&align="+numPerPage+"'>";
 
 				pageNavi += pageNo + "</a></li>";
 
@@ -88,7 +91,7 @@ public class AdminService {
 
 			pageNavi += "<li class='page-item'>";
 
-			pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + pageNo + "'>";
+			pageNavi += "<a class='page-link' href='/allmember.do?reqPage=" + pageNo + "&align="+numPerPage+"'>";
 
 			pageNavi += "&gt;</a></li>";
 
@@ -105,5 +108,10 @@ public class AdminService {
 		return mpd;
 		
 		
+	}
+
+	public int addBlackMember(String memberNo) {
+		int result = dao.addBlackMember(memberNo);
+		return result;
 	}
 }

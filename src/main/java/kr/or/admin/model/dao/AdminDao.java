@@ -3,6 +3,7 @@ package kr.or.admin.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +20,39 @@ public class AdminDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Transactional
-	public ArrayList<Member2> allMemberList(String searchType, String searchText) {
-		List list = null;
-		if(searchText ==null) {
-			list = sqlSession.selectList("member.selectAllMember");
-		}else {
+	public ArrayList<Member2> allMemberList(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2) {
+		
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("searchType", searchType);
 			map.put("searchText", searchText);
+			map.put("memberLevel", memberLevel);
+			map.put("searchDetail",searchDetail);
+			map.put("period",period);
+			map.put("start", start2);
+			map.put("end", end2);
+			map.put("moreless", moreless);
+			map.put("joinStart", joinStart);
+			map.put("joinEnd", joinEnd);
+			map.put("searchText2", searchText2);
+			map.put("detail", detail);
+			List list = sqlSession.selectList("member.selectDetailMember",map);
 			
-			list = sqlSession.selectList("member.selectOneMember",map);
-			
+			return (ArrayList<Member2>) list;
 		}
-		
-		return (ArrayList<Member2>) list;
-	}
-
+	
 	public int selectTotalCount() {
 		int totalCount = sqlSession.selectOne("member.selectTotalCount");
-		return 0;
+		return totalCount;
 	}
+	public int addBlackMember(String memberNo) {
+		StringTokenizer st = new StringTokenizer(memberNo, ",");
+		String[] arr = new String[st.countTokens()];
+		for(int i = 0; i<arr.length;i++) {
+			arr[i]=st.nextToken();
+		}
+		int result = sqlSession.update("member.addBlackMember",arr);
+		return result;
+	}
+		
+		
 }

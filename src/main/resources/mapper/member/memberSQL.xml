@@ -23,9 +23,10 @@ enroll_date as enrollDate,
 withdraw_date as withdrawDate,
 member_black as memberBlack,
 (select count(*) from freeboard where free_writer = member_id)freeCount,
-(select count(*) from recipe_board where recipe_writer = member_id)recipeCount
+(select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
+(select count(*) from freeboard_comment where fc_writer = member_id)fcCount
 
-from member
+from member where memberBlack = 0
 	</select>
 	<select id="selectTotalCount" resultType="_int">
 	select count(*) from member
@@ -52,9 +53,134 @@ enroll_date as enrollDate,
 withdraw_date as withdrawDate,
 member_black as memberBlack,
 (select count(*) from freeboard where free_writer = member_id)freeCount,
-(select count(*) from recipe_board where recipe_writer = member_id)recipeCount
+(select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
+(select count(*) from freeboard_comment where fc_writer = member_id)fcCount
 
 from member) where ${searchType} like '%'||#{searchText}||'%'
 
 	</select>
+	<select id="selectDetailMember" parameterType="hashmap" resultType="m2">
+	select * from (select member_no as memberNo,
+member_id as memberId,
+member_pw as memberPw,
+member_email as memberEmail,
+member_name as memberName,
+member_nickname as memberNickname,
+member_phone as memberPhone,
+member_birth as memberBirth,
+postcode,
+address_road as addressRoad,
+address_detail as addressDetail,
+member_consent as memberConsent,
+profile_path as profilePath,
+profile_intro as profileIntro,
+certificate_path as certificatePath,
+member_level as memberLevel,
+member_point as memberPoint,
+enroll_date as enrollDate,
+withdraw_date as withdrawDate,
+member_black as memberBlack,
+(select count(*) from freeboard where free_writer = member_id)freeCount,
+(select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
+(select count(*) from freeboard_comment where fc_writer = member_id)fcCount
+
+from member) where memberBlack = 0
+
+<if test="detail==1">
+
+
+and ${searchType} like '%'||#{searchText}||'%'
+
+
+</if>
+<if test="detail==2">
+and
+<choose>
+<when test="searchDetail ==1">
+freeCount
+<choose>
+<when test="moreless ==1">
+<![CDATA[>=]]>#{searchText2}
+
+</when>
+<otherwise>
+<![CDATA[<=]]>#{searchText2}
+
+</otherwise>
+</choose>
+
+</when>
+<when test="searchDetail ==2">
+recipeCount
+<choose>
+<when test="moreless ==1">
+<![CDATA[>=]]>#{searchText2}
+
+</when>
+<otherwise>
+<![CDATA[<=]]>#{searchText2}
+
+</otherwise>
+</choose>
+</when>
+<when test="searchDetail ==3">
+fcCount
+<choose>
+<when test="moreless ==1">
+<![CDATA[>=]]>#{searchText2}
+
+</when>
+<otherwise>
+<![CDATA[<=]]>#{searchText2}
+
+</otherwise>
+</choose>
+</when>
+<when test="searchDetail ==4">
+fcCount
+<choose>
+<when test="moreless ==1">
+<![CDATA[>=]]>#{searchText2}
+
+</when>
+<otherwise>
+<![CDATA[<=]]>#{searchText2}
+
+</otherwise>
+</choose>
+</when>
+<otherwise>
+enrollDate
+between #{joinStart} and #{joinEnd}
+</otherwise>
+</choose>
+</if>
+
+<choose>
+<when test="memberLevel ==0">
+and memberLevel =1 or memberLevel =2
+
+</when>
+<when test="memberLevel ==1">
+and memberLevel =1 
+
+</when>
+<when test="memberLevel ==2">
+and memberLevel =2
+
+</when>
+
+</choose>
+
+order by enrollDate desc
+	</select>
+	
+	
+	
+	
+	<update id="addBlackMember" parameterType="string" >
+	update member set member_black = 1 where member_no in 
+	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
+	
+	</update>
 </mapper>
