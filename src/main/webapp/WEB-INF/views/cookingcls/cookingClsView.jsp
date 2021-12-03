@@ -191,10 +191,10 @@ Quisque ut quam eleifend odio semper dictum vehicula a erat. Quisque sit amet ti
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input type="text" name="blah" id="blah" class="input-group">
+									<input type="text" name="blah" id="blah" class="form-control">
 								</td>							
 								<td>
-									<select class="form-select">
+									<select class="form-select form-select-md">
 										<option value="1">★☆☆☆☆</option>
 										<option value="2">★★☆☆☆</option>
 										<option value="3">★★★☆☆</option>

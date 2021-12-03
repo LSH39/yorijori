@@ -21,7 +21,7 @@ public class CookingClsDao {
 
 	public ArrayList<CookingCls> selectAllClass() {
 		// TODO Auto-generated method stub
-		List<CookingCls> list = sqlSession.selectList("cookingcls.selectList");
+		List<CookingCls> list = sqlSession.selectList("cookingcls.selectClassList");
 		return (ArrayList<CookingCls>) list;
 	}
 }
