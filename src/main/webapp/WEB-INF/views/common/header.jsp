@@ -117,61 +117,61 @@
       
       
             <!-- 레시피 카테고리 -->
-    	<!-- <form action="/recipes.do" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
-		<div class="row recipe-category">
-			<div class="col">
-			<ul>
-				<li class="recipe-category-1">
-					<h3>
-						<span>상황에 맞는 요리</span>
-					</h3>
-					<ul>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-					</ul>
-				</li>
+    	<form action="/recipes.do" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+		<div class="recipe-category">
+			<div class="row">
+				<div class="col">
+				<ul>
+					<li class="recipe-category-1">
+						<h3>
+							<span>상황에 맞는 요리</span>
+						</h3>
+						<ul>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+							</li>
+						</ul>
+					</li>
+				</div>
+				<div class="col">
+					<li class="recipe-category-2">
+						<h3>
+							<span>상황에 맞는 요리</span>
+						</h3>
+						<ul>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+							</li>
+						</ul>
+					</li>		
+				</ul>
+				</div>
 			</div>
-			<div class="col">
-				<li class="recipe-category-2">
-					<h3>
-						<span>상황에 맞는 요리</span>
-					</h3>
-					<ul>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-						<li>
-							<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
-						</li>
-					</ul>
-				</li>		
-			</ul>
-			</div>
-		</div>
 			<div class="btn-area">
 				<button type="submit" class="btn-search">검색하기</button>
 				<button type="button" class="btn-close">닫기</button>
 			</div>
 		</div>
 	</form>
-	-->
-	<!-- //마우스오버시 보이는 레이어메뉴 -->
+
 	
 
     </div>
@@ -187,8 +187,19 @@
   </div>
   
   <script>
+  	function abc(){
+  		if($("html").scrollTop()==0){
+  			 $('.recipe-category').css("top","120px");
+  			$('.recipe-category').hide();
+  		}else{
+  			$('.recipe-category').css("top","80px");
+  		}
+  	}
+  	$(document).scroll(function(){
+  		abc();
+  	})
   	$(function(){
-  		$('.recipe-category').hide();
+  		abc();
   	})
   	  $('#show-category').on('click', function(){
   		  $('.recipe-category').toggle();

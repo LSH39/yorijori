@@ -18,6 +18,7 @@ public class NoticeController {
 		model.addAttribute("list", npd.getList());
 		model.addAttribute("pageNavi", npd.getPageNavi());
 		model.addAttribute("start", npd.getStart());
+		model.addAttribute("totalCount", npd.getTotalCount());
 		return "notice/noticeList";
 	}
 }

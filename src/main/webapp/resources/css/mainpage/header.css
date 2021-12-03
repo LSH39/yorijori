@@ -4,10 +4,11 @@
 	width: 100%;
 	border-bottom: 1px solid #adadad;
 	background-color: rgba(255, 255, 255, 0.9);
-	top: 20%;
+	top: 80px;
 	position: absolute;
 	z-index: 100;
 	left: 0;
+	display:none;
 }
 .recipe-category>ul{
 	margin: 0;
