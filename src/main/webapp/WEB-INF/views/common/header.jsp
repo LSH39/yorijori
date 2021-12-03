@@ -44,6 +44,9 @@
 
 </head>
 
+
+
+<div class="header-wrap">
 <!-- ======= 최상단 부분 ======= -->
   <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
@@ -67,7 +70,6 @@
       </div>
     </div>
   </section>
-
   <!-- ======= 헤더 ======= -->
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center">
@@ -114,13 +116,16 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      
-      
-            <!-- 레시피 카테고리 -->
-    	<form action="/recipes.do" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+
+	
+
+    </div>
+    
+  </header><!-- End Header -->
+  <form action="/recipes.do" method="get">
 		<div class="recipe-category">
-			<div class="row">
-				<div class="col">
+			<div class="recipe-category-box">
+				<div>
 				<ul>
 					<li class="recipe-category-1">
 						<h3>
@@ -128,55 +133,92 @@
 						</h3>
 						<ul>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group1" value="1"/> 술안주</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group1" value="1"/> 다이어트</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group1" value="1"/> 손님초대</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group1" value="1"/> 혼밥/자취</label>
 							</li>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/> 간식</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/> 유아식</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/> 비건/채식</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group1" value="1"/> 기타</label>
+							</li>	
 						</ul>
 					</li>
 				</div>
-				<div class="col">
+				<div>
 					<li class="recipe-category-2">
 						<h3>
-							<span>상황에 맞는 요리</span>
+							<span>재료별 요리</span>
 						</h3>
 						<ul>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group2" value="1"/> 육류</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group2" value="1"/> 채소류</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group2" value="1"/> 해산물</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/>면역력 강화</label>
+								<label><input type="radio" name="category-group2" value="1"/> 달걀/유제품</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/> 면/만두</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/> 콩/두부</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/> 과일</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group2" value="1"/> 기타</label>
+							</li>
+						</ul>
+					</li>		
+				</div>
+				<div>
+					<li class="recipe-category-3">
+						<h3>
+							<span>난이도별 요리</span>
+						</h3>
+						<ul>
+							<li>
+								<label><input type="radio" name="category-group3" value="1"/> 상</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group3" value="1"/> 중</label>
+							</li>
+							<li>
+								<label><input type="radio" name="category-group3" value="1"/> 하</label>
 							</li>
 						</ul>
 					</li>		
 				</ul>
 				</div>
 			</div>
-			<div class="btn-area">
+			<div class="category-btn-area">
 				<button type="submit" class="btn-search">검색하기</button>
-				<button type="button" class="btn-close">닫기</button>
+				<button type="button" class="recipe-category-close">닫기</button>
 			</div>
 		</div>
 	</form>
-
-	
-
-    </div>
-    
-  </header><!-- End Header -->
+  </div>
      <!-- 따라다니는 우측 퀵 메뉴 -->
   <div class="quickmenu"> 
   	<ul>
