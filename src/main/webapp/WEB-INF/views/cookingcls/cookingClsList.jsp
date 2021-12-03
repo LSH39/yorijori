@@ -14,8 +14,14 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<h1>쿠킹클래스 목록</h1>
+		<c:forEach items="${list }" var="ccls" varStatus="i">
 		<img src="./resources/img/cookingcls/classtest.jpg" width="300px" height="300px"><br>
-		<a href="/cookingClsView.do?classNo=${ccls.classNo}" >너는 절대 못하는</a>
+		<h5>${i.count }</h5>
+		<h5>${ccls.memberNo }</h5>
+		<h5>${ccls.classTitle }</h5>
+		<h5>${ccls.classPrice }</h5>
+		<a href="/cookingClsView.do?classNo=${ccls.classNo}">너는 절대 못하는</a>
+		</c:forEach>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

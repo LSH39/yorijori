@@ -18,10 +18,10 @@ public class CookingClsController {
 	
 	//쿠킹클래스 전체 조회
 	@RequestMapping(value="/cookingClsList.do")
-	public String selectAllClass(Model model) {
+	public String SelectAllClass(Model model) {
 		ArrayList<CookingCls> list = service.selectAllClass();
 		model.addAttribute("list", list);
-		return "cookingcls/cookingclsList";
+		return "cookingcls/cookingClsList";
 	}
 	
 	//쿠킹클래스 작성

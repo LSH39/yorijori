@@ -2,9 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cookingcls">
 
+	<!-- 
+	DaoImpl단
+getSqlSession().selectOne("호출매퍼.호출ID")
+
+
+mybatis xml mapper단
+
+<mapper namespace="호출매퍼"><select id="호출ID"></select>
+	 -->
+	
 	<!-- 쿠킹클래스 전체 조회 -->
-	<select id="selectAllClass" resultType="ccls">
+	<select id="selectClassList" resultType="ccls">
 		select
+			class_no as classNo,
 			member_no as memberNo,
 			class_title as classTitle,
 			class_price as classPrice
@@ -28,7 +39,6 @@
 			class_reg_date as classRegDate,
 			class_time as classTime,
 			class_location as classLocation
-		
 		from cooking_class 
 		where class_no=#{classNo}
 	</select>
