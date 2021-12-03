@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쿠킹클래스 목록</title>
+<title>쿠킹클래스 뷰</title>
 <style>
 
 </style>
@@ -13,7 +13,8 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h1>쿠킹클래스 목록</h1>
+
+		<h1>쿠킹클래스 뷰</h1>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

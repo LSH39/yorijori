@@ -23,7 +23,19 @@ public class RecipeService {
 
 
 	public int insertRecipe(RecipeBoard rb, RecipeContent rc, Material m) {
-		
-		return 0;
+		int result = dao.insertRecipeBoard(rb);
+		int recipeNo = 0;
+		if(result>0) {
+			recipeNo = dao.selectRecipeNo(rb);
+			if(recipeNo>0) {
+			m.setRecipeNo(recipeNo);
+			result = dao.insertMaterial(m);
+			  if(result>0) {
+				  rc.setRecipeNo(recipeNo);
+				  result = dao.insertContent(rc);
+			  }
+			}
+		}
+		return result;
 	}
 }

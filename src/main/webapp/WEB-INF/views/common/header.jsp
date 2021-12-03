@@ -73,7 +73,7 @@
     <div class="container d-flex align-items-center">
 
       
-      <a href="/" class="logo me-auto"><img src="resources/img/mainpage/logo_header.png" alt="" class="img-fluid"></a>
+      <a href="index.html" class="logo me-auto"><img src="resources/img/mainpage/logo_header.png" alt="" class="img-fluid"></a>
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -95,7 +95,7 @@
           </li>
           <li class="dropdown" style="padding-right:15px;"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/freeboardList.do?reqPage=1">자유게시판</a></li>
+              <li><a href="#">자유게시판</a></li>
               <li><a href="#">공지사항</a></li>
               <li><a href="#">메뉴추천</a></li>
             </ul>
