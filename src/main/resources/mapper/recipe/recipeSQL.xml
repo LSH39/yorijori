@@ -21,7 +21,21 @@
  	<insert id="insertMaterial" parameterType="material">
  		insert into material values(material_seq.nextval,#{recipeNo},#{materialName},#{mAmount})
  	</insert>
- 	<select id="insertContent" parameterType="rcontent">
+ 	<insert id="insertContent" parameterType="rcontent">
  		insert into recipe_content values(r_file_seq.nextval,#{recipeNo},#{filename},#{filepath},#{recipeContent})
+ 	</insert>
+ 	<select id="recipeCategoty1" parameterType="string" resultType="rb">
+ 		select 
+ 			recipe_no as recipeNo, 
+ 			recipe_writer as recipeWriter, 
+ 			recipe_title as recipeTitle, 
+ 			filepath,
+ 			read_count as readCount,
+ 			recipe_time as recipeTime, 
+ 			recipe_level as recipeLevel
+ 		from recipe_board where situation=#{item}
+ 	</select>
+ 	<select id="selectMemberId"  parameterType="_int" >
+ 		select member_id from member where member_no=#{recipe_writer};
  	</select>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.vo.product;
 import kr.or.recipe.model.dao.RecipeDao;
 import kr.or.recipe.model.vo.Material;
@@ -26,7 +27,7 @@ public class RecipeService {
 		int result = dao.insertRecipeBoard(rb);
 		int recipeNo = 0;
 		if(result>0) {
-			recipeNo = dao.selectRecipeNo(rb);
+			recipeNo = dao.selectRecipeNo();
 			if(recipeNo>0) {
 			m.setRecipeNo(recipeNo);
 			result = dao.insertMaterial(m);
@@ -37,5 +38,29 @@ public class RecipeService {
 			}
 		}
 		return result;
+	}
+
+
+	public RecipeBoard selectOneRecipe(int recipeNo) {
+		RecipeBoard rb = dao.selectOneRecipe(recipeNo);
+		return rb;
+	}
+
+
+	public RecipeContent selectContent(int recipeNo) {
+		RecipeContent rc = dao.selectContent(recipeNo);
+		return rc;
+	}
+
+
+	public Material selectMaterial(int recipeNo) {
+		Material m = dao.selectMaterial(recipeNo);
+		return m;
+	}
+
+
+	public ArrayList<RecipeBoard> selectCategory1(String item) {
+		ArrayList<RecipeBoard>list = dao.selectCategory1(item);
+		return list;
 	}
 }
