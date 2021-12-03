@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <style>
+<style>
 
 #line2 {
 	background-color: gray;
 	height: 3px;
-	width: 875px;
+	width: 800px;
 }
 
 .h_left{
@@ -89,29 +90,44 @@
     display: none;
 }
 
+
+/* 클릭 표시 a태그 배경색 #d6c6a5 */
+.main{
+margin-bottom:40px;
+}
 /* 메인 콘텐츠 설정 */
 .main-content{
     width: 875px;
+    
 }
-.classForm{
-  width:875px;
-  boder:3px solid black;
-  font-size:12px;
- 
+.retable {
+   width: 800px;
+   height: 40px;
+   margin-bottom: 30px;
+   text-align: center;
+   border:none;
+   background-color: rgb(224, 219, 239);
+}
+.coupons{
+    width: 800px;
+   height: 50px;
+   background-color:rgb(224, 224, 224);
 
-  }
-  .main{
-  margin-bottom:40px;
-  }
-
+}
+.cou1{
+    width: 800px;
+    height:50px;
+    float: left;
+    
+}
 </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
         <div class="main-left-box">
-            <h3>마이페이지</h3>
-           <ul>
+			<h2>마이페이지</h2>
+			<ul>
 				<li>
 					<ul class="subnavi">
 						<li><a href="#">내정보 조회 및 수정<span>&gt;</span></a></li>
@@ -131,49 +147,43 @@
 						<li><a href="#" id="lf-click">작성 게시글<span>&gt;</span></a></li>
 						<li><a href="#">내 작성 레시피<span>&gt;</span></a></li>
 
-					</ul>
-			</li>
+					</ul></li>
 			</ul>
-        </div>
+		</div>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-            <h3 id="h_hotel">클래스 예약내역</h3>
+            <h3 id="h_hotel">내 쿠폰함</h3>
             <div id="line2"></div><br>
-            <table border="1" class="classForm">
+            <table border="1" class="retable">
                 <tr>
-                    <th>예약번호</th>
-                    <th>요리클래스</th>
-                    <th>인원</th>
-                    <th>클래스시작일</th>
-                    <th>클래스종료일</th>
-                    <th>수강료</th>
-                    <th>수업시간</th>
-                    <th>수업장소</th>
-                    <th>상태</th>
-                    <th>예약수정</th>
-                    <th>예약취소</th>
+ 
+                   <td><b>쿠폰명</b></td>
+                   <td><b>할인금액</b></td>
+                   <td><b>사용가능기간</b></td>
+                   <td><b>사용여부</b></td>
+                
                 </tr>
-                    <c:forEach items="${list}" var="mcr" varStatus="i">
-                <tr>
-                    <td>${mcr.rsrvNo }</td>
-                    <td>${mcr.classTitle }</td>
-                    <td>${mcr.classCurrNop }</td>
-                    <td>${mcr.classStart }</td>
-                    <td>${mcr.classEnd }</td>
-                    <td>${mcr.classPrice }</td>
-                    <td>${mcr.classTime }</td>
-                    <td>${mcr.classLocation }</td>
-                    <td>${mcr.classStatus }</td>
-                    <td><button value="수정" id="modify"><a href="#">수정</a></button></td>
-                    <td><button value="취소" id="delete"><a href="#">삭제</a></button></td>
-                </tr>
-            
-                </c:forEach>
-            </table>
+                </table>
+                
+                       <c:forEach items="${list}" var="mcou" varStatus="i">
+                <div class="coupons">
+                    <table class="cou1">
+                  <tr>
+                    <td>${mcou.couponName }</td>
+                    <td>${mcou.couponDiscount }</td>
+                    <td>${mcou.couponStart }~${mcou.couponEnd }</td>
+                    <td>${mcou.couponUse }</td>
 
+                  </tr>
+                 </table>
+          
+
+                </div>
+                </c:forEach>
         </div>
         
         </div>
-      <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+  
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

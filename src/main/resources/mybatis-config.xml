@@ -42,6 +42,7 @@
 	    <typeAlias type="kr.or.coupon.model.vo.MyCoupon" alias="mcou"/>
 
 	     <typeAlias type="kr.or.cookingRsrv.model.vo.MyCookingRsrv" alias="mcr"/>
+	     <typeAlias type="kr.or.review.model.vo.MyClassReview" alias="mreview"/>
 	</typeAliases>
 </configuration>
 

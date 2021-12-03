@@ -49,7 +49,7 @@
 		WITHDRAW_DATE as withdrawDate,
 		MEMBER_BLACK as memberBlack
 		from member where
-		member_id='test0016'
+		member_id='test0018'
 	</select>
 	<update id="updateMember" parameterType="m">
 		update member set
@@ -57,22 +57,10 @@
 	</update>
 	
 	<delete id="deleteMember"  parameterType="string">
-	delete from member where member_id='test0026' and member_pw='333'
+	delete from member where member_id='test0040' and member_pw='333'
 	
 	</delete>
-	<select id="classReview" parameterType="review">
-	select 
-	review_no as reviewNo,
-	class_no as classNo,
-	class_no as productNo,
-	class_no as memberNo,
-	class_no as reviewContent,
-	class_no as reviewRate,
-	class_no as reviewFlag,
-	class_no as reviewDate
-	from review where member_id='hyo'
-	
-	</select>
+
 	<select id="myCoupon" resultType="mcou" parameterType="_int">
 		select 
 		c.coupon_name as couponName,
@@ -104,6 +92,34 @@
 	where recipe_writer=111
 	
 	</select>
+<select id="myClass" parameterType="_int" resultType="mcr">
+	select 
+	cr.rsrv_no as rsrvNo,
+	cc.class_title as classTitle,
+	cc.class_curr_nop as classCurrNop,
+	cc.class_start as classStart,
+	cc.class_end as classEnd ,
+	cc.class_price as classPrice,
+	cc.class_time as classTime,
+	cc.class_location as classLocation,
+	cc.class_Status as classStatus
+	from cooking_class cc ,
+	cooking_rsrv cr where cr.member_No =111
 
+
+</select>
+<select id="myclassReview" parameterType="_int" resultType="mreview">
+	select r.REVIEW_NO as reviewNo ,
+	r.REIVEW_FLAG as reviewFlag,
+	r.CLASS_NO as classNo,
+	r.REVIEW_CONTENT as reviewContent,
+	r.REVIEW_RATE as reviewRate,
+	r.REVIEW_DATE as reviewDate,
+	cook.class_title as classTitle
+	from review r,cooking_class cook
+    where r.CLASS_NO =cook.class_no and r.member_no=111
+
+
+</select>
 </mapper>
 

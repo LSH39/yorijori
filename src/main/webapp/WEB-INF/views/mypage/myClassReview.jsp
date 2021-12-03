@@ -1,41 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-#header{
-width: 1200px;
-height: 138px;
-background-color: #d696e2;
-margin: 0 auto;
-}
-#footer{
-width: 1100px;
-height: 138px;
-background-color: #d696e2;
-margin: 0 auto;
-}
+  <style>
 
-
-
-#delFrm {
+#line2 {
+	background-color: gray;
+	height: 3px;
 	width: 800px;
-	height: 300px;
-	margin-top:20px;
-	margin-bottom: 50px;
-    background-color: rgb(244, 232, 250);
-	
 }
-#confirm {
-	width: 800px;
-	height: 80px;
-	margin-top:30px;
-	margin-bottom: 50px;
-    background-color:rgb(247, 247, 229);
-}
+
 .h_left{
 	width: 350px;
 	height: 300px;
@@ -108,46 +86,49 @@ margin: 0 auto;
     position: absolute;
     right: 10px;
     font-size: 10px;
-    font-family: 'ns_b';
     display: none;
 }
-.delete{
-    width: 400px;
-    height: 200px;
-    margin: 0 auto;
- 
-}
-#delbutton{
-    background-color: rgb(224, 224, 224);
-    width:300px;
-    height: 30px;
-    border: none;
-    margin-left: 30px;
-}
-#memberId{
-    width:300px;
-    height: 30px;
-    margin-bottom: 20px;
-    margin-top: 50px;
-    margin-left: 30px;
-}
-#memberPw{
-    width:300px;
-    height: 30px;
-    margin-bottom: 20px;
-    margin-left: 30px;
-}
+
+
+/* 클릭 표시 a태그 배경색 #d6c6a5 */
 
 /* 메인 콘텐츠 설정 */
 .main-content{
     width: 875px;
 }
-
-
+/*후기*/
+.review{
+    width:800px;
+    height:100px;
+   
+}
+.re{
+    width:800px;
+    height:50px; 
+    
+}
+.butt{
+    text-align: right;
+    margin-top: 10px;
+    
+}
+#del,#upd{
+    background-color: rgb(196, 191, 227);
+    border: none;
+}
+#rti{
+    width: 800px;
+    margin-bottom: 20px;
+    background-color: #d696e2;
+    border-left: none;
+}
+.rrr{
+    margin-bottom: 20px;
+}
 </style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+ <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
         <div class="main-left-box">
             <h2>마이페이지</h2>
@@ -178,21 +159,50 @@ margin: 0 auto;
         </div>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-            <h2 id="h_hotel">회원탈퇴</h2>
+            <h3 id="h_hotel">쿠킹 클래스 review</h3>
             <div id="line2"></div><br>
-          <div id="confirm">
-              <p>xx님의 정확한 정보확인을 위해 아이디/비밀번호를 다시 확인하겠습니다.</p> </div>
-          <div id="delFrm">
-          <form action="/deleteMember.do" method="post">
-              <div class="delete">
-               <input type="text" id="memberId" placeholder="아이디 입력"><br>
-               <input type="password" id="memberPw" placeholder="비밀번호 입력"><br>
-               <button type="submit" id="delbutton">회원탈퇴하기</button>
+             <div class="review">
+                 <table  id="rti">
+                <tr>
+                    <th>후기번호</th>
+                    <th>요리클래스번호</th>
+                    <th>요리클래스이름</th>
+                    <th>리뷰내용</th>
+                    <th>리뷰평점</th>
+                    <th>등록일</th>
+                </tr>
+            </table>
+             <c:forEach items="${list}" var="mreview" varStatus="i">
+            <div class="rrr">
+              <table border="1" class="re">
+                  
+                  <tr>
+                    <td>${mreview.reviewNo}</td>
+                    <td>${mreview.classNo}</td>
+                    <td>${mreview.classTitle}</td>
+                    <td>${mreview.reviewContent }</td>
+                    <td>${mreview.reviewRate}</td>
+                    <td>${mreview.reviewDate }</td>
+                </tr>
+              </table>
+
+              <div class="butt">
+                <input type="button" value="수정" id="upd">
+                <input type="button" value="삭제" id="del">
               </div>
-        </form>
+              </div>
+             </c:forEach>
+              <div>
+                
+
+                </div>
+             
+             </div>
+           
         </div>
+        
         </div>
-    </div>
+   
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
