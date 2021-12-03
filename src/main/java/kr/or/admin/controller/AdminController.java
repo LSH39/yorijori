@@ -25,18 +25,11 @@ public class AdminController {
 		return "admin/admin";
 	}
 	@RequestMapping(value="/allmember.do")
-<<<<<<< HEAD
 	public String allmember(Model model,int reqPage,String searchType,String searchText,String searchDetail,String period,String start,String end,String moreless,String joinStart,String joinEnd,String detail,String align,String memberLevel,String searchText2) {
-=======
-	public String allmember(Model model,int reqPage) {
->>>>>>> refs/heads/master
 		
-<<<<<<< HEAD
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2);
-=======
-		MemberPageData mpd =  service.allMemberList(reqPage);
->>>>>>> refs/heads/master
 		model.addAttribute("list" ,mpd.getList());
+		
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/allmember";
