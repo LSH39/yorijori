@@ -77,11 +77,9 @@ margin-left : 50%;
         </div>
         
     
-<<<<<<< HEAD
+
     <span>조회 된 회원 수</span> <span class="amount">${list.size() }</span>
-=======
-    <span>전체 회원 수</span> <span>${list.size() }</span>
->>>>>>> refs/heads/master
+
     <hr>
     
    	<div>
@@ -218,7 +216,7 @@ margin-left : 50%;
     			$("#recentonemonth").html("");
     		}
     	});
-<<<<<<< HEAD
+
     	$("#searchbtn1").click(function(){
     		
     		var searchType= $("#searchtype").val();
@@ -359,8 +357,7 @@ margin-left : 50%;
 			});
     	
     	
-=======
->>>>>>> refs/heads/master
+
     });
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
