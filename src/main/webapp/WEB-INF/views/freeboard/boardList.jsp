@@ -50,29 +50,7 @@
 	      				</tbody>
 	      			</table>
 					<div class="pagi">
-						<ul class="pagination tk-pagination">
-						    <li class="tk-page-item disabled">
-						      <a class="page-link" href="#">&lt;</a>
-						    </li>
-						    <li class="tk-page-item active">
-						      <a class="page-link" href="#">1</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">2</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">3</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">4</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">5</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">&gt;</a>
-						    </li>
-					  	</ul>
+						${pageNavi }
 					</div>
 					<form action="/freeboardSearch.do" method="get">
 					<div class="board-search row">

@@ -21,4 +21,9 @@ public class NoticeController {
 		model.addAttribute("totalCount", npd.getTotalCount());
 		return "notice/noticeList";
 	}
+	
+	@RequestMapping(value="/noticeWriteFrm.do")
+	public String noticeWriteFrm() {
+		return "notice/noticeWriteFrm";
+	}
 }

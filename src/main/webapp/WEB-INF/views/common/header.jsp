@@ -213,7 +213,7 @@
 				</div>
 			</div>
 			<div class="category-btn-area">
-				<button type="submit" class="btn-search">검색하기</button>
+				<button type="submit" class="recipe-btn-search">검색하기</button>
 				<button type="button" class="recipe-category-close">닫기</button>
 			</div>
 		</div>
