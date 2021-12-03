@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.recipe-category {
+	width: 100%;
+	border-bottom: 1px solid #adadad;
+	background-color: rgba(255, 255, 255, 0.9);
+	top: 20%;
+	position: absolute;
+	z-index: 100;
+	left: 0;
+}
+.recipe-category>ul{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	text-align: center;
+}
+.recipe-category>ul{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.recipe-category li{
+	display: inline-block;
+	vertical-align: top;
+	padding: 0 50px 0 0;
+	box-sizing: border-box;
+	text-align: left;
+}
+.recipe-category ul>li{
+	display: flex;
+	flex-direction: column;
+}
+.recipe-category span{
+	display: block;
+	font-weight: bold;
+	color: rgb(155, 89, 182);
+	padding: 5px 0;
+}
+
+.recipe-category label:hover{
+	color: #C4BFE3;
+}
