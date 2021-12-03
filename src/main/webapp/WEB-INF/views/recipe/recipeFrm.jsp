@@ -131,15 +131,15 @@
 				var mName = $(".mName");
 				var rContent = $(".rContent");
 				var rFile = $(".rFile");
-				if($("#recipeTitle").val()=="" || $("#subhead").val()=="" || $("#uploadImg").val()=="" || $("#foodname").val=="" || $("#situation").val()=="" || $("#material").val()=="" || $("#recipeLevel").val=="" ){
+				if($("#recipeTitle").val()=="" || $("#subhead").val()=="" || $("#uploadImg").val()=="" || $("#foodname").val()=="" || $("#situation").val()=="" || $("#material").val()=="" || $("#recipeLevel").val()=="" ){
 					 alert("빈칸없이 작성해주세요");
-				}else if(!mName.eq(0)val()=="" || mName.eq(0).val()=="" ){
+				}else if(!mName.eq(0).val()=="" || mName.eq(0).val()=="" ){
 					for(int i=0; i<mName.length; i++){
 						if(mName.eq(i).val()==""){
 							alert("재료를 빈칸없이 작성해주세요");
 						}else{
 							for(int i=0; i<rContent.length; i++){
-								if(rContent.eq(i)val()=="" || rFile.eq(i).val()==""){
+								if(rContent.eq(i).val()=="" || rFile.eq(i).val()==""){
 									alert("조리순서를 빈칸없이 작성해주세요");
 								}
 							}
