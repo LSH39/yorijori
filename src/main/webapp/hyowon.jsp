@@ -19,7 +19,7 @@
                         <li><a href="/mycoupon.do?memberNo=111">쿠폰함<span>&gt;</span></a></li>
                         <li><a href="/deleteFrm.do?">회원탈퇴<span>&gt;</span></a></li>
                         <li><a href="#">참여한 경연대회<span>&gt;</span></a></li>
-                        <li><a href="#">요리클래스 예약내역<span>&gt;</span></a></li>
+                        <li><a href="myclass.do?memberNo=111">요리클래스 예약내역<span>&gt;</span></a></li>
                         <li><a href="#">Dm내역<span>&gt;</span></a></li>
                         <li><a href="#">follwer 게시글<span>&gt;</span></a></li>
                         <li><a href="#">찜한 레시피<span>&gt;</span></a></li>

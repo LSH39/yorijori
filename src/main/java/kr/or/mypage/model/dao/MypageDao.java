@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.Coupon;
 import kr.or.coupon.model.vo.CouponList;
 import kr.or.coupon.model.vo.MyCoupon;
@@ -43,6 +44,10 @@ public class MypageDao {
 	/*내 레시피*/
 	public RecipeBoard myRecipe(int recipeWriter) {
 		return sqlSession.selectOne("mypage.myRecipe",recipeWriter);
+	}
+	/*내 예약내역*/
+	public MyCookingRsrv myClass(int memberNo) {
+		return sqlSession.selectOne("mypage.myClass",memberNo);
 	}
 	
 

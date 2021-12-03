@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -235,8 +236,24 @@ $("#delBtn").click(function() {
 							</tr>
 				               <tr>
 				                   <td>자격증</td>
-				                   <td><input type=text name="certificatePath" id="certificatePath"  
-				                   onfocus="this.placeholder=''" value="${m.certificatePath }"></td>
+				                   <td>
+				             <c:choose>
+							<c:when test="${not empty m.certificatePath }">
+								<img src="resources/img/mypage/file.png" width="16px" class="delFile">
+								<span class="delFile">${m.certificatePath}</span>
+								<button type="button" id="delBtn"
+									class="btn btn-primary btn-sm delFile">수정</button>
+
+								<input type="file" name="upfile" style="display: none;">
+								<input type="hidden" name="oldFilename" value="${m.certificatePath}"
+									placeholder="자격증">
+							</c:when>
+							<c:otherwise>
+								<input type="file" name="upfile">
+							</c:otherwise>
+						</c:choose>
+						</td>
+				 
 				               </tr>
 				                
 				               <tr>

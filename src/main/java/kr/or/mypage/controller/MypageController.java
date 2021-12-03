@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.service.MypageService;
@@ -77,5 +78,11 @@ public class MypageController {
 		MyCoupon mc= service.mycoupon(memberNo);
 		model.addAttribute("mc", mc);
 		return "mypage/myCoupon";
+	}
+	@RequestMapping(value = "/myclass.do")
+	public String myclass(int memberNo, Model model) {
+		MyCookingRsrv mcr= service.myclass(memberNo);
+		model.addAttribute("mcr", mcr);
+		return "mypage/myReserve";
 	}
 }

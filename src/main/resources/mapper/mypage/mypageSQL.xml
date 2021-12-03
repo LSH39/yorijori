@@ -104,5 +104,21 @@
 	where recipe_writer=111
 	
 	</select>
+	
+	<select id="myClass" parameterType="_int" resultType="mcr">
+	select cr.rsrv_no as rsrvNo,
+	cc.class_title as classTitle,
+	cc.class_curr_nop as classCurrNop,
+	cc.class_start as classStart,
+	cc.class_end as classEnd,
+	cc.class_price as classPrice,
+	cc.class_time as classTime,
+	cc.class_location as classLocation,
+	cc.class_Status as classStatus
+	from cooking_class cc , cooking_rsrv cr where cr.member_No =111
+	
+	
+	
+	</select>
 </mapper>
 

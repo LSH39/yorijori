@@ -3,6 +3,7 @@ package kr.or.mypage.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.Coupon;
 import kr.or.coupon.model.vo.CouponList;
 import kr.or.coupon.model.vo.MyCoupon;
@@ -48,6 +49,11 @@ public class MypageService {
 	public Member sellerPage(String memberId) {
 		Member m =dao.sellerPage(memberId);
 		return m;
+	}
+
+	public MyCookingRsrv myclass(int memberNo) {
+		MyCookingRsrv mcr =dao.myClass(memberNo);
+		return mcr;
 	}
 
 
