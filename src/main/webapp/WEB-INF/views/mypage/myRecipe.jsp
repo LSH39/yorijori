@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <style>
+<style>
 
 #line2 {
 	background-color: gray;
 	height: 3px;
-	width: 875px;
+	width: 800px;
 }
 
 .h_left{
@@ -89,21 +89,66 @@
     display: none;
 }
 
+
+/* 클릭 표시 a태그 배경색 #d6c6a5 */
+.main{
+margin-bottom:40px;
+}
 /* 메인 콘텐츠 설정 */
 .main-content{
     width: 875px;
+    
 }
-.classForm{
-  width:875px;
-  boder:3px solid black;
-  font-size:12px;
- 
+/*내 레시피*/
+.follow{
+    width:800px;
+    height: 120px;
+    background-color: burlywood;
+}
+.item{
+    width: 250px;
+    height:280px;
+    background-color:rgb(224, 224, 224);
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 40px;
+    
+}
+#itemI{
+    width: 250px;
+    height:180px;
 
-  }
-  .main{
-  margin-bottom:40px;
-  }
+}
 
+#fone{
+    width: 150px;
+    height:120px;
+    float: left;
+    margin-left: 100px;   
+}
+#ftwo{
+    width: 450px;
+    height:120px;
+    float: left;
+    
+}
+
+#pp{
+    width: 100px;
+    height:100px;
+    border-radius: 50px;
+    margin-left: 30px;
+   
+}
+.myFollow{
+    width:400px;
+    text-align: center;
+    margin-left: 30px;
+    margin-top: 10px;
+    
+
+}
 </style>
 </head>
 <body>
@@ -111,9 +156,10 @@
     <div class="main">
         <div class="main-left-box">
             <h3>마이페이지</h3>
-           <ul>
-				<li>
-					<ul class="subnavi">
+            <ul>
+                <li>
+                    <span>MY INFO</span>
+                 	<ul class="subnavi">
 						<li><a href="#">내정보 조회 및 수정<span>&gt;</span></a></li>
 						<li><a href="#" id="lf-click">내 구매내역<span>&gt;</span></a></li>
 						<li><a href="#">쿠폰함<span>&gt;</span></a></li>
@@ -124,56 +170,57 @@
 						<li><a href="#">follwer 게시글<span>&gt;</span></a></li>
 						<li><a href="#">찜한 레시피<span>&gt;</span></a></li>
 					</ul>
-				</li>
-				<li><span>my write</span>
-					<ul class="subnavi">
-						<li><a href="#">작성후기<span>&gt;</span></a></li>
+                </li>
+                <li>
+                    <span>MY WRITE</span>
+                    <ul class="subnavi">
+                      	<li><a href="#">작성후기<span>&gt;</span></a></li>
 						<li><a href="#" id="lf-click">작성 게시글<span>&gt;</span></a></li>
 						<li><a href="#">내 작성 레시피<span>&gt;</span></a></li>
-
-					</ul>
-			</li>
-			</ul>
+                    </ul>
+                </li>
+            </ul>
         </div>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-            <h3 id="h_hotel">클래스 예약내역</h3>
-            <div id="line2"></div><br>
-            <table border="1" class="classForm">
-                <tr>
-                    <th>예약번호</th>
-                    <th>요리클래스</th>
-                    <th>인원</th>
-                    <th>클래스시작일</th>
-                    <th>클래스종료일</th>
-                    <th>수강료</th>
-                    <th>수업시간</th>
-                    <th>수업장소</th>
-                    <th>상태</th>
-                    <th>예약수정</th>
-                    <th>예약취소</th>
+            <h4>naeun_SOn</h4>
+            <div class="follow">
+             <div id="fone"><img id="pp" src="/resources/img/mypage/profile.jpeg"></div>
+             <div id="ftwo">
+              <table class="myFollow">
+                  <tr>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>0</td>
+                  </tr>
+                  <tr>
+                    <th>게시글</th>
+                    <th>팔로워</th>
+                    <th>팔로잉</th>
                 </tr>
-                    <c:forEach items="${list}" var="mcr" varStatus="i">
-                <tr>
-                    <td>${mcr.rsrvNo }</td>
-                    <td>${mcr.classTitle }</td>
-                    <td>${mcr.classCurrNop }</td>
-                    <td>${mcr.classStart }</td>
-                    <td>${mcr.classEnd }</td>
-                    <td>${mcr.classPrice }</td>
-                    <td>${mcr.classTime }</td>
-                    <td>${mcr.classLocation }</td>
-                    <td>${mcr.classStatus }</td>
-                    <td><button value="수정" id="modify"><a href="#">수정</a></button></td>
-                    <td><button value="취소" id="delete"><a href="#">삭제</a></button></td>
-                </tr>
+              </table>
+             </div>  
             
-                </c:forEach>
-            </table>
+            </div>
+            <div id="line2"></div><br>
+            <h3 id="h_hotel">my recipe</h3>
+             <c:forEach items="${list}" var="rb" varStatus="i">
+            <div class="item">
+                <a href="#"> 
+                    <img id="itemI" src="/resources/img/mypage/house.png">
+                </a>
+                <div id="items">
+                    <span class="it_info1"><b id="it1">#</b>${rb.recipeTitle}</span><br>
+                    <span class="it_info1"><b id="it1">#</b>난이도 ${rb.recipeLevel}</span><br>
+                    <span class="it_info1"><b id="it1">#</b>${rb.recipeTime}조리</span><br>   
+                </div>
+                
+              </div>
+              </c:forEach>
 
         </div>
         
         </div>
-      <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+  <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

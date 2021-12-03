@@ -27,9 +27,8 @@ public class RecipeDao {
 		 
 	}
 
-	public int selectRecipeNo(RecipeBoard rb) {
-		int result = sqlSession.selectOne("recipe.selectRecipeNo");
-		return result;
+	public int selectRecipeNo() {
+		return sqlSession.selectOne("recipe.selectRecipeNo");
 	}
 	public int insertMaterial(Material m) {
 		return sqlSession.insert("recipe.insertMaterial",m);
@@ -37,6 +36,30 @@ public class RecipeDao {
 
 	public int insertContent(RecipeContent rc) {
 		return sqlSession.insert("recipe.insertContent", rc);
+	}
+
+	public RecipeBoard selectOneRecipe(int recipeNo) {
+		return sqlSession.selectOne("recipe.selectOneRecipe",recipeNo);
+	}
+
+	public RecipeContent selectContent(int recipeNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Material selectMaterial(int recipeNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<RecipeBoard> selectCategory1(String item) {
+		List<RecipeBoard> list = sqlSession.selectList("recipe.selectCategory1", item);
+		return null;
+	}
+
+	public String selectMemberId() {
+		
+		return null;
 	}
 
 

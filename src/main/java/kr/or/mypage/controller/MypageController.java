@@ -1,5 +1,7 @@
 package kr.or.mypage.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,7 @@ import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.service.MypageService;
 import kr.or.recipe.model.vo.RecipeBoard;
-import kr.or.review.model.vo.Review;
+import kr.or.review.model.vo.MyClassReview;
 
 @Controller
 public class MypageController {
@@ -21,9 +23,14 @@ public class MypageController {
 	public String mypage(String memberId, Model model) {
 		Member m = service.mypage(memberId);
 		model.addAttribute("m", m);
-		return "member/mypage";
+		return "mypage/mypage";
 	}
-
+	@RequestMapping(value = "/selPage.do")
+	public String selPage(String memberId, Model model) {
+		Member m = service.sellerPage(memberId);
+		model.addAttribute("m", m);
+		return "mypage/sellerProfile";
+	}
 	@RequestMapping(value = "/updateMember.do")
 	public String updateMember(Member m, Model model) {
 		int result = service.upMember(m);
@@ -53,29 +60,28 @@ public class MypageController {
 
 	@RequestMapping(value = "/myRecipe.do")
 	public String myRecipe(int recipeWriter, Model model) {
-		RecipeBoard re= service.myRecipe(recipeWriter);
-		model.addAttribute("re", re);
+		ArrayList<RecipeBoard> list= service.myRecipe(recipeWriter);
+		model.addAttribute("list", list);
 		return "mypage/myRecipe";
 	}
-	
-	@RequestMapping(value = "/classReview.do")
-	public String classReview(String memberId, Model model) {
-		Review r= service.classReview(memberId);
-		model.addAttribute("r", r);
-		return "mypage/classReview";
-	}
-	
+		
 	@RequestMapping(value = "/mycoupon.do")
 	public String mycoupon(int memberNo, Model model) {
-		MyCoupon mc= service.mycoupon(memberNo);
-		model.addAttribute("mc", mc);
+		ArrayList<MyCoupon> list= service.mycoupon(memberNo);
+		model.addAttribute("list", list);
 		return "mypage/myCoupon";
 	}
 	@RequestMapping(value = "/myclass.do")
 	public String myclass(int memberNo, Model model) {
-		MyCookingRsrv mcr= service.myclass(memberNo);
-		model.addAttribute("mcr", mcr);
+		ArrayList<MyCookingRsrv> list= service.myclass(memberNo);
+		model.addAttribute("list", list);
 		return "mypage/myReserve";
+	}
+	@RequestMapping(value = "/myclassReview.do")
+	public String myclassReview(int memberNo, Model model) {
+		ArrayList<MyClassReview> list= service.myclassReview(memberNo);
+		model.addAttribute("list", list);
+		return "mypage/myClassReview";
 	}
 
 }

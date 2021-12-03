@@ -99,7 +99,7 @@ h1, h2, h3, h4, h5, h6 {
 #header {
   background-color: #C4BFE3;
   opacity: 0.9;
-  transition: all 0.5s;
+ /*  transition: all 0.1s; */
   z-index: 997;
   height: 80px;
 }
@@ -184,12 +184,12 @@ h1, h2, h3, h4, h5, h6 {
   top: calc(100% + 30px);
   margin: 0;
   padding: 10px 0;
-  z-index: 99;
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
   background: rgb(246, 240, 255);
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-  transition: 0.3s;
+  /* transition: 0.3s; */
 }
 .navbar .dropdown ul li {
   min-width: 200px;

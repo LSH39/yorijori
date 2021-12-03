@@ -40,6 +40,7 @@
 	      					<tr>
 	      						<th scope="col">번호</th>
 	      						<th scope="col">제목</th>
+	      						<th scope="col">추천수</th>
 	      						<th scope="col">작성자</th>
 	      						<th scope="col">작성일</th>
 	      						<th scope="col">조회</th>
@@ -49,29 +50,7 @@
 	      				</tbody>
 	      			</table>
 					<div class="pagi">
-						<ul class="pagination tk-pagination">
-						    <li class="tk-page-item disabled">
-						      <a class="page-link" href="#">&lt;</a>
-						    </li>
-						    <li class="tk-page-item active">
-						      <a class="page-link" href="#">1</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">2</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">3</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">4</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">5</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">&gt;</a>
-						    </li>
-					  	</ul>
+						${pageNavi }
 					</div>
 					<form action="/freeboardSearch.do" method="get">
 					<div class="board-search row">

@@ -21,20 +21,20 @@
 				<h1>커뮤니티</h1>
 				<div class="sidemenubox">
 					<ul class="nav flex-column">
-						<li class="nav-item"><a href="#">공지사항 <span> &gt;</span></a></li>
-						<li class="nav-item active"><a href="#">자유게시판 <span> &gt;</span></a></li>
+						<li class="nav-item active"><a href="#">공지사항 <span> &gt;</span></a></li>
+						<li class="nav-item"><a href="#">자유게시판 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
 					</ul>
 				</div>
 	      	</div>
 	      	<div class="col-10 main-content">
 	      		<div class="main-content-title">
-	      			<h2>자유게시판 <span> 우리들의 즐거운 커뮤니티 공간!</span></h2>
-	      			<a href="freeboard/freeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
+	      			<h2>공지게시판 <span> 요리조리의 새로운 소식들과 유용한 정보들을 한 곳에서 확인하세요.</span></h2>
+	      			<a href="noticeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
 	      		</div>
 	      		<div class="freeboard-table">
 	      			<div class="freeboard-count">
-	      				<h5>총 게시물 : <span style="color: rgb(159, 144, 207);">0</span>개</h5>
+	      				<h5>총 게시물 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
 	      			</div>
 	      			<table class="table table-hover">
 	      				<thead>
@@ -50,31 +50,9 @@
 	      				</tbody>
 	      			</table>
 					<div class="pagi">
-						<ul class="pagination tk-pagination">
-						    <li class="tk-page-item disabled">
-						      <a class="page-link" href="#">&lt;</a>
-						    </li>
-						    <li class="tk-page-item active">
-						      <a class="page-link" href="#">1</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">2</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">3</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">4</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">5</a>
-						    </li>
-						    <li class="tk-page-item">
-						      <a class="page-link" href="#">&gt;</a>
-						    </li>
-					  	</ul>
+						${pageNavi }
 					</div>
-					<form action="/freeboardSearch.do" method="get">
+					<form action="/noticeSearch.do" method="get">
 					<div class="board-search row">
 						<div class="col-9">
 							검색어 

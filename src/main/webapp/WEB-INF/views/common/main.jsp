@@ -23,7 +23,7 @@
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">요린이도 <span>걱정 NO!</span></h2>
-              <p class="animate__animated animate__fadeInUp">비건 식단부터 다양한 상황별 요리, 난이도 낮은 레시피까지 <span style="font-weight:bolder;">요리조리</span>에서 뚝딱 만들어보세요.</p>
+              <p class="animate__animated animate__fadeInUp">비건 식단부터 다양한 상황별 요리, 난이도 쉬움 레시피까지 <span style="font-weight:bolder;">요리조리</span>에서 뚝딱 만들어보세요.</p>
               <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
             </div>
           </div>
@@ -35,7 +35,7 @@
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown" style="font-family: 'Noto Sans KR', serif; font-weight: 700; font-size: 42px;">2021년 <span style="color:rgb(192, 57, 43); margin-bottom: 0px;">12</span>월의 기적</h2>
               <h4 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 28px; color: #fff; margin-top: 5px;">요리조리의 크리스마스는 현재진행중!</h4>
-              <p class="animate__animated animate__fadeInUp">매월 진행되는 요리조리 경연대회, 올해의 마지막 달인만큼 더욱 풍성하게 준비하였습니다.<br> 포인트부터 밀키트 상품 제작까지, 요리조리와 함께 설레는 크리스마스를 함께하세요.</p>
+              <p class="animate__animated animate__fadeInUp">매월 진행되는 요리조리 경연대회. 올해의 마지막 달인만큼 더욱 풍성하게 준비하였습니다.<br>포인트 적립부터 밀키트 상품 제작까지, 요리조리와 함께 설레는 크리스마스를 맞이하세요.</p>
               <a href="#" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
             </div>
           </div>
