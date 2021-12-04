@@ -1,6 +1,7 @@
 package kr.or.cookingCls.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,9 +20,14 @@ public class CookingClsDao {
 		return sqlSession.selectOne("cookingcls.selectOneClass", classNo); //mqpper xml에서 설정한 namespace
 	}
 
-	public ArrayList<CookingCls> selectAllClass() {
+	public ArrayList<CookingCls> selectAllClass(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		List<CookingCls> list = sqlSession.selectList("cookingcls.selectClassList");
+		List<CookingCls> list = sqlSession.selectList("cookingcls.selectClassList", map);
 		return (ArrayList<CookingCls>) list;
+	}
+
+	public int totalCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cookingcls.totalCount");
 	}
 }

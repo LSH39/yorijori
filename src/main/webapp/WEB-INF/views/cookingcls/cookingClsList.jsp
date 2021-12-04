@@ -7,7 +7,14 @@
 <meta charset="UTF-8">
 <title>쿠킹클래스 목록</title>
 <style>
-
+	.page-item.active .page-link {
+    	background-color: #8E44AD !important;
+    	border-color: #8E44AD !important;
+    	color: #fff !important;
+    	}
+	.page-link {
+    	color: #8E44AD !important;
+    	}
 </style>
 </head>
 <body>
@@ -22,6 +29,7 @@
 		<h5>${ccls.classPrice }</h5>
 		<a href="/cookingClsView.do?classNo=${ccls.classNo}">너는 절대 못하는</a>
 		</c:forEach>
+		<div id="pageNavi">${pageNavi }</div>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

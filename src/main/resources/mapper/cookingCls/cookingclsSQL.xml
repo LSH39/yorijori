@@ -13,13 +13,25 @@ mybatis xml mapper단
 	 -->
 	
 	<!-- 쿠킹클래스 전체 조회 -->
-	<select id="selectClassList" resultType="ccls">
-		select
+	<select id="selectClassList" parameterType="map"  resultType="ccls">
+		select *
+		from
+		(select 
+			rownum as rnum,
+			c.*
+		from
+		(select
 			class_no as classNo,
 			member_no as memberNo,
 			class_title as classTitle,
 			class_price as classPrice
-		from cooking_class
+		from cooking_class order by class_no desc) c)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<!-- 전체 페이지 수 -->
+	<select id="totalCount" resultType="_int">
+		select count(*) from cooking_class
 	</select>
 	
 	<!-- 쿠킹클래스 조회 -->
@@ -42,4 +54,16 @@ mybatis xml mapper단
 		from cooking_class 
 		where class_no=#{classNo}
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
