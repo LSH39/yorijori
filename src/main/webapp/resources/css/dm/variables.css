@@ -1,0 +1,6 @@
+:root {
+  --yellow: #fae100;
+  --shy-gray: #d5d5d5;
+  --horizontal-space: 25px;
+  --main-border: 1px solid var(--shy-gray);
+}
