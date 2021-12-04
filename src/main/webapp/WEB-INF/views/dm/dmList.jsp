@@ -5,9 +5,67 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="./resources/css/dm/styles.css"/>
+<title>메세지 리스트</title>
 </head>
 <body>
-	<h1>DM문의</h1>
+    <header class="screen-header">
+      <h1 class="screen-header_title">Chats</h1>
+      <div class="screen-header_icons">
+        <span><i class="fas fa-search fa-2x"></i></span>
+        <span><i class="far fa-comment-dots fa-2x"></i></span>
+        <span><i class="fas fa-music fa-2x"></i></span>
+        <span class="screen-header_setting">
+          <a href="#">
+            <i class="fas fa-cog fa-2x"></i>
+            <p class="screen-header_dot"></p>
+          </a>
+        </span>
+      </div>
+    </header>
+
+    <main class="main-screen">
+      <a class="link" href="dmView.do">
+        <div class="user-component">
+          <div class="user-component__column">
+            <img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />
+            <div class="user-component__text">
+              <h4 class="user-component__text-name">멤버닉네임</h4>
+              <h6 class="user-component__text-preview">
+                DM내용이 여기에 표시됨
+              </h6>
+            </div>
+          </div>
+          <div class="user-component__column">
+            <span class="user-component__time">21:22</span>
+            <div class="badge">1</div>
+          </div>
+        </div>
+      </a>
+    </main>
+    
+    <main class="main-screen">
+      <a class="link" href="/dmView.do">
+        <div class="user-component">
+          <div class="user-component__column">
+            <img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />
+            <div class="user-component__text">
+              <h4 class="user-component__text-name">멤버닉네임</h4>
+              <h6 class="user-component__text-preview">
+                DM내용이 여기에 표시됨
+              </h6>
+            </div>
+          </div>
+          <div class="user-component__column">
+            <span class="user-component__time">21:22</span>
+            <div class="badge">1</div>
+          </div>
+        </div>
+      </a>
+    </main>
+    <script
+      src="https://kit.fontawesome.com/6478f529f2.js"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>
