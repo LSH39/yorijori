@@ -222,6 +222,16 @@ Quisque ut quam eleifend odio semper dictum vehicula a erat. Quisque sit amet ti
 							<div class="d-grid gap-2">
 								<button type="button" id="payBtn" class="btn btn-primary btn-lg" >결제하기</button>
 							</div>
+							<div class="d-grid gap-2 mt-4">
+								<a href="/dmView.do" class="btn btn-primary btn-lg" >문의하기</a>
+							</div>
+							<div class="d-grid gap-2 mt-4">
+								<a href="/dmList.do" class="btn btn-primary btn-lg" >문의 목록(테스트)</a>
+							</div>
+							<div class="mt-4 d-grid gap-8 d-md-flex justify-content-md-between">
+								<button type="button" id="" class="btn btn-secondary btn-lg" >수정하기</button>
+								<button type="button" id="" class="btn btn-danger btn-lg" >삭제하기</button>							
+							</div>
 						</div>
 					</div>
 				</div>

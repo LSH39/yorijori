@@ -29,7 +29,11 @@
 		<h5>${ccls.classPrice }</h5>
 		<a href="/cookingClsView.do?classNo=${ccls.classNo}">너는 절대 못하는</a>
 		</c:forEach>
-		<div id="pageNavi">${pageNavi }</div>
+		<div id="pageNavi">${pageNavi }
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  				<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4" >클래스 작성</a>
+			</div>
+		</div>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
