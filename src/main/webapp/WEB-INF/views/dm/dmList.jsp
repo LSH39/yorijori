@@ -24,45 +24,59 @@
       </div>
     </header>
 
-    <main class="main-screen">
-      <a class="link" href="dmView.do">
-        <div class="user-component">
-          <div class="user-component__column">
-            <img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />
-            <div class="user-component__text">
-              <h4 class="user-component__text-name">멤버닉네임</h4>
-              <h6 class="user-component__text-preview">
-                DM내용이 여기에 표시됨
-              </h6>
-            </div>
-          </div>
-          <div class="user-component__column">
-            <span class="user-component__time">21:22</span>
-            <div class="badge">1</div>
-          </div>
-        </div>
-      </a>
-    </main>
-    
+	<!-- 
     <main class="main-screen">
       <a class="link" href="/dmView.do">
         <div class="user-component">
           <div class="user-component__column">
             <img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />
             <div class="user-component__text">
-              <h4 class="user-component__text-name">멤버닉네임</h4>
+              <h4 class="user-component__text-name">얘는 샘플</h4>
               <h6 class="user-component__text-preview">
-                DM내용이 여기에 표시됨
+              	예시니까 무시해도 됩니다.
               </h6>
             </div>
           </div>
           <div class="user-component__column">
             <span class="user-component__time">21:22</span>
-            <div class="badge">1</div>
+            <div class="no-badge"></div>
           </div>
         </div>
       </a>
     </main>
+	 -->
+    
+    <c:forEach items="${list }" var="dm">
+    <main class="main-screen">
+      <a class="link" href="/dmView.do?memberNo=${dm.memberNo }">
+        <div class="user-component">
+          <div class="user-component__column">
+            <img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />
+            <div class="user-component__text">
+              <h4 class="user-component__text-name">${dm.dmReceiver }</h4>
+              <h6 class="user-component__text-preview">
+                ${dm.dmContent }
+              </h6>
+            </div>
+          </div>
+          <div class="user-component__column">
+            <span class="user-component__time">${dm.dmDate.substring(11, 16) }</span>
+            <c:choose>
+            	<c:when test="${dm.dmReadFlag eq 1 }">
+            		<div class="no-badge">
+            		</div>
+            	</c:when>
+            	<c:when test="${dm.dmReadFlag eq 0 }">
+            		<div class="badge">
+            		X
+            		</div>
+            	</c:when>
+            </c:choose>
+          </div>
+        </div>
+      </a>
+    </main>
+    </c:forEach>
     <script
       src="https://kit.fontawesome.com/6478f529f2.js"
       crossorigin="anonymous"

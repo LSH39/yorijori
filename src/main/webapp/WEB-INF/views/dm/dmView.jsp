@@ -32,29 +32,39 @@
 
     <main class="main-screen main-chat">
       <div class="chat__timestamp">
-        <span>Wednesday, October 7, 2020</span>
+        <span>xxxxxs</span>
       </div>
-
+      
+      <c:forEach items="${list }" var="dm">
+      <!-- 메세지 받음 -->
+      <c:if test="${dm.dmReceiver ne 'z' }">
       <div class="message-row">
         <img src="./resources/img/dm/classtest.jpg"/>
         <div class="message-row__content">
-          <span class="message__author">멤버 닉네임</span>
+          <span class="message__author">${dm.dmReceiver }</span>
           <div class="message__info">
-            <span class="message__bubble">환불해주세요</span>
-            <span class="message__time">21:27</span>
+            <span class="message__bubble">${dm.dmContent }</span>
+            <span class="message__time">${dm.dmDate.substring(11, 16) }</span>
           </div>
         </div>
       </div>
+      </c:if>
 
+      <!-- 메세지 보냄 -->
+      <c:if test="${dm.dmReceiver eq 'z' }">
       <div class="message-row message-row--own">
         <div class="message-row__content">
           <div class="message__info">
-            <span class="message__time">21:29</span>
-            <span class="message__bubble">ㅗ</span>
+            <span class="message__time">${dm.dmDate.substring(11, 16) }</span>
+            <span class="message__bubble">${dm.dmContent }</span>
           </div>
         </div>
       </div>
+      </c:if>
+      </c:forEach>
       
+      <!-- 메세지 받음 -->
+      <!-- 
       <div class="message-row">
         <img src="./resources/img/dm/classtest.jpg"/>
         <div class="message-row__content">
@@ -65,7 +75,10 @@
           </div>
         </div>
       </div>
+       -->
       
+      <!-- 메세지 보냄 -->
+      <!-- 
       <div class="message-row message-row--own">
         <div class="message-row__content">
           <div class="message__info">
@@ -74,6 +87,7 @@
           </div>
         </div>
       </div>
+       -->
       
     </main>
 
