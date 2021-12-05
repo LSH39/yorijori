@@ -25,7 +25,7 @@ mybatis xml mapper단
 			member_no as memberNo,
 			class_title as classTitle,
 			class_price as classPrice
-		from cooking_class order by class_no desc) c)
+		from cooking_class order by class_no asc) c)
 		where rnum between #{start} and #{end}
 	</select>
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.cookingCls.model.dao.CookingClsDao;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingCls.model.vo.CookingClsPageData;
+import kr.or.review.model.vo.Review;
 
 @Service
 public class CookingClsService {
@@ -92,5 +93,11 @@ public class CookingClsService {
 		
 		CookingClsPageData ccpd = new CookingClsPageData(list, pageNavi, start);
 		return ccpd;
+	}
+
+	public ArrayList<Review> selectReviewList(int classNo) {
+		// TODO Auto-generated method stub
+		ArrayList<Review> list = dao.selectReviewList(classNo);
+		return list;
 	}
 }

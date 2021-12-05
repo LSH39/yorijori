@@ -60,7 +60,14 @@
 </style>
 <script>
 	$(function(){
+		//리뷰 작성 버튼
 		$("#reviewWrite").click(function(){
+			let reviewInput = $("#reviewInput").val();
+			
+			if(reviewInput == ''){
+				alert("공백은 안돼요");
+				return;
+			}
 			alert("리뷰 작성 됐다고 가정");
 		});
 		
@@ -161,6 +168,49 @@ Quisque ut quam eleifend odio semper dictum vehicula a erat. Quisque sit amet ti
 						<table class="table">
 							<tr>
 								<th>번호</th>
+								<th>내용</th>
+								<th>아이디</th>
+								<th>평점</th>
+							</tr>
+							<c:forEach items="${list }" var="review" varStatus="i">
+							<tr>
+								<td>${i.count }</td>
+								<td>${review.reviewContent }</td>
+								<td>${review.memberNo }</td>
+								<td>${review.reviewRate }</td>
+							</tr>
+							</c:forEach>
+							<form acrion="/테스트확인용도" method="GET">
+							<tr>
+								<td colspan="2">
+									<input type="hidden" name="memberNo" value="응애">
+									<input type="text" name="reviewContent" id="reviewInput" class="form-control">
+								</td>							
+								<td>
+									<select class="form-select form-select-md" name="reviewRate">
+										<option value="1">★☆☆☆☆</option>
+										<option value="2">★★☆☆☆</option>
+										<option value="3">★★★☆☆</option>
+										<option value="4">★★★★☆</option>
+										<option value="5">★★★★★</option>
+									</select>
+								</td>							
+								<td>
+									<div class="d-grid gap-2">
+										<button type="button" id="reviewWrite" class="btn btn-danger btn-md">작성</button>
+										<!-- <input type="submit" value="asd">-->
+									</div>
+								</td>							
+							</tr>
+							</form>
+							
+						</table>
+					</div>
+					<!-- 
+					<div class="table">
+						<table class="table">
+							<tr>
+								<th>번호</th>
 								<th>아이디</th>
 								<th>내용</th>
 								<th>평점</th>
@@ -211,6 +261,10 @@ Quisque ut quam eleifend odio semper dictum vehicula a erat. Quisque sit amet ti
 							
 						</table>
 					</div>
+					 -->
+					<div>
+						<jsp:include page="/WEB-INF/views/review/reviewList.jsp"/>
+					</div>
 				</div>
 				<div class="right">
 					<div class="right-stick">
@@ -238,6 +292,9 @@ Quisque ut quam eleifend odio semper dictum vehicula a erat. Quisque sit amet ti
 			</div>
 		</div>
 	</div>
+	<script>
+	
+	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

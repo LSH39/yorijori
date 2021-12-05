@@ -27,7 +27,7 @@
 		<h5>${ccls.memberNo }</h5>
 		<h5>${ccls.classTitle }</h5>
 		<h5>${ccls.classPrice }</h5>
-		<a href="/cookingClsView.do?classNo=${ccls.classNo}">너는 절대 못하는</a>
+		<a href="/cookingClsView.do?classNo=${ccls.classNo}">클래스 링크임</a>
 		</c:forEach>
 		<div id="pageNavi">${pageNavi }
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">

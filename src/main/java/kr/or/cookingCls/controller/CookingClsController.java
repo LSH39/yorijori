@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.cookingCls.model.service.CookingClsService;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingCls.model.vo.CookingClsPageData;
+import kr.or.review.model.vo.Review;
 
 @Controller
 public class CookingClsController {
@@ -43,7 +44,9 @@ public class CookingClsController {
 	@RequestMapping(value="/cookingClsView.do")
 	public String CookingClsListView(int classNo, Model model) {
 		CookingCls ccls = service.selectOneClass(classNo);
+		ArrayList<Review> list = service.selectReviewList(classNo);
 		model.addAttribute("ccls", ccls);
+		model.addAttribute("list", list);
 		return "cookingcls/cookingClsView";
 	}
 	

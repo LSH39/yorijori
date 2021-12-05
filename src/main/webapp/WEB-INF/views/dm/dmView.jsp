@@ -5,6 +5,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./resources/css/dm/styles.css"/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <meta charset="UTF-8">
 <title>메세지</title>
 </head>
@@ -32,7 +33,7 @@
 
     <main class="main-screen main-chat">
       <div class="chat__timestamp">
-        <span>xxxxxs</span>
+        <span>2021년 12월 05일</span>
       </div>
       
       <c:forEach items="${list }" var="dm">
@@ -96,15 +97,19 @@
       <div class="reply__column">
         <input type="text" placeholder="메세지를 입력해주세요"/>
         <i class="far fa-smile"></i>
-        <button>
+        <button type="button" id="message__send">
           <i class="fas fa-arrow-up"></i>
         </button>
       </div>
     </form>
 
-    <script
-      src="https://kit.fontawesome.com/6478f529f2.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+    <script>
+    	$(function(){
+    		$("#message__send").click(function(){
+    			alert("zz");
+    		});
+    	});
+    </script>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.cookingCls.model.vo.CookingCls;
+import kr.or.review.model.vo.Review;
 
 @Repository
 public class CookingClsDao {
@@ -29,5 +30,11 @@ public class CookingClsDao {
 	public int totalCount() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("cookingcls.totalCount");
+	}
+
+	public ArrayList<Review> selectReviewList(int classNo) {
+		// TODO Auto-generated method stub
+		List<Review> list = sqlSession.selectList("review.selectAllReview", classNo);
+		return (ArrayList<Review>)list;
 	}
 }

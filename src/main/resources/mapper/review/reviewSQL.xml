@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
-
+	<select id="selectAllReview" parameterType="_int" resultType="review">
+		select 
+			review_no as reviewNo,
+			class_no as classNo,
+			product_no as productNo,
+			member_no as memberNo,
+			review_content as reviewContent,
+			review_rate as reviewRate,
+			reivew_flag as reivewFlag,
+			review_date as reviewDate
+		from review
+		where class_no=#{classNo}
+	</select>
 </mapper>
 
