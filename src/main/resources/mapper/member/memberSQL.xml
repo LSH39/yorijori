@@ -188,4 +188,37 @@ order by enrollDate desc
 	
 	</update>
 
+
+
+
+
+
+
+	<!-- LSH -->
+	<select id="loginMember"  parameterType="m" resultType="m">
+		select member_no as memberNo,
+			member_id as memberId,
+			member_pw as memberPw,
+			member_email as memberEmail,
+			member_name as memberName,
+			member_nickname as memberNickname,
+			member_phone as memberPhone,
+			member_birth as memberBirth,
+			postcode,
+			address_road as addressRoad,
+			address_detail as addressDetail,
+			member_consent as memberConsent,
+			profile_path as profilePath,
+			profile_intro as profileIntro,
+			certificate_path as certificatePath,
+			member_level as memberLevel,
+			member_point as memberPoint,
+			enroll_date as enrollDate,
+			withdraw_date as withdrawDate,
+			member_black as memberBlack
+		from member
+		where member_id=#{memberId} and member_pw=#{memberPw}
+	</select>
+
+
 </mapper>
