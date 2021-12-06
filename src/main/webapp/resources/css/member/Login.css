@@ -1,0 +1,42 @@
+.wrap{
+    width: 300px;
+    margin: 0 auto;
+}
+.content{
+    margin: 100px 0px 100px 0px;
+}
+
+.joinSearch>div:hover{
+    cursor: pointer;
+}
+h2, p{
+    text-align: center;
+}
+p{
+    color: #7F7F7F;
+}
+.joinSearch{
+    margin-top: 30px;
+    overflow: hidden;
+}
+.joinSearch>div{
+    float: left;
+    width: 100px;
+    text-align: center;
+}
+.joinSearch>div>img:nth-child(1), .joinSearch>div:hover>img:nth-child(2){
+    display: inline;
+}
+.joinSearch>div>img:nth-child(2), .joinSearch>div:hover>img:nth-child(1){
+    display: none;
+}
+.joinSearch>div:hover>p{
+    color: #9A86B3;
+}
+img {
+    width: 50px;
+    height: 50px;
+}
+.joinSearch p{
+    font-size: 14px;
+}
