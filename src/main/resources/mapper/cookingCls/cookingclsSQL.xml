@@ -55,7 +55,10 @@ mybatis xml mapper단
 		where class_no=#{classNo}
 	</select>
 	
-	
+	<!-- 쿠킹 클래스 삭제 -->
+	<delete id="deleteOneClass" parameterType="_int">
+		delete from cooking_class where class_No=#{classNo}
+	</delete>
 	
 	
 	
