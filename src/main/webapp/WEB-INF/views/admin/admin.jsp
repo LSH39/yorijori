@@ -40,7 +40,7 @@
             <td><a href="allmember.do?reqPage=1">전체회원조회</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
-            <td><a href="#">쿠폰발행</a></td>
+            <td><a href="coupon.do">쿠폰발행</a></td>
         </tr>
         <tr class="table-warning">
             <td><a href="blackList.do?reqPage=1">블랙리스트관리</a></td>
@@ -55,7 +55,7 @@
             <td><a href="#"></a></td>
         </tr>
         <tr class="table-warning">
-            <td><a href="#">탈퇴요청 승인</a></td>
+            <td><a href="permissionDelete.do?reqPage=1">탈퇴요청 승인</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>

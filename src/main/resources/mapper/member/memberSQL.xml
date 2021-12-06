@@ -99,67 +99,43 @@ and
 <choose>
 <when test="searchDetail ==1">
 freeCount
-<choose>
-<when test="moreless ==1">
-<![CDATA[>=]]>#{searchText2}
 
-</when>
-<otherwise>
-<![CDATA[<=]]>#{searchText2}
-
-</otherwise>
-</choose>
 
 </when>
 <when test="searchDetail ==2">
 recipeCount
-<choose>
-<when test="moreless ==1">
-<![CDATA[>=]]>#{searchText2}
 
-</when>
-<otherwise>
-<![CDATA[<=]]>#{searchText2}
-
-</otherwise>
-</choose>
 </when>
 <when test="searchDetail ==3">
 fcCount
-<choose>
-<when test="moreless ==1">
-<![CDATA[>=]]>#{searchText2}
 
-</when>
-<otherwise>
-<![CDATA[<=]]>#{searchText2}
-
-</otherwise>
-</choose>
 </when>
 <when test="searchDetail ==4">
-fcCount
-<choose>
-<when test="moreless ==1">
-<![CDATA[>=]]>#{searchText2}
-
-</when>
-<otherwise>
-<![CDATA[<=]]>#{searchText2}
-
-</otherwise>
-</choose>
-</when>
-<otherwise>
 enrollDate
 between #{joinStart} and #{joinEnd}
-</otherwise>
+
+</when>
+
 </choose>
+
+
+<choose>
+<when test="moreless ==1">
+<![CDATA[>=]]> #{searchText2}
+
+</when>
+<when test="moreless ==2">
+<![CDATA[<=]]> #{searchText2}
+
+</when>
+
+</choose>
+
 </if>
 
 <choose>
 <when test="memberLevel ==0">
-and memberLevel =1 or memberLevel =2
+and (memberLevel =1 or memberLevel =2)
 
 </when>
 <when test="memberLevel ==1">
@@ -172,6 +148,9 @@ and memberLevel =2
 </when>
 <when test="memberLevel==4">
 and memberLevel = 4
+</when>
+<when test="memberLevel==5">
+and memberLevel = 5
 </when>
 
 </choose>
@@ -188,7 +167,10 @@ order by enrollDate desc
 	
 	</update>
 		<update id="addNormalMember" parameterType="string" >
-	update member set member_black = 0 where member_no in 
+	update member set 
+	member_black = 0
+	
+	 where member_no in 
 	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
 	
 	</update>
@@ -197,5 +179,13 @@ order by enrollDate desc
 	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
 	
 	</delete>
+	<update id="addJori" parameterType="string" >
+	update member set 
+	member_level = 2
+	
+	 where member_no in 
+	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
+	
+	</update>
 
 </mapper>

@@ -13,11 +13,15 @@ text-align: center;}
 text-align: center;
 margin-left : 50%;
 }
+
+
 </style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
+	
     <div class="container">
         <h2>전체 회원 조회</h2>
     
@@ -124,7 +128,7 @@ margin-left : 50%;
     <tr>
     <td><input class="chkbox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
     <td>${m.memberNickname }(${m.memberId })</td>
-    <td><button>상세보기</button></td>
+    <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>
     <c:choose >
     <c:when test="${m.memberLevel eq 1}">
@@ -139,7 +143,18 @@ margin-left : 50%;
     <td>${m.enrollDate }</td>
     <td>${m.recipeCount }</td>
     <td>${m.boardCount }</td>
+    
     </tr>
+    <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
+    이름 : 
+  	전화번호 : 
+  	주소 : 
+  	프로필 이미지 : 
+  	자기소개 : 
+  	포인트 : 
+  	
+    </td></tr>
+    
     </c:forEach>
     
     </table>
@@ -149,12 +164,31 @@ margin-left : 50%;
     <div class="pagenation" style="">
     ${pageNavi }
     </div>
-    </div>
+   
+   </div>
+ 
+ 	
+    
     
     <script>
+    
+  
+    	
     $(function(){
+    	
+    	$(".showDetailBtn").click(function(){
+    		var index = $(this).val();
+    		
+    		
+    		
+    		
+    		
+    		$(".showDetail"+index).fadeToggle();
+    	});
+    	
+    	
     	$(".detailbtn").click(function(){
-    		$(".detail").slideToggle();
+    		$(".detail").fadeToggle();
     	});
     	
     	$("input[name=searchdetail]").change(function(){

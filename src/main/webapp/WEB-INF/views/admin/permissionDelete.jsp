@@ -19,7 +19,7 @@ margin-left : 50%;
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
     <div class="container">
-        <h2>블랙리스트 회원 조회</h2>
+        <h2>조리꾼 탈퇴 요청 회원 조회</h2>
     
     
     <div style="background-color: #F7F7E5; ">
@@ -86,17 +86,13 @@ margin-left : 50%;
    	
     <div style="float: left;">
         <span>선택 회원을</span>
-        <button class="addNormal">일반회원으로 변경</button>
-        <button>강제 탈퇴</button>
+        
+        <button class="deleteMember">탈퇴</button>
         <button>쪽지</button>
     </div>
     
     <div style="float: right;">
-    <select class="memberLevel">
-        <option value="0">전체회원</option>
-        <option value="1">요리꾼</option>
-        <option value="2">조리꾼</option>
-    </select>
+    
     <select class="align">
         <option value="30">30명 정렬</option>
         <option value="50">50명 정렬</option>
@@ -116,7 +112,7 @@ margin-left : 50%;
     <th>상세보기</th>
     <th>구분(요리꾼/조리꾼)</th>
     <th>가입일</th>
-    <th>레시피 수</th>
+    <th>판매중인 밀키트 수</th>
     <th>게시글 수</th>
     
     </tr>
@@ -126,18 +122,11 @@ margin-left : 50%;
     <td>${m.memberNickname }(${m.memberId })</td>
     <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>
-    <c:choose >
-    <c:when test="${m.memberLevel eq 1}">
-   	요리꾼
+    조리꾼(탈퇴 요청)
     
-    </c:when>
-    <c:otherwise>
-    조리꾼
-    </c:otherwise>
-    </c:choose>
     </td>
     <td>${m.enrollDate }</td>
-    <td>${m.recipeCount }</td>
+    <td>밀키트개수넣기</td>
     <td>${m.boardCount }</td>
     </tr>
     <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
@@ -147,7 +136,8 @@ margin-left : 50%;
   	프로필 이미지 : 
   	자기소개 : 
   	포인트 : 
-  	사유 : 
+  	자격증 : 
+  	
     </td></tr>
     </c:forEach>
     
@@ -171,6 +161,7 @@ margin-left : 50%;
     		
     		$(".showDetail"+index).fadeToggle();
     	});
+    	
     	$(".detailbtn").click(function(){
     		$(".detail").slideToggle();
     	});
@@ -242,9 +233,9 @@ margin-left : 50%;
     		var searchText = $("#searchtext").val();
     		var align = $(".align").val();
     		$.ajax({
-    			url:"blackList.do?reqPage=1",
+    			url:"permissionJoin.do?reqPage=1",
     			type:"post",
-    			data : {searchType:searchType,searchText:searchText,detail:detail,align:align},
+    			data : {searchType:searchType,searchText:searchText,detail:detail,align:align,memberLevel:"4"},
     			success: function(data){
     				$("body").html(data);
     				if(searchType =="memberNickname"){
@@ -302,7 +293,7 @@ margin-left : 50%;
 			$(".align").change(function(){
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"blackList.do?reqPage=1",
+	    			url:"permissionJoin.do?reqPage=1",
 	    			type:"post",
 	    			data : {align:align},
 	    			success: function(data){
@@ -322,7 +313,7 @@ margin-left : 50%;
 				var memberLevel = $(".memberLevel").val();
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"blackList.do?reqPage=1",
+	    			url:"permissionJoin.do?reqPage=1",
 	    			type:"post",
 	    			data : {memberLevel:memberLevel,align:align},
 	    			success: function(data){
@@ -340,7 +331,7 @@ margin-left : 50%;
 				
 			});
 			
-			$(".addNormal").click(function(){
+			$(".addJori").click(function(){
 				var memberNo;
 				
 				for(var i =0; i<$(".amount").html();i++){
@@ -357,11 +348,11 @@ margin-left : 50%;
 				
 				
 				$.ajax({
-	    			url:"addNormalMember.do",
+	    			url:"addJori.do",
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="blackList.do?reqPage=1";
+	    				location.href="permissionJoin.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
@@ -394,7 +385,7 @@ margin-left : 50%;
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="blackList.do?reqPage=1";
+	    				location.href="permissionJoin.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
