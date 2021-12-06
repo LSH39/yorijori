@@ -27,7 +27,7 @@
 	display: flex;
 }
 .main-content{
-	margin-left: 20px;
+	margin: 0 20px;
 }
 .main-content span{
 	padding-left: 25px;
@@ -47,16 +47,20 @@
 	margin-left: auto;
 	text-align: center;
 }
-.freeboard-table thead{
+.board-table thead{
 	border-top: 5px solid rgb(196, 191, 227);
 }
 .pagi{
-	margin-left: 30%;
 	margin-top: 40px;
 	margin-bottom: 40px;
+	display: flex;
+	justify-content: center;
 }
 .board-search{
 	border-top: 2px solid #c0c0c0;
 	padding-top: 50px;
 	margin-bottom: 60px;
+}
+.board-table thead th, .board-table tbody td{
+	text-align: center;
 }
