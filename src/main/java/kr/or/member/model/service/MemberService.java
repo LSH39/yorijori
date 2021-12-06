@@ -14,6 +14,7 @@ public class MemberService {
 	@Autowired
 	private MemberDao dao;
 
+	// 임시 로그인
 	public Member loginMember(Member member){
 		Member m;
 		if(member.getMemberId().isEmpty() || member.getMemberPw().isEmpty()) {
@@ -29,20 +30,22 @@ public class MemberService {
 			}else if(pw.equals("x")) {
 				member.setMemberPw("x                                                               ");
 			}
-			/*
-			if(pw.length() <64) {
-				for(int i=0;i<64-pw.length();i++) {
-					pw += " ";
-				}
-				member.setMemberPw(pw);
-				System.out.println("pw : "+pw);
-				System.out.println(member.getMemberPw());
-			}
-			*/
 			
 			m = dao.loginMember(member);
 		}
 		return m;
 	}
+	//로그인
+	public Member loginMemberEnc(Member member){
+		Member m;
+		if(member.getMemberId().isEmpty() || member.getMemberPw().isEmpty()) {
+			m = null;
+		}else {
+			m = dao.loginMember(member);
+		}
+		return m;
+	}
+	
+	
 	
 }

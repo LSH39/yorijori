@@ -97,6 +97,7 @@
 	<context:component-scan base-package="kr.or.point" />
 	<context:component-scan base-package="kr.or.admin" />
 	<context:component-scan base-package="kr.or.about" />
+	<context:component-scan base-package="kr.or.common" />
 	
 	<!-- 성승민 임시 -->
 	<context:component-scan base-package="kr.or.profile" />
