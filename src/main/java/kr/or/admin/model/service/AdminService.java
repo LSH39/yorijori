@@ -133,4 +133,9 @@ public class AdminService {
 		int result = dao.deleteMember(memberNo);
 		return result;
 	}
+
+	public int addJori(String memberNo) {
+		int result = dao.addJori(memberNo);
+		return result;
+	}
 }

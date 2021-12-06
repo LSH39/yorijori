@@ -67,6 +67,19 @@ public class AdminController {
 		return "admin/permissionJoin";
 	}
 	
+	@RequestMapping(value="/permissionDelete.do")
+	public String permissionDelete(Model model,int reqPage,String searchType,String searchText,String searchDetail,String period,String start,String end,String moreless,String joinStart,String joinEnd,String detail,String align,String memberLevel,String searchText2) {
+		int level = 0;
+		String gotothe = "permissionDelete";
+		memberLevel = "5";
+		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
+		model.addAttribute("list" ,mpd.getList());
+		
+		model.addAttribute("pageNavi",mpd.getPageNavi());
+		
+		return "admin/permissionDelete";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/addNormalMember.do")
 	public String addNormalMember(String memberNo) {
@@ -79,6 +92,16 @@ public class AdminController {
 	public String deleteMember(String memberNo) {
 		int result = service.deleteMember(memberNo);
 		return "redirect:/allmember.do?reqPage=1";
+	}
+	@ResponseBody
+	@RequestMapping(value="/addJori.do")
+	public String addJori(String memberNo) {
+		int result = service.addJori(memberNo);
+		return "redirect:/permissionJoin.do?reqPage=1";
+	}
+	@RequestMapping(value="/coupon.do")
+	public String coupon() {
+		return "admin/coupon";
 	}
 	
 }

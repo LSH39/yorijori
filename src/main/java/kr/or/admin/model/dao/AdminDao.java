@@ -79,6 +79,17 @@ public class AdminDao {
 		int result = sqlSession.delete("member.deleteMember",arr);
 		return result;
 	}
+
+
+	public int addJori(String memberNo) {
+		StringTokenizer st = new StringTokenizer(memberNo, ",");
+		String[] arr = new String[st.countTokens()];
+		for(int i = 0; i<arr.length;i++) {
+			arr[i]=st.nextToken();
+		}
+		int result = sqlSession.update("member.addJori",arr);
+		return result;
+	}
 		
 		
 }
