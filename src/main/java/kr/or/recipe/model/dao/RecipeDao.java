@@ -38,29 +38,36 @@ public class RecipeDao {
 		return sqlSession.insert("recipe.insertContent", rc);
 	}
 
+	
+	public ArrayList<RecipeBoard> selectCategory1(String item) {
+		List<RecipeBoard> list = sqlSession.selectList("recipe.selectCategory1", item);
+		return (ArrayList<RecipeBoard>)list;
+	}
+
+	public ArrayList<RecipeBoard> selectCategory2(String item2) {
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectCategory2",item2); 
+		return (ArrayList<RecipeBoard>)list;
+	}
+
+	public ArrayList<RecipeBoard> selectCategory3(String item3) {
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectCategory3",item3);
+		return (ArrayList<RecipeBoard>)list;
+	}
+	
 	public RecipeBoard selectOneRecipe(int recipeNo) {
 		return sqlSession.selectOne("recipe.selectOneRecipe",recipeNo);
 	}
 
-	public RecipeContent selectContent(int recipeNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<RecipeContent> selectContent(int recipeNo) {
+		List<RecipeContent>list = sqlSession.selectList("recipe.selectContent",recipeNo);
+		return (ArrayList<RecipeContent>)list;
 	}
 
-	public Material selectMaterial(int recipeNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Material> selectMaterial(int recipeNo) {
+		List<Material>list = sqlSession.selectList("recipe.selectMaterial",recipeNo);
+		return (ArrayList<Material>)list;
 	}
 
-	public ArrayList<RecipeBoard> selectCategory1(String item) {
-		List<RecipeBoard> list = sqlSession.selectList("recipe.selectCategory1", item);
-		return null;
-	}
-
-	public String selectMemberId() {
-		
-		return null;
-	}
 
 
 }
