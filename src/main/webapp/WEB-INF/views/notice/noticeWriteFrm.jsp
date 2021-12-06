@@ -25,7 +25,7 @@
 	      	<div class="main-content">
 	      		<div class="content-title">
 	      			<h2>공지게시판</h2>
-	      			<h5>게시글 작성</h5>
+	      			<h5>게시글 작성하기</h5>
 	      		</div>
 	      		<form action="/insertNotice.do" method="post" enctype="multipart/form-data">
 	      			<div class="form-group row">

@@ -21,4 +21,24 @@
 	<select id="totalCount" resultType="_int">
 		select count(*) from notice
 	</select>
+	<select id="selectOneNotice" parameterType="_int" resultType="n">
+		select
+			notice_no as noticeNo,
+			notice_title as noticeTitle,
+			notice_Writer as noticeWriter,
+			notice_Content as noticeContent,
+			reg_date as regDate,
+			notice_readcount as noticeReadcount,
+			filename as filename,
+			filepath as filepath
+		from notice
+		where notice_no=#{noticeNo}
+	</select>
+	<delete id="deleteNotice" parameterType="_int">
+		delete 
+		from notice where notice_no=#{noticeNo}
+	</delete>
+	<insert id="insertNotice" parameterType="n">
+		insert into notice values (notice_seq.nextval, #{noticeTitle}, #{noticeWriter}, #{noticeContent}, to_char(sysdate, 'yyyy-mm-dd'), 0, #{filename}, #{filepath})
+	</insert>
 </mapper>

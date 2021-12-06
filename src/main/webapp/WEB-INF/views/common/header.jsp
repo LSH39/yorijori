@@ -90,7 +90,7 @@
           <li><a class="nav-link scrollto " href="/cookingClsList.do?reqPage=1">클래스</a></li>
            <li class="dropdown"><a href="#"><span>이벤트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/contestList.do">경연대회투표</a></li>
+              <li><a href="/contestList.do?reqPage=1">경연대회투표</a></li>
               <li><a href="/contestResult.do">우승자 발표</a></li>
               <li><a href="#">역대 우승자</a></li>
             </ul>

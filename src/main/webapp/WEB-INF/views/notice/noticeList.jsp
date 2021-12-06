@@ -51,10 +51,9 @@
 	      					<c:forEach items="${list }" var="n" varStatus="1">
 	      						<tr>
 	      							<td>${start+i.index }</td>
-	      							<td><a href='/noticeView?noticeNo=${n.noticeNo }'>
+	      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
 											${n.noticeTitle }
 										</a>
-										[댓글수]
 									</td>
 									<td>${n.noticeWriter }</td>
 									<td>${n.regDate }</td>

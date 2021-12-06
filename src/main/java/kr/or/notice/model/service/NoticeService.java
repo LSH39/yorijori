@@ -6,9 +6,9 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.notice.controller.NoticePageData;
 import kr.or.notice.model.dao.NoticeDao;
 import kr.or.notice.model.vo.Notice;
+import kr.or.notice.model.vo.NoticePageData;
 
 @Service
 public class NoticeService {
@@ -68,5 +68,20 @@ public class NoticeService {
 		pageNavi += "</ul>";
 		NoticePageData npd = new NoticePageData(list,pageNavi,start,totalCount);
 		return npd;
+	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		Notice n = dao.selectOneNotice(noticeNo);
+		return n;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		int result = dao.deleteNotice(noticeNo);
+		return result;
+	}
+
+	public int insertNotice(Notice n) {
+		int result = dao.insertNotice(n);
+		return result;
 	}
 }

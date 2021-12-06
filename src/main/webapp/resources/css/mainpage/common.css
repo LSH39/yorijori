@@ -47,3 +47,18 @@
 .board-search .row{
 	display: flex;
 }
+.btn-update{
+	background: rgb(246, 240, 255);
+	color: #6D5874;
+}
+.btn-update:hover{
+	background: #F7F7E5;
+}
+.btn-delete{
+	background: #f1f1f1;
+	color: #454545;
+}
+.btn-delete:hover{
+	color: #f1f1f1;
+	background-color: #454545;
+}

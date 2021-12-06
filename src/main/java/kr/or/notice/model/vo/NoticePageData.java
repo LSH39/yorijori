@@ -1,8 +1,7 @@
-package kr.or.notice.controller;
+package kr.or.notice.model.vo;
 
 import java.util.ArrayList;
 
-import kr.or.notice.model.vo.Notice;
 import lombok.Data;
 
 @Data

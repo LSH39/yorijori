@@ -24,4 +24,19 @@ public class NoticeDao {
 		int totalCount = sqlSession.selectOne("notice.totalCount");
 		return totalCount;
 	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		Notice n = sqlSession.selectOne("notice.selectOneNotice", noticeNo);
+		return n;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		int result = sqlSession.delete("notice.deleteNotice", noticeNo);
+		return result;
+	}
+
+	public int insertNotice(Notice n) {
+		int result = sqlSession.insert("notice.insertNotice", n);
+		return result;
+	}
 }
