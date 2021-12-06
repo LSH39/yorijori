@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 				<h1>커뮤니티</h1>
 				<div class="sidemenubox">
 					<ul class="nav flex-column">
-						<li class="nav-item active"><a href="#">공지사항 <span> &gt;</span></a></li>
+						<li class="nav-item active"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">자유게시판 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
 					</ul>
@@ -29,11 +30,11 @@
 	      	</div>
 	      	<div class="col-10 main-content">
 	      		<div class="main-content-title">
-	      			<h2>공지게시판 <span> 요리조리의 새로운 소식들과 유용한 정보들을 한 곳에서 확인하세요.</span></h2>
+	      			<h2>공지게시판 <span> 요리조리의 새로운 소식과 유용한 정보를 한 곳에서 확인하세요.</span></h2>
 	      			<a href="noticeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
 	      		</div>
-	      		<div class="freeboard-table">
-	      			<div class="freeboard-count">
+	      		<div class="board-table">
+	      			<div class="board-count">
 	      				<h5>총 게시물 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
 	      			</div>
 	      			<table class="table table-hover">
@@ -47,6 +48,19 @@
 	      					</tr>
 	      				</thead>
 	      				<tbody>
+	      					<c:forEach items="${list }" var="n" varStatus="1">
+	      						<tr>
+	      							<td>${start+i.index }</td>
+	      							<td><a href='/noticeView?noticeNo=${n.noticeNo }'>
+											${n.noticeTitle }
+										</a>
+										[댓글수]
+									</td>
+									<td>${n.noticeWriter }</td>
+									<td>${n.regDate }</td>
+									<td>${n.noticeReadcount }</td>
+								</tr>
+							</c:forEach>
 	      				</tbody>
 	      			</table>
 					<div class="pagi">

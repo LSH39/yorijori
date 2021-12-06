@@ -229,7 +229,7 @@
   </div>
   
   <script>
-  	function abc(){
+  	function scrollrecipe(){
   		if($("html").scrollTop()==0){
   			 $('.recipe-category').css("top","120px");
   			$('.recipe-category').hide();
@@ -238,14 +238,17 @@
   		}
   	}
   	$(document).scroll(function(){
-  		abc();
+  		scrollrecipe();
   	})
   	$(function(){
-  		abc();
+  		scrollrecipe();
   	})
   	  $('#show-category').on('click', function(){
   		  $('.recipe-category').toggle();
-  	  })
+  	  });
+  	$('.recipe-category-close').on('click', function(){
+  		$('.recipe-category').hide();
+  	})
 	  $('.recipe-category').on('click', 'input:radio', function () {
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
