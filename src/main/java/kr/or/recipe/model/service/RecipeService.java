@@ -41,26 +41,33 @@ public class RecipeService {
 	}
 
 
-	public RecipeBoard selectOneRecipe(int recipeNo) {
-		RecipeBoard rb = dao.selectOneRecipe(recipeNo);
-		return rb;
-	}
-
-
-	public RecipeContent selectContent(int recipeNo) {
-		RecipeContent rc = dao.selectContent(recipeNo);
-		return rc;
-	}
-
-
-	public Material selectMaterial(int recipeNo) {
-		Material m = dao.selectMaterial(recipeNo);
-		return m;
-	}
-
-
 	public ArrayList<RecipeBoard> selectCategory1(String item) {
 		ArrayList<RecipeBoard>list = dao.selectCategory1(item);
 		return list;
 	}
+
+
+	public ArrayList<RecipeBoard> selectCategory2(String item2) {
+		ArrayList<RecipeBoard>list = dao.selectCategory2(item2);
+		return list;
+	}
+
+
+	public ArrayList<RecipeBoard> selectCategory3(String item3) {
+		ArrayList<RecipeBoard>list = dao.selectCategory3(item3);
+		return list;
+	}
+
+	public RecipeBoard selectOneRecipe(int recipeNo) {
+		RecipeBoard rb = dao.selectOneRecipe(recipeNo);
+		ArrayList<Material>mList = dao.selectMaterial(recipeNo);
+		ArrayList<RecipeContent>rList = dao.selectContent(recipeNo);
+		rb.setMList(mList);
+		rb.setRList(rList);
+		return rb;
+	}
+
+
 }
+	
+
