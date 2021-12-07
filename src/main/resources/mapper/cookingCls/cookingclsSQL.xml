@@ -72,7 +72,7 @@ mybatis xml mapper단
 		update cooking_class set class_curr_nop=class_curr_nop+1 where class_no=#{classNo}
 	</update>
 	
-	<!-- 쿠킹클래스 햔재 인원수 증가 -->
+	<!-- 쿠킹클래스 햔재 인원수 감소 -->
 	<update id="decCookingClsNop" parameterType="_int">
 		update cooking_class set class_curr_nop=class_curr_nop-1 where class_no=#{classNo}
 	</update>

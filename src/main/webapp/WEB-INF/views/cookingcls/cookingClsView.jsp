@@ -114,8 +114,7 @@
 			let memberNo = $("#memberNo").val();
 			let classNo = $("#classNo").val();
 			let classNop = $("#classNop").html();
-			let impUid = date.getFullYear()+""+(date.getMonth()+1)+""+date.getDate()+""+date.getHours()+""+date.getMinutes()+""+date.getSeconds(); 
-		
+			let impUid = date.getFullYear()+""+("0"+(date.getMonth()+1)).slice(-2)+""+("0"+date.getDate()).slice(-2)+""+("0"+date.getHours()).slice(-2)+""+("0"+date.getMinutes()).slice(-2)+""+("0"+date.getSeconds()).slice(-2);
 			
 			IMP.init("imp42282461"); //요리조리 가맹점
 			IMP.request_pay({ //결제할 떄 필요한 정보(객체)
@@ -277,7 +276,7 @@
 										<button type="button" id="noPayBtn" class="btn btn-danger btn-lg" >결제하기</button>
 									</c:when>
 									<c:when test="${empty sessionScope.m  }">									
-										<button type="button" id="noPayBtn" class="btn btn-warning btn-lg" >로그인 하세요!</button>
+										<a href="/loginFrm.do" class="btn btn-warning btn-lg" >로그인 하세요!</a>
 									</c:when>
 									<c:otherwise>
 										<button type="button" id="payBtn" class="btn btn-primary btn-lg" >결제하기</button>
