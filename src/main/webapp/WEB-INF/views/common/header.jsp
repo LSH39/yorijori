@@ -90,7 +90,7 @@
           <li><a class="nav-link scrollto " href="/cookingClsList.do?reqPage=1">클래스</a></li>
            <li class="dropdown"><a href="#"><span>이벤트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/contestList.do?reqPage=1">경연대회투표</a></li>
+              <li><a class="nav-link" onclick="chkDate();">경연대회투표</a></li>
               <li><a href="/contestResult.do">우승자 발표</a></li>
               <li><a href="#">역대 우승자</a></li>
             </ul>
@@ -252,5 +252,17 @@
 	  $('.recipe-category').on('click', 'input:radio', function () {
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
+  	
+  	//현재 일자 체크 (대회 투표기간 확인)
+  	function chkDate(){
+  		var today = new Date();
+  		var date = today.getDate();
+  		if(date >= 1 && date <= 15){
+  			location.href="/contestList.do?reqPage=1";
+  		}else {
+  			alert("대회 투표기간이 아닙니다.");
+  		}
+  		
+  	}
   </script>
   

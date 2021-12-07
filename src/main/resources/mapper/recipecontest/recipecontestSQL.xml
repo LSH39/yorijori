@@ -2,9 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="recipecontest">
 	<select id="totalCount" resultType="_int">
-		select count(*) from recipecontest
+		select count(*) from contest_recipe
 	</select>
-	<select id="contestList" parameterType="map" resultType="rc">
-	
+	<select id="selectList" parameterType="map" resultType="rc">
+			select rrr.*, (select count(*) from contest_vote where contest_no=rrr.contestNo) as voteCount
+    from
+    (select rownum as rnum, rr.*, m.member_nickname as memberNickname from
+    (select cr.contest_no as contestNo, cr.RECIPE_NO as recipeNo, cr.ENTER_DATE as enterDate, cr.CONTEST_RESULT as contestResult, cr.CONTEST_MONTH as contestMonth, cr.RECIPE_DELETE as recipeDelete, r.recipe_writer
+        from contest_recipe cr
+        left join recipe_board r
+        on cr.RECIPE_NO=r.recipe_no order by cr.CONTEST_NO desc)rr
+    left join member m
+    on rr.recipe_writer=m.member_no)rrr
+    where rnum between #{start} and #{end}
 	</select>
 </mapper>

@@ -22,7 +22,7 @@ public class RecipeContestDao {
 	}
 
 	public ArrayList<RecipeContest> selectContestList(HashMap<String, Object> map) {
-		List<RecipeContest> list = sqlSession.selectList("recipecontest.selectList");
+		List<RecipeContest> list = sqlSession.selectList("recipecontest.selectList", map);
 		return (ArrayList<RecipeContest>) list;
 	}
 }
