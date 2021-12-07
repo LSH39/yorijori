@@ -46,7 +46,7 @@ mybatis xml mapper단
 			class_price as classPrice,
 			class_rate as classRate,
 			class_nop as classNop,
-			class_curr_nop as classCurNop,
+			class_curr_nop as classCurrNop,
 			class_status as classStatus,
 			class_reg_date as classRegDate,
 			class_time as classTime,
@@ -60,11 +60,22 @@ mybatis xml mapper단
 		delete from cooking_class where class_No=#{classNo}
 	</delete>
 	
+	<!-- 쿠킹 클래스 현재 인원수 -->
+	<select id="selectCurrClsCnt" parameterType="_int" resultType="_int">
+		select class_curr_nop as classCurrNop
+		from cooking_class 
+		where class_no=#{classNo}
+	</select>
 	
+	<!-- 쿠킹클래스 햔재 인원수 증가 -->
+	<update id="incCookingClsNop" parameterType="_int">
+		update cooking_class set class_curr_nop=class_curr_nop+1 where class_no=#{classNo}
+	</update>
 	
-	
-	
-	
+	<!-- 쿠킹클래스 햔재 인원수 증가 -->
+	<update id="decCookingClsNop" parameterType="_int">
+		update cooking_class set class_curr_nop=class_curr_nop-1 where class_no=#{classNo}
+	</update>
 	
 	
 	
