@@ -10,6 +10,7 @@ import kr.or.milkit.model.vo.product;
 import kr.or.recipe.model.dao.RecipeDao;
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 @Service
 public class RecipeService {
@@ -65,6 +66,18 @@ public class RecipeService {
 		rb.setMList(mList);
 		rb.setRList(rList);
 		return rb;
+	}
+
+
+	public ArrayList<RecipeComment> selectComment(int recipeNo) {
+		ArrayList<RecipeComment>list = dao.selectComment(recipeNo);
+		return list;
+	}
+
+
+	public int insertComment(int recipeNo, int memberNo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
