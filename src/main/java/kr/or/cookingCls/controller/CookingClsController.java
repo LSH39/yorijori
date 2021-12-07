@@ -34,7 +34,7 @@ public class CookingClsController {
 //		return "cookingcls/cookingClsList";
 	}
 	
-	//쿠킹클래스 작성
+	//쿠킹클래스 작성 페이지
 	@RequestMapping(value="/cookingClsWriteFrm.do")
 	public String CookingClsListWriteFrm() {
 		return "cookingcls/cookingClsWriteFrm";
@@ -45,15 +45,33 @@ public class CookingClsController {
 	public String CookingClsListView(int classNo, Model model) {
 		CookingCls ccls = service.selectOneClass(classNo);
 		ArrayList<Review> list = service.selectReviewList(classNo);
+		double reviewAvg = service.avgReviewRate(classNo);
 		model.addAttribute("ccls", ccls);
 		model.addAttribute("list", list);
+		model.addAttribute("reviewAvg", reviewAvg);
 		return "cookingcls/cookingClsView";
 	}
 	
 	
-	//쿠킹클래스 수정
+	//쿠킹클래스 수정 페이지
 	@RequestMapping(value="/cookingClsUpdateFrm.do")
 	public String CookingClsListUpdateFrm() {
 		return "cookingcls/cookingClsUpdateFrm";
+	}
+	
+	//쿠킹클래스 삭제
+	@RequestMapping(value="/cookingClsDelete.do")
+	public String cookingClsDelete(int classNo, Model model) {
+		int result = service.deleteOneClass(classNo);
+		
+		if(result>0) {
+			model.addAttribute("msg", "삭제 성공!");
+			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");
+		}else {
+			model.addAttribute("msg", "삭제 실패!");
+			model.addAttribute("loc", "/cookingClsView.do?classNo="+classNo);			
+		}
+		return "common/msg";
+		
 	}
 }

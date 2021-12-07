@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
     <style>
+    	.quickmenu{
+    	display: none;
+    	}
 
         input#menu{
             display: none;
@@ -50,7 +53,7 @@
         div.slidebar{
             width: 300px;
             height: 100%;
-            background-color: black;
+            background-color: #6D5874;
             position: fixed; top: 0;
             left:-250px;
             z-index: 1;
@@ -79,10 +82,23 @@
        div.slidebar:hover{
        left:-230px;
        }
-       .showDrop{
-       background-color: gray;
+       .slidebar .showDrop{
+       color: black;
+       background-color: #E0D8EF;
+       box-shadow: rgb(13,23,36,0.7) 3px 3px 3px;
        
        }
+       .slidebar a:hover{
+       color: #C4BFE3;
+       }
+      .slidebar .showDrop:hover{
+      	color:#6D5874;
+      }
+       
+.showDetail{
+display: none;
+background-color: black;
+}
     </style>
 
     <div id="leftnav">
@@ -95,7 +111,7 @@
         <div class="slidebar navbar">
             
                 
-                    <a class="nav-link" href="/admin.do">관리 홈</a>
+                    <a class="nav-link showDrop"  href="/admin.do">관리 홈</a>
                 
                 
                     <a class="nav-link showDrop1 showDrop" href="#">회원관리</a>
@@ -106,7 +122,7 @@
                 <a class="nav-link" href="allmember.do?reqPage=1">전체회원조회</a>
                 <a class="nav-link" href="blackList.do?reqPage=1">블랙리스트 관리</a>
                 <a class="nav-link" href="permissionJoin.do?reqPage=1">전문가 가입 승인</a>
-                <a class="nav-link" href="#">탈퇴 요청 승인</a>
+                <a class="nav-link" href="permissionDelete.do?reqPage=1">탈퇴 요청 승인</a>
 
             	
        		</div>
@@ -125,7 +141,7 @@
                 
                 <div class="drop3 navbar" style="display: none;">
                     
-               <a class="nav-link" href="#">쿠폰 발행</a>
+               <a class="nav-link" href="coupon.do">쿠폰 발행</a>
                     <a class="nav-link" href="#">쿠폰 관리</a>
 
             	

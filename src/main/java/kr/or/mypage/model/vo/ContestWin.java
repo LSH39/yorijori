@@ -4,10 +4,11 @@ import lombok.Data;
 
 @Data
 public class ContestWin {
-private int winNo;
+//private int winNo;
 private int contestNo;
-private int voteCount;
-private int winMonth;
+//private int voteCount;
+private String contestMonth;
+private int contestWinner;
 private int recipeWriter;
-private int recipeTitle;
+private String recipeTitle;
 }

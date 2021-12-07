@@ -119,14 +119,26 @@ public class RecipeController {
 	@RequestMapping(value = "/recipeView.do")
 	   public String recipeView(int recipeNo, Model model) {
 		RecipeBoard rb = service.selectOneRecipe(recipeNo);
-		RecipeContent rc = service.selectContent(recipeNo);
-		Material m = service.selectMaterial(recipeNo);
+		model.addAttribute("rb", rb);
 		return "recipe/recipeView";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/rCategory1.do", produces = "application/json;charset=utf-8")
 		public String rCategory1(String item){
 		ArrayList<RecipeBoard>list = service.selectCategory1(item);
+		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/rCategory2.do", produces = "application/json;charset=utf-8")
+		public String rCategory2(String item2) {
+		ArrayList<RecipeBoard>list = service.selectCategory2(item2);
+		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/rCategory3.do" , produces = "application/json;charset=utf-8")
+		public String rCategory3(String item3) {
+		ArrayList<RecipeBoard>list = service.selectCategory3(item3);
 		return new Gson().toJson(list);
 	}
 }
