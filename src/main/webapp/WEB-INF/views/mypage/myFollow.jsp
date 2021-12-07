@@ -118,7 +118,7 @@ margin: 0 auto;
 .followR{
     width:250px;
     height: 300px;
-    background-color:darkorange ;
+    
     float: left;
     margin-right: 30px;
 }
@@ -130,12 +130,13 @@ margin: 0 auto;
 .pr{
     width:250px;
     height: 140px;
-    background-color:rgb(255, 102, 0) ;
+     background-color:darksalmon ;
+  
 }
 .pw{
     width:250px;
     height: 100px;
-    background-color:rgb(43, 182, 85) ;
+    background-color:darksalmon ;
 }
 #pp{
     width: 60px;
@@ -145,7 +146,7 @@ margin: 0 auto;
     float: left;
    
 }
-#memberId{
+#nickName{
     float: left;
     margin-left: 15px;
 }
@@ -191,11 +192,11 @@ margin: 0 auto;
         <div class="main-content">
             <h3 id="h_hotel">★my Follow★</h3>
             <div id="line2"></div><br>
-              <c:forEach items="${list}" var="mi" varStatus="i">
+              <c:forEach items="${list}" var="fol" varStatus="i">
             <div class="followR">
                 <div class="pt">
-                    <img id="pp" src="img/profile.jpeg">
-                    <h5 id="memberId">member_id</h5>
+                    <img id="pp" src="resources/img/mypage/profile.jpeg">
+                    <h5 id="nickName">${fol.memberNickname }</h5>
                 </div>
                 <div class="pr">
                     <a href="#"> 
@@ -203,8 +204,8 @@ margin: 0 auto;
                     </a>
                 </div>
                 <div class="pw">
-                    <h5>#</h5>
-                    <h5></h5>
+                    <h5>#${fol.recipeTitle}</h5>
+                    <h5>#${fol.subhead }</h5>
                 </div>
 
             </div>
