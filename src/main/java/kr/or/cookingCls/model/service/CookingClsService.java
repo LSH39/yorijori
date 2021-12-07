@@ -94,10 +94,25 @@ public class CookingClsService {
 		CookingClsPageData ccpd = new CookingClsPageData(list, pageNavi, start);
 		return ccpd;
 	}
-
+	
+	//리뷰 목록 조회
 	public ArrayList<Review> selectReviewList(int classNo) {
 		// TODO Auto-generated method stub
 		ArrayList<Review> list = dao.selectReviewList(classNo);
 		return list;
+	}
+
+	//리뷰 점수 평균
+	public double avgReviewRate(int classNo) {
+		// TODO Auto-generated method stub
+		double reviewAvg = dao.avgReviewRate(classNo);
+		return reviewAvg;
+	}
+
+	//클래스 삭제
+	public int deleteOneClass(int classNo) {
+		// TODO Auto-generated method stub
+		int result = dao.deleteOneClass(classNo);
+		return result;
 	}
 }

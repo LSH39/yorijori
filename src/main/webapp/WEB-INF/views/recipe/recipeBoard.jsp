@@ -7,38 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
-      <script>
-         $(function(){
-         
-        $(".item").click(function(){
-            var item = $(this).html();
-            $.ajax({
-            	url: "/rCategoty1.do",
-            	data : {item:item},
-            	type: "post",
-            	success(function(data) {
-					$(".recipeList").empty();
-					for(var i=0;i<data.length;i++){
-						var rb = data[i];
-						var html = "";
-						html += "<div class='recipe'>";
-						html += "<a href='/recipeView.do?recipeNo="+rb.recipeNo+"'>"+rb.filepath+"</a>";
-						html += "<a href='/recipeView.do?recipeNo="+rb.recipeNo+"'>"+rb.recipeTitle+"</a>";
-						html += rb.recipeWriter
-					}
-				})
-            });
-        });
-        $(".item2").click(function(){
-            var item2 = $(this).html();
-            console.log(item2);
-        });
-        $(".item3").click(function(){
-            var item3 = $(this).html();
-            console.log(item3);
-        });
-    });
-    </script>
+     
 </head>
 
 <body>
@@ -78,12 +47,93 @@
 </div>
 	<div id="recipeList">
 		<c:forEach items="${list }" var="rb" varStatus="i">
-		<a href="/recipeView.do?recipeNo=${recipeNo }"><img src="/resources/upload/recipe/${rb.filepath }"></a>
-	    <a href="/recipeView.do?recipeNo=${recipeNo }">${rb.recipeTitle }</a>
+		<a href="/recipeView.do?recipeNo=${rb.recipeNo }"><img src="/resources/upload/recipe/${rb.filepath }"></a>
+	    <a href="/recipeView.do?recipeNo=${rb.recipeNo }">${rb.recipeTitle }</a>
 		${rb.readCount }
+		${rb.nickname }
 		${rb.recipeTime }
 		${rb.recipeLevel }
 		</c:forEach>
 	</div>		
+	 <script>
+         $(function(){
+         
+        $(".item").click(function(){
+            var item = $(this).html();
+            $.ajax({
+            	url: "/rCategory1.do",
+            	data : {item:item},
+            	dataType : "json",
+            	type: "post",
+            	success: function(data) {
+					$("#recipeList").empty();
+					for(var i=0;i<data.length;i++){
+						var rb = data[i];
+						var html = "";
+						html += "<div class='recipe'>";
+						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].filepath+"</a>";
+						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].recipeTitle+"</a>";
+						html += data[i].readCount;
+						html += data[i].nickname;
+						html += data[i].recipeTime;
+						html += data[i].recipeLevel;
+						html += "</div>";
+						$("#recipeList").append(html);
+					}
+				}
+            });
+        });
+        $(".item2").click(function(){
+            var item2 = $(this).html();
+            $.ajax({
+            	url: "/rCategory2.do",
+            	data : {item2:item2},
+            	dataType :"json",
+            	type: "post",
+            	success : function(data) {
+            		$("#recipeList").empty();
+					for(var i=0;i<data.length;i++){
+						var rb = data[i];
+						var html = "";
+						html += "<div class='recipe'>";
+						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].filepath+"</a>";
+						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].recipeTitle+"</a>";
+						html += data[i].readCount;
+						html += data[i].nickname;
+						html += data[i].recipeTime;
+						html += data[i].recipeLevel;
+						html += "</div>";
+						$("#recipeList").append(html);
+					}
+				}
+            });
+        });
+        $(".item3").click(function(){
+            var item3 = $(this).html();
+            $.ajax({
+            	url: "/rCategory3.do",
+            	data : {item3:item3},
+            	dataType :"json",
+            	type: "post",
+            	success : function(data) {
+            		$("#recipeList").empty();
+					for(var i=0;i<data.length;i++){
+						var rb = data[i];
+						var html = "";
+						html += "<div class='recipe'>";
+						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].filepath+"</a>";
+						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].recipeTitle+"</a>";
+						html += data[i].readCount;
+						html += data[i].nickname;
+						html += data[i].recipeTime;
+						html += data[i].recipeLevel;
+						html += "</div>";
+						$("#recipeList").append(html);
+					}
+				}
+            });
+        });
+    });
+    </script>
 </body>
 </html>

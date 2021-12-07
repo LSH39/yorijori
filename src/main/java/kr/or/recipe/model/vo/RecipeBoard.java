@@ -1,5 +1,7 @@
 package kr.or.recipe.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.Data;
 
 @Data
@@ -17,5 +19,7 @@ public class RecipeBoard {
 	private String recipeLevel;
 	private String situation;
 	private String material;
-
+	private ArrayList<RecipeContent>rList;
+	private ArrayList<Material>mList;
+	private String nickname;
 }

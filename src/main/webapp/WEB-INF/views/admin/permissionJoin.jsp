@@ -86,8 +86,8 @@ margin-left : 50%;
    	
     <div style="float: left;">
         <span>선택 회원을</span>
-        <button class="addNormal">조리꾼 승인</button>
-        <button>강제 탈퇴</button>
+        <button class="addJori">조리꾼 승인</button>
+        <button class="deleteMember">강제 탈퇴</button>
         <button>쪽지</button>
     </div>
     
@@ -124,7 +124,7 @@ margin-left : 50%;
     <tr>
     <td><input class="chkbox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
     <td>${m.memberNickname }(${m.memberId })</td>
-    <td><button>상세보기</button></td>
+    <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>
     조리꾼(승인대기)
     
@@ -133,6 +133,16 @@ margin-left : 50%;
     <td>${m.recipeCount }</td>
     <td>${m.boardCount }</td>
     </tr>
+    <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
+    이름 : 
+  	전화번호 : 
+  	주소 : 
+  	프로필 이미지 : 
+  	자기소개 : 
+  	포인트 : 
+  	자격증 : 
+  	
+    </td></tr>
     </c:forEach>
     
     </table>
@@ -146,6 +156,16 @@ margin-left : 50%;
     
     <script>
     $(function(){
+    	$(".showDetailBtn").click(function(){
+    		var index = $(this).val();
+    		
+    		
+    		
+    		
+    		
+    		$(".showDetail"+index).fadeToggle();
+    	});
+    	
     	$(".detailbtn").click(function(){
     		$(".detail").slideToggle();
     	});
@@ -277,7 +297,7 @@ margin-left : 50%;
 			$(".align").change(function(){
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"allmember.do?reqPage=1",
+	    			url:"permissionJoin.do?reqPage=1",
 	    			type:"post",
 	    			data : {align:align},
 	    			success: function(data){
@@ -297,7 +317,7 @@ margin-left : 50%;
 				var memberLevel = $(".memberLevel").val();
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"allmember.do?reqPage=1",
+	    			url:"permissionJoin.do?reqPage=1",
 	    			type:"post",
 	    			data : {memberLevel:memberLevel,align:align},
 	    			success: function(data){
@@ -315,7 +335,7 @@ margin-left : 50%;
 				
 			});
 			
-			$(".addNormal").click(function(){
+			$(".addJori").click(function(){
 				var memberNo;
 				
 				for(var i =0; i<$(".amount").html();i++){
@@ -332,11 +352,11 @@ margin-left : 50%;
 				
 				
 				$.ajax({
-	    			url:"addNormalMember.do",
+	    			url:"addJori.do",
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="blackList.do?reqPage=1";
+	    				location.href="permissionJoin.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
@@ -369,7 +389,7 @@ margin-left : 50%;
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="blackList.do?reqPage=1";
+	    				location.href="permissionJoin.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){

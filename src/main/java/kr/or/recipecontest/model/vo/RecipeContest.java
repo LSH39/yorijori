@@ -7,7 +7,7 @@ public class RecipeContest {
 	private int contestNo;
 	private int recipeNo;
 	private String enterDate;
-	private int contestResult;
+	private int contestWinner;
 	private String contestMonth;
 	private int recipeDelete;
 }

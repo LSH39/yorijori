@@ -57,7 +57,7 @@
 	</update>
 	
 	<delete id="deleteMember"  parameterType="string">
-	delete from member where member_id='test0040' and member_pw='333'
+	     delete from member where member_id='test0040' and member_pw='333'
 	
 	</delete>
 
@@ -74,51 +74,117 @@
 	</select>
 	
 	<select id="myRecipe" parameterType="_int" resultType="rb">
-	select 
-	RECIPE_NO as recipeNo,
-	RECIPE_WRITER as recipeWriter,
-	RECIPE_TITLE as recipeTitle,
-	filepath,
-	READ_COUNT as readCount,
-	RECIPE_DATE as recipeDate,
-	subhead,
-	RECIPE_VIDEO as recipeVideo,
-	RECIPE_TIME as recipeTime,
-	FOOD_NAME as foodName,
-	RECIPE_LEVEL as recipeLevel,
-	situation,
-	material
-	from recipe_board 
-	where recipe_writer=111
+		select 
+		RECIPE_NO as recipeNo,
+		RECIPE_WRITER as recipeWriter,
+		RECIPE_TITLE as recipeTitle,
+		filepath,
+		READ_COUNT as readCount,
+		RECIPE_DATE as recipeDate,
+		subhead,
+		RECIPE_VIDEO as recipeVideo,
+		RECIPE_TIME as recipeTime,
+		FOOD_NAME as foodName,
+		RECIPE_LEVEL as recipeLevel,
+		situation,
+		material
+		from recipe_board 
+		where recipe_writer=111
 	
 	</select>
 <select id="myClass" parameterType="_int" resultType="mcr">
-	select 
-	cr.rsrv_no as rsrvNo,
-	cc.class_title as classTitle,
-	cc.class_curr_nop as classCurrNop,
-	cc.class_start as classStart,
-	cc.class_end as classEnd ,
-	cc.class_price as classPrice,
-	cc.class_time as classTime,
-	cc.class_location as classLocation,
-	cc.class_Status as classStatus
-	from cooking_class cc ,
-	cooking_rsrv cr where cr.member_No =111
+		select 
+		cr.rsrv_no as rsrvNo,
+		cc.class_title as classTitle,
+		cc.class_curr_nop as classCurrNop,
+		cc.class_start as classStart,
+		cc.class_end as classEnd ,
+		cc.class_price as classPrice,
+		cc.class_time as classTime,
+		cc.class_location as classLocation,
+		cc.class_Status as classStatus
+		from cooking_class cc ,
+		cooking_rsrv cr where cr.member_No =111
 
 
 </select>
 <select id="myclassReview" parameterType="_int" resultType="mreview">
-	select r.REVIEW_NO as reviewNo ,
-	r.REIVEW_FLAG as reviewFlag,
-	r.CLASS_NO as classNo,
-	r.REVIEW_CONTENT as reviewContent,
-	r.REVIEW_RATE as reviewRate,
-	r.REVIEW_DATE as reviewDate,
-	cook.class_title as classTitle
-	from review r,cooking_class cook
-    where r.CLASS_NO =cook.class_no and r.member_no=111
+		select r.REVIEW_NO as reviewNo ,
+		r.REVIEW_FLAG as reviewFlag,
+		r.CLASS_NO as classNo,
+		r.REVIEW_CONTENT as reviewContent,
+		r.REVIEW_RATE as reviewRate,
+		r.REVIEW_DATE as reviewDate,
+		cook.class_title as classTitle
+		from review r,cooking_class cook
+	    where r.CLASS_NO =cook.class_no and r.member_no=111 and r.review_flag=2
 
+
+</select>
+<select id="myitemReview" parameterType="_int" resultType="ireview">
+		select r.REVIEW_NO  as reviewNo,
+		r.REVIEW_FLAG as reviewFlag,
+		r.product_NO as productNo,
+		r.REVIEW_CONTENT  as reviewContent,
+		r.REVIEW_RATE as reviewRate,
+		r.REVIEW_DATE as reviewDate,
+		p.milkit_name as milkitName
+		from review r,product p
+	    where r.product_NO =p.product_no and r.member_no=111 and r.review_flag=1
+
+
+</select>
+
+<select id="contestWinner"  resultType="ct">
+		 select cr.contest_no as contestNo,
+		 cr.contest_month as contestMonth,
+		 rb.recipe_title as recipeTitle,
+		 rb.recipe_writer as recipeWriter
+		 from contest_recipe cr,recipe_board rb
+		 where cr.recipe_no=rb.recipe_no and cr.contest_winner=1 
+		 order by contest_month asc
+
+
+</select>
+<select id="myContest"  resultType="myc" parameterType="_int">
+	  select cr.contest_no as contestNo,
+		   cr.contest_month as contestMonth,
+	        cr.enter_Date as enterDate,
+	        rb.recipe_title as recipeTitle,
+	        rb.recipe_writer as recipeWriter,
+	        cr.contest_winner as contestWinner
+	  from contest_recipe cr,recipe_board rb
+	  where cr.recipe_no=rb.recipe_no and recipe_writer=111
+	  order by contest_no asc
+
+</select>
+<select id="myItem" resultType="mi" parameterType="_int">
+		 select 
+		 product_no as productNo,
+		 milkit_name as milkitName,
+		 milkit_writer as milkitWriter,
+		 milkit_price as milkitPrice,
+		 filePath as filepath,
+		 milkit_date as milkitDate,
+		 milkit_stock as milkitStock
+		 from product where milkit_writer=111
+
+
+</select>
+<select id="likeRecipe" resultType="lr" parameterType="_int">
+		 select rl.like_no as likeNo,
+		 rl.member_no as memberNo,
+		 rl.recipe_no as recipeNo,
+		 rb.recipe_date as recipeDate,
+		 rb.recipe_level as recipeLevel,
+		 rb.recipe_title as recipeTitle,
+		 rb.recipe_writer as recipeWriter, 
+		 rb.filepath as filepath,
+		 rb.read_count as readCount,
+		 rb.subhead as subhead
+		 from recipe_board rb,recipe_like rl
+		 where rb.recipe_no=rl.recipe_no and rl.member_no=111
+ 
 
 </select>
 </mapper>

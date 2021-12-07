@@ -124,7 +124,7 @@ margin-left : 50%;
     <tr>
     <td><input class="chkbox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
     <td>${m.memberNickname }(${m.memberId })</td>
-    <td><button>상세보기</button></td>
+    <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>
     <c:choose >
     <c:when test="${m.memberLevel eq 1}">
@@ -140,6 +140,15 @@ margin-left : 50%;
     <td>${m.recipeCount }</td>
     <td>${m.boardCount }</td>
     </tr>
+    <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
+    이름 : 
+  	전화번호 : 
+  	주소 : 
+  	프로필 이미지 : 
+  	자기소개 : 
+  	포인트 : 
+  	사유 : 
+    </td></tr>
     </c:forEach>
     
     </table>
@@ -153,6 +162,15 @@ margin-left : 50%;
     
     <script>
     $(function(){
+    	$(".showDetailBtn").click(function(){
+    		var index = $(this).val();
+    		
+    		
+    		
+    		
+    		
+    		$(".showDetail"+index).fadeToggle();
+    	});
     	$(".detailbtn").click(function(){
     		$(".detail").slideToggle();
     	});
@@ -284,7 +302,7 @@ margin-left : 50%;
 			$(".align").change(function(){
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"allmember.do?reqPage=1",
+	    			url:"blackList.do?reqPage=1",
 	    			type:"post",
 	    			data : {align:align},
 	    			success: function(data){
@@ -304,7 +322,7 @@ margin-left : 50%;
 				var memberLevel = $(".memberLevel").val();
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"allmember.do?reqPage=1",
+	    			url:"blackList.do?reqPage=1",
 	    			type:"post",
 	    			data : {memberLevel:memberLevel,align:align},
 	    			success: function(data){
