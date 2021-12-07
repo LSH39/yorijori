@@ -37,4 +37,14 @@ public class CookingClsDao {
 		List<Review> list = sqlSession.selectList("review.selectAllReview", classNo);
 		return (ArrayList<Review>)list;
 	}
+
+	public double avgReviewRate(int classNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("review.avgReviewRate", classNo);
+	}
+
+	public int deleteOneClass(int classNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("cookingcls.deleteOneClass", classNo);
+	}
 }
