@@ -49,6 +49,8 @@
 	     <typeAlias type="kr.or.mypage.model.vo.LikeRecipe" alias="lr"/>
 	     <typeAlias type="kr.or.mypage.model.vo.FollowList" alias="fol"/>
 	     <typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc"/>
+	      <typeAlias type="kr.or.mypage.model.vo.Myorder" alias="mo"/>
+	        <typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms"/>
 	</typeAliases>
 </configuration>
 

@@ -17,7 +17,7 @@
                         <li><a href="/selPage.do?memberId=test0018">판매자판조회 및 수정<span></span></a></li>
                         <li><a href="/mycoupon.do?memberNo=111">쿠폰함<span></span></a></li>
                         <li><a href="/deleteFrm.do?">회원탈퇴<span></span></a></li>
-                         <li><a href="/deleteFrm.do?">회원탈퇴(판매자)<span></span></a></li>
+                         <li><a href="/delSelFrm.do?">회원탈퇴(판매자)<span></span></a></li>
                          <li><a href="/contestWinner.do">역대우승작12/6<span></span></a></li> 
                          
                        
@@ -37,8 +37,9 @@
                         <li><a href="/myRecipe.do?recipeWriter=111">내 작성 레시피<span></span></a></li>
                         <li><a href="/myItem.do?milkitWriter=111">내 판매밀키트<span></span></a></li>
                          <li><a href="/followList.do?memberNo=111">팔로우리스트<span></span></a></li>
-                         <li><a href="/followList?" id="lf-click">내 구매내역<span></span></a></li>                           
-                  
+                         <li><a href="/myOrder.do?memberNo=111" id="lf-click">내 구매내역<span></span></a></li>       
+                          <li><a href="/sellList.do?memberNo=5" id="lf-click">내 판매내역<span></span></a></li>                  
+                         
                     </ul>
                 </li>
             </ul>

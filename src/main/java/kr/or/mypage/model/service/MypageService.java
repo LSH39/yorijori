@@ -16,6 +16,8 @@ import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.Mychat;
+import kr.or.mypage.model.vo.Myorder;
+import kr.or.mypage.model.vo.Mysell;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -128,6 +130,33 @@ public class MypageService {
 		ArrayList<Mychat> list = dao.myChatList(chatRecive);
 		return list;
 	}
+
+	public int upSeller(Member m) {
+		int result = dao.upSeller(m);
+		return result;
+	}
+
+	public ArrayList<Myorder> myOrderList(int memberNo) {
+		ArrayList<Myorder> list = dao.myOrderList(memberNo);
+		return list;
+	}
+
+
+	public Myorder myOrderDetail(int orderNo) {
+		Myorder mo =dao.myOrderDetail(orderNo);
+		return mo;
+	}
+
+	public ArrayList<Myorder> orderDetail(int orderNo) {
+		ArrayList<Myorder> list = dao.orderDetail(orderNo);
+		return list;
+	}
+
+	public ArrayList<Mysell> mySellList(int memberNo) {
+		ArrayList<Mysell> list = dao.mySellerList(memberNo);
+		return list;
+	}
+	
 
 	
 

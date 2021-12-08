@@ -187,15 +187,17 @@
 									<th>내용</th>
 									<th>아이디</th>
 									<th>평점</th>
+									<th></th>
 								</tr>
 								<c:forEach items="${list }" var="review" varStatus="i">
 								<tr>
 									<td>${i.count }</td>
 									<td>${review.reviewContent }</td>
 									<td>${review.memberNo }</td>
-									<td>${review.reviewRate }
+									<td>${review.reviewRate }</td>
+									<td>									
 										<c:if test="${sessionScope.m.memberNo eq review.memberNo }">
-										<a class="btn-close" href="/reviewDelete.do?reviewNo=${review.reviewNo }" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X</a>
+											<a class="btn-close" href="/reviewDelete.do?reviewNo=${review.reviewNo }" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X</a>
 										</c:if>
 									</td>
 								</tr>

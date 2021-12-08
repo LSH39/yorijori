@@ -17,6 +17,8 @@ import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.Mychat;
+import kr.or.mypage.model.vo.Myorder;
+import kr.or.mypage.model.vo.Mysell;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -104,6 +106,32 @@ public class MypageDao {
 	public ArrayList<Mychat> myChatList(String chatRecive) {
 		List<Mychat> list = sqlSession.selectList("mypage.chatList");
 		return (ArrayList<Mychat>) list;
+	}
+	/*회원탈퇴(판매자)*/
+	public int upSeller(Member m) {
+		return sqlSession.update("mypage.upSeller",m);
+	
+	}
+	/*주문내역조회*/
+	public ArrayList<Myorder> myOrderList(int memberNo) {
+		List<Myorder> list = sqlSession.selectList("mypage.orderList");
+		return (ArrayList<Myorder>) list;
+	}
+	/*주문상세조회*/
+	
+	public Myorder myOrderDetail(int orderNo) {
+		return sqlSession.selectOne("mypage.orderDetail",orderNo);
+	
+	}
+	/*상세리스트*/
+	public ArrayList<Myorder> orderDetail(int orderNo) {
+		List<Myorder> list = sqlSession.selectList("mypage.detailOrder");
+		return (ArrayList<Myorder>) list;
+	}
+	/*판매내역조회*/
+	public ArrayList<Mysell> mySellerList(int memberNo) {
+		List<Mysell> list = sqlSession.selectList("mypage.sellerList");
+		return (ArrayList<Mysell>) list;
 	}
 
 
