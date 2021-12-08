@@ -10,4 +10,8 @@ public class RecipeComment {
 	private String rcContent;
 	private String rcDate;
 	private String nickname;
+	
+	public String getRcContentBr() {
+		return rcContent.replaceAll("\r\n", "<br>");
+	}
 }
