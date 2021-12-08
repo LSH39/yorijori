@@ -28,6 +28,7 @@ public class ReviewDao {
 		return sqlSession.insert("review.insertReview", review);
 	}
 
+	//리부 삭제
 	public int deleteReview(int reviewNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("review.deleteReview", reviewNo);

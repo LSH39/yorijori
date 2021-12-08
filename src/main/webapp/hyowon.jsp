@@ -22,7 +22,7 @@
                          
                        
                         <li><a href="/myclass.do?memberNo=111">요리클래스 예약내역<span></span></a></li>
-                        <li><a href="#">Dm내역<span></span></a></li>
+                        <li><a href="/myChatList.do?chatRecive=111">내 채팅내역<span></span></a></li>
                         <li><a href="/likeRecipe.do?memberNo=111">찜한 레시피<span>&gt;</span></a></li>
                          <li><a href="/myContest.do?recipeWriter=111">참여한 경연대회<span></span></a></li>
                     </ul>
@@ -33,10 +33,10 @@
                    
                         <li><a href="/myclassReview.do?memberNo=111">요리클래스후기<span></span></a></li>
                         <li><a href="/myitemReview.do?memberNo=111"">밀키트후기<span></span></a></li>
-                        <li><a href="myBoard.do?re">작성 게시글<span></span></a></li>
+                        <li><a href="myBoard.do?freeWriter=hyo">작성 게시글<span></span></a></li>
                         <li><a href="/myRecipe.do?recipeWriter=111">내 작성 레시피<span></span></a></li>
                         <li><a href="/myItem.do?milkitWriter=111">내 판매밀키트<span></span></a></li>
-                         <li><a href="/followList?memberNo=111">팔로우리스트<span></span></a></li>
+                         <li><a href="/followList.do?memberNo=111">팔로우리스트<span></span></a></li>
                          <li><a href="/followList?" id="lf-click">내 구매내역<span></span></a></li>                           
                   
                     </ul>

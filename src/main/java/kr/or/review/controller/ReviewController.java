@@ -30,7 +30,6 @@ public class ReviewController {
 	@RequestMapping(value="/insertReview.do")
 	public String insertReview(Review review, Model model) {
 		int result = service.insertReview(review);
-		System.out.println(review.getMemberNo());
 		if(result > 0) {
 			return "1";
 		}else {
@@ -38,6 +37,8 @@ public class ReviewController {
 		}
 	}
 	
+	
+	//리뷰 삭제
 	@RequestMapping(value="/reviewDelete.do")
 	public String deleteReview(int reviewNo, Model model) {
 		int result = service.deleteReview(reviewNo);

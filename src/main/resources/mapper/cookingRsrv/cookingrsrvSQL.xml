@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cookingrsrv">
+	
+	<!-- 클래스 예약하기 -->
+	<insert id="insertCookingRsrv" parameterType="map">
+		insert into cooking_rsrv values(
+			cooking_rsrv_seq.nextval, #{memberNo}, #{classNo}, #{impUid}, to_char(sysdate, 'YYYY-MM-DD')
+		)
+	</insert>
+	
+	<!-- 클래스 예약 내역 조회 -->
+	<select id="selectAllRsrv" parameterType="_int" resultType="crsrv">
+		select
+			rsrv_no as rsrvNo,
+			member_no as memberNo,
+			class_no as classNo,
+			imp_uid as impUid,
+			rsrv_date rsrvDate
+		from cooking_rsrv
+		where member_no=#{memberNo}
+	</select>
+	
+	<!-- 클래스 예약 취소 -->
+	<delete id="deleteCookingRsrv" parameterType="_int">
+		delete from cooking_rsrv where class_no=#{classNo}
+	</delete>
+</mapper>

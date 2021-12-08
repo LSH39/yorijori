@@ -17,14 +17,14 @@ public class CookingClsService {
 	@Autowired
 	private CookingClsDao dao;
 
-	//쿠킹클래스 조회
+	//쿠킹 클래스 조회
 	public CookingCls selectOneClass(int classNo) {
 		// TODO Auto-generated method stub
 		CookingCls ccls = dao.selectOneClass(classNo);
 		return ccls;
 	}
 
-	//쿠킹클래스 전체 조회
+	//쿠킹 클래스 전체 조회
 	public CookingClsPageData selectAllClass(int reqPage) {
 		// TODO Auto-generated method stub
 		
@@ -109,7 +109,7 @@ public class CookingClsService {
 		return reviewAvg;
 	}
 
-	//클래스 삭제
+	//쿠킹 클래스 삭제
 	public int deleteOneClass(int classNo) {
 		// TODO Auto-generated method stub
 		int result = dao.deleteOneClass(classNo);

@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+    .main{
+            margin: 0 auto;
+            width:1180px;
+            
+        }
+       
+        .mainImg{
+            display:flex;   
+            justify-content: center;
+            position:relative;
+        }
+        #count{
+            position:absolute;
+            border-radius:15px;
+            background-color:#443c46;
+            width:100px;
+            text-align:center;
+            top: 90%;
+            left: 68%;
+            
+        }
+        .mainImg>img{
+            width: 700px;
+            height: 500px;
+        }
+        #countText{
+            padding-left:10px;
+            padding-bottom:5px;
+            color: #ababab;
+        }
+        #rbName{
+            margin-top: 50px;
+            font-weight: 900;
+            text-align: center;
+            font-size: 20px;
+        }
+        .rbWrap{
+            width: 1000px; 
+            margin: 0 auto;
+            margin-left: 100px;
+        }
+        .rbList{    
+            width: 500px;
+            height: 500px;
+            float: left;
+        }
+        #rbTitle{
+            font-size: 50px;
+            font-weight: 900;
+            height: 100px;
+            text-align: center;
+        }
+        #rbSub{
+            height: 60px;
+            text-align: center;        
+            margin-top: 80px;
+        }
+        .rbImg>div{
+            width: 100px;
+            float: left;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .rbImg{
+            margin-left: 150px;
+            
+        }
+        #mList{
+            width: 300px;
+            border: 2px solid #6D5874;
+            height: 400px;
+            margin-left: 100px;
+        }
+        #mList>li{
+            margin-left: 50px;
+        }
+        #mTitle{
+            font-weight: 900;
+            font-size: 30px;
+        }
+        .contents{
+            width: 1000px;
+        }
+        .text{
+            color:#6D5874;
+            font-weight: bolder;
+            text-align: center;
+        }
+        .amount{
+            margin-left: 50px;
+        }
+        .navi{
+            width: 100%;
+            margin: 0 auto;
+        }
+        .navi>ul{
+            
+        }
+        .navi>ul>li{
+            float: left;
+            display: block;
+            box-sizing: border-box;
+            width: 350px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background-color: blueviolet;
+        }
+      .navi a{
+          text-decoration: none;
+      }

@@ -1,6 +1,7 @@
 package kr.or.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.admin.model.service.AdminService;
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
-import kr.or.member.model.service.MemberService;
-import kr.or.member.model.vo.Member;
+
+
 
 
 @Controller
@@ -101,6 +102,24 @@ public class AdminController {
 	}
 	@RequestMapping(value="/coupon.do")
 	public String coupon() {
+		return "admin/coupon";
+	}
+	@RequestMapping(value="/createCoupon.do")
+	public String createCoupon(String couponName,String who,String type,String method,String limit, String amount,String dcResult,String limitDate) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("couponName", couponName);
+		map.put("who", who);
+		map.put("type", type);
+		map.put("method", method);
+		map.put("limit", limit);
+		map.put("limitDate", limitDate);
+		map.put("amount", amount);
+		map.put("dcResult", dcResult);
+		
+		int result1 = service.createCoupon(map);
+		
+			
+			
 		return "admin/coupon";
 	}
 	

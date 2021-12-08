@@ -24,6 +24,7 @@ import kr.or.recipe.model.service.RecipeService;
 import kr.or.recipe.model.vo.FileVo;
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 import sun.reflect.generics.visitor.Reifier;
 
@@ -140,5 +141,18 @@ public class RecipeController {
 		public String rCategory3(String item3) {
 		ArrayList<RecipeBoard>list = service.selectCategory3(item3);
 		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/selectComment.do" , produces = "application/json;charset=utf-8")
+	public String selectComment(int recipeNo) {
+		ArrayList<RecipeComment>list = service.selectComment(recipeNo);
+		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/insertComment.do")
+	public int insertComment(RecipeComment rc) {
+		int result = service.insertComment(rc);
+		return result;
+		
 	}
 }

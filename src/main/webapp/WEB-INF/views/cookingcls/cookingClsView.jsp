@@ -11,6 +11,10 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <title>쿠킹클래스 뷰</title>
 <style>
+	td{
+		vertical-align:middle;
+	}
+
 	.left{
 		width: 66.6666%;
 		position:static;
@@ -98,15 +102,24 @@
 			});
 		});
 		
-		$("#payBtn").click(function(){
-			let classPrice = $(".classPrice").html(); //실제 가격
-			let date = new Date();
-			let fullDate = date.getFullYear()+""+(date.getMonth()+1)+""+date.getDate()+""+date.getHours()+""+date.getMinutes()+""+date.getSeconds(); 
+		$("#noPayBtn").click(function(){
+			alert("자신의 클래스는 예약이 안됩니다!");
+		});
 		
+		//강의 결제
+		$("#payBtn").click(function(){
+			let date = new Date();
+			let classPrice = $(".classPrice").html(); //실제 가격
+			let classTitle = $("#classTitle").html();
+			let memberNo = $("#memberNo").val();
+			let classNo = $("#classNo").val();
+			let classNop = $("#classNop").html();
+			let impUid = date.getFullYear()+""+("0"+(date.getMonth()+1)).slice(-2)+""+("0"+date.getDate()).slice(-2)+""+("0"+date.getHours()).slice(-2)+""+("0"+date.getMinutes()).slice(-2)+""+("0"+date.getSeconds()).slice(-2);
+			
 			IMP.init("imp42282461"); //요리조리 가맹점
 			IMP.request_pay({ //결제할 떄 필요한 정보(객체)
 				merchant_uid : "상품명_"+date, //거래 아이디
-				name : "결제 테스트", //결제 이름 설정함
+				name : classTitle, //결제 이름 설정함
 				amount : 100, //결제 금액 테스트용이니까 100원
 				buyer_email : "forestwowch@gmail.com", //구매자 이메일
 				buyer_name : "성승민",
@@ -119,9 +132,22 @@
 					//성공시 로직(db결제정보 insert -> 사용자 화면 처리)
 					console.log("카드 승인 번호 "+rsp.apply_num);
 				}else{
-					alert("결제 실패실패");
-					console.log(fullDate);
+					console.log(impUid);
 					//실패시 로직(장바구니에 저장 -> 사용자 화면 처리)
+					$.ajax({
+						url : "/insertCookingRsrv.do",
+						type : "post",
+						data : {memberNo : memberNo, classNo : classNo, impUid : impUid, classNop : classNop},
+						success : function(data){
+							console.log(data);
+							if(data=="1"){
+								alert("예약 성공");
+								location.reload();
+							}else if(data=="0"){
+								alert("인원수 초과");					
+							}
+						}
+					});
 				}
 			});
 		});
@@ -224,72 +250,15 @@
 							
 						</table>
 					</div>
-					<!-- 
-					<div class="table">
-						<table class="table">
-							<tr>
-								<th>번호</th>
-								<th>아이디</th>
-								<th>내용</th>
-								<th>평점</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>myaccount</td>
-								<td>싫어요</td>
-								<td>★★★★☆</td>
-							</tr>
-							<tr>								
-								<td>2</td>
-								<td>myaccount1</td>
-								<td>싫어요</td>
-								<td>★★★★☆</td>
-							</tr>
-							<tr>								
-								<td>3</td>
-								<td>myaccount2</td>
-								<td>싫어요</td>
-								<td>★★★★☆</td>
-							</tr>
-							<tr>								
-								<td>4</td>
-								<td>myaccount3</td>
-								<td>싫어요</td>
-								<td>★★★★☆</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<input type="text" name="blah" id="blah" class="form-control">
-								</td>							
-								<td>
-									<select class="form-select form-select-md">
-										<option value="1">★☆☆☆☆</option>
-										<option value="2">★★☆☆☆</option>
-										<option value="3">★★★☆☆</option>
-										<option value="4">★★★★☆</option>
-										<option value="5">★★★★★</option>
-									</select>
-								</td>							
-								<td>
-									<div class="d-grid gap-2">
-									<button type="button" id="reviewWrite" class="btn btn-danger btn-md">작성</button>
-									</div>
-								</td>							
-							</tr>
-							
-						</table>
-					</div>
-					 -->
-					<div>
-						<jsp:include page="/WEB-INF/views/review/reviewList.jsp"/>
-					</div>
+
 				</div>
 				<div class="right">
 					<div class="right-stick">
 						<div class="right-stick-content">
-							<h5>제목 : ${ccls.classTitle }</h5>
+							<h5>제목 : <span id="classTitle">${ccls.classTitle }</span></h5>
 							<h5>가격 : <span class="classPrice">${ccls.classPrice }</span>원</h5>
 							<h5>강의시간 : ${ccls.classTime }</h5>
+							<h5>정원 : <span id="classNop">${ccls.classNop }</span>&nbsp;/&nbsp;<span>${ccls.classCurrNop }</span></h5>
 							<c:choose>
 								<c:when test="${not empty ccls.classLocation }">
 									<h5>장소 : ${ccls.classLocation }</h5>
@@ -299,7 +268,20 @@
 								</c:otherwise>
 							</c:choose>
 							<div class="d-grid gap-2">
-								<button type="button" id="payBtn" class="btn btn-primary btn-lg" >결제하기</button>
+								<c:choose>
+									<c:when test="${ccls.classCurrNop eq ccls.classNop }">
+										<button type="button" class="btn btn-secondary btn-lg" >마감!</button>
+									</c:when>
+									<c:when test="${sessionScope.m.memberNo eq ccls.memberNo}">
+										<button type="button" id="noPayBtn" class="btn btn-danger btn-lg" >결제하기</button>
+									</c:when>
+									<c:when test="${empty sessionScope.m  }">									
+										<a href="/loginFrm.do" class="btn btn-warning btn-lg" >로그인 하세요!</a>
+									</c:when>
+									<c:otherwise>
+										<button type="button" id="payBtn" class="btn btn-primary btn-lg" >결제하기</button>
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="d-grid gap-2 mt-4">
 								<a href="/dmView.do" class="btn btn-primary btn-lg" >문의하기</a>
