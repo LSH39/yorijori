@@ -52,7 +52,7 @@ public class AdminController {
 		String gotothe = "blackList";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
-		
+		model.addAttribute("totalCount",mpd.getTotalCount());
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/blackList";
@@ -64,7 +64,7 @@ public class AdminController {
 		memberLevel = "4";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
-		
+		model.addAttribute("totalCount",mpd.getTotalCount());
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/permissionJoin";
@@ -77,7 +77,7 @@ public class AdminController {
 		memberLevel = "5";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
-		
+		model.addAttribute("totalCount",mpd.getTotalCount());
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/permissionDelete";

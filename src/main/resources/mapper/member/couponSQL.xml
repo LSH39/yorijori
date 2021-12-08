@@ -85,15 +85,17 @@ member_black as memberBlack
   
   <select id="selectAllCoupon" resultType="c">
   
-select * from(select rownum as rnum, coupon_no as couponNo,
+select couponNo,couponName,couponStart,couponEnd,couponAmount,
+(select count(*) from coupon_list where coupon_no = couponNo and coupon_use =0)noUseCount,
+  (select count(*) from coupon_list where coupon_no = couponNo and coupon_use =1)useCount
+from(select rownum as rnum, coupon_no as couponNo,
   coupon_name as couponName,
   coupon_start as couponStart,
   coupon_end as couponEnd,
   coupon_discount as couponDiscount,
-  coupon_amount as couponAmount,
-  (select count(*) from coupon_list where coupon_no = coupon_no and coupon_use =0)noUseCount,
-  (select count(*) from coupon_list where coupon_no = coupon_no and coupon_use =1)useCount
-  from coupon) where
+  coupon_amount as couponAmount
+  
+  from coupon where coupon_end <![CDATA[>=]]> to_char(sysdate,'yyyy-mm-dd') ) where
   
   
    rnum between #{start} and #{end}
@@ -103,7 +105,7 @@ select * from(select rownum as rnum, coupon_no as couponNo,
   <select id="selectCouponTotalCount" resultType="_int">
   
   select count(*)
-  from coupon
+  from coupon where coupon_end <![CDATA[>=]]> to_char(sysdate,'yyyy-mm-dd')
   
   </select>
   

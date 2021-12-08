@@ -25,6 +25,9 @@ public class AdminService {
 		if(align!=null) {
 			numPerPage = Integer.parseInt(align);
 		}
+		if(memberLevel==null) {
+			memberLevel = "0";
+		}
 		int end = reqPage*numPerPage;
 		int start = end - numPerPage+1;
 		ArrayList<Member2> list = dao.allMemberList(searchType,searchText,searchDetail,period,start2,end2,moreless,joinStart,joinEnd,detail,memberLevel,searchText2,level,start,end);
@@ -41,17 +44,17 @@ public class AdminService {
 		String pageNavi = "<ul class='pagination pagination-lg'>";
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class='page-link' href='/"+gotothe+".do?reqPage=" + (pageNo - 1) + "&align="+numPerPage+"'>";
+			pageNavi += "<a class='page-link' href='/"+gotothe+".do?reqPage=" + (pageNo - 1) + "&align="+numPerPage+"&memberLevel="+memberLevel+"'>";
 			pageNavi += "&lt;</a></li>";
 		}
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class='page-link' href='"+gotothe+".do?reqPage=" + pageNo + "&align="+numPerPage+"'>";
+				pageNavi += "<a class='page-link' href='"+gotothe+".do?reqPage=" + pageNo + "&align="+numPerPage+"&memberLevel="+memberLevel+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>"; 
-				pageNavi += "<a class='page-link' href='"+gotothe+".do?reqPage=" + pageNo +"&align="+numPerPage+"'>";
+				pageNavi += "<a class='page-link' href='"+gotothe+".do?reqPage=" + pageNo +"&align="+numPerPage+"&memberLevel="+memberLevel+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -61,7 +64,7 @@ public class AdminService {
 		}
 		if (pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class='page-link' href='"+gotothe+".do?reqPage=" + pageNo + "&align="+numPerPage+"'>";
+			pageNavi += "<a class='page-link' href='"+gotothe+".do?reqPage=" + pageNo + "&align="+numPerPage+"&memberLevel="+memberLevel+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";

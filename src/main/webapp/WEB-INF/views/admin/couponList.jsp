@@ -64,7 +64,7 @@ text-align: center;}
     <th style="width: 300px;">쿠폰이름</th>
     <th>상세보기</th>
     <th>할인금액</th>
-    <th>쿠폰 개수</th>
+    <th>남은 쿠폰 수량</th>
     <th>발급일</th>
     <th>마감일</th>
     
@@ -93,9 +93,10 @@ text-align: center;}
     </tr>
     <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
     <div class="row">
-    <div class="col-md-3">사용 된 쿠폰 : ${c.useCount }</div>
+    <div class="col-md-3">총 발급 수량 : ${c.useCount+c.noUseCount }</div>
+    <div class="col-md-3">사용 한 쿠폰 : ${c.useCount }</div>
     <div class="col-md-3">사용하지 않은 쿠폰 : ${c.noUseCount }</div>
-    <div class="col-md-3"></div>
+    
     <div class="col-md-3"></div>
     
     </div>

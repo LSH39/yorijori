@@ -75,7 +75,7 @@ text-align: center;}
         
     
 
-    <span>조회 된 회원 수</span> <span class="amount">${list.size() }</span>
+    <span>조회 된 회원 수</span> <span class="amount">${totalCount }</span>
 
     <hr>
     
@@ -96,6 +96,7 @@ text-align: center;}
         <option value="2">조리꾼</option>
     </select>
     <select class="align">
+    <option value="10">10명 정렬</option>
         <option value="30">30명 정렬</option>
         <option value="50">50명 정렬</option>
         <option value="100">100명 정렬</option>
@@ -437,6 +438,8 @@ text-align: center;}
     $(".showAllDetail").click(function(){
     	$(".showDetailBtn").click();
     });
+    
+    
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     

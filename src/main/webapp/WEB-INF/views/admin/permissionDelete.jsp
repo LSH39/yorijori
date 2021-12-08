@@ -75,7 +75,7 @@ text-align: center;}
         
     
 
-    <span>조회 된 회원 수</span> <span class="amount">${list.size() }</span>
+    <span>조회 된 회원 수</span> <span class="amount">${totalCount }</span>
 
     <hr>
     
@@ -92,6 +92,7 @@ text-align: center;}
     <div style="float: right;">
     
     <select class="align">
+    <option value="10">10명 정렬</option>
         <option value="30">30명 정렬</option>
         <option value="50">50명 정렬</option>
         <option value="100">100명 정렬</option>
@@ -237,7 +238,7 @@ text-align: center;}
     		var searchText = $("#searchtext").val();
     		var align = $(".align").val();
     		$.ajax({
-    			url:"permissionJoin.do?reqPage=1",
+    			url:"permissionDelete.do?reqPage=1",
     			type:"post",
     			data : {searchType:searchType,searchText:searchText,detail:detail,align:align,memberLevel:"4"},
     			success: function(data){
@@ -262,42 +263,10 @@ text-align: center;}
     		});
     	});
     	
-			$(".searchbtn2").click(function(){
-    		var detail = 2;
-    		var searchDetail= $("input[name=searchdetail]").val();
-    		var period = $(".period").val();
-    		var start = $(".recentmonthstart").val();
-    		var end = $(".recentmonthend").val();
-    		var moreless = $(".moreless").val();
-    		var searchText2 = $(".searchText2").val();
-    		var joinStart = $(".date1").val();
-    		var joinEnd = $(".date2").val();
-    		var align = $(".align").val();
-    		var memberLevel = $(".memberLevel").val();
-    		$.ajax({
-    			url:"allmember.do?reqPage=1",
-    			type:"post",
-    			data : {searchDetail:searchDetail,period:period,start:start,end:end,moreless:moreless,
-    				searchText2:searchText2,joinStart:joinStart,joinEnd:joinEnd,detail:detail,align:align,memberLevel:memberLevel},
-    			success: function(data){
-    				console.log("1");
-    				$("body").html(data);
-    				$(".detail").show();
-    				$("#searchText2").val(searchText2);
-    				$(".align").val(align);
-    				$(".memberLevel").val(memberLevel);
-    			},
-    			error:function(){
-    				console.log("err");
-    			}
-    			
-    			
-    		});
-    	});
 			$(".align").change(function(){
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"permissionJoin.do?reqPage=1",
+	    			url:"permissionDelete.do?reqPage=1",
 	    			type:"post",
 	    			data : {align:align},
 	    			success: function(data){
@@ -317,7 +286,7 @@ text-align: center;}
 				var memberLevel = $(".memberLevel").val();
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"permissionJoin.do?reqPage=1",
+	    			url:"permissionDelete.do?reqPage=1",
 	    			type:"post",
 	    			data : {memberLevel:memberLevel,align:align},
 	    			success: function(data){
@@ -356,7 +325,7 @@ text-align: center;}
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="permissionJoin.do?reqPage=1";
+	    				location.href="permissionDelete.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
@@ -389,7 +358,7 @@ text-align: center;}
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="permissionJoin.do?reqPage=1";
+	    				location.href="permissionDelete.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){

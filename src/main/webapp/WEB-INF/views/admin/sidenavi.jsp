@@ -123,7 +123,7 @@ color: #9F90CF;
     
 }
 
-button{
+button ,input[type=submit],input[type=reset]{
 color: #fff;
 background-color: #9F90CF;
 

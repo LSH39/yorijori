@@ -95,11 +95,13 @@ text-align: center;}
     
     <div style="float: right;">
     <select class="memberLevel">
+    	
         <option value="0">전체회원</option>
         <option value="1">요리꾼</option>
         <option value="2">조리꾼</option>
     </select>
     <select class="align">
+    	
     	<option value="10">10명 정렬</option>
         <option value="30">30명 정렬</option>
         <option value="50">50명 정렬</option>
@@ -186,6 +188,8 @@ text-align: center;}
   
     	
     $(function(){
+    	
+    	
     	
     	$(".showDetailBtn").click(function(){
     		var index = $(this).val();

@@ -107,7 +107,7 @@
 	<div class="col-md-2"></div>
 	<div class="col-md-2">할인 설정</div>
 	<div class="col-md-6">
-	<input id="dc" style="width: 20%; text-align: right;"type="text" placeholder="0">
+	<input id="dc"  style="width: 20%; text-align: right;"type="text" placeholder="0">
 	<select id="rate">
 	<option value="%">%
 	<option value="">₩
@@ -237,11 +237,38 @@
 		
 		
 	});
+	var tmp;
+	$("#dc").keyup(function(){
+		var dc = $("#dc").val();
+		var regExp = /^[1-9]\d*$/;
+		if(regExp.test(dc)){
+			tmp = dc;
+		}else{
+			$(this).val(tmp);	
+		}
+	});
+	var tmp2;
+	$("input[name=amount]").keyup(function(){
+		var amount = $(this).val();
+		var regExp = /^[1-9]\d*$/;
+		if(regExp.test(amount)){
+			tmp2 = amount;
+		}else{
+			$(this).val(tmp2);	
+		}
+	});
+	
 	
 	$("#drop").click(function(){
 		$("#unlimit").click();
 	});
-	
+	$("input[type=submit]").click(function(){
+		if($("#couponNameChk").html()>0 &&$("#dc").val() !=null && $("#limitDate").val()!= ""){
+			
+		}else{
+			return false;
+		}
+	});
 	
 	
 	</script>
