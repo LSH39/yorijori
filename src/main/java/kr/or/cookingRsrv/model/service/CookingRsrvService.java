@@ -18,10 +18,10 @@ public class CookingRsrvService {
 
 	//예약 하기
 	@Transactional
-	public int insertCookingRsrv(int memberNo, int classNo, String impUid, int classNop) {
+	public int insertCookingRsrv(String memberNickname, int classNo, String impUid, int classNop) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("memberNo", memberNo);
+		map.put("memberNickname", memberNickname);
 		map.put("classNo", classNo);
 		map.put("impUid", impUid);
 		
@@ -40,18 +40,26 @@ public class CookingRsrvService {
 	}
 
 	//예약 내역 조회
-	public ArrayList<CookingRsrv> selectAllRsrv(int memberNo) {
+	public ArrayList<CookingRsrv> selectAllRsrv(String memberNickname) {
 		// TODO Auto-generated method stub
-		ArrayList<CookingRsrv> list = dao.selectAllRsrv(memberNo);
+		ArrayList<CookingRsrv> list = dao.selectAllRsrv(memberNickname);
 		return list;
 	}
 
-	//예약 취소
+	//예약 취소 내역 삭제
 	@Transactional
-	public int deleteCookingRsrv(int classNo) {
+	public int deleteCookingRsrv(int rsrvNo) {
 		// TODO Auto-generated method stub
-		int result = dao.deleteCookingRsrv(classNo);
-		int result1 = dao.decCookingClsNop(classNo);
+		int result = dao.deleteCookingRsrv(rsrvNo);
+		return result;
+	}
+
+	//쿠킹 클래스 예약 취소 (성승민 12-08)
+	@Transactional
+	public int cancelCookingRsrv(int classNo) {
+		// TODO Auto-generated method stub
+		int result = dao.cancelCookingRsrv(classNo);
+		int result1 = dao.decCookingClsNop(classNo);				
 		return result;
 	}
 

@@ -44,9 +44,9 @@ public class ReviewController {
 		int result = service.deleteReview(reviewNo);
 		if(result > 0) {
 			model.addAttribute("msg", "삭제 성공");
-			model.addAttribute("loc", "/");
+			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");
 		}else {
-			model.addAttribute("msg", "삭제 성공");
+			model.addAttribute("msg", "삭제 실패!");
 			model.addAttribute("loc", "/");			
 		}
 		return "common/msg";

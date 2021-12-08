@@ -1,6 +1,7 @@
 package kr.or.dm.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -23,9 +24,15 @@ public class DmDao {
 	}
 
 	//문의 조회
-	public ArrayList<Dm> selectOneDm(int memberNo) {
+	public ArrayList<Dm> selectOneDm(int classNo) {
 		// TODO Auto-generated method stub
-		List<Dm> list = sqlSession.selectList("direct.selectOneDm", memberNo) ;
+		List<Dm> list = sqlSession.selectList("direct.selectOneDm", classNo) ;
 		return (ArrayList<Dm>) list; 
+	}
+
+	//문의 작성
+	public int insertDm(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("direct.insertDm", map);
 	}
 }

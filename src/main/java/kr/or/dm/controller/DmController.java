@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.dm.model.service.DmService;
 import kr.or.dm.model.vo.Dm;
@@ -21,6 +22,7 @@ public class DmController {
 	public String dmList(Model model) {
 		ArrayList<Dm> list = service.selectAllDm();
 		
+		//이거 출력테스트
 		for(Dm i: list) {
 			System.out.println(i.getDmReceiver());
 		}
@@ -30,9 +32,23 @@ public class DmController {
 	
 	//문의 조회
 	@RequestMapping(value="/dmView.do")
-	public String dmView(int memberNo, Model model) {
-		ArrayList<Dm> list = service.selectOneDm(memberNo);
+	public String dmView(int classNo, Model model) {
+		//memberNo 클래스 번호 진행
+		ArrayList<Dm> list = service.selectOneDm(classNo);
 		model.addAttribute("list", list);
+		model.addAttribute("classNo", classNo);
 		return "dm/dmView";
+	}
+	
+	//문의 작성
+	@ResponseBody
+	@RequestMapping(value="/dmSend.do")
+	public String insertDm(int classNo, String dmReceiver, String dmSender, String dmContent) {
+		int result = service.insertDm(classNo, dmReceiver, dmSender, dmContent);
+		if(result > 0) {
+			return "1"; 
+		}else {
+			return "0";
+		}
 	}
 }
