@@ -143,15 +143,16 @@ public class RecipeController {
 		return new Gson().toJson(list);
 	}
 	@ResponseBody
-	@RequestMapping(value = "/recipeComment.do" , produces = "application/json;charset=utf-8")
-	public String rComment(int recipeNo) {
+	@RequestMapping(value = "/selectComment.do" , produces = "application/json;charset=utf-8")
+	public String selectComment(int recipeNo) {
 		ArrayList<RecipeComment>list = service.selectComment(recipeNo);
 		return new Gson().toJson(list);
 	}
+	@ResponseBody
 	@RequestMapping(value = "/insertComment.do")
-	public String insertComment(int recipeNo, int memberNo) {
-		int result = service.insertComment(recipeNo,memberNo);
-		return null;
+	public int insertComment(RecipeComment rc) {
+		int result = service.insertComment(rc);
+		return result;
 		
 	}
 }

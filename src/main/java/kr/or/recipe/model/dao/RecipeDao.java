@@ -74,6 +74,10 @@ public class RecipeDao {
 		return (ArrayList<RecipeComment>)list;
 	}
 
+	public int insertCommnet(RecipeComment rc) {
+		return sqlSession.insert("recipe.insertComment",rc);
+	}
+
 
 
 }

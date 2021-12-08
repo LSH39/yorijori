@@ -75,9 +75,9 @@ public class RecipeService {
 	}
 
 
-	public int insertComment(int recipeNo, int memberNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertComment(RecipeComment rc) {
+		int result = dao.insertCommnet(rc);
+		return result;
 	}
 
 
