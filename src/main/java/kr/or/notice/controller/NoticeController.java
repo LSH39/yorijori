@@ -1,9 +1,35 @@
 package kr.or.notice.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.security.Principal;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.or.notice.model.service.NoticeService;
 import kr.or.notice.model.vo.Notice;
@@ -31,7 +57,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeView.do")
 	public String noticeView(Model model, int noticeNo) {
-		Notice n = service.selectOneNotice(noticeNo);
+		Notice n = service.viewOneNotice(noticeNo);
 		model.addAttribute("n", n);
 		return "notice/noticeView";
 	}
@@ -50,7 +76,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeUpdateFrm.do")
 	public String noticeUpdateFrm(Model model, int noticeNo) {
-		Notice n = service.selectOneNotice(noticeNo);
+		Notice n = service.getNotice(noticeNo);
 		model.addAttribute("n", n);
 		return "notice/noticeUpdateFrm";
 	}
@@ -65,5 +91,17 @@ public class NoticeController {
 		}
 			model.addAttribute("loc", "noticeList?reqPage=1");
 			return "common/msg";
+	}
+	@ResponseBody
+	@RequestMapping(value="/uploadNoticeImage.do")
+	public void uploadFile(HttpServletRequest request, HttpServletResponse response, Model model) throws ServletException, IOException {
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String saveDirectory = root + "resources/upload/notice";
+		int maxSize = 10 * 1024 * 1024;
+		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory, maxSize, new DefaultFileRenamePolicy());
+		String filepath = mRequest.getFilesystemName("file");
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.print("/resources/upload/notice/"+filepath);
 	}
 }

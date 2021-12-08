@@ -85,4 +85,15 @@ public class NoticeService {
 		int result = dao.insertNotice(n);
 		return result;
 	}
+
+	public Notice viewOneNotice(int noticeNo) {
+		dao.readCountUpdate(noticeNo);
+		Notice n = dao.selectOneNotice(noticeNo);
+		return n;
+	}
+
+	public Notice getNotice(int noticeNo) {
+		Notice n = dao.selectOneNotice(noticeNo);
+		return n;
+	}
 }

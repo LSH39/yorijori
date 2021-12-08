@@ -33,11 +33,15 @@
 	      				<div class="col-sm-4">
 	      					<input type="text" class="form-control" id="inputTitle" name="noticeTitle" placeholder="제목">
 	      				</div>
+	      				<label for="fileUpload" class="col-sm-2 col-form-label">첨부파일</label>
+	      				<div class="col-sm-4">
+	      					<input type="file" class="form-control" id="fileUpload" name="filename">
+	      				</div>
 	      			</div>
 	      			<div class="form-group row">
 	      				<label for="inputWriter" class="col-sm-2 col-form-label">작성자</label>
 	      				<div class="col-sm-4">
-	      					<input type="text" readonly class="form-control-plaintext" id="inputWriter" value="${sessionScope.m.memberId }">
+	      					<input type="text" readonly class="form-control-plaintext" name="noticeWriter" id="inputWriter" value="${sessionScope.m.memberId }">
 	      				</div>
 	      			</div>
 	      			<div class="form-group row">
