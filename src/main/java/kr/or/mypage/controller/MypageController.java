@@ -18,6 +18,8 @@ import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.Mychat;
+import kr.or.mypage.model.vo.Myorder;
+import kr.or.mypage.model.vo.Mysell;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -139,5 +141,46 @@ public class MypageController {
 		model.addAttribute("list", list);
 		return "mypage/chatList";
 	}
-
+	@RequestMapping(value = "/delSelFrm.do")
+	public String deleteSelFrm() {
+		return "mypage/deleteSeller";
+	}
+	@RequestMapping(value = "/deleteSeller.do")
+	public String deleteSeller(Member m, Model model) {
+		int result = service.upSeller(m);
+		if (result > 0) {
+			model.addAttribute("msg", "탈퇴요청 성공");
+		} else {
+			model.addAttribute("msg", "탈퇴 요청 실패");
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	}
+	@RequestMapping(value = "/myOrder.do")
+	public String myOrderList(int memberNo,Model model) {
+		ArrayList<Myorder> list= service.myOrderList(memberNo);
+		model.addAttribute("list", list);
+		return "mypage/myOrder";
+	}
+	
+	@RequestMapping(value = "/myOrderDetail.do")
+	public String myOrderDetail(int orderNo, Model model) {
+		Myorder mo = service.myOrderDetail(orderNo);
+		model.addAttribute("mo", mo);
+		return "mypage/orderDetail";
+	}
+	
+	@RequestMapping(value = "/detailOrder.do")
+	public String detailOrder(int orderNo, Model model) {
+		ArrayList<Myorder> list= service.orderDetail(orderNo);
+		model.addAttribute("list", list);
+		return "mypage/orderDetail";
+	}
+	
+	@RequestMapping(value = "/sellList.do")
+	public String sellList(int memberNo, Model model) {
+		ArrayList<Mysell> list= service.mySellList(memberNo);
+		model.addAttribute("list", list);
+		return "mypage/sellerList";
+	}
 }
