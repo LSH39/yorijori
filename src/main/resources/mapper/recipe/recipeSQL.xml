@@ -99,4 +99,8 @@
         (select member_nickname from member m where m.member_no = rc.member_no)as nickname 
  		from recipe_comment rc where recipe_no=#{recipeNo}
  	</select>
+ 	<insert id="insertComment" parameterType="rcomment">
+ 		insert into recipe_comment values(rc_seq.nextval,#{recipeNo},#{memberNo},#{rcContent},to_char(sysdate,'yyyy-mm-dd'))
+ 		
+ 	</insert>
 </mapper>
