@@ -71,6 +71,7 @@ public class NoticeService {
 	}
 
 	public Notice selectOneNotice(int noticeNo) {
+		dao.readCountUpdate(noticeNo);
 		Notice n = dao.selectOneNotice(noticeNo);
 		return n;
 	}

@@ -39,4 +39,9 @@ public class NoticeDao {
 		int result = sqlSession.insert("notice.insertNotice", n);
 		return result;
 	}
+
+	public int readCountUpdate(int noticeNo) {
+		int result = sqlSession.update("notice.rcUpdate", noticeNo);
+		return result;
+	}
 }
