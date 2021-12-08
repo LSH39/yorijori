@@ -62,3 +62,16 @@
 	color: #f1f1f1;
 	background-color: #454545;
 }
+.btn-announce{
+	border-radius: 35px;
+	background: #fff;
+	color: rgb(110, 110, 110);
+}
+.btn-announce:hover{
+	background: #8E44AD;
+	color: #fff;
+}
+.order-by:hover{
+	cursor: pointer;
+	color: #C4BFE3;
+}
