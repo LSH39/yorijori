@@ -90,6 +90,49 @@ public class AdminDao {
 		int result = sqlSession.update("member.addJori",arr);
 		return result;
 	}
+
+
+	public int createCoupon(HashMap<String, Object> map) {
+		int result = sqlSession.insert("coupon.createCoupon",map);
+		
+		return result;
+	}
+
+
+	public int dropCoupon(HashMap<String, Object> map) {
+		 
+		
+		
+		int result = sqlSession.insert("coupon.dropCoupon",map);
+		
+		return result;
+	}
+
+
+	public HashMap<String, Object> selectMemberNo(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("coupon.selectMemberNo",map);
+		String couponLast = sqlSession.selectOne("coupon.couponLast");
+		map.put("list",list);
+		map.put("couponLast", couponLast);
+		
+		return map;
+	}
+
+
+	public int dropPoint(HashMap<String, Object> map) {
+		int result = sqlSession.update("coupon.dropPoint",map);
+		return result;
+	}
+
+
+	public Member2 selectOneMember(HashMap<String, Object> map) {
+		Member2 m = sqlSession.selectOne("coupon.selectOneMember",map);
+		
+		return m;
+	}
+
+
+	
 		
 		
 }
