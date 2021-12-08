@@ -16,9 +16,9 @@ public class RecipeBoard {
 	private String recipeVideo;
 	private String recipeTime;
 	private String foodName;
-	private String recipeLevel;
-	private String situation;
-	private String material;
+	private int recipeLevel;
+	private int situation;
+	private int material;
 	private ArrayList<RecipeContent>rList;
 	private ArrayList<Material>mList;
 	private String nickname;

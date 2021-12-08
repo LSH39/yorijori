@@ -18,8 +18,8 @@ public class RecipeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<RecipeBoard> selectRecipeList() {
-		List<RecipeBoard>list = sqlSession.selectList("recipe.selectRecipeList"); 
+	public ArrayList<RecipeBoard> selectRecipeList(RecipeBoard rb) {
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectRecipeList",rb); 
 		return (ArrayList<RecipeBoard>)list;
 	}
 
@@ -76,6 +76,14 @@ public class RecipeDao {
 
 	public int insertCommnet(RecipeComment rc) {
 		return sqlSession.insert("recipe.insertComment",rc);
+	}
+
+	public int deleteComment(int rCommentNo) {
+		return sqlSession.delete("recipe.deleteComment", rCommentNo);
+	}
+
+	public int updateComment(RecipeComment rc) {
+		return sqlSession.update("recipe.updateComment", rc);
 	}
 
 

@@ -18,8 +18,8 @@ public class RecipeService {
 	private RecipeDao dao;
 
 
-	public ArrayList<RecipeBoard> selectRecipeList() {
-		ArrayList<RecipeBoard>list = dao.selectRecipeList();
+	public ArrayList<RecipeBoard> selectRecipeList(RecipeBoard rb) {
+		ArrayList<RecipeBoard>list = dao.selectRecipeList(rb);
 		return list;
 	}
 
@@ -77,6 +77,18 @@ public class RecipeService {
 
 	public int insertComment(RecipeComment rc) {
 		int result = dao.insertCommnet(rc);
+		return result;
+	}
+
+
+	public int deleteComment(int rCommentNo) {
+		int result = dao.deleteComment(rCommentNo);
+		return result;
+	}
+
+
+	public int updateComment(RecipeComment rc) {
+		int result = dao.updateComment(rc);
 		return result;
 	}
 
