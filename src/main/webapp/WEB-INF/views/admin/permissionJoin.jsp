@@ -9,10 +9,7 @@
 <style>
 .allmember{
 text-align: center;}
-.pagenation  {
-text-align: center;
-margin-left : 50%;
-}
+
 </style>
 </head>
 <body>
@@ -89,6 +86,7 @@ margin-left : 50%;
         <button class="addJori">조리꾼 승인</button>
         <button class="deleteMember">강제 탈퇴</button>
         <button>쪽지</button>
+        <button class="showAllDetail">전체 상세 보기</button>
     </div>
     
     <div style="float: right;">
@@ -116,8 +114,8 @@ margin-left : 50%;
     <th>상세보기</th>
     <th>구분(요리꾼/조리꾼)</th>
     <th>가입일</th>
-    <th>레시피 수</th>
-    <th>게시글 수</th>
+    <th></th>
+    <th></th>
     
     </tr>
     <c:forEach items="${list }" var="m" varStatus="i">
@@ -130,17 +128,23 @@ margin-left : 50%;
     
     </td>
     <td>${m.enrollDate }</td>
-    <td>${m.recipeCount }</td>
-    <td>${m.boardCount }</td>
+    <td></td>
+    <td></td>
     </tr>
     <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
-    이름 : 
-  	전화번호 : 
-  	주소 : 
-  	프로필 이미지 : 
-  	자기소개 : 
-  	포인트 : 
-  	자격증 : 
+    <div class="row">
+    <div class="col-md-3">이름 : ${m.memberName }</div>
+    <div class="col-md-3">전화번호 : ${m.memberPhone }</div>
+    <div class="col-md-3">도로명 주소 : ${m.addressRoad }</div>
+    <div class="col-md-3">상세주소 : ${m.addressDetail }</div>
+    
+    </div>
+    <div class="row">
+    <div class="col-md-3">자기소개 : ${m.profileIntro }</div>
+    <div class="col-md-3">자격증 : </div>
+    
+    
+    </div>
   	
     </td></tr>
     </c:forEach>
@@ -404,6 +408,9 @@ margin-left : 50%;
     	
     	
 
+    });
+    $(".showAllDetail").click(function(){
+    	$(".showDetailBtn").click();
     });
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />

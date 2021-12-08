@@ -11,5 +11,6 @@ public class Coupon {
 	private String couponDiscount;
 	private int couponAmount;	
 	private String couponDate;
-	
+	private int noUseCount;
+	private int useCount;
 }

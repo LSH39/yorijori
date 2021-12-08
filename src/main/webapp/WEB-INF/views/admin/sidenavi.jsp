@@ -97,7 +97,36 @@
        
 .showDetail{
 display: none;
-background-color: black;
+background-color: #E0D8EF;
+}
+
+.pagenation{
+display: flex;
+}
+.pagenation ul{
+align-self: center;
+margin : 0 auto;
+
+
+
+}
+.pagenation a{
+color: #9F90CF;
+background-color :#fff; }
+.pagenation a:hover{
+color: #9F90CF;
+}
+.page-item.active .page-link{
+   color: #fff;
+   background: #9F90CF;
+   border-color : #9F90CF;
+    
+}
+
+button{
+color: #fff;
+background-color: #9F90CF;
+
 }
     </style>
 
@@ -142,7 +171,7 @@ background-color: black;
                 <div class="drop3 navbar" style="display: none;">
                     
                <a class="nav-link" href="coupon.do">쿠폰 발행</a>
-                    <a class="nav-link" href="#">쿠폰 관리</a>
+                    <a class="nav-link" href="couponList.do?reqPage=1">쿠폰 관리</a>
 
             	
        		</div>
