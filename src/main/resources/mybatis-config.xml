@@ -43,6 +43,12 @@
 
 	     <typeAlias type="kr.or.cookingRsrv.model.vo.MyCookingRsrv" alias="mcr"/>
 	     <typeAlias type="kr.or.review.model.vo.MyClassReview" alias="mreview"/>
+	     <typeAlias type="kr.or.review.model.vo.MyItemReview" alias="ireview"/>
+	     <typeAlias type="kr.or.mypage.model.vo.MyContest" alias="myc"/>
+	     <typeAlias type="kr.or.mypage.model.vo.MyItem" alias="mi"/>
+	     <typeAlias type="kr.or.mypage.model.vo.LikeRecipe" alias="lr"/>
+	     <typeAlias type="kr.or.mypage.model.vo.FollowList" alias="fol"/>
+	     <typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc"/>
 	</typeAliases>
 </configuration>
 

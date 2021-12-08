@@ -4,13 +4,13 @@
  	<select id="selectRecipeList" resultType="rb">
  		select 
  			recipe_no as recipeNo, 
- 			recipe_writer as recipeWriter, 
  			recipe_title as recipeTitle, 
  			filepath,
  			read_count as readCount,
  			recipe_time as recipeTime, 
- 			recipe_level as recipeLevel
- 		from recipe_board 
+ 			recipe_level as recipeLevel,
+		(select member_nickname from Member m  where m.member_no = r.recipe_writer) as nickname 
+		from recipe_board r
  	</select>
  	<insert id="insertRecipeBoard" parameterType="rb" >
  		insert into recipe_board values(recipe_seq.nextval,#{recipeWriter},#{recipeTitle},#{filepath},0,to_char(sysdate,'yyyy-mm-dd'),#{subhead},#{recipeVideo},#{recipeTime},#{foodName},#{recipeLevel},#{situation},#{material})
@@ -24,18 +24,83 @@
  	<insert id="insertContent" parameterType="rcontent">
  		insert into recipe_content values(r_file_seq.nextval,#{recipeNo},#{filename},#{filepath},#{recipeContent})
  	</insert>
- 	<select id="recipeCategoty1" parameterType="string" resultType="rb">
- 		select 
+ 	<select id="selectCategory1" parameterType="string" resultType="rb">
+ 	   select 
  			recipe_no as recipeNo, 
- 			recipe_writer as recipeWriter, 
  			recipe_title as recipeTitle, 
  			filepath,
  			read_count as readCount,
  			recipe_time as recipeTime, 
- 			recipe_level as recipeLevel
- 		from recipe_board where situation=#{item}
+ 			recipe_level as recipeLevel,
+        (select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
+ 	from recipe_board r where situation=#{item}
  	</select>
- 	<select id="selectMemberId"  parameterType="_int" >
- 		select member_id from member where member_no=#{recipe_writer};
+ 	<select id="selectCategory2" parameterType="string" resultType="rb">
+ 		select 
+ 			recipe_no as recipeNo, 
+ 			recipe_title as recipeTitle, 
+ 			filepath,
+ 			read_count as readCount,
+ 			recipe_time as recipeTime, 
+ 			recipe_level as recipeLevel,
+        	(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
+ 		from recipe_board r where material=#{item2}
  	</select>
+ 	<select id="selectCategory3" parameterType="string" resultType="rb">
+ 		select 
+ 			recipe_no as recipeNo, 
+ 			recipe_title as recipeTitle, 
+ 			filepath,
+ 			read_count as readCount,
+ 			recipe_time as recipeTime, 
+ 			recipe_level as recipeLevel,
+        	(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
+ 		from recipe_board r where recipe_level=#{item3}
+ 	</select>
+ 	<select id="selectOneRecipe" parameterType="_int" resultType="rb">
+ 		select
+ 			recipe_no as recipeNo,
+ 			recipe_title as recipeTitle, 
+ 			filepath,
+ 			read_count as readCount,
+ 			recipe_date recipeDate,
+ 			subhead,
+ 			recipe_video as recipeVide,
+ 			recipe_time as recipeTime,
+ 			food_name as foodName,
+ 			recipe_time as recipeTime, 
+ 			recipe_level as recipeLevel,
+ 			(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
+ 		from recipe_board r where recipe_no=#{recipeNo}
+ 			
+ 	</select>
+ 	<select id="selectMaterial"  parameterType="_int" resultType="material">
+ 		select 
+ 			material_no as materialNo,
+ 			recipe_no as recipeNo,
+ 			material_name as materialName,
+ 			m_amount as mAmount
+ 		from material where recipe_no=#{recipeNo}
+ 	</select>
+ 	<select id="selectContent" parameterType="_int" resultType="rcontent">
+ 		select 
+ 			r_file_no as rFileNo,
+ 			recipe_no as recipeNo,
+ 			filename, filepath,
+ 			recipe_content as recipeContent
+ 		from recipe_content where recipe_no=#{recipeNo}
+ 	</select>
+ 	<select id="selectComment" parameterType="_int" resultType="rcomment">
+ 		select 
+ 			r_comment_no as rCommentNo,
+ 			recipe_no as recipeNo,
+ 			rc_content as rcContent,
+ 			rc_date as rcDate,
+        (select member_nickname from member m where m.member_no = rc.member_no)as nickname 
+ 		from recipe_comment rc where recipe_no=#{recipeNo}
+ 	</select>
+ 	<insert id="insertComment" parameterType="rcomment">
+ 		insert into recipe_comment values(rc_seq.nextval,#{recipeNo},#{memberNo},#{rcContent},to_char(sysdate,'yyyy-mm-dd'))
+ 		
+ 	</insert>
 </mapper>

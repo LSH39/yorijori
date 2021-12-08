@@ -7,10 +7,18 @@ import org.springframework.stereotype.Service;
 
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
+import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.dao.MypageDao;
+import kr.or.mypage.model.vo.ContestWin;
+import kr.or.mypage.model.vo.FollowList;
+import kr.or.mypage.model.vo.LikeRecipe;
+import kr.or.mypage.model.vo.MyContest;
+import kr.or.mypage.model.vo.MyItem;
+import kr.or.mypage.model.vo.Mychat;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
+import kr.or.review.model.vo.MyItemReview;
 import kr.or.review.model.vo.Review;
 @Service
 public class MypageService {
@@ -77,6 +85,47 @@ public class MypageService {
 
 	public ArrayList<MyClassReview> myclassReview(int memberNo) {
 		ArrayList<MyClassReview> list =dao.myClassReview(memberNo);
+		return list;
+	}
+
+	public ArrayList<MyItemReview> myItemReview(int memberNo) {
+		ArrayList<MyItemReview> list =dao.myItemReview(memberNo);
+		return list;
+	}
+
+
+	public ArrayList<ContestWin> contestWin() {
+		ArrayList<ContestWin> list =dao.contestWin();
+		return list;
+	}
+
+	public ArrayList<MyContest> myContest(int recipeWriter) {
+		ArrayList<MyContest> list = dao.myContest(recipeWriter);
+		return list;
+	}
+
+	public ArrayList<MyItem> myItem(int milkitWriter) {
+		ArrayList<MyItem> list = dao.myItem(milkitWriter);
+		return list;
+	}
+
+	public ArrayList<LikeRecipe> likeRecipe(int memberNo) {
+		ArrayList<LikeRecipe> list = dao.likeRecipe(memberNo);
+		return list;
+	}
+
+	public ArrayList<FollowList> followList(int memberNo) {
+		ArrayList<FollowList> list = dao.followList(memberNo);
+		return list;
+	}
+
+	public ArrayList<Freeboard> myBoard(String freeWriter) {
+		ArrayList<Freeboard> list = dao.myBoard(freeWriter);
+		return list;
+	}
+
+	public ArrayList<Mychat> myChatList(String chatRecive) {
+		ArrayList<Mychat> list = dao.myChatList(chatRecive);
 		return list;
 	}
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="review">
+	<!-- 리뷰 조회 -->
 	<select id="selectAllReview" parameterType="_int" resultType="review">
 		select 
 			review_no as reviewNo,
@@ -14,5 +15,25 @@
 		from review
 		where class_no=#{classNo}
 	</select>
+	
+	<!-- 리뷰 작성 -->
+	<insert id="insertReview" parameterType="review">
+		insert into review values(
+			review_seq.nextval, #{classNo}, null, #{memberNo}, #{reviewContent}, #{reviewRate}, 2, to_char(sysdate, 'YYYY-MM-DD') 
+		)
+	</insert>
+	
+	<!-- 리뷰 평균 평점 조회 -->
+	<select id="avgReviewRate" parameterType="_int" resultType="_double">
+		select 
+			nvl(trunc(avg(review_rate), 1), 0) 
+		from review 
+		where class_no=#{classNo}
+	</select>
+	
+	<!-- 등록한 리뷰 삭제 -->
+	<delete id="deleteReview" parameterType="_int">
+		delete from review where review_no=#{reviewNo}
+	</delete>
 </mapper>
 

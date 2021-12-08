@@ -32,6 +32,7 @@
 		<div id="pageNavi">${pageNavi }
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
   				<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4" >클래스 작성</a>
+				<a href="/cookingRsrvList.do">예약내역</a>
 			</div>
 		</div>
 	</div>

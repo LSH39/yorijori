@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 
 
@@ -38,29 +39,45 @@ public class RecipeDao {
 		return sqlSession.insert("recipe.insertContent", rc);
 	}
 
+	
+	public ArrayList<RecipeBoard> selectCategory1(String item) {
+		List<RecipeBoard> list = sqlSession.selectList("recipe.selectCategory1", item);
+		return (ArrayList<RecipeBoard>)list;
+	}
+
+	public ArrayList<RecipeBoard> selectCategory2(String item2) {
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectCategory2",item2); 
+		return (ArrayList<RecipeBoard>)list;
+	}
+
+	public ArrayList<RecipeBoard> selectCategory3(String item3) {
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectCategory3",item3);
+		return (ArrayList<RecipeBoard>)list;
+	}
+	
 	public RecipeBoard selectOneRecipe(int recipeNo) {
 		return sqlSession.selectOne("recipe.selectOneRecipe",recipeNo);
 	}
 
-	public RecipeContent selectContent(int recipeNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<RecipeContent> selectContent(int recipeNo) {
+		List<RecipeContent>list = sqlSession.selectList("recipe.selectContent",recipeNo);
+		return (ArrayList<RecipeContent>)list;
 	}
 
-	public Material selectMaterial(int recipeNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Material> selectMaterial(int recipeNo) {
+		List<Material>list = sqlSession.selectList("recipe.selectMaterial",recipeNo);
+		return (ArrayList<Material>)list;
 	}
 
-	public ArrayList<RecipeBoard> selectCategory1(String item) {
-		List<RecipeBoard> list = sqlSession.selectList("recipe.selectCategory1", item);
-		return null;
+	public ArrayList<RecipeComment> selectComment(int recipeNo) {
+		List<RecipeComment>list = sqlSession.selectList("recipe.selectComment",recipeNo);
+		return (ArrayList<RecipeComment>)list;
 	}
 
-	public String selectMemberId() {
-		
-		return null;
+	public int insertCommnet(RecipeComment rc) {
+		return sqlSession.insert("recipe.insertComment",rc);
 	}
+
 
 
 }

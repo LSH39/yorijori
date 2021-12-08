@@ -9,4 +9,5 @@ public class RecipeComment {
 	private int memberNo;
 	private String rcContent;
 	private String rcDate;
+	private String nickname;
 }
