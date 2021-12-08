@@ -25,4 +25,5 @@ public class RecipeContestDao {
 		List<RecipeContest> list = sqlSession.selectList("recipecontest.selectList", map);
 		return (ArrayList<RecipeContest>) list;
 	}
+
 }

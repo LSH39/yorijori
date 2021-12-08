@@ -67,153 +67,20 @@
   </section><!-- End Hero -->
 
   <main id="main">
-
-    <!-- ======= Featured Services Section ======= -->
-    <section id="featured-services" class="featured-services section-bg">
-      <div class="container">
-
-        <div class="row no-gutters">
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-laptop"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-briefcase"></i></div>
-              <h4 class="title"><a href="">Dolor Sitema</a></h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur trade stravi</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Featured Services Section -->
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>About Us</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2">
-            <img src="resources/img/mainpage/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-            </ul>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us">
-      <div class="container">
-
-        <div class="row no-gutters">
-
-          <div class="col-lg-4 col-md-6 content-item">
-            <span>01</span>
-            <h4>Lorem Ipsum</h4>
-            <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-            <span>02</span>
-            <h4>Repellat Nihil</h4>
-            <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-            <span>03</span>
-            <h4> Ad ad velit qui</h4>
-            <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-            <span>04</span>
-            <h4>Repellendus molestiae</h4>
-            <p>Inventore quo sint a sint rerum. Distinctio blanditiis deserunt quod soluta quod nam mider lando casa</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-            <span>05</span>
-            <h4>Sapiente Magnam</h4>
-            <p>Vitae dolorem in deleniti ipsum omnis tempore voluptatem. Qui possimus est repellendus est quibusdam</p>
-          </div>
-
-          <div class="col-lg-4 col-md-6 content-item">
-            <span>06</span>
-            <h4>Facilis Impedit</h4>
-            <p>Quis eum numquam veniam ea voluptatibus voluptas. Excepturi aut nostrum repudiandae voluptatibus corporis sequi</p>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Why Us Section -->
-
-    <!-- ======= Our Clients Section ======= -->
-    <section id="clients" class="clients">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Our Clients</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="clients-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-8.png" class="img-fluid" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Our Clients Section -->
-
-    <!-- ======= Services Section ======= -->
+  
+  <!-- ======= 믿고 보는 레시피 Section ======= -->
     <section id="services" class="services">
       <div class="container">
 
-        <div class="section-title">
+       <!--  <div class="section-title">
           <h2>Services</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+       -->
+        
+        <div class="header-section-title">
+          <h2>믿고 보는 레시피 리스트</h2>
+          <p>요리조리가 엄선한 레시피를 다양한 테마별로 확인해보세요.</p>
         </div>
 
         <div class="row">
@@ -299,6 +166,147 @@
 
       </div>
     </section><!-- End Services Section -->
+  
+  <!-- ======= why-us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-lg-4 col-md-6 content-item">
+            <span>01</span>
+            <h4>Lorem Ipsum</h4>
+            <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item">
+            <span>02</span>
+            <h4>Repellat Nihil</h4>
+            <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item">
+            <span>03</span>
+            <h4> Ad ad velit qui</h4>
+            <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item">
+            <span>04</span>
+            <h4>Repellendus molestiae</h4>
+            <p>Inventore quo sint a sint rerum. Distinctio blanditiis deserunt quod soluta quod nam mider lando casa</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item">
+            <span>05</span>
+            <h4>Sapiente Magnam</h4>
+            <p>Vitae dolorem in deleniti ipsum omnis tempore voluptatem. Qui possimus est repellendus est quibusdam</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item">
+            <span>06</span>
+            <h4>Facilis Impedit</h4>
+            <p>Quis eum numquam veniam ea voluptatibus voluptas. Excepturi aut nostrum repudiandae voluptatibus corporis sequi</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= featured-services ======= -->
+    <section id="featured-services" class="featured-services section-bg">
+      <div class="container">
+
+        <div class="row no-gutters">
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-laptop"></i></div>
+              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-briefcase"></i></div>
+              <h4 class="title"><a href="">Dolor Sitema</a></h4>
+              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
+              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur trade stravi</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Featured Services Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>About Us</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2">
+            <img src="resources/img/mainpage/about.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <p class="fst-italic">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+              <li><i class="bi bi-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+              <li><i class="bi bi-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+            </ul>
+            <p>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    
+
+    <!-- ======= Our Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Our Clients</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="clients-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-8.png" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Our Clients Section -->
+
+    
 
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">

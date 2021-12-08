@@ -15,7 +15,7 @@ public class RecipeContestService {
 	@Autowired
 	private RecipeContestDao dao;
 
-	public ContestPageData selectContestList(int reqPage) {
+	public ContestPageData selectContestList(int reqPage, int orderIndex) {
 		//필요한 정보 - 페이지당 게시물 개수
 		int numPerPage = 12;
 		int end = reqPage * numPerPage;
@@ -25,6 +25,8 @@ public class RecipeContestService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("orderIndex", orderIndex);
+	
 		ArrayList<RecipeContest> list = dao.selectContestList(map);
 		
 		//페이지 네비게이션 제작
@@ -65,7 +67,8 @@ public class RecipeContestService {
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
-		ContestPageData cpd = new ContestPageData(list,pageNavi,start,totalCount);
+		ContestPageData cpd = new ContestPageData(list,pageNavi,start,totalCount, orderIndex);
 		return cpd;
 	}
+
 }

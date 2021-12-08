@@ -651,7 +651,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Why Us
+# why-us
 --------------------------------------------------------------*/
 .why-us {
   padding: 0;
@@ -661,6 +661,7 @@ section {
 }
 .why-us .content-item {
   padding: 40px;
+  background: "#f1f1f1";
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
   margin: -1px;

@@ -62,37 +62,65 @@
 	      			<div>총 <span id="totalCount">${totalCount }</span>개</div>
 	      			<div>
 	      				<button class="btn-main btn-enter">대회 참가하기</button>
-	      				<span class="order-by active">최신순</span> | <span class="order-by">가나다순</span> | <span class="order-by">높은투표순</span>
+	      				<input type="hidden" id="orderIndex" value="${orderIndex }">
+	      				<span class="order-by">최신순</span> | <span class="order-by">가나다순</span> | <span class="order-by">높은투표순</span>
 	      			</div>
 	      		</div>
 	      		<div class="contest-content">
 	      			<ul>
+	      				<c:forEach items="${list }" var="r" varStatus="i">
 	      				<li class="recipe">
-	      					<a href="#">
+	      					<a href="/recipeView.do?recipeNo=${r.recipeNo }">
 	      						<div class="img-box">
-	      							<img src="#" style="width:300px;height:320px;">
+	      							<img src="resources/upload/recipe/${r.recipePath }" style="width:300px;height:320px;">
 	      						</div>
 	      						<div class="recipe-info">
-	      							<div class="recipe-title"><h4>레시피 제목</h4></div>
-	      							<div class="recipe-content">레시피에 대한 설명</div>
+	      							<div class="recipe-title"><h4>${r.recipeTitle }</h4></div>
+	      							<div class="recipe-content" style="color:#454545;">${r.recipeContent }</div>
 	      						</div>
+	      					</a>
+	      					<a href="#">
 	      						<div class="recipe-profile">
 	      							<div class="profile-pic">
 	      								<img src="#">
-	      								<h5>아이디</h5>
+	      								<h5>${r.memberNickname }</h5>
 	      							</div>
+	      					</a>
 	      							<div class="vote-count">
-	      								<span>투표수</span>
-	      								<img src="#" id="vote">
+	      								<span>${r.voteCount }</span>
+	      								<img src="resources/img/recipecontest/vote-before.png" id="vote">
 	      								<label for="vote">투표하기</label>
 	      							</div>
 	      						</div>
 	      					</a>
-	      				</li>		
+	      				</li>
+	      				</c:forEach>
 	      			</ul>
 	      		</div>
+	      		<div class="pagi">
+	      			${pageNavi }
+	      		</div>
+	      		<hr>
+	      		<form action="/recipeContestSearch.do" method="get">
+					<div class="board-search row">
+						<div class="col-9">
+							검색어 
+								<input type="radio" id="searchtype-1" name="searchtype" class="searchtype" value="title">
+								<label for="searchtype-1">제목</label>
+								<input type="radio" id="searchtype-2" name="searchtype" class="searchtype" value="content">
+								<label for="searchtype-2">내용</label>
+								<input type="radio" id="searchtype-3" name="searchtype" class="searchtype" value="writerId">
+								<label for="searchtype-3">작성자(ID)</label>
+								<input type="radio" id="searchtype-4" name="searchtype" class="searchtype" value="writerNickname">
+								<label for="searchtype-4">작성자(닉네임)</label>
+						</div>
+						<div class="col">
+							<input type="search" class="tk-search" name="searchword">
+							<button class="btn-main btn-search my-2 my-sm-0" type="submit"><img src="resources/img/mainpage/search_icon_w.png" style="width: 25px; height: 25px;"></button>
+						</div>
+					</div>
+					</form>
 	      	</div>
-	     </div>
   </main><!-- End #main -->
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script>
@@ -105,6 +133,22 @@
   		console.log(month);
   		$(".thisyr").html(year);
   		$(".thismonth").html(month);
+  		//정렬 default
+  		var orderIndex = $("#orderIndex").val();
+  		$(".order-by").eq(orderIndex).addClass("active");
+  		
+  	
+  		$(".order-by").on("click", function(){
+  			var index = $(".order-by").index(this);
+  			var reqPage = 1;
+  			var body = $(".contest-content").children("ul");
+  			var totalCount = $("#totalCount");
+  			console.log(index);
+  			location.href="contestList.do?reqPage="+reqPage+"&orderIndex="+index;
+  		});
+  		
+  		
+  		
   		
   	});
   	function delCheck(){

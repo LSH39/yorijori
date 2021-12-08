@@ -48,7 +48,7 @@
 	      					</tr>
 	      				</thead>
 	      				<tbody>
-	      					<c:forEach items="${list }" var="n" varStatus="1">
+	      					<c:forEach items="${list }" var="n" varStatus="i">
 	      						<tr>
 	      							<td>${start+i.index }</td>
 	      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
@@ -72,11 +72,11 @@
 								<input type="radio" id="searchtype-1" name="searchtype" class="searchtype" value="title">
 								<label for="searchtype-1">제목</label>
 								<input type="radio" id="searchtype-2" name="searchtype" class="searchtype" value="content">
-								<label for="searchtype-1">내용</label>
+								<label for="searchtype-2">내용</label>
 								<input type="radio" id="searchtype-3" name="searchtype" class="searchtype" value="writerId">
-								<label for="searchtype-1">작성자(ID)</label>
+								<label for="searchtype-3">작성자(ID)</label>
 								<input type="radio" id="searchtype-4" name="searchtype" class="searchtype" value="writerNickname">
-								<label for="searchtype-1">작성자(닉네임)</label>
+								<label for="searchtype-4">작성자(닉네임)</label>
 						</div>
 						<div class="col">
 							<input type="search" class="tk-search" name="searchword">

@@ -258,7 +258,7 @@
   		var today = new Date();
   		var date = today.getDate();
   		if(date >= 1 && date <= 15){
-  			location.href="/contestList.do?reqPage=1";
+  			location.href="/contestList.do?reqPage=1&orderIndex=0";
   		}else {
   			alert("대회 투표기간이 아닙니다.");
   		}

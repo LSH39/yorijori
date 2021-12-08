@@ -10,14 +10,16 @@ public class ContestPageData {
 	private String pageNavi;
 	private int start;
 	private int totalCount;
+	private int orderIndex;
 	
 	
-	public ContestPageData(ArrayList<RecipeContest> list, String pageNavi, int start, int totalCount) {
+	public ContestPageData(ArrayList<RecipeContest> list, String pageNavi, int start, int totalCount, int orderIndex) {
 		super();
 		this.list = list;
 		this.pageNavi = pageNavi;
 		this.start = start;
 		this.totalCount = totalCount;
+		this.orderIndex = orderIndex;
 	}
 	public ContestPageData() {
 		super();
