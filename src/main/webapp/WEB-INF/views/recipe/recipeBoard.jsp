@@ -68,7 +68,6 @@
             	success: function(data) {
 					$("#recipeList").empty();
 					for(var i=0;i<data.length;i++){
-						var rb = data[i];
 						var html = "";
 						html += "<div class='recipe'>";
 						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].filepath+"</a>";
@@ -93,7 +92,6 @@
             	success : function(data) {
             		$("#recipeList").empty();
 					for(var i=0;i<data.length;i++){
-						var rb = data[i];
 						var html = "";
 						html += "<div class='recipe'>";
 						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].filepath+"</a>";
@@ -118,7 +116,6 @@
             	success : function(data) {
             		$("#recipeList").empty();
 					for(var i=0;i<data.length;i++){
-						var rb = data[i];
 						var html = "";
 						html += "<div class='recipe'>";
 						html += "<a href='/recipeView.do?recipeNo="+data[i].recipeNo+"'>"+data[i].filepath+"</a>";

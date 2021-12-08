@@ -32,6 +32,9 @@
 		<div id="pageNavi">${pageNavi }
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
   				<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4" >클래스 작성</a>
+  				<c:if test="${not empty sessionScope.m }">
+					<a href="/cookingRsrvList.do">예약내역</a>  				
+  				</c:if>
 			</div>
 		</div>
 	</div>

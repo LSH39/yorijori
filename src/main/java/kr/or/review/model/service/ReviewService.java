@@ -32,7 +32,8 @@ public class ReviewService {
 		return result;
 	}
 
-
+	//리뷰 삭제
+	@Transactional
 	public int deleteReview(int reviewNo) {
 		// TODO Auto-generated method stub
 		int result = dao.deleteReview(reviewNo);

@@ -10,4 +10,5 @@ public class CookingRsrv {
 	private int classNo;
 	private String impUid;
 	private String rsrvDate;
+	private int cancelFlag;
 }

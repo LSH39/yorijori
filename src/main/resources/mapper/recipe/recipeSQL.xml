@@ -59,6 +59,7 @@
  	</select>
  	<select id="selectOneRecipe" parameterType="_int" resultType="rb">
  		select
+ 			recipe_no as recipeNo,
  			recipe_title as recipeTitle, 
  			filepath,
  			read_count as readCount,
@@ -88,6 +89,18 @@
  			filename, filepath,
  			recipe_content as recipeContent
  		from recipe_content where recipe_no=#{recipeNo}
- 			
  	</select>
+ 	<select id="selectComment" parameterType="_int" resultType="rcomment">
+ 		select 
+ 			r_comment_no as rCommentNo,
+ 			recipe_no as recipeNo,
+ 			rc_content as rcContent,
+ 			rc_date as rcDate,
+        (select member_nickname from member m where m.member_no = rc.member_no)as nickname 
+ 		from recipe_comment rc where recipe_no=#{recipeNo}
+ 	</select>
+ 	<insert id="insertComment" parameterType="rcomment">
+ 		insert into recipe_comment values(rc_seq.nextval,#{recipeNo},#{memberNo},#{rcContent},to_char(sysdate,'yyyy-mm-dd'))
+ 		
+ 	</insert>
 </mapper>

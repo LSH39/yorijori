@@ -1,6 +1,8 @@
 package kr.or.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -136,6 +138,69 @@ public class AdminService {
 
 	public int addJori(String memberNo) {
 		int result = dao.addJori(memberNo);
+		return result;
+	}
+
+	public int createCoupon(HashMap<String, Object> map) {
+		
+		
+		int result = dao.createCoupon(map);
+		int method =  Integer.parseInt((String)map.get("method")) ;
+		int type = Integer.parseInt((String)map.get("type"));
+		
+		System.out.println(method);
+		int result2 =0;
+		if(result>0 && method==2 &&type==1) {
+			map  = dao.selectMemberNo(map);
+			List list =(List) map.get("list");
+			for(int i=0; i<list.size();i++) {
+			String memberNo= (String)list.get(i);
+			String couponNo = (String) map.get("couponLast");
+			map.put("memberNo", memberNo);
+			map.put("couponNo",couponNo);
+			result2 += dao.dropCoupon(map);
+			
+			}
+			
+		}else if(result>0 && method==2 && type==2) {
+			map  = dao.selectMemberNo(map);
+			List list =(List) map.get("list");
+			for(int i=0; i<list.size();i++) {
+			String memberNo= (String)list.get(i);
+			map.put("memberNo", memberNo);
+			Member2 m = dao.selectOneMember(map);
+			String dcResult = (String) map.get("dcResult");
+			int idx = dcResult.indexOf("p");
+			String dcString = dcResult.substring(0,idx);
+			
+			int dc = Integer.parseInt(dcString);
+			
+			int mPoint = m.getMemberPoint();
+			
+			
+			int sum = mPoint+dc;
+			
+			map.put("sum", sum);
+			map.put("dc",dc);
+			result2 += dao.dropPoint(map);
+			}
+			
+		
+		
+	}
+			
+		
+		
+		
+		
+		
+	
+		return result;
+	}
+
+	public int dropCoupon(HashMap<String, Object> map) {
+		
+		int result = dao.dropCoupon(map);
 		return result;
 	}
 }
