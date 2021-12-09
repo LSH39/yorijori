@@ -79,7 +79,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="#">서비스소개</a></li>
+          <li><a class="nav-link scrollto" href="/siteInfo.do">서비스소개</a></li>
           <li><a class="nav-link scrollto" href="#" id="show-category">레시피</a></li>
           <li class="dropdown"><a href="#"><span>밀키트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -92,7 +92,7 @@
             <ul>
               <li><a href="/contestList.do">경연대회투표</a></li>
               <li><a href="/contestResult.do">우승자 발표</a></li>
-              <li><a href="#">역대 우승자</a></li>
+              <li><a href="/contestWinner.do">역대 우승자</a></li>
             </ul>
           </li>
           <li class="dropdown" style="padding-right:15px;"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>
