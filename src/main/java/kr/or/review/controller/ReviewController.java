@@ -30,7 +30,6 @@ public class ReviewController {
 	@RequestMapping(value="/insertReview.do")
 	public String insertReview(Review review, Model model) {
 		int result = service.insertReview(review);
-		System.out.println(review.getMemberNo());
 		if(result > 0) {
 			return "1";
 		}else {
@@ -38,14 +37,16 @@ public class ReviewController {
 		}
 	}
 	
+	
+	//리뷰 삭제
 	@RequestMapping(value="/reviewDelete.do")
 	public String deleteReview(int reviewNo, Model model) {
 		int result = service.deleteReview(reviewNo);
 		if(result > 0) {
 			model.addAttribute("msg", "삭제 성공");
-			model.addAttribute("loc", "/");
+			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");
 		}else {
-			model.addAttribute("msg", "삭제 성공");
+			model.addAttribute("msg", "삭제 실패!");
 			model.addAttribute("loc", "/");			
 		}
 		return "common/msg";

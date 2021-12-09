@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 
 
@@ -17,8 +18,8 @@ public class RecipeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<RecipeBoard> selectRecipeList() {
-		List<RecipeBoard>list = sqlSession.selectList("recipe.selectRecipeList"); 
+	public ArrayList<RecipeBoard> selectRecipeList(RecipeBoard rb) {
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectRecipeList",rb); 
 		return (ArrayList<RecipeBoard>)list;
 	}
 
@@ -66,6 +67,23 @@ public class RecipeDao {
 	public ArrayList<Material> selectMaterial(int recipeNo) {
 		List<Material>list = sqlSession.selectList("recipe.selectMaterial",recipeNo);
 		return (ArrayList<Material>)list;
+	}
+
+	public ArrayList<RecipeComment> selectComment(int recipeNo) {
+		List<RecipeComment>list = sqlSession.selectList("recipe.selectComment",recipeNo);
+		return (ArrayList<RecipeComment>)list;
+	}
+
+	public int insertCommnet(RecipeComment rc) {
+		return sqlSession.insert("recipe.insertComment",rc);
+	}
+
+	public int deleteComment(int rCommentNo) {
+		return sqlSession.delete("recipe.deleteComment", rCommentNo);
+	}
+
+	public int updateComment(RecipeComment rc) {
+		return sqlSession.update("recipe.updateComment", rc);
 	}
 
 

@@ -111,7 +111,7 @@
           <label for="headersearchsubmit"><img src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
           </form>
           <li><a class="nav-link scrollto" href="#"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
-          <li><a class="getstarted scrollto" href="#">레시피 작성</a></li>
+          <li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -122,7 +122,7 @@
     </div>
     
   </header><!-- End Header -->
-  <form action="/recipes.do" method="get">
+  <form action="/recipeBoard.do" method="get">
 		<div class="recipe-category">
 			<div class="recipe-category-box">
 				<div>
@@ -133,28 +133,28 @@
 						</h3>
 						<ul>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 술안주</label>
+								<label><input type="radio" name="situation" value="1"/> 술안주</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 다이어트</label>
+								<label><input type="radio" name="situation" value="2"/> 다이어트</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 손님초대</label>
+								<label><input type="radio" name="situation" value="3"/> 손님초대</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 혼밥/자취</label>
+								<label><input type="radio" name="situation" value="4"/> 혼밥/자취</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 간식</label>
+								<label><input type="radio" name="situation" value="5"/> 간식</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 유아식</label>
+								<label><input type="radio" name="situation" value="6"/> 유아식</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 비건/채식</label>
+								<label><input type="radio" name="situation" value="7"/> 비건/채식</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group1" value="1"/> 기타</label>
+								<label><input type="radio" name="situation" value="8"/> 기타</label>
 							</li>	
 						</ul>
 					</li>
@@ -166,28 +166,28 @@
 						</h3>
 						<ul>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 육류</label>
+								<label><input type="radio" name="material" value="1"/> 육류</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 채소류</label>
+								<label><input type="radio" name="material" value="2"/> 채소류</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 해산물</label>
+								<label><input type="radio" name="material" value="3"/> 해산물</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 달걀/유제품</label>
+								<label><input type="radio" name="material" value="4"/> 달걀/유제품</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 면/만두</label>
+								<label><input type="radio" name="material" value="5"/> 면/만두</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 콩/두부</label>
+								<label><input type="radio" name="material" value="6"/> 콩/두부</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 과일</label>
+								<label><input type="radio" name="material" value="7"/> 과일</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group2" value="1"/> 기타</label>
+								<label><input type="radio" name="material" value="8"/> 기타</label>
 							</li>
 						</ul>
 					</li>		
@@ -199,13 +199,13 @@
 						</h3>
 						<ul>
 							<li>
-								<label><input type="radio" name="category-group3" value="1"/> 상</label>
+								<label><input type="radio" name="recipeLevel" value="1"/> 상</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group3" value="1"/> 중</label>
+								<label><input type="radio" name="recipeLevel" value="2"/> 중</label>
 							</li>
 							<li>
-								<label><input type="radio" name="category-group3" value="1"/> 하</label>
+								<label><input type="radio" name="recipeLevel" value="3"/> 하</label>
 							</li>
 						</ul>
 					</li>		

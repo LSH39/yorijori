@@ -9,10 +9,7 @@
 <style>
 .allmember{
 text-align: center;}
-.pagenation  {
-text-align: center;
-margin-left : 50%;
-}
+
 
 
 </style>
@@ -82,7 +79,7 @@ margin-left : 50%;
         
     
 
-    <span>조회 된 회원 수</span> <span class="amount">${list.size() }</span>
+    <span>조회 된 회원 수</span> <span class="amount">${totalCount }</span>
 
     <hr>
     
@@ -93,15 +90,19 @@ margin-left : 50%;
         <button class="addBlack">블랙리스트 추가</button>
         <button class="deleteMember">강제 탈퇴</button>
         <button>쪽지</button>
+        <button class="showAllDetail">전체 상세 보기</button>
     </div>
     
     <div style="float: right;">
     <select class="memberLevel">
+    	
         <option value="0">전체회원</option>
         <option value="1">요리꾼</option>
         <option value="2">조리꾼</option>
     </select>
     <select class="align">
+    	
+    	<option value="10">10명 정렬</option>
         <option value="30">30명 정렬</option>
         <option value="50">50명 정렬</option>
         <option value="100">100명 정렬</option>
@@ -127,7 +128,7 @@ margin-left : 50%;
     <c:forEach items="${list }" var="m" varStatus="i">
     <tr>
     <td><input class="chkbox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
-    <td>${m.memberNickname }(${m.memberId })</td>
+    <td><img src="${m.profilePath }">${m.memberNickname }(${m.memberId })</td>
     <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>
     <c:choose >
@@ -146,12 +147,23 @@ margin-left : 50%;
     
     </tr>
     <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
-    이름 : 
-  	전화번호 : 
-  	주소 : 
-  	프로필 이미지 : 
-  	자기소개 : 
-  	포인트 : 
+    
+    <div class="row">
+    <div class="col-md-3">이름 : ${m.memberName }</div>
+    <div class="col-md-3">전화번호 : ${m.memberPhone }</div>
+    <div class="col-md-3">도로명 주소 : ${m.addressRoad }</div>
+    <div class="col-md-3">상세주소 : ${m.addressDetail }</div>
+    
+    </div>
+    <div class="row">
+    <div class="col-md-3">자기소개 : ${m.profileIntro }</div>
+    <div class="col-md-3">포인트 : ${m.memberPoint }</div>
+    </div>
+  	
+  	
+  	
+  	
+  	
   	
     </td></tr>
     
@@ -159,11 +171,12 @@ margin-left : 50%;
     
     </table>
     
-    </div>
     
+    </div>
     <div class="pagenation" style="">
     ${pageNavi }
     </div>
+    
    
    </div>
  
@@ -175,6 +188,8 @@ margin-left : 50%;
   
     	
     $(function(){
+    	
+    	
     	
     	$(".showDetailBtn").click(function(){
     		var index = $(this).val();
@@ -429,6 +444,10 @@ margin-left : 50%;
     	
 
     });
+    $(".showAllDetail").click(function(){
+    	$(".showDetailBtn").click();
+    });
+    
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     

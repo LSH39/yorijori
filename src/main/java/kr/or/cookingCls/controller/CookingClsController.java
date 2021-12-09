@@ -18,7 +18,7 @@ public class CookingClsController {
 	@Autowired
 	private CookingClsService service;
 	
-	//쿠킹클래스 전체 조회
+	//쿠킹 클래스 전체 조회
 	@RequestMapping(value="/cookingClsList.do")
 	public String SelectAllClass(int reqPage, Model model) {
 		//새로
@@ -34,13 +34,13 @@ public class CookingClsController {
 //		return "cookingcls/cookingClsList";
 	}
 	
-	//쿠킹클래스 작성 페이지
+	//쿠킹 클래스 작성 페이지
 	@RequestMapping(value="/cookingClsWriteFrm.do")
 	public String CookingClsListWriteFrm() {
 		return "cookingcls/cookingClsWriteFrm";
 	}
 	
-	//쿠킹클래스 조회
+	//쿠킹 클래스 조회
 	@RequestMapping(value="/cookingClsView.do")
 	public String CookingClsListView(int classNo, Model model) {
 		CookingCls ccls = service.selectOneClass(classNo);
@@ -53,13 +53,13 @@ public class CookingClsController {
 	}
 	
 	
-	//쿠킹클래스 수정 페이지
+	//쿠킹 클래스 수정 페이지
 	@RequestMapping(value="/cookingClsUpdateFrm.do")
 	public String CookingClsListUpdateFrm() {
 		return "cookingcls/cookingClsUpdateFrm";
 	}
 	
-	//쿠킹클래스 삭제
+	//쿠킹 클래스 삭제
 	@RequestMapping(value="/cookingClsDelete.do")
 	public String cookingClsDelete(int classNo, Model model) {
 		int result = service.deleteOneClass(classNo);

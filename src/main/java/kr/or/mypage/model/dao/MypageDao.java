@@ -9,11 +9,16 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
+import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.vo.ContestWin;
+import kr.or.mypage.model.vo.FollowList;
 import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyItem;
+import kr.or.mypage.model.vo.Mychat;
+import kr.or.mypage.model.vo.Myorder;
+import kr.or.mypage.model.vo.Mysell;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -86,6 +91,47 @@ public class MypageDao {
 	public ArrayList<LikeRecipe> likeRecipe(int memberNo) {
 		List<LikeRecipe> list = sqlSession.selectList("mypage.likeRecipe");
 		return (ArrayList<LikeRecipe>) list;
+	}
+	/*팔로우리스트*/
+	public ArrayList<FollowList> followList(int memberNo) {
+		List<FollowList> list = sqlSession.selectList("mypage.followList");
+		return (ArrayList<FollowList>) list;
+	}
+	/*내 게시판*/
+	public ArrayList<Freeboard> myBoard(String freeWriter) {
+		List<Freeboard> list = sqlSession.selectList("mypage.myBoard");
+		return (ArrayList<Freeboard>) list;
+	}
+	/*내 채팅리스트*/
+	public ArrayList<Mychat> myChatList(String chatRecive) {
+		List<Mychat> list = sqlSession.selectList("mypage.chatList");
+		return (ArrayList<Mychat>) list;
+	}
+	/*회원탈퇴(판매자)*/
+	public int upSeller(Member m) {
+		return sqlSession.update("mypage.upSeller",m);
+	
+	}
+	/*주문내역조회*/
+	public ArrayList<Myorder> myOrderList(int memberNo) {
+		List<Myorder> list = sqlSession.selectList("mypage.orderList");
+		return (ArrayList<Myorder>) list;
+	}
+	/*주문상세조회*/
+	
+	public Myorder myOrderDetail(int orderNo) {
+		return sqlSession.selectOne("mypage.orderDetail",orderNo);
+	
+	}
+	/*상세리스트*/
+	public ArrayList<Myorder> orderDetail(int orderNo) {
+		List<Myorder> list = sqlSession.selectList("mypage.detailOrder");
+		return (ArrayList<Myorder>) list;
+	}
+	/*판매내역조회*/
+	public ArrayList<Mysell> mySellerList(int memberNo) {
+		List<Mysell> list = sqlSession.selectList("mypage.sellerList");
+		return (ArrayList<Mysell>) list;
 	}
 
 

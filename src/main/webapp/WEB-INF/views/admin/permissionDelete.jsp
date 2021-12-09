@@ -9,10 +9,7 @@
 <style>
 .allmember{
 text-align: center;}
-.pagenation  {
-text-align: center;
-margin-left : 50%;
-}
+
 </style>
 </head>
 <body>
@@ -78,7 +75,7 @@ margin-left : 50%;
         
     
 
-    <span>조회 된 회원 수</span> <span class="amount">${list.size() }</span>
+    <span>조회 된 회원 수</span> <span class="amount">${totalCount }</span>
 
     <hr>
     
@@ -89,11 +86,13 @@ margin-left : 50%;
         
         <button class="deleteMember">탈퇴</button>
         <button>쪽지</button>
+        <button class="showAllDetail">전체 상세 보기</button>
     </div>
     
     <div style="float: right;">
     
     <select class="align">
+    <option value="10">10명 정렬</option>
         <option value="30">30명 정렬</option>
         <option value="50">50명 정렬</option>
         <option value="100">100명 정렬</option>
@@ -130,13 +129,19 @@ margin-left : 50%;
     <td>${m.boardCount }</td>
     </tr>
     <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
-    이름 : 
-  	전화번호 : 
-  	주소 : 
-  	프로필 이미지 : 
-  	자기소개 : 
-  	포인트 : 
-  	자격증 : 
+    <div class="row">
+    <div class="col-md-3">이름 : ${m.memberName }</div>
+    <div class="col-md-3">전화번호 : ${m.memberPhone }</div>
+    <div class="col-md-3">도로명 주소 : ${m.addressRoad }</div>
+    <div class="col-md-3">상세주소 : ${m.addressDetail }</div>
+    
+    </div>
+    <div class="row">
+    <div class="col-md-3">자기소개 : ${m.profileIntro }</div>
+    <div class="col-md-3">자격증 : </div>
+    
+    
+    </div>
   	
     </td></tr>
     </c:forEach>
@@ -233,7 +238,7 @@ margin-left : 50%;
     		var searchText = $("#searchtext").val();
     		var align = $(".align").val();
     		$.ajax({
-    			url:"permissionJoin.do?reqPage=1",
+    			url:"permissionDelete.do?reqPage=1",
     			type:"post",
     			data : {searchType:searchType,searchText:searchText,detail:detail,align:align,memberLevel:"4"},
     			success: function(data){
@@ -258,42 +263,10 @@ margin-left : 50%;
     		});
     	});
     	
-			$(".searchbtn2").click(function(){
-    		var detail = 2;
-    		var searchDetail= $("input[name=searchdetail]").val();
-    		var period = $(".period").val();
-    		var start = $(".recentmonthstart").val();
-    		var end = $(".recentmonthend").val();
-    		var moreless = $(".moreless").val();
-    		var searchText2 = $(".searchText2").val();
-    		var joinStart = $(".date1").val();
-    		var joinEnd = $(".date2").val();
-    		var align = $(".align").val();
-    		var memberLevel = $(".memberLevel").val();
-    		$.ajax({
-    			url:"allmember.do?reqPage=1",
-    			type:"post",
-    			data : {searchDetail:searchDetail,period:period,start:start,end:end,moreless:moreless,
-    				searchText2:searchText2,joinStart:joinStart,joinEnd:joinEnd,detail:detail,align:align,memberLevel:memberLevel},
-    			success: function(data){
-    				console.log("1");
-    				$("body").html(data);
-    				$(".detail").show();
-    				$("#searchText2").val(searchText2);
-    				$(".align").val(align);
-    				$(".memberLevel").val(memberLevel);
-    			},
-    			error:function(){
-    				console.log("err");
-    			}
-    			
-    			
-    		});
-    	});
 			$(".align").change(function(){
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"permissionJoin.do?reqPage=1",
+	    			url:"permissionDelete.do?reqPage=1",
 	    			type:"post",
 	    			data : {align:align},
 	    			success: function(data){
@@ -313,7 +286,7 @@ margin-left : 50%;
 				var memberLevel = $(".memberLevel").val();
 				var align = $(".align").val();
 				$.ajax({
-	    			url:"permissionJoin.do?reqPage=1",
+	    			url:"permissionDelete.do?reqPage=1",
 	    			type:"post",
 	    			data : {memberLevel:memberLevel,align:align},
 	    			success: function(data){
@@ -352,7 +325,7 @@ margin-left : 50%;
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="permissionJoin.do?reqPage=1";
+	    				location.href="permissionDelete.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
@@ -385,7 +358,7 @@ margin-left : 50%;
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){
-	    				location.href="permissionJoin.do?reqPage=1";
+	    				location.href="permissionDelete.do?reqPage=1";
 	    				
 	    			},
 	    			error:function(){
@@ -400,6 +373,9 @@ margin-left : 50%;
     	
     	
 
+    });
+    $(".showAllDetail").click(function(){
+    	$(".showDetailBtn").click();
     });
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />

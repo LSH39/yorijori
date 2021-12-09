@@ -7,19 +7,20 @@
 			review_no as reviewNo,
 			class_no as classNo,
 			product_no as productNo,
-			member_no as memberNo,
+			member_nickname as memberNickname,
 			review_content as reviewContent,
 			review_rate as reviewRate,
 			review_flag as reviewFlag,
 			review_date as reviewDate
 		from review
 		where class_no=#{classNo}
+		order by review_no desc
 	</select>
 	
 	<!-- 리뷰 작성 -->
 	<insert id="insertReview" parameterType="review">
 		insert into review values(
-			review_seq.nextval, #{classNo}, null, #{memberNo}, #{reviewContent}, #{reviewRate}, 2, to_char(sysdate, 'YYYY-MM-DD') 
+			review_seq.nextval, #{classNo}, null, #{memberNickname}, #{reviewContent}, #{reviewRate}, 2, to_char(sysdate, 'YYYY-MM-DD') 
 		)
 	</insert>
 	

@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+       .main{
+            margin: 0 auto;
+            margin-top:100px;
+            width:1200px;
+        }
+       
+        .mainImg{
+            display:flex;   
+            justify-content: center;
+            position:relative;
+        }
+        #count{
+            position:absolute;
+            border-radius:15px;
+            background-color:#443c46;
+            width:100px;
+            text-align:center;
+            top: 90%;
+            left: 68%; 
+        }
+        .mainImg>img{
+            width: 700px;
+            height: 500px;
+        }
+        #countText{
+            padding-left:10px;
+            padding-bottom:10px;
+            color: #ababab;
+        }
+        #rbName{
+            margin-top: 50px;
+            font-weight: 900;
+            text-align: center;
+            font-size: 20px;
+        }
+       .rbList{    	  
+            margin: 0 auto;
+            width: 500px;
+           margin-bottom: 20px;
+        }
+        #rbTitle{
+            font-size: 50px;
+            font-weight: 900;
+            text-align: center;
+        }
+        #rbSub{
+            text-align: center;        
+        }
+        .rbImg>div{
+            width: 100px;
+            float: left;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .rbImg{
+        	height:120px;
+            margin-left: 150px;
+            
+        }
+        #mList{
+        	margin-top:10px;
+            width: 300px;
+            margin: 0 auto;
+         
+        }
+        #mList li{
+            margin-left: 30px;
+            height: 50px;
+        }
+        #mTitle{
+            font-weight: 900;
+            font-size: 30px;
+            text-align: center;
+        }
+        .contents{
+            width: 1000px;
+        }
+        .text{
+            color:#6D5874;
+            font-weight: bolder;
+            text-align: center;
+        }
+        .amount{
+            margin-left: 30px;
+        }
+        .recipeNavi>ul{
+            margin: 0 auto;
+            margin-top: 50px;
+            
+        }
+        .recipeNavi>ul>li>a{
+        	width:300px;
+            float: left;
+            display: block;
+            box-sizing: border-box;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;   
+        }
+     

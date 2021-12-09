@@ -24,6 +24,7 @@ import kr.or.recipe.model.service.RecipeService;
 import kr.or.recipe.model.vo.FileVo;
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 import sun.reflect.generics.visitor.Reifier;
 
@@ -33,8 +34,8 @@ public class RecipeController {
 	private RecipeService service;
 	
 	@RequestMapping(value = "/recipeBoard.do")
-	public String recipeBoard(Model model) {
-		ArrayList<RecipeBoard>list = service.selectRecipeList();
+	public String recipeBoard(RecipeBoard rb, Model model) {
+		ArrayList<RecipeBoard>list = service.selectRecipeList(rb);
 		model.addAttribute("list", list);
 		return "recipe/recipeBoard";
 	}
@@ -119,7 +120,9 @@ public class RecipeController {
 	@RequestMapping(value = "/recipeView.do")
 	   public String recipeView(int recipeNo, Model model) {
 		RecipeBoard rb = service.selectOneRecipe(recipeNo);
+		ArrayList<RecipeComment>list = service.selectComment(recipeNo);
 		model.addAttribute("rb", rb);
+		model.addAttribute("list", list);
 		return "recipe/recipeView";
 	}
 	
@@ -140,5 +143,31 @@ public class RecipeController {
 		public String rCategory3(String item3) {
 		ArrayList<RecipeBoard>list = service.selectCategory3(item3);
 		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/selectComment.do" , produces = "application/json;charset=utf-8")
+	public String selectComment(int recipeNo) {
+		ArrayList<RecipeComment>list = service.selectComment(recipeNo);
+		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/insertComment.do")
+	public int insertComment(RecipeComment rc) {
+		int result = service.insertComment(rc);
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/updateComment.do")
+	public int updateComment(RecipeComment rc) {
+		int result = service.updateComment(rc);
+		return result;
+		
+	}
+	@ResponseBody
+	@RequestMapping(value = "/deleteComment.do")
+	public int deleteComment(int rCommentNo) {
+		int result = service.deleteComment(rCommentNo);
+		return result;
+		
 	}
 }

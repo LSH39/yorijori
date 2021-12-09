@@ -48,13 +48,13 @@
     
     <c:forEach items="${list }" var="dm">
     <main class="main-screen">
-      <a class="link" href="/dmView.do?memberNo=${dm.memberNo }">
+      <a class="link" href="/dmView.do?classNo=${dm.classNo }">
         <div class="user-component">
           <div class="user-component__column">
             <img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />
             <div class="user-component__text">
               <h4 class="user-component__text-name">${dm.dmReceiver }</h4>
-              <h6 class="user-component__text-preview">
+              <h6 class="user-component__text-preview" >
                 ${dm.dmContent }
               </h6>
             </div>

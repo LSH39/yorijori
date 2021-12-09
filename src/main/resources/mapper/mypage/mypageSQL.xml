@@ -55,7 +55,10 @@
 		update member set
 		address=#{address} where member_id=#{memberId}
 	</update>
+	<update id="upSeller" parameterType="m">
+	update member set member_level=5 where member_Id='test0016' and member_pw='333'
 	
+	</update>
 	<delete id="deleteMember"  parameterType="string">
 	     delete from member where member_id='test0040' and member_pw='333'
 	
@@ -141,7 +144,7 @@
 		 rb.recipe_title as recipeTitle,
 		 rb.recipe_writer as recipeWriter
 		 from contest_recipe cr,recipe_board rb
-		 where cr.recipe_no=rb.recipe_no and cr.contest_winner=1 
+		 where cr.recipe_no=rb.recipe_no and cr.contest_result=1 
 		 order by contest_month asc
 
 
@@ -152,7 +155,7 @@
 	        cr.enter_Date as enterDate,
 	        rb.recipe_title as recipeTitle,
 	        rb.recipe_writer as recipeWriter,
-	        cr.contest_winner as contestWinner
+	        cr.contest_result as contestResult
 	  from contest_recipe cr,recipe_board rb
 	  where cr.recipe_no=rb.recipe_no and recipe_writer=111
 	  order by contest_no asc
@@ -185,6 +188,157 @@
 		 from recipe_board rb,recipe_like rl
 		 where rb.recipe_no=rl.recipe_no and rl.member_no=111
  
+
+</select>
+
+<select id="myBoard" resultType="fb" parameterType="_int">
+		select free_no as freeNo,
+		free_writer as freeWriter,
+		free_title as freeTitle,
+		free_content as freeContent,
+		reg_date as regDate,
+		free_readcount as freeReadcount
+        from freeboard where free_writer='hyo'
+ 
+
+</select>
+<select id="followList" resultType="fol" parameterType="_int">
+    
+	    select a.recipe_Writer as recipeWriter,
+	     a.recipe_Title as recipeTitle,
+	     a.filepath as filepath,
+	     a.subhead as subhead,
+	     (select member_nickName from member where member_no = a.recipe_writer)as memberNickname
+	    from recipe_board a
+	    where a.recipe_writer in (SELECT follow_no from follow where member_no=111)
+
+</select>
+
+<select id="chatList" resultType="mc" parameterType="_int">
+		select a.chat_no as chatNo,
+		a.chat_send as chatSend ,
+		a.chat_recive as chatRecive,
+		a.chat_content as chatContent,
+		a.chat_date as chatDate
+	  from chat a 
+	     , (select chat_send , max(chat_no) as chat_no
+	          from chat
+	         where chat_recive = 111
+	         group by chat_send
+	         ) b
+	  where a.chat_send = b.chat_send
+	    and a.chat_no = b.chat_no
+
+
+</select>
+
+<select id="orderList" resultType="mo" parameterType="_int">
+ select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus
+      
+     from
+     order_option a,order_tbl b
+     where a.order_no =b.order_no and b.member_no=111
+
+</select>
+
+<select id="orderDetail" resultType="mo" parameterType="_int">
+ select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus
+      
+     from
+     order_option a,order_tbl b
+     where a.order_no =b.order_no and b.order_no=11
+         
+
+</select>
+
+<select id="detailOrder" parameterType="_int" resultType="mo">
+select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus,
+        c.milkit_name as milkitName ,
+        c.milkit_price as milkitPrice,
+        c.filepath
+      
+     from
+     order_option a,order_tbl b,product c
+     where a.order_no =b.order_no and a.product_no =c.product_no  and b.order_no=11
+
+</select>
+<select id="sellerList" resultType="ms" parameterType="_int">
+  select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus,
+        c.milkit_writer as milkitWriter,
+        c.recipe_no as recipeNo,
+        c.milkit_name as milkitName    
+	     from
+	     order_option a,order_tbl b,product c
+	     where a.order_no =b.order_no and a.product_no=c.product_no  and c.milkit_writer=5 
+
 
 </select>
 </mapper>
