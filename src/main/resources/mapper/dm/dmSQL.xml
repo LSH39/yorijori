@@ -11,7 +11,8 @@
 			dm_sender as dmSender,
 			dm_content as dmContent,
 			dm_read_flag as dmReadFlag,
-			dm_date as dmDate 
+			dm_date as dmDate, 
+			dm_room_no as dmRoomNo
 		from dm 
 		where dm_no IN 
 			(select max(dm_no) 
@@ -19,7 +20,7 @@
 			order by dm_read_flag asc, dm_date desc
 	</select>
 
-	<!-- 문의 보기 -->
+	<!-- 최초 문의 보기 -->
 	<select id="selectOneDm" parameterType="_int" resultType="dm">
 		select 
 			dm_no as dmNo,
@@ -28,15 +29,34 @@
 			dm_sender as dmSender,
 			dm_content as dmContent,
 			dm_read_flag as dmReadFlag,
-			dm_date as dmDate 
+			dm_date as dmDate, 
+			dm_room_no as dmRoomNo
 		from dm 
 		where class_no=#{classNo}
 	</select>
 	
-	<!-- 문의 작성 -->
+	<!-- 방 번호 있는 문의 -->
+	<select id="selectOneDmRoomId" parameterType="_int" resultType="dm">
+		select 
+			dm_no as dmNo,
+			class_no as classNo,
+			dm_receiver as dmReceiver,
+			dm_sender as dmSender,
+			dm_content as dmContent,
+			dm_read_flag as dmReadFlag,
+			dm_date as dmDate, 
+			dm_room_no as dmRoomNo
+		from dm 
+		where dm_room_no=#{dmRoomNo}
+	</select>
+	
+	<!-- 방 번호 생성 -->
+	
+	
+	<!-- 문의 작성 (구매자) -->
 	<insert id="insertDm" parameterType="map">
-		insert dm into values(
-			dm_seq.nextval, #{classNo}, #{dmReceiver}, #{dmSender}, #{dmContent}, #{dmReadFlag}, to_char(sysdate, 'YYYY-MM-DD HH:MI:SS')
+		insert into dm values(
+			dm_seq.nextval, #{classNo}, #{dmReceiver}, #{dmSender}, #{dmContent}, 0, #{dmRoomNo}, to_char(sysdate, 'YYYY-MM-DD HH:MI:SS')
 		)
 		
 	</insert>

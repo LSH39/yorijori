@@ -19,7 +19,7 @@
         </a>
       </div>
       <div class="alt-header__column">
-        <h1 class="alt-header__title">멤버 닉네임</h1>
+        <h1 class="alt-header__title">${receiver }</h1>
       </div>
       <div class="alt-header__column">
         <a class="link" href="#">
@@ -38,21 +38,24 @@
       
       <c:forEach items="${list }" var="dm">
       <!-- 메세지 받음 -->
-      <c:if test="${dm.dmSender ne sessionScope.m.memberId }">
+
+      <c:choose>
+      	<c:when test="${dm.dmSender != sessionScope.m.memberNickname }">
       <div class="message-row">
         <img src="./resources/img/dm/classtest.jpg"/>
         <div class="message-row__content">
-          <span class="message__author">${dm.dmReceiver }</span>
+          <span class="message__author">${dm.dmSender }</span>
           <div class="message__info">
             <span class="message__bubble">${dm.dmContent }</span>
             <span class="message__time">${dm.dmDate.substring(11, 16) }</span>
           </div>
         </div>
       </div>
-      </c:if>
+      	</c:when>
 
-      <!-- 메세지 보냄 -->
-      <c:if test="${dm.dmSender eq sessionScope.m.memberId }">
+
+
+      	<c:when test="${dm.dmSender == sessionScope.m.memberNickname }">
       <div class="message-row message-row--own">
         <div class="message-row__content">
           <div class="message__info">
@@ -61,7 +64,9 @@
           </div>
         </div>
       </div>
-      </c:if>
+      	</c:when>
+      </c:choose>
+
       </c:forEach>
       
       <!-- 메세지 받음 -->
@@ -92,9 +97,9 @@
       
     </main>
 	
-	<input type="hidden" class="dmSender" value="${sessionScope.m.memberId }">
+	<input type="hidden" class="dmSender" value="${sessionScope.m.memberNickname }">
 	<input type="hidden" class="classNo" value="${classNo }">
-	<input type="hidden" class="" value="">
+	<input type="hidden" class="dmReceiver" value="${receiver }">
     <form class="reply">
       <div class="reply__column"><i class="far fa-plus-square"></i></div>
       <div class="reply__column">
@@ -110,7 +115,7 @@
     <script>
     	$(function(){
     		$("#message__send").click(function(){
-    			let dmReceiver = "";
+    			let dmReceiver = $(".dmReceiver").val();
     			let dmSender = $(".dmSender").val();
     			let classNo = $(".classNo").val();
     			let dmContent = $(".dmContent").val();
@@ -122,11 +127,18 @@
     			
     			//메세지 작성을 할때 필요한 것
     			//1. dmReceiver, dmSender<-sessionScope.m.memberId, (classNo)로 사용할것, dmContent
-    			/*
+    			
     			$.ajax({
     				url : "/dmSend.do",
     				type : "post",
-    				data : 
+    				data : {classNo:classNo, dmReceiver:dmReceiver, dmSender:dmSender, dmContent:dmContent},
+    				success : function(data){
+    					if(data=="1"){
+    						console.log("성공!(테스트용)");
+    					}else if(data=="0"){
+    						console.log("실패!(테스트용)");						
+    					}
+    				}
     				
     				
     				
@@ -139,8 +151,6 @@
     				
     				
     			});
-    			*/
-    			alert("zz");
     		});
     	});
     </script>
