@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="recipe">
- 	<select id="selectRecipeList" resultType="rb">
+ 	<select id="selectRecipeList" parameterType="rb" resultType="rb">
  		select 
  			recipe_no as recipeNo, 
  			recipe_title as recipeTitle, 
@@ -11,6 +11,39 @@
  			recipe_level as recipeLevel,
 		(select member_nickname from Member m  where m.member_no = r.recipe_writer) as nickname 
 		from recipe_board r
+	<choose>
+		<when test="situation gt 0 and material gt 0 and recipeLevel gt 0 ">
+		 where situation=#{situation} and  material=#{material} and recipe_level=#{recipeLevel}
+		</when>
+		<when test="situation gt 0">
+			where situation=#{situation}
+			<if test="material gt 0">
+			and material=#{material}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>
+		<when test="material gt 0">
+			where material=#{material}
+			<if test="situation gt 0">
+			and situation=#{situation}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>
+		<when test="recipeLevel gt 0">
+			where recipe_level=#{recipeLevel}
+			<if test="material gt 0">
+			and material=#{material}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>
+	</choose>
+		
  	</select>
  	<insert id="insertRecipeBoard" parameterType="rb" >
  		insert into recipe_board values(recipe_seq.nextval,#{recipeWriter},#{recipeTitle},#{filepath},0,to_char(sysdate,'yyyy-mm-dd'),#{subhead},#{recipeVideo},#{recipeTime},#{foodName},#{recipeLevel},#{situation},#{material})
@@ -24,39 +57,7 @@
  	<insert id="insertContent" parameterType="rcontent">
  		insert into recipe_content values(r_file_seq.nextval,#{recipeNo},#{filename},#{filepath},#{recipeContent})
  	</insert>
- 	<select id="selectCategory1" parameterType="string" resultType="rb">
- 	   select 
- 			recipe_no as recipeNo, 
- 			recipe_title as recipeTitle, 
- 			filepath,
- 			read_count as readCount,
- 			recipe_time as recipeTime, 
- 			recipe_level as recipeLevel,
-        (select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
- 	from recipe_board r where situation=#{item}
- 	</select>
- 	<select id="selectCategory2" parameterType="string" resultType="rb">
- 		select 
- 			recipe_no as recipeNo, 
- 			recipe_title as recipeTitle, 
- 			filepath,
- 			read_count as readCount,
- 			recipe_time as recipeTime, 
- 			recipe_level as recipeLevel,
-        	(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
- 		from recipe_board r where material=#{item2}
- 	</select>
- 	<select id="selectCategory3" parameterType="string" resultType="rb">
- 		select 
- 			recipe_no as recipeNo, 
- 			recipe_title as recipeTitle, 
- 			filepath,
- 			read_count as readCount,
- 			recipe_time as recipeTime, 
- 			recipe_level as recipeLevel,
-        	(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
- 		from recipe_board r where recipe_level=#{item3}
- 	</select>
+ 	
  	<select id="selectOneRecipe" parameterType="_int" resultType="rb">
  		select
  			recipe_no as recipeNo,
@@ -96,11 +97,23 @@
  			recipe_no as recipeNo,
  			rc_content as rcContent,
  			rc_date as rcDate,
+ 			member_no as memberNo,
         (select member_nickname from member m where m.member_no = rc.member_no)as nickname 
  		from recipe_comment rc where recipe_no=#{recipeNo}
  	</select>
  	<insert id="insertComment" parameterType="rcomment">
  		insert into recipe_comment values(rc_seq.nextval,#{recipeNo},#{memberNo},#{rcContent},to_char(sysdate,'yyyy-mm-dd'))
- 		
+ 	</insert>
+ 	<delete id="deleteComment" parameterType="_int">
+ 		delete from recipe_comment where r_comment_no=#{rCommentNo}
+ 	</delete>
+ 	<update id="updateComment" parameterType="rcomment">
+ 		update recipe_comment set rc_content=#{rcContent} where r_comment_no=#{rCommentNo}
+ 	</update>
+ 	<update id="updateCount" parameterType="rb">
+ 		update recipe_board set read_count=read_count +1 where recipe_no=#{recipeNo}
+ 	</update>
+ 	<insert id="insertLike" parameterType="rlike">
+ 		insert into recipe_like values(r_like_seq.nextval,#{memberNo},#{recipe_no})
  	</insert>
 </mapper>

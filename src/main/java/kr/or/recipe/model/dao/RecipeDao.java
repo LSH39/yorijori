@@ -11,6 +11,7 @@ import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
+import kr.or.recipe.model.vo.RecipeLike;
 
 
 @Repository
@@ -18,8 +19,8 @@ public class RecipeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<RecipeBoard> selectRecipeList() {
-		List<RecipeBoard>list = sqlSession.selectList("recipe.selectRecipeList"); 
+	public ArrayList<RecipeBoard> selectRecipeList(RecipeBoard rb) {
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectRecipeList",rb); 
 		return (ArrayList<RecipeBoard>)list;
 	}
 
@@ -76,6 +77,22 @@ public class RecipeDao {
 
 	public int insertCommnet(RecipeComment rc) {
 		return sqlSession.insert("recipe.insertComment",rc);
+	}
+
+	public int deleteComment(int rCommentNo) {
+		return sqlSession.delete("recipe.deleteComment", rCommentNo);
+	}
+
+	public int updateComment(RecipeComment rc) {
+		return sqlSession.update("recipe.updateComment", rc);
+	}
+
+	public int updateCount(RecipeBoard rb) {
+		return sqlSession.update("recipe.updateCount", rb);
+	}
+
+	public int insertLike(RecipeLike rl) {
+		return sqlSession.insert("recipe.insertLike", rl);
 	}
 
 

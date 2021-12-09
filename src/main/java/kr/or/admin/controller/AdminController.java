@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.admin.model.service.AdminService;
+import kr.or.admin.model.vo.CouponPageData;
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
+import kr.or.coupon.model.vo.Coupon;
 
 
 
@@ -31,7 +33,7 @@ public class AdminController {
 		String gotothe = "allmember";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
-		
+		model.addAttribute("totalCount",mpd.getTotalCount());
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/allmember";
@@ -50,7 +52,7 @@ public class AdminController {
 		String gotothe = "blackList";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
-		
+		model.addAttribute("totalCount",mpd.getTotalCount());
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/blackList";
@@ -62,7 +64,7 @@ public class AdminController {
 		memberLevel = "4";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
-		
+		model.addAttribute("totalCount",mpd.getTotalCount());
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/permissionJoin";
@@ -75,7 +77,7 @@ public class AdminController {
 		memberLevel = "5";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());
-		
+		model.addAttribute("totalCount",mpd.getTotalCount());
 		model.addAttribute("pageNavi",mpd.getPageNavi());
 		
 		return "admin/permissionDelete";
@@ -121,6 +123,33 @@ public class AdminController {
 			
 			
 		return "admin/coupon";
+	}
+	@RequestMapping(value="/couponList.do")
+	public String couponList(Model model, int reqPage  ) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String gotothe = "couponList";
+		
+		map.put("gotothe", gotothe);
+		map.put("reqPage", reqPage);
+		
+		CouponPageData cpd = service.selectAllCoupon(map);
+		model.addAttribute("list",cpd.getList());
+		model.addAttribute("pageNavi",cpd.getPageNavi());
+		model.addAttribute("totalCount",cpd.getStart());
+		return "admin/couponList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/adminDeleteCoupon.do")
+	public String adminDeleteCoupon(String couponNo) {
+		int result = service.deleteCoupon(couponNo);
+		return "redirect:/couponList.do?reqPage=1";
+	}
+	@ResponseBody
+	@RequestMapping(value="/pointReset.do")
+	public String pointReset(String memberNo) {
+		int result = service.pointReset(memberNo);
+		return "redirect:/blackList.do?reqPage=1";
 	}
 	
 }

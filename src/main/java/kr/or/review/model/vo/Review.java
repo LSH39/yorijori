@@ -8,7 +8,7 @@ public class Review {
 	private int reviewNo;
 	private int classNo;
 	private int productNo;
-	private int memberNo;
+	private String memberNickname;
 	private String reviewContent;
 	private int reviewRate;
 	private int reviewFlag;

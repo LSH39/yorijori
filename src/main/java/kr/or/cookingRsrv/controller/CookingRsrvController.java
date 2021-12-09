@@ -25,19 +25,17 @@ public class CookingRsrvController {
 	//쿠킹 클래스 예약
 	@ResponseBody
 	@RequestMapping(value="/insertCookingRsrv.do")
-	public String insertCookingRsrv(int memberNo, int classNo, String impUid, int classNop, Model model) {
+	public String insertCookingRsrv(String memberNickname, int classNo, String impUid, int classNop, Model model) {
 		//회원번호 클래스번호 아잉포트 번호
 		//예약할때 해당 클래스 인원수 확인, 없을때 insert 하고 인원수 +1 update 인원수 꽉찼으면 2번으로
 
-
-		int result = service.insertCookingRsrv(memberNo, classNo, impUid, classNop);
+		int result = service.insertCookingRsrv(memberNickname, classNo, impUid, classNop);
 
 		if(result > 0) {
 			return "1";
 		}else {
 			return "0";
 		}
-
 	}
 	
 	//쿠킹 클래스 예약 내역
@@ -45,16 +43,30 @@ public class CookingRsrvController {
 	public String selectAllRsrv(Model model, HttpSession session) {
 		//int memberNo = (Integer)session.getAttribute("MemberNo");
 		Member member = (Member)session.getAttribute("m");
-		int memberNo = member.getMemberNo();
-		ArrayList<CookingRsrv> list = service.selectAllRsrv(memberNo);
+		String memberNickname = member.getMemberNickname();
+		ArrayList<CookingRsrv> list = service.selectAllRsrv(memberNickname);
 		model.addAttribute("list", list);
 		return "cookingrsrv/cookingRsrvList";
 	}
 	
-	//쿠킹 클래스 예약 취소
+	//쿠킹 클래스 내역 삭제
 	@RequestMapping(value="/deleteCookingRsrv.do")
-	public String deleteCookingRsrv(int classNo, Model model) {
-		int result = service.deleteCookingRsrv(classNo);
+	public String deleteCookingRsrv(int rsrvNo, Model model) {
+		int result = service.deleteCookingRsrv(rsrvNo);
+		if(result > 0) {
+			model.addAttribute("msg", "내역 삭제 성공!");
+			model.addAttribute("loc", "/cookingRsrvList.do");
+		}else {
+			model.addAttribute("msg", "내역 삭제 실패!");
+			model.addAttribute("loc", "/");			
+		}
+		return "common/msg";
+	}
+	
+	//쿠킹 클래스 예약 취소 (성승민 12-08)
+	@RequestMapping(value="/cancelCookingRsrv.do")
+	public String cancelCookingRsrv(int classNo, Model model) {
+		int result = service.cancelCookingRsrv(classNo);
 		if(result > 0) {
 			model.addAttribute("msg", "취소 성공!");
 			model.addAttribute("loc", "/");

@@ -12,14 +12,15 @@ import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
+import kr.or.recipe.model.vo.RecipeLike;
 @Service
 public class RecipeService {
 	@Autowired
 	private RecipeDao dao;
 
 
-	public ArrayList<RecipeBoard> selectRecipeList() {
-		ArrayList<RecipeBoard>list = dao.selectRecipeList();
+	public ArrayList<RecipeBoard> selectRecipeList(RecipeBoard rb) {
+		ArrayList<RecipeBoard>list = dao.selectRecipeList(rb);
 		return list;
 	}
 
@@ -42,27 +43,13 @@ public class RecipeService {
 	}
 
 
-	public ArrayList<RecipeBoard> selectCategory1(String item) {
-		ArrayList<RecipeBoard>list = dao.selectCategory1(item);
-		return list;
-	}
-
-
-	public ArrayList<RecipeBoard> selectCategory2(String item2) {
-		ArrayList<RecipeBoard>list = dao.selectCategory2(item2);
-		return list;
-	}
-
-
-	public ArrayList<RecipeBoard> selectCategory3(String item3) {
-		ArrayList<RecipeBoard>list = dao.selectCategory3(item3);
-		return list;
-	}
-
 	public RecipeBoard selectOneRecipe(int recipeNo) {
 		RecipeBoard rb = dao.selectOneRecipe(recipeNo);
 		ArrayList<Material>mList = dao.selectMaterial(recipeNo);
 		ArrayList<RecipeContent>rList = dao.selectContent(recipeNo);
+		if(rb != null) {
+			int result = dao.updateCount(rb);
+		}
 		rb.setMList(mList);
 		rb.setRList(rList);
 		return rb;
@@ -81,6 +68,22 @@ public class RecipeService {
 	}
 
 
+	public int deleteComment(int rCommentNo) {
+		int result = dao.deleteComment(rCommentNo);
+		return result;
+	}
+
+
+	public int updateComment(RecipeComment rc) {
+		int result = dao.updateComment(rc);
+		return result;
+	}
+
+
+	public int insertLike(RecipeLike rl) {
+		int result = dao.insertLike(rl);
+		return result;
+	}
 }
 	
 

@@ -9,10 +9,7 @@
 <style>
 .allmember{
 text-align: center;}
-.pagenation  {
-text-align: center;
-margin-left : 50%;
-}
+
 </style>
 </head>
 <body>
@@ -78,7 +75,7 @@ margin-left : 50%;
         
     
 
-    <span>조회 된 회원 수</span> <span class="amount">${list.size() }</span>
+    <span>조회 된 회원 수</span> <span class="amount">${totalCount }</span>
 
     <hr>
     
@@ -89,6 +86,7 @@ margin-left : 50%;
         <button class="addNormal">일반회원으로 변경</button>
         <button>강제 탈퇴</button>
         <button>쪽지</button>
+        <button class="showAllDetail">전체 상세 보기</button>
     </div>
     
     <div style="float: right;">
@@ -98,6 +96,7 @@ margin-left : 50%;
         <option value="2">조리꾼</option>
     </select>
     <select class="align">
+    <option value="10">10명 정렬</option>
         <option value="30">30명 정렬</option>
         <option value="50">50명 정렬</option>
         <option value="100">100명 정렬</option>
@@ -141,13 +140,20 @@ margin-left : 50%;
     <td>${m.boardCount }</td>
     </tr>
     <tr class="showDetail${i.index } showDetail" style=""><td colspan="7">
-    이름 : 
-  	전화번호 : 
-  	주소 : 
-  	프로필 이미지 : 
-  	자기소개 : 
-  	포인트 : 
-  	사유 : 
+    <div class="row">
+    <div class="col-md-3">이름 : ${m.memberName }</div>
+    <div class="col-md-3">전화번호 : ${m.memberPhone }</div>
+    <div class="col-md-3">도로명 주소 : ${m.addressRoad }</div>
+    <div class="col-md-3">상세주소 : ${m.addressDetail }</div>
+    
+    </div>
+    <div class="row">
+    <div class="col-md-3">자기소개 : ${m.profileIntro }</div>
+    <div class="col-md-3">포인트 : ${m.memberPoint }</div>
+    <div class="col-md-3">사유 : </div>
+    <div class="col-md-3"><button class="pointReset">포인트 초기화</button><input type="hidden" value="${m.memberNo }"></div>
+    </div>
+  	
     </td></tr>
     </c:forEach>
     
@@ -406,10 +412,34 @@ margin-left : 50%;
 	    		});
 				
 			});
+			
+			$(".pointReset").click(function(){
+				var memberNo = $(this).next().val();
+				$.ajax({
+	    			url:"pointReset.do",
+	    			type:"post",
+	    			data : {memberNo:memberNo},
+	    			success: function(data){
+	    				location.href="blackList.do?reqPage=1";
+	    				
+	    			},
+	    			error:function(){
+	    				console.log("err");
+	    				
+	    			}
+	    			
+	    			
+	    		});
+			});
     	
     	
 
     });
+    $(".showAllDetail").click(function(){
+    	$(".showDetailBtn").click();
+    });
+    
+    
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     
