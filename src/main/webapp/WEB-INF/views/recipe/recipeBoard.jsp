@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<c:import url="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
     <h1>레시피</h1>
 
@@ -40,6 +40,6 @@
 		</c:forEach>
 		</div>
 	</div>		
-<c:import url="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
