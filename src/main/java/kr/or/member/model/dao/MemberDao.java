@@ -17,9 +17,7 @@ public class MemberDao {
 	private SqlSessionTemplate sqlSession;
 
 	public Member loginMember(Member member) {
-		System.out.println("1 : "+member.getMemberId() + member.getMemberPw());
 		Member m = sqlSession.selectOne("member.loginMember",member);
-		System.out.println("2 : "+m.getMemberId() + m.getMemberPw());
 		return m;
 	}
 	
