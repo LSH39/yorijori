@@ -9,7 +9,7 @@
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
-<c:import url="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
 		<h1>레시피 등록</h1>
 		<form action="/recipeFrm.do" method="post"
@@ -168,6 +168,6 @@
 			
 		});
 	</script>
-	<c:import url="/WEB-INF/views/common/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
