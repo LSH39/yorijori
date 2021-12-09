@@ -1,9 +1,12 @@
 package kr.or.admin.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import kr.or.admin.model.service.AdminService;
 import kr.or.admin.model.vo.CouponPageData;
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
+import kr.or.admin.model.vo.Prev;
 import kr.or.coupon.model.vo.Coupon;
 
 
@@ -150,6 +154,24 @@ public class AdminController {
 	public String pointReset(String memberNo) {
 		int result = service.pointReset(memberNo);
 		return "redirect:/blackList.do?reqPage=1";
+	}
+	@RequestMapping(value="/stat.do")
+	public String stat(Model model,String today) {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today2 = sdf.format(date);
+		if(today ==null) {
+			today=today2;
+		}
+		Prev count = service.selectFjr(today);
+		
+		
+		Prev prev = service.selectFreeCount();
+		model.addAttribute("freeCount",count.getToday());
+		model.addAttribute("joinCount",count.getPrev1());
+		model.addAttribute("recipeCount",count.getPrev2());
+		model.addAttribute("p",prev);
+		return "admin/stat";
 	}
 	
 }
