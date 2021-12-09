@@ -79,7 +79,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="#">서비스소개</a></li>
+          <li><a class="nav-link scrollto" href="/siteInfo.do">서비스소개</a></li>
           <li><a class="nav-link scrollto" href="#" id="show-category">레시피</a></li>
           <li class="dropdown"><a href="#"><span>밀키트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
