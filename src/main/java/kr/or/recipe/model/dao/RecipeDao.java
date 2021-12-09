@@ -11,6 +11,7 @@ import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
+import kr.or.recipe.model.vo.RecipeLike;
 
 
 @Repository
@@ -84,6 +85,14 @@ public class RecipeDao {
 
 	public int updateComment(RecipeComment rc) {
 		return sqlSession.update("recipe.updateComment", rc);
+	}
+
+	public int updateCount(RecipeBoard rb) {
+		return sqlSession.update("recipe.updateCount", rb);
+	}
+
+	public int insertLike(RecipeLike rl) {
+		return sqlSession.insert("recipe.insertLike", rl);
 	}
 
 

@@ -26,6 +26,7 @@ import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
+import kr.or.recipe.model.vo.RecipeLike;
 import sun.reflect.generics.visitor.Reifier;
 
 @Controller
@@ -127,24 +128,6 @@ public class RecipeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/rCategory1.do", produces = "application/json;charset=utf-8")
-		public String rCategory1(String item){
-		ArrayList<RecipeBoard>list = service.selectCategory1(item);
-		return new Gson().toJson(list);
-	}
-	@ResponseBody
-	@RequestMapping(value = "/rCategory2.do", produces = "application/json;charset=utf-8")
-		public String rCategory2(String item2) {
-		ArrayList<RecipeBoard>list = service.selectCategory2(item2);
-		return new Gson().toJson(list);
-	}
-	@ResponseBody
-	@RequestMapping(value = "/rCategory3.do" , produces = "application/json;charset=utf-8")
-		public String rCategory3(String item3) {
-		ArrayList<RecipeBoard>list = service.selectCategory3(item3);
-		return new Gson().toJson(list);
-	}
-	@ResponseBody
 	@RequestMapping(value = "/selectComment.do" , produces = "application/json;charset=utf-8")
 	public String selectComment(int recipeNo) {
 		ArrayList<RecipeComment>list = service.selectComment(recipeNo);
@@ -167,6 +150,12 @@ public class RecipeController {
 	@RequestMapping(value = "/deleteComment.do")
 	public int deleteComment(int rCommentNo) {
 		int result = service.deleteComment(rCommentNo);
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/insertLike.do")
+	public int insertLike(RecipeLike rl) {
+		int result = service.insertLike(rl);
 		return result;
 		
 	}
