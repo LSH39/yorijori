@@ -33,10 +33,12 @@ public class DmController {
 	//문의 조회
 	@RequestMapping(value="/dmView.do")
 	public String dmView(int classNo, Model model) {
-		//memberNo 클래스 번호 진행
+
 		ArrayList<Dm> list = service.selectOneDm(classNo);
+		String receiver = service.selectOneNickname(classNo);
 		model.addAttribute("list", list);
 		model.addAttribute("classNo", classNo);
+		model.addAttribute("receiver", receiver);
 		return "dm/dmView";
 	}
 	
@@ -44,6 +46,10 @@ public class DmController {
 	@ResponseBody
 	@RequestMapping(value="/dmSend.do")
 	public String insertDm(int classNo, String dmReceiver, String dmSender, String dmContent) {
+		System.out.println("classNo "+classNo);
+		System.out.println("dmReceiver "+dmReceiver);
+		System.out.println("dmSender "+dmSender);
+		System.out.println("dmContent "+dmContent);
 		int result = service.insertDm(classNo, dmReceiver, dmSender, dmContent);
 		if(result > 0) {
 			return "1"; 

@@ -53,4 +53,9 @@ public class CookingClsDao {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("cookingcls.deleteOneClass", classNo);
 	}
+
+	public int selectOneDmRoomNo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("", map);
+	}
 }
