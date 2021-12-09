@@ -61,7 +61,12 @@
 	      		<div class="contest-outline">
 	      			<div>총 <span id="totalCount">${totalCount }</span>개</div>
 	      			<div>
-	      				<button class="btn-main btn-enter">대회 참가하기</button>
+	      				<c:choose>
+	      					<c:when test="${not empty sessionScope.m }">
+	      					<input type="hidden" class="memberNo" value="${sessionScope.m.memberNo }">
+	      					<button class="btn-main btn-enter">대회 참가하기</button>
+	      					</c:when>
+	      				</c:choose>
 	      				<input type="hidden" id="orderIndex" value="${orderIndex }">
 	      				<span class="order-by">최신순</span> | <span class="order-by">가나다순</span> | <span class="order-by">높은투표순</span>
 	      			</div>
@@ -88,8 +93,15 @@
 	      					</a>
 	      							<div class="vote-count">
 	      								<span>${r.voteCount }</span>
-	      								<img src="resources/img/recipecontest/vote-before.png" id="vote">
-	      								<label for="vote">투표하기</label>
+	      								<c:choose>
+	      									<c:when test="${not empty sessionScope.m }">
+	      										<div class="vote">
+	      											<input type="hidden" class="contestNo" value="${r.contestNo }">
+	      											<img src="resources/img/recipecontest/vote-before.png" id="vote">
+	      											<label for="vote">투표하기</label>
+	      										</div>	
+	      									</c:when>
+	      								</c:choose>
 	      							</div>
 	      						</div>
 	      					</a>
@@ -129,15 +141,15 @@
   		var today = new Date();
   		var year = today.getFullYear();
   		var month = today.getMonth()+1;
-  		console.log(year);
-  		console.log(month);
+  		var voted = false; //투표여부 확인
+  		
   		$(".thisyr").html(year);
   		$(".thismonth").html(month);
   		//정렬 default
   		var orderIndex = $("#orderIndex").val();
   		$(".order-by").eq(orderIndex).addClass("active");
   		
-  	
+  		//정렬기준
   		$(".order-by").on("click", function(){
   			var index = $(".order-by").index(this);
   			var reqPage = 1;
@@ -147,10 +159,47 @@
   			location.href="contestList.do?reqPage="+reqPage+"&orderIndex="+index;
   		});
   		
+  		//접속자 투표여부 확인
+  		$.ajax({
+				url: "/voteCheck.do",
+				type: "get",
+				data: {memberNo:memberNo},
+				success: function(data){
+					if(data > 0){
+						var contestNo = data;
+						var vote = $('.contestNo[value='+contestNo+']').parent('div');
+						var img = vote.children('img');
+						var label = vote.children("label[for='vote']");
+						img.attr("src", "");
+						img.attr("src", "resources/img/recipecontest/vote-after.png");
+						label.html("");
+						label.html("투표완료");
+						voted= true;
+				}
+			})
   		
+  		
+  		//투표하기
+  		$(".vote").on("click", function(){
+  			var voteRecipe_ans = confirm("투표하시겠습니까?");
+  			var memberNo = $(".memberNo").val();
+  			var contestNo = $(".contestNo").val();
+  			console.log(contestNo);
+  			if(voteRecipe_ans == true){
+  				if (voted == false){
+  					location.href="/insertVote?contestNo="+contestNo+"&memberNo="+memberNo;	
+  				} else {
+  					alert("이미 투표하셨습니다.");
+  				}
+  			}
+  			} else {
+  				return false;
+  			}
+  		});
   		
   		
   	});
+  	//게시글 삭제 확인
   	function delCheck(){
   		var delNotice_ans = confirm("게시글을 삭제하시겠습니까?");
   		var noticeNo = $("#noticeNo").val();

@@ -71,4 +71,21 @@ public class RecipeContestService {
 		return cpd;
 	}
 
+	public int voteCheck(int memberNo) {
+		int result = dao.voteCheck(memberNo);
+		int contestNo = 0;
+		if(result>0) { //투표한 이력이 있을 경우
+			contestNo = dao.selectContestNo(memberNo);
+		}
+		return contestNo;
+	}
+
+	public int insertVote(int memberNo, int contestNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("contestNo", contestNo);
+		int result = dao.insertVote(map);
+		return result;
+	}
+
 }

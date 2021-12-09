@@ -66,11 +66,14 @@
 .contest-content li>a{
 	display: block;
 }
+.vote-count{
+	margin: auto;
+}
 .recipe-profile{
 	display: flex;
 }
 .vote-count{
-	margin: auto;
+	display: flex;
 }
 .pagi{
 	margin-left: 50%;
@@ -79,7 +82,14 @@
 	margin-bottom: 50px;
 	margin-top: 20px;
 }
-.vote-count:hover{
+.vote:hover{
+	cursor: pointer;
+}
+.vote:hover>img{
+	-webkit-transform:scale(1.1);
+}
+.vote:hover>label{
+	font-weight: bolder;
 	cursor: pointer;
 }
 .profile-pic>img{

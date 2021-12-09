@@ -26,4 +26,19 @@ public class RecipeContestDao {
 		return (ArrayList<RecipeContest>) list;
 	}
 
+	public int voteCheck(int memberNo) {
+		int result = sqlSession.selectOne("recipecontest.selectVote", memberNo);
+		return result;
+	}
+
+	public int insertVote(HashMap<String, Object> map) {
+		int result = sqlSession.insert("recipecontest.insertVote", map);
+		return result;
+	}
+
+	public int selectContestNo(int memberNo) {
+		int contestNo = sqlSession.selectOne("recipecontest.selectContestNo", memberNo);
+		return contestNo;
+	}
+
 }

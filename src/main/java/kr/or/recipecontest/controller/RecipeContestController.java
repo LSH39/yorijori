@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.recipecontest.model.service.RecipeContestService;
 import kr.or.recipecontest.model.vo.ContestPageData;
+import kr.or.recipecontest.model.vo.RecipeContest;
 
 @Controller
 public class RecipeContestController {
@@ -28,6 +29,25 @@ public class RecipeContestController {
 	@RequestMapping(value="/contestResult.do")
 	public String contestResult() {
 		return "recipecontest/contestResult";
+	}
+	
+	@ResponseBody //data 자체로 return
+	@RequestMapping(value="/voteCheck.do")
+	public int voteCheck(int memberNo) {
+		int contestNo = service.voteCheck(memberNo);
+		return contestNo;
+	}
+	
+	@RequestMapping(value="/insertVote.do")
+	public String insertVote(Model model, int memberNo, int contestNo) {
+		int result = service.insertVote(memberNo, contestNo);
+		if(result>0) { //투표 성공
+			model.addAttribute("msg", "투표 완료");
+		} else {
+			model.addAttribute("msg", "투표 실패....에러 찾아라");
+		}
+			model.addAttribute("loc", "/contestList.do?reqPage=1&orderIndex=0");
+			return "common/msg";
 	}
 	
 }

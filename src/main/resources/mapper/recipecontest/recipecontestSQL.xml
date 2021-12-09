@@ -28,4 +28,13 @@
     on rr.recipe_writer=m.member_no)rrr
     where rnum between #{start} and #{end}
 	</select>
+	<select id="selectVote" parameterType="_int" resultType="_int">
+		select count(*) from contest_vote where member_no=#{memberNo} and vote_date like '%' || to_char(sysdate, 'yyyy-mm') || '%'
+	</select>
+	<insert id="insertVote" parameterType="map">
+		insert into contest_vote values (vote_seq.nextval, #{memberNo}, #{contestNo}, to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
+	<select id="selectContestNo" parameterType="_int" resultType="_int">
+		select contest_no as contestNo from contest_vote where member_no=#{memberNo} and vote_date like '%' || to_char(sysdate, 'yyyy-mm') || '%'
+	</select>
 </mapper>
