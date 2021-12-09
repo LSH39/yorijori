@@ -52,10 +52,20 @@
 		member_id='test0018'
 	</select>
 	<update id="updateMember" parameterType="m">
-		update member set
-		address=#{address} where member_id=#{memberId}
+	update member set
+		member_email=#{memberEmail},
+        member_nickName=#{memberNickname},
+        member_phone=#{memberPhone},
+        member_birth=#{memberBirth},
+        postcode=#{postcode},
+        address_road=#{addressRoad},
+        address_detail=#{addressDetail},
+        profile_intro=#{profileIntro},
+        member_name=#{memberName}
+    where member_id=#{memberId} 
 	</update>
-	<update id="upSeller" parameterType="m">
+	
+	<update id="upSeller" parameterType="string">
 	update member set member_level=5 where member_Id='test0016' and member_pw='333'
 	
 	</update>
@@ -338,6 +348,51 @@ select a.ORDER_OPTION_NO as orderOptionNo,
 	     from
 	     order_option a,order_tbl b,product c
 	     where a.order_no =b.order_no and a.product_no=c.product_no  and c.milkit_writer=5 
+
+
+</select>
+	<update id="updateSeller" parameterType="m">
+	  update member set
+		member_email=#{memberEmail},
+        member_nickName=#{memberNickname},
+        member_phone=#{memberPhone},
+        member_birth=#{memberBirth},
+        postcode=#{postcode},
+        address_road=#{addressRoad},
+        address_detail=#{addressDetail},
+        profile_intro=#{profileIntro},
+        member_name=#{memberName}
+    where member_id=#{memberId} 
+	
+	</update>
+	<select id="totalSell" resultType="ms" parameterType="_int">
+	  
+	select a.ORDER_NO as orderNo,
+               a.PRODUCT_NO as productNo,
+               a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+                b.milkit_writer as milkitWriter,
+                b.recipe_no as recipeNo,
+                b.milkit_name as milkitName,
+                b.milkit_price as milkitPrice,
+                b.milkit_stock as milkitStock,
+                b.filePath,
+                c.member_no as memberNo,
+                c.order_name as orderName
+		 
+		from order_option a,product b,order_tbl c
+		where a.product_no=b.product_no and c.order_no =a.order_no  and c.member_no=111 
+
+
+</select>
+
+<select id="dmList" resultType="md" parameterType="_int">
+	select dm_no as dmNo,
+	       dm_receiver as dmReceiver,
+	       dm_sender as dmSender,
+	       dm_content as dmContent,
+	       dm_read_flag as dmReadFlag,
+	       dm_date as dmDate
+	     from dm where dm_receiver='승민전문가'
 
 
 </select>

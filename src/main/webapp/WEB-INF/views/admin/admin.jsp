@@ -32,7 +32,7 @@
     <table class="table table-hover">
         <tr class="table-warning">
             <td><a href="#">회원관리</a></td>
-            <td><a href="#">방문자 통계</a></td>
+            <td><a href="stat.do">방문자 통계</a></td>
             <td><a href="#">밀키트 통계</a></td>
             <td><a href="#">쿠폰</a></td>
         </tr>
