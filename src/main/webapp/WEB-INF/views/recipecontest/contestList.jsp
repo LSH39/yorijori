@@ -142,7 +142,6 @@
   		var year = today.getFullYear();
   		var month = today.getMonth()+1;
   		var voted = false; //투표여부 확인
-  		
   		$(".thisyr").html(year);
   		$(".thismonth").html(month);
   		//정렬 default
@@ -160,7 +159,9 @@
   		});
   		
   		//접속자 투표여부 확인
-  		$.ajax({
+  		var memberNo = $(".memberNo").val();
+  		if(memberNo != null){
+  	 		$.ajax({
 				url: "/voteCheck.do",
 				type: "get",
 				data: {memberNo:memberNo},
@@ -168,37 +169,44 @@
 					if(data > 0){
 						var contestNo = data;
 						var vote = $('.contestNo[value='+contestNo+']').parent('div');
+						console.log(vote);
+						console.log(img);
 						var img = vote.children('img');
 						var label = vote.children("label[for='vote']");
 						img.attr("src", "");
 						img.attr("src", "resources/img/recipecontest/vote-after.png");
 						label.html("");
 						label.html("투표완료");
+						label.css("color", "#8E44AD").css("font-weight", "bolder");
 						voted= true;
 				}
-			})
+				}
+		
+  			});
+  		}
   		
   		
-  		//투표하기
+  		//투표 or 투표 취소
   		$(".vote").on("click", function(){
   			var voteRecipe_ans = confirm("투표하시겠습니까?");
   			var memberNo = $(".memberNo").val();
-  			var contestNo = $(".contestNo").val();
+  			var contestNo = $(this).children(".contestNo").val();
   			console.log(contestNo);
   			if(voteRecipe_ans == true){
   				if (voted == false){
-  					location.href="/insertVote?contestNo="+contestNo+"&memberNo="+memberNo;	
+  					location.href="/insertVote.do?contestNo="+contestNo+"&memberNo="+memberNo;
+  					voted = true;
   				} else {
   					alert("이미 투표하셨습니다.");
   				}
-  			}
-  			} else {
+  			}else {
   				return false;
   			}
   		});
   		
   		
-  	});
+  		});
+  		
   	//게시글 삭제 확인
   	function delCheck(){
   		var delNotice_ans = confirm("게시글을 삭제하시겠습니까?");
