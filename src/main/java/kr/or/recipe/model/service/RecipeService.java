@@ -80,8 +80,8 @@ public class RecipeService {
 	}
 
 
-	public int insertLike(RecipeBoard rb) {
-		int result = dao.insertLike(rb);
+	public int insertLike(RecipeLike rl) {
+		int result = dao.insertLike(rl);
 		return result;
 	}
 }

@@ -26,6 +26,7 @@ import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
+import kr.or.recipe.model.vo.RecipeLike;
 import sun.reflect.generics.visitor.Reifier;
 
 @Controller
@@ -153,8 +154,8 @@ public class RecipeController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/insertLike.do")
-	public int insertLike(RecipeBoard rb) {
-		int result = service.insertLike(rb);
+	public int insertLike(RecipeLike rl) {
+		int result = service.insertLike(rl);
 		return result;
 		
 	}
