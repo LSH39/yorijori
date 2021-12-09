@@ -28,9 +28,17 @@
     <h1>레시피</h1>
 
 	<div id="recipeList">
-		<c:forEach items="${list }" var="rb" varStatus="i">
-		<a href="/recipeView.do?recipeNo=${rb.recipeNo }"><img src="/resources/upload/recipe/${rb.filepath }"></a>
-	    <p><a href="/recipeView.do?recipeNo=${rb.recipeNo }">${rb.recipeTitle }</a></p>
+		<c:forEach items="${list }" var="rb" varStatus="i">	
+	    <p>
+	    <c:if test="${sessionScope.m.memberNo == null }">
+	    <a href="/recipeView.do?recipeNo=${rb.recipeNo }&memberNo=0"><img src="/resources/upload/recipe/${rb.filepath }"></a>
+	    <a href="/recipeView.do?recipeNo=${rb.recipeNo }&memberNo=0">${rb.recipeTitle }</a>
+	    </c:if>
+	    <c:if test="${sessionScope.m.memberNo != null }">
+	    <a href="/recipeView.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}"><img src="/resources/upload/recipe/${rb.filepath }"></a>
+	    <a href="/recipeView.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">${rb.recipeTitle }</a>
+	    </c:if>
+	    </p>
 	    <p>${rb.nickname }</p>
 		<p>
 		<span>${rb.readCount }</span>
