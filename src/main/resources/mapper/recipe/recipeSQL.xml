@@ -97,6 +97,7 @@
  			recipe_no as recipeNo,
  			rc_content as rcContent,
  			rc_date as rcDate,
+ 			member_no as memberNo,
         (select member_nickname from member m where m.member_no = rc.member_no)as nickname 
  		from recipe_comment rc where recipe_no=#{recipeNo}
  	</select>
@@ -109,4 +110,10 @@
  	<update id="updateComment" parameterType="rcomment">
  		update recipe_comment set rc_content=#{rcContent} where r_comment_no=#{rCommentNo}
  	</update>
+ 	<update id="updateCount" parameterType="rb">
+ 		update recipe_board set read_count=read_count +1 where recipe_no=#{recipeNo}
+ 	</update>
+ 	<insert id="insertLike" parameterType="rlike">
+ 		insert into recipe_like values(r_like_seq.nextval,#{memberNo},#{recipe_no})
+ 	</insert>
 </mapper>

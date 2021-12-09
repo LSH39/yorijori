@@ -11,13 +11,14 @@
 
 </head>
 <body>
-<c:import url="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">	
+    <p id="heart"><img src="/resources/img/recipe/heart.png" width="30px"></p>
 		<div class="mainImg">
 		<img src="/resources/upload/recipe/${rb.filepath }">
 		<div id="count"><span id="countImg"><img src="/resources/img/recipe/eye.png" width="20px"></span><span id="countText"> ${rb.readCount }</span></div> 
 		</div>
-       
+       	
             <div class="rbList">
              <p id="rbName">${rb.nickname }</p>	
 			<p id="rbTitle">${rb.recipeTitle }</p>
@@ -52,7 +53,7 @@
         
 		<div class="rcList" style="display:none;">
 		<div class="rcInput" >
-		<c:if test="${not empty sessionScope.m.memberNo}">
+		<c:if test="${sessionScope.m.memberNo != null}">
 		<form id="insertRc">
 			<textarea name="rcContent" id="rcContent"></textarea>
 			<input type="hidden" value="${sessionScope.m.memberNo }" id="memberNo">
@@ -66,7 +67,7 @@
 			<textarea id="rcContent" name="rcContent" class="form-control" style="display:none;">${rc.rcContent }</textarea>
 			<button style="display:none;">수정완료</button>
 			<p class="commentsBtn">
-			<c:if test= "${sessionScope.m.memberNo eq rc.memberNo}">
+			<c:if test= "${sessionScope.m.memberNo == rc.memberNo}">
 			<a href="javascript:void(0)" onclick="updateComment(this,'${rc.RCommentNo}');">수정</a>
 			<a href="javascript:void(0)" onclick="deleteComment(this,'${rc.RCommentNo}');">삭제</a>	
 			</c:if>
@@ -80,19 +81,16 @@
 		</c:forEach>
 		</div>
 		</div>
-			<c:import url="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		$("#comment").click(function() {
-			var memberNo = ${sessionScope.m.memberNo};
 			$(".rcList").css("display","block");	
 			$(".rContent").css("display","none");
-			console.log(memberNo);
 			});
 
 		$("#insertBtn").click(function() {
 			var rcContent = $("#rcContent").val();
 			var recipeNo = ${rb.recipeNo};
-			var memberNo = 1;
+			var memberNo = ${sessionScope.m.memberNo};
 			$.ajax({
 				url: "/insertComment.do",
 				data:{rcContent:rcContent,
@@ -159,7 +157,23 @@
 				});
 				}
 			}
+		$("#heart").click(function() {
+			var recipeNo = ${rb.recipeNo};
+			var memberNo = ${sessionScope.m.memberNo};
+			$.ajax({
+				url: "/insertLike.do",
+				data:{memberNo:memberNo,
+					recipeNo:recipeNo},
+				type:"post",
+				success:function(data){
+					if(data>0){
+						console.log("1");
+					}
+					}
+				})
+			});	
+		
 	</script>
-	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
