@@ -99,7 +99,7 @@
 .mbord{
 
     width:800px;
-    height:600px;
+    height:700px;
     background-color: rgb(224, 224, 224);
     margin: 0 auto;
     margin-bottom: 40px;
@@ -113,10 +113,11 @@
 }
 .myInfo{
     width:450px;
-    height:500px;
+    height:600px;
     background-color:rgb(234, 217, 241);
     float:left;
     margin-top:50px;
+    line-height:30px;
 }
 .mine{
     width:400px;
@@ -152,11 +153,19 @@
   
 }
 </style>
+<script>
+$("#rePro").click(function() {
+
+});
+
+
+
+</script>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="main">
-		<div class="main-left-box">
+    <div class="main">
+      		<div class="main-left-box">
 			<h2>마이페이지</h2>
 			<ul>
 				<li>
@@ -181,16 +190,19 @@
 					</ul></li>
 			</ul>
 		</div>
-		<!-- 메인 콘텐츠 -->
-		<div class="main-content">
-			<div class="mbord">
-				<div class="profile">
-					<img id="pp" src="/resources/img/mypage/profile.jpeg"> <input type="button"
-						value="프로필바꾸기" id="rePro">
-				</div>
-				<div class="myInfo">
-					<form>
-						<table class="mine" border="1">
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+          <form action="/updateMember.do" method="post" enctype="multipart/form-data" name="updateFrm">
+        <div class="mbord">
+           
+          <div class="profile">
+          <img id="pp" src="resources/img/mypage/profile.jpeg">
+              <input type="button" value="프로필바꾸기" id="rePro">
+             
+          </div>
+          <div class="myInfo">
+         
+        			<table class="mine" border="1">
 							<tr>
 								<td>회원소개</td>
 								<td><input type="text" name="memberConsent" id="memberConsent"
@@ -219,14 +231,15 @@
 							<tr>
 								<td>휴대폰번호</td>
 								<td><input type="text" name="memberPhone" id="memberPhone"
-									onfocus="this.placeholder=''" value="${m.memberPhone }"></td>
+									onfocus="this.placeholder=''"value="${m.memberPhone }"></td>
 							</tr>
 							<tr>
 								<td>생년월일</td>
 								<td><input type="text" name="memberBirth" id="memberBirth"
 									onfocus="this.placeholder=''" value="${m.memberBirth }"></td>
 							</tr>
-							<tr>
+				                
+				               <tr>
 								<td>우편번호</td>
 								<td><input type="text" name="postcode" id="postcode"
 									onfocus="this.placeholder=''" value="${m.postcode }"></td>
@@ -244,32 +257,35 @@
 							<tr>
 								<td>회원등급</td>
 								<td><input type="text" name="memberLevel" id="memberLevel"
-									onfocus="this.placeholder=''" value="${m.memberLevel }"></td>
+									onfocus="this.placeholder=''" value="${m.memberLevel }" readonly></td>
 							</tr>
 							<tr>
 								<td>포인트내역</td>
 								<td><input type="text" name="memberPoint" id="memberPoint"
-									onfocus="this.placeholder=''" value="${m.memberPoint }"></td>
+									onfocus="this.placeholder=''" value="${m.memberPoint }" readonly></td>
 							</tr>
 							<tr>
 								<td>가입일</td>
 								<td><input type="text" name="enrollDate" id="enrollDate"
-									onfocus="this.placeholder=''" value="${m.enrollDate }"></td>
+									onfocus="this.placeholder=''" value="${m.enrollDate }" readonly></td>
 							</tr>
 
-						</table>
-						<div class="buttonBox">
-							<input type="submit" value="수정하기" id="update">
-						</div>
-					</form>
+              </table>
+              <div class="buttonBox">
+              <input type="submit" value="수정하기" id="update">
+              </div>
+            
+  
+         
+      </div>
+    
+          </div>
+          </form>
 
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
+        </div>
+        
+        </div>
+	
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

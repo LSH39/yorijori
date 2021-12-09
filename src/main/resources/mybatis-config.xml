@@ -51,6 +51,7 @@
 	     <typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc"/>
 	      <typeAlias type="kr.or.mypage.model.vo.Myorder" alias="mo"/>
 	        <typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms"/>
+	          <typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md"/>
 	</typeAliases>
 </configuration>
 

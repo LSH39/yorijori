@@ -18,6 +18,7 @@ import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.Mychat;
+import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.Mysell;
 import kr.or.recipe.model.vo.RecipeBoard;
@@ -41,17 +42,7 @@ public class MypageController {
 		model.addAttribute("m", m);
 		return "mypage/sellerProfile";
 	}
-	@RequestMapping(value = "/updateMember.do")
-	public String updateMember(Member m, Model model) {
-		int result = service.upMember(m);
-		if (result > 0) {
-			model.addAttribute("msg", "정보변경 성공");
-		} else {
-			model.addAttribute("msg", "정보변경 실패");
-		}
-		model.addAttribute("loc", "/");
-		return "common/msg";
-	}
+
 	@RequestMapping(value = "/deleteFrm.do")
 	public String joinFrm() {
 		return "mypage/deleteMember";
@@ -182,5 +173,43 @@ public class MypageController {
 		ArrayList<Mysell> list= service.mySellList(memberNo);
 		model.addAttribute("list", list);
 		return "mypage/sellerList";
+	}
+	
+	@RequestMapping(value = "/totalSell.do")
+	public String totalSell(int memberNo, Model model) {
+		ArrayList<Mysell> list= service.totalSell(memberNo);
+		model.addAttribute("list", list);
+		return "mypage/amountSell";
+	}
+	
+		@RequestMapping(value = "/updateSeller.do")
+		public String updateSeller(Member m, Model model) {
+
+			int result = service.updateSeller(m);
+			if (result > 0) {
+				model.addAttribute("msg", "정보변경 성공");
+			} else {
+				model.addAttribute("msg", "정보변경 실패");
+			}
+			model.addAttribute("loc", "/");
+			return "common/msg";
+		}
+	@RequestMapping(value = "/updateMember.do")
+	public String updateMember(Member m, Model model) {
+
+		int result = service.upMember(m);
+		if (result > 0) {
+			model.addAttribute("msg", "정보변경 성공");
+		} else {
+			model.addAttribute("msg", "정보변경 실패");
+		}
+		model.addAttribute("loc", "/mypage.do");
+		return "common/msg";
+	}
+	@RequestMapping(value = "/mydmList.do")
+	public String myDmList(String dmReceiver,Model model) {
+		ArrayList<Mydm> list= service.myDmList(dmReceiver);
+		model.addAttribute("list", list);
+		return "mypage/dmList";
 	}
 }
