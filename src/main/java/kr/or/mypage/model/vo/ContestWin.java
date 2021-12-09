@@ -8,7 +8,7 @@ public class ContestWin {
 private int contestNo;
 //private int voteCount;
 private String contestMonth;
-private int contestWinner;
+private int contestResult;
 private int recipeWriter;
 private String recipeTitle;
 }

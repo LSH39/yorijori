@@ -10,7 +10,8 @@
   top: 20.38px;
   z-index: 0;
   background-color: white;
-  padding-top: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .alt-header__column {
@@ -34,6 +35,6 @@
 .alt-header__title {
   text-align: center;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 13px;
   margin: 0px;
 }

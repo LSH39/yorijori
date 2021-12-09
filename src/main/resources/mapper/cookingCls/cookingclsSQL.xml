@@ -22,7 +22,7 @@ mybatis xml mapper단
 		from
 		(select
 			class_no as classNo,
-			member_no as memberNo,
+			member_nickname as memberNickname,
 			class_title as classTitle,
 			class_price as classPrice
 		from cooking_class order by class_no asc) c)
@@ -39,7 +39,7 @@ mybatis xml mapper단
 		select 
 			class_no as classNo,
 			class_title as classTitle,
-			member_no as memberNo,
+			member_nickname as memberNickname,
 			class_content as ClassContent,
 			class_start as classStart,
 			class_end as classEnd,

@@ -55,7 +55,10 @@
 		update member set
 		address=#{address} where member_id=#{memberId}
 	</update>
+	<update id="upSeller" parameterType="m">
+	update member set member_level=5 where member_Id='test0016' and member_pw='333'
 	
+	</update>
 	<delete id="deleteMember"  parameterType="string">
 	     delete from member where member_id='test0040' and member_pw='333'
 	
@@ -141,7 +144,7 @@
 		 rb.recipe_title as recipeTitle,
 		 rb.recipe_writer as recipeWriter
 		 from contest_recipe cr,recipe_board rb
-		 where cr.recipe_no=rb.recipe_no and cr.contest_winner=1 
+		 where cr.recipe_no=rb.recipe_no and cr.contest_result=1 
 		 order by contest_month asc
 
 
@@ -152,7 +155,7 @@
 	        cr.enter_Date as enterDate,
 	        rb.recipe_title as recipeTitle,
 	        rb.recipe_writer as recipeWriter,
-	        cr.contest_winner as contestWinner
+	        cr.contest_result as contestResult
 	  from contest_recipe cr,recipe_board rb
 	  where cr.recipe_no=rb.recipe_no and recipe_writer=111
 	  order by contest_no asc
@@ -225,6 +228,116 @@
 	         ) b
 	  where a.chat_send = b.chat_send
 	    and a.chat_no = b.chat_no
+
+
+</select>
+
+<select id="orderList" resultType="mo" parameterType="_int">
+ select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus
+      
+     from
+     order_option a,order_tbl b
+     where a.order_no =b.order_no and b.member_no=111
+
+</select>
+
+<select id="orderDetail" resultType="mo" parameterType="_int">
+ select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus
+      
+     from
+     order_option a,order_tbl b
+     where a.order_no =b.order_no and b.order_no=11
+         
+
+</select>
+
+<select id="detailOrder" parameterType="_int" resultType="mo">
+select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus,
+        c.milkit_name as milkitName ,
+        c.milkit_price as milkitPrice,
+        c.filepath
+      
+     from
+     order_option a,order_tbl b,product c
+     where a.order_no =b.order_no and a.product_no =c.product_no  and b.order_no=11
+
+</select>
+<select id="sellerList" resultType="ms" parameterType="_int">
+  select a.ORDER_OPTION_NO as orderOptionNo,
+        a.ORDER_NO as orderNo,
+        a.PRODUCT_NO as productNo,
+        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+        b.MEMBER_NO as memberNo,
+        b.ORDER_NAME as orderName,
+        b.ORDER_EMAIL as orderEmail,
+        b.ORDER_PHONE as orderPhone,
+        b.ORDER_POSTCODE as orderPostcode,
+        b.ORDER_ADDR_ROAD as orderAddrRoad,
+        b.ORDER_ADDR_DETAIL as orderAddrDetail,
+        b.ORDER_REQUEST as orderRequest,
+        b.ORDER_PAY_OPTION as orderPayOption,
+        b.ORDER_PRICE as orderPrice,
+        b.ORDER_SALE as orderSale,
+        b.ORDER_PAYMENT as orderPayment,
+        b.IMP_UID as impUid,
+        b.ORDER_STATUS as orderStatus,
+        c.milkit_writer as milkitWriter,
+        c.recipe_no as recipeNo,
+        c.milkit_name as milkitName    
+	     from
+	     order_option a,order_tbl b,product c
+	     where a.order_no =b.order_no and a.product_no=c.product_no  and c.milkit_writer=5 
 
 
 </select>

@@ -46,7 +46,7 @@
             <td><a href="blackList.do?reqPage=1">블랙리스트관리</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
-            <td><a href="#">쿠폰 관리</a></td>
+            <td><a href="couponList.do?reqPage=1">쿠폰 관리</a></td>
         </tr>
         <tr class="table-warning">
             <td><a href="permissionJoin.do?reqPage=1">전문가 가입 승인</a></td>

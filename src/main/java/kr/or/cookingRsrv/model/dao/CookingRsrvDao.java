@@ -35,21 +35,27 @@ public class CookingRsrvDao {
 	}
 
 	//예약 내역 조회
-	public ArrayList<CookingRsrv> selectAllRsrv(int memberNo) {
+	public ArrayList<CookingRsrv> selectAllRsrv(String memberNickname) {
 		// TODO Auto-generated method stub
-		List<CookingRsrv> list = sqlSession.selectList("cookingrsrv.selectAllRsrv", memberNo);
+		List<CookingRsrv> list = sqlSession.selectList("cookingrsrv.selectAllRsrv", memberNickname);
 		return (ArrayList<CookingRsrv>) list;
 	}
 
-	//쿠킹 클래스 예약 취소
-	public int deleteCookingRsrv(int classNo) {
+	//예약 취소 내역 삭제
+	public int deleteCookingRsrv(int rsrvNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("cookingrsrv.deleteCookingRsrv", classNo);
+		return sqlSession.delete("cookingrsrv.deleteCookingRsrv", rsrvNo);
 	}
 	
 	//인원수 감소
 	public int decCookingClsNop(int classNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("cookingcls.decCookingClsNop", classNo);
+	}
+
+	//쿠킹 클래스 예약 취소 (성승민 12-08)
+	public int cancelCookingRsrv(int classNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cookingrsrv.cancelCookingRsrv", classNo);
 	}
 }

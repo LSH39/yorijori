@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.vo.Member2;
+import kr.or.coupon.model.vo.Coupon;
 
 
 
@@ -21,7 +22,7 @@ public class AdminDao {
 	
 	@Transactional
 
-	public ArrayList<Member2> allMemberList(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2,int level) {
+	public ArrayList<Member2> allMemberList(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2,int level,int start,int end) {
 		
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("searchType", searchType);
@@ -37,14 +38,32 @@ public class AdminDao {
 			map.put("searchText2", searchText2);
 			map.put("detail", detail);
 			map.put("level",level);
+			map.put("start2", start);
+			map.put("end2", end);
 			List list = sqlSession.selectList("member.selectDetailMember",map);
 			
 			return (ArrayList<Member2>) list;
 		}
 	
 
-	public int selectTotalCount() {
-		int totalCount = sqlSession.selectOne("member.selectTotalCount");
+	public int selectTotalCount(String searchType, String searchText, String searchDetail, String period, String start2, String end2, String moreless, String joinStart, String joinEnd,String detail,String memberLevel,String searchText2,int level,int start,int end) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("searchType", searchType);
+		map.put("searchText", searchText);
+		map.put("memberLevel", memberLevel);
+		map.put("searchDetail",searchDetail);
+		map.put("period",period);
+		map.put("start", start2);
+		map.put("end", end2);
+		map.put("moreless", moreless);
+		map.put("joinStart", joinStart);
+		map.put("joinEnd", joinEnd);
+		map.put("searchText2", searchText2);
+		map.put("detail", detail);
+		map.put("level",level);
+		map.put("start2", start);
+		map.put("end2", end);
+		int totalCount = sqlSession.selectOne("member.selectTotalCount",map);
 		return totalCount;
 	}
 	public int addBlackMember(String memberNo) {
@@ -129,6 +148,35 @@ public class AdminDao {
 		Member2 m = sqlSession.selectOne("coupon.selectOneMember",map);
 		
 		return m;
+	}
+
+
+	public ArrayList<Coupon> selectAllCoupon(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("coupon.selectAllCoupon",map);
+		return (ArrayList<Coupon> )list;
+	}
+
+
+	public int selectCouponTotalCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("coupon.selectCouponTotalCount",map);
+		return totalCount;
+	}
+
+
+	public int deleteCoupon(String couponNo) {
+		StringTokenizer st = new StringTokenizer(couponNo, ",");
+		String[] arr = new String[st.countTokens()];
+		for(int i = 0; i<arr.length;i++) {
+			arr[i]=st.nextToken();
+		}
+		int result = sqlSession.delete("coupon.deleteCoupon",arr);
+		return result;
+	}
+
+
+	public int pointReset(String memberNo) {
+		int result = sqlSession.update("member.pointReset",memberNo);
+		return result;
 	}
 
 

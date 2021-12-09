@@ -192,7 +192,7 @@
                 <div class="eve2">${myc.recipeTitle }</div>
                 <div class="eve3">${myc.enterDate }</div>
                 <div class="eve4">${myc.contestMonth }</div>
-                <div class="eve4">${myc.contestWinner }</div>
+                <div class="eve4">${myc.contestResult }</div>
 
                 </div>
                </c:forEach>

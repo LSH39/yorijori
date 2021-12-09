@@ -1,6 +1,7 @@
 package kr.or.dm.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,20 @@ public class DmService {
 	}
 
 	//문의 조회
-	public ArrayList<Dm> selectOneDm(int memberNo) {
+	public ArrayList<Dm> selectOneDm(int classNo) {
 		// TODO Auto-generated method stub
-		ArrayList<Dm> list = dao.selectOneDm(memberNo);
+		ArrayList<Dm> list = dao.selectOneDm(classNo);
 		return list;
+	}
+
+	public int insertDm(int classNo, String dmReceiver, String dmSender, String dmContent) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("classNo", classNo);
+		map.put("dmReceiver", dmReceiver);
+		map.put("dmSender", dmSender);
+		map.put("dmContent", dmContent);
+		int result = dao.insertDm(map);
+		return result;
 	}
 }

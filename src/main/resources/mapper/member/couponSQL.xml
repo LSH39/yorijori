@@ -4,7 +4,12 @@
   
   <insert id="createCoupon" parameterType="map" >
  
-  insert into coupon values(coupon_seq.nextval,#{couponName},to_char(sysdate,'yyyy-mm-dd'),#{limitDate},#{dcResult},#{amount} )
+  insert into coupon values(coupon_seq.nextval,#{couponName},to_char(sysdate,'yyyy-mm-dd'),#{limitDate},#{dcResult},
+  <if test="limit==2">
+  2147483645)
+  </if>
+  <if test="limit==1">#{amount} )</if>
+  
   
   </insert>
   
@@ -77,4 +82,39 @@ member_black as memberBlack
   </when>
   </choose>
   </select>
+  
+  <select id="selectAllCoupon" resultType="c">
+  
+select couponNo,couponName,couponStart,couponEnd,couponAmount,
+(select count(*) from coupon_list where coupon_no = couponNo and coupon_use =0)noUseCount,
+  (select count(*) from coupon_list where coupon_no = couponNo and coupon_use =1)useCount
+from(select rownum as rnum, coupon_no as couponNo,
+  coupon_name as couponName,
+  coupon_start as couponStart,
+  coupon_end as couponEnd,
+  coupon_discount as couponDiscount,
+  coupon_amount as couponAmount
+  
+  from coupon where coupon_end <![CDATA[>=]]> to_char(sysdate,'yyyy-mm-dd') ) where
+  
+  
+   rnum between #{start} and #{end}
+   order by couponStart desc
+  
+  </select>
+  <select id="selectCouponTotalCount" resultType="_int">
+  
+  select count(*)
+  from coupon where coupon_end <![CDATA[>=]]> to_char(sysdate,'yyyy-mm-dd')
+  
+  </select>
+  
+  <delete id="deleteCoupon" >
+  
+  delete from coupon where coupon_no in 
+	<foreach collection="array" item="couponNo" open="(" close=")" separator=",">#{couponNo}</foreach>
+	
+  
+  </delete>
+  
 </mapper>

@@ -8,7 +8,7 @@ import lombok.Data;
 public class MemberPageData {
 	private ArrayList<Member2> list;
 	private String pageNavi;
-	private int start;
+	private int totalCount;
 	
 	public ArrayList<Member2> getList() {
 		return list;
@@ -26,19 +26,19 @@ public class MemberPageData {
 		this.pageNavi = pageNavi;
 	}
 
-	public int getStart() {
-		return start;
+	public int getTotalCount() {
+		return totalCount;
 	}
 
-	public void setStart(int start) {
-		this.start = start;
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
 	}
 
-	public MemberPageData(ArrayList<Member2> list, String pageNavi, int start) {
+	public MemberPageData(ArrayList<Member2> list, String pageNavi, int totalCount) {
 		super();
 		this.list = list;
 		this.pageNavi = pageNavi;
-		this.start = start;
+		this.totalCount = totalCount;
 	}
 
 	public MemberPageData() {

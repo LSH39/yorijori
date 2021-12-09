@@ -1,24 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
     <style>
-#header{
-width: 1200px;
-height: 138px;
-background-color: #d696e2;
-margin: 0 auto;
-}
-#footer{
-width: 1100px;
-height: 138px;
-background-color: #d696e2;
-margin: 0 auto;
-}
 
 #line2 {
 	background-color: gray;
@@ -104,7 +94,7 @@ margin: 0 auto;
 #line2 {
 	background-color: gray;
 	height: 3px;
-	width: 830px;
+	width: 800px;
 }
 
 /* 클릭 표시 a태그 배경색 #d6c6a5 */
@@ -113,57 +103,61 @@ margin: 0 auto;
 .main-content{
     width: 875px;
 }
-/*내 팔로우*/
-
-.followR{
-    width:250px;
-    height: 300px;
-    
+.mySell{
+         width:800px;
+         height:220px;
+         background-color: rgb(224, 219, 239);
+         margin-bottom:30px;
+}
+.sellNo{
+    width:800px;
+    height:40px;
+     background-color: rgb(191, 190, 190);
+ 
+}
+.li{
+    width:3px;
+    height:180px;
+    background-color: gray;
     float: left;
-    margin-right: 30px;
 }
-.pt{
-    width:250px;
-    height: 60px;
-    background-color:darksalmon ;
+.sellItem{
+    width:398px;
+    height:220px;
+    float: left; 
+    line-height: 30px;
 }
-.pr{
-    width:250px;
-    height: 140px;
-     background-color:rgb(224, 219, 239) ;
-  
-}
-.pw{
-    width:250px;
-    height: 100px;
-    background-color:rgb(224, 219, 239) ;
-}
-#pp{
-    width: 60px;
-    height:60px;
-    border-radius: 50px;
-    margin-left: 30px;
+.orderInfo{
+    width:399px;
+    height:220px;
     float: left;
+    line-height: 35px;
+   
    
 }
-#nickName{
-    float: left;
-    margin-left: 15px;
-}
-#itemI{
-    width: 250px;
-    height:130px;
-}
+#sell{
+  width:30px;
+  height:30px;
+  margin-left:660px;
+  margin-top:5px;
+  }
 </style>
+<script>
+function orderDetail(orderNo){
+	   location.href="/detailOrder.do?orderNo="+orderNo;
+	}
+
+</script>
 </head>
 <body>
-   <jsp:include page="/WEB-INF/views/common/header.jsp" />
+  <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
     <div class="main">
         <div class="main-left-box">
             <h3>마이페이지</h3>
             <ul>
                 <li>
-                    <span>MY INFO</span>
+                    <span>소개</span>
                     <ul class="subnavi">
                         <li><a href="/introHotel">내정보 조회 및 수정<span>&gt;</span></a></li>
                         <li><a href="/membership" id="lf-click">멤버십 정보<span>&gt;</span></a></li>
@@ -175,7 +169,7 @@ margin: 0 auto;
                     </ul>
                 </li>
                 <li>
-                    <span>MY WRITE</span>
+                    <span>소개</span>
                     <ul class="subnavi">
                         <li><a href="/introHotel">내정보 조회 및 수정<span>&gt;</span></a></li>
                         <li><a href="/membership" id="lf-click">멤버십 정보<span>&gt;</span></a></li>
@@ -190,30 +184,36 @@ margin: 0 auto;
         </div>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-            <h3 id="h_hotel">★my Follow★</h3>
+            <h3 id="h_hotel">판매내역 조회</h3>
             <div id="line2"></div><br>
-              <c:forEach items="${list}" var="fol" varStatus="i">
-            <div class="followR">
-                <div class="pt">
-                    <img id="pp" src="resources/img/mypage/profile.jpeg">
-                    <h5 id="nickName">${fol.memberNickname }</h5>
-                </div>
-                <div class="pr">
-                    <a href="#"> 
-                        <img id="itemI" src="resources/img/mypage/house.png">
-                    </a>
-                </div>
-                <div class="pw">
-                    <h5>#${fol.recipeTitle}</h5>
-                    <h5>#${fol.subhead }</h5>
-                </div>
+            <c:forEach items="${list}" var="ms" varStatus="i">
+             <div class="mySell">
+                <div class="sellNo">   
+                <span>주문번호 :${ms.orderNo }</span><img id="sell" src="/resources/img/mypage/sell.png">  </div>
+                <div class="sellItem">
+                    <span class="it_info1"><b id="m">주문내역: </b>&emsp;${ms.milkitName}</span><br>
+                      <span class="it_info1"><b id="m">주문수량: </b>&emsp;${ms.orderOptionAmount}개</span>&emsp;<br>
+                     <span class="it_info1"><b id="m">결제금액: </b>&emsp;${ms.orderPayment}원</span><br>
+                     <span class="it_info1"><b id="m">배송비:</b>&emsp;무료배송</span>&emsp;<br> 
+                     <span class="it_info1"><b id="m">결제방식: </b>&emsp;${ms.orderPayOption}</span>&emsp;<br> 
+                    <span class="it_info1"><b id="m">결제번호: </b>&emsp;${ms.impUid}</span>&emsp;<br>
 
-            </div>
-            </c:forEach>
+                </div>
+                <div class="li"></div>
+                <div class="orderInfo">
+                    <span class="it_info1"><b id="m">주문자이름: </b>&emsp;${ms.orderName}</span>&emsp;<br>
+                    <span class="it_info1"><b id="m">주문자이메일: </b>&emsp;${ms.orderEmail}</span><br>
+                     <span class="it_info1"><b id="m">주문자 연락처: </b>&emsp;${ms.orderPhone}</span><br>
+                    <span class="it_info1"><b id="m">주문상태: </b>&emsp;${ms.orderStatus}</span>&emsp;<br>
+                    <span class="it_info1"><b id="m">요청사항: </b>&emsp;${ms.orderRequest}</span>&emsp;<br>
+                </div>
+             </div>
+             </c:forEach>
+
         </div>
         
         </div>
-    
-    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+   
+      <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
