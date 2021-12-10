@@ -1,1 +1,29 @@
 @charset "UTF-8";
+.like-box{
+	text-align: center;
+	padding-bottom: 30px;
+}
+.like-wrap:hover{
+	cursor: pointer;
+}
+.comment-box{
+	padding-top: 20px;
+}
+.comment-table>table>*{
+	border: 1px solid gray;
+}
+.fcLike:hover{
+	cursor: pointer;
+}
+.comment-table>table>tbody>tr:first-child {
+	padding: 20px 0;
+	background-color: rgb(246, 240, 255);
+}
+.fcwriter-profile h6, p, img{
+	margin: 0;
+	padding: 0;
+}
+.fcwriter-profile p{
+	font-size: 14px;
+	color: #ADADAD;
+}

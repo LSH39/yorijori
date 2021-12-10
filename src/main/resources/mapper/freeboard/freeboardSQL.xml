@@ -40,7 +40,9 @@
 	        fc_writer as fcWriter,
 	        fc_content as fcContent,
 	        reg_date as regDate,
-	        (select count(*) from fc_like where fc.fc_no = fc_no) as fcLikeCount
+	        (select count(*) from fc_like where fc.fc_no = fc_no) as fcLikeCount,
+	        (select profile_path from member where fc.fc_writer = member_id) as profilePath,
+	        (select member_nickname from member where fc.fc_writer= member_id) as memberNickname
         from freeboard_comment fc
         where free_no=#{freeNo} order by 1
 	</select>

@@ -71,13 +71,13 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/insertNotice.do")
-	public String insertNotice(Model model, MultipartFile file, HttpServletRequest request, Notice n) {
-		if(file == null) {
+	public String insertNotice(Model model, MultipartFile upfile, HttpServletRequest request, Notice n) {
+		if(upfile == null) {
 			//첨부파일 없는 경우
 		} else {
 			//첨부파일 있는 경우
 			String saveDirectory = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
-			String filename = file.getOriginalFilename();
+			String filename = upfile.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf(".")); //파일명
 			String extension = filename.substring(filename.indexOf(".")); //확장자
 			//업로드할 파일명을 저장할 변수
@@ -102,7 +102,7 @@ public class NoticeController {
 				//업로드 속도증가를 위한 보조스트림
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				//파일 업로드
-				byte[] bytes = file.getBytes();
+				byte[] bytes = upfile.getBytes();
 				bos.write(bytes);
 				bos.close();
 			} catch (FileNotFoundException e) {
