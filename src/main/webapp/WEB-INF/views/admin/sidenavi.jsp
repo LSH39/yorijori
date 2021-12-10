@@ -156,7 +156,7 @@ background-color: #9F90CF;
             	
        		</div>
        		
-                <a class="nav-link showDrop2 showDrop" href="#">통계</a>
+                <a class="nav-link showDrop2 showDrop" href="stat.do">통계</a>
                 <div class="drop2 navbar" style="display: none;">
                     
                <a class="nav-link" href="#">방문자 통계</a>

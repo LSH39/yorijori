@@ -115,4 +115,13 @@ public class CookingClsService {
 		int result = dao.deleteOneClass(classNo);
 		return result;
 	}
+
+	public int selectOneDmRoomNo(int classNo, String memberNickname) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("classNo", classNo);
+		map.put("memberNickname", memberNickname);
+		int dmRoomNo = dao.selectOneDmRoomNo(map);
+		return dmRoomNo;
+	}
 }

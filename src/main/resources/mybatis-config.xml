@@ -8,6 +8,7 @@
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.admin.model.vo.Member2" alias="m2"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
+		<typeAlias type="kr.or.admin.model.vo.Prev" alias="prev"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
@@ -51,6 +52,7 @@
 	     <typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc"/>
 	      <typeAlias type="kr.or.mypage.model.vo.Myorder" alias="mo"/>
 	        <typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms"/>
+	          <typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md"/>
 	</typeAliases>
 </configuration>
 

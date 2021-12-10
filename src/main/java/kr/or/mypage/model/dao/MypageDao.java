@@ -17,6 +17,7 @@ import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.Mychat;
+import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.Mysell;
 import kr.or.recipe.model.vo.RecipeBoard;
@@ -132,6 +133,21 @@ public class MypageDao {
 	public ArrayList<Mysell> mySellerList(int memberNo) {
 		List<Mysell> list = sqlSession.selectList("mypage.sellerList");
 		return (ArrayList<Mysell>) list;
+	}
+	/*판매량 */
+	public ArrayList<Mysell> totalSell(int memberNo) {
+		List<Mysell> list = sqlSession.selectList("mypage.totalSell");
+		return (ArrayList<Mysell>) list;
+	}
+	/*판매자정보수정*/
+	public int updateSeller(Member m) {
+		return sqlSession.update("mypage.updateSeller",m);
+
+	}
+	/*dm리스트*/
+	public ArrayList<Mydm> myDmList(String dmReceiver) {
+		List<Mydm> list = sqlSession.selectList("mypage.dmList");
+		return (ArrayList<Mydm>) list;
 	}
 
 
