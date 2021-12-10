@@ -10,8 +10,13 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
 	<div class="container">
+
+	 <div class="row">
 	 
-    <div style="background-color: #F7F7E5; height: 200px;">
+	 <div class="col-md-1"></div>
+	 <div class="col-md-10">
+	 <h2>관리자 페이지</h2>
+	 <div style="background-color: #F7F7E5; height: 200px;">
         <div style="float: left;">
             <img src="#" style="width: 200px;">
         <button class="btn btn-warning">로고 변경하기</button>
@@ -28,12 +33,23 @@
                 </table>
         </div>
     </div>
+	 
+	 </div>
+	 <div class="col-md-1"></div>
+	 
+	 
+	 </div>
     
+    
+    
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
     <table class="table table-hover">
         <tr class="table-warning">
             <td><a href="#">회원관리</a></td>
-            <td><a href="stat.do">방문자 통계</a></td>
-            <td><a href="#">밀키트 통계</a></td>
+            <td><a href="stat.do">일간 현황</a></td>
+            <td><a href="#">순위</a></td>
             <td><a href="#">쿠폰</a></td>
         </tr>
         <tr class="table-warning">
@@ -63,6 +79,12 @@
 
 
     </table>
+    
+    
+    </div>
+    <div class="col-md-1"></div>
+     </div>
+    
     
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

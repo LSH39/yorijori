@@ -16,7 +16,10 @@ text-align: center;}
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
     <div class="container">
-        <h2>조리꾼 탈퇴 요청 회원 조회</h2>
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+    <h2>조리꾼 탈퇴 요청 회원 조회</h2>
     
     
     <div style="background-color: #F7F7E5; ">
@@ -153,6 +156,11 @@ text-align: center;}
     <div class="pagenation" style="">
     ${pageNavi }
     </div>
+    
+    </div>
+    <div class="col-md-1"></div>
+    </div>
+        
     </div>
     
     <script>
