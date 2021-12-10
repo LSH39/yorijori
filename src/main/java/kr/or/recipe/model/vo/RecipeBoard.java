@@ -24,4 +24,5 @@ public class RecipeBoard {
 	private String nickname;
 	private int likeCheck;
 	private int reportCheck;
+	private int likeCnt;
 }

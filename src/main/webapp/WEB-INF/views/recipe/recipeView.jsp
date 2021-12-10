@@ -49,16 +49,8 @@
 			<p id="rbTitle">${rb.recipeTitle }</p>
 			<p id="rbSub">${rb.subhead }</p>
 			<div class="rbImg">
-            <p>
-            <img src="/resources/img/recipe/watch.png" width="20px">
-            <img src="/resources/img/recipe/star.png" width="20px"></p>
-            <p>${rb.recipeTime }      	  
-                <c:choose>
-                <c:when test="${rb.recipeLevel eq 1}">상</c:when>
-                <c:when test="${rb.recipeLevel eq 2}">중</c:when>
-                <c:when test="${rb.recipeLevel eq 3}">하</c:when>
-                </c:choose>            
-                </p>
+                <p><img src="/resources/img/recipe/watch.png" width="20px"><img src="/resources/img/recipe/star.png" width="20px"></p>
+            </div>       
        	 </div>
             </div>
             <c:if test="${sessionScope.m.memberNo != null }">

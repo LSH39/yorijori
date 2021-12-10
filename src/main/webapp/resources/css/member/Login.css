@@ -5,7 +5,6 @@
 .content{
     margin: 100px 0px 100px 0px;
 }
-
 .joinSearch>div:hover{
     cursor: pointer;
 }
@@ -14,6 +13,7 @@
 }
 .container p{
     color: #7F7F7F;
+    margin: 10px 0px 10px 0px;
 }
 .joinSearch{
     margin-top: 30px;
