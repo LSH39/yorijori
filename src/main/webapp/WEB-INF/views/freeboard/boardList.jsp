@@ -23,7 +23,7 @@
 				<div class="sidemenubox">
 					<ul class="nav flex-column">
 						<li class="nav-item"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
-						<li class="nav-item active"><a href="/freeboardList.do?reqPage=1">자유게시판 <span> &gt;</span></a></li>
+						<li class="nav-item active"><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
 					</ul>
 				</div>
@@ -37,11 +37,12 @@
 	      			<div class="board-count">
 	      				<h5>총 게시물 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
 	      				<div class="board-order-dropdown">
+	      				  <input type="hidden" value="${orderIndex }" class="orderIndex">
 	      				  <p style="color:#454545;">정렬기준</p>
-						  <select class="order-by">
-						    <option selected>최신순</option>
-						    <option>댓글순</option>
-						    <option>추천순</option>
+						  <select class="order-by-box">
+						    <option selected value="0">최신순</option>
+						    <option value="1">댓글순</option>
+						    <option value="2">추천순</option>
 						  </select>
 						</div>
 	      			</div>
@@ -102,5 +103,30 @@
 
   </main><!-- End #main -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<script>
+	$(function(){
+		var orderIndex = $(".orderIndex").val();
+		if(orderIndex == 0){
+			$(".order-by-box").val(0);
+		} else if (orderIndex == 1){
+			$(".order-by-box").val(1);
+		} else {
+			$(".order-by-box").val(2);
+		}
+			
+		
+		//정렬정렬정렬
+		$(".order-by-box").on("change", function(){
+			var orderby = $(".order-by-box").val();
+			if(orderby == 0){
+				location.href="/freeboardList.do?reqPage=1&orderIndex=0";
+			} else if (orderby == 1){
+				location.href="/freeboardList.do?reqPage=1&orderIndex=1";
+			} else if (orderby == 2){
+				location.href="/freeboardList.do?reqPage=1&orderIndex=2";
+			}
+		});
+	});
+</script>
 </body>
 </html>

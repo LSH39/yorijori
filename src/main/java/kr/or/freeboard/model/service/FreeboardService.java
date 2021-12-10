@@ -8,14 +8,17 @@ import org.springframework.stereotype.Service;
 
 import kr.or.freeboard.model.dao.FreeboardDao;
 import kr.or.freeboard.model.vo.Freeboard;
+import kr.or.freeboard.model.vo.FreeboardComment;
+import kr.or.freeboard.model.vo.FreeboardFile;
 import kr.or.freeboard.model.vo.FreeboardPageData;
+import kr.or.freeboard.model.vo.FreeboardViewData;
 
 @Service
 public class FreeboardService {
 	@Autowired
 	private FreeboardDao dao;
 	
-	public FreeboardPageData selectFreeList(int reqPage) {
+	public FreeboardPageData selectFreeList(int reqPage, int orderIndex) {
 		//필요한 정보 - 페이지당 게시물 개수
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
@@ -25,6 +28,7 @@ public class FreeboardService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("orderIndex", orderIndex);
 		ArrayList<Freeboard> list = dao.selectFreeList(map);
 		
 		//페이지 네비게이션 제작
@@ -43,15 +47,15 @@ public class FreeboardService {
 		
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"tk-page-item\">";
-			pageNavi += "<a class=\"page-link\" href='/freeboardList.do?reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/freeboardList.do?reqPage="+(pageNo-1)+"&orderIndex="+orderIndex+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"tk-page-item active\">";
-				pageNavi += "<a class='page-link' href='/freeboardList.do?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/freeboardList.do?reqPage="+pageNo+"&orderIndex="+orderIndex+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='tk-page-item'>";
-				pageNavi += "<a class='page-link' href='/freeboardList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/freeboardList.do?reqPage="+pageNo+"&orderIndex="+orderIndex+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -61,12 +65,24 @@ public class FreeboardService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='tk-page-item'>";
-			pageNavi += "<a class='page-link' href='/freeboardList?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/freeboardList?reqPage="+pageNo+"&orderIndex="+orderIndex+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
 		FreeboardPageData fpd = new FreeboardPageData(list,pageNavi,start,totalCount);
 		return fpd;
+	}
+
+	public FreeboardViewData selectOneFree(int freeNo) {
+		ArrayList<FreeboardComment> commentList = dao.selectCommentList(freeNo);
+		ArrayList<FreeboardFile> fileList = dao.selectFileList(freeNo);
+		Freeboard fb = dao.selectOneFree(freeNo);
+		FreeboardViewData fvd = new FreeboardViewData();
+		fvd.setCommentList(commentList);
+		fvd.setFileList(fileList);
+		fvd.setFb(fb);
+		fvd.setProfilePath(fb.getProfilePath());
+		return fvd;
 	}
 
 }

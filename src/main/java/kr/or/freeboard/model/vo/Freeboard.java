@@ -13,4 +13,10 @@ public class Freeboard {
 	private String memberNickname;
 	private int freeLikeCount;
 	private int fcCount;
+	private String profilePath;
+	
+	
+	public String getFreeContentBr() {
+	return freeContent.replaceAll("\r\n", "<br>");
+	}
 }
