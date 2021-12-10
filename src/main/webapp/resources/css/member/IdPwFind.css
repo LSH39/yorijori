@@ -1,0 +1,61 @@
+.wrap{
+    width: 500px;
+    margin: 0 auto;
+}
+.content{
+    margin: 100px 0px 100px 0px;
+}
+
+.top_div{
+    width: 250px;
+    height: 40px;
+    line-height: 35px;
+    float: left;
+    text-align: center;
+    border-bottom: 3px solid #EEF1F4;
+}
+.h2_txt{
+    padding: 80px 0px 0px 0px;
+}
+.title_txt{
+    font-size: 18px;
+    margin: 20px 0px 0px 0px;
+}
+.input_txt, .light_btn{
+    margin-top: 5px;
+}
+.input_txt{
+    width: 400px;
+}
+#memberName, #memberId, #memberPw, #memberPw2{
+    width: 100%;
+}
+.light_btn{
+    width: 100px;
+}
+.purple_btn{
+    width: 100%;
+    margin-top: 50px;
+}
+#codeTr{
+    display: none;
+}
+#sub_txt{
+	display: none;
+}
+.result_tbl{
+    width: 500px;
+    height: 325px;
+    resize: none;
+}
+#result_txt{
+    height: 228px;
+}
+.result_txt{
+    font-size: 18px;
+    text-align: center;
+}
+.result_txt:nth-child(2){
+    color: #8E44AD;
+    font-size: 22px;
+}

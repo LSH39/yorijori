@@ -11,28 +11,28 @@
     box-sizing: border-box;
     margin-top: 15px;
     font-size: 16px;
-    padding-left: 10px;
 }
 .input_txt{
     border: 1px solid #7F7F7F;
     border-radius: 5px;
     font-size: 18px;
+    padding-left: 10px;
 }
 .input_txt:focus{
-    outline: 1px solid #9A86B3;
+    outline: 1px solid #8E44AD;
 }
 .purple_btn{
     color: #FFFFFF;
-    background-color: #9A86B3;
+    background-color: #8E44AD;
     border: 0;
     border-radius: 5px;
     font-weight: bold;
 }
 
 .light_btn{
-    color: #9A86B3;
+    color: #8E44AD;
     background-color: #FFFFFF;
-    border: 3px solid #9A86B3;
+    border: 3px solid #8E44AD;
     border-radius: 5px;
     font-weight: bold;
 }
@@ -62,9 +62,26 @@
 .h2_txt{
     text-align: center;
     font-size: 24px;
-    font-weight: bold;
     line-height: 90px;
 }
-.container p{
-    margin: 10px 0px 10px 0px;
+.top_txt{
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    padding: 50px 0px 50px 0px;
+}
+.container input[type="checkbox"]{
+    display: none;
+}
+.container input[type="checkbox"]+span{
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background: url(/resources/img/login/checkbox_g.png);
+    background-size: cover;
+    vertical-align:bottom;
+    cursor: pointer;
+}
+.container input[type="checkbox"]:checked+span{
+    background-image: url(/resources/img/login/checkbox_p.png);
 }

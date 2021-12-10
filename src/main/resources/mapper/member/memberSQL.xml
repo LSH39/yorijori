@@ -320,5 +320,59 @@ order by enrollDate desc
 		where member_id=#{memberId} and member_pw=#{memberPw}
 	</select>
 
-
+	<insert id="joinAdmin" parameterType="m">
+		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberEmail},#{memberName},#{memberNickname},#{memberPhone},'1900-01-01','00000','admin','admin',0,'profile_admin.png','admin',null,3,0,to_char(sysdate,'yyyy-mm-dd'),null,0)
+	</insert>
+	<insert id="joinBasic" parameterType="m">
+		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberEmail},#{memberName},#{memberNickname},#{memberPhone},#{memberBirth},#{postcode},#{addressRoad},#{addressDetail},#{memberConsent},'profile_basic.png',null,null,1,0,to_char(sysdate,'yyyy-mm-dd'),null,0)
+		<selectKey resultType="_int" order="AFTER" keyProperty="memberNo">
+			select member_no from member where member_id=#{memberId}
+		</selectKey>
+	</insert>
+	<insert id="joinPro" parameterType="m">
+		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberEmail},#{memberName},#{memberNickname},#{memberPhone},#{memberBirth},#{postcode},#{addressRoad},#{addressDetail},#{memberConsent},'profile_basic.png',null,#{certificatePath},2,0,to_char(sysdate,'yyyy-mm-dd'),null,0)
+		<selectKey resultType="_int" order="AFTER" keyProperty="memberNo">
+			select member_no from member where member_id=#{memberId}
+		</selectKey>
+	</insert>
+	
+	<insert id="joinCoupon" parameterType="m">
+		insert into coupon_list values(coupon_list_seq.nextval,#{memberNo},1,0,null)
+	</insert>
+	
+	<select id="joinSearch" parameterType="m" resultType="String">
+		select member_no as memberNo
+		from member
+		<choose>
+			<when test="memberId!=null">
+				where member_id=#{memberId}
+			</when>
+			<when test="memberEmail!=null">
+				where member_email=#{memberEmail}
+			</when>
+			<when test="memberNickname!=null">
+				where member_nickname=#{memberNickname}
+			</when>
+			<when test="memberPhone!=null">
+				where member_phone=#{memberPhone}
+			</when>
+		</choose>
+	</select>
+	
+	<select id="findIdPw" parameterType="m" resultType="m">
+		select member_no as memberNo,
+				member_id as memberId
+		from member
+		<choose>
+			<when test="memberName!=null">
+				where member_name=#{memberName} and member_email=#{memberEmail}
+			</when>
+			<when test="memberId!=null">
+				where member_id=#{memberId} and member_email=#{memberEmail}
+			</when>
+		</choose>
+	</select>
+	<update id="findPwRe" parameterType="m">
+		update member set member_pw=#{memberPw} where member_no=#{memberNo}
+	</update>
 </mapper>

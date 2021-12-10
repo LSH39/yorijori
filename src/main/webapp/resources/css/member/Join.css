@@ -1,0 +1,58 @@
+.wrap{
+    width: 1000px;
+    margin: 0 auto;
+}
+.content{
+    margin: 100px 0px 100px 0px;
+}
+.h2_txt{
+    line-height: 90px;
+}
+.center>div>h2{
+    text-align: center;
+    float: left;
+}
+.content img{
+    width: 70px;
+    height: 70px;
+    float: left;
+    padding-left: 20px;
+    padding-top: 5px;
+    box-sizing: content-box;
+}
+.content span{
+    color: #8E44AD;
+}
+.center{
+    width: 1000px;
+    border: 4px solid #8E44AD;
+    box-sizing: border-box;
+    margin: 50px 0px 50px 0px;
+    padding: 20px;
+}
+.center>div{
+    overflow: hidden;
+    text-align: center;
+    margin: auto;
+}
+.center>div:nth-child(1){
+    width: 300px;
+}
+.center>div:nth-child(2){
+    width: 500px;
+}
+.center>div:nth-child(-n+2){
+    padding: 5px;
+}
+.bottom{
+    text-align: center;
+}
+.container button{
+    margin: 10px;
+}
+#joinAdmin_btn{
+	width: 100px;
+	height: 30px;
+	font-size: 12px;
+	float: right;
+}
