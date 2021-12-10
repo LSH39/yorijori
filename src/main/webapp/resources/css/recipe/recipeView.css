@@ -157,4 +157,6 @@
     		border-radius:5px;
     		text-align: center;
     	}
-    	
+    	.rbImg img{
+    		margin: 30px;
+    	}
