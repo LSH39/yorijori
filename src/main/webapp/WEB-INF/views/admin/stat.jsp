@@ -39,88 +39,96 @@ fill:#9F90CF;
 }
 rect{
 fill:none;}
+
+.selected{
+cursor:pointer;
+text-align:center;
+border: 1px solid #9f90cf;
+background-color: #9f90cf;
+color:#fff;
+font-weight: bold;
+
+
+
+}
+.unselect{
+
+
+border: 1px solid #e0d8ef;
+cursor:pointer;
+text-align:center;
+background-color: #E0D8EF;
+color:#9f90cf;
+
+}
+svg{
+
+
+}
+
 </style>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
-      var totoday = new Date();
-      var toyear = totoday.getFullYear();
-      var tomonth = totoday.getMonth();
-      var todate = totoday.getDate();
-      var prev1 = new Date(toyear,tomonth,todate);
-  	  var prev2 =	new Date(toyear,tomonth,todate);
-  	  var prev3=new Date(toyear,tomonth,todate);
-  	  var prev4 =new Date(toyear,tomonth,todate);
-  	  var prev5=new Date(toyear,tomonth,todate);
-  	  var prev6=new Date(toyear,tomonth,todate);
-  	prev1.setDate(prev1.getDate()-1);
-  	prev2.setDate(prev1.getDate()-2);
-  	prev3.setDate(prev1.getDate()-3);
-  	prev4.setDate(prev1.getDate()-4);
-  	prev5.setDate(prev1.getDate()-5);
-  	prev6.setDate(prev1.getDate()-6);
-  	
-  	
-  	var prev1month = prev1.getMonth()+1;
-  	if(prev1month==0){
-  		prev1month =12;
-  	}
-  	var prev2month = prev2.getMonth()+1;
-  	if(prev2month==0){
-  		prev2month =12;
-  	}
-  	var prev3month = prev3.getMonth()+1;
-  	if(prev3month==0){
-  		prev3month =12;
-  	}
-  	var prev4month = prev4.getMonth()+1;
-  	if(prev4month==0){
-  		prev4month =12;
-  	}
-  	var prev5month = prev5.getMonth()+1;
-  	if(prev5month==0){
-  		prev5month =12;
-  	}
-  	var prev6month = prev6.getMonth()+1;
-  	if(prev6month==0){
-  		prev6month =12;
-  	}
+
   	
   	
   	
   	
   	
-  	var prev1day = prev1.getFullYear()+"-"+prev1month+"-"+prev1.getDate();
-  	var prev2day = prev2.getFullYear()+"-"+prev2month+"-"+prev2.getDate();
-  	var prev3day = prev3.getFullYear()+"-"+prev3month+"-"+prev3.getDate();
-  	var prev4day = prev4.getFullYear()+"-"+prev4month+"-"+prev4.getDate();
-  	var prev5day = prev5.getFullYear()+"-"+prev5month+"-"+prev5.getDate();
-  	var prev6day = prev6.getFullYear()+"-"+prev6month+"-"+prev6.getDate();
+  	
   	
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['날짜',  '게시글'],
-          [prev6day,       ${p.prev7}],
-          [prev5day,       ${p.prev6}],
-          [prev4day,       ${p.prev5}],
-          [prev3day,       ${p.prev4}],
+          [prev7day,       ${p.prev7}],
+          [prev6day,       ${p.prev6}],
+          [prev5day,       ${p.prev5}],
+          [prev4day,       ${p.prev4}],
           [prev3day,       ${p.prev3}],
           [prev2day,       ${p.prev2}],
           [prev1day,       ${p.prev1}],
-          [today2,       ${p.today}]
+          [today,       ${p.today}]
         ]);
+        
+        var data2 = google.visualization.arrayToDataTable([
+            ['날짜',  '레시피'],
+            [prev7day,       ${r.prev7}],
+            [prev6day,       ${r.prev6}],
+            [prev5day,       ${r.prev5}],
+            [prev4day,       ${r.prev4}],
+            [prev3day,       ${r.prev3}],
+            [prev2day,       ${r.prev2}],
+            [prev1day,       ${r.prev1}],
+            [today,       ${r.today}]
+          ]);
+        var data3 = google.visualization.arrayToDataTable([
+            ['날짜',  '회원가입'],
+            [prev7day,       ${j.prev7}],
+            [prev6day,       ${j.prev6}],
+            [prev5day,       ${j.prev5}],
+            [prev4day,       ${j.prev4}],
+            [prev3day,       ${j.prev3}],
+            [prev2day,       ${j.prev2}],
+            [prev1day,       ${j.prev1}],
+            [today,       ${j.today}]
+          ]);
 
         var options = {
           
-          hAxis: {title: '게시글 수',  titleTextStyle: {color: '#9F90CF'}},
+          
           vAxis: {minValue: 0}
           
           
         };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.AreaChart(document.getElementById('freeChart'));
+        var chart2 = new google.visualization.AreaChart(document.getElementById('recipeChart'));
+        var chart3 = new google.visualization.AreaChart(document.getElementById('joinChart'));
         chart.draw(data, options);
+        chart2.draw(data2, options);
+        chart3.draw(data3, options);
       }
     </script>
 </head>
@@ -163,15 +171,71 @@ fill:none;}
 	</div>
 	<br>
 	<div class="row">
+	<div class="col-md-2"></div>
+	<div  class="col-md-2 selected grBtn" >게시글</div><input type="hidden" value="1">
+	<div  class="col-md-2 unselect grBtn" >레시피</div><input type="hidden" value="2">
+	<div  class="col-md-2 unselect grBtn" >회원가입</div><input type="hidden" value="3">
+	<div class="col-md-2" style="border-bottom: 1px solid #9f90cf;"></div>
+	<div class="col-md-2"></div>
+	</div>
+	<br>
+	<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8"><h2 id="chartName">게시글 그래프</h2></div>
+	
+	<div class="col-md-2"></div>
+	</div>
+	
+	<div class="row freeChart chart">
 	<div class="col-md-1"></div>
-	<div class="col-md-10"><div id="chart_div" style="width: 100%; height: 500px;"></div></div>
+	<div class="col-md-10">
+	
+	<div id="freeChart" style="width: 100%; height: 500px;"></div></div>
+	
+	<div class="col-md-1"></div>
+	</div>
+	
+	<div class="row joinChart chart" style="">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	
+	<div id="joinChart" style=" width: 100%; height: 500px;"></div></div>
 	
 	<div class="col-md-1"></div>
 	</div>
 	
 	
+	
+	<div class="row recipeChart chart" style="">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	
+	<div id="recipeChart" style="width: 100%; height: 500px;"></div></div>
+	
+	<div class="col-md-1"></div>
 	</div>
+	
+	<input id="f" type="hidden" value="${today }">
+	<input id="today" type="hidden" value="${day.today }">
+	<input id="prev1day" type="hidden" value="${day.prev1day }">
+	<input id="prev2day" type="hidden" value="${day.prev2day }">
+	<input id="prev3day" type="hidden" value="${day.prev3day }">
+	<input id="prev4day" type="hidden" value="${day.prev4day }">
+	<input id="prev5day" type="hidden" value="${day.prev5day }">
+	<input id="prev6day" type="hidden" value="${day.prev6day }">
+	<input id="prev7day" type="hidden" value="${day.prev7day }">
+	</div>
+	
 	<script type="text/javascript">
+	var today = $("#today").val();
+	var prev1day = $("#prev1day").val();
+  	var prev2day = $("#prev2day").val();
+  	var prev3day = $("#prev3day").val();
+  	var prev4day = $("#prev4day").val();
+  	var prev5day = $("#prev5day").val();
+  	var prev6day = $("#prev6day").val();
+  	var prev7day = $("#prev7day").val();
+	
 	var date = new Date();
 	var day = date.getDate();
 	if(day<10){
@@ -181,17 +245,41 @@ fill:none;}
 	var year = date.getFullYear();
 	
 	
-	var today = year+"."+month+"."+day+".";
+	
 	
 	var today1 = year+"-"+month+"-"+day;
 	var today2= today1;
-	$("#dateTxt").html(today1);
+	
 	$("#date").prop("max",today1);
-	$("#date").val(today1);
+	
+		$("#date").val($("#f").val());
+		$("#dateTxt").html($("#f").val());
+	
+	//	$("#dateTxt").html(today1);
+	//	$("#date").val(today1);
+	
+	
 	$("#date").change(function(){
-		
-		$("#dateTxt").html($(this).val());
 		today2 =$(this).val();
+		
+		
+		$.ajax({
+			url:"stat.do",
+			type:"post",
+			data : {today:today2},
+			success: function(data){
+				
+				$("body").html(data);
+				today1 = today2;
+				
+			
+			},
+			error:function(){
+				console.log("err");
+			}
+			
+			
+		});
 	});
 	$(".xi-calendar").click(function(){
 		$("#date").click();
@@ -224,13 +312,6 @@ fill:none;}
 		}else{
 			currday = currday-1;	
 		}
-		
-		
-		
-		
-		
-		
-		
 		currmonth =currmonth-1+1;
 		if(currmonth<10){
 			currmonth ="0"+currmonth;
@@ -238,9 +319,39 @@ fill:none;}
 		if(currday<10){
 			currday = "0"+currday;
 		}
+		
+		
+		
+
+		
+		
+		
+		
+		
 		var dd = curryear+"-"+currmonth+"-"+currday;
 		$("#dateTxt").html(dd);
 		$("#date").val(dd);
+
+		today2 =$("#date").val();
+				
+				
+				$.ajax({
+					url:"stat.do",
+					type:"post",
+					data : {today:today2},
+					success: function(data){
+						
+						$("body").html(data);
+						today1 = today2;
+						
+					
+					},
+					error:function(){
+						console.log("err");
+					}
+					
+					
+				});
 	});
 	
 	
@@ -297,9 +408,63 @@ fill:none;}
 		if(currday<10){
 			currday = "0"+currday;
 		}
+		
+		
+		
+		
+		
+		
 		var dd = curryear+"-"+currmonth+"-"+currday;
 		$("#dateTxt").html(dd);
 		$("#date").val(dd);
+		
+		
+
+		today2 =$("#date").val();
+				
+				console.log(today2);
+				$.ajax({
+					url:"stat.do",
+					type:"post",
+					data : {today:today2},
+					success: function(data){
+						$("body").html(data);
+						today1 = today2;
+						
+						
+					
+					},
+					error:function(){
+						console.log("err");
+					}
+					
+					
+				});
+	});
+	
+	setTimeout(() => {
+		$(".recipeChart").hide();
+		$(".joinChart").hide();
+	}, 100);
+	
+	
+	
+	$(".grBtn").click(function(){
+		$(".grBtn").addClass("unselect");
+		$(this).removeClass("unselect");
+		$(this).addClass("selected");
+		$(".chart").hide();
+		console.log($(this).next().val());
+		switch($(this).next().val()){
+		case "1" : $(".freeChart").show();
+			break;
+		case "2" : $(".recipeChart").show();
+			break;
+		case "3" :$(".joinChart").show();
+			break;
+		}
+		$("#chartName").html($(this).html()+" 그래프");
+		
 	});
 	
 	</script>

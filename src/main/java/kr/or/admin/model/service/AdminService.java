@@ -224,14 +224,25 @@ public class AdminService {
 		return result;
 	}
 
-	public Prev selectFreeCount() {
-		Prev prev = dao.selectFreeCount();
+	public Prev selectFreeCount(HashMap<String, Object> map) {
+		Prev prev = dao.selectFreeCount(map);
 		return prev;
 	}
 
-	public Prev selectFjr(String today) {
-		Prev count = dao.selectFjr(today);
+	public Prev selectFjr(HashMap<String, Object> map) {
+		Prev count = dao.selectFjr(map);
 		return count;
+	}
+
+	public Prev selectRecipeCount(HashMap<String, Object> map) {
+		Prev recipe = dao.selectRecipeCount(map);
+		
+		return recipe;
+	}
+
+	public Prev selectJoinCount(HashMap<String, Object> map) {
+		Prev join = dao.selectJoinCount(map);
+		return join;
 	}
 	
 	

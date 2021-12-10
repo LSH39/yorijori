@@ -181,16 +181,28 @@ public class AdminDao {
 	}
 
 
-	public Prev selectFreeCount() {
-		Prev prev = sqlSession.selectOne("stat.selectFreeCount");
+	public Prev selectFreeCount(HashMap<String, Object> map) {
+		Prev prev = sqlSession.selectOne("stat.selectFreeCount",map);
 		
 		return prev;
 	}
 
 
-	public Prev selectFjr(String today) {
-		Prev count = sqlSession.selectOne("stat.selectFjr",today);
+	public Prev selectFjr(HashMap<String, Object> map) {
+		Prev count = sqlSession.selectOne("stat.selectFjr",map);
 		return count;
+	}
+
+
+	public Prev selectRecipeCount(HashMap<String, Object> map) {
+		Prev recipe = sqlSession.selectOne("stat.selectRecipeCount",map);
+		return recipe;
+	}
+
+
+	public Prev selectJoinCount(HashMap<String, Object> map) {
+		Prev join = sqlSession.selectOne("stat.selectJoinCount",map);
+		return join;
 	}
 
 
