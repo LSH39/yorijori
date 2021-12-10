@@ -92,7 +92,7 @@
             <ul>
               <li><a class="nav-link" onclick="chkDate();">경연대회투표</a></li>
               <li><a href="/contestResult.do">우승자 발표</a></li>
-              <li><a href="#">역대 우승자</a></li>
+              <li><a href="/contestWinner.do">역대 우승자</a></li>
             </ul>
           </li>
           <li class="dropdown" style="padding-right:15px;"><a href="#"><span>커뮤니티</span> <i class="bi bi-chevron-down"></i></a>

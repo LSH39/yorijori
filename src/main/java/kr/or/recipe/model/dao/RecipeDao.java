@@ -1,6 +1,7 @@
 package kr.or.recipe.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +13,7 @@ import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 import kr.or.recipe.model.vo.RecipeLike;
+import kr.or.recipe.model.vo.RecipeReport;
 
 
 @Repository
@@ -40,25 +42,6 @@ public class RecipeDao {
 		return sqlSession.insert("recipe.insertContent", rc);
 	}
 
-	
-	public ArrayList<RecipeBoard> selectCategory1(String item) {
-		List<RecipeBoard> list = sqlSession.selectList("recipe.selectCategory1", item);
-		return (ArrayList<RecipeBoard>)list;
-	}
-
-	public ArrayList<RecipeBoard> selectCategory2(String item2) {
-		List<RecipeBoard>list = sqlSession.selectList("recipe.selectCategory2",item2); 
-		return (ArrayList<RecipeBoard>)list;
-	}
-
-	public ArrayList<RecipeBoard> selectCategory3(String item3) {
-		List<RecipeBoard>list = sqlSession.selectList("recipe.selectCategory3",item3);
-		return (ArrayList<RecipeBoard>)list;
-	}
-	
-	public RecipeBoard selectOneRecipe(int recipeNo) {
-		return sqlSession.selectOne("recipe.selectOneRecipe",recipeNo);
-	}
 
 	public ArrayList<RecipeContent> selectContent(int recipeNo) {
 		List<RecipeContent>list = sqlSession.selectList("recipe.selectContent",recipeNo);
@@ -93,6 +76,18 @@ public class RecipeDao {
 
 	public int insertLike(RecipeLike rl) {
 		return sqlSession.insert("recipe.insertLike", rl);
+	}
+
+	public RecipeBoard selectOneRecipe(HashMap<String, Object> map) {
+		return sqlSession.selectOne("recipe.selectOneRecipe",map);
+	}
+
+	public int deleteLike(RecipeLike rl) {
+		return sqlSession.delete("recipe.deleteLike", rl);
+	}
+
+	public int insertReport(RecipeReport rp) {
+		return sqlSession.insert("recipe.insertReport", rp);
 	}
 
 

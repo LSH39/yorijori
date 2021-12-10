@@ -7,10 +7,20 @@
         }
        
         .mainImg{
-            display:flex;   
-            justify-content: center;
+            text-align:center;
             position:relative;
         }
+        .checkImg{
+        	background-color:#443c46;
+        	margin: 0 auto;
+    		width:700px;
+    		height: 50px;
+    		line-height: 50px;
+    	}
+    	.checkImg>span{
+    		
+    		padding-left: 20px;
+    	}
         #count{
             position:absolute;
             border-radius:15px;
@@ -37,27 +47,29 @@
         }
        .rbList{    	  
             margin: 0 auto;
-            width: 500px;
-           margin-bottom: 20px;
+            width: 700px;
+            text-align: center;
         }
         #rbTitle{
             font-size: 50px;
             font-weight: 900;
-            text-align: center;
         }
         #rbSub{
-            text-align: center;        
+                   
         }
-        .rbImg>div{
-            width: 100px;
-            float: left;
+
+        .rbImg .img{
+           width:100px;
             box-sizing: border-box;
-            text-align: center;
         }
         .rbImg{
-        	height:120px;
-            margin-left: 150px;
-            
+			text-align: center;
+           
+        }
+         .text{
+            color:#6D5874;
+            font-weight: bolder;
+            text-align: center;
         }
         #mList{
         	margin-top:10px;
@@ -77,26 +89,72 @@
         .contents{
             width: 1000px;
         }
-        .text{
-            color:#6D5874;
-            font-weight: bolder;
-            text-align: center;
-        }
+       
         .amount{
             margin-left: 30px;
         }
-        .recipeNavi>ul{
-            margin: 0 auto;
-            margin-top: 50px;
-            
-        }
-        .recipeNavi>ul>li>a{
-        	width:300px;
+        .recipeNavi li{
+       		 width:300px;
             float: left;
             display: block;
             box-sizing: border-box;
             height: 60px;
             line-height: 60px;
-            text-align: center;   
-        }
-     
+            text-align: center;       
+         }
+         .recipeNavi a{
+         	text-decoration: none;
+         }
+          #modal-wrap{
+			left:33%;
+			z-index:1;
+			width:500px;
+			height:350px;
+			position: fixed;
+		}
+		#modal-wrap>h1{	
+			border-top-left-radius:10px;
+			border-top-right-radius:10px;	
+			background-color:#E0D8EF;
+			text-align: center;
+			padding: 15px 0;	
+			margin: 0;
+		}
+		#modal-content{
+			border: 3px solid #E0D8EF;
+			border-bottom-left-radius:10px;
+			border-bottom-right-radius:10px;
+			padding-top: 30px;
+			padding-bottom: 30px;
+			background-color: white;	
+		}
+		#modal-content>h5{
+			width: 80%;
+			margin: 0 auto;
+		}
+		.modalInput{
+			margin-top:30px;
+			text-align: center;
+		}
+		.modalInput label{
+			margin-right: 10px;
+		}
+		
+		#modal-btn{
+			text-align: center;
+		}
+    	#modal-btn>button{
+    		color: white;
+    		font-size:20px;
+    		font-weight:900;
+    		margin-left:10px;
+    		text-align:center;
+    		margin-top:40px;
+    		background-color:#9F90CF;
+    		width :200px;
+    		height:45px;
+    		border:none;
+    		border-radius:5px;
+    		text-align: center;
+    	}
+    	

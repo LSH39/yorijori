@@ -27,6 +27,7 @@ import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 import kr.or.recipe.model.vo.RecipeLike;
+import kr.or.recipe.model.vo.RecipeReport;
 import sun.reflect.generics.visitor.Reifier;
 
 @Controller
@@ -119,8 +120,8 @@ public class RecipeController {
 		return fv;
 	}
 	@RequestMapping(value = "/recipeView.do")
-	   public String recipeView(int recipeNo, Model model) {
-		RecipeBoard rb = service.selectOneRecipe(recipeNo);
+	   public String recipeView(int recipeNo,int memberNo, Model model) {
+		RecipeBoard rb = service.selectOneRecipe(recipeNo,memberNo);
 		ArrayList<RecipeComment>list = service.selectComment(recipeNo);
 		model.addAttribute("rb", rb);
 		model.addAttribute("list", list);
@@ -156,6 +157,18 @@ public class RecipeController {
 	@RequestMapping(value = "/insertLike.do")
 	public int insertLike(RecipeLike rl) {
 		int result = service.insertLike(rl);
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value ="/deleteLike.do")
+	public int deleteLike(RecipeLike rl) {
+		int result = service.deleteLike(rl);
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/insertReport.do")
+	public int insertReport(RecipeReport rp) {
+		int result = service.insertReport(rp);
 		return result;
 		
 	}

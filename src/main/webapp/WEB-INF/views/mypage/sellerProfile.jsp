@@ -156,7 +156,7 @@
 $("#delBtn").click(function() {
 	$(".delFile").hide();
 	$(this).next().show();
-	$("[name=status]").val(2);
+	
 });
 
 </script>
@@ -197,7 +197,7 @@ $("#delBtn").click(function() {
               <input type="button" value="프로필바꾸기" id="rePro">
           </div>
           <div class="myInfo">
-              <form>
+                  <form action="/updateSeller.do" method="post" name="updateSellerFrm" enctype="multipart/form-data">
         			<table class="mine" border="1">
 							<tr>
 								<td>회원소개</td>
@@ -207,7 +207,7 @@ $("#delBtn").click(function() {
 							<tr>
 								<td>회원아이디</td>
 								<td><input type="text" name="memberId" id="memberId"
-									onfocus="this.placeholder=''" value="${m.memberId }"></td>
+									onfocus="this.placeholder=''" value="${m.memberId }" readonly></td>
 							</tr>
 							<tr>
 								<td>회원이름</td>
@@ -236,7 +236,7 @@ $("#delBtn").click(function() {
 							</tr>
 				               <tr>
 				                   <td>자격증</td>
-				                   <td>
+				               <td>
 				             <c:choose>
 							<c:when test="${not empty m.certificatePath }">
 								<img src="resources/img/mypage/file.png" width="16px" class="delFile">
@@ -274,17 +274,17 @@ $("#delBtn").click(function() {
 							<tr>
 								<td>회원등급</td>
 								<td><input type="text" name="memberLevel" id="memberLevel"
-									onfocus="this.placeholder=''" value="${m.memberLevel }"></td>
+									onfocus="this.placeholder=''" value="${m.memberLevel }" readonly></td>
 							</tr>
 							<tr>
 								<td>포인트내역</td>
 								<td><input type="text" name="memberPoint" id="memberPoint"
-									onfocus="this.placeholder=''" value="${m.memberPoint }"></td>
+									onfocus="this.placeholder=''" value="${m.memberPoint }" readonly></td>
 							</tr>
 							<tr>
 								<td>가입일</td>
 								<td><input type="text" name="enrollDate" id="enrollDate"
-									onfocus="this.placeholder=''" value="${m.enrollDate }"></td>
+									onfocus="this.placeholder=''" value="${m.enrollDate }" readonly></td>
 							</tr>
 
               </table>
@@ -295,7 +295,7 @@ $("#delBtn").click(function() {
   
          
       </div>
-    
+   
           </div>
 
         </div>

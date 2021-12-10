@@ -193,19 +193,21 @@
             <div id="line2"></div><br>
             <div class="orD">
                 <div class="or">
+               
                     <table border="1" class="orl">
+                   
                         <tr>
                         <th class="tb2-th" colspan="3">주문번호:${mo.orderNo}</th>
                         <td class="tb2-td"><img src="img/s.jpeg" id="sort" ></td>
                     </tr>
-                       <c:forEach items="${list}" var="mo" varStatus="i">
+                         <c:forEach items="${list}" var="mo" varStatus="i">
                     <tr class="tb2-tr2">
                         <td class="tb2-td">${mo.filepath}</td>
                         <td class="tb2-td">${mo.milkitName}</td>
                         <td class="tb2-td">${mo.milkitPrice}</td>
                         <td class="tb2-td">${mo.orderOptionAmount}</td>
                     </tr>
-                    </c:forEach>
+                  </c:forEach>
                     
                     
                     </table>
@@ -297,8 +299,9 @@
                     <tr class="tb2-tr2">
                         <td class="tb2-td">${mo.orderRequest}</td>
                     </tr>
-                   
+                    
                     </table>
+                     
                 </div>
 
             </div>

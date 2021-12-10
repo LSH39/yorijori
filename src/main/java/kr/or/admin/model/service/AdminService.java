@@ -11,6 +11,7 @@ import kr.or.admin.model.dao.AdminDao;
 import kr.or.admin.model.vo.CouponPageData;
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
+import kr.or.admin.model.vo.Prev;
 import kr.or.coupon.model.vo.Coupon;
 
 
@@ -221,6 +222,16 @@ public class AdminService {
 	public int pointReset(String memberNo) {
 		int result = dao.pointReset(memberNo);
 		return result;
+	}
+
+	public Prev selectFreeCount() {
+		Prev prev = dao.selectFreeCount();
+		return prev;
+	}
+
+	public Prev selectFjr(String today) {
+		Prev count = dao.selectFjr(today);
+		return count;
 	}
 	
 	
