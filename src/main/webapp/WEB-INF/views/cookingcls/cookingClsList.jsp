@@ -35,6 +35,7 @@
   				<c:if test="${not empty sessionScope.m }">
 					<a href="/cookingRsrvList.do">예약내역</a>  				
   				</c:if>
+  				<a href="/profile.do?memberId=x">회원포르필테스트</a>
 			</div>
 		</div>
 	</div>

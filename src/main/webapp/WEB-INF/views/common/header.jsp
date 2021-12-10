@@ -55,7 +55,7 @@
       <div class="social-links d-none d-md-block">
       <c:choose>
 		<c:when test="${empty sessionScope.m }">
-        <a href="#" class="join">회원가입</a>
+        <a href="/joinCommon.do" class="join">회원가입</a>
         <a href="/loginFrm.do" class="login">로그인</a>
         <a href="/admin.do">관리자 페이지 </a>
         </c:when>

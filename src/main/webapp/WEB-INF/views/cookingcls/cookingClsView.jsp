@@ -122,7 +122,7 @@
 			let date = new Date();
 			let classPrice = $(".classPrice").html(); //실제 가격
 			let classTitle = $("#classTitle").html();
-			let memberNickname = $("#memberNickname").val();
+			let memberNickname = $("#clsMemberNickname").val();
 			let classNo = $("#classNo").val();
 			let classNop = $("#classNop").html();
 			let impUid = date.getFullYear()+""+("0"+(date.getMonth()+1)).slice(-2)+""+("0"+date.getDate()).slice(-2)+""+("0"+date.getHours()).slice(-2)+""+("0"+date.getMinutes()).slice(-2)+""+("0"+date.getSeconds()).slice(-2);
@@ -229,6 +229,7 @@
 								<td colspan="2">
 									<input type="hidden" name="classNo" value="${ccls.classNo }" id="classNo">
 									<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }" id="memberNickname">
+									<input type="hidden" name="clsMemberNickname" value="${ccls.memberNickname }" id="clsMemberNickname">
 									
 									<c:choose>
 										<c:when test="${ empty sessionScope.m }">

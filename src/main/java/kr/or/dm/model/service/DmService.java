@@ -29,6 +29,7 @@ public class DmService {
 		return list;
 	}
 
+	//문의 작성
 	public int insertDm(int classNo, String dmReceiver, String dmSender, String dmContent) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -38,5 +39,12 @@ public class DmService {
 		map.put("dmContent", dmContent);
 		int result = dao.insertDm(map);
 		return result;
+	}
+	
+	//클래스 개설자 닉네임 찾기
+	public String selectOneNickname(int classNo) {
+		// TODO Auto-generated method stub
+		String receiver = dao.selectOneNickname(classNo);
+		return receiver;
 	}
 }

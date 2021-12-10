@@ -24,17 +24,17 @@
                 <p>또는</p>
                 <button type="button" class="kakao_btn" onclick="location.href='/'">KAKAO 로그인</button>
                 <div class="joinSearch">
-                    <div onclick="location.href='#'">
+                    <div onclick="location.href='/joinCommon.do'">
                         <img src="/resources/img/login/Login_JoinG.png">
                         <img src="/resources/img/login/Login_JoinP.png">
                         <p>회원가입</p>
                     </div>
-                    <div onclick="location.href='#'">
+                    <div onclick="location.href='/findIdFrm.do'">
                         <img src="/resources/img/login/Login_IdSearchG.png">
                         <img src="/resources/img/login/Login_IdSearchP.png">
                         <p>아이디 찾기</p>
                     </div>
-                    <div onclick="location.href='#'">
+                    <div onclick="location.href='/findPwFrm.do'">
                         <img src="/resources/img/login/Login_PwSearchG.png">
                         <img src="/resources/img/login/Login_PwSearchP.png">
                         <p>비밀번호 찾기</p>

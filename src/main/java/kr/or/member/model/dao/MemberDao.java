@@ -20,8 +20,34 @@ public class MemberDao {
 		Member m = sqlSession.selectOne("member.loginMember",member);
 		return m;
 	}
+
+	public String joinSearch(Member member) {
+		String memberNo = sqlSession.selectOne("member.joinSearch",member);
+		return memberNo;
+	}
+
+	public int joinAdmin(Member member) {
+		return sqlSession.insert("member.joinAdmin",member);
+	}
 	
+	public int joinBasic(Member member) {
+		return sqlSession.insert("member.joinBasic",member);
+	}
 	
-	
+	public int joinPro(Member member) {
+		return sqlSession.insert("member.joinPro",member);
+	}
+
+	public int joinCoupon(Member member) {
+		return sqlSession.insert("member.joinCoupon",member);
+	}
+
+	public Member findIdPw(Member member) {
+		return sqlSession.selectOne("member.findIdPw",member);
+	}
+
+	public int findPwRe(Member member) {
+		return sqlSession.update("member.findPwRe",member);
+	}
 	
 }

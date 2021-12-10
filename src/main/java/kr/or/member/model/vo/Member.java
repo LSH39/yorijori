@@ -15,13 +15,13 @@ public class Member {
 	private String postcode;
 	private String addressRoad;
 	private String addressDetail;
-	private String memberConsent;
+	private int memberConsent;
 	private String profilePath;
 	private String profileIntro;
 	private String certificatePath;
-	private String memberLevel;
+	private int memberLevel;
 	private int memberPoint;
 	private String enrollDate;
 	private String withdrawDate;
-	private String memberBlack;
+	private int memberBlack;
 }
