@@ -39,7 +39,7 @@
 		from notice where notice_no=#{noticeNo}
 	</delete>
 	<insert id="insertNotice" parameterType="n">
-		insert into notice values (notice_seq.nextval, #{noticeTitle}, #{noticeWriter}, #{noticeContent}, to_char(sysdate, 'yyyy-mm-dd'), 0, #{filename}, #{filepath})
+		insert into notice values (notice_seq.nextval, #{noticeWriter}, #{noticeTitle}, #{noticeContent}, 'n', to_char(sysdate, 'yyyy-mm-dd'), 0, #{filename}, #{filepath})
 	</insert>
 	<update id="rcUpdate" parameterType="_int">
 		update notice set notice_readcount = notice_readcount + 1

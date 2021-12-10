@@ -23,7 +23,7 @@
 				<div class="sidemenubox">
 					<ul class="nav flex-column">
 						<li class="nav-item active"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
-						<li class="nav-item"><a href="#">자유게시판 <span> &gt;</span></a></li>
+						<li class="nav-item"><a href="/freeboardList.do?reqPage=1">자유게시판 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
 					</ul>
 				</div>
@@ -89,7 +89,6 @@
 	      </div>
       </div>
     </section>
-
   </main><!-- End #main -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

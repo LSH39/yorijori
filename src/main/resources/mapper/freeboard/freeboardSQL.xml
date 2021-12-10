@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="freeboard">
-
+	<select id="freeList" parameterType="map" resultType="fb">
+		select *
+		    from 
+		    (select rownum as rnum, fff.* from
+		    (select ff.*, freeLikeCount from
+		    (select f.*, fcCount from
+		    (select
+				  		free_no as freeNo,
+				  		free_writer as freeWriter,
+				  		free_title as freeTitle,
+				  		free_content as freeContent,
+				  		reg_date as regDate,
+				  		free_readcount as freeReadcount,
+		                member_nickname as memberNickname
+		    from freeboard
+		    left join member
+		    on free_writer=member_id)f
+		    left join (select free_no, count(*) as fcCount from freeboard_comment group by free_no)
+		    on f.freeNo = free_no)ff 
+		    left join (select free_no, count(*) as freeLikeCount from freeboard_like group by free_no)
+		    on ff.freeNo= free_no
+		    order by freeNo desc)fff)
+		    where rnum between #{start} and #{end}
+	</select>
+	<select id="totalCount" resultType="_int">
+		select count(*) from freeboard
+	</select>
 </mapper>
 

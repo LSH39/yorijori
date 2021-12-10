@@ -50,6 +50,17 @@
 .board-table thead{
 	border-top: 5px solid rgb(196, 191, 227);
 }
+.board-count{
+	display: flex;
+}
+.board-order-dropdown{
+	display: flex;
+	margin-left: auto;
+	align-items: flex-start;
+}
+.board-order-dropdown>*{
+	margin-right: 20px;
+}
 .pagi{
 	margin-top: 40px;
 	margin-bottom: 40px;

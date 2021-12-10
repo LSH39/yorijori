@@ -44,15 +44,15 @@ public class NoticeService {
 		
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"tk-page-item\">";
-			pageNavi += "<a class=\"page-link\" href='/noticeList?reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/noticeList.do?reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"tk-page-item active\">";
-				pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/noticeList.do?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='tk-page-item'>";
-				pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/noticeList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -62,7 +62,7 @@ public class NoticeService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='tk-page-item'>";
-			pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/noticeList.do?reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";

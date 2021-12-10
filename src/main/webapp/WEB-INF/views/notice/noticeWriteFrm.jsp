@@ -35,13 +35,13 @@
 	      				</div>
 	      				<label for="fileUpload" class="col-sm-2 col-form-label">첨부파일</label>
 	      				<div class="col-sm-4">
-	      					<input type="file" class="form-control" id="fileUpload" name="filename">
+	      					<input type="file" class="form-control" id="fileUpload" name="upfile" accept=".gif, .jpg, .png, .jpeg">
 	      				</div>
 	      			</div>
 	      			<div class="form-group row">
-	      				<label for="inputWriter" class="col-sm-2 col-form-label">작성자</label>
+	      				<label for="noticeWriter" class="col-sm-2 col-form-label">작성자</label>
 	      				<div class="col-sm-4">
-	      					<input type="text" readonly class="form-control-plaintext" name="noticeWriter" id="inputWriter" value="${sessionScope.m.memberId }">
+	      					<input type="text" readonly class="form-control-plaintext" name="noticeWriter" id="noticeWriter" value="${sessionScope.m.memberId }">
 	      				</div>
 	      			</div>
 	      			<div class="form-group row">
@@ -73,21 +73,37 @@
 					}
 				}
 			});
-		});
-		function uploadImage(file,editor){
-			var form = new FormData();
-			form.append("file",file);
-			$.ajax({
-				url : "/uploadNoticeImage.do",
-				type : "post",
-				data : form,
-				processData : false,
-				contentType : false,
-				success : function(data){
-					$(editor).summernote("insertImage",data);
+			
+			//파일 용량 제한
+			$("input[type='file']").off().on("change", function(){
+				if (this.files && this.files[0]) {
+					var maxSize = 10 * 1024 * 1024;
+					var fileSize = this.files[0].size;
+					console.log(fileSize);
+
+					if(fileSize > maxSize){
+						alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
+						$(this).val('');
+						return false;
+					}
 				}
 			});
-		}
+			
+			function uploadImage(file,editor){
+				var form = new FormData();
+				form.append("file",file);
+				$.ajax({
+					url : "/uploadNoticeImage.do",
+					type : "post",
+					data : form,
+					processData : false,
+					contentType : false,
+					success : function(data){
+						$(editor).summernote("insertImage",data);
+					}
+				});
+			}
+		});
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

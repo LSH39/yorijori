@@ -1,20 +1,23 @@
 package kr.or.notice.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -69,26 +72,83 @@ public class NoticeController {
 		return "notice/noticeUpdateFrm";
 	}
 	
-	@RequestMapping(value="insertNotice.do")
-	public String insertNotice(Model model, Notice n) {
-		int result = service.insertNotice(n);
-		if(result>0) {
-			model.addAttribute("msg", "등록 완료!");
+	@RequestMapping(value="/insertNotice.do")
+	public String insertNotice(Model model, MultipartFile file, HttpServletRequest request, Notice n) {
+		if(file == null) {
+			//첨부파일 없는 경우
 		} else {
-			model.addAttribute("msg", "등록 실패......");
+			//첨부파일 있는 경우
+			String saveDirectory = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+			String filename = file.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf(".")); //파일명
+			String extension = filename.substring(filename.indexOf(".")); //확장자
+			//업로드할 파일명을 저장할 변수
+			String filepath = null;
+			int count = 0;
+			while(true) {
+				if(count == 0) {
+					filepath = onlyFilename+extension; //test.txt (중복이 안된 경우!)
+				} else {
+					filepath = onlyFilename+"_"+count+extension; //test_3.txt (중복이 되면)
+				}
+				File checkFile = new File(saveDirectory+filepath); //java.io.File
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			//파일명 중복처리 끝나면 파일 업로드하기
+			try {
+				//중복처리가 끝난 파일명(filepath)로 파일을 업로드
+				FileOutputStream fos = new FileOutputStream(new File(saveDirectory+filepath));
+				//업로드 속도증가를 위한 보조스트림
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				//파일 업로드
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				n.setFilename(filename);
+				n.setFilepath(filepath);
 		}
-			model.addAttribute("loc", "noticeList?reqPage=1");
-			return "common/msg";
+			int result = service.insertNotice(n);
+			if(result>0) {
+				model.addAttribute("msg", "등록 완료!");
+			} else {
+				model.addAttribute("msg", "등록 실패......");
+			}
+				model.addAttribute("loc", "/noticeList.do?reqPage=1");
+				return "common/msg";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/uploadNoticeImage.do")
-	public void uploadFile(HttpServletRequest request, HttpServletResponse response, Model model) throws ServletException, IOException {
-		String root = request.getSession().getServletContext().getRealPath("/");
-		String saveDirectory = root + "resources/upload/notice";
-		int maxSize = 10 * 1024 * 1024;
-		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory, maxSize, new DefaultFileRenamePolicy());
-		String filepath = mRequest.getFilesystemName("file");
-		response.setCharacterEncoding("utf-8");
+	public void uploadFile(HttpServletRequest request, MultipartFile file, HttpServletResponse response, Model model) throws ServletException, IOException {
+		String saveDirectory = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+		String filename = file.getOriginalFilename();
+		String onlyFilename = filename.substring(0, filename.indexOf(".")); //파일명
+		String extension = filename.substring(filename.indexOf(".")); //확장자
+		//업로드할 파일명을 저장할 변수
+		String filepath = null;
+		int count = 0;
+		while(true) {
+			if(count == 0) {
+				filepath = onlyFilename+extension; //test.txt (중복이 안된 경우!)
+			} else {
+				filepath = onlyFilename+"_"+count+extension; //test_3.txt (중복이 되면)
+			}
+			File checkFile = new File(saveDirectory+filepath); //java.io.File
+			if(!checkFile.exists()) {
+				break;
+			}
+			count++;
+		}
 		PrintWriter out = response.getWriter();
 		out.print("/resources/upload/notice/"+filepath);
 	}
