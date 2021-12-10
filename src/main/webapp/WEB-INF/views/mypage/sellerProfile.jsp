@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.3.1.js"></script>
   <style>
 
 #line2 {
@@ -153,13 +155,28 @@
 }
 </style>
 <script>
-$("#delBtn").click(function() {
-	$(".delFile").hide();
-	$(this).next().show();
-	
-});
-
-</script>
+function loadImg(obj) {
+	  var files = obj.files;
+	  console.log(files);
+	  if(files.length != 0){
+		  var reader = new FileReader();
+		  reader.readAsDataURL(files[0]);
+		  reader.onload = function(e) {
+			$("#pp").attr("src",e.target.result);
+			$("#pp").css("height","150px");
+			$("#myProfile").css("display","none");
+			
+		}
+	  }
+	}
+		$(function() {
+			$("#rePro").click(function(e) {
+				e.preventDefault();
+				$("#myProfile").click();
+			});	
+				
+		});
+	</script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -193,8 +210,11 @@ $("#delBtn").click(function() {
         <div class="main-content">
         <div class="mbord">
           <div class="profile">
-          <img id="pp" src="resources/img/mypage/profile.jpeg">
-              <input type="button" value="프로필바꾸기" id="rePro">
+          <img id="pp" src="resources/upload/profile/${m.profilePath }" width="130px">
+          <input type="file" id="myProfile" name="myProfile" onchange="loadImg(this);"
+			accept=".jpg,.jpeg,.png,.gif" style="display: none;" id="myProfile">
+              <button value="프로필바꾸기" id="rePro">프로필바꾸기</button>
+              
           </div>
           <div class="myInfo">
                   <form action="/updateSeller.do" method="post" name="updateSellerFrm" enctype="multipart/form-data">

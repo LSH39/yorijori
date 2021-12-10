@@ -6,87 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.3.1.js"></script>
   <style>
 
 #line2 {
 	background-color: gray;
 	height: 3px;
 	width: 800px;
-}
-
-.h_left{
-	width: 350px;
-	height: 300px;
-
-	float:left;
-	margin-left:30px;
-	margin-top:20px;
-}
-.h_right{
-	width: 350px;
-	height: 300px;
-
-	float:left;
-	margin-left:30px;
-	margin-top:20px;
-}
-/* 메인 영역 */
-.main{
-    width: 1200px;
-    margin: 0 auto;
-    margin-top: 50px;
-    overflow: hidden;
-}
-.main>div{
-    float: left;
-}
-/* 메인 내부 서브 네비 */
-.main-left-box{
-    width: 230px;
-    padding: 23px;
-    box-sizing: border-box;
-    background-color: rgb(224, 219, 239);
-    margin-right: 60px;
-}
-.main-left-box>h2{
-    margin: 0;
-    height: 50px;
-    cursor: default;
-    border-bottom: 3px solid #565c54;
-    margin-bottom: 25px;
-}
-.main-left-box ul{
-    list-style-type: none;
-    padding: 0;
-}
-.main-left-box ul>*{
-    text-indent: 5px;
-}
-.main-left-box>ul>li>span{
-    font-family: 'ns_b';
-    font-size: 18px;
-    cursor: default;
-    display: block;
-    border-bottom: 1px dotted #b9a989;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-}
-.subnavi{
-    margin-bottom: 25px;
-}
-.subnavi a{
-    display: block;
-    text-decoration: none;
-    font-size: 15px;
-    line-height: 23px;
-    margin-bottom: 2px;
-    position: relative;
-}
-.subnavi a>span{
-    position: absolute;
-    right: 10px;
-    font-size: 10px;
-    display: none;
 }
 
 
@@ -154,54 +81,50 @@
 }
 </style>
 <script>
-$("#rePro").click(function() {
-
-});
-
-
-
-</script>
+function loadImg(obj) {
+	  var files = obj.files;
+	  console.log(files);
+	  if(files.length != 0){
+		  var reader = new FileReader();
+		  reader.readAsDataURL(files[0]);
+		  reader.onload = function(e) {
+			$("#pp").attr("src",e.target.result);
+			$("#pp").css("height","150px");
+			$("#myProfile").css("display","none");
+			
+		}
+	  }
+	}
+		$(function() {
+			$("#rePro").click(function(e) {
+				e.preventDefault();
+				$("#myProfile").click();
+			});	
+				
+		});
+	</script>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
-      		<div class="main-left-box">
-			<h2>마이페이지</h2>
-			<ul>
-				<li>
-					<ul class="subnavi">
-						<li><a href="#">내정보 조회 및 수정<span>&gt;</span></a></li>
-						<li><a href="#" id="lf-click">내 구매내역<span>&gt;</span></a></li>
-						<li><a href="#">쿠폰함<span>&gt;</span></a></li>
-						<li><a href="#">회원탈퇴<span>&gt;</span></a></li>
-						<li><a href="#">참여한 경연대회<span>&gt;</span></a></li>
-						<li><a href="#">요리클래스 예약내역<span>&gt;</span></a></li>
-						<li><a href="#">Dm내역<span>&gt;</span></a></li>
-						<li><a href="#">follwer 게시글<span>&gt;</span></a></li>
-						<li><a href="#">찜한 레시피<span>&gt;</span></a></li>
-					</ul>
-				</li>
-				<li><span>my write</span>
-					<ul class="subnavi">
-						<li><a href="#">작성후기<span>&gt;</span></a></li>
-						<li><a href="#" id="lf-click">작성 게시글<span>&gt;</span></a></li>
-						<li><a href="#">내 작성 레시피<span>&gt;</span></a></li>
-
-					</ul></li>
-			</ul>
-		</div>
+    <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />
+      	
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-          <form action="/updateMember.do" method="post" enctype="multipart/form-data" name="updateFrm">
+         
         <div class="mbord">
-           
+            <form action="/updateMember.do" method="post" enctype="multipart/form-data" name="updateFrm">
           <div class="profile">
-          <img id="pp" src="resources/img/mypage/profile.jpeg">
-              <input type="button" value="프로필바꾸기" id="rePro">
+          
+          <img id="pp" src="resources/upload/profile/${m.profilePath }" width="130px">
+          <input type="file" id="myProfile" name="myProfile" onchange="loadImg(this);"
+			accept=".jpg,.jpeg,.png,.gif" style="display: none;" id="myProfile">
+              <button value="프로필바꾸기" id="rePro">프로필바꾸기</button>
              
           </div>
+           
           <div class="myInfo">
-         
+        
         			<table class="mine" border="1">
 							<tr>
 								<td>회원소개</td>
@@ -275,12 +198,13 @@ $("#rePro").click(function() {
               <input type="submit" value="수정하기" id="update">
               </div>
             
+            
   
          
       </div>
-    
+      </form>
           </div>
-          </form>
+          
 
         </div>
         
