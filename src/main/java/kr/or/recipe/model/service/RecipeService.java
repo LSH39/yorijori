@@ -1,6 +1,7 @@
 package kr.or.recipe.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
 import kr.or.recipe.model.vo.RecipeContent;
 import kr.or.recipe.model.vo.RecipeLike;
+import kr.or.recipe.model.vo.RecipeReport;
 @Service
 public class RecipeService {
 	@Autowired
@@ -43,8 +45,11 @@ public class RecipeService {
 	}
 
 
-	public RecipeBoard selectOneRecipe(int recipeNo) {
-		RecipeBoard rb = dao.selectOneRecipe(recipeNo);
+	public RecipeBoard selectOneRecipe(int recipeNo, int memberNo) {
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		map.put("recipeNo", recipeNo);
+		map.put("memberNo", memberNo);
+		RecipeBoard rb = dao.selectOneRecipe(map);
 		ArrayList<Material>mList = dao.selectMaterial(recipeNo);
 		ArrayList<RecipeContent>rList = dao.selectContent(recipeNo);
 		if(rb != null) {
@@ -82,6 +87,18 @@ public class RecipeService {
 
 	public int insertLike(RecipeLike rl) {
 		int result = dao.insertLike(rl);
+		return result;
+	}
+
+
+	public int deleteLike(RecipeLike rl) {
+		int result = dao.deleteLike(rl);
+		return result;
+	}
+
+
+	public int insertReport(RecipeReport rp) {
+		int result = dao.insertReport(rp);
 		return result;
 	}
 }

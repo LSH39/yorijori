@@ -55,7 +55,7 @@
       <div class="social-links d-none d-md-block">
       <c:choose>
 		<c:when test="${empty sessionScope.m }">
-        <a href="#" class="join">회원가입</a>
+        <a href="/joinCommon.do" class="join">회원가입</a>
         <a href="/loginFrm.do" class="login">로그인</a>
         <a href="/admin.do">관리자 페이지 </a>
         </c:when>
@@ -90,7 +90,7 @@
           <li><a class="nav-link scrollto " href="/cookingClsList.do?reqPage=1">클래스</a></li>
            <li class="dropdown"><a href="#"><span>이벤트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/contestList.do">경연대회투표</a></li>
+              <li><a class="nav-link" onclick="chkDate();">경연대회투표</a></li>
               <li><a href="/contestResult.do">우승자 발표</a></li>
               <li><a href="/contestWinner.do">역대 우승자</a></li>
             </ul>
@@ -99,7 +99,7 @@
             <ul>
 
               <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
-              <li><a href="/freeboardList.do">자유게시판</a></li>
+              <li><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판</a></li>
               <li><a href="#">메뉴추천</a></li>
             </ul>
           </li>
@@ -229,7 +229,7 @@
   </div>
   
   <script>
-  	function abc(){
+  	function scrollrecipe(){
   		if($("html").scrollTop()==0){
   			 $('.recipe-category').css("top","120px");
   			$('.recipe-category').hide();
@@ -238,16 +238,31 @@
   		}
   	}
   	$(document).scroll(function(){
-  		abc();
+  		scrollrecipe();
   	})
   	$(function(){
-  		abc();
+  		scrollrecipe();
   	})
   	  $('#show-category').on('click', function(){
   		  $('.recipe-category').toggle();
-  	  })
+  	  });
+  	$('.recipe-category-close').on('click', function(){
+  		$('.recipe-category').hide();
+  	})
 	  $('.recipe-category').on('click', 'input:radio', function () {
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
+  	
+  	//현재 일자 체크 (대회 투표기간 확인)
+  	function chkDate(){
+  		var today = new Date();
+  		var date = today.getDate();
+  		if(date >= 1 && date <= 15){
+  			location.href="/contestList.do?reqPage=1&orderIndex=0";
+  		}else {
+  			alert("대회 투표기간이 아닙니다.");
+  		}
+  		
+  	}
   </script>
   

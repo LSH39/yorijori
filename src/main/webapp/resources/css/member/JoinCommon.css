@@ -1,0 +1,177 @@
+.wrap{
+    width: 600px;
+    margin: 0 auto;
+}
+.content{
+    margin: 50px 0px 200px 0px;
+}
+.center{
+    overflow: hidden;
+}
+
+.title{
+    margin : 10px 0px 2px 0px;
+    padding-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.title>span:nth-child(1){
+    color: #FF0000;
+}
+.title>span:nth-child(2){
+    line-height: 30px;
+}
+.sub{
+    margin : 2px 0px 0px 0px;
+    color: #7F7F7F;
+    font-size: 14px;
+}
+.join_check{
+    float: right;
+    font-size: 14px;
+    color: #FF0000;
+}
+.check{
+    width: 100px;
+    font-weight: bold;
+    margin-top: 0px;
+    display: block;
+}
+.input_txt{
+    width: 600px;
+    margin-top: 0px;
+}
+#memberPw2, #addressDetail, #address_btn{
+    margin-top: 10px;
+}
+#mailTable{
+    width: 600px;
+    border: 0;
+}
+#memberEmail{
+    width: 280px;
+}
+#at{
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    margin: 0px 10px 0px 10px;
+}
+[name=domain]{
+    width: 150px;
+}
+#mailTable td:last-child{
+    padding-left: 10px;
+}
+#postcode, #address_btn{
+    width: 150px;
+}
+#addressRoad, #addressDetail{
+    width: 440px;
+}
+#postcode, #addressDetail{
+    float: left;
+}
+#addressRoad, #address_btn{
+    float: right;
+}
+#file_txt{
+    display:block;
+    clear:both;
+    padding-top: 10px;
+}
+#line{
+    margin: 30px 0px 10px 0px;
+    border: 0;
+    height: 2px;
+    background-color: #7F7F7F;
+}
+#p3_txt{
+    font-size: 18px;
+    font-weight: bold;
+}
+#p3_txt, .bottom_p{
+    display: inline-block;
+}
+.bottom input{
+    float: left;
+}
+.bottom *{
+    height: 24px;
+    margin: 5px;
+}
+.agree{
+    color: #FF0000;
+}
+.agree_info{
+    float: right;
+    color: #7F7F7F;
+}
+.agree_info:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+.textarea{
+    width: 600px;
+    height: 120px;
+    resize: none;
+    padding: 10px;
+    line-height: 20px;
+    box-sizing: border-box;
+    margin: 20px 0px 20px 0px;
+    display: none;
+}
+.textarea:focus{
+    outline: none;
+}
+.purple_btn{
+    width: 600px;
+    height: 45px;
+    margin: 20px 0px 20px 0px;
+}
+
+/* JoinPro*/
+#filename{
+    width: 490px;
+    cursor: default;
+}
+#certificatePath{
+    display: none;
+}
+.gray_btn{
+    width: 100px;
+    display: inline-block;
+    margin: 0;
+    vertical-align: bottom;
+    text-align: center;
+    line-height: 45px;
+    padding: 0;
+}
+.gray_btn:hover{
+    cursor: pointer;
+}
+
+/* modal */
+#exampleModalCenterTitle{
+    margin: 0 auto;
+}
+#modalCheck{
+    width: 300px;
+    height: 38px;
+    float: left;
+}
+#check_btn{
+    float: right;
+}
+#enter_btn{
+    background-color: #8E44AD;
+    border: #8E44AD;
+    display: none;
+}
+#modal-body{
+    width: 400px;
+    margin: auto;
+}
+#modal-body>p:first-child{
+    margin-top: 16px;
+}

@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="freeboard">
-
+	<select id="freeList" parameterType="map" resultType="fb">
+		  select * from
+		    (select rownum as rnum, ff.* from
+		    (select
+				  		free_no as freeNo,
+				  		free_writer as freeWriter,
+				  		free_title as freeTitle,
+				  		free_content as freeContent,
+				  		reg_date as regDate,
+				  		free_readcount as freeReadcount,
+		                (select member_nickname from member where member_id=free_writer) as memberNickname,
+		                (select profile_path from member where member_id=free_writer) as profilePath,
+		                (select count(*) from freeboard_comment fc where fc.free_no=f.free_no) as fcCount,
+		                (select count(*) from freeboard_like fl where fl.free_no=f.free_no) as freeLikeCount 
+		    from freeboard f
+		    <choose>
+		    	<when test="orderIndex==0">
+		    		order by freeNo desc
+		    	</when>
+		    	<when test="orderIndex==1">
+		    		order by fcCount desc
+		    	</when>
+		    	<when test="orderIndex==2">
+		    		order by freeLikeCount desc
+		    	</when>	
+		    </choose>
+		    )ff)
+		    where rnum between #{start} and #{end}
+	</select>
+	<select id="totalCount" resultType="_int">
+		select count(*) from freeboard
+	</select>
+	<select id="commentList" parameterType="_int" resultType="fc">
+		select
+	        fc_no as fcNo,
+	        free_no as freeNo,
+	        fc_writer as fcWriter,
+	        fc_content as fcContent,
+	        reg_date as regDate,
+	        (select count(*) from fc_like where fc.fc_no = fc_no) as fcLikeCount
+        from freeboard_comment fc
+        where free_no=#{freeNo} order by 1
+	</select>
+	<select id="fileList" parameterType="_int" resultType="ff">
+		select
+			ff_no as ffNo,
+			free_no as freeNo,
+			ff_filename as ffFilename,
+			ff_filepath as ffFilepath
+		from freeboard_file
+		where free_no=#{freeNo} order by 1
+	</select>
+	<select id="selectOneFree" parameterType="_int" resultType="fb">
+		 select * from
+		    (select
+				  		free_no as freeNo,
+				  		free_writer as freeWriter,
+				  		free_title as freeTitle,
+				  		free_content as freeContent,
+				  		reg_date as regDate,
+				  		free_readcount as freeReadcount,
+		                (select member_nickname from member where member_id=free_writer) as memberNickname,
+		                (select profile_path from member where member_id=free_writer) as profilePath,
+		                (select count(*) from freeboard_comment fc where fc.free_no=f.free_no) as fcCount,
+		                (select count(*) from freeboard_like fl where fl.free_no=f.free_no) as freeLikeCount 
+		    from freeboard f)
+   	 		where freeNo=#{freeNo}
+	</select>
 </mapper>
 

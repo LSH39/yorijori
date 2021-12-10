@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="stat">
+  <select id="selectFreeCount" parameterType="hashmap" resultType="prev">
+  
+  select
+   (select count(*) from freeboard where reg_date =#{today})today,
+   (select count(*) from freeboard where reg_date =#{prev1day})prev1,
+   (select count(*) from freeboard where reg_date =#{prev2day})prev2,
+   (select count(*) from freeboard where reg_date =#{prev3day})prev3,
+   (select count(*) from freeboard where reg_date =#{prev4day})prev4,
+   (select count(*) from freeboard where reg_date =#{prev5day})prev5,
+   (select count(*) from freeboard where reg_date =#{prev6day})prev6,
+   (select count(*) from freeboard where reg_date =#{prev7day})prev7
+   
+   from dual
+  
+  </select>
+  
+  <select id="selectFjr" parameterType="hashmap" resultType="prev">
+  select
+   (select count(*) from freeboard where reg_date= #{today})today,
+   (select count(*) from member where enroll_date= #{today})prev1,
+   (select count(*) from recipe_board where recipe_date= #{today})prev2
+   
+   from dual
+  
+  
+  </select>
+  
+  <select id="selectRecipeCount" parameterType="hashmap" resultType="prev">
+  
+  select
+   (select count(*) from recipe_board where recipe_date =#{today})today,
+   (select count(*) from recipe_board where recipe_date =#{prev1day})prev1,
+   (select count(*) from recipe_board where recipe_date =#{prev2day})prev2,
+   (select count(*) from recipe_board where recipe_date =#{prev3day})prev3,
+   (select count(*) from recipe_board where recipe_date =#{prev4day})prev4,
+   (select count(*) from recipe_board where recipe_date =#{prev5day})prev5,
+   (select count(*) from recipe_board where recipe_date =#{prev6day})prev6,
+   (select count(*) from recipe_board where recipe_date =#{prev7day})prev7
+   
+   from dual
+  
+  </select>
+  
+  <select id="selectJoinCount" parameterType="hashmap" resultType="prev">
+  
+  select
+   (select count(*) from member where enroll_date =#{today})today,
+   (select count(*) from member where enroll_date =#{prev1day})prev1,
+   (select count(*) from member where enroll_date =#{prev2day})prev2,
+   (select count(*) from member where enroll_date =#{prev3day})prev3,
+   (select count(*) from member where enroll_date =#{prev4day})prev4,
+   (select count(*) from member where enroll_date =#{prev5day})prev5,
+   (select count(*) from member where enroll_date =#{prev6day})prev6,
+   (select count(*) from member where enroll_date =#{prev7day})prev7
+   
+   from dual
+  
+  </select>
+  
+</mapper>

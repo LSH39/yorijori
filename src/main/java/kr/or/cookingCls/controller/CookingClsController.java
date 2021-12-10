@@ -2,6 +2,8 @@ package kr.or.cookingCls.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.cookingCls.model.service.CookingClsService;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingCls.model.vo.CookingClsPageData;
+import kr.or.member.model.vo.Member;
 import kr.or.review.model.vo.Review;
 
 @Controller
@@ -42,8 +45,11 @@ public class CookingClsController {
 	
 	//쿠킹 클래스 조회
 	@RequestMapping(value="/cookingClsView.do")
-	public String CookingClsListView(int classNo, Model model) {
+	public String CookingClsListView(int classNo, HttpSession session , Model model) {
 		CookingCls ccls = service.selectOneClass(classNo);
+		Member member = (Member)session.getAttribute("m");
+		String memberNickname = member.getMemberNickname();
+		int dmRoomNo = service.selectOneDmRoomNo(classNo, memberNickname);
 		ArrayList<Review> list = service.selectReviewList(classNo);
 		double reviewAvg = service.avgReviewRate(classNo);
 		model.addAttribute("ccls", ccls);

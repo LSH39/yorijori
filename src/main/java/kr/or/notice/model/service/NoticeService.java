@@ -6,9 +6,9 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.notice.controller.NoticePageData;
 import kr.or.notice.model.dao.NoticeDao;
 import kr.or.notice.model.vo.Notice;
+import kr.or.notice.model.vo.NoticePageData;
 
 @Service
 public class NoticeService {
@@ -44,15 +44,15 @@ public class NoticeService {
 		
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"tk-page-item\">";
-			pageNavi += "<a class=\"page-link\" href='/noticeList?reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/noticeList.do?reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"tk-page-item active\">";
-				pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/noticeList.do?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='tk-page-item'>";
-				pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/noticeList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -62,11 +62,38 @@ public class NoticeService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='tk-page-item'>";
-			pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/noticeList.do?reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
 		NoticePageData npd = new NoticePageData(list,pageNavi,start,totalCount);
 		return npd;
+	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		dao.readCountUpdate(noticeNo);
+		Notice n = dao.selectOneNotice(noticeNo);
+		return n;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		int result = dao.deleteNotice(noticeNo);
+		return result;
+	}
+
+	public int insertNotice(Notice n) {
+		int result = dao.insertNotice(n);
+		return result;
+	}
+
+	public Notice viewOneNotice(int noticeNo) {
+		dao.readCountUpdate(noticeNo);
+		Notice n = dao.selectOneNotice(noticeNo);
+		return n;
+	}
+
+	public Notice getNotice(int noticeNo) {
+		Notice n = dao.selectOneNotice(noticeNo);
+		return n;
 	}
 }

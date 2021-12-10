@@ -58,8 +58,8 @@
  		insert into recipe_content values(r_file_seq.nextval,#{recipeNo},#{filename},#{filepath},#{recipeContent})
  	</insert>
  	
- 	<select id="selectOneRecipe" parameterType="_int" resultType="rb">
- 		select
+ 	<select id="selectOneRecipe" parameterType="hashmap" resultType="rb">
+ 		    select
  			recipe_no as recipeNo,
  			recipe_title as recipeTitle, 
  			filepath,
@@ -71,7 +71,9 @@
  			food_name as foodName,
  			recipe_time as recipeTime, 
  			recipe_level as recipeLevel,
- 			(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname
+ 			(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname,
+            (select count(*) from recipe_like rr where rr.recipe_no = r.recipe_no and rr.member_no=#{memberNo}) as likeCheck,
+            (select count(*) from recipe_report rp where rp.recipe_no = r.recipe_no and rp.member_no=#{memberNo}) as reportCheck
  		from recipe_board r where recipe_no=#{recipeNo}
  			
  	</select>
@@ -114,6 +116,33 @@
  		update recipe_board set read_count=read_count +1 where recipe_no=#{recipeNo}
  	</update>
  	<insert id="insertLike" parameterType="rlike">
- 		insert into recipe_like values(r_like_seq.nextval,#{memberNo},#{recipe_no})
+ 		insert into recipe_like values(r_like_seq.nextval,#{memberNo},#{recipeNo})
  	</insert>
+ 	<delete id="deleteLike" parameterType="rlike">
+ 		delete from recipe_like where recipe_no =#{recipeNo} and member_no=#{memberNo}
+ 	</delete>
+ 	<insert id="insertReport" parameterType="report">
+ 		insert into recipe_report values(report_seq.nextval,#{recipeNo},#{memberNo},#{reportComment})
+ 	</insert>
+ 	
+ 	<!-- 성승민 프로필 연동 레시피 게시물 수 -->
+ 	<select id="selectOneReceipeCnt" parameterType="_int" resultType="_int">
+ 		select count(*) 
+ 		from recipe_board 
+ 		where recipe_writer=#{recipeWriter}
+ 	</select>
+ 	
+ 	<!-- 성승민 프로필 연동 레시피 게시물 리스트 -->
+ 	<select id="selectAllList" parameterType="_int" resultType="rb">
+ 		select 
+ 		 	recipe_no as recipeNo, 
+ 		 	recipe_writer as recipeWriter,
+ 			recipe_title as recipeTitle, 
+ 			filepath,
+ 			read_count as readCount,
+ 			recipe_date as recipeDate
+ 		from recipe_board
+ 		where recipe_writer=#{memberNo}
+ 		order by recipe_no desc
+ 	</select>
 </mapper>

@@ -14,17 +14,57 @@ public class MemberService {
 	@Autowired
 	private MemberDao dao;
 
-	//로그인
 	public Member loginMemberEnc(Member member){
 		Member m;
 		if(member.getMemberId().isEmpty() || member.getMemberPw().isEmpty()) {
 			m = null;
 		}else {
-			System.out.println("암호화값 : "+member.getMemberPw());
 			m = dao.loginMember(member);
 		}
 		return m;
 	}
+	
+	public String joinSearch(Member member) {
+		return dao.joinSearch(member);
+	}
+
+	public int joinAdminEnc(Member member, String domain) {
+		String memberEmail = member.getMemberEmail()+"@"+domain;
+		member.setMemberEmail(memberEmail);
+		int result = dao.joinAdmin(member);
+		return result;
+	}
+
+	public int joinBasicEnc(Member member, String domain) {
+		String memberEmail = member.getMemberEmail()+"@"+domain;
+		member.setMemberEmail(memberEmail);
+		int result1 = dao.joinBasic(member);
+		int result2 = 0;
+		if(result1>0) {
+			result2 = dao.joinCoupon(member);
+		}
+		return result2;
+	}
+	
+	public int joinProEnc(Member member, String domain) {
+		String memberEmail = member.getMemberEmail()+"@"+domain;
+		member.setMemberEmail(memberEmail);
+		int result1 = dao.joinPro(member);
+		int result2 = 0;
+		if(result1>0) {
+			result2 = dao.joinCoupon(member);
+		}
+		return result2;
+	}
+
+	public Member findIdPw(Member member) {
+		return dao.findIdPw(member);
+	}
+
+	public int findPwReEnc(Member member) {
+		return dao.findPwRe(member);
+	}
+
 	
 	
 	

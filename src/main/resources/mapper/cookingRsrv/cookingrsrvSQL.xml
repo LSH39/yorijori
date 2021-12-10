@@ -19,7 +19,7 @@
 			rsrv_date as rsrvDate,
 			cancel_flag as cancelFlag 
 		from cooking_rsrv
-		where member_no=#{memberNo}
+		where member_nickname=#{memberNickname}
 		order by rsrv_no desc
 	</select>
 	

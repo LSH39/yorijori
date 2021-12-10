@@ -13,4 +13,9 @@ public class Notice {
 	private int noticeReadcount;
 	private String filename;
 	private String filepath;
+	
+	
+	public String getNoticeContentBr() {
+	return noticeContent.replaceAll("\r\n", "<br>");
+	}
 }

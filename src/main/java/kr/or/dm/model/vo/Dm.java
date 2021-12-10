@@ -11,5 +11,6 @@ public class Dm {
 	private String dmSender;
 	private String dmContent;
 	private int dmReadFlag;
+	private int dmRoomNo;
 	private String dmDate;
 }

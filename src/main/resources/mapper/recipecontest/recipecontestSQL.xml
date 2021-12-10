@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="recipecontest">
-
+	<select id="totalCount" resultType="_int">
+		select count(*) from contest_recipe
+	</select>
+	<select id="selectList" parameterType="map" resultType="rc">
+	select rrr.*
+    from
+    (select rownum as rnum, rr.*, m.member_nickname as memberNickname, m.profile_path as profilePath from
+    (select cr.contest_no as contestNo, cr.RECIPE_NO as recipeNo, cr.ENTER_DATE as enterDate, cr.CONTEST_RESULT as contestResult, cr.CONTEST_MONTH as contestMonth, cr.RECIPE_DELETE as recipeDelete, r.recipe_writer, r.recipe_title as recipeTitle, r.subhead as recipeContent, r.filepath as recipePath, (select count(*) from contest_vote where contest_no=cr.contest_no) as voteCount 
+        from contest_recipe cr
+        left join recipe_board r
+        on cr.RECIPE_NO=r.recipe_no 
+       	<choose>
+	       	<when test="orderIndex==0">
+	       		order by contestNo desc
+	       	</when>
+	       	<when test="orderIndex==1">
+	       		order by recipeTitle
+	       	</when>
+	       	<when test="orderIndex==2">
+	       		order by voteCount desc
+	       	</when>
+       	</choose>
+		)rr
+    left join member m
+    on rr.recipe_writer=m.member_no)rrr
+    where rnum between #{start} and #{end}
+	</select>
+	<select id="selectVote" parameterType="_int" resultType="_int">
+		select count(*) from contest_vote where member_no=#{memberNo} and vote_date like '%' || to_char(sysdate, 'yyyy-mm') || '%'
+	</select>
+	<insert id="insertVote" parameterType="map">
+		insert into contest_vote values (vote_seq.nextval, #{memberNo}, #{contestNo}, to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
+	<select id="selectContestNo" parameterType="_int" resultType="_int">
+		select contest_no as contestNo from contest_vote where member_no=#{memberNo} and vote_date like '%' || to_char(sysdate, 'yyyy-mm') || '%'
+	</select>
 </mapper>

@@ -8,6 +8,7 @@
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.admin.model.vo.Member2" alias="m2"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
+		<typeAlias type="kr.or.admin.model.vo.Prev" alias="prev"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
@@ -17,6 +18,10 @@
 		<typeAlias type="kr.or.freeboard.model.vo.Freeboard" alias="fb"/>
 		<typeAlias type="kr.or.notice.model.vo.Notice" alias="n"/>
 		<typeAlias type="kr.or.recipecontest.model.vo.RecipeContest" alias="rc"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardComment" alias="fc"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardLike" alias="flike"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardCommentLike" alias="fcl"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardFile" alias="ff"/>
 		<!-- 태경 alias 끝 -->
 		
 		<!-- 성승민 별칭 추가 -->

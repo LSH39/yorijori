@@ -22,5 +22,7 @@ public class RecipeBoard {
 	private ArrayList<RecipeContent>rList;
 	private ArrayList<Material>mList;
 	private String nickname;
-	private ArrayList<RecipeLike>like;
+	private int likeCheck;
+	private int reportCheck;
+	private int likeCnt;
 }

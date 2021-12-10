@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.vo.Member2;
+import kr.or.admin.model.vo.Prev;
 import kr.or.coupon.model.vo.Coupon;
 
 
@@ -177,6 +178,31 @@ public class AdminDao {
 	public int pointReset(String memberNo) {
 		int result = sqlSession.update("member.pointReset",memberNo);
 		return result;
+	}
+
+
+	public Prev selectFreeCount(HashMap<String, Object> map) {
+		Prev prev = sqlSession.selectOne("stat.selectFreeCount",map);
+		
+		return prev;
+	}
+
+
+	public Prev selectFjr(HashMap<String, Object> map) {
+		Prev count = sqlSession.selectOne("stat.selectFjr",map);
+		return count;
+	}
+
+
+	public Prev selectRecipeCount(HashMap<String, Object> map) {
+		Prev recipe = sqlSession.selectOne("stat.selectRecipeCount",map);
+		return recipe;
+	}
+
+
+	public Prev selectJoinCount(HashMap<String, Object> map) {
+		Prev join = sqlSession.selectOne("stat.selectJoinCount",map);
+		return join;
 	}
 
 

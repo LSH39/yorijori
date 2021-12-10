@@ -35,4 +35,10 @@ public class DmDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("direct.insertDm", map);
 	}
+
+	//클래스 개설자 닉네임 찾음
+	public String selectOneNickname(int classNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cookingcls.selectOneNickname", classNo);
+	}
 }

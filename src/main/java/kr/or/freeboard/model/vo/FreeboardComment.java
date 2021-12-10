@@ -9,4 +9,5 @@ public class FreeboardComment {
 	private String fcWriter;
 	private String fcContent;
 	private String regDate;
+	private int fcLikeCount;
 }
