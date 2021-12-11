@@ -25,16 +25,16 @@ public class CookingRsrvController {
 	//쿠킹 클래스 예약
 	@ResponseBody
 	@RequestMapping(value="/insertCookingRsrv.do")
-	public String insertCookingRsrv(String memberNickname, int classNo, String impUid, int classNop, Model model) {
+	public int insertCookingRsrv(String memberNickname, int memberNo, int classNo, String impUid, int classNop, Model model) {
 		//회원번호 클래스번호 아잉포트 번호
 		//예약할때 해당 클래스 인원수 확인, 없을때 insert 하고 인원수 +1 update 인원수 꽉찼으면 2번으로
 
-		int result = service.insertCookingRsrv(memberNickname, classNo, impUid, classNop);
+		int result = service.insertCookingRsrv(memberNickname, memberNo, classNo, impUid, classNop);
 
 		if(result > 0) {
-			return "1";
+			return 1;
 		}else {
-			return "0";
+			return 0;
 		}
 	}
 	
@@ -43,8 +43,8 @@ public class CookingRsrvController {
 	public String selectAllRsrv(Model model, HttpSession session) {
 		//int memberNo = (Integer)session.getAttribute("MemberNo");
 		Member member = (Member)session.getAttribute("m");
-		String memberNickname = member.getMemberNickname();
-		ArrayList<CookingRsrv> list = service.selectAllRsrv(memberNickname);
+		int memberNo = member.getMemberNo();
+		ArrayList<CookingRsrv> list = service.selectAllRsrv(memberNo);
 		model.addAttribute("list", list);
 		return "cookingrsrv/cookingRsrvList";
 	}

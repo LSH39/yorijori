@@ -18,12 +18,13 @@ public class CookingRsrvService {
 
 	//예약 하기
 	@Transactional
-	public int insertCookingRsrv(String memberNickname, int classNo, String impUid, int classNop) {
+	public int insertCookingRsrv(String memberNickname, int memberNo, int classNo, String impUid, int classNop) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNickname", memberNickname);
 		map.put("classNo", classNo);
 		map.put("impUid", impUid);
+		map.put("memberNo", memberNo);
 		
 		int result = 0;
 		int classCnt = dao.currClsCnt(classNo); //db에서 현재 인원수 조회
@@ -40,9 +41,9 @@ public class CookingRsrvService {
 	}
 
 	//예약 내역 조회
-	public ArrayList<CookingRsrv> selectAllRsrv(String memberNickname) {
+	public ArrayList<CookingRsrv> selectAllRsrv(int memberNo) {
 		// TODO Auto-generated method stub
-		ArrayList<CookingRsrv> list = dao.selectAllRsrv(memberNickname);
+		ArrayList<CookingRsrv> list = dao.selectAllRsrv(memberNo);
 		return list;
 	}
 
