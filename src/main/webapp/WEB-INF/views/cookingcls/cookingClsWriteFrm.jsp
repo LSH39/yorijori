@@ -173,7 +173,7 @@
 				<input type="date" name="classStart" id="classStart"><br><br>
 				<h5>클래스 종료일</h5>
 				<input type="date" name="classEnd" id="classEnd"><br><br>
-				
+				<input type="file">
 				<input
 					type="submit" value="등록" class="btn btn-danger">
 				<button type="button" id="chkHidden" class="btn btn-primary">히든값 확인 버튼</button>
