@@ -22,9 +22,9 @@
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
                     // 예제를 참고하여 다양한 활용법을 확인해 보세요.
                     if (data.userSelectedType === 'R') {
-                        $("#classLocation").val(data.roadAddress);
+                        $("#classLocation1").val(data.roadAddress);
                     } else {
-                        $("#classLocation").val(data.jibunAddress);
+                        $("#classLocation1").val(data.jibunAddress);
                     }
                     $("#classLocation2").focus();
                 }
@@ -147,23 +147,25 @@
 			<h1>요리 클래스 등록</h1>
 		</div>
 		<div>
-			<form action="" method="get">
+			<form action="/cookingClsWrite.do" method="get">
+				<!-- 전문가 닉네임 히든값 -->
+				<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }">
 				<h5>강의 제목</h5>
 				<input type="text" name="classTitle" id="classTitle" maxlength="33" class="input-group input-group-sm"><br>
 				<h5>강의 내용</h5>
-				<textarea name="classContent" id="" cols="30" rows="10"></textarea>
+				<textarea name="classContent" id="classContent" cols="30" rows="10"></textarea>
 				<br>
 				<h5>강의 장소(입력 안할시 비대면)</h5>
-				<input type="text" name="classLocation" id="classLocation">
+				<input type="text" name="classLocation1" id="classLocation1" maxlength="100">
 				<button type="button" id="addrSearch" class="btn btn-primary">주소검색</button>
-				<br> <input type="text" name="" id="classLocation2"><br>
+				<br> <input type="text" name="classLocation2" id="classLocation2" maxlength="100"><br>
 				<h5>강의 가격</h5>
 				<input type="text" name="classPrice" id="classPrice" maxlength="10">원<br>
 				<span class="result">　</span>
-				<h5>강의 시간 23글자임 시간10bytes + 4글자12bytes</h5>
-				<h5>오전09:00~오후10:00</h5>
+				<h5>강의 정원</h5>
+				<input type="text" name="classNop" id="classNop" maxlength="10">명<br>
 				<h5>강의시간</h5>
-				<input type="time" id="time1">부터<input type="time"id="time2"> <input type="hidden" name="classTime" id="timeHidden">
+				<input type="time" name="classStartTime" id="time1">부터<input type="time" name="classEndTime" id="time2">
 				<button type="button" id="btntest" class="btn-primary btn-sm">시간테스트</button>
 				<br>
 				<span class="result">　</span><br>

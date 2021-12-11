@@ -28,7 +28,7 @@ public class CookingClsService {
 	public CookingClsPageData selectAllClass(int reqPage) {
 		// TODO Auto-generated method stub
 		
-		int numPerPage = 1;
+		int numPerPage = 9;
 		
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -123,5 +123,11 @@ public class CookingClsService {
 		map.put("memberNickname", memberNickname);
 		int dmRoomNo = dao.selectOneDmRoomNo(map);
 		return dmRoomNo;
+	}
+
+	public int insertCookingCls(CookingCls ccls) {
+		// TODO Auto-generated method stub
+		int result = dao.insertCookingCls(ccls);
+		return result;
 	}
 }

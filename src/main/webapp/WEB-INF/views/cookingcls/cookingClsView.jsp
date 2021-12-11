@@ -273,11 +273,44 @@
 							<h5>제목 : <span id="classTitle">${ccls.classTitle }</span></h5>
 							<h5>클래스 강사 : ${ccls.memberNickname }<span class="vertified">정품</span></h5>
 							<h5>가격 : <span class="classPrice">${ccls.classPrice }</span>원</h5>
-							<h5>강의시간 : ${ccls.classTime }</h5>
+							<h5>강의시간 : 
+							<c:choose>
+							<c:when test="${ccls.classStartTime.substring(0, 2) lt 12 }">
+							오전&nbsp;${ccls.classStartTime }
+							</c:when>
+							<c:when test="${ccls.classStartTime.substring(0, 2) gt 11 }">
+							오후
+								<c:choose>
+									<c:when test="${ccls.classStartTime.substring(0, 2)-12 lt 10}">
+									0${ccls.classStartTime.substring(0, 2)-12}${ccls.classStartTime.substring(2, 5) }
+									</c:when>
+									<c:otherwise>
+									${ccls.classStartTime.substring(0, 2)-12}${ccls.classStartTime.substring(2, 5) }
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							</c:choose>~
+							<c:choose>
+							<c:when test="${ccls.classEndTime.substring(0, 2) lt 12 }">
+							오전&nbsp;${ccls.classEndTime }
+							</c:when>
+							<c:when test="${ccls.classEndTime.substring(0, 2) gt 11 }">
+							오후
+								<c:choose>
+									<c:when test="${ccls.classEndTime.substring(0, 2)-12 lt 10}">
+									0${ccls.classEndTime.substring(0, 2)-12}${ccls.classEndTime.substring(2, 5) }
+									</c:when>
+									<c:otherwise>
+									${ccls.classEndTime.substring(0, 2)-12}${ccls.classEndTime.substring(2, 5) }
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							</c:choose>
+							</h5>
 							<h5>정원 : <span id="classNop">${ccls.classNop }</span>&nbsp;/&nbsp;<span>${ccls.classCurrNop }</span></h5>
 							<c:choose>
-								<c:when test="${not empty ccls.classLocation }">
-									<h5>장소 : ${ccls.classLocation }</h5>
+								<c:when test="${not empty ccls.classLocation1 }">
+									<h5>장소 : ${ccls.classLocation1} ${ccls.classLocation2} </h5>
 								</c:when>
 								<c:otherwise>
 									<h5>장소 : 비대면 클래스입니다!</h5>

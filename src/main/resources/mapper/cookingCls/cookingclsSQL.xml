@@ -24,7 +24,8 @@ mybatis xml mapper단
 			class_no as classNo,
 			member_nickname as memberNickname,
 			class_title as classTitle,
-			class_price as classPrice
+			class_price as classPrice,
+			class_start as classStart
 		from cooking_class order by class_no asc) c)
 		where rnum between #{start} and #{end}
 	</select>
@@ -49,8 +50,10 @@ mybatis xml mapper단
 			class_curr_nop as classCurrNop,
 			class_status as classStatus,
 			class_reg_date as classRegDate,
-			class_time as classTime,
-			class_location as classLocation
+			class_start_time as classStartTime,
+			class_end_time as classEndTime,
+			class_location1 as classLocation1,
+			class_location2 as classLocation2
 		from cooking_class 
 		where class_no=#{classNo}
 	</select>
@@ -85,5 +88,12 @@ mybatis xml mapper단
 		where class_no=#{classNo}
 	</select>
 	
+	<!-- 클래스 등록 -->
+	<insert id="insertCookingCls" parameterType="ccls">
+		insert into cooking_class values(
+			class_seq.nextval, #{memberNickname}, #{classTitle}, #{classContent}, #{classStart}, #{classEnd}, #{classPrice}, 0, #{classNop}, 0, 1, to_char(sysdate, 'YYYY-MM-DD'), #{classStartTime}, #{classEndTime}, #{classLocation1}, #{classLocation2}
+		)
+		
+	</insert>
 	
 </mapper>

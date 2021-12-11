@@ -17,6 +17,8 @@ public class CookingCls {
 	private int classCurrNop;
 	private int classStatus;
 	private String classRegDate;
-	private String classTime;
-	private String classLocation;
+	private String classStartTime;
+	private String classEndTime;
+	private String classLocation1;
+	private String classLocation2;
 }
