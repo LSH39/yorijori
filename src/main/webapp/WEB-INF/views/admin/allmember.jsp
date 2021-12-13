@@ -20,7 +20,11 @@ text-align: center;}
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
 	
     <div class="container">
-        <h2>전체 회원 조회</h2>
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+    
+    <h2>전체 회원 조회</h2>
     
     
     <div style="background-color: #F7F7E5; ">
@@ -45,10 +49,11 @@ text-align: center;}
             <input type="radio" value="3" id="commentspace" name="searchdetail"><label for="commentspace">댓글 수</label>
             <input type="radio" value="4" id="visitspace" name="searchdetail"><label for="visitspace">방문 수</label>
             <input type="radio" value="5" id="signdate" name="searchdetail"><label for="signdate">가입일</label>
+            <input id="searchDetail" type="hidden" value="1"> 
             <hr>
             <div class="detail1">
             <select class="period">
-                <option value="1">전체기간</option>
+                <option selected value="1">전체기간</option>
                 <option value="2">최근 1개월</option>
             </select>
             <span id="recentonemonth"></span><input class="recentmonthstart" type="hidden"><input class="recentmonthend" type="hidden">
@@ -57,7 +62,7 @@ text-align: center;}
             <input class="searchText2" type="text" placeholder="0" style="width: 70px;">
             <span>개</span>
             <select class="moreless">
-                <option value="1">이상</option>
+                <option selected value="1">이상</option>
                 <option value="2">이하</option>
                 
             </select>
@@ -177,6 +182,13 @@ text-align: center;}
     ${pageNavi }
     </div>
     
+    
+    
+    </div>
+    <div class="col-md-1"></div>
+    
+    </div>
+        
    
    </div>
  
@@ -207,6 +219,7 @@ text-align: center;}
     	});
     	
     	$("input[name=searchdetail]").change(function(){
+    		$("#searchDetail").val($(this).val());
     		$(".detail1").show();
     		$(".detail2").hide();
     		$("#space").html($(this).next().html());
@@ -300,7 +313,8 @@ text-align: center;}
     	
 			$(".searchbtn2").click(function(){
     		var detail = 2;
-    		var searchDetail= $("input[name=searchdetail]").val();
+    		
+    		var searchDetail= $("#searchDetail").val();
     		var period = $(".period").val();
     		var start = $(".recentmonthstart").val();
     		var end = $(".recentmonthend").val();
@@ -317,7 +331,7 @@ text-align: center;}
     			data : {searchDetail:searchDetail,period:period,start:start,end:end,moreless:moreless,
     				searchText2:searchText2,joinStart:joinStart,joinEnd:joinEnd,detail:detail,align:align,memberLevel:memberLevel},
     			success: function(data){
-    				console.log("1");
+    				
     				$("body").html(data);
     				$(".detail").show();
     				$("#searchText2").val(searchText2);
@@ -338,7 +352,7 @@ text-align: center;}
 	    			type:"post",
 	    			data : {align:align},
 	    			success: function(data){
-	    				console.log("1");
+	    				
 	    				$("body").html(data);
 	    				$(".align").val(align);
 	    				

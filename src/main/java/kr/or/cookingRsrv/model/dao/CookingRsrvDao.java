@@ -35,9 +35,9 @@ public class CookingRsrvDao {
 	}
 
 	//예약 내역 조회
-	public ArrayList<CookingRsrv> selectAllRsrv(String memberNickname) {
+	public ArrayList<CookingRsrv> selectAllRsrv(int memberNo) {
 		// TODO Auto-generated method stub
-		List<CookingRsrv> list = sqlSession.selectList("cookingrsrv.selectAllRsrv", memberNickname);
+		List<CookingRsrv> list = sqlSession.selectList("cookingrsrv.selectAllRsrv", memberNo);
 		return (ArrayList<CookingRsrv>) list;
 	}
 

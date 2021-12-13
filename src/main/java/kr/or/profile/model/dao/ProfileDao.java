@@ -67,6 +67,8 @@ public class ProfileDao {
 		return (ArrayList<RecipeBoard>) list;
 	}
 	
+
+	
 	
 	
 }

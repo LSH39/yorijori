@@ -114,10 +114,13 @@ svg{
             [prev1day,       ${j.prev1}],
             [today,       ${j.today}]
           ]);
+       
+        
+       
 
         var options = {
           
-          
+        		
           vAxis: {minValue: 0}
           
           
@@ -126,10 +129,17 @@ svg{
         var chart = new google.visualization.AreaChart(document.getElementById('freeChart'));
         var chart2 = new google.visualization.AreaChart(document.getElementById('recipeChart'));
         var chart3 = new google.visualization.AreaChart(document.getElementById('joinChart'));
+        
+  	  
         chart.draw(data, options);
         chart2.draw(data2, options);
         chart3.draw(data3, options);
-      }
+        
+        
+      } 
+      
+      
+      
     </script>
 </head>
 <body>
@@ -175,7 +185,7 @@ svg{
 	<div  class="col-md-2 selected grBtn" >게시글</div><input type="hidden" value="1">
 	<div  class="col-md-2 unselect grBtn" >레시피</div><input type="hidden" value="2">
 	<div  class="col-md-2 unselect grBtn" >회원가입</div><input type="hidden" value="3">
-	<div class="col-md-2" style="border-bottom: 1px solid #9f90cf;"></div>
+	<div class="col-md-2"></div>
 	<div class="col-md-2"></div>
 	</div>
 	<br>
@@ -213,6 +223,8 @@ svg{
 	<div id="recipeChart" style="width: 100%; height: 500px;"></div></div>
 	
 	<div class="col-md-1"></div>
+	
+	
 	</div>
 	
 	<input id="f" type="hidden" value="${today }">
@@ -462,6 +474,7 @@ svg{
 			break;
 		case "3" :$(".joinChart").show();
 			break;
+		
 		}
 		$("#chartName").html($(this).html()+" 그래프");
 		

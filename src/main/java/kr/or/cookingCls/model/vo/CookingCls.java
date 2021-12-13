@@ -17,6 +17,13 @@ public class CookingCls {
 	private int classCurrNop;
 	private int classStatus;
 	private String classRegDate;
-	private String classTime;
-	private String classLocation;
+	private String classStartTime;
+	private String classEndTime;
+	private String classLocation1;
+	private String classLocation2;
+	
+	//줄바꿈 적용 시키려고 만든 getter
+	public String getClassContentBr() {
+		return classContent.replaceAll("\r\n", "<br>");
+	}
 }

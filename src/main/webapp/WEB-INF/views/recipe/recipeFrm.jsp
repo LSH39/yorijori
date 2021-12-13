@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -25,11 +24,10 @@
 			</div>
 			<div class="recipeFrm">
 				<label for="uploadImg">대표이미지</label> 
+				<img id="img" >
 				<input type="file" id="uploadImg" name="uploadImg" onchange="loadImg(this);"
-					accept=".jpg,.jpeg,.png,.gif" style="display: none;" id="uploadImg">
-				<button id="uploadBtn">
-					<img src="/resources/img/recipe/image.png" id="img" width="300px">
-				</button>
+					accept=".jpg,.jpeg,.png,.gif"  >
+					
 			</div>
 			<div class="recipeFrm">
 				<label for="recipeVideo">동영상 링크</label>
@@ -106,14 +104,13 @@
 	<script>
 		function loadImg(obj) {
 		  var files = obj.files;
-		  console.log(files);
 		  if(files.length != 0){
 			  var reader = new FileReader();
 			  reader.readAsDataURL(files[0]);
 			  reader.onload = function(e) {
 				$("#img").attr("src",e.target.result);
-				$("#img").css("height","300px");
-				$("#uploadImg").css("display","none");
+				$("#img").css("height","200px");
+				$("#img").css("width","200px");
 			}
 		  }
 		}

@@ -49,11 +49,11 @@ member_point as memberPoint,
 enroll_date as enrollDate,
 withdraw_date as withdrawDate,
 member_black as memberBlack,
-(select count(*) from freeboard where free_writer = member_id)freeCount,
+(select count(*) from freeboard where free_writer = member_id)boardCount,
 (select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
 (select count(*) from freeboard_comment where fc_writer = member_id)fcCount
 
-from member) where memberBlack = #{level}
+from member order by enrollDate desc) where memberBlack = #{level}
 
 <if test="detail==1">
 
@@ -66,7 +66,7 @@ and ${searchType} like '%'||#{searchText}||'%'
 and
 <choose>
 <when test="searchDetail ==1">
-freeCount
+boardCount
 
 
 </when>
@@ -89,11 +89,11 @@ between #{joinStart} and #{joinEnd}
 
 <choose>
 <when test="moreless ==1">
-<![CDATA[>=]]> #{searchText2}
+<![CDATA[>]]>= #{searchText2}
 
 </when>
 <when test="moreless ==2">
-<![CDATA[<=]]> #{searchText2}
+<![CDATA[<]]>= #{searchText2}
 
 </when>
 
@@ -123,7 +123,7 @@ and memberLevel = 5
 
 </choose>
 
-order by enrollDate desc
+
 	</select>
 
 	<select id="selectOneMember" parameterType="hashmap" resultType="m2">
@@ -147,7 +147,7 @@ member_point as memberPoint,
 enroll_date as enrollDate,
 withdraw_date as withdrawDate,
 member_black as memberBlack,
-(select count(*) from freeboard where free_writer = member_id)freeCount,
+(select count(*) from freeboard where free_writer = member_id)boardCount,
 (select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
 (select count(*) from freeboard_comment where fc_writer = member_id)fcCount
 
@@ -158,7 +158,7 @@ from member) where ${searchType} like '%'||#{searchText}||'%'
 	select * from ( select rownum as rnum, memberNo,memberId,memberPw,memberEmail,memberName,memberNickname,
 memberPhone,memberBirth,
 postcode,addressRoad,addressDetail,memberConsent,profilePath,profileIntro,
-certificatePath,memberLevel,memberPoint,enrollDate,withdrawDate,memberBlack, freeCount,recipeCount, fcCount from (select member_no as memberNo,
+certificatePath,memberLevel,memberPoint,enrollDate,withdrawDate,memberBlack, boardCount,recipeCount, fcCount from (select member_no as memberNo,
 member_id as memberId,
 member_pw as memberPw,
 member_email as memberEmail,
@@ -178,11 +178,11 @@ member_point as memberPoint,
 enroll_date as enrollDate,
 withdraw_date as withdrawDate,
 member_black as memberBlack,
-(select count(*) from freeboard where free_writer = member_id)freeCount,
+(select count(*) from freeboard where free_writer = member_id)boardCount,
 (select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
 (select count(*) from freeboard_comment where fc_writer = member_id)fcCount
 
-from member) where memberBlack = #{level}
+from member order by enrollDate desc) where memberBlack = #{level}
 
 <if test="detail==1">
 
@@ -195,7 +195,7 @@ and ${searchType} like '%'||#{searchText}||'%'
 and
 <choose>
 <when test="searchDetail ==1">
-freeCount
+boardCount
 
 
 </when>
@@ -232,7 +232,7 @@ between #{joinStart} and #{joinEnd}
 
 <choose>
 <when test="memberLevel ==0">
-and (memberLevel =1 or memberLevel =2)
+and memberLevel in (1,2)
 
 </when>
 <when test="memberLevel ==1">
@@ -252,7 +252,7 @@ and memberLevel = 5
 
 </choose>
 ) where rnum between #{start2} and #{end2}
-order by enrollDate desc
+
 	</select>
 	
 	

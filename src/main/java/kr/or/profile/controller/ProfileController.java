@@ -27,6 +27,7 @@ public class ProfileController {
 	public String Profile(String memberId, HttpSession session, Model model) {
 		Member member = service.selectOneProfile(memberId);
 		int memberNo = member.getMemberNo();
+		System.out.println(memberNo);
 		int follow = service.selectOneFollow(memberNo);
 		int follower = service.selectOneFollower(memberNo);
 		int rbCnt = service.selectOneReceipeCnt(memberNo);
@@ -42,6 +43,7 @@ public class ProfileController {
 		model.addAttribute("follow", follow);
 		model.addAttribute("follower", follower);
 		model.addAttribute("rbCnt", rbCnt);
+		//model.addAttribute("rbLike", rbLike);
 		model.addAttribute("list", list);
 		return "mypage/profile";
 	}
@@ -75,5 +77,5 @@ public class ProfileController {
 		}
 	}
 	
-	
+
 }

@@ -43,13 +43,27 @@ public class CookingClsController {
 		return "cookingcls/cookingClsWriteFrm";
 	}
 	
+	//쿠킹 클래스 작성
+	@RequestMapping(value="/cookingClsWrite.do")
+	public String cookingClsWrite(CookingCls ccls, Model model) {
+		int result = service.insertCookingCls(ccls);
+		if(result > 0) {
+			model.addAttribute("msg", "작성 성공");
+			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");
+		}else {
+			model.addAttribute("msg", "작성 실패");
+			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");			
+		}
+		return "common/msg";
+	}
+	
 	//쿠킹 클래스 조회
 	@RequestMapping(value="/cookingClsView.do")
 	public String CookingClsListView(int classNo, HttpSession session , Model model) {
 		CookingCls ccls = service.selectOneClass(classNo);
-		Member member = (Member)session.getAttribute("m");
-		String memberNickname = member.getMemberNickname();
-		int dmRoomNo = service.selectOneDmRoomNo(classNo, memberNickname);
+		//Member member = (Member)session.getAttribute("m");
+		//String memberNickname = member.getMemberNickname();
+		//int dmRoomNo = service.selectOneDmRoomNo(classNo, memberNickname);
 		ArrayList<Review> list = service.selectReviewList(classNo);
 		double reviewAvg = service.avgReviewRate(classNo);
 		model.addAttribute("ccls", ccls);

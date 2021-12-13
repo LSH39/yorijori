@@ -5,21 +5,22 @@
 	<!-- 클래스 예약하기 -->
 	<insert id="insertCookingRsrv" parameterType="map">
 		insert into cooking_rsrv values(
-			cooking_rsrv_seq.nextval, #{memberNickname}, #{classNo}, #{impUid}, to_char(sysdate, 'YYYY-MM-DD'), 0
+			cooking_rsrv_seq.nextval, #{memberNo}, #{memberNickname}, #{classNo}, #{impUid}, to_char(sysdate, 'YYYY-MM-DD'), 0
 		)
 	</insert>
 	
 	<!-- 클래스 예약 내역 조회 -->
-	<select id="selectAllRsrv" parameterType="String" resultType="crsrv">
+	<select id="selectAllRsrv" parameterType="_int" resultType="crsrv">
 		select
 			rsrv_no as rsrvNo,
+			member_no as memberNo,
 			member_nickname as memberNickname,
 			class_no as classNo,
 			imp_uid as impUid,
 			rsrv_date as rsrvDate,
 			cancel_flag as cancelFlag 
 		from cooking_rsrv
-		where member_nickname=#{memberNickname}
+		where member_no=#{memberNo}
 		order by rsrv_no desc
 	</select>
 	

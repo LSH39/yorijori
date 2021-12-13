@@ -85,8 +85,8 @@
           <li><a class="nav-link scrollto" href="#" id="show-category">레시피</a></li>
           <li class="dropdown"><a href="#"><span>밀키트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">신상품</a></li>
-              <li><a href="#">베스트 상품</a></li>
+              <li><a href="/milkitList.do">신상품</a></li>
+              <li><a href="/milkitList.do">베스트 상품</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto " href="/cookingClsList.do?reqPage=1">클래스</a></li>
@@ -112,7 +112,7 @@
           <input type="submit" id="headersearchsubmit" style="display: none;"></input>
           <label for="headersearchsubmit"><img src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
           </form>
-          <li><a class="nav-link scrollto" href="#"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
+          <li><a class="nav-link scrollto" href="/cart.do"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
           <li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
           
         </ul>
@@ -266,5 +266,69 @@
   		}
   		
   	}
+  	//방문자수 기록용 쿠키 스크립트
+  	function setCookie(cname,cvalue,exdays){
+  	    var d = new Date();
+  	    d.setTime(d.getTime()+(exdays*24*60*1000));
+  	    var expires = "expires=" +d.toUTCString();
+  	    document.cookie = cname+"="+cvalue+";"+expires +"; path=/";
+  	}
+  	function getCookie(cname){
+  	    var name = cname+"=";
+  	    var decodedCookie = decodeURIComponent(document.cookie);
+  	    var ca = decodedCookie.split(';');
+  	    for(var i =0; i<ca.length;i++){
+  	        var c = ca[i];
+  	        while(c.charAt(0)==' '){
+  	            c = c.substring(1);
+  	        }
+  	        if(c.indexOf(name)==0){
+  	            return c.substring(name.length,c.length);
+  	        }
+  	    }
+  	    return "";
+  	}
+
+
+  	if(getCookie("visit")==0){
+  	    
+  	    
+
+  	  $.ajax({
+			url:"visitCount.do",
+			type:"post",
+			data : {},
+			success: function(data){
+				setCookie("visit","1","1");
+				
+			},
+			error:function(){
+				console.log("err");
+			}
+			
+			
+		});
+  	    
+  	}else{
+  	    if(getCookie("login")==0 && ${ not empty sessionScope.m }){
+  	        
+
+  	      $.ajax({
+  			url:"loginCount.do",
+  			type:"post",
+  			data : {},
+  			success: function(data){
+  				setCookie("login","1","1");
+  				
+  			},
+  			error:function(){
+  				console.log("err");
+  			}
+  			
+  			
+  		});
+  	}
+  	}
+  	//쿠키 스크립트 끝
   </script>
   

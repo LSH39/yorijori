@@ -9,6 +9,7 @@
 		<typeAlias type="kr.or.admin.model.vo.Member2" alias="m2"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
 		<typeAlias type="kr.or.admin.model.vo.Prev" alias="prev"/>
+		<typeAlias type="kr.or.admin.model.vo.VisitCount" alias="vc"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
@@ -39,7 +40,8 @@
 		<typeAlias type="kr.or.recipe.model.vo.RecipeContent" alias="rcontent"/>
 		<typeAlias type="kr.or.recipe.model.vo.RecipeReport" alias="report"/>
 		<typeAlias type="kr.or.recipe.model.vo.RecipeLike" alias="rlike"/>
-		
+		<typeAlias type="kr.or.milkit.model.vo.Product" alias="product"/>
+		<!-- 김민지 별칭 끝 -->
 
 		<typeAlias type="kr.or.mypage.model.vo.Follow" alias="fl"/>
 		<typeAlias type="kr.or.mypage.model.vo.ContestWin" alias="ct"/>
@@ -53,11 +55,14 @@
 	     <typeAlias type="kr.or.mypage.model.vo.MyItem" alias="mi"/>
 	     <typeAlias type="kr.or.mypage.model.vo.LikeRecipe" alias="lr"/>
 	     <typeAlias type="kr.or.mypage.model.vo.FollowList" alias="fol"/>
-	     <typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc"/>
-	      <typeAlias type="kr.or.mypage.model.vo.Myorder" alias="mo"/>
-	        <typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms"/>
-	          <typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md"/>
-	               <typeAlias type="kr.or.mypage.model.vo.DetailOrder" alias="dd"/>
+		<typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc" />
+		<typeAlias type="kr.or.mypage.model.vo.Myorder" alias="mo" />
+		<typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms" />
+		<typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md" />
+		<typeAlias type="kr.or.mypage.model.vo.DetailOrder" alias="dd" />
+		<typeAlias type="kr.or.milkit.model.vo.product" alias="pd" />
+		       
+
 	</typeAliases>
 </configuration>
 

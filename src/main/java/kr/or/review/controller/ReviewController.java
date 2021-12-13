@@ -28,27 +28,25 @@ public class ReviewController {
 	//리뷰 작성 AJAX사용
 	@ResponseBody
 	@RequestMapping(value="/insertReview.do")
-	public String insertReview(Review review, Model model) {
+	public int insertReview(Review review, Model model) {
 		int result = service.insertReview(review);
 		if(result > 0) {
-			return "1";
+			return 1;
 		}else {
-			return "0";
+			return 0;
 		}
 	}
 	
-	
-	//리뷰 삭제
-	@RequestMapping(value="/reviewDelete.do")
-	public String deleteReview(int reviewNo, Model model) {
+	//리뷰 삭제 AJAX사용
+	@ResponseBody
+	@RequestMapping(value="/deleteReview.do")
+	public int deleteReview(int reviewNo) {
 		int result = service.deleteReview(reviewNo);
 		if(result > 0) {
-			model.addAttribute("msg", "삭제 성공");
-			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");
+			return 1;
 		}else {
-			model.addAttribute("msg", "삭제 실패!");
-			model.addAttribute("loc", "/");			
+			return 0;
 		}
-		return "common/msg";
 	}
+	
 }

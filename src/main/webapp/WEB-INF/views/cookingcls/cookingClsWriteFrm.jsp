@@ -4,27 +4,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="resources/summernote/summernote-lite.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <!-- 
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3034a6bde601c666de71198a328eaa3e"></script>
  -->
+<!--  -->
 
+
+<!--  -->
 <meta charset="UTF-8">
 <title>쿠킹클래스 작성</title>
 <style>
 </style>
-    <script>
-        $(function(){
+
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<script src="resources/summernote/jquery-3.3.1.js"></script>
+	<script src="resources/summernote/summernote-lite.js"></script>
+	<script src="resources/summernote/lang/summernote-ko-KR.js"></script>
+	<div class="container">
+		<div>
+			<h1>요리 클래스 등록</h1>
+		</div>
+		<div>
+			<form action="/cookingClsWrite.do" method="get">
+				<!-- 전문가 닉네임 히든값 -->
+				<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }">
+				<h5>강의 제목</h5>
+				<input type="text" name="classTitle" class="form-control" id="classTitle" maxlength="33" class="input-group input-group-sm"><br>
+				<h5>강의 내용</h5>
+				<textarea name="classContent" class="form-control" id="classContent" cols="30" rows="10"></textarea>
+				<br>
+				<h5>강의 장소(입력 안할시 비대면)</h5>
+				<input type="text" name="classLocation1" id="classLocation1" maxlength="100">
+				<button type="button" id="addrSearch" class="btn btn-primary">주소검색</button>
+				<br> <input type="text" name="classLocation2" id="classLocation2" maxlength="100"><br>
+				<h5>강의 가격</h5>
+				<input type="text" name="classPrice" id="classPrice" maxlength="10">원<br>
+				<span class="result">　</span>
+				<h5>강의 정원</h5>
+				<input type="text" name="classNop" id="classNop" maxlength="10">명<br>
+				<h5>강의시간</h5>
+				<input type="time" name="classStartTime" id="time1">부터<input type="time" name="classEndTime" id="time2">
+				<button type="button" id="btntest" class="btn-primary btn-sm">시간테스트</button>
+				<br>
+				<span class="result">　</span><br>
+				<h5>클래스 시작일</h5>
+				<input type="date" name="classStart" id="classStart"><br><br>
+				<h5>클래스 종료일</h5>
+				<input type="date" name="classEnd" id="classEnd"><br><br>
+				<input type="file">
+				<input
+					type="submit" value="등록" class="btn btn-danger">
+				<button type="button" id="chkHidden" class="btn btn-primary">히든값 확인 버튼</button>
+			</form>
+		</div>
+	</div>
+	<script>
+		$(function(){
             $("#addrSearch").click(function(){
                 new daum.Postcode({
                 oncomplete: function(data) {
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
                     // 예제를 참고하여 다양한 활용법을 확인해 보세요.
                     if (data.userSelectedType === 'R') {
-                        $("#classLocation").val(data.roadAddress);
+                        $("#classLocation1").val(data.roadAddress);
                     } else {
-                        $("#classLocation").val(data.jibunAddress);
+                        $("#classLocation1").val(data.jibunAddress);
                     }
                     $("#classLocation2").focus();
                 }
@@ -42,6 +91,8 @@
                 $("#timeHidden").val(testRes1+"부터"+testRes2);
                 console.log(testRes1+"부터"+testRes2);
             });
+            
+
 
             $("#time1").change(function(){
                 let time1 = $("#time1").val();
@@ -125,59 +176,19 @@
             		console.log("올바르게 입력됨");
             	}
             });
-            
-            /*
-            $("#classStart").datepicker({
-            	mindate:0
+			
+			
+            $("#classContent").summernote({
+				height : 400,
+				lang : "ko-KR",
+				callbacks : {
+					onImageUpload : function(files){
+						uploadImage(files[0],this);
+					}
+				}
             });
-            
-            $("#classEnd").datepicker({
-            	mindate:0
-            });
-            */
-            
-        });
-
-    </script>
-</head>
-<body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="container">
-		<div>
-			<h1>요리 클래스 등록</h1>
-		</div>
-		<div>
-			<form action="" method="get">
-				<h5>강의 제목</h5>
-				<input type="text" name="classTitle" id="classTitle" maxlength="33" class="input-group input-group-sm"><br>
-				<h5>강의 내용</h5>
-				<textarea name="classContent" id="" cols="30" rows="10"></textarea>
-				<br>
-				<h5>강의 장소(입력 안할시 비대면)</h5>
-				<input type="text" name="classLocation" id="classLocation">
-				<button type="button" id="addrSearch" class="btn btn-primary">주소검색</button>
-				<br> <input type="text" name="" id="classLocation2"><br>
-				<h5>강의 가격</h5>
-				<input type="text" name="classPrice" id="classPrice" maxlength="10">원<br>
-				<span class="result">　</span>
-				<h5>강의 시간 23글자임 시간10bytes + 4글자12bytes</h5>
-				<h5>오전09:00~오후10:00</h5>
-				<h5>강의시간</h5>
-				<input type="time" id="time1">부터<input type="time"id="time2"> <input type="hidden" name="classTime" id="timeHidden">
-				<button type="button" id="btntest" class="btn-primary btn-sm">시간테스트</button>
-				<br>
-				<span class="result">　</span><br>
-				<h5>클래스 시작일</h5>
-				<input type="date" name="classStart" id="classStart"><br><br>
-				<h5>클래스 종료일</h5>
-				<input type="date" name="classEnd" id="classEnd"><br><br>
-				
-				<input
-					type="submit" value="등록" class="btn btn-danger">
-				<button type="button" id="chkHidden" class="btn btn-primary">히든값 확인 버튼</button>
-			</form>
-		</div>
-	</div>
+		});
+	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

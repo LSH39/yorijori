@@ -83,6 +83,7 @@ public class ProfileService {
 		ArrayList<RecipeBoard> list = dao.selectAllList(memberNo);
 		return list;
 	}
+
 	
 	
 }
