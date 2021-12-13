@@ -1,0 +1,238 @@
+.container{
+    width: 1100px;
+    margin: 0 auto;
+}
+.container>p{
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+#order, #delivery, #point, #pay, #coupon{
+    width: 1100px;
+    margin-top: 30px;
+}
+.caption{
+    border-bottom: 1px solid #000000;
+    font-size: 22px;
+    text-align: left;
+    font-weight: bold;
+    padding: 10px;
+    color: #000000;
+    caption-side: top;
+}
+th,td{
+    padding: 10px;
+    box-sizing: border-box;
+}
+.product-table-title{
+    font-size: 18px;
+    text-align: center;
+}
+.product-table-container td{
+    font-weight: bold;
+    text-align: center;
+    height: 120px;
+}
+.product-table-container td:nth-child(1){
+    width: 120px;
+}
+.product-table-container td:nth-child(3), .product-table-container td:nth-child(4){
+    width: 150px;
+}
+.product-table-container td:nth-child(2)>p{
+    text-align: left;
+    padding: 5px;
+    padding-left: 50px;
+    margin: auto;
+}
+.product-table-container td:nth-child(2)>p:first-child{
+    font-weight: normal;
+}
+#order img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+#nojusoupdate{
+    height: 32px;
+    font-size: 14px;
+    float: right;
+    line-height: 45px;
+}
+.input_txt{
+    height: 35px;
+    font-size: 16px;
+    margin: 0 auto;
+}
+.none_txt{
+    border: none;
+}
+.none_txt:focus{
+    outline: none;
+}
+#delivery th{
+    width: 120px;
+    text-align: left;
+}
+#delivery tr:nth-child(4)>th{
+    vertical-align: top;
+}
+.light_btn{
+    width: 150px;
+    height: 40px;
+    border-width: 2px;
+}
+#newAddr{
+    margin-left: 20px;
+}
+[name="orderPostcode"]{
+    width: 100px;
+}
+[name="orderAddrRoad"]{
+    width: 400px;
+}
+[name="orderAddrDetail"]{
+    width: 400px;
+}
+[name="orderRequest"]{
+    width: 500px;
+}
+#delivery label:hover, .pay-left-top label:hover{
+    cursor: pointer;
+}
+input[name=juso], input[name=payMethod]{
+    display: none;
+}
+input[name=juso]:checked + label, input[name=payMethod]:checked + label{
+    background-color: #8E44AD;
+    color: #ffffff;
+}
+
+#deliveryRequest{
+    width: 400px;
+    height: 20px;
+    font-size: 16px;
+}
+[name=couponList]{
+    border: 2px solid #8E44AD;
+    border-radius: 5px;
+    width: 500px;
+    height: 35px;
+    padding-left: 10px;
+    text-overflow: ellipsis;
+}
+#point th, #coupon th{
+    width: 170px;
+    text-align: left;
+}
+#point span, #coupon span{
+    color: #8E44AD;
+    font-size: 18px;
+    font-weight: bold;
+}
+#usePoint{
+    width: 100px;
+    height: 20px;
+    font-size: 16px;
+    text-align: right;
+    border: 0;
+    border-bottom: 2px solid #8E44AD;
+}
+#pay{
+    width: 1100px;
+}
+#pay>tbody>tr, .pay>tbody>tr>td{
+    padding: 0;
+}
+#pay>tbody>tr>td:first-child{
+    width: 100%;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+#pay-left-top, .pay-left-bottom{
+    width: 100%;
+    box-sizing: border-box;
+}
+#pay>tbody>tr>td:first-child{
+    padding-left: 0;
+}
+#pay-right{
+    width: 350px;
+    height: 310px;
+    box-sizing: border-box;
+    border: 3px solid #8E44AD;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+#pay-right caption{
+    border: none;
+}
+#pay-right tr>td:first-child{
+    text-align: left;
+    padding-left: 30px;
+}
+#pay-right tr>td:last-child{
+    text-align: right;
+    padding-right: 30px;
+}
+#pay-right tr:last-of-type{
+    font-size: 24px;
+    border-top: 2px solid #7F7F7F;
+}
+#totalPrice{
+    color: #8E44AD;
+}
+#pay-left-top th{
+    width: 170px;
+    text-align: left;
+}
+#pay-left-bottom th{
+    text-align: left;
+    padding-bottom: 0px;
+}
+#pay-left-bottom textarea{
+    width: 680px;
+    height: 90px;
+    resize: none;
+    padding: 10px;
+    line-height: 20px;
+}
+#bottom{
+    text-align: center;
+}
+#p_txt{
+    text-align: center;
+    padding-top: 60px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.purple_btn{
+    width: 500px;
+    margin-bottom: 100px;
+}
+.light_btn{
+    padding: 0;
+}
+[type='radio']{
+    display: none;
+}
+.radioLabel{
+    width: 100px;
+    height: 35px;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 14px;
+    text-align: center;
+    line-height: 31px;
+    box-sizing: border-box;
+}
+.radioLabel:hover{
+    border: 2px solid #8E44AD;
+    color: #ffffff;
+    background-color: #8E44AD;
+}
+[name="orderPayOption"]:checked+label{
+    color: #ffffff;
+    background-color: #8E44AD;
+}

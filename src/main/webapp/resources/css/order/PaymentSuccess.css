@@ -1,0 +1,45 @@
+.wrap{
+    width: 1000px;
+    margin: 0 auto;
+}
+.content{
+    margin: 100px 0px 100px 0px;
+}
+.center{
+    width: 1000px;
+    border: 4px solid #8E44AD;
+    box-sizing: border-box;
+    margin: 50px 0px 50px 0px;
+    padding: 50px;
+}
+.center>div{
+    overflow: hidden;
+    text-align: center;
+    margin: 20px;
+    font-weight: bold;
+}
+.center>div>img{
+    height: 30px;
+    display: inline;
+    vertical-align: bottom;
+}
+.p1_txt{
+    display: inline;
+}
+.p2_txt{
+    margin: 5px;
+    font-size: 20px;
+}
+.h2_txt{
+    font-size: 28px;
+    background-color: #E0DBEF;
+}
+.purple_btn{
+    width: 80px;
+    height: 30px;
+    padding: 0;
+    text-decoration: none;
+}
+.center span{
+    color: #8E44AD;
+}

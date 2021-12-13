@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
@@ -34,7 +35,8 @@ public class MemberService {
 		int result = dao.joinAdmin(member);
 		return result;
 	}
-
+	
+	@Transactional
 	public int joinBasicEnc(Member member, String domain) {
 		String memberEmail = member.getMemberEmail()+"@"+domain;
 		member.setMemberEmail(memberEmail);
@@ -46,6 +48,7 @@ public class MemberService {
 		return result2;
 	}
 	
+	@Transactional
 	public int joinProEnc(Member member, String domain) {
 		String memberEmail = member.getMemberEmail()+"@"+domain;
 		member.setMemberEmail(memberEmail);

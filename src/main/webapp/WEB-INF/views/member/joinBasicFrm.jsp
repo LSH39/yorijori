@@ -107,7 +107,7 @@
         <!-- /mailCheck -->
     </div>
 
-    <%@include file = "/WEB-INF/views/member/join.jsp" %>
+    <%@include file = "/WEB-INF/views/member/joinJs.jsp" %>
     <script>
         // submit
         $("#submit_btn").click(function(){

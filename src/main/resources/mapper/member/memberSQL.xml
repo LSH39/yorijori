@@ -402,5 +402,19 @@ and memberLevel = 5
 	<update id="findPwRe" parameterType="m">
 		update member set member_pw=#{memberPw} where member_no=#{memberNo}
 	</update>
+	
+	<select id="orderMember"  parameterType="_int" resultType="m">
+		select member_no as memberNo,
+			member_email as memberEmail,
+			member_name as memberName,
+			member_nickname as memberNickname,
+			member_phone as memberPhone,
+			postcode,
+			address_road as addressRoad,
+			address_detail as addressDetail,
+			member_point as memberPoint
+		from member
+		where member_no=#{memberNo}
+	</select>
 
 </mapper>
