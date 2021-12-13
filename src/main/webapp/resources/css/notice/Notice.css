@@ -13,8 +13,8 @@
 .form-group:first-of-type {
 	border-top: 5px solid rgb(196, 191, 227);
 }
-.col-form-label:not([for="noticeContent"]){
-	background: rgb(246, 240, 255);
+.col-form-label:not(#content){
+    background: rgb(246, 240, 255);
 }
 .col-form-label{
 	text-align: center;

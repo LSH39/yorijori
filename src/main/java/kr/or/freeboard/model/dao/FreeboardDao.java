@@ -79,4 +79,24 @@ public class FreeboardDao {
 		List<FreeboardLike> list = sqlSession.selectList("freeboard.selectFcLikeList", map);
 		return (ArrayList<FreeboardLike>) list;
 	}
+
+	public int insertFcLike(HashMap<String, Object> map) {
+		int result = sqlSession.insert("freeboard.insertFcLike", map);
+		return result;
+	}
+
+	public int insertFreeboard(Freeboard f) {
+		int result = sqlSession.insert("freeboard.insertFree", f);
+		return result;
+	}
+
+	public int insertFreeboardFile(FreeboardFile ff) {
+		int result = sqlSession.insert("freeboard.insertFreeFile", ff);
+		return result;
+	}
+
+	public int selectFreeNo(Freeboard f) {
+		int freeNo = sqlSession.selectOne("freeboard.selectFreeNo", f);
+		return freeNo;
+	}
 }

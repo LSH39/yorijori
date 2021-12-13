@@ -93,14 +93,28 @@
 		where fc_no = #{fcNo}
 	</update>
 	<select id="selectFcLikeList" parameterType="map" resultType="fcl">
-	select 
-        fclike_no as fclikeNo,
-        fc_no as fcNo,
-        fc_liker as fcLiker
-    from
-        fc_like fl 
-        where fl.fc_no in (select fc.fc_no from freeboard_comment fc where fc.free_no=#{freeNo})
-        and fcLiker=#{memberId}
+		select 
+	        fclike_no as fclikeNo,
+	        fc_no as fcNo,
+	        fc_liker as fcLiker
+	    from
+	        fc_like fl 
+	        where fl.fc_no in (select fc.fc_no from freeboard_comment fc where fc.free_no=#{freeNo})
+	        and fc_liker=#{memberId}
+	</select>
+	<insert id="insertFcLike" parameterType="map">
+		insert into fc_like values(fclike_seq.nextval, #{fcNo}, #{memberId})
+	</insert>
+	<insert id="insertFree" parameterType="fb">
+		insert into freeboard values(free_seq.nextval, #{freeWriter}, #{freeTitle}, #{freeContent}, to_char(sysdate, 'yyyy-mm-dd'), 0)
+	</insert>
+	<insert id="insertFreeFile" parameterType="ff">
+		insert into freeboard_file values (ff_seq.nextval, #{freeNo}, #{ffFilename}, #{ffFilepath})
+	</insert>
+	<select id="selectFreeNo" parameterType="fb" resultType="_int">
+		select free_no as freeNo from freeboard
+		where free_writer = #{freeWriter} and free_title = #{freeTitle}
+		order by free_no desc
 	</select>
 </mapper>
 

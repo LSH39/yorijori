@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,19 +43,18 @@
 	      			</div>
 	      			<div class="form-group row">
 	      				<label for="memberNickname" class="col-sm-2 col-form-label">작성자</label>
-	      				<div class="col-sm-4">
+	      				<div class="col-sm-4 writerinfo">
 	      					<input type="text" readonly class="form-control-plaintext" name="memberNickname" id="memberNickname" value="${fb.memberNickname } [${fb.freeWriter}]">
 	      				</div>
-	      				<label for="filename" class="col-sm-2 col-form-label">첨부파일</label>
+	      				<label for="filename" class="col-sm-2 col-form-label">이미지</label>
 	      				<div class="col-sm-4">
 		      					<c:choose>
-									<c:when test="${not empty n.filename }">
-									<i class="bi bi-file-arrow-down"></i>
-									<a href="/fileDownFree.do?freeNo=${fb.freeNo }">${ff.filename }</a>
+									<c:when test="${not empty fileList }">
+										<i class="bi bi-file-arrow-down"></i> ${fn:length(fileList) }개
 									</c:when>
 									<c:otherwise>
 									<i class="bi bi-x-square-fill"></i>
-									<span>첨부파일이 없습니다.</span>
+									<span>파일이 없습니다.</span>
 									</c:otherwise>
 								</c:choose>					
 	      				</div>
@@ -71,7 +71,12 @@
 	      			</div>
 	      			<div class="form-group row">
 	      				<div class="col-sm-12">
-	      				<div class="freeContent" id="freeContent" style="test-align:left;padding-bottom:50px;">${fb.freeContentBr }</div>
+	      				<div class="freeContent" id="freeContent" style="test-align:left;padding-bottom:50px;">
+	      					<c:forEach items="${fileList }" var="ff" varStatus="i">
+								<img src="resources/upload/freeboard/${ff.ffFilepath }" style="width: 300px; height: 180px;">	
+							</c:forEach>
+	      				${fb.freeContentBr }
+	      				</div>
 						</div>
 						<div class="like-box">
 			      			<div class="like-wrap">
@@ -147,7 +152,7 @@
 	      											</div>
 	      										</td>
 	      										<td class="fcLike">
-	      											<div>
+	      											<div class="fc-like">
 	      											<img src="resources/img/freeboard/spoonknife.png" style="width:30px;height:30px;" class="fcLike">
 	      											<p>추천 <span class="fcLikeCount">${fc.fcLikeCount }</span></p>
 	      											</div>
@@ -280,7 +285,11 @@
 						var fcNo = $(".fcNo").val();
 						for(var j = 0; j < fcNoList.length; j++){
 							if(fcNo == fcNoList[j]){
-								
+								var img = fcNo.parents(".fcLike").children().eq(0).children("img");
+								var p = fcNo.parents(".fcLike").children().eq(0).children("p");
+								img.css("");
+								p.html("추천취소");
+								p.css("font-weight", "bolder");
 							}
 						}
 					}
@@ -288,6 +297,14 @@
 		
   			});
   		}
+  		
+  		//댓글 추천하기
+  		$(".fc-like").on("click", function(){
+  			var freeNo = $("#freeNo").val();
+  			var fcNo = $(this).parent().find(".fcNo").val();
+  			var memberId = $("#fcWriter").val();
+  			location.href="/insertFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
+  		});
   		
   		
   		

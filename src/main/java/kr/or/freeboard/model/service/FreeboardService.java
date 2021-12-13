@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.RollbackRuleAttribute;
 
 import kr.or.freeboard.model.dao.FreeboardDao;
 import kr.or.freeboard.model.vo.Freeboard;
@@ -129,6 +130,30 @@ public class FreeboardService {
 		map.put("freeNo", freeNo);
 		ArrayList<FreeboardLike> list = dao.selectFcLikeList(map);
 		return list;
+	}
+
+	public int insertFcLike(int fcNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("fcNo", fcNo);
+		int result = dao.insertFcLike(map);
+		return result;
+	}
+
+	public int insertFreeboard(Freeboard f, ArrayList<FreeboardFile> list) {
+		int result = dao.insertFreeboard(f);
+		int fn = dao.selectFreeNo(f);
+		int finalResult = 0;
+		if(result>0) {
+			for(int i=0; i<list.size(); i++) {
+				list.get(i).setFreeNo(fn);
+				int count = dao.insertFreeboardFile(list.get(i));
+				finalResult += count;
+			}
+		} else {
+			
+		}
+		return finalResult;
 	}
 
 }

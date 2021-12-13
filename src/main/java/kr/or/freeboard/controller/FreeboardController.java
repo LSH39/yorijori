@@ -1,16 +1,26 @@
 package kr.or.freeboard.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.freeboard.model.service.FreeboardService;
+import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.freeboard.model.vo.FreeboardComment;
 import kr.or.freeboard.model.vo.FreeboardCommentLike;
+import kr.or.freeboard.model.vo.FreeboardFile;
 import kr.or.freeboard.model.vo.FreeboardLike;
 import kr.or.freeboard.model.vo.FreeboardPageData;
 import kr.or.freeboard.model.vo.FreeboardViewData;
@@ -103,4 +113,84 @@ public class FreeboardController {
 		ArrayList<FreeboardLike> list = service.selectFcLikeList(memberId, freeNo);
 		return list;
 	}
+	
+	@RequestMapping(value="/insertFcLike.do")
+	public String insertFcLike(Model model, int fcNo, String memberId, int freeNo) {
+		int result = service.insertFcLike(fcNo, memberId);
+		if(result>0) {
+			model.addAttribute("msg", "추천 완료");
+		} else {
+			model.addAttribute("msg", "추천 실패....");
+		}
+			model.addAttribute("loc", "/freeView.do?freeNo="+freeNo);
+			return "common/msg";
+	}
+	
+	@RequestMapping(value="/freeWriteFrm.do")
+	public String freeWriteFrm() {
+		return "freeboard/freeWriteFrm";
+	}
+	
+	@RequestMapping(value="/insertFree.do")
+	public String insertFree(Freeboard f, Model model, MultipartFile[] upfile, HttpServletRequest request) {
+		//파일목록 저장할 list
+		ArrayList<FreeboardFile> list = new ArrayList<FreeboardFile>();
+		if(upfile[0].isEmpty()) {
+			//첨부파일 없는 경우
+		} else {
+			//파일업로드 경로 설정
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/freeboard/");
+			for(MultipartFile file : upfile) {
+				//파일명 중복처리
+				String filename = file.getOriginalFilename();
+				String onlyFilename = filename.substring(0, filename.indexOf("."));
+				String extension = filename.substring(filename.indexOf(".")); //확장자명
+				//실제로 업로드할 파일명 저장할 변수
+				String filepath = null;
+				int count = 0;
+				while(true) {
+					if(count == 0) {
+						filepath = onlyFilename + extension;
+					} else {
+						filepath = onlyFilename + "_" + count + extension; //중복 될 경우
+					}
+					File checkFile = new File(savePath+filepath);
+					if(!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+				//파일명 중복처리 완료. 업로드 시작
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					//업로드 속도증가를 위한 보조스트림
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					//파일 업로드
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				FreeboardFile ff = new FreeboardFile();
+				ff.setFfFilename(filename);
+				ff.setFfFilepath(filepath);
+				list.add(ff);
+			}
+		}
+		int result = service.insertFreeboard(f, list);
+		if(result == -1 || result != list.size()) {
+			model.addAttribute("msg", "등록 실패");
+		} else {
+			model.addAttribute("msg", "등록 완료");
+		}
+		model.addAttribute("loc", "/freeboardList.do?reqPage=1&orderIndex=0");
+		return "common/msg";
+		
+	}
+	
 }
