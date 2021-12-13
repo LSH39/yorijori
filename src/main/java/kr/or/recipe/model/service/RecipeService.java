@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.member.model.vo.Member;
-import kr.or.milkit.model.vo.product;
+import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.dao.RecipeDao;
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
