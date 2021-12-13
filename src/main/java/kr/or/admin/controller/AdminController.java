@@ -20,7 +20,10 @@ import kr.or.admin.model.vo.CouponPageData;
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
 import kr.or.admin.model.vo.Prev;
+import kr.or.admin.model.vo.Ranking;
 import kr.or.coupon.model.vo.Coupon;
+import kr.or.freeboard.model.vo.Freeboard;
+import kr.or.recipe.model.vo.RecipeBoard;
 
 
 
@@ -290,7 +293,8 @@ public class AdminController {
 		
 		
 		Prev count = service.selectFjr(map);
-		
+		Prev visitCount = service.statVisitCount(map);
+		Prev loginCount = service.statloginCount(map);
 		Prev prev = service.selectFreeCount(map);
 		Prev recipe = service.selectRecipeCount(map);
 		Prev join = service.selectJoinCount(map);
@@ -302,6 +306,8 @@ public class AdminController {
 		model.addAttribute("j",join);
 		model.addAttribute("day",map);
 		model.addAttribute("today",today);
+		model.addAttribute("visitCount",visitCount);
+		model.addAttribute("loginCount",loginCount);
 		return "admin/stat";
 	}
 	@RequestMapping(value="/visitCount.do")
@@ -316,6 +322,13 @@ public class AdminController {
 		int result = service.loginCount();
 		
 		
+	}
+	@RequestMapping(value="/ranking")
+	public String ranking(Model model) {
+		
+		Ranking ranking = service.ranking();
+		model.addAttribute("ranking",ranking);
+		return "admin/ranking";
 	}
 	
 }

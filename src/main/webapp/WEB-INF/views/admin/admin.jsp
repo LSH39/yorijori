@@ -49,7 +49,7 @@
         <tr class="table-warning">
             <td><a href="#">회원관리</a></td>
             <td><a href="stat.do">일간 현황</a></td>
-            <td><a href="#">순위</a></td>
+            <td><a href="ranking.do">순위</a></td>
             <td><a href="#">쿠폰</a></td>
         </tr>
         <tr class="table-warning">

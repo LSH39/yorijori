@@ -160,7 +160,7 @@ background-color: #9F90CF;
                 <div class="drop2 navbar" style="display: none;">
                     
                <a class="nav-link" href="stat.do">일간 현황</a>
-                <a class="nav-link" href="#">순위</a>
+                <a class="nav-link" href="ranking.do">순위</a>
 
             	
        		</div>

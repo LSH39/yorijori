@@ -12,6 +12,7 @@ import kr.or.admin.model.vo.CouponPageData;
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
 import kr.or.admin.model.vo.Prev;
+import kr.or.admin.model.vo.Ranking;
 import kr.or.coupon.model.vo.Coupon;
 
 
@@ -254,6 +255,21 @@ public class AdminService {
 	public int loginCount() {
 		int result = dao.loginCount();
 		return result;
+	}
+
+	public Prev statVisitCount(HashMap<String, Object> map) {
+		Prev visitCount = dao.statVisitCount(map);
+		return visitCount;
+	}
+
+	public Prev statloginCount(HashMap<String, Object> map) {
+		Prev loginCount = dao.statLoginCount(map);
+		return loginCount;
+	}
+
+	public Ranking ranking() {
+		Ranking ranking = dao.ranking();
+		return ranking;
 	}
 	
 	

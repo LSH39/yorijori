@@ -10,10 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.Prev;
+import kr.or.admin.model.vo.Ranking;
 import kr.or.admin.model.vo.VisitCount;
 import kr.or.coupon.model.vo.Coupon;
+import kr.or.freeboard.model.vo.Freeboard;
+import kr.or.milkit.model.vo.product;
+import kr.or.mypage.model.vo.Follow;
+import kr.or.recipe.model.vo.RecipeBoard;
 
 
 
@@ -226,6 +232,34 @@ public class AdminDao {
 		VisitCount vc = sqlSession.selectOne("stat.selectVisitCount");
 		int result = sqlSession.update("stat.updateVisitCount",vc);
 		return 0;
+	}
+
+
+	public Prev statVisitCount(HashMap<String, Object> map) {
+		Prev visitCount = sqlSession.selectOne("stat.statVisitCount",map);
+		return visitCount;
+	}
+
+
+	public Prev statLoginCount(HashMap<String, Object> map) {
+		Prev loginCount = sqlSession.selectOne("stat.statLoginCount",map);
+		return loginCount;
+	}
+
+
+	public Ranking ranking() {
+		
+		List list1 = sqlSession.selectList("stat.rankingBoard");
+		List list2 = sqlSession.selectList("stat.rankingRecipe");
+		List list3 = sqlSession.selectList("stat.rankingFollow");
+		List list4 = sqlSession.selectList("stat.rankingMilkit");
+		
+		ArrayList<Freeboard> fbList =(ArrayList<Freeboard>)list1 ;
+		ArrayList<RecipeBoard> rbList =(ArrayList<RecipeBoard>)list2;
+		ArrayList<Member2> fList=(ArrayList<Member2>)list3;
+		ArrayList<product> milList =(ArrayList<product>) list4;
+		Ranking ranking = new Ranking(fbList, rbList, fList, milList);
+		return ranking;
 	}
 
 
