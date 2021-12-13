@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.Prev;
+import kr.or.admin.model.vo.VisitCount;
 import kr.or.coupon.model.vo.Coupon;
 
 
@@ -203,6 +204,28 @@ public class AdminDao {
 	public Prev selectJoinCount(HashMap<String, Object> map) {
 		Prev join = sqlSession.selectOne("stat.selectJoinCount",map);
 		return join;
+	}
+
+
+	public int visitCount() {
+		VisitCount vc = sqlSession.selectOne("stat.selectVisitCount");
+		if(vc ==null) {
+			int addResult = sqlSession.insert("stat.addVisitCount");	
+		}
+		vc = sqlSession.selectOne("stat.selectVisitCount");
+		
+		int result = sqlSession.update("stat.increaseVisitCount",vc);
+		
+		
+		
+		return result;
+	}
+
+
+	public int loginCount() {
+		VisitCount vc = sqlSession.selectOne("stat.selectVisitCount");
+		int result = sqlSession.update("stat.updateVisitCount",vc);
+		return 0;
 	}
 
 

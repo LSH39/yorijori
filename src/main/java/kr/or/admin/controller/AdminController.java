@@ -304,5 +304,18 @@ public class AdminController {
 		model.addAttribute("today",today);
 		return "admin/stat";
 	}
+	@RequestMapping(value="/visitCount.do")
+	public void visitCount() {
+		int result = service.visitCount();
+		
+		
+	}
+	
+	@RequestMapping(value="/loginCount.do")
+	public void loginCount() {
+		int result = service.loginCount();
+		
+		
+	}
 	
 }

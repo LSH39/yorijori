@@ -249,5 +249,70 @@
 	  $('.recipe-category').on('click', 'input:radio', function () {
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
+  	
+  	//방문자수 기록용 쿠키 스크립트
+  	function setCookie(cname,cvalue,exdays){
+  	    var d = new Date();
+  	    d.setTime(d.getTime()+(exdays*24*60*1000));
+  	    var expires = "expires=" +d.toUTCString();
+  	    document.cookie = cname+"="+cvalue+";"+expires +"; path=/";
+  	}
+  	function getCookie(cname){
+  	    var name = cname+"=";
+  	    var decodedCookie = decodeURIComponent(document.cookie);
+  	    var ca = decodedCookie.split(';');
+  	    for(var i =0; i<ca.length;i++){
+  	        var c = ca[i];
+  	        while(c.charAt(0)==' '){
+  	            c = c.substring(1);
+  	        }
+  	        if(c.indexOf(name)==0){
+  	            return c.substring(name.length,c.length);
+  	        }
+  	    }
+  	    return "";
+  	}
+
+
+  	if(getCookie("visit")==0){
+  	    
+  	    
+
+  	  $.ajax({
+			url:"visitCount.do",
+			type:"post",
+			data : {},
+			success: function(data){
+				setCookie("visit","1","1");
+				
+			},
+			error:function(){
+				console.log("err");
+			}
+			
+			
+		});
+  	    
+  	}else{
+  	    if(getCookie("login")==0 && ${ not empty sessionScope.m }){
+  	        
+
+  	      $.ajax({
+  			url:"loginCount.do",
+  			type:"post",
+  			data : {},
+  			success: function(data){
+  				setCookie("login","1","1");
+  				
+  			},
+  			error:function(){
+  				console.log("err");
+  			}
+  			
+  			
+  		});
+  	}
+  	}
+  	//쿠키 스크립트 
   </script>
   

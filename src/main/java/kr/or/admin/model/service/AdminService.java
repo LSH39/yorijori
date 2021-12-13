@@ -244,6 +244,18 @@ public class AdminService {
 		Prev join = dao.selectJoinCount(map);
 		return join;
 	}
+
+	public int visitCount() {
+		int result = dao.visitCount();
+		
+		return result;
+	}
+
+	public int loginCount() {
+		int result = dao.loginCount();
+		return result;
+	}
+	
 	
 	
 	

@@ -60,4 +60,25 @@
   
   </select>
   
+  <select id="selectVisitCount" resultType="vc">
+  select visit_date as visitDate, visit_count as visitCount , login_count as loginCount from visit_count where visit_date = to_char(sysdate,'yyyy-mm-dd')
+  
+  
+  </select>
+  
+  <insert id="addVisitCount">
+  
+  insert into visit_count values(visit_count_seq.nextval,to_char(sysdate,'yyyy-mm-dd'),0,0)
+  
+  </insert>
+  
+  <update id="increaseVisitCount" parameterType="vc">
+  update visit_count set visit_count = #{visitCount}+1  where visit_date = to_char(sysdate,'yyyy-mm-dd') 
+  </update>
+  
+  <update id="updateVisitCount" parameterType="vc">
+  
+  update visit_count set visit_count = #{visitCount}-1 , login_count = #{loginCount }+1 where visit_date = to_char(sysdate,'yyyy-mm-dd')
+  </update>
+  
 </mapper>
