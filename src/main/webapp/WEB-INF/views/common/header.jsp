@@ -289,17 +289,17 @@
   	    return "";
   	}
 
-
+	
   	if(getCookie("visit")==0){
   	    
-  	    
+  		setCookie("visit","1","1");
 
   	  $.ajax({
 			url:"visitCount.do",
 			type:"post",
 			data : {},
 			success: function(data){
-				setCookie("visit","1","1");
+				
 				
 			},
 			error:function(){
@@ -312,13 +312,13 @@
   	}else{
   	    if(getCookie("login")==0 && ${ not empty sessionScope.m }){
   	        
-
+  	    	setCookie("login","1","1");
   	      $.ajax({
   			url:"loginCount.do",
   			type:"post",
   			data : {},
   			success: function(data){
-  				setCookie("login","1","1");
+  				
   				
   			},
   			error:function(){

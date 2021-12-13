@@ -17,7 +17,8 @@ import kr.or.admin.model.vo.Ranking;
 import kr.or.admin.model.vo.VisitCount;
 import kr.or.coupon.model.vo.Coupon;
 import kr.or.freeboard.model.vo.Freeboard;
-import kr.or.milkit.model.vo.product;
+import kr.or.milkit.model.vo.Product;
+
 import kr.or.mypage.model.vo.Follow;
 import kr.or.recipe.model.vo.RecipeBoard;
 
@@ -231,7 +232,7 @@ public class AdminDao {
 	public int loginCount() {
 		VisitCount vc = sqlSession.selectOne("stat.selectVisitCount");
 		int result = sqlSession.update("stat.updateVisitCount",vc);
-		return 0;
+		return result;
 	}
 
 
@@ -257,7 +258,7 @@ public class AdminDao {
 		ArrayList<Freeboard> fbList =(ArrayList<Freeboard>)list1 ;
 		ArrayList<RecipeBoard> rbList =(ArrayList<RecipeBoard>)list2;
 		ArrayList<Member2> fList=(ArrayList<Member2>)list3;
-		ArrayList<product> milList =(ArrayList<product>) list4;
+		ArrayList<Product> milList =(ArrayList<Product>) list4;
 		Ranking ranking = new Ranking(fbList, rbList, fList, milList);
 		return ranking;
 	}

@@ -61,7 +61,7 @@
 		<typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms" />
 		<typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md" />
 		<typeAlias type="kr.or.mypage.model.vo.DetailOrder" alias="dd" />
-		<typeAlias type="kr.or.milkit.model.vo.product" alias="pd" />
+		<typeAlias type="kr.or.milkit.model.vo.Product" alias="pd" />
 		       
 
 	</typeAliases>
