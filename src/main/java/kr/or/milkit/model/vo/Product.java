@@ -3,7 +3,7 @@ package kr.or.milkit.model.vo;
 import lombok.Data;
 
 @Data
-public class product {
+public class Product {
 	private int productNo;
 	private int recipeNo;
 	private int milkitWriter;

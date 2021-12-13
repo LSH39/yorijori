@@ -83,8 +83,8 @@
           <li><a class="nav-link scrollto" href="#" id="show-category">레시피</a></li>
           <li class="dropdown"><a href="#"><span>밀키트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">신상품</a></li>
-              <li><a href="#">베스트 상품</a></li>
+              <li><a href="/milkitList.do">신상품</a></li>
+              <li><a href="/milkitList.do">베스트 상품</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto " href="/cookingClsList.do?reqPage=1">클래스</a></li>
