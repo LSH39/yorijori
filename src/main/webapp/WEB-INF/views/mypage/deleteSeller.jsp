@@ -167,7 +167,7 @@
             <h2 id="h_hotel">판매자회원탈퇴</h2>
             <div id="line2"></div><br>
           <div id="confirm">
-              <p>xx님의 정확한 정보확인을 위해 아이디/비밀번호를 다시 확인하겠습니다.</p> </div>
+              <p><b>${sessionScope.m.memberNickname}님</b>의 정확한 정보확인을 위해 아이디/비밀번호를 다시 확인하겠습니다.</p> </div>
           <div id="delFrm">
           <form action="/deleteSeller.do" method="post">
               <div class="delete">

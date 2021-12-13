@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.content-title{
+	text-align: center;
+}
+.content-title>h5{
+	font-family: "TmoneyRoundWindRegular", sans-serif;
+	color: #454545;
+}
+.content-title{
+	margin-bottom: 30px;
+}
+.form-group:first-of-type {
+	border-top: 5px solid rgb(196, 191, 227);
+}
+.col-form-label:not([for="noticeContent"]){
+	background: rgb(246, 240, 255);
+}
+.col-form-label{
+	text-align: center;
+}
+.form-group>label{
+	font-weight: bolder;
+	padding: 15px 10px;
+}
+.submitFrm{
+	text-align: center;
+	padding: 10px;
+	border-bottom: 2px solid #c0c0c0;
+}
+.form-group:not(.submitFrm){
+	display: flex;
+	align-items: center;
+}
+.form-group:nth-child(2){
+	border-bottom: 2px solid #c0c0c0;
+	margin-bottom: 20px;
+}
+.backTo{
+	text-align: right;
+	padding: 10px;
+}

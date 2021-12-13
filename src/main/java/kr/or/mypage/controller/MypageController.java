@@ -1,12 +1,12 @@
 package kr.or.mypage.controller;
 
 import java.util.ArrayList;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.freeboard.model.vo.Freeboard;
@@ -73,20 +73,20 @@ public class MypageController {
 		return "mypage/myCoupon";
 	}
 	@RequestMapping(value = "/myclass.do")
-	public String myclass(int memberNo, Model model) {
-		ArrayList<MyCookingRsrv> list= service.myclass(memberNo);
+	public String myclass(String memberNickname, Model model) {
+		ArrayList<MyCookingRsrv> list= service.myclass(memberNickname);
 		model.addAttribute("list", list);
 		return "mypage/myReserve";
 	}
 	@RequestMapping(value = "/myclassReview.do")
-	public String myclassReview(int memberNo, Model model) {
-		ArrayList<MyClassReview> list= service.myclassReview(memberNo);
+	public String myclassReview(String memberNickname, Model model) {
+		ArrayList<MyClassReview> list= service.myclassReview(memberNickname);
 		model.addAttribute("list", list);
 		return "mypage/myClassReview";
 	}
 	@RequestMapping(value = "/myitemReview.do")
-	public String myitemReview(int memberNo, Model model) {
-		ArrayList<MyItemReview> list= service.myItemReview(memberNo);
+	public String myitemReview(String memberNickname, Model model) {
+		ArrayList<MyItemReview> list= service.myItemReview(memberNickname);
 		model.addAttribute("list", list);
 		return "mypage/myItemReview";
 	}
@@ -195,17 +195,18 @@ public class MypageController {
 			return "common/msg";
 		}
 	@RequestMapping(value = "/updateMember.do")
-	public String updateMember(Member m, Model model) {
+	public String updateMember(Member m, Model model,HttpServletRequest request,HttpServletResponse response) {
+	
+				int result = service.upMember(m);
+				if (result > 0) {
+					model.addAttribute("msg", "정보변경 성공");
+				} else {
+					model.addAttribute("msg", "정보변경 실패");
+				}
+				model.addAttribute("loc", "/mypage.do");
+				return "common/msg";
+			}
 
-		int result = service.upMember(m);
-		if (result > 0) {
-			model.addAttribute("msg", "정보변경 성공");
-		} else {
-			model.addAttribute("msg", "정보변경 실패");
-		}
-		model.addAttribute("loc", "/mypage.do");
-		return "common/msg";
-	}
 	@RequestMapping(value = "/mydmList.do")
 	public String myDmList(String dmReceiver,Model model) {
 		ArrayList<Mydm> list= service.myDmList(dmReceiver);

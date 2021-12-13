@@ -58,4 +58,9 @@ public class CookingClsDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("", map);
 	}
+
+	public int insertCookingCls(CookingCls ccls) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cookingcls.insertCookingCls", ccls);
+	}
 }

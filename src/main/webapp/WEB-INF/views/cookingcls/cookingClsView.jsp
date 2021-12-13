@@ -98,9 +98,9 @@
 				data : {classNo:classNo, memberNickname:memberNickname, reviewContent:reviewContent, reviewRate:reviewRate},
 				success : function(data){
 					console.log(data);
-					if(data=="1"){
+					if(data==1){
 						console.log("성공!(테스트용)");
-					}else if(data=="0"){
+					}else if(data==0){
 						console.log("실패!(테스트용)");						
 					}
 				//location.reload();
@@ -113,6 +113,21 @@
 			});
 		});
 		
+		$(document).on("click", ".reviewDelete", function(){
+			//let reviewNoParam = $(this).attr("href");
+			let reviewNo = $(this).children(".deleteLinkVal").val();
+
+			$.ajax({
+				url : "/deleteReview.do",
+				type : "post",
+				data : {reviewNo:reviewNo},
+				success : function(data){
+					$(".table").load(location.href+" .table");
+				}
+			});
+			
+		});
+		
 		$("#noPayBtn").click(function(){
 			alert("자신의 클래스는 예약이 안됩니다!");
 		});
@@ -123,6 +138,7 @@
 			let classPrice = $(".classPrice").html(); //실제 가격
 			let classTitle = $("#classTitle").html();
 			let memberNickname = $("#clsMemberNickname").val();
+			let memberNo = $("#memberNo").val();
 			let classNo = $("#classNo").val();
 			let classNop = $("#classNop").html();
 			let impUid = date.getFullYear()+""+("0"+(date.getMonth()+1)).slice(-2)+""+("0"+date.getDate()).slice(-2)+""+("0"+date.getHours()).slice(-2)+""+("0"+date.getMinutes()).slice(-2)+""+("0"+date.getSeconds()).slice(-2);
@@ -148,14 +164,15 @@
 					$.ajax({
 						url : "/insertCookingRsrv.do",
 						type : "post",
-						data : {memberNickname : memberNickname, classNo : classNo, impUid : impUid, classNop : classNop},
+						data : {memberNickname : memberNickname, memberNo : memberNo, classNo : classNo, impUid : impUid, classNop : classNop},
 						success : function(data){
 							console.log(data);
-							if(data=="1"){
+							if(data==1){
 								alert("예약 성공");
 								location.reload();
-							}else if(data=="0"){
-								alert("인원수 초과");					
+							}else if(data==0){
+								alert("인원수 초과");
+								location.href="/";
 							}
 						}
 					});
@@ -207,8 +224,11 @@
 									<td>${review.memberNickname }</td>
 									<td>${review.reviewRate }</td>
 									<td>									
-										<c:if test="${sessionScope.m.memberNickname eq review.memberNickname }">
-											<a class="btn-close" href="/reviewDelete.do?reviewNo=${review.reviewNo }" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X</a>
+										<c:if test="${sessionScope.m.memberNickname eq review.memberNickname }">											
+											<!-- 
+											<a class="btn-close deleteReview" href="/reviewDelete.do?reviewNo=${review.reviewNo }" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X</a>
+											 -->
+											<a class="btn-close reviewDelete" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X<input type="hidden" class="deleteLinkVal" value="${review.reviewNo }"></a>
 										</c:if>
 									</td>
 								</tr>
@@ -229,6 +249,7 @@
 								<td colspan="2">
 									<input type="hidden" name="classNo" value="${ccls.classNo }" id="classNo">
 									<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }" id="memberNickname">
+									<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }" id="memberNo">
 									<input type="hidden" name="clsMemberNickname" value="${ccls.memberNickname }" id="clsMemberNickname">
 									
 									<c:choose>
@@ -273,11 +294,44 @@
 							<h5>제목 : <span id="classTitle">${ccls.classTitle }</span></h5>
 							<h5>클래스 강사 : ${ccls.memberNickname }<span class="vertified">정품</span></h5>
 							<h5>가격 : <span class="classPrice">${ccls.classPrice }</span>원</h5>
-							<h5>강의시간 : ${ccls.classTime }</h5>
+							<h5>강의시간 : 
+							<c:choose>
+							<c:when test="${ccls.classStartTime.substring(0, 2) lt 12 }">
+							오전&nbsp;${ccls.classStartTime }
+							</c:when>
+							<c:when test="${ccls.classStartTime.substring(0, 2) gt 11 }">
+							오후
+								<c:choose>
+									<c:when test="${ccls.classStartTime.substring(0, 2)-12 lt 10}">
+									0${ccls.classStartTime.substring(0, 2)-12}${ccls.classStartTime.substring(2, 5) }
+									</c:when>
+									<c:otherwise>
+									${ccls.classStartTime.substring(0, 2)-12}${ccls.classStartTime.substring(2, 5) }
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							</c:choose>~
+							<c:choose>
+							<c:when test="${ccls.classEndTime.substring(0, 2) lt 12 }">
+							오전&nbsp;${ccls.classEndTime }
+							</c:when>
+							<c:when test="${ccls.classEndTime.substring(0, 2) gt 11 }">
+							오후
+								<c:choose>
+									<c:when test="${ccls.classEndTime.substring(0, 2)-12 lt 10}">
+									0${ccls.classEndTime.substring(0, 2)-12}${ccls.classEndTime.substring(2, 5) }
+									</c:when>
+									<c:otherwise>
+									${ccls.classEndTime.substring(0, 2)-12}${ccls.classEndTime.substring(2, 5) }
+									</c:otherwise>
+								</c:choose>
+							</c:when>
+							</c:choose>
+							</h5>
 							<h5>정원 : <span id="classNop">${ccls.classNop }</span>&nbsp;/&nbsp;<span>${ccls.classCurrNop }</span></h5>
 							<c:choose>
-								<c:when test="${not empty ccls.classLocation }">
-									<h5>장소 : ${ccls.classLocation }</h5>
+								<c:when test="${not empty ccls.classLocation1 }">
+									<h5>장소 : ${ccls.classLocation1} ${ccls.classLocation2} </h5>
 								</c:when>
 								<c:otherwise>
 									<h5>장소 : 비대면 클래스입니다!</h5>
@@ -289,13 +343,13 @@
 										<button type="button" class="btn btn-secondary btn-lg" >마감!</button>
 									</c:when>
 									<c:when test="${sessionScope.m.memberNickname eq ccls.memberNickname}">
-										<button type="button" id="noPayBtn" class="btn btn-danger btn-lg" >예약하기</button>
+										<button type="button" id="noPayBtn" class="btn btn-danger btn-lg" >수강하기</button>
 									</c:when>
 									<c:when test="${empty sessionScope.m  }">									
 										<a href="/loginFrm.do" class="btn btn-warning btn-lg" >로그인 하세요!</a>
 									</c:when>
 									<c:otherwise>
-										<button type="button" id="payBtn" class="btn btn-primary btn-lg" >예약하기</button>
+										<button type="button" id="payBtn" class="btn btn-primary btn-lg" >수강하기</button>
 									</c:otherwise>
 								</c:choose>
 							</div>

@@ -10,4 +10,13 @@ public class Freeboard {
 	private String freeContent;
 	private String regDate;
 	private int freeReadcount;
+	private String memberNickname;
+	private int freeLikeCount;
+	private int fcCount;
+	private String profilePath;
+	
+	
+	public String getFreeContentBr() {
+	return freeContent.replaceAll("\r\n", "<br>");
+	}
 }

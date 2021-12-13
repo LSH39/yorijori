@@ -58,18 +58,18 @@ public class MypageDao {
 		return (ArrayList<MyCoupon>)list;
 	}
 	/*내 예약내역*/
-	public ArrayList<MyCookingRsrv> myClass(int memberNo) {
-		List<MyCookingRsrv> list = sqlSession.selectList("mypage.myClass",memberNo);
+	public ArrayList<MyCookingRsrv> myClass(String memberNickname) {
+		List<MyCookingRsrv> list = sqlSession.selectList("mypage.myClass",memberNickname);
 		return (ArrayList<MyCookingRsrv>)list;
 	}
 	/*내 클래스후기 조회*/
-	public ArrayList<MyClassReview> myClassReview(int memberNo) {
-		List<MyClassReview> list = sqlSession.selectList("mypage.myclassReview",memberNo);
+	public ArrayList<MyClassReview> myClassReview(String memberNickname) {
+		List<MyClassReview> list = sqlSession.selectList("mypage.myclassReview",memberNickname);
 		return (ArrayList<MyClassReview>)list;
 	}
 	/*내 밀키트 후기조회*/
-	public ArrayList<MyItemReview> myItemReview(int memberNo) {
-		List<MyItemReview> list = sqlSession.selectList("mypage.myitemReview",memberNo);
+	public ArrayList<MyItemReview> myItemReview(String memberNickname) {
+		List<MyItemReview> list = sqlSession.selectList("mypage.myitemReview",memberNickname);
 		return (ArrayList<MyItemReview>)list;
 	}
 	/*역대우승자 List*/

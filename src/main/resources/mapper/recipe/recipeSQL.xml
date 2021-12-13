@@ -133,6 +133,7 @@
  	</select>
  	
  	<!-- 성승민 프로필 연동 레시피 게시물 리스트 -->
+ 	<!-- 
  	<select id="selectAllList" parameterType="_int" resultType="rb">
  		select 
  		 	recipe_no as recipeNo, 
@@ -144,5 +145,22 @@
  		from recipe_board
  		where recipe_writer=#{memberNo}
  		order by recipe_no desc
+ 	</select>
+ 	 -->
+ 	
+ 	<!-- 성승민 프로필 연동 레시피 게시물 + 좋아유 수 리스트 --> 
+ 	<select id="selectAllList" parameterType="_int" resultType="rb">
+ 		select 
+ 			recipe_no as recipeNo, 
+ 			recipe_writer as recipeWriter, 
+ 			filepath, 
+ 			read_count as readCount, 
+ 			count(member_no) likeCnt
+		from recipe_board 
+		left outer join recipe_like
+		using(recipe_no) 
+		where recipe_writer in #{member_No}
+		group by recipe_no, recipe_writer, filepath, read_count
+		order by recipe_no desc
  	</select>
 </mapper>

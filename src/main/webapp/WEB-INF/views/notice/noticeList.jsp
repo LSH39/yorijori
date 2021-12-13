@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,19 +22,19 @@
 				<h1>커뮤니티</h1>
 				<div class="sidemenubox">
 					<ul class="nav flex-column">
-						<li class="nav-item active"><a href="#">공지사항 <span> &gt;</span></a></li>
-						<li class="nav-item"><a href="#">자유게시판 <span> &gt;</span></a></li>
+						<li class="nav-item active"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
+						<li class="nav-item"><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
 					</ul>
 				</div>
 	      	</div>
 	      	<div class="col-10 main-content">
 	      		<div class="main-content-title">
-	      			<h2>공지게시판 <span> 요리조리의 새로운 소식들과 유용한 정보들을 한 곳에서 확인하세요.</span></h2>
+	      			<h2>공지게시판 <span> 요리조리의 새로운 소식과 유용한 정보를 한 곳에서 확인하세요.</span></h2>
 	      			<a href="noticeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
 	      		</div>
-	      		<div class="freeboard-table">
-	      			<div class="freeboard-count">
+	      		<div class="board-table">
+	      			<div class="board-count">
 	      				<h5>총 게시물 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
 	      			</div>
 	      			<table class="table table-hover">
@@ -47,6 +48,18 @@
 	      					</tr>
 	      				</thead>
 	      				<tbody>
+	      					<c:forEach items="${list }" var="n" varStatus="i">
+	      						<tr>
+	      							<td>${start+i.index }</td>
+	      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
+											${n.noticeTitle }
+										</a>
+									</td>
+									<td>${n.noticeWriter }</td>
+									<td>${n.regDate }</td>
+									<td>${n.noticeReadcount }</td>
+								</tr>
+							</c:forEach>
 	      				</tbody>
 	      			</table>
 					<div class="pagi">
@@ -59,11 +72,11 @@
 								<input type="radio" id="searchtype-1" name="searchtype" class="searchtype" value="title">
 								<label for="searchtype-1">제목</label>
 								<input type="radio" id="searchtype-2" name="searchtype" class="searchtype" value="content">
-								<label for="searchtype-1">내용</label>
+								<label for="searchtype-2">내용</label>
 								<input type="radio" id="searchtype-3" name="searchtype" class="searchtype" value="writerId">
-								<label for="searchtype-1">작성자(ID)</label>
+								<label for="searchtype-3">작성자(ID)</label>
 								<input type="radio" id="searchtype-4" name="searchtype" class="searchtype" value="writerNickname">
-								<label for="searchtype-1">작성자(닉네임)</label>
+								<label for="searchtype-4">작성자(닉네임)</label>
 						</div>
 						<div class="col">
 							<input type="search" class="tk-search" name="searchword">
@@ -76,7 +89,6 @@
 	      </div>
       </div>
     </section>
-
   </main><!-- End #main -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

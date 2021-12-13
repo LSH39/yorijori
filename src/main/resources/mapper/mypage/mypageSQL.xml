@@ -105,10 +105,8 @@
 		where recipe_writer=111
 	
 	</select>
-<select id="myClass" parameterType="_int" resultType="mcr">
-		select 
-		cr.rsrv_no as rsrvNo,
-		cc.class_title as classTitle,
+<select id="myClass" parameterType="string" resultType="mcr">
+select 	cc.class_title as classTitle,
 		cc.class_curr_nop as classCurrNop,
 		cc.class_start as classStart,
 		cc.class_end as classEnd ,
@@ -116,13 +114,15 @@
 		cc.class_time as classTime,
 		cc.class_location as classLocation,
 		cc.class_Status as classStatus
-		from cooking_class cc ,
-		cooking_rsrv cr where cr.member_No =111
+        ,cr.rsrv_no as rsrvNo,
+        cr.member_nickname as memberNickname
+     from cooking_rsrv cr,cooking_class cc
+      where cc.class_no =cr.class_no and cr.member_nickname='승민일반'
 
 
 </select>
 <select id="myclassReview" parameterType="_int" resultType="mreview">
-		select r.REVIEW_NO as reviewNo ,
+    select r.REVIEW_NO as reviewNo ,
 		r.REVIEW_FLAG as reviewFlag,
 		r.CLASS_NO as classNo,
 		r.REVIEW_CONTENT as reviewContent,
@@ -130,12 +130,12 @@
 		r.REVIEW_DATE as reviewDate,
 		cook.class_title as classTitle
 		from review r,cooking_class cook
-	    where r.CLASS_NO =cook.class_no and r.member_no=111 and r.review_flag=2
+	    where r.CLASS_NO =cook.class_no and r.member_nickname='테스트16' and r.review_flag=2
 
 
 </select>
 <select id="myitemReview" parameterType="_int" resultType="ireview">
-		select r.REVIEW_NO  as reviewNo,
+	  select r.REVIEW_NO  as reviewNo,
 		r.REVIEW_FLAG as reviewFlag,
 		r.product_NO as productNo,
 		r.REVIEW_CONTENT  as reviewContent,
@@ -143,7 +143,7 @@
 		r.REVIEW_DATE as reviewDate,
 		p.milkit_name as milkitName
 		from review r,product p
-	    where r.product_NO =p.product_no and r.member_no=111 and r.review_flag=1
+	    where r.product_NO =p.product_no and r.member_nickname='테스트16' and r.review_flag=1
 
 
 </select>
@@ -358,6 +358,7 @@ select a.ORDER_OPTION_NO as orderOptionNo,
         member_phone=#{memberPhone},
         member_birth=#{memberBirth},
         postcode=#{postcode},
+        PROFILE_PATH=#{profilePath},
         address_road=#{addressRoad},
         address_detail=#{addressDetail},
         profile_intro=#{profileIntro},

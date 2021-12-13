@@ -241,9 +241,9 @@ main{
 }
 .main-grid{
     display: grid;
-    grid-template-columns: repeat(3, 19vw);
+    grid-template-columns: repeat(3, 15.1vw);
     /*grid-template-rows: 19vw;*/
-    grid-auto-rows: 19vw;
+    grid-auto-rows: 15.1vw;
     gap: 2%;
     height: auto;
 
@@ -344,7 +344,7 @@ main{
 		            <!-- 프로필 사진 연동 되면 이 부분 주석 지워주세요 
 		            <img class="img-profile" src="./resources/img/member/${member.profilePath }" alt="기본프로필">
 		            -->
-		            <img class="img-profile" src="./resources/img/member/profile_basic.png" alt="기본프로필">
+		            <img class="img-profile" src="./resources/upload/member_profile/profile_basic.png" alt="기본프로필">
 		            <div class="profile-info-wrap">
 		                <div class="profile-info-header">
 		                    <h1>${member.memberNickname}</h1>
@@ -354,17 +354,17 @@ main{
 		                    <!-- <button>프로필 수정</button> -->
 		                    <c:choose>
 		                    	<c:when test="${empty sessionScope.m.memberNo }">
-				                    <button>팔로우</button>
+				                    <button style="background-color:#8E44AD;">팔로우</button>
 		                    	</c:when>
 		                    	<c:when test="${member.memberNo ne sessionScope.m.memberNo}">
 		                    		<c:choose>
 		                    			<c:when test="${empty fl }">
-						                    <button class="follow">팔로우</button>
-						                    <button class="unfollow" style="display:none;">언팔로우</button>
+						                    <button class="follow" style="background-color:#ADADAD;">팔로우</button>
+						                    <button class="unfollow" style="display:none;background-color:#8E44AD;">언팔로우</button>
 		                    			</c:when>
 		                    			<c:when test="${not empty fl }">
-						                    <button class="unfollow">언팔로우</button>
-						                    <button class="follow" style="display:none;">팔로우</button>
+						                    <button class="unfollow" style="background-color:#ADADAD;">언팔로우</button>
+						                    <button class="follow" style="display:none;background-color:#8E44AD;">팔로우</button>
 		                    			</c:when>
 		                    		</c:choose>
 		                    	</c:when>
@@ -476,7 +476,7 @@ main{
 		    	        	<a href="/recipeView.do?recipeNo=${rb.recipeNo }">
 		    	        	<div class="second">
 		        	    		<span class="profile-like"></span>
-		            			<span class="like-count">4</span>
+		            			<span class="like-count">${rb.likeCnt }</span>
 		            			<span class="profile-view"></span>
 		            			<span class="view-count">${rb.readCount }</span>
 			            	</div>

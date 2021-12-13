@@ -6,6 +6,7 @@ import lombok.Data;
 public class MyCookingRsrv {
 	
 	private int rsrvNo;
+	private String memberNickname;
 	private String classTitle;
 	private int classCurrNop;
 	private String classStart;

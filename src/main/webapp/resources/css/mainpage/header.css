@@ -83,3 +83,7 @@
 	background-color: rgb(20, 20, 20);
 	color: #f1f1f1;
 }
+
+a:hover{
+	cursor: pointer;
+}

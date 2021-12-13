@@ -81,18 +81,18 @@ public class MypageService {
 		return list;
 	}
 
-	public ArrayList<MyCookingRsrv> myclass(int memberNo) {
-		ArrayList<MyCookingRsrv> list =dao.myClass(memberNo);
+	public ArrayList<MyCookingRsrv> myclass(String memberNickname) {
+		ArrayList<MyCookingRsrv> list =dao.myClass(memberNickname);
 		return list;
 	}
 
-	public ArrayList<MyClassReview> myclassReview(int memberNo) {
-		ArrayList<MyClassReview> list =dao.myClassReview(memberNo);
+	public ArrayList<MyClassReview> myclassReview(String memberNickname) {
+		ArrayList<MyClassReview> list =dao.myClassReview(memberNickname);
 		return list;
 	}
 
-	public ArrayList<MyItemReview> myItemReview(int memberNo) {
-		ArrayList<MyItemReview> list =dao.myItemReview(memberNo);
+	public ArrayList<MyItemReview> myItemReview(String memberNickname) {
+		ArrayList<MyItemReview> list =dao.myItemReview(memberNickname);
 		return list;
 	}
 

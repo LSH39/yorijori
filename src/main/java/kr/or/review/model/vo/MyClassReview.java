@@ -8,8 +8,10 @@ public class MyClassReview {
 	private int reviewFlag;
 	private int classNo;
 	private int productNo;
+	private String memberNickname;
 	private String reviewContent;
 	private int reviewRate;
 	private String reviewDate;
 	private String classTitle;
+	
 }

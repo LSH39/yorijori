@@ -19,6 +19,10 @@
 		<typeAlias type="kr.or.freeboard.model.vo.Freeboard" alias="fb"/>
 		<typeAlias type="kr.or.notice.model.vo.Notice" alias="n"/>
 		<typeAlias type="kr.or.recipecontest.model.vo.RecipeContest" alias="rc"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardComment" alias="fc"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardLike" alias="flike"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardCommentLike" alias="fcl"/>
+		<typeAlias type="kr.or.freeboard.model.vo.FreeboardFile" alias="ff"/>
 		<!-- 태경 alias 끝 -->
 		
 		<!-- 성승민 별칭 추가 -->
