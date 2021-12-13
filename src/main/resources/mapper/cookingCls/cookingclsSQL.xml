@@ -95,5 +95,20 @@ mybatis xml mapper단
 		)
 		
 	</insert>
+
+	
+	<!-- 파일 등록 -->
+	<insert id="insertFile" parameterType="ccpvo">
+		insert into cooking_class_pic values(
+			class_pic_seq.nextval, #{classFileNo}, #{classNo}, #{classFilename}, {classFilepath}
+		)
+	</insert>
+	
+	<!-- 클래스 수정 -->
+	<update id="updateCookingCls" parameterType="ccls">
+		update cooking_class 
+		set class_title=#{classTitle}, class_content=#{classContent}, class_start=#{classStart}, class_end=#{classEnd}, class_price=#{classPrice}, class_nop=#{classNop}, class_start_time=#{classStartTime}, class_end_time=#{classEndTime}, class_location1=#{classLocation1}, class_location2=#{classLocation2}
+		where class_no=#{classNo}
+	</update>
 	
 </mapper>

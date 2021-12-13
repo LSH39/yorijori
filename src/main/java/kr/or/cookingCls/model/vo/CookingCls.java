@@ -1,5 +1,7 @@
 package kr.or.cookingCls.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.Data;
 
 @Data
@@ -21,6 +23,7 @@ public class CookingCls {
 	private String classEndTime;
 	private String classLocation1;
 	private String classLocation2;
+	private ArrayList<CookingClsPicVO> clsFileList;
 	
 	//줄바꿈 적용 시키려고 만든 getter
 	public String getClassContentBr() {
