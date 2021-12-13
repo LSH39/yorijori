@@ -71,5 +71,36 @@
 		    from freeboard f)
    	 		where freeNo=#{freeNo}
 	</select>
+	<insert id="freeboardLike" parameterType="map">
+		insert into freeboard_like values (freelike_seq.nextval, #{freeNo}, #{memberId})
+	</insert>
+	<select id="oneFreeLike" parameterType="map" resultType="_int">
+		select count(*) from freeboard_like
+		where free_no = #{freeNo} and free_liker=#{memberId}
+	</select>
+	<insert id="freeboardComment" parameterType="fc">
+		insert into freeboard_comment values (fc_seq.nextval, #{freeNo}, #{fcWriter}, #{fcContent}, to_char(sysdate, 'yyyy-mm-dd PM HH:MI'))
+	</insert>
+	<update id="rcUpdate" parameterType="_int">
+		update freeboard set free_readcount = free_readcount + 1
+		where free_no = #{freeNo}
+	</update>
+	<delete id="delFreeboardComment" parameterType="_int">
+		delete from freeboard_comment where fc_no = #{fcNo}
+	</delete>
+	<update id="updateFreeboardComment" parameterType="map">
+		update freeboard_comment set fc_content = #{fcContent}
+		where fc_no = #{fcNo}
+	</update>
+	<select id="selectFcLikeList" parameterType="map" resultType="fcl">
+	select 
+        fclike_no as fclikeNo,
+        fc_no as fcNo,
+        fc_liker as fcLiker
+    from
+        fc_like fl 
+        where fl.fc_no in (select fc.fc_no from freeboard_comment fc where fc.free_no=#{freeNo})
+        and fcLiker=#{memberId}
+	</select>
 </mapper>
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.freeboard.model.vo.FreeboardComment;
 import kr.or.freeboard.model.vo.FreeboardFile;
+import kr.or.freeboard.model.vo.FreeboardLike;
 
 @Repository
 public class FreeboardDao {
@@ -41,5 +42,41 @@ public class FreeboardDao {
 	public Freeboard selectOneFree(int freeNo) {
 		Freeboard fb = sqlSession.selectOne("freeboard.selectOneFree", freeNo);
 		return fb;
+	}
+
+	public int insertFreeboardLike(HashMap<String, Object> map) {
+		int result = sqlSession.insert("freeboard.freeboardLike", map);
+		return result;
+	}
+
+	public int selectOneFreeLike(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("freeboard.oneFreeLike", map);
+		return result;
+	}
+
+	public int insertFreeboardComment(FreeboardComment fc) {
+		int result = sqlSession.insert("freeboard.freeboardComment", fc);
+		return result;
+	}
+
+	public int readCountUpdate(int freeNo) {
+		int result = sqlSession.update("freeboard.rcUpdate", freeNo);
+		return result;
+	}
+
+	public int deleteFreeboardComment(int fcNo) {
+		int result = sqlSession.delete("freeboard.delFreeboardComment", fcNo);
+		return result;
+	}
+
+	public int updateFreeboardComment(HashMap<String, Object> map) {
+		int result = sqlSession.update("freeboard.updateFreeboardComment", map);
+		return result;
+	}
+
+
+	public ArrayList<FreeboardLike> selectFcLikeList(HashMap<String, Object> map) {
+		List<FreeboardLike> list = sqlSession.selectList("freeboard.selectFcLikeList", map);
+		return (ArrayList<FreeboardLike>) list;
 	}
 }

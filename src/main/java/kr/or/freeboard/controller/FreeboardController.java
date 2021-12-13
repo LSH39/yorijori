@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.freeboard.model.service.FreeboardService;
+import kr.or.freeboard.model.vo.FreeboardComment;
+import kr.or.freeboard.model.vo.FreeboardCommentLike;
+import kr.or.freeboard.model.vo.FreeboardLike;
 import kr.or.freeboard.model.vo.FreeboardPageData;
 import kr.or.freeboard.model.vo.FreeboardViewData;
 
@@ -36,5 +40,67 @@ public class FreeboardController {
 		model.addAttribute("fb", fvd.getFb());
 		model.addAttribute("profilePath", fvd.getProfilePath());
 		return "freeboard/freeView";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/likeFreeboard.do")
+	public int likeFreeboard(Model model, int freeNo, String memberId) {
+		int result = service.selectOneFreeLike(freeNo, memberId);
+		return result;
+	}
+	
+	@RequestMapping(value="/insertFreeboardLike.do")
+	public String insertFreeboardLike(Model model, int freeNo, String memberId) {
+		int result = service.insertFreeboardLike(freeNo, memberId);
+		if(result>0) {
+			model.addAttribute("msg", "추천 완료");
+		} else {
+			model.addAttribute("msg", "추천 실패....");
+		}
+			model.addAttribute("loc", "/freeView.do?freeNo="+freeNo);
+			return "common/msg";
+	}
+	
+	@RequestMapping(value="/insertFreeboardComment.do")
+	public String insertComment(Model model, FreeboardComment fc) {
+		int result = service.insertFreeboardComment(fc);
+		if(result>0) {
+			model.addAttribute("msg", "등록 완료");
+		} else {
+			model.addAttribute("msg", "등록 실패..");
+		}
+			model.addAttribute("loc", "/freeView.do?freeNo="+fc.getFreeNo());
+			return "common/msg";
+	}
+	
+	@RequestMapping(value="/deleteFc.do")
+	public String deleteComment(Model model, int fcNo, int freeNo) {
+		int result = service.deleteFreeboardComment(fcNo);
+		if(result>0) {
+			model.addAttribute("msg", "삭제 완료");
+		} else {
+			model.addAttribute("msg", "삭제 실패..");
+		}
+			model.addAttribute("loc", "/freeView.do?freeNo="+freeNo);
+			return "common/msg";
+	}
+	
+	@RequestMapping(value="/updateFc.do")
+	public String updateComment(Model model, int fcNo, String fcContent, int freeNo) {
+		int result = service.updateFreeboardComment(fcNo, fcContent);
+		if (result>0) {
+			model.addAttribute("msg", "수정 완료");
+		} else {
+			model.addAttribute("msg", "수정 실패");
+		}
+			model.addAttribute("loc", "/freeView.do?freeNo="+freeNo);
+			return "common/msg";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/fcLikeCheck.do")
+	public ArrayList<FreeboardLike> fcLikeCheck(Model model, String memberId, int freeNo){
+		ArrayList<FreeboardLike> list = service.selectFcLikeList(memberId, freeNo);
+		return list;
 	}
 }

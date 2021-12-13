@@ -32,7 +32,6 @@
 				<div class="view-content col">
 	      			<div class="form-group row">
 	      				<label for="noticeTitle" class="col-sm-2 col-form-label">제목</label>
-	      				<input type="hidden" value="${fb.freeNo }" id="freeNo">
 	      				<div class="col-sm-4">
 	      					<input type="text" readonly class="form-control-plaintext" id="freeTitle" name="freeTitle" value="${fb.freeTitle }">
 	      				</div>
@@ -76,8 +75,8 @@
 						</div>
 						<div class="like-box">
 			      			<div class="like-wrap">
-			      			<label for="freeLike">추천 <span class="likeCount">${fb.freeLikeCount }</span></label>
-			      			<img src="#" style="width:100px; height:100px;" id="freeLike">
+				      			<label for="freeLike">추천 <span class="likeCount">${fb.freeLikeCount }</span></label>
+				      			<img src="resources/img/freeboard/cookhat.png" style="width:40px; height:40px;" id="freeLike">
 			      			</div>
 	      				</div>      			
 	      			</div>
@@ -85,7 +84,20 @@
 	      		<div class="comment-box row">
 	      		<c:choose>
 	      			<c:when test="${empty sessionScope.m }">
-	      				회원만 볼 수 있습니다.
+	      				<table class="comment-table row">
+	      					<tbody>
+	      						<tr>
+	      							<th style="padding-bottom: 20px;">
+	      								댓글 (${fb.fcCount })
+	      							</th>
+	      						</tr>
+	      						<tr>
+	      							<td>
+	      								회원만 볼 수 있습니다. 로그인 해주세요.
+	      							</td>
+	      						</tr>
+	      					</tbody>
+	      				</table>
 	      			</c:when>
 	      			<c:otherwise>
 	      				<div class="comment-table row">
@@ -95,6 +107,20 @@
 	      								<td colspan="2">
 	      								댓글 (${fb.fcCount })
 	      								</td>
+	      							</tr>
+	      							<!-- 댓글 작성하기 -->
+	      							<tr class="write-comment-box">
+	      								<form action="/insertFreeboardComment.do" method="post" class="insert-comment">
+		      								<td class="fc-main col-sm-10">
+		      									<input type="hidden" name="freeNo" id="freeNo" value="${fb.freeNo }">
+		      									<input type="hidden" name="fcWriter" id="fcWriter" value="${sessionScope.m.memberId }">
+			      								<div class="write-comment"><h5>댓글 작성하기</h5></div>
+			      								<textarea rows="5" cols="110" name="fcContent" id="fcContent"></textarea>
+		      								</td>
+		      								<td class="fc-main col-sm comment-submit">
+		      									<button type="submit" class="btn-main submit-comment">댓글 등록하기</button>
+		      								</td>
+	      								</form>
 	      							</tr>
 	      							<c:choose>
 	      							<c:when test="${not empty commentList }">
@@ -116,13 +142,27 @@
 	      													</tr>
 	      												</table>
 	      											</div>
-	      											<div class="fcContent" style="text-align:left;">
+	      											<div class="fcContent" style="text-align:left; padding-bottom: 15px;">
 	      												${fc.fcContent }
 	      											</div>
 	      										</td>
 	      										<td class="fcLike">
-	      											<img src="#" style="width:50px;height:50px;" class="fcLike">
-	      											추천<span class="fcLikeCount">${fc.fcLikeCount }</span>
+	      											<div>
+	      											<img src="resources/img/freeboard/spoonknife.png" style="width:30px;height:30px;" class="fcLike">
+	      											<p>추천 <span class="fcLikeCount">${fc.fcLikeCount }</span></p>
+	      											</div>
+	      											<c:choose>
+	      												<c:when test="${fc.memberNickname eq sessionScope.m.memberNickname }">
+	      													<div>
+	      														<input type="hidden" value="${fc.fcNo }" class="fcNo">
+	      														<span class="comment-upd">수정</span> / <span class="comment-del">삭제</span>
+	      													</div>
+	      													<div>
+	      														<button class="commentup-submit" style="display:none;">등록하기</button>
+	      														<button class="commentup-cancel" style="display:none;">취소</button>
+	      													</div>
+	      												</c:when>
+	      											</c:choose>
 	      										</td>
 	      									</tr>
 	      								</c:forEach>
@@ -137,22 +177,123 @@
 	      		<div class="backTo">
 	      			<a href="/freeUpdateFrm.do?freeNo=${fb.freeNo }"><button class="btn-main btn-update">수정하기</button></a>
 	      			<button class="btn-main btn-delete" onclick='delCheck();'>삭제하기</button>
-	      			<a href="/noticeList.do?reqPage=1"><button class="btn-main">목록으로</button></a>
+	      			<a href="/freeboardList.do?reqPage=1&orderIndex=0"><button class="btn-main">목록으로</button></a>
 	      		</div>
 	      	</div>
 	      </div>
     </section>
   </main><!-- End #main -->
   <script>
+  	//게시글 삭제
   	function delCheck(){
-  		var delNotice_ans = confirm("게시글을 삭제하시겠습니까?");
-  		var noticeNo = $("#freeNo").val();
-  		if(delNotice_ans == true){
-			location.href="/deleteFreeboard.do?freeNo="+noticeNo;
+  		var delBoard_ans = confirm("게시글을 삭제하시겠습니까?");
+  		var boardNo = $("#freeNo").val();
+  		if(delBoard_ans == true){
+			location.href="/deleteFreeboard.do?freeNo="+boardNo;
 		} else {
 			return false;
 		}
   	}
+  	$(function(){
+  		$("#freeLike").on("click", function(){
+  	  		var memberId = $("#fcWriter").val();
+  	  		var freeNo = $("#freeNo").val();
+  	  		if (memberId != null){
+  	  			var like_ans = confirm("게시글을 추천하시겠습니까?");
+  	  			if (like_ans == true){
+  	  				$.ajax({
+  	  					url: "/likeFreeboard.do",
+  	  					type: "get",
+  	  					data: {freeNo:freeNo, memberId:memberId},
+  	  					success: function(data){
+  	  						if(data>0){
+  	  							alert("이미 추천하셨습니다!");
+  	  						} else {
+  	  							location.href="/insertFreeboardLike.do?freeNo="+freeNo+"&memberId="+memberId;	
+  	  					}
+  	  					}
+  	  			
+  	  	  			});
+  	  			} else {
+  	  				return false;
+  	  			}
+  	  		} else {
+  	  			alert("회원만 추천이 가능합니다. 로그인 해주세요.");
+  	  		}
+  	  	});
+  		
+  		//댓글 삭제
+  		$(".comment-del").on("click", function(){
+  			var fcDel_ans = confirm("댓글을 삭제하시겠습니까?");
+  			var freeNo = $("#freeNo").val();
+  			var fcNo = $(this).parent().children("input[type='hidden']").val();
+  			if(fcDel_ans == true){
+  				location.href="/deleteFc.do?fcNo="+fcNo+"&freeNo="+freeNo;
+  			} else {
+  				return false;
+  			}
+  		});
+  		
+  		//댓글 수정 클릭시 화면 변경
+  		$(".comment-upd").on("click", function(){
+  			var fcNo = $(this).parent().children("input[type='hidden']").val();
+  			var fcContentBox = $(this).parents(".fcLike").prev().find(".fcContent");
+  			var fcContent = $(this).parents(".fcLike").prev().find(".fcContent").html();
+  			$(this).parent().hide();
+  			$(this).parent().next().children("button").show();
+  			fcContentBox.empty();
+  			var html = "<textarea rows='5' cols='100' name='fcContentUp' style='text-align:left;'>"+fcContent+"</textarea>";
+  			fcContentBox.html(html);
+  			
+  			//댓글 수정 취소
+  	  		$(".commentup-cancel").on("click", function(){
+  	  			$(this).hide();
+  	  			$(this).prev().hide();
+  	  			$(this).parent().prev().show();
+  	  			fcContentBox.empty();
+  	  			fcContentBox.html(fcContent);
+  	  		});
+  		});
+  		//댓글 수정 완료
+  		$(".commentup-submit").on("click", function(){
+  			var freeNo = $("#freeNo").val();
+  			var fcNo = $(this).parent().prev().children(".fcNo").val();
+  			var fcContent = $(this).parents(".fcLike").prev().find(".fcContent").children("textarea").val();
+  			location.href="/updateFc.do?fcNo="+fcNo+"&fcContent="+fcContent+"&freeNo="+freeNo;
+  		});
+  		
+  		//댓글 추천여부 확인
+  		var memberId = $("#fcWriter").val();
+  		var freeNo = $("#freeNo").val();
+  		if(memberId != null){
+  	 		$.ajax({
+				url: "/fcLikeCheck.do",
+				type: "get",
+				data: {memberId:memberId, freeNo:freeNo},
+				success: function(data){
+					var list = data.list;
+					var fcNoList = new Array();
+					if(list != null){
+						for(var i=0; i<list.length; i++){
+							fcNoList[i] = list[i].fcNo;
+						}
+						var fcNo = $(".fcNo").val();
+						for(var j = 0; j < fcNoList.length; j++){
+							if(fcNo == fcNoList[j]){
+								
+							}
+						}
+					}
+				}
+		
+  			});
+  		}
+  		
+  		
+  		
+  	});
+  	
+  	
   </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

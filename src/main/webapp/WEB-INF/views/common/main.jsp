@@ -24,7 +24,7 @@
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">요린이도 <span>걱정 NO!</span></h2>
               <p class="animate__animated animate__fadeInUp">비건 식단부터 다양한 상황별 요리, 난이도 쉬움 레시피까지 <span style="font-weight:bolder;">요리조리</span>에서 뚝딱 만들어보세요.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
+              <a href="/siteInfo.do" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
             </div>
           </div>
         </div>

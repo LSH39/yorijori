@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import kr.or.freeboard.model.dao.FreeboardDao;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.freeboard.model.vo.FreeboardComment;
+import kr.or.freeboard.model.vo.FreeboardCommentLike;
 import kr.or.freeboard.model.vo.FreeboardFile;
+import kr.or.freeboard.model.vo.FreeboardLike;
 import kr.or.freeboard.model.vo.FreeboardPageData;
 import kr.or.freeboard.model.vo.FreeboardViewData;
 
@@ -74,6 +76,7 @@ public class FreeboardService {
 	}
 
 	public FreeboardViewData selectOneFree(int freeNo) {
+		dao.readCountUpdate(freeNo);
 		ArrayList<FreeboardComment> commentList = dao.selectCommentList(freeNo);
 		ArrayList<FreeboardFile> fileList = dao.selectFileList(freeNo);
 		Freeboard fb = dao.selectOneFree(freeNo);
@@ -83,6 +86,49 @@ public class FreeboardService {
 		fvd.setFb(fb);
 		fvd.setProfilePath(fb.getProfilePath());
 		return fvd;
+	}
+
+	public int insertFreeboardLike(int freeNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("freeNo", freeNo);
+		map.put("memberId", memberId);
+		int result = dao.insertFreeboardLike(map);
+		return result;
+	}
+
+	public int selectOneFreeLike(int freeNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("freeNo", freeNo);
+		map.put("memberId", memberId);
+		int result = dao.selectOneFreeLike(map);
+		return result;
+	}
+
+	public int insertFreeboardComment(FreeboardComment fc) {
+		int result = dao.insertFreeboardComment(fc);
+		return result;
+	}
+
+	public int deleteFreeboardComment(int fcNo) {
+		int result = dao.deleteFreeboardComment(fcNo);
+		return result;
+	}
+
+	public int updateFreeboardComment(int fcNo, String fcContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("fcNo", fcNo);
+		map.put("fcContent", fcContent);
+		int result = dao.updateFreeboardComment(map);
+		return result;
+	}
+
+
+	public ArrayList<FreeboardLike> selectFcLikeList(String memberId, int freeNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("freeNo", freeNo);
+		ArrayList<FreeboardLike> list = dao.selectFcLikeList(map);
+		return list;
 	}
 
 }

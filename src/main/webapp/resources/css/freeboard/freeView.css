@@ -3,17 +3,16 @@
 	text-align: center;
 	padding-bottom: 30px;
 }
-.like-wrap:hover{
+.like-wrap:hover>*{
 	cursor: pointer;
+	transform: scale(1.1);
+	font-weight: bolder;
 }
 .comment-box{
 	padding-top: 20px;
 }
 .comment-table>table>*{
 	border: 1px solid gray;
-}
-.fcLike:hover{
-	cursor: pointer;
 }
 .comment-table>table>tbody>tr:first-child {
 	padding: 20px 0;
@@ -26,4 +25,70 @@
 .fcwriter-profile p{
 	font-size: 14px;
 	color: #ADADAD;
+}
+.fcwriter-profile h6{
+	padding-top: 10px;
+}
+.fcLike img{
+	margin-right: 15px;
+}
+.fcLike>div:first-child{
+	overflow: hidden;
+}
+.fcLike>div:first-child>*{
+	float: left;
+}
+.fcLike>div:first-child:hover>*{
+	cursor: pointer;
+	transform: scale(1.2);
+}
+.comment-upd:hover, .comment-del:hover{
+	font-weight: bolder;
+	cursor: pointer;
+}
+.comment-upd:hover{
+	color: #a2d48e; 
+}
+.comment-del:hover{
+	color: #c3423a;
+}
+.write-comment{
+	padding: 5px 0;
+}
+.write-comment-box{
+	background: #fffff4;
+}
+.comment-submit{
+	vertical-align: middle;
+}
+.submit-comment{
+	width: 140px;
+	border-radius: 50px;
+}
+.commentup-submit{
+	width: 100px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	background: #6bdfe8;
+	color: #454545;
+	margin-top: 30px;
+}
+.commentup-submit:hover{
+	font-weight: bolder;
+	color: #454545;
+	background: #b3ecf0;
+}
+.commentup-cancel{
+	width: 70px;
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	background: #fff3b3;
+	margin-top: 30px;
+}
+.commentup-cancel:hover{
+	font-weight: bolder;
+	color: #fff;
+	background: #ADADAD;
 }

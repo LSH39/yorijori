@@ -31,7 +31,11 @@
 	      	<div class="col-10 main-content">
 	      		<div class="main-content-title">
 	      			<h2>자유게시판 <span> 회원분들의 즐거운 커뮤니티 공간!</span></h2>
-	      			<a href="/freeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
+	      			<c:choose>
+	      				<c:when test="${not empty sessionScope.m }">
+	      					<a href="/freeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
+	      				</c:when>
+	      			</c:choose>
 	      		</div>
 	      		<div class="board-table">
 	      			<div class="board-count">
