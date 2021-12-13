@@ -10,4 +10,12 @@
 		JOIN MEMBER M2 ON M2.MEMBER_NO=P.MILKIT_WRITER
 		WHERE P.MILKIT_DELETE=1 AND M.MEMBER_NO=#{memberNo}
 	</select>
+	
+	<update id="changeCart" parameterType="cart">
+		update cart set product_amount=#{productAmount}, product_price=#{productPrice} where cart_no=#{cartNo}
+	</update>
+	
+	<delete id="deleteCart" parameterType="_int">
+		delete from cart where cart_no=#{cartNo}
+	</delete>
 </mapper>

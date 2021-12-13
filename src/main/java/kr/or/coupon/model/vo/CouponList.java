@@ -9,6 +9,8 @@ public class CouponList {
 	private int couponNo;
 	private int couponUse;
 	private String couponDate;
-	
+	// 추가
+	private String couponName;
+	private String couponDiscount;
 	
 }
