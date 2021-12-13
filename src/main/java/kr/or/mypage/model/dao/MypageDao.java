@@ -1,6 +1,7 @@
 package kr.or.mypage.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +13,7 @@ import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.vo.ContestWin;
+import kr.or.mypage.model.vo.DetailOrder;
 import kr.or.mypage.model.vo.FollowList;
 import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyContest;
@@ -52,11 +54,12 @@ public class MypageDao {
 		List<RecipeBoard> list = sqlSession.selectList("mypage.myRecipe",recipeWriter);
 		return (ArrayList<RecipeBoard>)list;
 	}
-	/*내 쿠폰내역*/
+	/*내 쿠폰내역
 	public ArrayList<MyCoupon> myCoupon(int memberNo) {
 		List<MyCoupon> list = sqlSession.selectList("mypage.myCoupon",memberNo);
 		return (ArrayList<MyCoupon>)list;
 	}
+	*/
 	/*내 예약내역*/
 	public ArrayList<MyCookingRsrv> myClass(String memberNickname) {
 		List<MyCookingRsrv> list = sqlSession.selectList("mypage.myClass",memberNickname);
@@ -88,11 +91,12 @@ public class MypageDao {
 		List<MyItem> list = sqlSession.selectList("mypage.myItem");
 		return (ArrayList<MyItem>) list;
 	}
-	/*좋아요 레시피*/
+	/*좋아요 레시피
 	public ArrayList<LikeRecipe> likeRecipe(int memberNo) {
 		List<LikeRecipe> list = sqlSession.selectList("mypage.likeRecipe");
 		return (ArrayList<LikeRecipe>) list;
 	}
+	*/
 	/*팔로우리스트*/
 	public ArrayList<FollowList> followList(int memberNo) {
 		List<FollowList> list = sqlSession.selectList("mypage.followList");
@@ -113,14 +117,15 @@ public class MypageDao {
 		return sqlSession.update("mypage.upSeller",m);
 	
 	}
-	/*주문내역조회*/
+	/*주문내역조회
 	public ArrayList<Myorder> myOrderList(int memberNo) {
 		List<Myorder> list = sqlSession.selectList("mypage.orderList");
 		return (ArrayList<Myorder>) list;
 	}
+	*/
 	/*주문상세조회*/
 	
-	public Myorder myOrderDetail(int orderNo) {
+	public DetailOrder myOrderDetail(int orderNo) {
 		return sqlSession.selectOne("mypage.orderDetail",orderNo);
 	
 	}
@@ -149,6 +154,62 @@ public class MypageDao {
 		List<Mydm> list = sqlSession.selectList("mypage.dmList");
 		return (ArrayList<Mydm>) list;
 	}
+	/*주문페이징*/
+	public ArrayList<Myorder> selectOrderList(HashMap<String, Object> map) {
+		List<Myorder> list = sqlSession.selectList("mypage.orderList1", map);
+		return (ArrayList<Myorder>) list;
+	}
+	/*주문게시글 총개수*/
+	public int selectTotalCount() {
+		int totalCount = sqlSession.selectOne("mypage.totalCount");
+		return totalCount;
+	}
+	/*내 쿠폰함 페이징*/
+	public ArrayList<MyCoupon> selectCouponList(HashMap<String, Object> map) {
+		List<MyCoupon> list = sqlSession.selectList("mypage.myCouponList",map);
+		return (ArrayList<MyCoupon>)list;
+	}
+	/*쿠폰함 총개수*/
+	public int couponTotalCount() {
+		int totalCount = sqlSession.selectOne("mypage.couponCount");
+		return totalCount;
+	}
+	/*참여대회내역 페이징*/
+	public ArrayList<MyContest> selectContestList(HashMap<String, Object> map) {
+		List<MyContest> list = sqlSession.selectList("mypage.myContestList",map);
+		return (ArrayList<MyContest>)list;
+	}
+	/*대회내역 페이징*/
+	public int contestCount() {
+		int totalCount = sqlSession.selectOne("mypage.contestCount");
+		return totalCount;
+	}
+	/* 내 게시판 페이징*/
+	public ArrayList<Freeboard> myBoardList(HashMap<String, Object> map) {
+		List<Freeboard> list = sqlSession.selectList("mypage.myBoardList",map);
+		return (ArrayList<Freeboard>)list;
+	}
+	/*게시판 게시글수*/
+	public int freeBoardCount() {
+		int totalCount = sqlSession.selectOne("mypage.boardCount");
+		return totalCount;
+	}
+	/* 찜한 레시피*/
+	public ArrayList<LikeRecipe> likeRecipeList(HashMap<String, Object> map) {
+		List<LikeRecipe> list = sqlSession.selectList("mypage.likeRecipe",map);
+		return (ArrayList<LikeRecipe>)list;
+	}
+	/*찜한 레시피 수*/
+	public int recipeCount() {
+		int totalCount = sqlSession.selectOne("mypage.likeRecipeCount");
+		return totalCount;
+	}
+	/*읽지 않은 dm개수*/
+	public Mydm countDm(String dmReceiver) {
+		return sqlSession.selectOne("mypage.countDm",dmReceiver);
+	}
+	
+	
 
 
 }

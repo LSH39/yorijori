@@ -80,6 +80,27 @@ float: left;
 #detail{
     margin-left: 40px;
 }
+.pagenation{
+display: flex;
+margin-left : 500px;
+margin-bottom:30px;
+}
+.pagenation ul{
+align-self: center;
+margin : 0 auto;
+}
+.pagenation a{
+color: #9F90CF;
+background-color :#fff;
+ }
+.pagenation a:hover{
+color: #9F90CF;
+}
+.page-item.active .page-link{
+  color: #fff;
+  background: #9F90CF;
+  border-color : #9F90CF;
+}
 </style>
 <script>
 function orderDetail(orderNo){
@@ -92,11 +113,21 @@ function orderDetail(orderNo){
 <body>
   <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
-       <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />   
+   	  <c:choose>
+		<c:when test="${sessionScope.m.memberLevel==1}">
+      	   <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />	
+        </c:when>
+
+       	 <c:otherwise>
+   	   <jsp:include page="/WEB-INF/views/mypage/sellerNavi.jsp" />	
+        
+       	</c:otherwise>
+       </c:choose>  
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
             <h3 id="h_hotel">주문내역 조회</h3>
             <div id="line2"></div><br>
+            	<h5>총  주문횟수 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>번</h5>
              <c:forEach items="${list}" var="mo" varStatus="i">
              <div class="myorder">
                <div class="foodI">
@@ -109,7 +140,6 @@ function orderDetail(orderNo){
                </div>
                <div class="orders">
         
-                <span class="it_info1"><b id="m">주문수량: </b>&emsp;${mo.orderOptionAmount }개</span>&emsp;<br>
                 <span class="it_info1"><b id="m">결제방식: </b>&emsp;${mo.orderPayOption }</span><br>
                  <span class="it_info1"><b id="m">배송비: </b>&emsp;무료배송</span><br>
                 <span class="it_info1"><b id="m">결제금액:</b>&emsp;${mo.orderPayment }원</span>&emsp;<br>
@@ -127,8 +157,12 @@ function orderDetail(orderNo){
 
              </div>
              </c:forEach>
+             
 
         </div>
+        <div class="pagenation">
+						${pageNavi }
+					</div>
         
         </div>
    

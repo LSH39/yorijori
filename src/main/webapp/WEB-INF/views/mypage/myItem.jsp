@@ -51,7 +51,16 @@
 <body>
    <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
-	 <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />   
+	  <c:choose>
+		<c:when test="${sessionScope.m.memberLevel==1}">
+      	   <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />	
+        </c:when>
+
+       	 <c:otherwise>
+   	   <jsp:include page="/WEB-INF/views/mypage/sellerNavi.jsp" />	
+        
+       	</c:otherwise>
+       </c:choose>   
 		<!-- 메인 콘텐츠 -->
 		<div class="main-content">
 			<h3 id="h_hotel">내가 판매하는 밀키트</h3>

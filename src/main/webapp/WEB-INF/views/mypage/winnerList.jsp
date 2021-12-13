@@ -58,7 +58,7 @@
 .win{
     width: 250px;
     height:400px;
-    background-color:rgb(240, 240, 192);
+    background-color:rgb(240, 240, 191);
     float: left;
     margin-left: 30px;
     margin-right: 10px;
@@ -83,11 +83,25 @@
  overflow: hidden;
  }
 </style>
+<link rel="stylesheet" href="resources/css/mypage/win.css">
 </head>
 <body>
  <jsp:include page="/WEB-INF/views/common/header.jsp" />
+ <script src="resources/summernote/jquery-3.3.1.js"></script>
+     <div>
+    <div class="contest-banner"></div>
+        	<div class="contest-banner-content">
+	      		<h2><span class="thisyr"></span>년 <span class="thismonth"></span>월</h2>
+	      		<h2>이번달 경연대회 우승작은 무엇일까요?</h2><br>
+  		
+	      	</div>
+	      	  	<div class="contest-info">
+	      		<a href="#">
+	      			<button class="month-winner">>>이번달 우승작 보러가기</button>
+	      		</a>
+	      	</div>
     <div class="main">
-       
+
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
             <h3 id="wintt">WINNER LIST</h3>
@@ -112,7 +126,21 @@
         </div>
         
         </div>
+        </div>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+      <script>
+  	$(function(){
+  		var today = new Date();
+  		var year = today.getFullYear();
+  		var month = today.getMonth()+1;		
+  		$(".thisyr").html(year);
+  		$(".thismonth").html(month);
+
+  		
+  		});
+  		
+
+  </script>
 </body>
 </html>

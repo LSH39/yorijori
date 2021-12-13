@@ -59,7 +59,9 @@
         <a href="/loginFrm.do" class="login">로그인</a>
         <a href="/admin.do">관리자 페이지 </a>
         </c:when>
-       	<c:otherwise>
+
+       	 <c:otherwise>
+      
        	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
        	<a href="/logout.do" class="logout">로그아웃</a>
         <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>

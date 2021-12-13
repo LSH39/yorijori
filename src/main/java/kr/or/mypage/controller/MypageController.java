@@ -1,25 +1,30 @@
 package kr.or.mypage.controller;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
-import kr.or.coupon.model.vo.MyCoupon;
-import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.service.MypageService;
 import kr.or.mypage.model.vo.ContestWin;
+import kr.or.mypage.model.vo.DetailOrder;
 import kr.or.mypage.model.vo.FollowList;
 import kr.or.mypage.model.vo.LikeRecipe;
-import kr.or.mypage.model.vo.MyContest;
+import kr.or.mypage.model.vo.MyFreeBoardPageData;
 import kr.or.mypage.model.vo.MyItem;
+import kr.or.mypage.model.vo.MyLikeRecipePageData;
 import kr.or.mypage.model.vo.Mychat;
+import kr.or.mypage.model.vo.MycontestPagedata;
 import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
+import kr.or.mypage.model.vo.MyorderPageData;
 import kr.or.mypage.model.vo.Mysell;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
@@ -43,6 +48,7 @@ public class MypageController {
 		return "mypage/sellerProfile";
 	}
 
+	
 	@RequestMapping(value = "/deleteFrm.do")
 	public String joinFrm() {
 		return "mypage/deleteMember";
@@ -66,12 +72,7 @@ public class MypageController {
 		return "mypage/myRecipe";
 	}
 		
-	@RequestMapping(value = "/mycoupon.do")
-	public String mycoupon(int memberNo, Model model) {
-		ArrayList<MyCoupon> list= service.mycoupon(memberNo);
-		model.addAttribute("list", list);
-		return "mypage/myCoupon";
-	}
+
 	@RequestMapping(value = "/myclass.do")
 	public String myclass(String memberNickname, Model model) {
 		ArrayList<MyCookingRsrv> list= service.myclass(memberNickname);
@@ -96,36 +97,21 @@ public class MypageController {
 		model.addAttribute("list", list);
 		return "mypage/winnerList";
 	}
-	@RequestMapping(value = "/myContest.do")
-	public String myContest(int recipeWriter,Model model) {
-		ArrayList<MyContest> list= service.myContest(recipeWriter);
-		model.addAttribute("list", list);
-		return "mypage/myContest";
-	}
+
 	@RequestMapping(value = "/myItem.do")
 	public String myItem(int milkitWriter,Model model) {
 		ArrayList<MyItem> list= service.myItem(milkitWriter);
 		model.addAttribute("list", list);
 		return "mypage/myItem";
 	}
-	@RequestMapping(value = "/likeRecipe.do")
-	public String likeRecipe(int memberNo,Model model) {
-		ArrayList<LikeRecipe> list= service.likeRecipe(memberNo);
-		model.addAttribute("list", list);
-		return "mypage/likeRecipe";
-	}
+
 	@RequestMapping(value = "/followList.do")
 	public String followList(int memberNo,Model model) {
 		ArrayList<FollowList> list= service.followList(memberNo);
 		model.addAttribute("list", list);
 		return "mypage/myFollow";
 	}
-	@RequestMapping(value = "/myBoard.do")
-	public String myBoard(String freeWriter,Model model) {
-		ArrayList<Freeboard> list= service.myBoard(freeWriter);
-		model.addAttribute("list", list);
-		return "mypage/myBoard";
-	}
+
 	@RequestMapping(value = "/myChatList.do")
 	public String myChatList(String chatRecive,Model model) {
 		ArrayList<Mychat> list= service.myChatList(chatRecive);
@@ -147,24 +133,72 @@ public class MypageController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
-	@RequestMapping(value = "/myOrder.do")
-	public String myOrderList(int memberNo,Model model) {
-		ArrayList<Myorder> list= service.myOrderList(memberNo);
-		model.addAttribute("list", list);
+
+	@RequestMapping(value = "/myOrderList.do")
+	public String myOrderList1(int memberNo,Model model,int reqPage) {
+		MyorderPageData mpd =service.orderList(reqPage);
+		model.addAttribute("list", mpd.getList());
+		model.addAttribute("pageNavi", mpd.getPageNavi());
+		model.addAttribute("start", mpd.getStart());
+		model.addAttribute("totalCount", mpd.getTotalCount());
 		return "mypage/myOrder";
+	
+	}
+
+	@RequestMapping(value = "/mycouponList.do")
+	public String mycoupon(int memberNo, Model model,int reqPage) {
+		MyCouponPageData cpd =service.mycouponList(reqPage);
+		model.addAttribute("list", cpd.getList());
+		model.addAttribute("pageNavi", cpd.getPageNavi());
+		model.addAttribute("start", cpd.getStart());
+		model.addAttribute("totalCount", cpd.getTotalCount());
+		
+		return "mypage/myCoupon";
+	}
+	@RequestMapping(value = "/myContestList.do")
+	public String myContestList(int recipeWriter, Model model,int reqPage) {
+		MycontestPagedata ctpd =service.mycontestList(reqPage);
+		model.addAttribute("list", ctpd.getList());
+		model.addAttribute("pageNavi", ctpd.getPageNavi());
+		model.addAttribute("start", ctpd.getStart());
+		model.addAttribute("totalCount", ctpd.getTotalCount());
+		
+		return "mypage/myContest";
 	}
 	
-	@RequestMapping(value = "/myOrderDetail.do")
-	public String myOrderDetail(int orderNo, Model model) {
-		Myorder mo = service.myOrderDetail(orderNo);
-		model.addAttribute("mo", mo);
-		return "mypage/orderDetail";
+	@RequestMapping(value = "/myBoardList.do")
+	public String myBoardList(String freeWriter, Model model,int reqPage) {
+		MyFreeBoardPageData fpd =service.myfreeBoardList(reqPage);
+		model.addAttribute("list", fpd.getList());
+		model.addAttribute("pageNavi", fpd.getPageNavi());
+		model.addAttribute("start", fpd.getStart());
+		model.addAttribute("totalCount", fpd.getTotalCount());
+		
+		return "mypage/myBoard";
 	}
-	
+	/*
+	@RequestMapping(value = "/likeRecipe.do")
+	public String likeRecipe(int memberNo,Model model) {
+		ArrayList<LikeRecipe> list= service.likeRecipe(memberNo);
+		model.addAttribute("list", list);
+		return "mypage/likeRecipe";
+	}*/
+	@RequestMapping(value = "/myLikeList.do")
+	public String myLikeList(int memberNo, Model model,int reqPage) {
+		MyLikeRecipePageData rpd =service.likeRecipeList(reqPage);
+		model.addAttribute("list", rpd.getList());
+		model.addAttribute("pageNavi", rpd.getPageNavi());
+		model.addAttribute("start", rpd.getStart());
+		model.addAttribute("totalCount", rpd.getTotalCount());
+		
+		return "mypage/likeRecipe";
+	}
 	@RequestMapping(value = "/detailOrder.do")
 	public String detailOrder(int orderNo, Model model) {
 		ArrayList<Myorder> list= service.orderDetail(orderNo);
 		model.addAttribute("list", list);
+		DetailOrder dd = service.myOrderDetail(orderNo);
+		model.addAttribute("dd", dd);
 		return "mypage/orderDetail";
 	}
 	
@@ -213,4 +247,50 @@ public class MypageController {
 		model.addAttribute("list", list);
 		return "mypage/dmList";
 	}
+	
+	@RequestMapping(value = "/countDm.do")
+	public String countDm(String dmReceiver, Model model) {
+		Mydm md = service.countDm(dmReceiver);
+		model.addAttribute("md", md);
+		return "mypage/memberNavi";
+	}
+	/*
+	@RequestMapping(value = "/myBoard.do")
+	public String myBoard(String freeWriter,Model model) {
+		ArrayList<Freeboard> list= service.myBoard(freeWriter);
+		model.addAttribute("list", list);
+		return "mypage/myBoard";
+	}*/
+	/*
+	@RequestMapping(value = "/myOrderDetail.do")
+	public String myOrderDetail(int orderNo, Model model) {
+		Myorder mo = service.myOrderDetail(orderNo);
+		model.addAttribute("mo", mo);
+		
+		return "mypage/orderDetail";
+	}
+	*/
+	/*
+	@RequestMapping(value = "/mycoupon.do")
+	public String mycoupon(int memberNo, Model model) {
+		ArrayList<MyCoupon> list= service.mycoupon(memberNo);
+		model.addAttribute("list", list);
+		return "mypage/myCoupon";
+	}*/
+	/*
+	@RequestMapping(value = "/myContest.do")
+	public String myContest(int recipeWriter,Model model) {
+		ArrayList<MyContest> list= service.myContest(recipeWriter);
+		model.addAttribute("list", list);
+		return "mypage/myContest";
+	}*/
+	/*
+	@RequestMapping(value = "/myOrder.do")
+	public String myOrderList(int memberNo,Model model) {
+		ArrayList<Myorder> list= service.myOrderList(memberNo);
+		model.addAttribute("list", list);
+		return "mypage/myOrder";
+	}
+	*/
+
 }

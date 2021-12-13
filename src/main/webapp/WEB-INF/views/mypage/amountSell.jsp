@@ -134,35 +134,16 @@
 <body>
    <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
-        <div class="main-left-box">
-            <h3>마이페이지</h3>
-            <ul>
-                <li>
-                    <span>MY INFO</span>
-                    <ul class="subnavi">
-                        <li><a href="/introHotel">내정보 조회 및 수정<span>&gt;</span></a></li>
-                        <li><a href="/membership" id="lf-click">멤버십 정보<span>&gt;</span></a></li>
-                        <li><a href="/location">쿠폰함<span>&gt;</span></a></li>
-                        <li><a href="/location">회원탈퇴<span>&gt;</span></a></li>
-                        <li><a href="/location">오시는 길<span>&gt;</span></a></li>
-                        <li><a href="/location">오시는 길<span>&gt;</span></a></li>
-                        <li><a href="/location">오시는 길<span>&gt;</span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <span>MY WRITE</span>
-                    <ul class="subnavi">
-                        <li><a href="/introHotel">내정보 조회 및 수정<span>&gt;</span></a></li>
-                        <li><a href="/membership" id="lf-click">멤버십 정보<span>&gt;</span></a></li>
-                        <li><a href="/location">쿠폰함<span>&gt;</span></a></li>
-                        <li><a href="/location">회원탈퇴<span>&gt;</span></a></li>
-                        <li><a href="/location">오시는 길<span>&gt;</span></a></li>
-                        <li><a href="/location">오시는 길<span>&gt;</span></a></li>
-                        <li><a href="/location">오시는 길<span>&gt;</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+  	 <c:choose>
+		<c:when test="${sessionScope.m.memberLevel==1}">
+      	   <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />	
+        </c:when>
+
+       	 <c:otherwise>
+   	   <jsp:include page="/WEB-INF/views/mypage/sellerNavi.jsp" />	
+        
+       	</c:otherwise>
+       </c:choose>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
             <h3 id="h_hotel">판매량 통계</h3>

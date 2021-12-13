@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -22,7 +25,7 @@
 .orD{
      width:800px;
     height:2000px;
-    background-color:aquamarine;
+   
         }
 
 .or{
@@ -62,15 +65,54 @@
 .orl{
     width:800px;
     height:800px; 
+    
 }
 #sort{
-    width:20px;
-    height:10px;
+    width:100px;
+    height:100px;
 }
 .tb2-th{
  text-align:center;
+
  }
+ 
+ .tb2-tr2,.tb-tr{
+ background-color: #F7F7E5;
+
+  }
+ .tb-trs{
+ display:none;
+  background-color: #F7F7E5;
+ }
+  .tt{
+   text-align:center;
+
+
+  }
+  #re{
+  text-align:center;
+  }
+  .tb2-td{
+    text-align:center;
+  }
 </style>
+    <script>
+        $(function(){
+     
+        $("#clicks").click(function(){
+            var idx = $("#clicks").index(this);
+                 var contents = $(".tb-trs");
+          
+                 if($('.tb-trs').eq(idx).is(":visible")){
+                    contents.eq(idx).hide();
+                   
+                }else{
+                    contents.eq(idx).show();
+                }
+        });
+  
+    });
+    </script>
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -85,16 +127,16 @@
                
                     <table border="1" class="orl">
                    
-                        <tr>
-                        <th class="tb2-th" colspan="3">주문번호:${mo.orderNo}</th>
-                        <td class="tb2-td"><img src="img/s.jpeg" id="sort" ></td>
+                        <tr >
+                        <th class="tt" colspan="3">주문번호:${dd.orderNo}</th>
+                       
                     </tr>
                          <c:forEach items="${list}" var="mo" varStatus="i">
                     <tr class="tb2-tr2">
-                        <td class="tb2-td">${mo.filepath}</td>
+                        <td class="tb2-td"><img src="resources/img/mypage/house.png" id="sort" ></td>
                         <td class="tb2-td">${mo.milkitName}</td>
-                        <td class="tb2-td">${mo.milkitPrice}</td>
-                        <td class="tb2-td">${mo.orderOptionAmount}</td>
+                        <td class="tb2-td">${mo.milkitPrice}원</td>
+                        <td class="tb2-td">${mo.orderOptionAmount}개</td>
                     </tr>
                   </c:forEach>
                     
@@ -103,52 +145,53 @@
                 </div>
                 <div class="pay">
                     <table border="1" class="ppa">
+                   
                         <tr>
-                        <th class="tb2-th" colspan="2">결제정보<img src="img/s.jpeg" id="sort" ></th>
+                    <th class="tb2-th" colspan="2">결제정보 </th>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">상품금액</td>
-                        <td class="tb2-td">${mo.orderPrice}원</td>
+                        <td class="tb2-td">${dd.orderPrice}원</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">배송비</td>
                         <td class="tb2-td">무료배송</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">할인금액</td>
-                        <td class="tb2-td">-${mo.orderSale}원</td>
+                        <td class="tb2-td">-${dd.orderSale}원</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">결제금액</td>
-                        <td class="tb2-td">${mo.orderPayment}원</td>
+                        <td class="tb2-td">${dd.orderPayment}원</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">결제번호</td>
-                        <td class="tb2-td">${mo.impUid}</td>
+                        <td class="tb2-td">${dd.impUid}</td>
                     </tr>
-                   
+               
                     </table>
                 </div>
                 <div class="oin">
                     <table border="1" class="ppa">
                         <tr>
-                        <th class="tb2-th" colspan="2">주문정보<img src="img/s.jpeg" id="sort" ></th>
+                        <th class="tb2-th" colspan="2">주문정보</th>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">주문번호</td>
-                        <td class="tb2-td">${mo.orderNo}</td>
+                        <td class="tb2-td">${dd.orderNo}</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">주문자명</td>
-                        <td class="tb2-td">${mo.orderName}</td>
+                        <td class="tb2-td">${dd.orderName}</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">주문자이메일</td>
-                        <td class="tb2-td">${mo.orderEmail}</td>
+                        <td class="tb2-td">${dd.orderEmail}</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">주문자 연락처</td>
-                        <td class="tb2-td">${mo.orderPhone}</td>
+                        <td class="tb2-td">${dd.orderPhone}</td>
                     </tr>
                  
                    
@@ -157,23 +200,23 @@
                 <div class="ship">
                     <table border="1" class="ppa">
                         <tr>
-                        <th class="tb2-th" colspan="2">배송정보<img src="img/s.jpeg" id="sort" ></th>
+                        <th class="tb2-th" colspan="2">배송정보</th>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">받는분</td>
-                        <td class="tb2-td">${mo.orderName}</td>
+                        <td class="tb2-td">${dd.orderName}</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">우편번호</td>
-                        <td class="tb2-td">${mo.orderPostcode}</td>
+                        <td class="tb2-td">${dd.orderPostcode}</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">도로명주소</td>
-                        <td class="tb2-td">${mo.orderAddrRoad}</td>
+                        <td class="tb2-td">${dd.orderAddrRoad}</td>
                     </tr>
-                    <tr class="tb2-tr2">
+                    <tr class="tb-tr">
                         <td class="tb2-td">상세주소</td>
-                        <td class="tb2-td">${mo.orderAddrDetail}</td>
+                        <td class="tb2-td">${dd.orderAddrDetail}</td>
                     </tr>
                  
                    
@@ -182,11 +225,11 @@
                 <div class="extra">
                     <table border="1" class="no">
                         <tr>
-                        <th class="tb2-th">요청사항<img src="img/s.jpeg" id="sort" ></th>
+                        <th class="tb2-th">요청사항<button id="clicks">↓</button></th>
                     </tr>
                        
-                    <tr class="tb2-tr2">
-                        <td class="tb2-td">${mo.orderRequest}</td>
+                    <tr class="tb-trs">
+                        <td class="tb2-td" id="re">${dd.orderRequest}</td>
                     </tr>
                     
                     </table>
