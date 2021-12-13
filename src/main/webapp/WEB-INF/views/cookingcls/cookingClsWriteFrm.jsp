@@ -30,7 +30,7 @@
 			<h1>요리 클래스 등록</h1>
 		</div>
 		<div>
-			<form action="/cookingClsWrite.do" method="get">
+			<form action="/cookingClsWrite.do" method="post" enctype="multipart/form-data">
 				<!-- 전문가 닉네임 히든값 -->
 				<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }">
 				<h5>강의 제목</h5>
@@ -38,6 +38,7 @@
 				<h5>강의 내용</h5>
 				<textarea name="classContent" class="form-control" id="classContent" cols="30" rows="10"></textarea>
 				<br>
+				글자수 : <span id="currByte">0</span>/3000bytes)
 				<h5>강의 장소(입력 안할시 비대면)</h5>
 				<input type="text" name="classLocation1" id="classLocation1" maxlength="100">
 				<button type="button" id="addrSearch" class="btn btn-primary">주소검색</button>
@@ -56,7 +57,6 @@
 				<input type="date" name="classStart" id="classStart"><br><br>
 				<h5>클래스 종료일</h5>
 				<input type="date" name="classEnd" id="classEnd"><br><br>
-				<input type="file">
 				<input
 					type="submit" value="등록" class="btn btn-danger">
 				<button type="button" id="chkHidden" class="btn btn-primary">히든값 확인 버튼</button>
@@ -183,10 +183,64 @@
 				lang : "ko-KR",
 				callbacks : {
 					onImageUpload : function(files){
-						uploadImage(files[0],this);
+						//uploadImage(files[0],this);
+						
+						for(let i = files.length-1 ; i>=0 ; i--){
+							uploadImage(files[i], this);
+						}
+						
+					},
+					onChange : function(e){
+						setTimeout(function(){
+		        	    	let maxByte = 3000; //varchar2 3000이니까 3000
+        		    		let classContent = $("#classContent").val();
+			            	let classContentLen = classContent.length;
+            				let currByte = 0;
+            	
+			            	console.log(classContent);
+            				console.log(classContentLen);
+            				
+                            for(let i=0; i<classContentLen; i++){
+                                let charEach = classContent.charAt(i);
+                                let charUni = escape(charEach) //유니코드 형식으로 변환 u1234 이런식
+                                if(charUni.length>4){
+                                    // 한글 : oracle 11xe는 한글이 3Byte
+                                    currByte += 3;
+                                }else{
+                                    // 영문,숫자,특수문자 : 1Byte
+                                    currByte += 1;
+                                }
+                            }
+                            
+                            if(currByte > maxByte){
+                            	$("#currByte").html(currByte);
+                            	$("#currByte").css("color", "red");
+                            }else{
+                            	$("#currByte").html(currByte);
+                            	$("#currByte").css("color", "blue");                            	
+                            }
+							
+						}, 200);
 					}
 				}
             });
+            
+            function uploadImage(file, el) {
+    			data = new FormData();
+    			data.append("file", file);
+    			$.ajax({
+    				data : data,
+    				type : "POST",
+    				url : "/uploadClsImg.do",
+    				contentType : false,
+    				enctype : 'multipart/form-data',
+    				processData : false,
+    				success : function(data) {
+    					$(el).summernote('editor.insertImage', data.url);
+    				}
+    			});
+    		}
+            
 		});
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

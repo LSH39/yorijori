@@ -27,6 +27,7 @@
 		
 		<!-- 성승민 별칭 추가 -->
 		<typeAlias type="kr.or.cookingCls.model.vo.CookingCls" alias="ccls"/>
+		<typeAlias type="kr.or.cookingCls.model.vo.CookingClsPicVO" alias="ccpvo"/>
 		<typeAlias type="kr.or.cookingRsrv.model.vo.CookingRsrv" alias="crsrv"/>
 		<typeAlias type="kr.or.dm.model.vo.Dm" alias="dm"/>
 		<typeAlias type="kr.or.review.model.vo.Review" alias="review"/>
