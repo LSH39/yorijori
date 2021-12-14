@@ -310,7 +310,7 @@
 		});
   	    
   	}else{
-  	    if(getCookie("login")==0 && ${ not empty sessionScope.m }){
+  		if(getCookie("login")==0 && ${ not empty sessionScope.m }){
   	        
   	    	setCookie("login","1","1");
   	      $.ajax({
