@@ -16,6 +16,12 @@ text-align: center;}
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
     <div class="container">
+    
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+    
+    
         <h2>쿠폰 리스트</h2>
     
     
@@ -112,6 +118,11 @@ text-align: center;}
     <div class="pagenation" style="">
     ${pageNavi }
     </div>
+    
+    </div>
+    <div class="col-md-1"></div>
+    </div>
+    
     </div>
     
     <script>

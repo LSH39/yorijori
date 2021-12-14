@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import kr.or.milkit.model.vo.product;
+import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.service.RecipeService;
 import kr.or.recipe.model.vo.FileVo;
 import kr.or.recipe.model.vo.Material;

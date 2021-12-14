@@ -1,0 +1,136 @@
+.wrap{
+    width: 1100px;
+    margin: 0 auto;
+}
+.content{
+    margin: 100px 0px 100px 0px;
+}
+.container input[type="checkbox"]+span {
+    display: inline-block;
+}
+.center label:first-child{
+    height: 30px;
+    font-weight: bold;
+}
+#top{
+    border-bottom: 3px solid #EEF1F4;
+    padding: 10px 0px 10px 0px;
+}
+#deleteCart{
+    width: 100px;
+    height: 30px;
+    float: right;
+    margin: 0 auto;
+    border-width: 2px;
+}
+#cart, #bottomTbl{
+    width: 1100px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+#cart th{
+    text-align: center;
+    height: 50px;
+    padding: 5px;
+    border-bottom: 3px solid #EEF1F4;
+}
+#cart td{
+    padding: 10px;
+    border-bottom: 3px solid #EEF1F4;
+}
+#cart tr>td:first-child{
+    width: 30px;
+    text-align: center;
+}
+#cart tr>td:nth-child(2), #cart tr>td:nth-child(4), #cart tr>td:last-child{
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+}
+#cart img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.infoTd>p:nth-child(n+2){
+    font-weight: bold;
+}
+.infoTd>p{
+    margin: 2px;
+}
+.count{
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.less, .more{
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    vertical-align:bottom;
+    cursor: pointer;
+}
+.less{
+    background: url(/resources/img/cart/cart_less_g.png);
+    background-size: cover;
+}
+.less:hover{
+    background: url(/resources/img/cart/cart_less_p.png);
+    background-size: cover;
+}
+.more{
+    background: url(/resources/img/cart/cart_more_g.png);
+    background-size: cover;
+}
+.more:hover{
+    background: url(/resources/img/cart/cart_more_p.png);
+    background-size: cover;
+}
+#bottomTbl{
+    border-top: 3px solid #8E44AD;
+    border-bottom: 3px solid #8E44AD;
+    margin-top: 50px;
+}
+#bottomTbl *{
+    text-align: center;
+    font-weight: bold;
+}
+#bottomTbl tr:first-child>td:nth-child(-n+5){
+    font-weight: normal;
+}
+#bottomTbl td:first-child{
+    padding-left: 100px;
+}
+#bottomTbl td:last-child{
+    width: 30%;
+    padding-right: 100px;
+}
+#bottomTbl tr:first-child>td{
+    padding-top: 20px;
+}
+#bottomTbl tr:last-child>td{
+    padding-bottom: 20px;
+}
+#total{
+    color: #8E44AD;
+    font-size: 20px;
+}
+#bottomTbl img{
+    width: 20px;
+    height: 20px;
+}
+.bottom{
+    text-align: center;
+}
+#payBtn{
+    margin: 50px auto;
+}
+.changeCart{
+    width: 80px;
+    height: 25px;
+    font-weight: normal;
+    font-size: 12px;
+}
+.none{
+    display: none;
+}

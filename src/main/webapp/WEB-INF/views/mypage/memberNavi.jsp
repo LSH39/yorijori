@@ -80,6 +80,16 @@
     font-size: 10px;
     display: none;
 }
+.subnavi>li>a:hover{
+		 background-color:rgb(177, 109, 204);
+		 }
+.subnavi>li>a:focus{
+		 background-color:rgb(177, 109, 204);
+		 }
+#count{
+color:red;
+
+}
 </style>
 </head>
 <body>
@@ -89,23 +99,23 @@
 				<li>
 					<ul class="subnavi">
 						<li><a href="/mypage.do?memberId=${sessionScope.m.memberId }">내정보 조회 및 수정<span>&gt;</span></a></li>
-						<li><a href="/myOrder.do?memberNo=${sessionScope.m.memberNo }" id="lf-click">내 구매내역<span>&gt;</span></a></li>
-						<li><a href="/mycoupon.do?memberNo=${sessionScope.m.memberNo }">쿠폰함<span>&gt;</span></a></li>
+						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 구매내역<span>&gt;</span></a></li>
+						<li><a href="/mycouponList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">쿠폰함<span>&gt;</span></a></li>
 						<li><a href="/deleteFrm.do?">회원탈퇴<span>&gt;</span></a></li>
-						<li><a href="/myContest.do?recipeWriter=${sessionScope.m.memberNo }">참여한 경연대회<span>&gt;</span></a></li>
+						<li><a href="/myContestList.do?recipeWriter=${sessionScope.m.memberNo }&reqPage=1">참여한 경연대회<span>&gt;</span></a></li>
 						<li><a href="/myclass.do?memberNickname=${sessionScope.m.memberNickname}">요리클래스 예약내역<span>&gt;</span></a></li>
-						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span></a></li>
+						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">1쪽지</b></a></li>
 						<li><a href="/myChatList.do?chatRecive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
 						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
-						<li><a href="/likeRecipe.do?memberNo=${sessionScope.m.memberNo }">찜한 레시피<span>&gt;</span></a></li>
+						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">찜한 레시피<span>&gt;</span></a></li>
 					</ul>
 				</li>
-				<li><span>my write</span>
+				<li><span><b>내 작성글</b></span>
 					<ul class="subnavi">
 					    <li><a href="/myRecipe.do?recipeWriter=${sessionScope.m.memberNo }">내 작성 레시피<span>&gt;</span></a></li>
 						<li><a href="/myitemReview.do?memberNo=${sessionScope.m.memberNickname }">구매 밀키트후기<span>&gt;</span></a></li>
 						<li><a href="/myclassReview.do?memberNo=${sessionScope.m.memberNickname }">작성 클래스후기<span>&gt;</span></a></li>
-						<li><a href="/myBoard.do?freeWriter=${sessionScope.m.memberId }" id="lf-click">내 작성 게시글<span>&gt;</span></a></li>
+						<li><a href="/myBoardList.do?freeWriter=${sessionScope.m.memberId }&reqPage=1" id="lf-click">내 작성 게시글<span>&gt;</span></a></li>
 						
 
 					</ul></li>

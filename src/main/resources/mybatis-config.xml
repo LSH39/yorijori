@@ -9,10 +9,12 @@
 		<typeAlias type="kr.or.admin.model.vo.Member2" alias="m2"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
 		<typeAlias type="kr.or.admin.model.vo.Prev" alias="prev"/>
+		<typeAlias type="kr.or.admin.model.vo.VisitCount" alias="vc"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
 		<typeAlias type="kr.or.order.model.vo.Order" alias="o"/>
+		<typeAlias type="kr.or.order.model.vo.OrderOption" alias="oo"/>
 		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
 		<!-- 태경 alias -->
 		<typeAlias type="kr.or.freeboard.model.vo.Freeboard" alias="fb"/>
@@ -26,6 +28,7 @@
 		
 		<!-- 성승민 별칭 추가 -->
 		<typeAlias type="kr.or.cookingCls.model.vo.CookingCls" alias="ccls"/>
+		<typeAlias type="kr.or.cookingCls.model.vo.CookingClsPicVO" alias="ccpvo"/>
 		<typeAlias type="kr.or.cookingRsrv.model.vo.CookingRsrv" alias="crsrv"/>
 		<typeAlias type="kr.or.dm.model.vo.Dm" alias="dm"/>
 		<typeAlias type="kr.or.review.model.vo.Review" alias="review"/>
@@ -39,7 +42,8 @@
 		<typeAlias type="kr.or.recipe.model.vo.RecipeContent" alias="rcontent"/>
 		<typeAlias type="kr.or.recipe.model.vo.RecipeReport" alias="report"/>
 		<typeAlias type="kr.or.recipe.model.vo.RecipeLike" alias="rlike"/>
-		
+		<typeAlias type="kr.or.milkit.model.vo.Product" alias="product"/>
+		<!-- 김민지 별칭 끝 -->
 
 		<typeAlias type="kr.or.mypage.model.vo.Follow" alias="fl"/>
 		<typeAlias type="kr.or.mypage.model.vo.ContestWin" alias="ct"/>
@@ -53,10 +57,14 @@
 	     <typeAlias type="kr.or.mypage.model.vo.MyItem" alias="mi"/>
 	     <typeAlias type="kr.or.mypage.model.vo.LikeRecipe" alias="lr"/>
 	     <typeAlias type="kr.or.mypage.model.vo.FollowList" alias="fol"/>
-	     <typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc"/>
-	      <typeAlias type="kr.or.mypage.model.vo.Myorder" alias="mo"/>
-	        <typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms"/>
-	          <typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md"/>
+		<typeAlias type="kr.or.mypage.model.vo.Mychat" alias="mc" />
+		<typeAlias type="kr.or.mypage.model.vo.Myorder" alias="mo" />
+		<typeAlias type="kr.or.mypage.model.vo.Mysell" alias="ms" />
+		<typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md" />
+		<typeAlias type="kr.or.mypage.model.vo.DetailOrder" alias="dd" />
+		<typeAlias type="kr.or.milkit.model.vo.Product" alias="pd" />
+		       
+
 	</typeAliases>
 </configuration>
 

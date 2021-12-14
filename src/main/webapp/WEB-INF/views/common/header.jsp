@@ -59,7 +59,9 @@
         <a href="/loginFrm.do" class="login">로그인</a>
         <a href="/admin.do">관리자 페이지 </a>
         </c:when>
-       	<c:otherwise>
+
+       	 <c:otherwise>
+      
        	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
        	<a href="/logout.do" class="logout">로그아웃</a>
         <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
@@ -83,8 +85,8 @@
           <li><a class="nav-link scrollto" href="#" id="show-category">레시피</a></li>
           <li class="dropdown"><a href="#"><span>밀키트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">신상품</a></li>
-              <li><a href="#">베스트 상품</a></li>
+              <li><a href="/milkitList.do">신상품</a></li>
+              <li><a href="/milkitList.do">베스트 상품</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto " href="/cookingClsList.do?reqPage=1">클래스</a></li>
@@ -264,5 +266,69 @@
   		}
   		
   	}
+  	//방문자수 기록용 쿠키 스크립트
+  	function setCookie(cname,cvalue,exdays){
+  	    var d = new Date();
+  	    d.setTime(d.getTime()+(exdays*24*60*1000));
+  	    var expires = "expires=" +d.toUTCString();
+  	    document.cookie = cname+"="+cvalue+";"+expires +"; path=/";
+  	}
+  	function getCookie(cname){
+  	    var name = cname+"=";
+  	    var decodedCookie = decodeURIComponent(document.cookie);
+  	    var ca = decodedCookie.split(';');
+  	    for(var i =0; i<ca.length;i++){
+  	        var c = ca[i];
+  	        while(c.charAt(0)==' '){
+  	            c = c.substring(1);
+  	        }
+  	        if(c.indexOf(name)==0){
+  	            return c.substring(name.length,c.length);
+  	        }
+  	    }
+  	    return "";
+  	}
+
+	
+  	if(getCookie("visit")==0){
+  	    
+  		setCookie("visit","1","1");
+
+  	  $.ajax({
+			url:"visitCount.do",
+			type:"post",
+			data : {},
+			success: function(data){
+				
+				
+			},
+			error:function(){
+				console.log("err");
+			}
+			
+			
+		});
+  	    
+  	}else{
+  	    if(getCookie("login")==0 && ${ not empty sessionScope.m }){
+  	        
+  	    	setCookie("login","1","1");
+  	      $.ajax({
+  			url:"loginCount.do",
+  			type:"post",
+  			data : {},
+  			success: function(data){
+  				
+  				
+  			},
+  			error:function(){
+  				console.log("err");
+  			}
+  			
+  			
+  		});
+  	}
+  	}
+  	//쿠키 스크립트 끝
   </script>
   

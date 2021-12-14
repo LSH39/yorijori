@@ -43,12 +43,22 @@
 <body>
      <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
-       <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />   
+     	<c:choose>
+		<c:when test="${sessionScope.m.memberLevel==1}">
+      	   <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />	
+        </c:when>
+
+       	 <c:otherwise>
+   	   <jsp:include page="/WEB-INF/views/mypage/sellerNavi.jsp" />	
+        
+       	</c:otherwise>
+       </c:choose>  
 		<!-- 메인 콘텐츠 -->
 		<div class="main-content">
 			<h3 id="h_hotel">내가 작성한 게시판</h3>
 			<div id="line2"></div>
 			<br>
+				<h5>작성 게시글 수 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
 			<div class="board">
 
 
@@ -74,6 +84,9 @@
 				</table>
 
 			</div>
+			    <div class="pagenation">
+						${pageNavi }
+					</div>
 		</div>
 	</div>
 

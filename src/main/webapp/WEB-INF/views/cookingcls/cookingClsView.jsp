@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qg5b1hs250&submodules=geocoder"></script>
+<!-- 
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3034a6bde601c666de71198a328eaa3e&libraries=services"></script>
+ -->
+
 <title>쿠킹클래스 뷰</title>
 <style>
 	td{
@@ -179,6 +184,29 @@
 				}
 			});
 		});
+
+		
+		var classLocation1 = $("#classLocation1").html();
+		var mapOptions = {
+			    center: new naver.maps.LatLng(37.3595704, 127.105399),
+			    zoom: 15
+			};
+		var map = new naver.maps.Map('map', mapOptions);
+		
+		naver.maps.Service.geocode({ address: classLocation1 }, function(status, response) { 
+			if (status === naver.maps.Service.Status.ERROR) { 
+				console.log('Something wrong!'); 
+				} 
+			var new_position = new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x) 
+			map.setCenter(new_position); 
+			
+			var marker = new naver.maps.Marker({ 
+				position: new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x), 
+				map: map 
+			}); 
+		});
+
+		
 	});
 </script>
 </head>
@@ -189,6 +217,9 @@
 		<h1>쿠킹클래스 뷰</h1>
 			<div class="class-wrap">
 				<div class="left position-static">
+					<div class="class-content">
+					<h5>내용은 ${ccls.classContent }</h5>
+					<!-- 
 					<img src="./resources/img/cookingcls/classtest.jpg">
 					<h5>클래스 번호는 ${ccls.classNo }</h5>
 					<h5>클래스 등록한 사람의 닉네임은 ${ccls.memberNickname }</h5>			
@@ -204,6 +235,13 @@
 					<p>Lorem ipsum dolor sit amet, consecteti</p>
 					<hr>
 					<img src="./resources/img/cookingcls/classtest.jpg">
+					 -->
+				
+					<c:forEach items="${ccls.clsFileList }" var="f">
+					<h1>파일 이름 : ${f.classFilepath }</h1>
+						<img src="./resources/upload/cookingcls/${f.classFilepath }">
+					</c:forEach>
+					</div>
 					<h3>리뷰 부분</h3>
 						<h5>클래스의 평점은 ${reviewAvg }</h5>
 					<div class="reviewSection">
@@ -328,16 +366,22 @@
 							</c:when>
 							</c:choose>
 							</h5>
-							<h5>정원 : <span id="classNop">${ccls.classNop }</span>&nbsp;/&nbsp;<span>${ccls.classCurrNop }</span></h5>
+							<h5>정원 : <span id="classNop">${ccls.classCurrNop }</span>&nbsp;/&nbsp;<span>${ccls.classNop }</span></h5>
 							<c:choose>
 								<c:when test="${not empty ccls.classLocation1 }">
-									<h5>장소 : ${ccls.classLocation1} ${ccls.classLocation2} </h5>
+									<h5>장소 : <span id="classLocation1">${ccls.classLocation1}</span></h5>
+									<h5> ${ccls.classLocation2}</h5>
 								</c:when>
 								<c:otherwise>
 									<h5>장소 : 비대면 클래스입니다!</h5>
 								</c:otherwise>
 							</c:choose>
-							<div class="d-grid gap-2">
+							<div class="d-grid gap-2 mt-4">
+								<c:if test="${not empty ccls.classLocation1 && not empty ccls.classLocation2}">
+									<button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">장소보기</button>
+								</c:if>
+							</div>
+							<div class="d-grid gap-2 mt-4">
 								<c:choose>
 									<c:when test="${ccls.classCurrNop eq ccls.classNop }">
 										<button type="button" class="btn btn-secondary btn-lg" >마감!</button>
@@ -361,7 +405,7 @@
 							</div>
 							<c:if test="${sessionScope.m.memberNickname eq ccls.memberNickname }">
 								<div class="mt-4 d-grid gap-8 d-md-flex justify-content-md-between">
-									<button type="button" id="" class="btn btn-secondary btn-lg" >수정하기</button>
+									<a href="/cookingClsUpdateFrm.do?classNo=${ccls.classNo }" id="" class="btn btn-secondary btn-lg" >수정하기</a>
 									<a href="/cookingClsDelete.do?classNo=${ccls.classNo }" class="btn btn-danger btn-lg" >삭제하기</a>							
 								</div>
 							</c:if>
@@ -369,6 +413,22 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+    			<div class="modal-content">
+      				<div class="modal-header">
+        				<h5 class="modal-title" id="exampleModalLabel">클래스 장소</h5>
+        				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      				</div>
+      				<div class="modal-body" style="display:flex;justify-content: center;">
+      					<div id="map" style="width:450px;height:450px;"></div>
+      				</div>
+      				<div class="modal-footer">
+        				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+      				</div>
+    			</div>
+  			</div>
 		</div>
 	</div>
 	<script>

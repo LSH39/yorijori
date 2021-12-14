@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,16 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
-       <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />   
+   	    <c:choose>
+		<c:when test="${sessionScope.m.memberLevel==1}">
+      	   <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />	
+        </c:when>
+
+       	 <c:otherwise>
+   	   <jsp:include page="/WEB-INF/views/mypage/sellerNavi.jsp" />	
+        
+       	</c:otherwise>
+       </c:choose>   
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
             <h2 id="h_hotel">회원탈퇴</h2>

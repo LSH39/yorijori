@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.cookingCls.model.vo.CookingCls;
+import kr.or.cookingCls.model.vo.CookingClsPicVO;
 import kr.or.review.model.vo.Review;
 
 @Repository
@@ -59,8 +60,21 @@ public class CookingClsDao {
 		return sqlSession.selectOne("", map);
 	}
 
+	//쿠킹 클래스 작성
 	public int insertCookingCls(CookingCls ccls) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("cookingcls.insertCookingCls", ccls);
+	}
+
+	//쿠킹 클래스 파일 처무
+	public int insertFile(CookingClsPicVO ccpvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cookingcls.insertFile", ccpvo);
+	}
+
+	//쿠킹 클래스 수정
+	public int updateOneClass(CookingCls ccls) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cookingcls.updateCookingCls", ccls);
 	}
 }

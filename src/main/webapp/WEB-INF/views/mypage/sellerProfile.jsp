@@ -181,31 +181,16 @@ function loadImg(obj) {
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
-      		<div class="main-left-box">
-			<h2>마이페이지</h2>
-			<ul>
-				<li>
-					<ul class="subnavi">
-						<li><a href="#">내정보 조회 및 수정<span>&gt;</span></a></li>
-						<li><a href="#" id="lf-click">내 구매내역<span>&gt;</span></a></li>
-						<li><a href="#">쿠폰함<span>&gt;</span></a></li>
-						<li><a href="#">회원탈퇴<span>&gt;</span></a></li>
-						<li><a href="#">참여한 경연대회<span>&gt;</span></a></li>
-						<li><a href="#">요리클래스 예약내역<span>&gt;</span></a></li>
-						<li><a href="#">Dm내역<span>&gt;</span></a></li>
-						<li><a href="#">follwer 게시글<span>&gt;</span></a></li>
-						<li><a href="#">찜한 레시피<span>&gt;</span></a></li>
-					</ul>
-				</li>
-				<li><span>my write</span>
-					<ul class="subnavi">
-						<li><a href="#">작성후기<span>&gt;</span></a></li>
-						<li><a href="#" id="lf-click">작성 게시글<span>&gt;</span></a></li>
-						<li><a href="#">내 작성 레시피<span>&gt;</span></a></li>
+	         <c:choose>
+		<c:when test="${sessionScope.m.memberLevel==1}">
+      	   <jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />	
+        </c:when>
 
-					</ul></li>
-			</ul>
-		</div>
+       	 <c:otherwise>
+   	   <jsp:include page="/WEB-INF/views/mypage/sellerNavi.jsp" />	
+        
+       	</c:otherwise>
+       </c:choose>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
         <div class="mbord">

@@ -24,7 +24,7 @@
 		WITHDRAW_DATE as withdrawDate,
 		MEMBER_BLACK as memberBlack
 		from member where
-		member_id='hyo'
+		member_id=#{memberId} 
 	</select>
 		<select id="sellerPage" resultType="m" parameterType="string">
 		select
@@ -49,7 +49,7 @@
 		WITHDRAW_DATE as withdrawDate,
 		MEMBER_BLACK as memberBlack
 		from member where
-		member_id='test0018'
+		member_id=#{memberId} 
 	</select>
 	<update id="updateMember" parameterType="m">
 	update member set
@@ -66,25 +66,15 @@
 	</update>
 	
 	<update id="upSeller" parameterType="string">
-	update member set member_level=5 where member_Id='test0016' and member_pw='333'
+	update member set member_level=5 where member_Id=#{memberId}  and member_pw=#{memberPw} 
 	
 	</update>
 	<delete id="deleteMember"  parameterType="string">
-	     delete from member where member_id='test0040' and member_pw='333'
+	     delete from member where member_id=#{memberId}  and member_pw=#{memberPw} 
 	
 	</delete>
 
-	<select id="myCoupon" resultType="mcou" parameterType="_int">
-		select 
-		c.coupon_name as couponName,
-		c.coupon_Start as couponStart,
-		c.coupon_end as couponEnd,
-		c.coupon_disCount as couponDiscount,
-		cl.coupon_use as couponUse
-	    from coupon c,coupon_list cl
-	   where c.coupon_No =cl.coupon_no 
-	   and member_No=111 and coupon_use=0
-	</select>
+
 	
 	<select id="myRecipe" parameterType="_int" resultType="rb">
 		select 
@@ -159,18 +149,7 @@ select 	cc.class_title as classTitle,
 
 
 </select>
-<select id="myContest"  resultType="myc" parameterType="_int">
-	  select cr.contest_no as contestNo,
-		   cr.contest_month as contestMonth,
-	        cr.enter_Date as enterDate,
-	        rb.recipe_title as recipeTitle,
-	        rb.recipe_writer as recipeWriter,
-	        cr.contest_result as contestResult
-	  from contest_recipe cr,recipe_board rb
-	  where cr.recipe_no=rb.recipe_no and recipe_writer=111
-	  order by contest_no asc
 
-</select>
 <select id="myItem" resultType="mi" parameterType="_int">
 		 select 
 		 product_no as productNo,
@@ -182,22 +161,6 @@ select 	cc.class_title as classTitle,
 		 milkit_stock as milkitStock
 		 from product where milkit_writer=111
 
-
-</select>
-<select id="likeRecipe" resultType="lr" parameterType="_int">
-		 select rl.like_no as likeNo,
-		 rl.member_no as memberNo,
-		 rl.recipe_no as recipeNo,
-		 rb.recipe_date as recipeDate,
-		 rb.recipe_level as recipeLevel,
-		 rb.recipe_title as recipeTitle,
-		 rb.recipe_writer as recipeWriter, 
-		 rb.filepath as filepath,
-		 rb.read_count as readCount,
-		 rb.subhead as subhead
-		 from recipe_board rb,recipe_like rl
-		 where rb.recipe_no=rl.recipe_no and rl.member_no=111
- 
 
 </select>
 
@@ -243,10 +206,9 @@ select 	cc.class_title as classTitle,
 </select>
 
 <select id="orderList" resultType="mo" parameterType="_int">
- select a.ORDER_OPTION_NO as orderOptionNo,
-        a.ORDER_NO as orderNo,
-        a.PRODUCT_NO as productNo,
-        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+
+ select 
+        b.ORDER_NO as orderNo,
         b.MEMBER_NO as memberNo,
         b.ORDER_NAME as orderName,
         b.ORDER_EMAIL as orderEmail,
@@ -263,16 +225,14 @@ select 	cc.class_title as classTitle,
         b.ORDER_STATUS as orderStatus
       
      from
-     order_option a,order_tbl b
-     where a.order_no =b.order_no and b.member_no=111
+     order_tbl b
+     where  b.member_no=111
 
 </select>
 
-<select id="orderDetail" resultType="mo" parameterType="_int">
- select a.ORDER_OPTION_NO as orderOptionNo,
-        a.ORDER_NO as orderNo,
-        a.PRODUCT_NO as productNo,
-        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+<select id="orderDetail" resultType="dd" parameterType="_int">
+ select 
+        b.order_no as orderNo,
         b.MEMBER_NO as memberNo,
         b.ORDER_NAME as orderName,
         b.ORDER_EMAIL as orderEmail,
@@ -289,8 +249,8 @@ select 	cc.class_title as classTitle,
         b.ORDER_STATUS as orderStatus
       
      from
-     order_option a,order_tbl b
-     where a.order_no =b.order_no and b.order_no=11
+     order_tbl b
+     where b.order_no=#{orderNo}
          
 
 </select>
@@ -397,5 +357,145 @@ select a.ORDER_OPTION_NO as orderOptionNo,
 
 
 </select>
+
+<select id="totalCount" resultType="_int">
+		 select count(*) from  order_tbl b
+         where  b.member_no=111
+	</select>
+
+	<select id="orderList1" parameterType="map" resultType="mo">
+	        select *
+  		from
+	  	(select 
+	  		rownum as rnum,
+	  		o.*
+	  	from
+		  	(select
+		   ORDER_NO as orderNo,
+        MEMBER_NO as memberNo,
+       ORDER_NAME as orderName,
+        ORDER_EMAIL as orderEmail,
+        ORDER_PHONE as orderPhone,
+        ORDER_POSTCODE as orderPostcode,
+        ORDER_ADDR_ROAD as orderAddrRoad,
+        ORDER_ADDR_DETAIL as orderAddrDetail,
+        ORDER_REQUEST as orderRequest,
+        ORDER_PAY_OPTION as orderPayOption,
+        ORDER_PRICE as orderPrice,
+        ORDER_SALE as orderSale,
+        ORDER_PAYMENT as orderPayment,
+        IMP_UID as impUid,
+        ORDER_STATUS as orderStatus
+		  	from  order_tbl  where member_No=111  order by order_No desc)o)
+		where rnum between #{start} and #{end}
+	
+	
+	</select>
+		<select id="myCoupon" resultType="mcou" parameterType="_int">
+		select 
+		c.coupon_name as couponName,
+		c.coupon_Start as couponStart,
+		c.coupon_end as couponEnd,
+		c.coupon_disCount as couponDiscount,
+		cl.coupon_use as couponUse
+	    from coupon c,coupon_list cl
+	   where c.coupon_No =cl.coupon_no 
+	   and member_No=111 and coupon_use=0
+	</select>
+			<select id="myCouponList" resultType="mcou" parameterType="map">
+	   select *
+  		from
+	  	(select rownum as rnum,
+	  		c.*
+	  	from
+		 (select
+         c.coupon_name as couponName,
+		c.coupon_Start as couponStart,
+		c.coupon_end as couponEnd,
+		c.coupon_disCount as couponDiscount,
+		cl.coupon_use as couponUse
+		  	from  coupon c,coupon_list cl  where c.coupon_No =cl.coupon_no  and member_No=111  order by coupon_end desc)c)
+	where rnum between #{start} and #{end}
+	</select>
+	
+	<select  id="couponCount" resultType="_int">
+ select count(*)from coupon_List where member_no=111
+	
+	</select>
+	<select id="myContestList"  resultType="myc" parameterType="map">
+		   select *
+  		from
+	  	(select rownum as rnum,
+	  		c.*
+	  	from
+		 (select
+           cr.contest_no as contestNo,
+		   cr.contest_month as contestMonth,
+	        cr.enter_Date as enterDate,
+	        rb.recipe_title as recipeTitle,
+	        rb.recipe_writer as recipeWriter,
+	        cr.contest_result as contestResult
+		  	 from contest_recipe cr,recipe_board rb  where cr.recipe_no=rb.recipe_no and recipe_writer=111 order by contest_no asc)c)
+	where rnum between #{start} and #{end}
+
+</select>
+	<select  id="contestCount" resultType="_int">
+  select count(*) from  contest_recipe cr,recipe_board rb where cr.recipe_no=rb.recipe_no and recipe_writer=111
+	
+	</select>
+		<select id="myBoardList"  resultType="fb" parameterType="map">
+		         select *
+  		from
+	  	(select rownum as rnum,
+	  		f.*
+	  	from
+		 (select
+         free_no as freeNo,
+		free_writer as freeWriter,
+		free_title as freeTitle,
+		free_content as freeContent,
+		reg_date as regDate,
+		free_readcount as freeReadcount
+		  	 from freeboard  where free_writer='hyo' order by free_no desc)f)
+	where rnum between #{start} and #{end}
+
+</select>
+	<select  id="boardCount" resultType="_int">
+  select count(*) from  freeboard where  free_writer='hyo'
+	
+	</select>
+	
+	<select id="likeRecipeCount" resultType="_int">
+	
+         select count(*)  from recipe_board rb,recipe_like rl  where rb.recipe_no=rl.recipe_no and rl.member_no=111
+	</select>
+	
+	<select id="likeRecipe"  resultType="lr" parameterType="map">
+     select *
+  		from
+	  	(select rownum as rnum,
+	  		r.*
+	  	from
+		 (select
+          rl.like_no as likeNo,
+		 rl.member_no as memberNo,
+		 rl.recipe_no as recipeNo,
+		 rb.recipe_date as recipeDate,
+		 rb.recipe_level as recipeLevel,
+		 rb.recipe_title as recipeTitle,
+		 rb.recipe_writer as recipeWriter, 
+		 rb.filepath as filepath,
+		 rb.read_count as readCount,
+		 rb.subhead as subhead
+		  	 from recipe_board rb,recipe_like rl  where rb.recipe_no=rl.recipe_no and rl.member_no=111 order by recipe_date desc)r)
+	
+	where rnum between #{start} and #{end}
+
+</select>
+
+	<select id="countDm" resultType="_int">
+	
+      select Count(*) from dm where dm_receiver='승민전문가' and dm_read_flag=0 
+	</select>
 </mapper>
 

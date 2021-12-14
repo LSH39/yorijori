@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="milkit">
+  <select id="selectRecipeList" parameterType="_int" resultType="rb">
+  	select 
+  		recipe_no as recipeNo,
+  		recipe_writer as recipeWriter,
+  		recipe_title as recipeTitle,
+  		food_name as foodName,
+  		filepath,
+  		subhead
+  	from recipe_board where recipe_writer=#{memberNo}
+  </select>
+  <select id="selectMilkitList" resultType="product">
+  	select 
+  		product_no as productNo,
+  		recipe_no as recipeNo,
+  		milkit_writer as milkitWriter,
+  		milkit_name as milkitName,
+  		milkit_price as milkitPrice,
+  		milkit_comment as milkitComment,
+  		filepath,
+  		milkit_content as milkitContent,
+  		milkit_date as milkitDate,
+  		milkit_stock as milkitStock,
+  		milkit_delete as milkitDelete
+  	from product where milkit_delete = 1
+  </select>
+</mapper>
