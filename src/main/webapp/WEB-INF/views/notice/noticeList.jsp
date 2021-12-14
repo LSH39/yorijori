@@ -49,16 +49,32 @@
 	      				</thead>
 	      				<tbody>
 	      					<c:forEach items="${list }" var="n" varStatus="i">
-	      						<tr>
-	      							<td>${start+i.index }</td>
-	      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
-											${n.noticeTitle }
-										</a>
-									</td>
-									<td>${n.noticeWriter }</td>
-									<td>${n.regDate }</td>
-									<td>${n.noticeReadcount }</td>
-								</tr>
+	      						<c:choose>
+	      							<c:when test="${n.noticePriority eq 'y' }">
+	      								<tr style="background: #FFFDE7; border-bottom: 1px solid #607D8B;">
+			      							<td>${start+i.index }</td>
+			      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
+													${n.noticeTitle }
+												</a>
+											</td>
+											<td>${n.noticeWriter }</td>
+											<td>${n.regDate }</td>
+											<td>${n.noticeReadcount }</td>
+										</tr>
+	      							</c:when>
+	      							<c:otherwise>
+	      								<tr>
+			      							<td>${start+i.index }</td>
+			      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
+													${n.noticeTitle }
+												</a>
+											</td>
+											<td>${n.noticeWriter }</td>
+											<td>${n.regDate }</td>
+											<td>${n.noticeReadcount }</td>
+										</tr>
+	      							</c:otherwise>
+	      						</c:choose>
 							</c:forEach>
 	      				</tbody>
 	      			</table>

@@ -13,7 +13,7 @@
 .form-group:first-of-type {
 	border-top: 5px solid rgb(196, 191, 227);
 }
-.col-form-label:not(#content){
+.col-form-label:not([for='content']){
     background: rgb(246, 240, 255);
 }
 .col-form-label{
@@ -39,4 +39,11 @@
 .backTo{
 	text-align: right;
 	padding: 10px;
+}
+#fixedNotice{
+	width: 18px;
+	height: 18px;
+	border: 2px solid #bcbcbc;
+	margin-top: 10px;
+	margin-left: 10px;
 }

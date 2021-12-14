@@ -72,7 +72,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="/insertNotice.do")
 	public String insertNotice(Model model, MultipartFile upfile, HttpServletRequest request, Notice n) {
-		if(upfile == null) {
+		if(upfile.isEmpty()) {
 			//첨부파일 없는 경우
 		} else {
 			//첨부파일 있는 경우
