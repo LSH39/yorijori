@@ -5,10 +5,12 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.cookingCls.model.dao.CookingClsDao;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingCls.model.vo.CookingClsPageData;
+import kr.or.cookingCls.model.vo.CookingClsPicVO;
 import kr.or.review.model.vo.Review;
 
 @Service
@@ -125,9 +127,36 @@ public class CookingClsService {
 		return dmRoomNo;
 	}
 
+	//클래스 글 등록
 	public int insertCookingCls(CookingCls ccls) {
 		// TODO Auto-generated method stub
 		int result = dao.insertCookingCls(ccls);
+		return result;
+	}
+
+	//파일 첨부 클래스 게시판
+	@Transactional
+	public int insertCookingCls(CookingCls ccls, ArrayList<CookingClsPicVO> classFiles) {
+		// TODO Auto-generated method stub
+		int result1 = dao.insertCookingCls(ccls);
+		int result = 0;
+		
+		if(result1 > 0) {
+			int classNo = ccls.getClassNo();
+			for(CookingClsPicVO ccpvo : classFiles) {
+				ccpvo.setClassNo(classNo);
+				result+=dao.insertFile(ccpvo);
+			}
+		}else {
+			return -1;
+		}
+		return result;
+	}
+
+	//클래스 수정
+	public int updateOneClass(CookingCls ccls) {
+		// TODO Auto-generated method stub
+		int result = dao.updateOneClass(ccls);
 		return result;
 	}
 }
