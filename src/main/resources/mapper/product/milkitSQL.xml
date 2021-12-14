@@ -11,8 +11,9 @@
   		subhead
   	from recipe_board where recipe_writer=#{memberNo}
   </select>
-  <select id="selectMilkitList" resultType="product">
-  	select 
+  <select id="selectMilkitList1" resultType="product">
+	select 
+  		rownum,
   		product_no as productNo,
   		recipe_no as recipeNo,
   		milkit_writer as milkitWriter,
@@ -24,6 +25,44 @@
   		milkit_date as milkitDate,
   		milkit_stock as milkitStock,
   		milkit_delete as milkitDelete
-  	from product where milkit_delete = 1
+  	from (select * from product  where milkit_delete=1 order by 1 desc) where rownum between 1 and 6
+  </select>
+  <select id="selectMilkitList2" resultType="product">
+  select rownum,p.* from(select 	
+        product_no as productNo,
+  		recipe_no as recipeNo,
+  		milkit_writer as milkitWriter,
+  		milkit_name as milkitName,
+  		milkit_price as milkitPrice,
+  		milkit_comment as milkitComment,
+  		filepath,
+  		milkit_content as milkitContent,
+  		milkit_date as milkitDate,
+  		milkit_stock as milkitStock,
+  		milkit_delete as milkitDelete,
+  	(select sum(order_option_amount) from order_option  where product_no = p.product_no)as amount
+	from product p where milkit_delete=1 order by amount desc nulls last)p where rownum between 1 and 6
+  </select>
+  <insert id="insertMilkit" parameterType="product">
+  	insert into product values(product_seq.nextval,#{recipeNo},#{milkitWriter},#{milkitName},#{milkitPrice},#{milkitComment},#{filepath},#{milkitContent},to_char(sysdate,'yyyy-mm-dd'),#{milkitStock},1)
+  </insert>
+  <select id="selectTotalCount" resultType="_int">
+  	select count(*) as total_count from product where milkit_delete = 1 
+  </select>
+  <select id="selectMoreProduct" parameterType="hashmap" resultType="product">
+  	select 
+  		rownum,
+  		product_no as productNo,
+  		recipe_no as recipeNo,
+  		milkit_writer as milkitWriter,
+  		milkit_name as milkitName,
+  		milkit_price as milkitPrice,
+  		milkit_comment as milkitComment,
+  		filepath,
+  		milkit_content as milkitContent,
+  		milkit_date as milkitDate,
+  		milkit_stock as milkitStock,
+  		milkit_delete as milkitDelete
+  	from (select * from product  where milkit_delete=1 order by 1 desc) where rownum between #{start} and #{end}
   </select>
 </mapper>

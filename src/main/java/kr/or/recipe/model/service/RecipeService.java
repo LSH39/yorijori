@@ -101,6 +101,7 @@ public class RecipeService {
 		int result = dao.insertReport(rp);
 		return result;
 	}
+
 }
 	
 

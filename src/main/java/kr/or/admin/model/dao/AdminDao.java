@@ -20,6 +20,7 @@ import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.milkit.model.vo.Product;
 
 import kr.or.mypage.model.vo.Follow;
+import kr.or.notice.model.vo.Notice;
 import kr.or.recipe.model.vo.RecipeBoard;
 
 
@@ -261,6 +262,12 @@ public class AdminDao {
 		ArrayList<Product> milList =(ArrayList<Product>) list4;
 		Ranking ranking = new Ranking(fbList, rbList, fList, milList);
 		return ranking;
+	}
+
+
+	public ArrayList<Notice> selectNotice() {
+		List list = sqlSession.selectList("stat.selectNotice");
+		return (ArrayList<Notice>) list;
 	}
 
 

@@ -14,6 +14,7 @@ import kr.or.admin.model.vo.MemberPageData;
 import kr.or.admin.model.vo.Prev;
 import kr.or.admin.model.vo.Ranking;
 import kr.or.coupon.model.vo.Coupon;
+import kr.or.notice.model.vo.Notice;
 
 
 @Service
@@ -270,6 +271,11 @@ public class AdminService {
 	public Ranking ranking() {
 		Ranking ranking = dao.ranking();
 		return ranking;
+	}
+
+	public ArrayList<Notice> selectNotice() {
+		ArrayList<Notice> list = dao.selectNotice();
+		return list;
 	}
 	
 	

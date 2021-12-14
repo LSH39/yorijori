@@ -128,7 +128,23 @@ select member_no as memberNo , member_id as memberId,(select count(*) from follo
   <select id="rankingMilkit" resultType="pd">
   select * from (select product_no as productNo,milkit_name as milkitName, (select nvl(sum(order_option_amount),0)  from order_option where product_no = product.product_no)milkitStock from product order by milkitStock desc) where rownum between 1 and 10
   </select>
-  
+  <select id="selectNotice"  resultType="n">
+		select *
+  		from
+	  	(select 
+	  		rownum as rnum,
+	  		n.*
+	  	from
+		  	(select
+		  		notice_no as noticeNo,
+		  		notice_title as noticeTitle,
+		  		notice_writer as noticeWriter,
+		  		notice_priority as noticePriority,
+		  		reg_date as regDate,
+		  		notice_readcount as noticeReadcount
+		  	from notice order by notice_no desc)n)
+		where rnum between 1 and 5
+	</select>
   
   
   
