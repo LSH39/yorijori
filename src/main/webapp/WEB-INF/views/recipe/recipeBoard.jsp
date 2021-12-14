@@ -26,7 +26,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
     <h1>레시피</h1>
-
 	<div id="recipeList">
 		<c:forEach items="${list }" var="rb" varStatus="i">	
 	    <p>
