@@ -1,12 +1,13 @@
 package kr.or.main.controller;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.main.model.service.MainService;
+import kr.or.main.model.vo.MainSearchResult;
 @Controller
 public class MainController {
 	
@@ -16,5 +17,15 @@ public class MainController {
 	@RequestMapping(value="/mainpage.do")
 	public String mainpage() {
 		return "common/main";
+	}
+	
+	@RequestMapping(value="/mainpagesearch.do")
+	public String mainpageSearch(Model model, int reqPage, String keyword) {
+		MainSearchResult msr = service.mainpageSearch(reqPage, keyword);
+		model.addAttribute("recipeList", msr.getRecipeList());
+		model.addAttribute("memberList", msr.getMemberList());
+		model.addAttribute("classList", msr.getClassList());
+		model.addAttribute("freeList", msr.getFreeList());
+		return "main/searchResult";
 	}
 }

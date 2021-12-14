@@ -45,4 +45,32 @@
 		update notice set notice_readcount = notice_readcount + 1
 		where notice_no = #{noticeNo}
 	</update>
+	<select id="selectPrevNo" parameterType="_int" resultType="_int">
+		select N.PREVNO 
+    	from
+    	(select notice_no as noticeNo,
+		  		notice_title as noticeTitle,
+		  		notice_writer as noticeWriter,
+		  		notice_priority as noticePriority,
+		  		reg_date as regDate,
+		  		notice_readcount as noticeReadcount,
+                LAG(NOTICE_NO, 1, -1) OVER(ORDER BY NOTICE_PRIORITY DESC, NOTICE_NO DESC) AS PREVNO,
+                LEAD(NOTICE_NO, 1, -1) OVER(ORDER BY NOTICE_PRIORITY DESC, NOTICE_NO DESC) AS NEXTNO
+    	from NOTICE)N
+        WHERE N.NOTICENO= #{noticeNo}	
+	</select>
+	<select id="selectNextNo" parameterType="_int" resultType="_int">
+		select N.NEXTNO 
+    	from
+    	(select notice_no as noticeNo,
+		  		notice_title as noticeTitle,
+		  		notice_writer as noticeWriter,
+		  		notice_priority as noticePriority,
+		  		reg_date as regDate,
+		  		notice_readcount as noticeReadcount,
+                LAG(NOTICE_NO, 1, -1) OVER(ORDER BY NOTICE_PRIORITY DESC, NOTICE_NO DESC) AS PREVNO,
+                LEAD(NOTICE_NO, 1, -1) OVER(ORDER BY NOTICE_PRIORITY DESC, NOTICE_NO DESC) AS NEXTNO
+    	from NOTICE)N
+        WHERE N.NOTICENO= #{noticeNo}
+	</select>
 </mapper>

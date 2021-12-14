@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.notice.model.service.NoticeService;
 import kr.or.notice.model.vo.Notice;
 import kr.or.notice.model.vo.NoticePageData;
+import kr.or.notice.model.vo.NoticeViewData;
 
 @Controller
 public class NoticeController {
@@ -46,8 +47,12 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeView.do")
 	public String noticeView(Model model, int noticeNo) {
-		Notice n = service.viewOneNotice(noticeNo);
-		model.addAttribute("n", n);
+		NoticeViewData nvd = service.selectNoticeViewData(noticeNo);
+		model.addAttribute("n", nvd.getN());
+		model.addAttribute("pNo", nvd.getPNo());
+		model.addAttribute("nNo", nvd.getNNo());
+		model.addAttribute("pn", nvd.getPn());
+		model.addAttribute("nn", nvd.getNn());
 		return "notice/noticeView";
 	}
 	

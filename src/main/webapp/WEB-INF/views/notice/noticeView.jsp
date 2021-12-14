@@ -78,6 +78,32 @@
 	      			<button class="btn-main btn-delete" onclick='delCheck();'>삭제하기</button>
 	      			<a href="/noticeList.do?reqPage=1"><button class="btn-main">목록으로</button></a>
 	      		</div>
+	      		<div class="prev-next-list row">
+	      			<c:choose>
+	      				<c:when test="${pNo ne -1 }">
+	      					<div class="row">
+				      			<label for="prev" class="col-sm-1 col-form-label">이전글</label>
+				      			<div class="col-sm-11">
+				      				<a href="/noticeView.do?noticeNo=${pNo }">
+				      					<input type="text" readonly class="form-control-plaintext" name="prevNotice" id="prev" value="${pn.noticeTitle }">
+				      				</a>
+				      			</div>
+			      			</div>
+	      				</c:when>
+	      			</c:choose>
+	      			<c:choose>
+	      				<c:when test="${nNo ne -1 }">
+	      					<div class="row">
+				      			<label for="next" class="col-sm-1 col-form-label">다음글</label>
+				      			<div class="col-sm-11">
+				      				<a href="/noticeView.do?noticeNo=${nNo }">
+				      					<input type="text" readonly class="form-control-plaintext" name="nextNotice" id="next" value="${nn.noticeTitle }">
+				      				</a>
+				      			</div>
+			      			</div>
+	      				</c:when>
+	      			</c:choose>
+	      		</div>
 	      		</div>
 	      	</div>
 	      </div>

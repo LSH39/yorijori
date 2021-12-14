@@ -44,4 +44,14 @@ public class NoticeDao {
 		int result = sqlSession.update("notice.rcUpdate", noticeNo);
 		return result;
 	}
+
+	public int selectPrevNo(int noticeNo) {
+		int prevNo = sqlSession.selectOne("notice.selectPrevNo", noticeNo);
+		return prevNo;
+	}
+
+	public int selectNextNo(int noticeNo) {
+		int nextNo = sqlSession.selectOne("notice.selectNextNo", noticeNo);
+		return nextNo;
+	}
 }

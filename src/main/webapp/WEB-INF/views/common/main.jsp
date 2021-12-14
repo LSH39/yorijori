@@ -17,9 +17,9 @@
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
       <div class="carousel-inner" role="listbox">
-
+        
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(resources/img/mainpage/mainbanner_1.jpg)">
+        <div class="carousel-item" style="background-image: url(resources/img/mainpage/mainbanner_1.jpg)">
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">요린이도 <span>걱정 NO!</span></h2>
@@ -28,26 +28,37 @@
             </div>
           </div>
         </div>
+        
 
         <!-- Slide 2 -->
         <div class="carousel-item" style="background-image: url(resources/img/mainpage/mainbanner_2.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown" style="font-family: 'Noto Sans KR', serif; font-weight: 700; font-size: 42px;">2021년 <span style="color:rgb(192, 57, 43); margin-bottom: 0px;">12</span>월의 기적</h2>
-              <h4 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 28px; color: #fff; margin-top: 5px;">요리조리의 크리스마스는 현재진행중!</h4>
-              <p class="animate__animated animate__fadeInUp">매월 진행되는 요리조리 경연대회. 올해의 마지막 달인만큼 더욱 풍성하게 준비하였습니다.<br>포인트 적립부터 밀키트 상품 제작까지, 요리조리와 함께 설레는 크리스마스를 맞이하세요.</p>
+              <h2 class="animate__animated animate__fadeInDown" style="font-family: 'Noto Sans KR', serif; font-weight: 700; font-size: 36px;">2021년 <span style="color:rgb(192, 57, 43); margin-bottom: 0px;">12</span>월의 레시피</h2>
+              <h4 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #fff; margin-top: 5px;">요리조리의 크리스마스는 현재진행중!</h4>
+              <p class="animate__animated animate__fadeInUp" style="font-size: 18px;">매월 진행되는 요리조리 경연대회. 올해의 마지막 달인만큼 더욱 풍성하게 준비하였습니다.<br>포인트 적립부터 밀키트 상품 제작까지, 요리조리와 함께 설레는 크리스마스를 맞이하세요.</p>
               <a href="/siteInfo.do" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
             </div>
           </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(resources/img/mainpage/slide/slide-3.jpg)">
+        </div> 
+        
+          <!-- Slide 3 -->
+        <div class="carousel-item" style="background-image: url(resources/img/mainpage/mainbanner_4.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+              <h2 class="animate__animated animate__fadeInDown" style="font-family: 'Noto Sans KR', serif; font-weight: 700; font-size: 42px; color: black;">신선한 샐러드도 이제는 배송 받자!</h2>
+              <h4 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 28px; color: black; margin-top: 5px;">밀키트로 간편하게 해결</h4>
+            </div>
+          </div>
+        </div> 
+        
+        <!-- Slide 4 -->
+        <div class="carousel-item active" style="background-image: url(resources/img/mainpage/mainbanner_3.jpg)">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown" style="margin-bottom: 0; color: #FF8554; margin-left: 90px;">YORIJORI</h2>
+              <h2 class="animate__animated animate__fadeInDown" style="margin-top: 0; margin-bottom: 10px; color: #FFB192; margin-left: 90px;">Membership</h2>
+              <p class="animate__animated animate__fadeInUp" style="font-family: 'TmoneyRoundWindRegular', sans-serif; color: #FF8554; margin-left: 90px;">오직 회원만 누리는 공식몰 단독 혜택</p>
             </div>
           </div>
         </div>

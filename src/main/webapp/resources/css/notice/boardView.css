@@ -17,7 +17,24 @@
 }
 .backTo>*{
 	margin-right: 10px;
+	margin-bottom: 30px;
+	margin-top: 10px;
 }
 .writerinfo>p{
 	margin: 0;
+}
+.prev-next-list{
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	display: flex;
+}
+.prev-next-list>div{
+	padding: 0;
+	margin: 0;
+}
+.prev-next-list>div:first-child {
+	border-bottom: 1px solid #ADADAD;
+}
+.prev-next-list>div:hover input{
+	cursor: pointer;
 }

@@ -30,6 +30,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 
 <!-- Vendor CSS Files -->
 <link href="resources/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -107,7 +110,7 @@
           </li>
           <li>
           <form action="/mainpagesearch.do" method="get" id="headersearchBar">
-          <input type="search" class="nav-link scrollto" id="header-mainsearch" placeholder="검색"></li>
+          <input type="search" class="nav-link scrollto" id="header-mainsearch" name="keyword" placeholder="검색"></li>
           <input type="hidden" name="reqPage" value=1>
           <input type="submit" id="headersearchsubmit" style="display: none;"></input>
           <label for="headersearchsubmit"><img src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
@@ -221,9 +224,11 @@
 		</div>
 	</form>
   </div>
+  
      <!-- 따라다니는 우측 퀵 메뉴 -->
   <div class="quickmenu"> 
   	<ul>
+  		<li><img src="/resources/img/mainpage/delivery.jpg" style="width:80px;height:110px;"> <a style="margin-bottom: 85px;">새벽배송</a></li>
   		<li><a href="#"><img src="/resources/img/mainpage/basket.png"> 최근 본 상품</a></li>
   		<li><a href="#"><img src="/resources/img/mainpage/q_mark.png"> 질문있어요</a></li>
   		<li><a href="#"><img src="/resources/img/mainpage/message.png"> 내 메세지</a></li>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.notice.model.dao.NoticeDao;
 import kr.or.notice.model.vo.Notice;
 import kr.or.notice.model.vo.NoticePageData;
+import kr.or.notice.model.vo.NoticeViewData;
 
 @Service
 public class NoticeService {
@@ -95,5 +96,21 @@ public class NoticeService {
 	public Notice getNotice(int noticeNo) {
 		Notice n = dao.selectOneNotice(noticeNo);
 		return n;
+	}
+
+	public NoticeViewData selectNoticeViewData(int noticeNo) {
+		dao.readCountUpdate(noticeNo);
+		Notice n = dao.selectOneNotice(noticeNo);
+		int pn = dao.selectPrevNo(noticeNo);
+		int nn = dao.selectNextNo(noticeNo);
+		Notice prevNotice = dao.selectOneNotice(pn);
+		Notice nextNotice = dao.selectOneNotice(nn);
+		NoticeViewData nvd = new NoticeViewData();
+		nvd.setN(n);
+		nvd.setPNo(pn);
+		nvd.setNNo(nn);
+		nvd.setPn(prevNotice);
+		nvd.setNn(nextNotice);
+		return nvd;
 	}
 }
