@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
+import kr.or.coupon.model.vo.MyCouponPageData;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.member.model.vo.Member;
-import kr.or.mypage.controller.MyCouponPageData;
 import kr.or.mypage.model.dao.MypageDao;
 import kr.or.mypage.model.vo.ContestWin;
 import kr.or.mypage.model.vo.DetailOrder;
@@ -26,6 +26,8 @@ import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.MyorderPageData;
 import kr.or.mypage.model.vo.Mysell;
+import kr.or.mypage.model.vo.ReadDm;
+import kr.or.mypage.model.vo.followCount;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -123,18 +125,15 @@ public class MypageService {
 		return list;
 	}
 */
-	public ArrayList<FollowList> followList(int memberNo) {
-		ArrayList<FollowList> list = dao.followList(memberNo);
-		return list;
-	}
+
 
 	public ArrayList<Freeboard> myBoard(String freeWriter) {
 		ArrayList<Freeboard> list = dao.myBoard(freeWriter);
 		return list;
 	}
 
-	public ArrayList<Mychat> myChatList(String chatRecive) {
-		ArrayList<Mychat> list = dao.myChatList(chatRecive);
+	public ArrayList<Mychat> myChatList(String chatReceive) {
+		ArrayList<Mychat> list = dao.myChatList(chatReceive);
 		return list;
 	}
 
@@ -174,10 +173,7 @@ public class MypageService {
 		return result;
 	}
 
-	public ArrayList<Mydm> myDmList(String dmReceiver) {
-		ArrayList<Mydm> list = dao.myDmList(dmReceiver);
-		return list;
-	}
+
 	
 	
 	/*주문내역 페이징*/
@@ -456,11 +452,21 @@ public class MypageService {
 		MyLikeRecipePageData rpd = new MyLikeRecipePageData(list,pageNavi,start,totalCount);
 		return rpd;
 	}
-/*읽지 않은 디엠 개수*/
-	public Mydm countDm(String dmReceiver) {
-		Mydm md =dao.countDm(dmReceiver);
-		return md;
-	}
 
+	/*팔로우*/
+		public followCount followList(int memberNo) {
+		ArrayList<FollowList> list = dao.followList(memberNo);
+	     int totalCount = dao.followCount();
+	     followCount fct = new followCount(list,totalCount);
+			return fct;
+		}
+    /*내 쪽지함*/
 
+		public ReadDm myDmList(String dmReceiver) {
+			ArrayList<Mydm> list = dao.myDmList(dmReceiver);
+		     int totalCount = dao.countsDm();
+		     ReadDm rd = new ReadDm(list,totalCount);
+				return rd;
+		}
+	
 }

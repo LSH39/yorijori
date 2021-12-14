@@ -105,7 +105,7 @@ color:red;
 						<li><a href="/myContestList.do?recipeWriter=${sessionScope.m.memberNo }&reqPage=1">참여한 경연대회<span>&gt;</span></a></li>
 						<li><a href="/myclass.do?memberNickname=${sessionScope.m.memberNickname}">요리클래스 예약내역<span>&gt;</span></a></li>
 						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">1쪽지</b></a></li>
-						<li><a href="/myChatList.do?chatRecive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
+						<li><a href="/myChatList.do?chatReceive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
 						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
 						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">찜한 레시피<span>&gt;</span></a></li>
 					</ul>

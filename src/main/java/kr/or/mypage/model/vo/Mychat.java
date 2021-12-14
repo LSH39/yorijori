@@ -7,7 +7,7 @@ import lombok.Data;
 public class Mychat {
 	private int chatNo;
 	private int chatSend;
-	private int chatRecive;
+	private int chatReceive;
 	private String chatContent;
 	private Date chatDate;
 	private String memberId;

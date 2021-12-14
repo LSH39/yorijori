@@ -115,7 +115,7 @@
 }
 .myInfo{
     width:450px;
-    height:500px;
+    height:1000px;
     background-color:rgb(234, 217, 241);
     float:left;
     margin-top:50px;
@@ -174,7 +174,15 @@ function loadImg(obj) {
 				e.preventDefault();
 				$("#myProfile").click();
 			});	
-				
+			
+		     $("#delBtn").click(function() {
+				//alert("수정하시겠습니까?");
+				$(".delFile").hide();
+				$(this).next().show();
+				//$("[name=status]").val(2);
+		});
+		
+	
 		});
 	</script>
 </head>
@@ -241,7 +249,9 @@ function loadImg(obj) {
 							</tr>
 				               <tr>
 				                   <td>자격증</td>
-				               <td>
+				              	<td> 
+				                
+				             <input type="hidden" name="status" value="1">
 				             <c:choose>
 							<c:when test="${not empty m.certificatePath }">
 								<img src="resources/img/mypage/file.png" width="16px" class="delFile">
@@ -257,6 +267,7 @@ function loadImg(obj) {
 								<input type="file" name="upfile">
 							</c:otherwise>
 						</c:choose>
+						
 						</td>
 				 
 				               </tr>

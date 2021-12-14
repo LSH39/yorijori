@@ -97,18 +97,15 @@ public class MypageDao {
 		return (ArrayList<LikeRecipe>) list;
 	}
 	*/
-	/*팔로우리스트*/
-	public ArrayList<FollowList> followList(int memberNo) {
-		List<FollowList> list = sqlSession.selectList("mypage.followList");
-		return (ArrayList<FollowList>) list;
-	}
+
+
 	/*내 게시판*/
 	public ArrayList<Freeboard> myBoard(String freeWriter) {
 		List<Freeboard> list = sqlSession.selectList("mypage.myBoard");
 		return (ArrayList<Freeboard>) list;
 	}
 	/*내 채팅리스트*/
-	public ArrayList<Mychat> myChatList(String chatRecive) {
+	public ArrayList<Mychat> myChatList(String chatReceive) {
 		List<Mychat> list = sqlSession.selectList("mypage.chatList");
 		return (ArrayList<Mychat>) list;
 	}
@@ -149,11 +146,7 @@ public class MypageDao {
 		return sqlSession.update("mypage.updateSeller",m);
 
 	}
-	/*dm리스트*/
-	public ArrayList<Mydm> myDmList(String dmReceiver) {
-		List<Mydm> list = sqlSession.selectList("mypage.dmList");
-		return (ArrayList<Mydm>) list;
-	}
+
 	/*주문페이징*/
 	public ArrayList<Myorder> selectOrderList(HashMap<String, Object> map) {
 		List<Myorder> list = sqlSession.selectList("mypage.orderList1", map);
@@ -204,9 +197,26 @@ public class MypageDao {
 		int totalCount = sqlSession.selectOne("mypage.likeRecipeCount");
 		return totalCount;
 	}
-	/*읽지 않은 dm개수*/
-	public Mydm countDm(String dmReceiver) {
-		return sqlSession.selectOne("mypage.countDm",dmReceiver);
+	
+	//1.팔로우리스트
+	public ArrayList<FollowList> followList(int memberNo) {
+		List<FollowList> list = sqlSession.selectList("mypage.followList");
+		return (ArrayList<FollowList>) list;
+	}
+	//2.
+	public int followCount() {
+		int totalCount = sqlSession.selectOne("mypage.followCount");
+		return totalCount;
+	}
+	/*dm리스트1번*/
+	public ArrayList<Mydm> myDmList(String dmReceiver) {
+		List<Mydm> list = sqlSession.selectList("mypage.dmList");
+		return (ArrayList<Mydm>) list;
+	}
+	//2.
+	public int countsDm() {
+		int totalCount = sqlSession.selectOne("mypage.countDm");
+		return totalCount;
 	}
 	
 	

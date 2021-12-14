@@ -99,7 +99,7 @@ margin-bottom:40px;
                     <td id="couName">${mcou.couponName }</td>
                     <td id="dis">${mcou.couponDiscount }</td>
                     <td id="time">${mcou.couponStart }~${mcou.couponEnd }</td>
-                    <td id="use">${mcou.couponUse }</td>
+                    <td id="use">${mcou.useCoupon }</td>
 
                   </tr>
                  </table>

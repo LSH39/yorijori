@@ -140,10 +140,10 @@ function orderDetail(orderNo){
                </div>
                <div class="orders">
         
-                <span class="it_info1"><b id="m">결제방식: </b>&emsp;${mo.orderPayOption }</span><br>
+                <span class="it_info1"><b id="m">결제방식: </b>&emsp;${mo.card}</span><br>
                  <span class="it_info1"><b id="m">배송비: </b>&emsp;무료배송</span><br>
                 <span class="it_info1"><b id="m">결제금액:</b>&emsp;${mo.orderPayment }원</span>&emsp;<br>
-                <span class="it_info1"><b id="m">주문상태: </b>&emsp;${mo.orderStatus }</span>&emsp;<br>
+                <span class="it_info1"><b id="m">주문상태: </b>&emsp;${mo.status }</span>&emsp;<br>
                 <span class="it_info1"><b id="m">요청사항: </b>&emsp;${mo.orderRequest }</span>&emsp;<br>
                </div>
                 <div class="rebutton">

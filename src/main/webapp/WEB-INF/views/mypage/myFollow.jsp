@@ -23,7 +23,7 @@
 
 .followR{
     width:250px;
-    height: 300px;
+    height: 350px;
     
     float: left;
     margin-right: 30px;
@@ -41,7 +41,7 @@
 }
 .pw{
     width:250px;
-    height: 100px;
+    height: 150px;
     background-color:rgb(224, 219, 239) ;
 }
 #pp{
@@ -79,6 +79,8 @@
         <div class="main-content">
             <h3 id="h_hotel">★my Follow★</h3>
             <div id="line2"></div><br>
+            <h5>좋아요수: <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
+            
               <c:forEach items="${list}" var="fol" varStatus="i">
             <div class="followR">
                 <div class="pt">
@@ -91,6 +93,7 @@
                     </a>
                 </div>
                 <div class="pw">
+                   <h5> 좋아요 ${f.totalCount }개</h5>
                     <h5>#${fol.recipeTitle}</h5>
                     <h5>#${fol.subhead }</h5>
                 </div>
