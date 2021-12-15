@@ -148,7 +148,7 @@
        </c:choose>
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-            <h2 id="h_hotel">판매자회원탈퇴</h2>
+            <h2 id="h_hotel">전문가 회원탈퇴</h2>
             <div id="line2"></div><br>
           <div id="confirm">
               <p><b>${sessionScope.m.memberNickname}님</b>의 정확한 정보확인을 위해 아이디/비밀번호를 다시 확인하겠습니다.</p> </div>

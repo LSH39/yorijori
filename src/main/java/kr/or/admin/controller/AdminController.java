@@ -23,6 +23,7 @@ import kr.or.admin.model.vo.Prev;
 import kr.or.admin.model.vo.Ranking;
 import kr.or.coupon.model.vo.Coupon;
 import kr.or.freeboard.model.vo.Freeboard;
+import kr.or.notice.model.vo.Notice;
 import kr.or.recipe.model.vo.RecipeBoard;
 
 
@@ -34,12 +35,15 @@ public class AdminController {
 	private AdminService service;
 	
 	@RequestMapping(value="/admin.do")
-	public String admin() {
+	public String admin(Model model) {
+		ArrayList<Notice> list = service.selectNotice();
+		model.addAttribute("list",list);
 		return "admin/admin";
 	}
 	@RequestMapping(value="/allmember.do")
 	public String allmember(Model model,int reqPage,String searchType,String searchText,String searchDetail,String period,String start,String end,String moreless,String joinStart,String joinEnd,String detail,String align,String memberLevel,String searchText2) {
 		int level = 0;
+		
 		String gotothe = "allmember";
 		MemberPageData mpd =  service.allMemberList(reqPage,searchType,searchText,searchDetail,period,start,end,moreless,joinStart,joinEnd,detail,align,memberLevel,searchText2,level,gotothe);
 		model.addAttribute("list" ,mpd.getList());

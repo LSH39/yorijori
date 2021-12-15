@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,13 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
+	<style>
+	a{
+	color:#6D5874;
+	}
+	a:hover{
+	color:#9A86B3;}
+	</style>
 	<div class="container">
 
 	 <div class="row">
@@ -18,20 +26,29 @@
 	 <h2>관리자 페이지</h2>
 	 <div style="background-color: #F7F7E5; height: 200px;">
         <div style="float: left;">
-            <img src="#" style="width: 200px;">
-        <button class="btn btn-warning">로고 변경하기</button>
+            <img src="resources/img/mainpage/logo_header.png" style="width: 200px;">
+      	고민중
         
         </div>
-        <div style="float: right;">
-            <h5>notice</h5>
-            <table class="table table-hover">
-                <tr class="table-warning">
-                    <td><a href="#">제목제목제목제목제목</a></td>
-                    <td><a href="#">조회수</a></td>
+        
+        <div style="float: right; width:300px; padding:15px; padding-top:0;">
+            
+            <table class="table table-hover" style="font-size: x-small; ">
+                <tr class="table" >
+                    <th style="text-align: center;">제목</th>
+                    
                     
                 </tr>
+                <c:forEach items="${list }" var="item" >
+                <tr>
+                <td><a href="/noticeView.do?noticeNo=${item.noticeNo }">${item.noticeTitle }</a></td>
+                </tr>
+                </c:forEach>
+                
                 </table>
+                
         </div>
+        <div style="float:right; width:50px; overflow: hidden; padding:10px; text-align: center; padding-top: 50px; height: 250px; background-color: #fff; ">공 지 사 항</div>
     </div>
 	 
 	 </div>

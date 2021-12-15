@@ -34,4 +34,31 @@ public class Mysell {
 	//주문옵션
 	private int orderOptionNo;
 	private int orderOptionAmount;
+	
+	public String getCard(){
+		if(orderPayOption == 1) {
+			return "신용카드";
+		}else if(orderPayOption == 2) {
+			return "무통장입금";
+	
+		}else {
+			return null;
+		}
+	}
+	
+	public String getStatus(){
+		if(orderStatus == 0) {
+			return "주문취소";
+		}else if(orderStatus == 1) {
+			return "주문완료";
+		}else if(orderStatus == 2) {
+			return "배송준비중";
+		}else if(orderStatus == 3) {
+			return "배송중";
+		}else if(orderStatus == 4) {
+			return "배송완료";
+		}else {
+			return null;
+		}
+	}
 }

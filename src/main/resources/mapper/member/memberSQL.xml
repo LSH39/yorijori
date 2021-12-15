@@ -79,8 +79,8 @@ fcCount
 
 </when>
 <when test="searchDetail ==4">
-enrollDate
-between #{joinStart} and #{joinEnd}
+(enrollDate
+
 
 </when>
 
@@ -96,6 +96,7 @@ between #{joinStart} and #{joinEnd}
 <![CDATA[<]]>= #{searchText2}
 
 </when>
+<when test="searchDetail==4">between #{joinStart} and #{joinEnd})</when>
 
 </choose>
 
@@ -208,8 +209,8 @@ fcCount
 
 </when>
 <when test="searchDetail ==4">
-enrollDate
-between #{joinStart} and #{joinEnd}
+(enrollDate
+
 
 </when>
 
@@ -225,7 +226,8 @@ between #{joinStart} and #{joinEnd}
 <![CDATA[<=]]> #{searchText2}
 
 </when>
-
+<when test="searchDetail==4">
+between #{joinStart} and #{joinEnd})</when>
 </choose>
 
 </if>

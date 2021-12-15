@@ -92,7 +92,7 @@
 							<td id="name">${mc.chatSend}</td>
 						</tr>
 						<tr>
-							<td>${mc.chatContent }</td>
+							<td><a href="#">${mc.chatContent }</a></td>
 						</tr>
 						<tr>
 							<td id="time">${mc.chatDate }</td>

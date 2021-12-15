@@ -29,14 +29,8 @@ border-right: 1px solid darkcyan;
  font-size: xx-large;
  }
  
- path {
-    stroke:#9F90CF;
-    
-    fill:none;
-}
-circle{
-fill:#9F90CF;
-}
+
+
 rect{
 fill:none;}
 
@@ -61,10 +55,7 @@ background-color: #E0D8EF;
 color:#9f90cf;
 
 }
-svg{
 
-
-}
 
 </style>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -114,26 +105,37 @@ svg{
             [prev1day,       ${j.prev1}],
             [today,       ${j.today}]
           ]);
-       
+        var data4 = google.visualization.arrayToDataTable([
+            ['날짜',  '비회원 방문','회원 방문'],
+            [prev7day,       ${visitCount.prev7},${loginCount.prev7}],
+            [prev6day,       ${visitCount.prev6},${loginCount.prev6}],
+            [prev5day,       ${visitCount.prev5},${loginCount.prev5}],
+            [prev4day,       ${visitCount.prev4},${loginCount.prev4}],
+            [prev3day,       ${visitCount.prev3},${loginCount.prev3}],
+            [prev2day,       ${visitCount.prev2},${loginCount.prev2}],
+            [prev1day,       ${visitCount.prev1},${loginCount.prev1}],
+            [today,       ${visitCount.today},${loginCount.today}]
+          ]);
         
        
 
         var options = {
           
         		
-          vAxis: {minValue: 0}
-          
+          vAxis: {minValue: 0},
+        colors: ['#9f90cf', '#79AAD2']
           
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('freeChart'));
         var chart2 = new google.visualization.AreaChart(document.getElementById('recipeChart'));
         var chart3 = new google.visualization.AreaChart(document.getElementById('joinChart'));
-        
+        var chart4 = new google.visualization.AreaChart(document.getElementById('visitChart'));
   	  
         chart.draw(data, options);
         chart2.draw(data2, options);
         chart3.draw(data3, options);
+        chart4.draw(data4, options);
         
         
       } 
@@ -167,15 +169,20 @@ svg{
 	<div class="row start">
 	<div class="col-md-2"></div>
 	<div class="col-md-3" >오늘 작성 게시글 수<br>
-	<span id="todayBoard">${freeCount }</span>
+	<span id="todayBoard">${freeCount }</span><br>
+	오늘 작성 레시피 수
+	<br>
+	<span id="todayRecipe">${recipeCount }</span>
+	
 	</div>
 	<div class="col-md-2" >오늘 가입 회원 수
 	<br>
 	<span id="todayJoin">${joinCount }</span>
 	</div>
-	<div class="col-md-3" >오늘 작성 레시피 수
-	<br>
-	<span id="todayRecipe">${recipeCount }</span>
+	<div class="col-md-3" >오늘 비회원 방문 수<br>
+	<span id="todayVisit">${visitCount.today }</span><br>
+	오늘 회원 방문 수<br>
+	<span id="todayLogin">${loginCount.today }</span>
 	</div>
 	<div class="col-md-2"></div>
 	</div>
@@ -185,7 +192,7 @@ svg{
 	<div  class="col-md-2 selected grBtn" >게시글</div><input type="hidden" value="1">
 	<div  class="col-md-2 unselect grBtn" >레시피</div><input type="hidden" value="2">
 	<div  class="col-md-2 unselect grBtn" >회원가입</div><input type="hidden" value="3">
-	<div class="col-md-2"></div>
+	<div class="col-md-2 unselect grBtn" >방문자 수</div><input type="hidden" value="4">
 	<div class="col-md-2"></div>
 	</div>
 	<br>
@@ -225,6 +232,16 @@ svg{
 	<div class="col-md-1"></div>
 	
 	
+	
+	
+	</div>
+	<div class="row visitChart chart2" style="">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	
+	<div id="visitChart" style=" width: 100%; height: 500px;"></div></div>
+	
+	<div class="col-md-1"></div>
 	</div>
 	
 	<input id="f" type="hidden" value="${today }">
@@ -457,6 +474,7 @@ svg{
 	setTimeout(() => {
 		$(".recipeChart").hide();
 		$(".joinChart").hide();
+		$(".visitChart").hide();
 	}, 100);
 	
 	
@@ -466,6 +484,7 @@ svg{
 		$(this).removeClass("unselect");
 		$(this).addClass("selected");
 		$(".chart").hide();
+		$(".chart2").hide();
 		console.log($(this).next().val());
 		switch($(this).next().val()){
 		case "1" : $(".freeChart").show();
@@ -474,7 +493,8 @@ svg{
 			break;
 		case "3" :$(".joinChart").show();
 			break;
-		
+		case "4" : $(".visitChart").show();
+			break;
 		}
 		$("#chartName").html($(this).html()+" 그래프");
 		

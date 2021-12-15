@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
+import kr.or.coupon.model.vo.MyCouponPageData;
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.service.MypageService;
 import kr.or.mypage.model.vo.ContestWin;
 import kr.or.mypage.model.vo.DetailOrder;
-import kr.or.mypage.model.vo.FollowList;
-import kr.or.mypage.model.vo.LikeRecipe;
 import kr.or.mypage.model.vo.MyFreeBoardPageData;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.MyLikeRecipePageData;
@@ -26,6 +26,8 @@ import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.MyorderPageData;
 import kr.or.mypage.model.vo.Mysell;
+import kr.or.mypage.model.vo.ReadDm;
+import kr.or.mypage.model.vo.followCount;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -105,16 +107,11 @@ public class MypageController {
 		return "mypage/myItem";
 	}
 
-	@RequestMapping(value = "/followList.do")
-	public String followList(int memberNo,Model model) {
-		ArrayList<FollowList> list= service.followList(memberNo);
-		model.addAttribute("list", list);
-		return "mypage/myFollow";
-	}
+
 
 	@RequestMapping(value = "/myChatList.do")
-	public String myChatList(String chatRecive,Model model) {
-		ArrayList<Mychat> list= service.myChatList(chatRecive);
+	public String myChatList(String chatReceive,Model model) {
+		ArrayList<Mychat> list= service.myChatList(chatReceive);
 		model.addAttribute("list", list);
 		return "mypage/chatList";
 	}
@@ -164,6 +161,23 @@ public class MypageController {
 		model.addAttribute("totalCount", ctpd.getTotalCount());
 		
 		return "mypage/myContest";
+	}
+	@RequestMapping(value = "/followList.do")
+	public String followList(int memberNo,Model model) {
+		followCount fct =service.followList(memberNo);
+		model.addAttribute("list", fct.getList());
+		model.addAttribute("totalCount", fct.getTotalCount());
+	
+		return "mypage/myFollow";
+	}
+	
+	@RequestMapping(value = "/mydmList.do")
+	public String myDmList(String dmReceiver,Model model) {
+		ReadDm rd =service.myDmList(dmReceiver);
+		//ArrayList<Mydm> list= service.myDmList(dmReceiver);
+		model.addAttribute("list", rd.getList());
+		model.addAttribute("totalCount", rd.getTotalCount());
+		return "mypage/dmList";
 	}
 	
 	@RequestMapping(value = "/myBoardList.do")
@@ -217,7 +231,7 @@ public class MypageController {
 	}
 	
 		@RequestMapping(value = "/updateSeller.do")
-		public String updateSeller(Member m, Model model) {
+		public String updateSeller(Member m, Model model, MultipartFile upfile, HttpServletRequest request) {
 
 			int result = service.updateSeller(m);
 			if (result > 0) {
@@ -241,19 +255,8 @@ public class MypageController {
 				return "common/msg";
 			}
 
-	@RequestMapping(value = "/mydmList.do")
-	public String myDmList(String dmReceiver,Model model) {
-		ArrayList<Mydm> list= service.myDmList(dmReceiver);
-		model.addAttribute("list", list);
-		return "mypage/dmList";
-	}
-	
-	@RequestMapping(value = "/countDm.do")
-	public String countDm(String dmReceiver, Model model) {
-		Mydm md = service.countDm(dmReceiver);
-		model.addAttribute("md", md);
-		return "mypage/memberNavi";
-	}
+
+
 	/*
 	@RequestMapping(value = "/myBoard.do")
 	public String myBoard(String freeWriter,Model model) {

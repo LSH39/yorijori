@@ -11,4 +11,15 @@ public class MyCoupon {
 	private String couponDiscount;
 	private int couponUse;
 	private int memberNo;
+	
+
+public String getUseCoupon(){
+	if(couponUse == 0) {
+		return "미사용";
+	}else if(couponUse == 1) {
+		return "사용완료";
+	}else {
+		return null;
+	}
+}
 }

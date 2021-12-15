@@ -58,18 +58,26 @@
       <div class="social-links d-none d-md-block">
       <c:choose>
 		<c:when test="${empty sessionScope.m }">
-        <a href="/joinCommon.do" class="join">회원가입</a>
-        <a href="/loginFrm.do" class="login">로그인</a>
-        <a href="/admin.do">관리자 페이지 </a>
+	        <a href="/joinCommon.do" class="join">회원가입</a>
+	        <a href="/loginFrm.do" class="login">로그인</a>
         </c:when>
 
-       	 <c:otherwise>
-      
-       	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
-       	<a href="/logout.do" class="logout">로그아웃</a>
-        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
-        <a href="#" class="qna">1:1문의하기</a>
-        
+		<c:when test="${sessionScope.m.memberLevel ==  3 }">
+			<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
+	        <a href="/admin.do">관리자 페이지 </a>
+	        <a class="qna chat" id="chatAdmin">1:1문의하기</a>
+	       	<a href="/logout.do" class="logout">로그아웃</a>
+	       	<!-- LSH -->
+			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
+		</c:when>
+		
+       	<c:otherwise>
+	       	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
+	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
+	        <a class="qna chat" id="chatUser">1:1문의하기</a>
+	       	<a href="/logout.do" class="logout">로그아웃</a>
+	       	<!-- LSH -->
+	       	<%@include file = "/WEB-INF/views/chat/chatUser.jsp" %>
        	</c:otherwise>
        </c:choose>
       </div>
@@ -88,8 +96,8 @@
           <li><a class="nav-link scrollto" href="#" id="show-category">레시피</a></li>
           <li class="dropdown"><a href="#"><span>밀키트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/milkitList.do">신상품</a></li>
-              <li><a href="/milkitList.do">베스트 상품</a></li>
+              <li><a href="/milkitList.do?boardNo=1">신상품</a></li>
+              <li><a href="/milkitList.do?boardNo=2">베스트 상품</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto " href="/cookingClsList.do?reqPage=1">클래스</a></li>
@@ -315,7 +323,7 @@
 		});
   	    
   	}else{
-  	    if(getCookie("login")==0 && ${ not empty sessionScope.m }){
+  		if(getCookie("login")==0 && ${ not empty sessionScope.m }){
   	        
   	    	setCookie("login","1","1");
   	      $.ajax({
@@ -336,4 +344,4 @@
   	}
   	//쿠키 스크립트 끝
   </script>
-  
+
