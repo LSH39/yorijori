@@ -30,7 +30,6 @@ public class OrderDao {
 
 	public ArrayList<CouponList> couponList(int memberNo) {
 		List list = sqlSession.selectList("order.couponList", memberNo);
-		ArrayList<CouponList> clist = (ArrayList<CouponList>)list;
 		return (ArrayList<CouponList>)list;
 	}
 

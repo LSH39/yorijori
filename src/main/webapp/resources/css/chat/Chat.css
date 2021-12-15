@@ -3,9 +3,10 @@
     background-color: #FFFFFF;
     z-index: 100;
     position: absolute;
-    top: 150px;
+    top: 100px;
     left: 70%;
     border-radius: 5px;
+    display: none;
 }
 .chatTop{
     height:40px;
@@ -57,7 +58,7 @@ width:0px;height:0px;}
 #chatEnter{
     width: 30px;
     height: 30px;
-    background-image: url(/img/chat_enter.png);
+    background-image: url(/resources/img/chat/chat_enter.png);
     background-size: 100%;
     border: 0;
     padding: 0;
@@ -89,4 +90,19 @@ width:0px;height:0px;}
     border-radius: 0px 20px 20px 20px;
     background-color: #EEF1F4;
     padding: 8px;
+}
+#qnaBtn{
+    z-index: 105;
+    position: absolute;
+    top: 450px;
+    left: 10px;
+    background-color: #8E44AD;
+    color: #FFFFFF;
+    border : 0px;
+    border-radius: 5px;
+    width: 150px;
+    height: 30px;
+}
+#blank{
+    height: 30px;
 }
