@@ -14,8 +14,8 @@
 
 <!-- header 및 기본 CSS-->
 <link rel="stylesheet" href="resources/css/mainpage/header.css">
-<!-- 부트스트랩용 jQuery -->
-<script type="text/javascript" src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- 부트스트랩용 jQuery
+<script type="text/javascript" src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <!-- 부트스트랩 icon -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <!-- Favicons -->
@@ -34,6 +34,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 
+<!-- slick css -->
+<link rel="stylesheet" type="text/css" href="resources/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="resources/slick/slick-theme.css"/>
 <!-- Vendor CSS Files -->
 <link href="resources/vendor/animate.css/animate.min.css" rel="stylesheet">
 <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

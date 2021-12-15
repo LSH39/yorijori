@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="resources/css/mainpage/common.css">
 <!-- 전용 CSS -->
 <link rel="stylesheet" href="resources/css/recipecontest/ContestList.css">
+<link rel="stylesheet" href="resources/css/recipecontest/SearchList.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -37,7 +38,7 @@
 	      		<div class="contest-outline">
 	      			<c:choose>
 	      				<c:when test="${totalCount ne 0 }">
-	      					<div><h5>검색결과 : </h5>총 <span id="totalCount">${totalCount }</span>개</div>
+	      					<div class="total-count"><h5>검색결과 : <span class="total">${totalCount }</span>개</h5></div>
 	      				</c:when>
 	      				<c:otherwise>
 	      					<div><h4>검색결과가 없습니다. </h4></div>

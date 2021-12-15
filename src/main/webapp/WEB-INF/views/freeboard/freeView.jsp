@@ -46,11 +46,20 @@
 	      				<div class="col-sm-4 writerinfo">
 	      					<input type="text" readonly class="form-control-plaintext" name="memberNickname" id="memberNickname" value="${fb.memberNickname } [${fb.freeWriter}]">
 	      				</div>
-	      				<label for="filename" class="col-sm-2 col-form-label">이미지</label>
+	      				<label for="filename" class="col-sm-2 col-form-label">첨부파일</label>
 	      				<div class="col-sm-4">
 		      					<c:choose>
 									<c:when test="${not empty fileList }">
-										<i class="bi bi-file-arrow-down"></i> ${fn:length(fileList) }개
+										<div class="dropdown">
+										  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+										    <i class="bi bi-file-arrow-down"></i> ${fn:length(fileList) }개
+										  </button>
+										  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+										    <li><a class="dropdown-item" href="#">Action</a></li>
+										    <li><a class="dropdown-item" href="#">Another action</a></li>
+										    <li><a class="dropdown-item" href="#">Something else here</a></li>
+										  </ul>
+										</div>
 									</c:when>
 									<c:otherwise>
 									<i class="bi bi-x-square-fill"></i>

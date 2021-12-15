@@ -67,19 +67,6 @@
 	    </div>
       <div class="container">	
 			<div class="board-content">
-	      		<div class="contest-outline">
-	      			<div>총 <span id="totalCount">${totalCount }</span>개</div>
-	      			<div>
-	      				<c:choose>
-	      					<c:when test="${not empty sessionScope.m }">
-	      					<input type="hidden" class="memberNo" value="${sessionScope.m.memberNo }">
-	      					<button class="btn-main btn-enter">대회 참가하기</button>
-	      					</c:when>
-	      				</c:choose>
-	      				<input type="hidden" id="orderIndex" value="${orderIndex }">
-	      				<span class="order-by">최신순</span> | <span class="order-by">가나다순</span> | <span class="order-by">높은투표순</span>
-	      			</div>
-	      		</div>
 	      		<div class="contest-content">
 	      			<ul>
 	      				<c:forEach items="${list }" var="r" varStatus="i">
@@ -118,29 +105,6 @@
 	      				</c:forEach>
 	      			</ul>
 	      		</div>
-	      		<div class="pagi">
-	      			${pageNavi }
-	      		</div>
-	      		<hr>
-	      		<form action="/recipeContestSearch.do" method="get">
-					<div class="board-search row">
-						<div class="col-9">
-							검색어 
-								<input type="radio" id="searchtype-1" name="searchtype" class="searchtype" value="title">
-								<label for="searchtype-1">제목</label>
-								<input type="radio" id="searchtype-2" name="searchtype" class="searchtype" value="content">
-								<label for="searchtype-2">내용</label>
-								<input type="radio" id="searchtype-3" name="searchtype" class="searchtype" value="writerId">
-								<label for="searchtype-3">작성자(ID)</label>
-								<input type="radio" id="searchtype-4" name="searchtype" class="searchtype" value="writerNickname">
-								<label for="searchtype-4">작성자(닉네임)</label>
-						</div>
-						<div class="col">
-							<input type="search" class="tk-search" name="searchword">
-							<button class="btn-main btn-search my-2 my-sm-0" type="submit"><img src="resources/img/mainpage/search_icon_w.png" style="width: 25px; height: 25px;"></button>
-						</div>
-					</div>
-					</form>
 	      	</div>
   </main><!-- End #main -->
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

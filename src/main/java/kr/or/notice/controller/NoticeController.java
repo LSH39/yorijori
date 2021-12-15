@@ -132,29 +132,43 @@ public class NoticeController {
 	
 	@ResponseBody
 	@RequestMapping(value="/uploadNoticeImage.do")
-	public void uploadFile(HttpServletRequest request, MultipartFile file, HttpServletResponse response, Model model) throws ServletException, IOException {
-		String saveDirectory = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+	public String uploadNoticeImage(MultipartFile file, HttpServletRequest request) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
 		String filename = file.getOriginalFilename();
-		String onlyFilename = filename.substring(0, filename.indexOf(".")); //파일명
-		String extension = filename.substring(filename.indexOf(".")); //확장자
-		//업로드할 파일명을 저장할 변수
+		String onlyFilename = filename.substring(0,filename.indexOf("."));
+		String extension = filename.substring(filename.indexOf("."));
 		String filepath = null;
-		int count = 0;
+		int count=0;
 		while(true) {
-			if(count == 0) {
-				filepath = onlyFilename+extension; //test.txt (중복이 안된 경우!)
-			} else {
-				filepath = onlyFilename+"_"+count+extension; //test_3.txt (중복이 되면)
+			if(count == 0 ) {
+				filepath = onlyFilename+extension;
+			}else {
+				filepath = onlyFilename+"_"+count+extension;
 			}
-			File checkFile = new File(saveDirectory+filepath); //java.io.File
+			File checkFile = new File(savePath+filepath);
 			if(!checkFile.exists()) {
 				break;
 			}
 			count++;
 		}
-		PrintWriter out = response.getWriter();
-		out.print("/resources/upload/notice/"+filepath);
+		try {
+			FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+			// 업로드 속도증가를 위한 보조스트림
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			// 파일 업로드
+			byte[] bytes = file.getBytes();
+			bos.write(bytes);
+			bos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/resources/upload/notice/" + filepath;		
 	}
+	
 	
 	@RequestMapping(value="/noticeSearch.do")
 	public String noticeSearch(Model model, String searchtype, String searchword) {

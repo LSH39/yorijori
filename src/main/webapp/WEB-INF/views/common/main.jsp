@@ -178,8 +178,27 @@
       </div>
     </section><!-- End Services Section -->
   
+  <section id="newproduct">
+  	  <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        <div class="swiper-slide">Slide 4</div>
+        <div class="swiper-slide">Slide 5</div>
+        <div class="swiper-slide">Slide 6</div>
+        <div class="swiper-slide">Slide 7</div>
+        <div class="swiper-slide">Slide 8</div>
+        <div class="swiper-slide">Slide 9</div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  
   <!-- ======= why-us Section ======= -->
     <section id="why-us" class="why-us">
+    	
       <div class="container">
         <div class="row no-gutters">
           <div class="col-lg-4 col-md-6 content-item">
@@ -224,6 +243,7 @@
     </section><!-- End Why Us Section -->
 
     <!-- ======= featured-services ======= -->
+    
     <section id="featured-services" class="featured-services section-bg">
       <div class="container">
 
@@ -628,6 +648,15 @@
   </main><!-- End #main -->
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
+  <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    </script>
 </body>
 </html>

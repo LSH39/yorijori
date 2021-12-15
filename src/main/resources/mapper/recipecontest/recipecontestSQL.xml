@@ -37,7 +37,7 @@
 	<select id="selectContestNo" parameterType="_int" resultType="_int">
 		select contest_no as contestNo from contest_vote where member_no=#{memberNo} and vote_date like '%' || to_char(sysdate, 'yyyy-mm') || '%'
 	</select>
-	<select id="searchList" parameterType="map" resultType="n">
+	<select id="searchList" parameterType="map" resultType="rc">
 		     select ccc.* from
             (select rownum as rnum, cc.* from
             (select c.*,
@@ -55,6 +55,7 @@
 			    recipe_delete as recipeDelete,
 			    recipe_writer as recipeWriterNo,
 			    recipe_title as recipeTitle,
+			    filepath as recipePath,
 			    subhead as recipeContent
 			    from contest_recipe cr
 			    left join recipe_board rb on rb.recipe_no=cr.recipe_no
@@ -91,6 +92,7 @@
 			    contest_result as contestResult,
 			    contest_month as contestMonth,
 			    recipe_delete as recipeDelete,
+			    filepath as recipePath,
 			    recipe_writer as recipeWriterNo,
 			    recipe_title as recipeTitle,
 			    subhead as recipeContent

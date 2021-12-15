@@ -69,7 +69,7 @@
   </main><!-- End #main -->
   <script>
 		$(function(){
-			$("#noticeContent").summernote({
+			$("#content").summernote({
 				height : 400,
 				lang : "ko-KR",
 				callbacks : {
@@ -101,6 +101,7 @@
 					url : "/uploadNoticeImage.do",
 					type : "post",
 					data : form,
+					enctype : 'multipart/form-data',
 					processData : false,
 					contentType : false,
 					success : function(data){
