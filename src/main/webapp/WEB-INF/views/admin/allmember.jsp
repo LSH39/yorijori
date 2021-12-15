@@ -47,8 +47,8 @@ text-align: center;}
             <input type="radio" checked value="1" id="postspace" name="searchdetail"><label for="postspace">게시글 수</label>
             <input type="radio" value="2" id="recipespace" name="searchdetail"><label for="recipespace">레시피 수</label>
             <input type="radio" value="3" id="commentspace" name="searchdetail"><label for="commentspace">댓글 수</label>
-            <input type="radio" value="4" id="visitspace" name="searchdetail"><label for="visitspace">방문 수</label>
-            <input type="radio" value="5" id="signdate" name="searchdetail"><label for="signdate">가입일</label>
+            
+            <input type="radio" value="4" id="signdate" name="searchdetail"><label for="signdate">가입일</label>
             <input id="searchDetail" type="hidden" value="1"> 
             <hr>
             <div class="detail1">
@@ -223,7 +223,7 @@ text-align: center;}
     		$(".detail1").show();
     		$(".detail2").hide();
     		$("#space").html($(this).next().html());
-    		if($(this).val()==5){
+    		if($(this).val()==4){
     			$(".detail2").show();
         		$(".detail1").hide();	
     		}
@@ -324,7 +324,9 @@ text-align: center;}
     		var joinEnd = $(".date2").val();
     		var align = $(".align").val();
     		var memberLevel = $(".memberLevel").val();
-    		
+    		if(searchDetail == 4){
+    			moreless = 0;
+    		}
     		$.ajax({
     			url:"allmember.do?reqPage=1",
     			type:"post",
@@ -337,6 +339,16 @@ text-align: center;}
     				$("#searchText2").val(searchText2);
     				$(".align").val(align);
     				$(".memberLevel").val(memberLevel);
+    				
+    				$("#searchDetail").val(searchDetail);
+    	    		$(".period").val(period);
+    	    		
+    	    		$(".moreless").val(moreless);
+    	    		
+    	    		$(".date1").val(joinStart);
+    	    		$(".date2").val(joinEnd);
+    	    		$(".align").val(align);
+    	    		$(".memberLevel").val(memberLevel);
     			},
     			error:function(){
     				console.log("err");
