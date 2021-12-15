@@ -1,4 +1,4 @@
-#userId{
+.userId{
     max-width: 200px;
     overflow:hidden;
     word-break: break-all;
@@ -6,23 +6,22 @@
     margin: 0;
     color: #6D5874;
 }
-#chatHome{
+#chatAdminHomeTbl{
     width: 100%;
     table-layout: fixed;
 }
-#chatHome tr:nth-child(2n){
+#chatAdminHomeTbl tr:nth-child(2n){
     border-bottom: 3px solid #EEF1F4;
 }
-#chatHome tr:last-child{
+#chatAdminHomeTbl tr:last-child{
     border: 0;
 }
-
-#chatHome td{
-    height: 40px;
+#chatAdminHomeTbl td{
+    height: 30px;
     padding: 5px;
     padding-left: 10px;
 }
-#chatId{
+.chatId{
     font-size: 18px;
     font-weight: bold;
 }
@@ -30,4 +29,13 @@
     overflow: hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
+}
+/* td높이 고정해주기위해, td안에 div 사용 */
+.chatText>div{
+	height: 25px;
+	line-height: 25px;
+	overflow: hidden;
+}
+#chatFrmAdmin{
+	
 }
