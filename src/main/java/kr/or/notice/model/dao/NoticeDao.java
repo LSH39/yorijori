@@ -54,4 +54,17 @@ public class NoticeDao {
 		int nextNo = sqlSession.selectOne("notice.selectNextNo", noticeNo);
 		return nextNo;
 	}
+
+	public ArrayList<Notice> searchNoticeList(HashMap<String, Object> map) {
+		List<Notice> searchList = sqlSession.selectList("notice.searchList", map);
+		return (ArrayList<Notice>) searchList;
+	}
+
+	public int selectTotalCount(String searchtype, String searchword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchtype", searchtype);
+		map.put("searchword", searchword);
+		int totalCount = sqlSession.selectOne("notice.searchCount", map);
+		return totalCount;
+	}
 }

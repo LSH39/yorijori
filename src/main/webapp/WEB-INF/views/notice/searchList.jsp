@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티 - 공지사항</title>
+<title>공지사항 - 검색결과</title>
 <!-- 공통 CSS-->
 <link rel="stylesheet" href="resources/css/mainpage/common.css">
 <link rel="stylesheet" href="resources/css/freeboard/BoardList.css">
@@ -35,7 +35,14 @@
 	      		</div>
 	      		<div class="board-table">
 	      			<div class="board-count">
-	      				<h5>총 게시물 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
+	      				<c:choose>
+	      					<c:when test="${totalCount ne 0 }">
+	      						<h5>검색결과 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
+	      					</c:when>
+	      					<c:otherwise>
+	      						<h4>검색결과가 없습니다.</h4>
+	      					</c:otherwise>
+	      				</c:choose>
 	      			</div>
 	      			<table class="table table-hover">
 	      				<thead>

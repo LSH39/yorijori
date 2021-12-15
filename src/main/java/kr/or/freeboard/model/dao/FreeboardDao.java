@@ -99,4 +99,17 @@ public class FreeboardDao {
 		int freeNo = sqlSession.selectOne("freeboard.selectFreeNo", f);
 		return freeNo;
 	}
+
+	public ArrayList<Freeboard> searchFreeList(HashMap<String, Object> map) {
+		List<Freeboard> searchList = sqlSession.selectList("freeboard.searchList", map);
+		return (ArrayList<Freeboard>) searchList;
+	}
+
+	public int selectTotalCount(String searchtype, String searchword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchtype", searchtype);
+		map.put("searchword", searchword);
+		int totalCount = sqlSession.selectOne("freeboard.searchCount", map);
+		return totalCount;
+	}
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.SqlSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +38,19 @@ public class RecipeContestDao {
 	public int selectContestNo(int memberNo) {
 		int contestNo = sqlSession.selectOne("recipecontest.selectContestNo", memberNo);
 		return contestNo;
+	}
+
+	public ArrayList<RecipeContest> searchContestList(HashMap<String, Object> map) {
+		List<RecipeContest> searchList = sqlSession.selectList("recipecontest.searchList", map);
+		return (ArrayList<RecipeContest>) searchList;
+	}
+
+	public int selectTotalCount(String searchtype, String searchword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchtype", searchtype);
+		map.put("searchword", searchword);
+		int totalCount = sqlSession.selectOne("recipecontest.searchCount", map);
+		return totalCount;
 	}
 
 }

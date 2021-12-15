@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -154,5 +154,16 @@ public class NoticeController {
 		}
 		PrintWriter out = response.getWriter();
 		out.print("/resources/upload/notice/"+filepath);
+	}
+	
+	@RequestMapping(value="/noticeSearch.do")
+	public String noticeSearch(Model model, String searchtype, String searchword) {
+		NoticePageData searchResult = service.selectNoticeList(searchtype, searchword);
+		model.addAttribute("list", searchResult.getList());
+		model.addAttribute("pageNavi", searchResult.getPageNavi());
+		model.addAttribute("start", searchResult.getStart());
+		model.addAttribute("totalCount", searchResult.getTotalCount());
+		return "notice/searchList";
+		
 	}
 }

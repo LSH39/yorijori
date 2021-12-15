@@ -24,6 +24,7 @@ import kr.or.freeboard.model.vo.FreeboardFile;
 import kr.or.freeboard.model.vo.FreeboardLike;
 import kr.or.freeboard.model.vo.FreeboardPageData;
 import kr.or.freeboard.model.vo.FreeboardViewData;
+import kr.or.notice.model.vo.NoticePageData;
 
 @Controller
 public class FreeboardController {
@@ -190,6 +191,17 @@ public class FreeboardController {
 		}
 		model.addAttribute("loc", "/freeboardList.do?reqPage=1&orderIndex=0");
 		return "common/msg";
+		
+	}
+	
+	@RequestMapping(value="/freeSearch.do")
+	public String freeSearch(Model model, String searchtype, String searchword) {
+		FreeboardPageData searchResult = service.selectFreeList(searchtype, searchword);
+		model.addAttribute("list", searchResult.getList());
+		model.addAttribute("pageNavi", searchResult.getPageNavi());
+		model.addAttribute("start", searchResult.getStart());
+		model.addAttribute("totalCount", searchResult.getTotalCount());
+		return "freeboard/searchList";
 		
 	}
 	

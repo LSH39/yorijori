@@ -116,5 +116,64 @@
 		where free_writer = #{freeWriter} and free_title = #{freeTitle}
 		order by free_no desc
 	</select>
+	<select id="searchList" parameterType="map" resultType="fb">
+		select *
+  		from
+	  	(select 
+	  		rownum as rnum,
+	  		n.*
+	  	from
+		  	(select
+		  		free_no as freeNo,
+		  		free_title as freeTitle,
+		  		free_writer as freeWriter,
+		  		free_content as freeContent,
+		  		reg_date as regDate,
+		  		free_readcount as freeReadcount,
+                (select member_nickname from member where member_id=free_writer) as memberNickname    
+		  	from freeboard
+            order by free_no desc)n)
+		where rnum between #{start} and #{end}
+        <choose>
+           <when test="searchtype.equals('writerNickname')"> 
+        and memberNickname like '%' || #{searchword} || '%'
+            </when>
+            <when test="searchtype.equals('writerId')">
+        and freeWriter like '%' || #{searchword} || '%'
+            </when>
+            <when test="searchtype.equals('title')">
+        and freeTitle like '%' || #{searchword} || '%'
+            </when>
+            <when test="searchtype.equals('content')">
+        and freeContent like '%' || #{searchword} || '%'
+            </when>
+        </choose>
+	</select>
+	<select id="searchCount" parameterType="map" resultType="_int">
+		select count(*) from
+		(select
+		  		free_no as freeNo,
+		  		free_title as freeTitle,
+		  		free_writer as freeWriter,
+		  		free_content as freeContent,
+		  		reg_date as regDate,
+		  		free_readcount as freeReadcount,
+                (select member_nickname from member where member_id=free_writer) as memberNickname    
+		  	from freeboard
+		  <choose>
+           <when test="searchtype.equals('writerNickname')"> 
+        )n where memberNickname like '%' || #{searchword} || '%'
+            </when>
+            <when test="searchtype.equals('writerId')">
+        where free_writer like '%' || #{searchword} || '%')n
+            </when>
+            <when test="searchtype.equals('title')">
+        where free_title like '%' || #{searchword} || '%')n
+            </when>
+            <when test="searchtype.equals('content')">
+        where free_content like '%' || #{searchword} || '%')n
+            </when>
+        </choose>
+	</select>
 </mapper>
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이벤트 - 경연대회투표</title>
+<title>경연대회투표 - 검색결과</title>
 <link rel="stylesheet" href="resources/css/mainpage/common.css">
 <!-- 전용 CSS -->
 <link rel="stylesheet" href="resources/css/recipecontest/ContestList.css">
@@ -35,7 +35,14 @@
 	      	
 			<div class="board-content">
 	      		<div class="contest-outline">
-	      			<div>총 <span id="totalCount">${totalCount }</span>개</div>
+	      			<c:choose>
+	      				<c:when test="${totalCount ne 0 }">
+	      					<div><h5>검색결과 : </h5>총 <span id="totalCount">${totalCount }</span>개</div>
+	      				</c:when>
+	      				<c:otherwise>
+	      					<div><h4>검색결과가 없습니다. </h4></div>
+	      				</c:otherwise>
+	      			</c:choose>
 	      			<div>
 	      				<c:choose>
 	      					<c:when test="${not empty sessionScope.m }">
@@ -43,8 +50,6 @@
 	      					<button class="btn-main btn-enter">대회 참가하기</button>
 	      					</c:when>
 	      				</c:choose>
-	      				<input type="hidden" id="orderIndex" value="${orderIndex }">
-	      				<span class="order-by">최신순</span> | <span class="order-by">가나다순</span> | <span class="order-by">높은투표순</span>
 	      			</div>
 	      		</div>
 	      		<div class="contest-content">
@@ -124,15 +129,6 @@
   		var orderIndex = $("#orderIndex").val();
   		$(".order-by").eq(orderIndex).addClass("active");
   		
-  		//정렬기준
-  		$(".order-by").on("click", function(){
-  			var index = $(".order-by").index(this);
-  			var reqPage = 1;
-  			var body = $(".contest-content").children("ul");
-  			var totalCount = $("#totalCount");
-  			console.log(index);
-  			location.href="contestList.do?reqPage="+reqPage+"&orderIndex="+index;
-  		});
   		
   		//접속자 투표여부 확인
   		var memberNo = $(".memberNo").val();

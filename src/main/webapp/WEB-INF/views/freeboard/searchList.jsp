@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티 - 공지사항</title>
+<title>자유게시판 - 검색결과</title>
 <!-- 공통 CSS-->
 <link rel="stylesheet" href="resources/css/mainpage/common.css">
-<link rel="stylesheet" href="resources/css/freeboard/BoardList.css">
-<!-- 페이지 전용 CSS -->
 <link rel="stylesheet" href="resources/css/notice/noticeList.css">
+<!-- 페이지 전용 CSS -->
+<link rel="stylesheet" href="resources/css/freeboard/BoardList.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -22,66 +22,64 @@
 				<h1>커뮤니티</h1>
 				<div class="sidemenubox">
 					<ul class="nav flex-column">
-						<li class="nav-item active"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
-						<li class="nav-item"><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판 <span> &gt;</span></a></li>
+						<li class="nav-item"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
+						<li class="nav-item active"><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
 					</ul>
 				</div>
 	      	</div>
 	      	<div class="col-10 main-content">
 	      		<div class="main-content-title">
-	      			<h2>공지게시판 <span> 요리조리의 새로운 소식과 유용한 정보를 한 곳에서 확인하세요.</span></h2>
-	      			<a href="noticeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
+	      			<h2>자유게시판 <span> 회원분들의 즐거운 커뮤니티 공간!</span></h2>
+	      			<c:choose>
+	      				<c:when test="${not empty sessionScope.m }">
+	      					<a href="/freeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
+	      				</c:when>
+	      			</c:choose>
 	      		</div>
 	      		<div class="board-table">
 	      			<div class="board-count">
-	      				<h5>총 게시물 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
+	      				<c:choose>
+	      					<c:when test="${totalCount ne 0 }">
+	      						<h5>검색결과 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
+	      					</c:when>
+	      					<c:otherwise>
+	      						<h4>검색결과가 없습니다.</h4>
+	      					</c:otherwise>
+	      				</c:choose>
+						</div>
 	      			</div>
 	      			<table class="table table-hover">
 	      				<thead>
 	      					<tr>
 	      						<th scope="col">번호</th>
 	      						<th scope="col">제목</th>
-	      						<th scope="col">작성자(ID)</th>
+	      						<th scope="col">추천</th>
+	      						<th scope="col">작성자(닉네임)</th>
 	      						<th scope="col">작성일</th>
 	      						<th scope="col">조회</th>
 	      					</tr>
 	      				</thead>
 	      				<tbody>
-	      					<c:forEach items="${list }" var="n" varStatus="i">
-	      						<c:choose>
-	      							<c:when test="${n.noticePriority eq 'y' }">
-	      								<tr style="background: #FFFDE7; border-bottom: 1px solid #607D8B;">
-			      							<td>${start+i.index }</td>
-			      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
-													${n.noticeTitle }
-												</a>
-											</td>
-											<td>${n.noticeWriter }</td>
-											<td>${n.regDate }</td>
-											<td>${n.noticeReadcount }</td>
-										</tr>
-	      							</c:when>
-	      							<c:otherwise>
-	      								<tr>
-			      							<td>${start+i.index }</td>
-			      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
-													${n.noticeTitle }
-												</a>
-											</td>
-											<td>${n.noticeWriter }</td>
-											<td>${n.regDate }</td>
-											<td>${n.noticeReadcount }</td>
-										</tr>
-	      							</c:otherwise>
-	      						</c:choose>
+	      					<c:forEach items="${list }" var="f" varStatus="i">
+	      						<tr>
+	      							<td>${start+i.index }</td>
+	      							<td><a href='/freeView.do?freeNo=${f.freeNo }'>
+											${f.freeTitle } [${f.fcCount }]
+										</a>
+									</td>
+									<td>${f.freeLikeCount }</td>
+									<td>${f.memberNickname }</td>
+									<td>${f.regDate }</td>
+									<td>${f.freeReadcount }</td>
+								</tr>
 							</c:forEach>
 	      				</tbody>
 	      			</table>
 					<div class="pagi">
 						${pageNavi }
 					</div>
-					<form action="/noticeSearch.do" method="get">
+					<form action="/freeSearch.do" method="get">
 					<div class="board-search row">
 						<div class="col-9">
 							검색어 
@@ -103,13 +101,14 @@
 	      		</div>
 	      	</div>
 	      </div>
-      </div>
     </section>
+
   </main><!-- End #main -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-</body>
 <script>
 	$(function(){
+		
+		//검색어 선택했는지 확인
 		$(".btn-search").on("click", function(){
 			var radioSearch = $("input[name='searchtype']").is(":checked");
 			if(radioSearch != true){
@@ -119,4 +118,5 @@
 		});
 	});
 </script>
+</body>
 </html>

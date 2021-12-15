@@ -56,7 +56,7 @@
 	      						<th scope="col">번호</th>
 	      						<th scope="col">제목</th>
 	      						<th scope="col">추천</th>
-	      						<th scope="col">작성자</th>
+	      						<th scope="col">작성자(닉네임)</th>
 	      						<th scope="col">작성일</th>
 	      						<th scope="col">조회</th>
 	      					</tr>
@@ -80,7 +80,7 @@
 					<div class="pagi">
 						${pageNavi }
 					</div>
-					<form action="/noticeSearch.do" method="get">
+					<form action="/freeSearch.do" method="get">
 					<div class="board-search row">
 						<div class="col-9">
 							검색어 
@@ -128,6 +128,15 @@
 				location.href="/freeboardList.do?reqPage=1&orderIndex=1";
 			} else if (orderby == 2){
 				location.href="/freeboardList.do?reqPage=1&orderIndex=2";
+			}
+		});
+		
+		//검색어 선택했는지 확인
+		$(".btn-search").on("click", function(){
+			var radioSearch = $("input[name='searchtype']").is(":checked");
+			if(radioSearch != true){
+				alert("검색어 선택 후 버튼을 눌러주세요!");
+				return false;
 			}
 		});
 	});
