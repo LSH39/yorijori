@@ -13,6 +13,7 @@
 	background-color: gray;
 	height: 3px;
 	width: 830px;
+	margin-top:30px;
 }
 
 /* 메인 콘텐츠 설정 */
@@ -67,7 +68,13 @@
     height:5px;
     
 }
+#read{
+margin-left:550px;
+}
+#mydm{
+float:left;
 
+}
 </style>
 </head>
 <body>
@@ -85,8 +92,10 @@
        </c:choose>  
 		<!-- 메인 콘텐츠 -->
 		<div class="main-content">
-			<h3 id="h_hotel">●내 쪽지함 ●</h3>
+			<h3 id="mydm">●내 쪽지함 ●</h3>
+			<h5 id="read">읽지 않은 쪽지 : <span style="color: red;">${totalCount }개</span></h5>
 			<div id="line2"></div>
+			 	
 			<br>
 			   <c:forEach items="${list}" var="md" varStatus="i">
 			<div class="dm">
@@ -101,7 +110,7 @@
 							<td id="name">${md.dmSender}</td>
 						</tr>
 						<tr>
-							<td id="content">${md.dmContent }</td>
+							<td id="content"><a href="#">${md.dmContent }</a></td>
 						</tr>
 						<tr>
 							<td id="time">${md.dmDate}</td>

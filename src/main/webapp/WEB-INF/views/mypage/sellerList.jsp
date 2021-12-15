@@ -176,7 +176,7 @@ function orderDetail(orderNo){
                       <span class="it_info1"><b id="m">주문수량: </b>&emsp;${ms.orderOptionAmount}개</span>&emsp;<br>
                      <span class="it_info1"><b id="m">결제금액: </b>&emsp;${ms.orderPayment}원</span><br>
                      <span class="it_info1"><b id="m">배송비:</b>&emsp;무료배송</span>&emsp;<br> 
-                     <span class="it_info1"><b id="m">결제방식: </b>&emsp;${ms.orderPayOption}</span>&emsp;<br> 
+                     <span class="it_info1"><b id="m">결제방식: </b>&emsp;${ms.card}</span>&emsp;<br> 
                     <span class="it_info1"><b id="m">결제번호: </b>&emsp;${ms.impUid}</span>&emsp;<br>
 
                 </div>
@@ -185,7 +185,7 @@ function orderDetail(orderNo){
                     <span class="it_info1"><b id="m">주문자이름: </b>&emsp;${ms.orderName}</span>&emsp;<br>
                     <span class="it_info1"><b id="m">주문자이메일: </b>&emsp;${ms.orderEmail}</span><br>
                      <span class="it_info1"><b id="m">주문자 연락처: </b>&emsp;${ms.orderPhone}</span><br>
-                    <span class="it_info1"><b id="m">주문상태: </b>&emsp;${ms.orderStatus}</span>&emsp;<br>
+                    <span class="it_info1"><b id="m">주문상태: </b>&emsp;${ms.status}</span>&emsp;<br>
                     <span class="it_info1"><b id="m">요청사항: </b>&emsp;${ms.orderRequest}</span>&emsp;<br>
                 </div>
              </div>

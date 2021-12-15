@@ -63,7 +63,7 @@
 		<typeAlias type="kr.or.mypage.model.vo.Mydm" alias="md" />
 		<typeAlias type="kr.or.mypage.model.vo.DetailOrder" alias="dd" />
 		<typeAlias type="kr.or.milkit.model.vo.Product" alias="pd" />
-		       
+		<typeAlias type="kr.or.mypage.model.vo.followCount" alias="f"/>      
 
 	</typeAliases>
 </configuration>

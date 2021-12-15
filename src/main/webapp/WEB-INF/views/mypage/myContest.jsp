@@ -56,12 +56,17 @@
     height:80px;
     float: left;
     text-align: center;
+   
 }.eve5{
     width: 160px;
     height:80px;
     float: left;
     text-align: center;
 }
+#winn{
+ color:red;
+}
+
 </style>
 </head>
 <body>
@@ -100,7 +105,7 @@
                 <div class="eve2">${myc.recipeTitle }</div>
                 <div class="eve3">${myc.enterDate }</div>
                 <div class="eve4">${myc.contestMonth }</div>
-                <div class="eve4">${myc.contestResult }</div>
+                <div class="eve4" id="winn">${myc.winResult}</div>
 
                 </div>
                </c:forEach>
@@ -110,6 +115,6 @@
 					</div>
         </div>
 
-
+   <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
