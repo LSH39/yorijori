@@ -16,14 +16,15 @@
 	color: #000000;
 }
 .contest-banner-content>h2>span{
-	color: #BD0000;
+	color: #8E44AD;
 }
 .contest-banner-content>h5{
 	font-family: "TmoneyRoundWindRegular";
 	font-size: 18px;
 }
 .contest-banner-content>h5, .contest-banner-content>h5>span{
-	color: #BD0000;
+	color: #8E44AD;
+	font-weight: bolder;
 }
 .btn-announce{
 	border: 1px solid #ADADAD;

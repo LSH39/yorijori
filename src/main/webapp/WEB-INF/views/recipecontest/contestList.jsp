@@ -14,48 +14,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <script src="resources/summernote/jquery-3.3.1.js"></script>
 <main id="main">
-		<div class="christmas-lights">
-	      		<ul class="lightrope">
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				 </ul>
-	    </div>
 		<div class="contest-banner">
 	      	<div class="contest-banner-content">
 	      		<h2><span class="thisyr"></span>년 <span class="thismonth"></span>월</h2>
 	      		<h2>레시피경연대회 온라인 투표</h2><br>
-	      		<h5><span style="color:black;">참가 및 투표기간:</span> 
+	      		<h5><span style="color:#454545;">참가 및 투표기간:</span> 
 	      		<span class="thisyr"></span>.
 	      		<span class="thismonth"></span>.01 ~ 
 	      		<span class="thisyr"></span>.
