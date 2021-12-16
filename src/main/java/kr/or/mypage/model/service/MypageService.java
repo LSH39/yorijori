@@ -20,14 +20,17 @@ import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyFreeBoardPageData;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.MyLikeRecipePageData;
+import kr.or.mypage.model.vo.MyPointPageData;
 import kr.or.mypage.model.vo.Mychat;
 import kr.or.mypage.model.vo.MycontestPagedata;
 import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.MyorderPageData;
+import kr.or.mypage.model.vo.Mypoint;
 import kr.or.mypage.model.vo.Mysell;
 import kr.or.mypage.model.vo.ReadDm;
 import kr.or.mypage.model.vo.followCount;
+import kr.or.point.model.vo.Point;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -464,9 +467,125 @@ public class MypageService {
 
 		public ReadDm myDmList(String dmReceiver) {
 			ArrayList<Mydm> list = dao.myDmList(dmReceiver);
-		     int totalCount = dao.countsDm();
-		     ReadDm rd = new ReadDm(list,totalCount);
+		     int dmCount = dao.countsDm();
+		     ReadDm rd = new ReadDm(list,dmCount);
 				return rd;
 		}
-	
+    /*내 포인트 내역*/
+		/*
+		public MyPointPageData pointList(int reqPage) {
+			//페이지당 게시물 개수
+			int numPerPage = 1;
+			int end = reqPage * numPerPage;
+			int start = end - numPerPage + 1;
+
+			//한 페이지
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+			ArrayList<Mypoint> list = dao.pointList(map);
+
+			//페이지 네비게이션 제작
+			int totalCount = dao.pointCount();
+			int totalPage = 0;
+
+			if(totalCount%numPerPage == 0) {
+				totalPage = totalCount/numPerPage;
+			} else {
+				totalPage = totalCount/numPerPage+1;
+			}
+			int pageNaviSize = 5;
+			int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+
+			String pageNavi = "<ul class='pagination'>";
+
+			if(pageNo != 1) {
+				pageNavi += "<li class=\"page\">";
+				pageNavi += "<a class=\"page-link\" href='/myBoardList.do?freeWriter=111&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			}
+			for(int i=0;i<pageNaviSize;i++){
+				if(pageNo == reqPage) {
+					pageNavi += "<li class=\"page\">";
+					pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				} else {
+					pageNavi += "<li class='page'>";
+					pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>";
+					pageNavi += pageNo+"</a></li>";
+				}
+				pageNo++;
+				if(pageNo>totalPage) {
+					break;
+				}
+			}
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page'>";
+				pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>";
+				pageNavi += "&gt;</a></li>";
+			}
+			pageNavi += "</ul>";
+			MyPointPageData ppd = new MyPointPageData(list,pageNavi,start,totalCount);
+			return ppd;
+		}
+	*/
+     
+		public ArrayList<Mypoint> myPoint(String memberNo) {
+			ArrayList<Mypoint> list = dao.mypoint(memberNo);
+			return list;
+		}
+
+		public MyPointPageData pointList(int reqPage) {
+			//페이지당 게시물 개수
+			int numPerPage = 5;
+			int end = reqPage * numPerPage;
+			int start = end - numPerPage + 1;
+
+			//한 페이지
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+			ArrayList<Mypoint> list = dao.selectPointList(map);
+
+			//페이지 네비게이션 제작
+			int totalCount = dao.pointCount();
+			int totalPoint = dao.totalPoint();
+			int usePoint = dao.usePoint();
+			int totalPage = 0;
+
+			if(totalCount%numPerPage == 0) {
+				totalPage = totalCount/numPerPage;
+			} else {
+				totalPage = totalCount/numPerPage+1;
+			}
+			int pageNaviSize = 5;
+			int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+
+			String pageNavi = "<ul class='pagination'>";
+
+			if(pageNo != 1) {
+				pageNavi += "<li class=\"page\">";
+				pageNavi += "<a class=\"page-link\" href='/mycouponList.do?memberNo=111&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			}
+			for(int i=0;i<pageNaviSize;i++){
+				if(pageNo == reqPage) {
+					pageNavi += "<li class=\"page\">";
+					pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo=111&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				} else {
+					pageNavi += "<li class='page'>";
+					pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo=111&reqPage="+pageNo+"'>";
+					pageNavi += pageNo+"</a></li>";
+				}
+				pageNo++;
+				if(pageNo>totalPage) {
+					break;
+				}
+			}
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page'>";
+				pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo=111&reqPage="+pageNo+"'>";
+				pageNavi += "&gt;</a></li>";
+			}
+			pageNavi += "</ul>";
+			MyPointPageData ppd = new MyPointPageData(list,pageNavi,start,totalCount,totalPoint,usePoint);
+			return ppd;
+		}
 }

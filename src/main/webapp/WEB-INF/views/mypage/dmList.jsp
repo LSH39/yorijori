@@ -92,8 +92,8 @@ float:left;
        </c:choose>  
 		<!-- 메인 콘텐츠 -->
 		<div class="main-content">
-			<h3 id="mydm">●내 쪽지함 ●</h3>
-			<h5 id="read">읽지 않은 쪽지 : <span style="color: red;">${totalCount }개</span></h5>
+			<h3 id="mydm">●MY DM 내역 ●</h3>
+			<h5 id="read">읽지 않은 쪽지 : <span style="color: red;">${dmCount }개</span></h5>
 			<div id="line2"></div>
 			 	
 			<br>
@@ -102,7 +102,8 @@ float:left;
             
 				<div class="pho"><div class="count">${i.count}</div>
 				  
-					<img id="pic" src="resources/img/mypage/profile.jpeg">
+					<%-- <img id="pic" src="resources/img/mypage/profile.jpeg">--%>
+					<img id="pic" src="resources/upload/member_profile/${md.profilePath}">
 				</div>
 				<div class="dmC">
 					<table class="dContent">

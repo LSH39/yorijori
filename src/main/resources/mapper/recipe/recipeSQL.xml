@@ -62,11 +62,12 @@
  		    select
  			recipe_no as recipeNo,
  			recipe_title as recipeTitle, 
+ 			recipe_writer as recipeWriter,
  			filepath,
  			read_count as readCount,
  			recipe_date recipeDate,
  			subhead,
- 			recipe_video as recipeVide,
+ 			recipe_video as recipeVideo,
  			recipe_time as recipeTime,
  			food_name as foodName,
  			recipe_time as recipeTime, 

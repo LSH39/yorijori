@@ -21,7 +21,9 @@ import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.Mychat;
 import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
+import kr.or.mypage.model.vo.Mypoint;
 import kr.or.mypage.model.vo.Mysell;
+import kr.or.point.model.vo.Point;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -213,12 +215,47 @@ public class MypageDao {
 		List<Mydm> list = sqlSession.selectList("mypage.dmList");
 		return (ArrayList<Mydm>) list;
 	}
-	//2.
+	//*dm개수*/
 	public int countsDm() {
-		int totalCount = sqlSession.selectOne("mypage.countDm");
+		int dmCount = sqlSession.selectOne("mypage.countDm");
+		return dmCount;
+	}
+	/*
+	//1포인트내역 조회
+	public ArrayList<Mypoint> pointList(HashMap<String, Object> map) {
+		List<Mypoint> list = sqlSession.selectList("mypage.pointList");
+		return (ArrayList<Mypoint>) list;
+	}
+	//2포인트내역개수 조회
+	public int pointCount() {
+		int totalCount = sqlSession.selectOne("mypage.pointCount");
 		return totalCount;
 	}
-	
+	*/
+	public ArrayList<Mypoint> mypoint(String memberNo) {
+		List<Mypoint> list = sqlSession.selectList("mypage.mypoint",memberNo);
+		return (ArrayList<Mypoint>)list;
+	}
+	//포인트리스트
+	public ArrayList<Mypoint> selectPointList(HashMap<String, Object> map) {
+		List<Mypoint> list = sqlSession.selectList("mypage.pointList");
+		return (ArrayList<Mypoint>) list;
+	}
+	//1.포인트내역 개수
+	public int pointCount() {
+		int totalCount = sqlSession.selectOne("mypage.countPoint");
+		return totalCount;
+	}
+	//2.총포인트
+	public int totalPoint() {
+		int totalPoint = sqlSession.selectOne("mypage.totalPoint");
+		return totalPoint;
+	}
+	//3.사용가능포인트
+	public int usePoint() {
+		int usePoint = sqlSession.selectOne("mypage.usePoint");
+		return usePoint;
+	}
 	
 
 

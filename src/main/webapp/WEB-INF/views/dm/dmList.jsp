@@ -48,16 +48,47 @@
     
     <c:forEach items="${list }" var="dm">
     <main class="main-screen">
-      <a class="link" href="/dmView.do?classNo=${dm.classNo }">
+      <a class="link" href="/dmView1.do?dmRoomNo=${dm.dmRoomNo }">
         <div class="user-component">
           <div class="user-component__column">
-            <img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />
+          	<c:choose>
+              	<c:when test="${sessionScope.m.memberNickname eq dm.dmReceiver}">
+              		<c:choose>
+              			<c:when test="${not empty dm.dmSpic }">
+	            			<img class="user-component__profile_img" src="./resources/upload/member/${dm.dmSpic }" />          		
+              			</c:when>
+              			<c:otherwise>
+	            			<img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />          		
+              			</c:otherwise>
+              		</c:choose>
+          		</c:when>
+              	<c:when test="${sessionScope.m.memberNickname ne dm.dmReceiver}">
+              		<c:choose>
+              			<c:when test="${not empty dm.dmRpic }">
+            				<img class="user-component__profile_img" src="./resources/upload/member/${dm.dmRpic }" />
+              			</c:when>
+              			<c:otherwise>
+	            			<img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />          		
+              			</c:otherwise>
+              		</c:choose>
+          		</c:when>          		
+          	</c:choose>
             <div class="user-component__text">
-              <h4 class="user-component__text-name">${dm.dmReceiver }</h4>
+              <h4 class="user-component__text-name">
+              	<c:choose>
+              		<c:when test="${sessionScope.m.memberNickname eq dm.dmReceiver}">
+              			${dm.dmSender }
+              		</c:when>
+              		<c:when test="${sessionScope.m.memberNickname ne dm.dmReceiver}">
+              			${dm.dmReceiver }
+              		</c:when>
+              	</c:choose>
+              </h4>
               <h6 class="user-component__text-preview" >
                 ${dm.dmContent }
               </h6>
             </div>
+            
           </div>
           <div class="user-component__column">
             <span class="user-component__time">${dm.dmDate.substring(11, 16) }</span>
@@ -68,7 +99,7 @@
             	</c:when>
             	<c:when test="${dm.dmReadFlag eq 0 }">
             		<div class="badge">
-            		X
+            		!
             		</div>
             	</c:when>
             </c:choose>

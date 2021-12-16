@@ -141,10 +141,7 @@
 			}
 			
 		$(function() {
-			$("#uploadBtn").click(function(e) {
-				e.preventDefault();
-				$("#uploadImg").click();
-			});	
+
 			
 			$("#plusBtn").click(function() {
 				var mHTML = "<div class='materialBox'>"

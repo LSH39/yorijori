@@ -16,7 +16,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
-
+	<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">
+	<div><span><a href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span><span><a href="/delRecipe.do">삭제</a></span></div>
+	</c:if>
 		<div id="topImg">
 			<img src="/resources/img/recipe/recipe.jpg">
 		</div>
@@ -116,7 +118,6 @@
 					</form>
 				</c:if>
 			</div>
-
 			<c:forEach items="${list}" var="rc">
 				<img src="/resources/img/recipe/person.png" width="30px">
 				<span class="rcNmae">${rc.nickname }</span>
@@ -135,8 +136,9 @@
 				</c:if>
 			</c:forEach>
 		</div>	
-			<c:forEach items="${rb.RList }" var="rc" varStatus="i">		
-			<div class="contents">
+			
+			<c:forEach items="${rb.RList }" var="rc" varStatus="i">
+			<div class="contents">		
 			<div class="ds">${rc.rContentBr }</div>
 			<img src="/resources/upload/recipeContent/${rc.filepath }">
 			</div>
@@ -147,7 +149,7 @@
 	</div>
 	<script>
 		var memberNo = $("#memberNo").val();
-		
+
 		function initTab() {
 			var frms = $(".view");
 			for (var i = 0; i < frms.length; i++) {
@@ -353,6 +355,7 @@
 		$("#cancelBtn").click(function() {
 			$("#modal-wrap").hide();
 		});
+		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

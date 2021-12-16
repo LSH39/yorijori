@@ -8,13 +8,13 @@ import lombok.Data;
 public class ReadDm {
 	private ArrayList<Mydm> list;
 
-	private int totalCount;
+	private int dmCount;
 	
 	
-	public ReadDm(ArrayList<Mydm> list, int totalCount) {
+	public ReadDm(ArrayList<Mydm> list, int dmCount) {
 		super();
 		this.list = list;
-		this.totalCount = totalCount;
+		this.dmCount = dmCount;
 	}
 
 

@@ -80,7 +80,7 @@ mybatis xml mapper단
 		update cooking_class set class_curr_nop=class_curr_nop-1 where class_no=#{classNo}
 	</update>
 	
-	<!-- 클래스 개설자 닉네임 -->
+	<!-- 클래스 개설자 닉네임 dm에 사용 -->
 	<select id="selectOneNickname" parameterType="_int" resultType="String">
 		select
 			member_nickname as memberNickname
