@@ -51,13 +51,13 @@
 		      					<c:choose>
 									<c:when test="${not empty fileList }">
 										<div class="dropdown">
-										  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+										  <button class="btn btn-announce dropdown-toggle" type="button" id="fileDropDownButton" data-bs-toggle="dropdown" aria-expanded="false">
 										    <i class="bi bi-file-arrow-down"></i> ${fn:length(fileList) }개
 										  </button>
-										  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-										    <li><a class="dropdown-item" href="#">Action</a></li>
-										    <li><a class="dropdown-item" href="#">Another action</a></li>
-										    <li><a class="dropdown-item" href="#">Something else here</a></li>
+										  <ul class="dropdown-menu" aria-labelledby="fileDropDownButton">
+										  <c:forEach items="${fileList }" var="ff" varStatus="i">
+										  	<li><a class="dropdown-item filedown" href="/fileDownFree.do?ffNo=${ff.ffNo }">${ff.ffFilename }</a></li>
+										  </c:forEach>
 										  </ul>
 										</div>
 									</c:when>
@@ -315,7 +315,14 @@
   			location.href="/insertFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
   		});
   		
-  		
+  		//파일다운로드 제한
+  		$(".filedown").on("click", function(){
+  			var memberId = $("#fcWriter").val();
+  			if(memberId == null){
+  				alert("로그인시 이용 가능합니다.");
+  				return false;
+  			}
+  		})
   		
   	});
   	

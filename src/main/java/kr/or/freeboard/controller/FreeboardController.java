@@ -1,13 +1,18 @@
 package kr.or.freeboard.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +29,7 @@ import kr.or.freeboard.model.vo.FreeboardFile;
 import kr.or.freeboard.model.vo.FreeboardLike;
 import kr.or.freeboard.model.vo.FreeboardPageData;
 import kr.or.freeboard.model.vo.FreeboardViewData;
+import kr.or.notice.model.vo.Notice;
 import kr.or.notice.model.vo.NoticePageData;
 
 @Controller
@@ -203,6 +209,44 @@ public class FreeboardController {
 		model.addAttribute("totalCount", searchResult.getTotalCount());
 		return "freeboard/searchList";
 		
+	}
+	
+	@RequestMapping(value="/fileDownFree.do")
+	public void fileDown(Model model, HttpServletRequest request, HttpServletResponse response, int ffNo) throws IOException {
+		FreeboardFile ff = service.getFreeboardFile(ffNo);
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/freeboard/");
+		String file = savePath + ff.getFfFilepath();
+		
+		FileInputStream fis = new FileInputStream(file);
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		ServletOutputStream sos = response.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(sos);
+		
+		String resFilename = "";
+		Boolean bool = 
+				request.getHeader("user-agent").indexOf("MSIE") != -1 ||
+				request.getHeader("user-agent").indexOf("Trident") != -1;
+		if(bool) { //브라우저 IE인 경우
+			resFilename = URLEncoder.encode(ff.getFfFilename(), "UTF-8");
+			resFilename = resFilename.replaceAll("\\\\", "%20");
+		} else {
+			resFilename = new String(ff.getFfFilename().getBytes("UTF-8"), "ISO-8859-1");
+		}
+		response.setContentType("application/octet-stream");
+		//다운로드할 파일 이름 저장
+		response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+		
+		//파일 전송
+		while(true) {
+			int read = bis.read();
+			if(read != -1) {
+				bos.write(read);
+			} else {
+				break;
+			}
+		}
+		bis.close();
+		bos.close();
 	}
 	
 }

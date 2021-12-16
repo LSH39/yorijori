@@ -175,5 +175,14 @@
             </when>
         </choose>
 	</select>
+	<select id="selectFreeboardFile" parameterType="_int" resultType="ff">
+		select
+			ff_no as ffNo,
+			free_no as freeNo,
+			ff_filename as ffFilename,
+			ff_filepath as ffFilepath
+		from freeboard_file
+		where ff_no = #{ffNo}
+	</select>
 </mapper>
 

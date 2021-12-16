@@ -112,4 +112,9 @@ public class FreeboardDao {
 		int totalCount = sqlSession.selectOne("freeboard.searchCount", map);
 		return totalCount;
 	}
+
+	public FreeboardFile getFreeboardFile(int ffNo) {
+		FreeboardFile ff = sqlSession.selectOne("freeboard.selectFreeboardFile", ffNo);
+		return ff;
+	}
 }

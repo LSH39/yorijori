@@ -74,8 +74,12 @@
 	      			</div>
 	      		</div>
 	      		<div class="backTo">
-	      			<a href="/noticeUpdateFrm.do?noticeNo=${n.noticeNo }"><button class="btn-main btn-update">수정하기</button></a>
-	      			<button class="btn-main btn-delete" onclick='delCheck();'>삭제하기</button>
+	      			<c:choose>
+	      				<c:when test="${n.noticeWriter eq sessionScope.m.memberId}">
+	      					<a href="/noticeUpdateFrm.do?noticeNo=${n.noticeNo }"><button class="btn-main btn-update">수정하기</button></a>
+	      					<button class="btn-main btn-delete" onclick='delCheck();'>삭제하기</button>
+	      				</c:when>
+	      			</c:choose>
 	      			<a href="/noticeList.do?reqPage=1"><button class="btn-main">목록으로</button></a>
 	      		</div>
 	      		<div class="prev-next-list row">

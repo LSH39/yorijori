@@ -213,4 +213,9 @@ public class FreeboardService {
 		
 	}
 
+		public FreeboardFile getFreeboardFile(int ffNo) {
+			FreeboardFile ff = dao.getFreeboardFile(ffNo);
+			return ff;
+		}
+
 }
