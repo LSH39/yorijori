@@ -334,5 +334,17 @@ public class AdminController {
 		model.addAttribute("ranking",ranking);
 		return "admin/ranking";
 	}
+	@RequestMapping(value="/adminSubs.do")
+	public String subs(Model model) {
+		ArrayList<Member2> list = service.subs();
+		model.addAttribute("list",list);
+		return "admin/subs";
+	}
+	@ResponseBody
+	@RequestMapping(value="/rePermission.do")
+	public String rePermission(String memberNo) {
+		int result = service.rePermission(memberNo);
+		return "redirect:/permissionJoin.do?reqPage=1";
+	}
 	
 }
