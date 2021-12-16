@@ -76,8 +76,14 @@
                 	<beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
 	            </beans:props>
 	        </beans:property>
-	       
 	</beans:bean>
+	
+	<!-- 웹소켓. 1:1채팅 -->
+	<beans:bean id="chatWebsoket" class="kr.or.chat.model.service.ChatWebsoket"/>
+	<!-- 웹소켓 설정 -->
+	<websocket:handlers>
+		<websocket:mapping handler="chatWebsoket" path="/chatWebsoket.do"/>
+	</websocket:handlers>
 	
 	
 	<aop:aspectj-autoproxy/>
