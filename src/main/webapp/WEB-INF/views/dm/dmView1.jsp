@@ -27,7 +27,7 @@
         </a>
       </div>
       <div class="alt-header__column">
-        <h1 class="alt-header__title">${receiver }</h1>
+        <h1 class="alt-header__title">XXXX</h1>
       </div>
       <div class="alt-header__column">
         <a class="link" href="#">
@@ -77,37 +77,9 @@
 
       </c:forEach>
       
-      <!-- 메세지 받음 -->
-      <!-- 
-      <div class="message-row">
-        <img src="./resources/img/dm/classtest.jpg"/>
-        <div class="message-row__content">
-          <span class="message__author">멤버 닉네임</span>
-          <div class="message__info">
-            <span class="message__bubble">아니 환불 왜 안해주냐고요</span>
-            <span class="message__time">21:30</span>
-          </div>
-        </div>
-      </div>
-       -->
-      
-      <!-- 메세지 보냄 -->
-      <!-- 
-      <div class="message-row message-row--own">
-        <div class="message-row__content">
-          <div class="message__info">
-            <span class="message__time">21:32</span>
-            <span class="message__bubble">ㅗ</span>
-          </div>
-        </div>
-      </div>
-       -->
-      
     </main>
 	
 	<input type="hidden" class="dmSender" value="${sessionScope.m.memberNickname }">
-	<input type="hidden" class="classNo" value="${classNo }">
-	<input type="hidden" class="dmReceiver" value="${receiver }">
     <div class="reply">
       <div class="reply__column"><i class="far fa-plus-square"></i></div>
       <div class="reply__column">

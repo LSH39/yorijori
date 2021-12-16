@@ -90,6 +90,11 @@ public class RecipeDao {
 		return sqlSession.insert("recipe.insertReport", rp);
 	}
 
+	public int updateRecipe(int recipeNo, int memberNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 }

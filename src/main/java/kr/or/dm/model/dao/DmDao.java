@@ -17,16 +17,16 @@ public class DmDao {
 	private SqlSessionTemplate sqlSession;
 
 	//문의 목록
-	public ArrayList<Dm> selectAllDm() {
+	public ArrayList<Dm> selectAllDm(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		List<Dm> list = sqlSession.selectList("direct.dmList");
+		List<Dm> list = sqlSession.selectList("direct.dmList", map);
 		return (ArrayList<Dm>)list;
 	}
 
 	//문의 조회
-	public ArrayList<Dm> selectOneDm(int classNo) {
+	public ArrayList<Dm> selectOneDm(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		List<Dm> list = sqlSession.selectList("direct.selectOneDm", classNo) ;
+		List<Dm> list = sqlSession.selectList("direct.selectOneDm", map) ;
 		return (ArrayList<Dm>) list; 
 	}
 
@@ -41,4 +41,41 @@ public class DmDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("cookingcls.selectOneNickname", classNo);
 	}
+	
+	//dm 채팅방 번호 조회
+	public int selectOneDmRoomNo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("direct.selectOneDmRoomNo", map);
+	}
+
+	//시퀀스 증가
+	public int incDmRoomNo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("direct.incDmRoomNo");
+	}
+
+	//dm조회할때 dm 채팅방 번호 가져옴
+	public int selectDmRoomNo2(HashMap<String, Object> map2 ) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("direct.selectDmRoomNo2", map2);
+	}
+
+	//클래스 개설자 입장에서 받은 닉네임 확인
+	public String changeReceiver(int dmRoomNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("direct.changeReceiver", dmRoomNo);
+	}
+
+	//문의 목록에서 조회하는거
+	public ArrayList<Dm> selectOneDm(int dmRoomNo) {
+		// TODO Auto-generated method stub
+		List<Dm> list = sqlSession.selectList("direct.selectOneDm2", dmRoomNo);
+		return (ArrayList<Dm>)list;
+	}
+
+	public void updateReadflag(int dmRoomNo) {
+		// TODO Auto-generated method stub
+		sqlSession.update("updateReadflag", dmRoomNo);
+	}
+
 }

@@ -102,6 +102,12 @@ public class RecipeService {
 		return result;
 	}
 
+
+	public int updateRecipe(int recipeNo, int memberNo) {
+		int result = dao.updateRecipe(recipeNo,memberNo);
+		return 0;
+	}
+
 }
 	
 
