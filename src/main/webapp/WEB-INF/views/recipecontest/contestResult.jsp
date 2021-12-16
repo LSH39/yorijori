@@ -65,51 +65,164 @@
 	      		</a>
 	      	</div>
 	    </div>
-      <div class="container">	
-			<div class="board-content">
-	      		<div class="contest-content">
-	      			<ul>
-	      				<c:forEach items="${list }" var="r" varStatus="i">
-	      				<li class="recipe">
-	      					<a href="/recipeView.do?recipeNo=${r.recipeNo }">
-	      						<div class="img-box">
-	      							<img src="resources/upload/recipe/${r.recipePath }" style="width:300px;height:320px;">
-	      						</div>
-	      						<div class="recipe-info">
-	      							<div class="recipe-title"><h4>${r.recipeTitle }</h4></div>
-	      							<div class="recipe-content" style="color:#454545;">${r.recipeContent }</div>
-	      						</div>
-	      					</a>
-	      					<a href="#">
-	      						<div class="recipe-profile">
-	      							<div class="profile-pic">
-	      								<img src="#">
-	      								<h5>${r.memberNickname }</h5>
-	      							</div>
-	      					</a>
-	      							<div class="vote-count">
-	      								<span>${r.voteCount }</span>
-	      								<c:choose>
-	      									<c:when test="${not empty sessionScope.m }">
-	      										<div class="vote">
-	      											<input type="hidden" class="contestNo" value="${r.contestNo }">
-	      											<img src="resources/img/recipecontest/vote-before.png" id="vote">
-	      											<label for="vote">투표하기</label>
-	      										</div>	
-	      									</c:when>
-	      								</c:choose>
-	      							</div>
-	      						</div>
-	      					</a>
-	      				</li>
-	      				</c:forEach>
-	      			</ul>
-	      		</div>
-	      	</div>
+      <div class="container">
+      	<div class="contest-result">
+      		<div class="trophy row">
+      			<ul>
+      				<li>
+	      				<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+						<lord-icon
+						    src="https://cdn.lordicon.com/lupuorrc.json"
+						    trigger="loop"
+						    colors="primary:#121331,secondary:#a39cf4"
+						    style="width:100px;height:100px;">
+						</lord-icon>
+							<h3>1등</h3>
+					</li>
+      				<li>
+      					<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+						<lord-icon
+						    src="https://cdn.lordicon.com/rcopausw.json"
+						    trigger="loop"
+						    colors="primary:#121331,secondary:#e5d1fa"
+						    style="width:100px;height:100px;">
+						</lord-icon>
+      					<h3>2등</h3>
+      				</li>
+      				<li>
+      					<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+						<lord-icon
+						    src="https://cdn.lordicon.com/kdruzgxz.json"
+						    trigger="loop"
+						    colors="primary:#121331,secondary:#e5d1fa"
+						    style="width:100px;height:100px">
+						</lord-icon>
+      					<h3>3등</h3>
+      				</li>
+      				<li>
+      					<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+						<lord-icon
+						    src="https://cdn.lordicon.com/qjvxqdov.json"
+						    trigger="loop"
+						    colors="primary:#eeca66,secondary:#a39cf4"
+						    style="width:100px;height:100px">
+						</lord-icon>
+      					<h3>참가상</h3>
+      				</li>
+      			</ul>
+      		</div>
+      	</div>
+      	<div class="row">
+      		<div class="winners-profile col-sm-9">
+      			<ul>
+      				<li>
+      					<a href="#">
+      						<div><img src="#" style="width:250px;height:200px;"></div>
+      						<div><h4>레시피 제목</h4></div>
+      					</a>
+      					<a href="#">
+      						<div><img src="#" style="width: 100px;height:100px;"></div>
+      						<div><h4>아이디</h4></div>
+      					</a>
+      					<div class="total-vote"><h5>110 </h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
+      				</li>
+      				<li>
+      					<a href="#">
+      						<div><img src="#" style="width:250px;height:200px;"></div>
+      						<div><h4>레시피 제목</h4></div>
+      					</a>
+      					<a href="#">
+      						<div><img src="#" style="width: 100px;height:100px;"></div>
+      						<div><h4>아이디</h4></div>
+      					</a>
+      					<div class="total-vote">
+      						<h5>110</h5>
+      						<img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;">
+      					</div>
+      				</li>
+      				<li>
+      					<a href="#">
+      						<div><img src="#" style="width:250px;height:200px;"></div>
+      						<div><h4>레시피 제목</h4></div>
+      					</a>
+      					<a href="#">
+      						<div><img src="#" style="width: 100px;height:100px;"></div>
+      						<div><h4>아이디</h4></div>
+      					</a>
+      					<div class="total-vote"><h5>110</h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
+      				</li>
+      			</ul>
+      		</div>
+      		<div class="special-winners col-sm-3">
+      			<ul class="winners">
+				  <li>Branding</li>
+				  <li>Identity Design</li>
+				  <li>Web Development</li>
+				  <li>Social Media Setup</li>
+				  <li>Email Marketing</li>
+				  <li>Brochure Development</li>
+				  <li>Logo Design</li>
+				</ul>
+      		</div>
+      	</div>
+      	<div class="prize-tower row">
+      			<ul>
+      				<li><h4>20만 포인트</h4></li>
+      				<li><h4>20만 포인트</h4></li>
+      				<li><h4>20만 포인트</h4></li>
+      				<li><h4>20만 포인트</h4></li>
+      			</ul>
+      	</div>
+      </div>	
   </main><!-- End #main -->
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script>
+  	var x = 0,
+    container = $('.winners'),
+    items = container.find('li'),
+    containerHeight = 0,
+    numberVisible = 5,
+    intervalSec = 2000;
+  	
+  	//세로로 움직이는 사이클
+	function vertCycle() {
+	  	  var firstItem = container.find('li.first').html();
+	  	    
+	  	  container.append('<li>'+firstItem+'</li>');
+	  	  firstItem = '';
+	  	  container.find('li.first').animate({ marginTop: "-50px" }, 600, function(){  $(this).remove(); container.find('li:first').addClass("first"); });
+	  	}
+	
+	
+	
   	$(function(){
+
+  	if(!container.find('li:first').hasClass("first")){
+  	  container.find('li:first').addClass("first");
+  	}
+
+  	items.each(function(){
+  	  if(x < numberVisible){
+  	    containerHeight = containerHeight + $(this).outerHeight();
+  	    x++;
+  	  }
+  	});
+
+  	container.css({ height: containerHeight, overflow: "hidden" });
+
+  	if(intervalSec < 700){
+  	  intervalSec = 700;
+  	}
+
+  	var init = setInterval("vertCycle();",intervalSec);
+
+  	container.hover(function(){
+  	  clearInterval(init);
+  	}, function(){
+  	  init = setInterval("vertCycle();",intervalSec);
+  	});
+  		
+  		
   		//현재 날짜 가져오기 (년/월)
   		var today = new Date();
   		var year = today.getFullYear();
@@ -176,7 +289,6 @@
   				return false;
   			}
   		});
-  		
   		
   		});
   		

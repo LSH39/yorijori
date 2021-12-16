@@ -37,3 +37,104 @@
 	left: 75%;
 	top: 50px;
 }
+ul{
+	overflow: hidden;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.trophy li{
+	float: left;
+	display: flex;
+	align-items: center;
+	padding: 0px 85px;
+	padding-top: 30px;
+}
+.winners-profile{
+	width: 75%;
+}
+.winners-profile li{
+	background: #f1f1f1;
+	float: left;
+	margin: 20px 15px;
+	padding: 10px;
+}
+.winners-profile li div{
+	text-align: center;
+}
+.total-vote{
+	display: flex;
+	justify-content: center;
+}
+.total-vote>h5{
+	padding: 0;
+	margin-top: 7px;
+	margin-right: 10px;
+}
+.prize-tower>ul{
+	display: flex;
+	align-items: flex-end;
+}
+.prize-tower li{
+	float: left;
+	width: calc(100%/4);
+	text-align: center;
+}
+.prize-tower li>h4{
+	padding: 30px;
+}
+.prize-tower li:not(li:last-child){
+	background: rgb(246, 240, 255);
+}
+.prize-tower li:first-child{
+	height: 500px;
+}
+.prize-tower li:nth-child(2){
+	height: 300px;
+}
+.prize-tower li:nth-child(3){
+	height: 150px;
+}
+
+
+
+
+
+.tagline {
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.tagline,
+.tagline a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+ul.winners {
+  width: 20em;
+  padding: 0;
+  margin: 50px auto 0;
+  border: 10px solid #fff;
+  box-shadow: 0px 2px 3px #eaeaea;
+
+}
+
+ul.winners li {
+  background: #f7f7f7;
+  color: #ddd;
+  list-style-type: none;
+  padding: 1em;
+  margin: 0;
+  transition: background-color 0.5s;
+}
+
+ul.winners li:nth-child(2) {
+  color: #fff;
+  background: #1998c4;
+}
+
+
+
+
+
