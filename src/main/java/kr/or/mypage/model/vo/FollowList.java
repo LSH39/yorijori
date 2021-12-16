@@ -13,5 +13,6 @@ public class FollowList {
 	private String recipeDate;
 	private String subhead;
 	private String memberNickname;
+	private int cnt;
 
 }

@@ -8,195 +8,229 @@
 		MEMBER_PW as memberPw,
 		MEMBER_EMAIL as memberEmail,
 		MEMBER_NAME as memberName,
-		MEMBER_NICKNAME as memberNickname,
+		MEMBER_NICKNAME
+		as memberNickname,
 		MEMBER_PHONE as memberPhone,
-		MEMBER_BIRTH as memberBirth,
+		MEMBER_BIRTH as
+		memberBirth,
 		postcode,
 		ADDRESS_ROAD as addressRoad,
-		ADDRESS_DETAIL as addressDetail,
+		ADDRESS_DETAIL as
+		addressDetail,
 		MEMBER_CONSENT as memberConsent,
-		PROFILE_PATH as profilePath,
+		PROFILE_PATH as
+		profilePath,
 		PROFILE_INTRO as profileIntro,
-		CERTIFICATE_PATH as certificatePath,
+		CERTIFICATE_PATH as
+		certificatePath,
 		MEMBER_LEVEL as memberLevel,
-		MEMBER_POINT as memberPoint,
+		MEMBER_POINT as
+		memberPoint,
 		ENROLL_DATE as enrollDate,
 		WITHDRAW_DATE as withdrawDate,
 		MEMBER_BLACK as memberBlack
 		from member where
-		member_id=#{memberId} 
+		member_id=#{memberId}
 	</select>
-		<select id="sellerPage" resultType="m" parameterType="string">
+	<select id="sellerPage" resultType="m" parameterType="string">
 		select
 		MEMBER_NO as memberNo,
 		MEMBER_ID as memberId,
 		MEMBER_PW as memberPw,
 		MEMBER_EMAIL as memberEmail,
 		MEMBER_NAME as memberName,
-		MEMBER_NICKNAME as memberNickname,
+		MEMBER_NICKNAME
+		as memberNickname,
 		MEMBER_PHONE as memberPhone,
-		MEMBER_BIRTH as memberBirth,
+		MEMBER_BIRTH as
+		memberBirth,
 		postcode,
 		ADDRESS_ROAD as addressRoad,
-		ADDRESS_DETAIL as addressDetail,
+		ADDRESS_DETAIL as
+		addressDetail,
 		MEMBER_CONSENT as memberConsent,
-		PROFILE_PATH as profilePath,
+		PROFILE_PATH as
+		profilePath,
 		PROFILE_INTRO as profileIntro,
-		CERTIFICATE_PATH as certificatePath,
+		CERTIFICATE_PATH as
+		certificatePath,
 		MEMBER_LEVEL as memberLevel,
-		MEMBER_POINT as memberPoint,
+		MEMBER_POINT as
+		memberPoint,
 		ENROLL_DATE as enrollDate,
 		WITHDRAW_DATE as withdrawDate,
 		MEMBER_BLACK as memberBlack
 		from member where
-		member_id=#{memberId} 
+		member_id=#{memberId}
 	</select>
 	<update id="updateMember" parameterType="m">
-	update member set
+		update member set
 		member_email=#{memberEmail},
-        member_nickName=#{memberNickname},
-        member_phone=#{memberPhone},
-        member_birth=#{memberBirth},
-        postcode=#{postcode},
-        address_road=#{addressRoad},
-        address_detail=#{addressDetail},
-        profile_intro=#{profileIntro},
-        member_name=#{memberName}
-    where member_id=#{memberId} 
+		member_nickName=#{memberNickname},
+		member_phone=#{memberPhone},
+		member_birth=#{memberBirth},
+		postcode=#{postcode},
+		address_road=#{addressRoad},
+		address_detail=#{addressDetail},
+		profile_intro=#{profileIntro},
+		member_name=#{memberName}
+		where member_id=#{memberId}
 	</update>
-	
+
 	<update id="upSeller" parameterType="string">
-	update member set member_level=5 where member_Id=#{memberId}  and member_pw=#{memberPw} 
-	
+		update member set member_level=5 where member_Id=#{memberId} and
+		member_pw=#{memberPw}
+
 	</update>
-	<delete id="deleteMember"  parameterType="string">
-	     delete from member where member_id=#{memberId}  and member_pw=#{memberPw} 
-	
+	<delete id="deleteMember" parameterType="string">
+		delete from member where member_id=#{memberId} and member_pw=#{memberPw}
+
 	</delete>
 
 
-	
+
 	<select id="myRecipe" parameterType="_int" resultType="rb">
-		select 
+		select
 		RECIPE_NO as recipeNo,
 		RECIPE_WRITER as recipeWriter,
-		RECIPE_TITLE as recipeTitle,
+		RECIPE_TITLE as
+		recipeTitle,
 		filepath,
 		READ_COUNT as readCount,
-		RECIPE_DATE as recipeDate,
+		RECIPE_DATE as
+		recipeDate,
 		subhead,
 		RECIPE_VIDEO as recipeVideo,
-		RECIPE_TIME as recipeTime,
+		RECIPE_TIME as
+		recipeTime,
 		FOOD_NAME as foodName,
 		RECIPE_LEVEL as recipeLevel,
 		situation,
 		material
-		from recipe_board 
+		from recipe_board
 		where recipe_writer=#{memberNo}
-	
+
 	</select>
-<select id="myClass" parameterType="string" resultType="mcr">
-select 	cc.class_title as classTitle,
+	<select id="myClass" parameterType="string" resultType="mcr">
+		select cc.class_title as classTitle,
 		cc.class_curr_nop as classCurrNop,
 		cc.class_start as classStart,
 		cc.class_end as classEnd ,
-		cc.class_price as classPrice,
-		cc.class_time as classTime,
-		cc.class_location as classLocation,
+		cc.class_price
+		as classPrice,
+		cc.class_start_time as classStartTime,
+		cc.class_end_time as classEndTime,
+		cc.class_location1 as
+		classLocation1,
+		cc.class_location2 as classLocation2,
 		cc.class_Status as classStatus
-        ,cr.rsrv_no as rsrvNo,
-        cr.member_nickname as memberNickname
-     from cooking_rsrv cr,cooking_class cc
-      where cc.class_no =cr.class_no and cr.member_nickname='승민일반'
+		,cr.rsrv_no as rsrvNo,
+		cr.member_nickname as memberNickname
+		from cooking_rsrv cr,cooking_class cc
+		where cc.class_no =cr.class_no and cr.member_nickname='승민전문가'
 
 
-</select>
-<select id="myclassReview" parameterType="_int" resultType="mreview">
-    select r.REVIEW_NO as reviewNo ,
+	</select>
+	<select id="myclassReview" parameterType="_int"
+		resultType="mreview">
+		select r.REVIEW_NO as reviewNo ,
 		r.REVIEW_FLAG as reviewFlag,
-		r.CLASS_NO as classNo,
+		r.CLASS_NO as
+		classNo,
 		r.REVIEW_CONTENT as reviewContent,
 		r.REVIEW_RATE as reviewRate,
 		r.REVIEW_DATE as reviewDate,
 		cook.class_title as classTitle
-		from review r,cooking_class cook
-	    where r.CLASS_NO =cook.class_no and r.member_nickname='테스트16' and r.review_flag=2
+		from review
+		r,cooking_class cook
+		where r.CLASS_NO =cook.class_no and r.member_nickname='테스트16' and
+		r.review_flag=2
 
 
-</select>
-<select id="myitemReview" parameterType="_int" resultType="ireview">
-	  select r.REVIEW_NO  as reviewNo,
+	</select>
+	<select id="myitemReview" parameterType="_int"
+		resultType="ireview">
+		select r.REVIEW_NO as reviewNo,
 		r.REVIEW_FLAG as reviewFlag,
-		r.product_NO as productNo,
-		r.REVIEW_CONTENT  as reviewContent,
-		r.REVIEW_RATE as reviewRate,
+		r.product_NO as
+		productNo,
+		r.REVIEW_CONTENT as reviewContent,
+		r.REVIEW_RATE as
+		reviewRate,
 		r.REVIEW_DATE as reviewDate,
 		p.milkit_name as milkitName
 		from review r,product p
-	    where r.product_NO =p.product_no and r.member_nickname='테스트16' and r.review_flag=1
+		where r.product_NO =p.product_no and r.member_nickname='테스트16' and
+		r.review_flag=1
 
 
-</select>
+	</select>
 
-<select id="contestWinner"  resultType="ct">
-		 select cr.contest_no as contestNo,
-		 cr.contest_month as contestMonth,
-		 rb.recipe_title as recipeTitle,
-		 rb.recipe_writer as recipeWriter
-		 from contest_recipe cr,recipe_board rb
-		 where cr.recipe_no=rb.recipe_no and cr.contest_result=1 
-		 order by contest_month asc
-
-
-</select>
-
-<select id="myItem" resultType="mi" parameterType="_int">
-		 select 
-		 product_no as productNo,
-		 milkit_name as milkitName,
-		 milkit_writer as milkitWriter,
-		 milkit_price as milkitPrice,
-		 filePath as filepath,
-		 milkit_date as milkitDate,
-		 milkit_stock as milkitStock
-		 from product where milkit_writer=111
+	<select id="contestWinner" resultType="ct">
+		select cr.contest_no as contestNo,
+		cr.contest_month as contestMonth,
+		rb.recipe_title as recipeTitle,
+		rb.recipe_writer as recipeWriter
+		from contest_recipe cr,recipe_board rb
+		where cr.recipe_no=rb.recipe_no and cr.contest_result=1
+		order by contest_month asc
 
 
-</select>
+	</select>
 
-<select id="myBoard" resultType="fb" parameterType="_int">
-		select free_no as freeNo,
+	<select id="myItem" resultType="mi" parameterType="_int">
+		select
+		product_no as productNo,
+		milkit_name as milkitName,
+		milkit_writer as milkitWriter,
+		milkit_price as milkitPrice,
+		filePath as filepath,
+		milkit_date as milkitDate,
+		milkit_stock as milkitStock
+		from product where milkit_writer=111
+
+
+	</select>
+
+	<select id="myBoard" resultType="fb" parameterType="_int">
+		select
+		free_no as freeNo,
 		free_writer as freeWriter,
 		free_title as freeTitle,
 		free_content as freeContent,
 		reg_date as regDate,
-		free_readcount as freeReadcount
-        from freeboard where free_writer=#{memberId}
- 
+		free_readcount as
+		freeReadcount
+		from freeboard where free_writer=#{memberId}
 
-</select>
-<select id="followList" resultType="fol" parameterType="_int">
-    
-select a.recipe_Writer as recipeWriter,
-	     a.recipe_Title as recipeTitle,
-	     a.filepath as filepath,
-	     a.subhead as subhead,
-         a.recipe_no as recipeNo,
-	     (select member_nickName from member where member_no = a.recipe_writer)as memberNickname
-	    from recipe_board a
-	    where a.recipe_writer in (SELECT follow_no from follow where member_no=111)
 
-</select>
- <select id="followCount" resultType="_int">
-	select count(*) from recipe_like where recipe_no=#{recipeNo} 
-    
 	</select>
-<select id="chatList" resultType="mc" parameterType="_int">
-		select a.chat_no as chatNo,
+	<select id="followList" resultType="fol" parameterType="_int">
+
+	select a.recipe_Writer as recipeWriter
+		     , a.recipe_Title as recipeTitle
+		     , a.filepath as filepath
+		     , a.subhead as subhead
+		     , a.recipe_no as recipeNo             
+             , (select count(*)from recipe_like where recipe_no=a.recipe_no) as cnt
+		     , (select member_nickName from member where member_no = a.recipe_writer) as memberNickname
+		  from recipe_board a
+               
+		 where a.recipe_writer in (SELECT follow_no from follow where member_no=111) 
+
+	</select>
+	<select id="followCount" resultType="_int">
+		 select count(*) from recipe_board where recipe_writer in (SELECT follow_no from follow where member_no=111) 
+
+	</select>
+	<select id="chatList" resultType="mc" parameterType="_int">
+	   	select a.chat_no as chatNo,
 		a.chat_send as chatSend ,
+        (select profile_path from member where member_no=a.chat_send)as profilePath,
 		a.chat_receive as chatReceive,
 		a.chat_content as chatContent,
 		a.chat_date as chatDate
+      
 	  from chat a 
 	     , (select chat_send , max(chat_no) as chat_no
 	          from chat
@@ -207,299 +241,375 @@ select a.recipe_Writer as recipeWriter,
 	    and a.chat_no = b.chat_no
 
 
-</select>
+	</select>
 
-<select id="orderList" resultType="mo" parameterType="_int">
+	<select id="orderList" resultType="mo" parameterType="_int">
 
- select 
-        b.ORDER_NO as orderNo,
-        b.MEMBER_NO as memberNo,
-        b.ORDER_NAME as orderName,
-        b.ORDER_EMAIL as orderEmail,
-        b.ORDER_PHONE as orderPhone,
-        b.ORDER_POSTCODE as orderPostcode,
-        b.ORDER_ADDR_ROAD as orderAddrRoad,
-        b.ORDER_ADDR_DETAIL as orderAddrDetail,
-        b.ORDER_REQUEST as orderRequest,
-        b.ORDER_PAY_OPTION as orderPayOption,
-        b.ORDER_PRICE as orderPrice,
-        b.ORDER_SALE as orderSale,
-        b.ORDER_PAYMENT as orderPayment,
-        b.IMP_UID as impUid,
-        b.ORDER_STATUS as orderStatus
-      
-     from
-     order_tbl b
-     where  b.member_no=111
+		select
+		b.ORDER_NO as orderNo,
+		b.MEMBER_NO as memberNo,
+		b.ORDER_NAME as orderName,
+		b.ORDER_EMAIL as orderEmail,
+		b.ORDER_PHONE as orderPhone,
+		b.ORDER_POSTCODE as orderPostcode,
+		b.ORDER_ADDR_ROAD as orderAddrRoad,
+		b.ORDER_ADDR_DETAIL as orderAddrDetail,
+		b.ORDER_REQUEST as orderRequest,
+		b.ORDER_PAY_OPTION as orderPayOption,
+		b.ORDER_PRICE as orderPrice,
+		b.ORDER_SALE as orderSale,
+		b.ORDER_PAYMENT as orderPayment,
+		b.IMP_UID as impUid,
+		b.ORDER_STATUS as orderStatus
 
-</select>
+		from
+		order_tbl b
+		where b.member_no=111
 
-<select id="orderDetail" resultType="dd" parameterType="_int">
- select 
-        b.order_no as orderNo,
-        b.MEMBER_NO as memberNo,
-        b.ORDER_NAME as orderName,
-        b.ORDER_EMAIL as orderEmail,
-        b.ORDER_PHONE as orderPhone,
-        b.ORDER_POSTCODE as orderPostcode,
-        b.ORDER_ADDR_ROAD as orderAddrRoad,
-        b.ORDER_ADDR_DETAIL as orderAddrDetail,
-        b.ORDER_REQUEST as orderRequest,
-        b.ORDER_PAY_OPTION as orderPayOption,
-        b.ORDER_PRICE as orderPrice,
-        b.ORDER_SALE as orderSale,
-        b.ORDER_PAYMENT as orderPayment,
-        b.IMP_UID as impUid,
-        b.ORDER_STATUS as orderStatus
-      
-     from
-     order_tbl b
-     where b.order_no=#{orderNo}
-         
+	</select>
 
-</select>
+	<select id="orderDetail" resultType="dd" parameterType="_int">
+		select
+		b.order_no as orderNo,
+		b.MEMBER_NO as memberNo,
+		b.ORDER_NAME as orderName,
+		b.ORDER_EMAIL as orderEmail,
+		b.ORDER_PHONE as orderPhone,
+		b.ORDER_POSTCODE as orderPostcode,
+		b.ORDER_ADDR_ROAD as orderAddrRoad,
+		b.ORDER_ADDR_DETAIL as orderAddrDetail,
+		b.ORDER_REQUEST as orderRequest,
+		b.ORDER_PAY_OPTION as orderPayOption,
+		b.ORDER_PRICE as orderPrice,
+		b.ORDER_SALE as orderSale,
+		b.ORDER_PAYMENT as orderPayment,
+		b.IMP_UID as impUid,
+		b.ORDER_STATUS as orderStatus
 
-<select id="detailOrder" parameterType="_int" resultType="mo">
-select a.ORDER_OPTION_NO as orderOptionNo,
-        a.ORDER_NO as orderNo,
-        a.PRODUCT_NO as productNo,
-        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
-        b.MEMBER_NO as memberNo,
-        b.ORDER_NAME as orderName,
-        b.ORDER_EMAIL as orderEmail,
-        b.ORDER_PHONE as orderPhone,
-        b.ORDER_POSTCODE as orderPostcode,
-        b.ORDER_ADDR_ROAD as orderAddrRoad,
-        b.ORDER_ADDR_DETAIL as orderAddrDetail,
-        b.ORDER_REQUEST as orderRequest,
-        b.ORDER_PAY_OPTION as orderPayOption,
-        b.ORDER_PRICE as orderPrice,
-        b.ORDER_SALE as orderSale,
-        b.ORDER_PAYMENT as orderPayment,
-        b.IMP_UID as impUid,
-        b.ORDER_STATUS as orderStatus,
-        c.milkit_name as milkitName ,
-        c.milkit_price as milkitPrice,
-        c.filepath
-      
-     from
-     order_option a,order_tbl b,product c
-     where a.order_no =b.order_no and a.product_no =c.product_no  and b.order_no=11
-
-</select>
-<select id="sellerList" resultType="ms" parameterType="_int">
-  select a.ORDER_OPTION_NO as orderOptionNo,
-        a.ORDER_NO as orderNo,
-        a.PRODUCT_NO as productNo,
-        a.ORDER_OPTION_AMOUNT as orderOptionAmount,
-        b.MEMBER_NO as memberNo,
-        b.ORDER_NAME as orderName,
-        b.ORDER_EMAIL as orderEmail,
-        b.ORDER_PHONE as orderPhone,
-        b.ORDER_POSTCODE as orderPostcode,
-        b.ORDER_ADDR_ROAD as orderAddrRoad,
-        b.ORDER_ADDR_DETAIL as orderAddrDetail,
-        b.ORDER_REQUEST as orderRequest,
-        b.ORDER_PAY_OPTION as orderPayOption,
-        b.ORDER_PRICE as orderPrice,
-        b.ORDER_SALE as orderSale,
-        b.ORDER_PAYMENT as orderPayment,
-        b.IMP_UID as impUid,
-        b.ORDER_STATUS as orderStatus,
-        c.milkit_writer as milkitWriter,
-        c.recipe_no as recipeNo,
-        c.milkit_name as milkitName    
-	     from
-	     order_option a,order_tbl b,product c
-	     where a.order_no =b.order_no and a.product_no=c.product_no  and c.milkit_writer=5 
+		from
+		order_tbl b
+		where b.order_no=#{orderNo}
 
 
-</select>
+	</select>
+
+	<select id="detailOrder" parameterType="_int" resultType="mo">
+		select a.ORDER_OPTION_NO as orderOptionNo,
+		a.ORDER_NO as orderNo,
+		a.PRODUCT_NO as productNo,
+		a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+		b.MEMBER_NO as memberNo,
+		b.ORDER_NAME as orderName,
+		b.ORDER_EMAIL as orderEmail,
+		b.ORDER_PHONE as orderPhone,
+		b.ORDER_POSTCODE as orderPostcode,
+		b.ORDER_ADDR_ROAD as orderAddrRoad,
+		b.ORDER_ADDR_DETAIL as orderAddrDetail,
+		b.ORDER_REQUEST as orderRequest,
+		b.ORDER_PAY_OPTION as orderPayOption,
+		b.ORDER_PRICE as orderPrice,
+		b.ORDER_SALE as orderSale,
+		b.ORDER_PAYMENT as orderPayment,
+		b.IMP_UID as impUid,
+		b.ORDER_STATUS as orderStatus,
+		c.milkit_name as milkitName ,
+		c.milkit_price as milkitPrice,
+		c.filepath
+
+		from
+		order_option a,order_tbl b,product c
+		where a.order_no =b.order_no and a.product_no =c.product_no and
+		b.order_no=11
+
+	</select>
+	<select id="sellerList" resultType="ms" parameterType="_int">
+		select a.ORDER_OPTION_NO as orderOptionNo,
+		a.ORDER_NO as orderNo,
+		a.PRODUCT_NO as productNo,
+		a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+		b.MEMBER_NO as memberNo,
+		b.ORDER_NAME as orderName,
+		b.ORDER_EMAIL as orderEmail,
+		b.ORDER_PHONE as orderPhone,
+		b.ORDER_POSTCODE as orderPostcode,
+		b.ORDER_ADDR_ROAD as orderAddrRoad,
+		b.ORDER_ADDR_DETAIL as orderAddrDetail,
+		b.ORDER_REQUEST as orderRequest,
+		b.ORDER_PAY_OPTION as orderPayOption,
+		b.ORDER_PRICE as orderPrice,
+		b.ORDER_SALE as orderSale,
+		b.ORDER_PAYMENT as orderPayment,
+		b.IMP_UID as impUid,
+		b.ORDER_STATUS as orderStatus,
+		c.milkit_writer as milkitWriter,
+		c.recipe_no as recipeNo,
+		c.milkit_name as milkitName
+		from
+		order_option a,order_tbl b,product c
+		where a.order_no =b.order_no and a.product_no=c.product_no and
+		c.milkit_writer=5
+
+
+	</select>
 	<update id="updateSeller" parameterType="m">
-	  update member set
+		update member set
 		member_email=#{memberEmail},
-        member_nickName=#{memberNickname},
-        member_phone=#{memberPhone},
-        member_birth=#{memberBirth},
-        postcode=#{postcode},
-        PROFILE_PATH=#{profilePath},
-        address_road=#{addressRoad},
-        address_detail=#{addressDetail},
-        profile_intro=#{profileIntro},
-        member_name=#{memberName}
-    where member_id=#{memberId} 
-	
+		member_nickName=#{memberNickname},
+		member_phone=#{memberPhone},
+		member_birth=#{memberBirth},
+		postcode=#{postcode},
+		PROFILE_PATH=#{profilePath},
+		address_road=#{addressRoad},
+		address_detail=#{addressDetail},
+		profile_intro=#{profileIntro},
+		member_name=#{memberName}
+		where member_id=#{memberId}
+
 	</update>
 	<select id="totalSell" resultType="ms" parameterType="_int">
-	  
-	select a.ORDER_NO as orderNo,
-               a.PRODUCT_NO as productNo,
-               a.ORDER_OPTION_AMOUNT as orderOptionAmount,
-                b.milkit_writer as milkitWriter,
-                b.recipe_no as recipeNo,
-                b.milkit_name as milkitName,
-                b.milkit_price as milkitPrice,
-                b.milkit_stock as milkitStock,
-                b.filePath,
-                c.member_no as memberNo,
-                c.order_name as orderName
-		 
+
+		select a.ORDER_NO as orderNo,
+		a.PRODUCT_NO as productNo,
+		a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+		b.milkit_writer as milkitWriter,
+		b.recipe_no as recipeNo,
+		b.milkit_name as milkitName,
+		b.milkit_price as milkitPrice,
+		b.milkit_stock as milkitStock,
+		b.filePath,
+		c.member_no as memberNo,
+		c.order_name as orderName
+
 		from order_option a,product b,order_tbl c
-		where a.product_no=b.product_no and c.order_no =a.order_no  and c.member_no=111 
+		where a.product_no=b.product_no
+		and c.order_no =a.order_no and c.member_no=111
 
 
-</select>
+	</select>
 
-<select id="dmList" resultType="md" parameterType="_int">
-	select dm_no as dmNo,
-	       dm_receiver as dmReceiver,
-	       dm_sender as dmSender,
-	       dm_content as dmContent,
-	       dm_read_flag as dmReadFlag,
-	       dm_date as dmDate
-	     from dm where dm_receiver='승민전문가'
+	<select id="dmList" resultType="md" parameterType="_int">
+		 
+        select dm_no as dmNo,
+		dm_receiver as dmReceiver,
+		dm_sender as dmSender,
+		dm_content as dmContent,
+		dm_read_flag as dmReadFlag,
+		dm_date as dmDate,
+       (select profile_path from member where member_nickname=dm_sender)as profilePath
+		from dm where dm_receiver='승민전문가'
 
 
-</select>
+	</select>
 
-<select id="totalCount" resultType="_int">
-		 select count(*) from  order_tbl b
-         where  b.member_no=111
+	<select id="totalCount" resultType="_int">
+		select count(*) from order_tbl b
+		where b.member_no=111
 	</select>
 
 	<select id="orderList1" parameterType="map" resultType="mo">
-	        select *
-  		from
-	  	(select 
-	  		rownum as rnum,
-	  		o.*
-	  	from
-		  	(select
-		   ORDER_NO as orderNo,
-        MEMBER_NO as memberNo,
-       ORDER_NAME as orderName,
-        ORDER_EMAIL as orderEmail,
-        ORDER_PHONE as orderPhone,
-        ORDER_POSTCODE as orderPostcode,
-        ORDER_ADDR_ROAD as orderAddrRoad,
-        ORDER_ADDR_DETAIL as orderAddrDetail,
-        ORDER_REQUEST as orderRequest,
-        ORDER_PAY_OPTION as orderPayOption,
-        ORDER_PRICE as orderPrice,
-        ORDER_SALE as orderSale,
-        ORDER_PAYMENT as orderPayment,
-        IMP_UID as impUid,
-        ORDER_STATUS as orderStatus
-		  	from  order_tbl  where member_No=111  order by order_No desc)o)
-		where rnum between #{start} and #{end}
-	
-	
+		select *
+		from
+		(select
+		rownum as rnum,
+		o.*
+		from
+		(select
+		ORDER_NO as orderNo,
+		MEMBER_NO as memberNo,
+		ORDER_NAME as orderName,
+		ORDER_EMAIL as orderEmail,
+		ORDER_PHONE as orderPhone,
+		ORDER_POSTCODE as orderPostcode,
+		ORDER_ADDR_ROAD as orderAddrRoad,
+		ORDER_ADDR_DETAIL as orderAddrDetail,
+		ORDER_REQUEST as orderRequest,
+		ORDER_PAY_OPTION as orderPayOption,
+		ORDER_PRICE as orderPrice,
+		ORDER_SALE as orderSale,
+		ORDER_PAYMENT as orderPayment,
+		IMP_UID as impUid,
+		ORDER_STATUS as orderStatus
+		from order_tbl where member_No=111 order by order_No desc)o)
+		where rnum
+		between #{start} and #{end}
+
+
 	</select>
-		<select id="myCoupon" resultType="mcou" parameterType="_int">
-		select 
+	<select id="myCoupon" resultType="mcou" parameterType="_int">
+		select
 		c.coupon_name as couponName,
 		c.coupon_Start as couponStart,
 		c.coupon_end as couponEnd,
-		c.coupon_disCount as couponDiscount,
+		c.coupon_disCount as
+		couponDiscount,
 		cl.coupon_use as couponUse
-	    from coupon c,coupon_list cl
-	   where c.coupon_No =cl.coupon_no 
-	   and member_No=111 and coupon_use=0
+		from coupon c,coupon_list cl
+		where c.coupon_No =cl.coupon_no
+		and member_No=111 and coupon_use=0
 	</select>
-			<select id="myCouponList" resultType="mcou" parameterType="map">
-	   select *
-  		from
-	  	(select rownum as rnum,
-	  		c.*
-	  	from
-		 (select
-         c.coupon_name as couponName,
+	<select id="myCouponList" resultType="mcou" parameterType="map">
+		select *
+		from
+		(select rownum as rnum,
+		c.*
+		from
+		(select
+		c.coupon_name as couponName,
 		c.coupon_Start as couponStart,
-		c.coupon_end as couponEnd,
+		c.coupon_end as
+		couponEnd,
 		c.coupon_disCount as couponDiscount,
-		cl.coupon_use as couponUse
-		  	from  coupon c,coupon_list cl  where c.coupon_No =cl.coupon_no  and member_No=111  order by coupon_end desc)c)
-	where rnum between #{start} and #{end}
+		cl.coupon_use as
+		couponUse
+		from coupon c,coupon_list cl where c.coupon_No =cl.coupon_no and
+		member_No=111 order by coupon_end desc)c)
+		where rnum between #{start} and #{end}
 	</select>
-	
-	<select  id="couponCount" resultType="_int">
- select count(*)from coupon_List where member_no=111
-	
-	</select>
-	<select id="myContestList"  resultType="myc" parameterType="map">
-		 		   select *
-  		from
-	  	(select rownum as rnum,
-	  		c.*
-	  	from
-		 (select
-           cr.contest_no as contestNo,
-		   cr.contest_month as contestMonth,
-	        to_date(cr.enter_Date ,'YYYY-mm-dd')as enterDate,
-	        rb.recipe_title as recipeTitle,
-	        rb.recipe_writer as recipeWriter,
-	        cr.contest_result as contestResult
-		  	 from contest_recipe cr,recipe_board rb  where cr.recipe_no=rb.recipe_no and recipe_writer=111 order by contest_no asc)c)
-	where rnum between #{start} and #{end}
 
-</select>
-	<select  id="contestCount" resultType="_int">
-  select count(*) from  contest_recipe cr,recipe_board rb where cr.recipe_no=rb.recipe_no and recipe_writer=111
-	
+	<select id="couponCount" resultType="_int">
+		select count(*)from coupon_List where member_no=111
+
 	</select>
-		<select id="myBoardList"  resultType="fb" parameterType="map">
-		         select *
-  		from
-	  	(select rownum as rnum,
-	  		f.*
-	  	from
-		 (select
-         free_no as freeNo,
+	<select id="myContestList" resultType="myc" parameterType="map">
+		select *
+		from
+		(select rownum as rnum,
+		c.*
+		from
+		(select
+		cr.contest_no as contestNo,
+		cr.contest_month as contestMonth,
+		to_date(cr.enter_Date ,'YYYY-mm-dd')as enterDate,
+		rb.recipe_title as recipeTitle,
+		rb.recipe_writer as recipeWriter,
+		cr.contest_result as contestResult
+		from contest_recipe cr,recipe_board rb where cr.recipe_no=rb.recipe_no and
+		recipe_writer=111 order by contest_no asc)c)
+		where rnum between #{start} and #{end}
+
+	</select>
+	<select id="contestCount" resultType="_int">
+		select count(*) from contest_recipe cr,recipe_board rb where
+		cr.recipe_no=rb.recipe_no and recipe_writer=111
+
+	</select>
+	<select id="myBoardList" resultType="fb" parameterType="map">
+		select *
+		from
+		(select rownum as rnum,
+		f.*
+		from
+		(select
+		free_no as freeNo,
 		free_writer as freeWriter,
 		free_title as freeTitle,
 		free_content as freeContent,
 		reg_date as regDate,
-		free_readcount as freeReadcount
-		  	 from freeboard  where free_writer='hyo' order by free_no desc)f)
-	where rnum between #{start} and #{end}
+		free_readcount as
+		freeReadcount
+		from freeboard where free_writer='hyo' order by free_no desc)f)
+		where rnum between #{start} and #{end}
 
-</select>
-	<select  id="boardCount" resultType="_int">
-  select count(*) from  freeboard where  free_writer='hyo'
-	
 	</select>
-	
+	<select id="boardCount" resultType="_int">
+		select count(*) from freeboard where free_writer='hyo'
+
+	</select>
+
 	<select id="likeRecipeCount" resultType="_int">
-	
-         select count(*)  from recipe_board rb,recipe_like rl  where rb.recipe_no=rl.recipe_no and rl.member_no=111
-	</select>
-	
-	<select id="likeRecipe"  resultType="lr" parameterType="map">
-     select *
-  		from
-	  	(select rownum as rnum,
-	  		r.*
-	  	from
-		 (select
-          rl.like_no as likeNo,
-		 rl.member_no as memberNo,
-		 rl.recipe_no as recipeNo,
-		 rb.recipe_date as recipeDate,
-		 rb.recipe_level as recipeLevel,
-		 rb.recipe_title as recipeTitle,
-		 rb.recipe_writer as recipeWriter, 
-		 rb.filepath as filepath,
-		 rb.read_count as readCount,
-		 rb.subhead as subhead
-		  	 from recipe_board rb,recipe_like rl  where rb.recipe_no=rl.recipe_no and rl.member_no=111 order by recipe_date desc)r)
-	
-	where rnum between #{start} and #{end}
 
-</select>
+		select count(*) from recipe_board rb,recipe_like rl where
+		rb.recipe_no=rl.recipe_no and rl.member_no=111
+	</select>
+
+	<select id="likeRecipe" resultType="lr" parameterType="map">
+		select *
+		from
+		(select rownum as rnum,
+		r.*
+		from
+		(select
+		rl.like_no as likeNo,
+		rl.member_no as memberNo,
+		rl.recipe_no as recipeNo,
+		rb.recipe_date as recipeDate,
+		rb.recipe_level as recipeLevel,
+		rb.recipe_title as recipeTitle,
+		rb.recipe_writer as recipeWriter,
+		rb.filepath as filepath,
+		rb.read_count as readCount,
+		rb.subhead as subhead
+		from recipe_board rb,recipe_like rl where rb.recipe_no=rl.recipe_no and
+		rl.member_no=111 order by recipe_date desc)r)
+
+		where rnum between #{start} and #{end}
+
+	</select>
 
 	<select id="countDm" resultType="_int">
+
+		select Count(*) from dm where dm_receiver='승민전문가' and dm_read_flag=0
+	</select>
 	
-      select Count(*) from dm where dm_receiver='승민전문가' and dm_read_flag=0 
+		<select id="pointList" resultType="mp" parameterType="map">
+	 select *
+		from
+		(select rownum as rnum,
+		p.*
+		from
+		(select
+		point_no as pointNo,
+		member_no as memberNo,
+		point_level as pointLevel,
+		point_amount as pointAmount,
+		point_date as pointDate
+		from point where
+		
+		member_no=104 order by point_date desc)p)
+		where rnum between #{start} and #{end}
+
+	</select>
+		<select id="totalPoint" resultType="_int">
+
+	select sum(point_amount)as sumPoint from point where member_no=104 and point_level=1 
+	</select>
+	
+		<select id="usePoint" resultType="_int">
+
+		select sum(point_amount) as sumPoint from point where member_no=104 and point_level=2 
+	</select>
+	
+	
+	<select id="countPoint" resultType="_int">
+
+		select Count(*) from point where member_no=104
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<select id="mypoint" resultType="mp" parameterType="_int">
+		 
+        select
+		point_no as pointNo,
+		member_no as memberNo,
+		point_level as pointLevel,
+		point_amount as pointAmount,
+		point_date as pointDate,
+		point_content as pointContent
+		from point where
+		
+		member_no=104 order by point_date desc
+
+
 	</select>
 </mapper>
 

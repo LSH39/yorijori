@@ -52,8 +52,7 @@
                 <tr>
                     <th>예약번호</th>
                     <th>요리클래스</th>
-                    <th>클래스시작일</th>
-                    <th>클래스종료일</th>
+                    <th>클래스시작일</th>     
                     <th>수강료</th>
                     <th>수업시간</th>
                     <th>수업장소</th>
@@ -65,12 +64,11 @@
                 <tr>
                     <td>${mcr.rsrvNo }</td>
                     <td>${mcr.classTitle }</td>                    
-                    <td>${mcr.classStart }</td>
-                    <td>${mcr.classEnd }</td>
-                    <td>${mcr.classPrice }</td>
-                    <td>${mcr.classTime }</td>
-                    <td>${mcr.classLocation}</td>
-                    <td>${mcr.classStatus }</td>
+                    <td>${mcr.classStart }</td>                    
+                    <td>${mcr.classPrice }원</td>
+                    <td>${mcr.classStartTime }분 ~ ${mcr.classEndTime}분 </td>
+                    <td>${mcr.classLocation1}</td>
+                    <td>${mcr.classStu }</td>
                     <td><button value="수정" id="modify"><a href="#">수정</a></button></td>
                     <td><button value="취소" id="delete"><a href="#">삭제</a></button></td>
                 </tr>

@@ -41,7 +41,7 @@
                          <li><a href="/myOrder.do?memberNo=111" id="lf-click">내 구매내역<span></span></a></li>   
                           <li><a href="/sellList.do?memberNo=5" id="lf-click">내 판매내역<span></span></a></li>    
                             <li><a href="/totalSell.do?memberNo=111" id="lf-click">내 판매량통계<span></span></a></li>               
-                         
+                         <li><a href="/myPoint.do?memberNo=104">포인트 내역<span>&gt;</span></a></li>
                     </ul>
                 </li>
             </ul>

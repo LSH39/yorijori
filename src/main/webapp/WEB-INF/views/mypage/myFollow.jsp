@@ -31,7 +31,7 @@
 .pt{
     width:250px;
     height: 60px;
-    background-color:darksalmon ;
+    background-color:rgb(217, 129, 253);
 }
 .pr{
     width:250px;
@@ -79,7 +79,7 @@
         <div class="main-content">
             <h3 id="h_hotel">★my Follow★</h3>
             <div id="line2"></div><br>
-            <h5>좋아요수: <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
+            <h5>팔로우 게시글 수: <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
             
               <c:forEach items="${list}" var="fol" varStatus="i">
             <div class="followR">
@@ -93,7 +93,7 @@
                     </a>
                 </div>
                 <div class="pw">
-                   <h5> 좋아요 ${f.totalCount }개</h5>
+                   <h5 style="color: rgb(126, 30, 166);"> 좋아요 ${fol.cnt }개</h5>
                     <h5>#${fol.recipeTitle}</h5>
                     <h5>#${fol.subhead }</h5>
                 </div>
