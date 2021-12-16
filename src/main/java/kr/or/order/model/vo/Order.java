@@ -18,5 +18,4 @@ public class Order {
 	private int orderSale;
 	private int orderPayment;
 	private String impUid;
-	private int orderStatus;
 }

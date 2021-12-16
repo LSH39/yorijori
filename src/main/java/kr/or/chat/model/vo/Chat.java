@@ -15,7 +15,4 @@ public class Chat {
 	private String strDate;
 	private String memberNickname;
 	
-	public String getChatContentBr() {
-		return chatContent.replaceAll("\r\n", "<br>");
-	}
 }

@@ -28,7 +28,8 @@ public class MemberService {
 	public String joinSearch(Member member) {
 		return dao.joinSearch(member);
 	}
-
+	
+	@Transactional
 	public int joinAdminEnc(Member member, String domain) {
 		String memberEmail = member.getMemberEmail()+"@"+domain;
 		member.setMemberEmail(memberEmail);
@@ -64,6 +65,7 @@ public class MemberService {
 		return dao.findIdPw(member);
 	}
 
+	@Transactional
 	public int findPwReEnc(Member member) {
 		return dao.findPwRe(member);
 	}

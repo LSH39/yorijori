@@ -19,6 +19,7 @@ public class ChatController {
 	@Autowired
 	private ChatService service;
 	
+	// 조회
 	@ResponseBody
 	@RequestMapping(value="/chatUserFrm.do")
 	public ArrayList<Chat> chatUserFrm(HttpSession session) {
@@ -55,5 +56,15 @@ public class ChatController {
 		ArrayList<Chat> chatAdminList = service.chatAdminList(chat);
 		return chatAdminList;
 	}
+	
+	// insert
+	@ResponseBody
+	@RequestMapping(value="/chatSend.do")
+	public int chatSend(Chat chat) {
+		int result = service.chatSend(chat);
+		return result;
+	}
+	
+
 	
 }
