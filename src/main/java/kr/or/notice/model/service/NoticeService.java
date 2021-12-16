@@ -170,4 +170,9 @@ public class NoticeService {
 				return searchResult;
 		
 	}
+
+	public int updateNotice(Notice n) {
+		int result = dao.updateNotice(n);
+		return result;
+	}
 }

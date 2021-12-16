@@ -189,8 +189,12 @@
 	      		</c:choose>
 	      		</div>
 	      		<div class="backTo">
-	      			<a href="/freeUpdateFrm.do?freeNo=${fb.freeNo }"><button class="btn-main btn-update">수정하기</button></a>
-	      			<button class="btn-main btn-delete" onclick='delCheck();'>삭제하기</button>
+	      		<c:choose>
+	      			<c:when test="${fb.freeWriter eq sessionScope.m.memberId }">
+	      				<a href="/freeUpdateFrm.do?freeNo=${fb.freeNo }"><button class="btn-main btn-update">수정하기</button></a>
+	      				<button class="btn-main btn-delete" onclick='delCheck();'>삭제하기</button>
+	      			</c:when>
+	      		</c:choose>
 	      			<a href="/freeboardList.do?reqPage=1&orderIndex=0"><button class="btn-main">목록으로</button></a>
 	      		</div>
 	      	</div>

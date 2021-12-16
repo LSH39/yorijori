@@ -184,5 +184,15 @@
 		from freeboard_file
 		where ff_no = #{ffNo}
 	</select>
+	<update id="updateFreeboard" parameterType="fb">
+		update freeboard
+		set free_title = #{freeTitle},
+			free_content = #{freeContent}
+		where free_no = #{freeNo}
+	</update>
+	<delete id="deleteFreeboardFile" parameterType="_int">
+		delete from freeboard_file
+		where free_no = #{freeNo}
+	</delete>
 </mapper>
 

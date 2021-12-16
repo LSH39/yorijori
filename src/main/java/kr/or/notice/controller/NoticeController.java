@@ -229,7 +229,7 @@ public class NoticeController {
 		
 		//기존 파일 삭제
 		if(oldFilepath != null) {
-			String fullPath = savePath + n.getFilepath();
+			String fullPath = savePath + oldFilepath;
 			File f = new File(fullPath);
 			if(f.isFile()) {
 				f.delete();

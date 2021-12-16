@@ -218,4 +218,20 @@ public class FreeboardService {
 			return ff;
 		}
 
+		public int updateFreeboard(Freeboard fb, ArrayList<FreeboardFile> list) {
+			int first = dao.updateFreeboard(fb);
+			int result = 0;
+			if(first>0) {
+				//연관된 파일 모두 삭제
+				dao.deleteFreeboardFile(fb.getFreeNo());
+				for(int i=0; i<list.size(); i++) {
+					list.get(i).setFreeNo(fb.getFreeNo());
+					int count = dao.insertFreeboardFile(list.get(i));
+					result += count;
+				}
+				
+			}
+			return result;
+		}
+
 }

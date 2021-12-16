@@ -117,4 +117,19 @@ public class FreeboardDao {
 		FreeboardFile ff = sqlSession.selectOne("freeboard.selectFreeboardFile", ffNo);
 		return ff;
 	}
+
+	public int updateFreeboard(Freeboard fb) {
+		int result = sqlSession.update("freeboard.updateFreeboard", fb);
+		return result;
+	}
+
+	public int updateFreeboardFile(HashMap<String, Object> map) {
+		int result = sqlSession.update("freeboard.updateFreeboardFile", map);
+		return result;
+	}
+
+	public int deleteFreeboardFile(int freeNo) {
+		int result = sqlSession.delete("freeboard.deleteFreeboardFile", freeNo);
+		return result;
+	}
 }

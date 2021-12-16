@@ -211,6 +211,45 @@ public class FreeboardController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/uploadFreeImage.do")
+	public String uploadFreeImage(MultipartFile file, HttpServletRequest request) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/freeboard/");
+		String filename = file.getOriginalFilename();
+		String onlyFilename = filename.substring(0,filename.indexOf("."));
+		String extension = filename.substring(filename.indexOf("."));
+		String filepath = null;
+		int count=0;
+		while(true) {
+			if(count == 0 ) {
+				filepath = onlyFilename+extension;
+			}else {
+				filepath = onlyFilename+"_"+count+extension;
+			}
+			File checkFile = new File(savePath+filepath);
+			if(!checkFile.exists()) {
+				break;
+			}
+			count++;
+		}
+		try {
+			FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+			// 업로드 속도증가를 위한 보조스트림
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			// 파일 업로드
+			byte[] bytes = file.getBytes();
+			bos.write(bytes);
+			bos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/resources/upload/freeboard/" + filepath;		
+	}
+	
 	@RequestMapping(value="/fileDownFree.do")
 	public void fileDown(Model model, HttpServletRequest request, HttpServletResponse response, int ffNo) throws IOException {
 		FreeboardFile ff = service.getFreeboardFile(ffNo);
@@ -248,5 +287,90 @@ public class FreeboardController {
 		bis.close();
 		bos.close();
 	}
+	
+	@RequestMapping(value="/freeUpdateFrm.do")
+	public String freeUpdateFrm(Model model, int freeNo) {
+		FreeboardViewData fvd = service.selectOneFree(freeNo);
+		model.addAttribute("fb", fvd.getFb());
+		model.addAttribute("fileList", fvd.getFileList());
+		model.addAttribute("freeNo", freeNo);
+		return "freeboard/freeUpdateFrm";
+	}
+	
+	@RequestMapping(value="/updateFree.do")
+	public String freeUpdate(Model model, MultipartFile[] upfile, HttpServletRequest request, Freeboard fb, int freeNo, String oldFilepath) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/freeboard/");
+		fb.setFreeNo(freeNo);
+		
+		//기존 파일 삭제
+		if(oldFilepath != null) {
+			ArrayList<FreeboardFile> fileList = service.selectOneFree(freeNo).getFileList();
+			for(int i=0; i<fileList.size(); i++) {
+				String fullPath = savePath + fileList.get(i).getFfFilepath();
+				File f = new File(fullPath);
+				if(f.isFile()) {
+					f.delete();
+				}
+			}
+		}
+		//파일목록 저장할 list
+				ArrayList<FreeboardFile> list = new ArrayList<FreeboardFile>();
+				if(upfile[0].isEmpty()) {
+					//첨부파일 없는 경우
+				} else {
+					//파일업로드 경로 설정
+					savePath = request.getSession().getServletContext().getRealPath("/resources/upload/freeboard/");
+					for(MultipartFile file : upfile) {
+						//파일명 중복처리
+						String filename = file.getOriginalFilename();
+						String onlyFilename = filename.substring(0, filename.indexOf("."));
+						String extension = filename.substring(filename.indexOf(".")); //확장자명
+						//실제로 업로드할 파일명 저장할 변수
+						String filepath = null;
+						int count = 0;
+						while(true) {
+							if(count == 0) {
+								filepath = onlyFilename + extension;
+							} else {
+								filepath = onlyFilename + "_" + count + extension; //중복 될 경우
+							}
+							File checkFile = new File(savePath+filepath);
+							if(!checkFile.exists()) {
+								break;
+							}
+							count++;
+						}
+						//파일명 중복처리 완료. 업로드 시작
+						try {
+							FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+							//업로드 속도증가를 위한 보조스트림
+							BufferedOutputStream bos = new BufferedOutputStream(fos);
+							//파일 업로드
+							byte[] bytes = file.getBytes();
+							bos.write(bytes);
+							bos.close();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						FreeboardFile ff = new FreeboardFile();
+						ff.setFfFilename(filename);
+						ff.setFfFilepath(filepath);
+						list.add(ff);
+					}
+				}
+				int result = service.updateFreeboard(fb, list);
+				if(result == -1 || result != list.size()) {
+					model.addAttribute("msg", "등록 실패");
+				} else {
+					model.addAttribute("msg", "등록 완료");
+				}
+				model.addAttribute("loc", "/freeboardList.do?reqPage=1&orderIndex=0");
+				return "common/msg";
+				
+			}
 	
 }

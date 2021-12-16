@@ -134,4 +134,13 @@
             </when>
         </choose>
 	</select>
+	<update id="updateNotice" parameterType="n">
+		update notice
+		set notice_title = #{noticeTitle},
+		notice_content = #{noticeContent},
+		notice_priority = #{noticePriority},
+		filename = #{filename},
+		filepath = #{filepath}
+		where notice_no = #{noticeNo}
+	</update>
 </mapper>

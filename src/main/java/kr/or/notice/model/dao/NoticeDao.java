@@ -67,4 +67,9 @@ public class NoticeDao {
 		int totalCount = sqlSession.selectOne("notice.searchCount", map);
 		return totalCount;
 	}
+
+	public int updateNotice(Notice n) {
+		int result = sqlSession.update("notice.updateNotice", n);
+		return result;
+	}
 }
