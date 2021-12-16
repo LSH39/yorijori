@@ -11,4 +11,5 @@ public class Mydm {
 	private String dmContent;
 	private int dmReadFlag;
 	private String dmDate;
+	private String profilePath;
 }

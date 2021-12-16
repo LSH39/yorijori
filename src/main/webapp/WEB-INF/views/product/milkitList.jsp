@@ -17,28 +17,38 @@
 		<div><a href="/milkitFrm1.do?memberNo=${sessionScope.m.memberNo }">밀키트 만들기</a></div>
 	</c:if>
 	<c:forEach items="${list }" var="p">
-	<div>	
+	<div><a href="/milkitView.do?productNo=${p.productNo }">
 		<p><img src="/resources/upload/product/${p.filepath }"></p>
 		<p>${p.milkitName}</p>
 		<p><fmt:formatNumber value="${p.milkitPrice}"/>원</p>
-		<p>${p.milkitComment }</p>
+		<p>${p.milkitComment }</p></a>
 	</div>
 	</c:forEach>
-	 <div class="btnWrap" ><button class="moreBtn"  currentCount="6" totalCount="${totalCount }" value="7" id="more">리워드 프로젝트 더보기</button></div>
+	<div id="moreProduct"></div>
+	 <div class="btnWrap" ><button currentCount="6" totalCount="${totalCount }" value="7" id="more">리워드 프로젝트 더보기</button></div>
 	 <script>
 	 $("#more").click(function(){
 		 	var boardNo = ${boardNo};
-			var start = $(this).val();
-			var seleted = $("#selected").val();
+		 	console.log(boardNo);
+		 	var start = $(this).val();
+		 	var seleted = $("#selected").val();
 			$.ajax({
 				url : "/moreProduct.do",
 				data : {start:start,
-					boardNo:boardNo},
+						boardNo:boardNo},
 				type : "post",
-				success : function(data){
+				success : function(data){			
 					for(var i=0;i<data.length;i++){
-						
+						var price = data[i].milkitPrice.toLocaleString('ko-KR')
+						var html ="";
+						html += "<div><p><img src='/resources/upload/product/"+data[i].filepath+"'></p></div>";					
+						html += "<p>"+data[i].milkitName+"</p>";
+						html += "<p><span class='price'>"+price+"</span><span>원</span></p>";
+						html += "<p>"+data[i].milkitComment+"</p></div>";
+						$("#moreProduct").append(html);	
+						console.log(price);
 					}
+
 					$("#more").val(Number(start)+3);
 					var curr = Number($("#more").attr("currentCount"));
 					$("#more").attr("currentCount", curr + data.length);

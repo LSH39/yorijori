@@ -77,14 +77,15 @@
        </c:choose>
 		<!-- 메인 콘텐츠 -->
 		<div class="main-content">
-			<h3 id="h_hotel">●MY DM ●</h3>
+			<h3 id="h_hotel">●chat ●</h3>
 			<div id="line2"></div>
 			<br>
 			   <c:forEach items="${list}" var="mc" varStatus="i">
 			<div class="dm">
 
 				<div class="pho">
-					<img id="pic" src="resources/img/mypage/profile.jpeg">
+					<%-- <img id="pic" src="resources/img/mypage/profile.jpeg">--%>
+					<img id="pic" src="resources/upload/member_profile/${mc.profilePath}">
 				</div>
 				<div class="dmC">
 					<table class="dContent">

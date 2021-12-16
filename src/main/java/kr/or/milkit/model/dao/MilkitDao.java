@@ -39,9 +39,19 @@ public class MilkitDao {
 		return sqlSession.selectOne("milkit.selectTotalCount");
 	}
 
-	public ArrayList<Product> selectMoreProduct(HashMap<String, Object> map) {
-		List<Product>list = sqlSession.selectList("milkit.selectMoreProduct",map);
+	public ArrayList<Product> selectMoreProduct1(HashMap<String, Object> map) {
+		List<Product>list = sqlSession.selectList("milkit.selectMoreProduct1",map);
 			return (ArrayList<Product>)list;
+	}
+
+	public ArrayList<Product> selectMoreProduct2(HashMap<String, Object> map) {
+		List<Product>list = sqlSession.selectList("milkit.selectMoreProduct2",map);
+			return  (ArrayList<Product>)list;
+	}
+
+	public ArrayList<Product> selectOneProduct(int productNo) {
+		List<Product>list = sqlSession.selectList("milkit.selectOneProduct",productNo);
+		return (ArrayList<Product>)list;
 	}
 
 }

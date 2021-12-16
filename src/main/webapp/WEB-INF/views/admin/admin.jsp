@@ -64,7 +64,7 @@
     <div class="col-md-10">
     <table class="table table-hover">
         <tr class="table-warning">
-            <td><a href="#">회원관리</a></td>
+            <td><a href="#">구독 회원 조회</a></td>
             <td><a href="stat.do">일간 현황</a></td>
             <td><a href="ranking.do">순위</a></td>
             <td><a href="#">쿠폰</a></td>

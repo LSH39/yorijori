@@ -89,6 +89,7 @@ text-align: center;}
         <span>선택 회원을</span>
         <button class="addJori">조리꾼 승인</button>
         <button class="deleteMember">강제 탈퇴</button>
+        <button class="rePermission">재인증 요구</button>
         <button>쪽지</button>
         <button class="showAllDetail">전체 상세 보기</button>
     </div>
@@ -395,6 +396,39 @@ text-align: center;}
 				
 				$.ajax({
 	    			url:"adminDeleteMember.do",
+	    			type:"post",
+	    			data : {memberNo:memberNo},
+	    			success: function(data){
+	    				location.href="permissionJoin.do?reqPage=1";
+	    				
+	    			},
+	    			error:function(){
+	    				console.log("err");
+	    				
+	    			}
+	    			
+	    			
+	    		});
+				
+			});
+			$(".rePermission").click(function(){
+				var memberNo;
+				
+				for(var i =0; i<$(".amount").html();i++){
+					if($(".chkbox").eq(i).is(":checked")){
+						if(memberNo==null){
+							memberNo = $(".chkbox").eq(i).next().val();	
+						}else{
+							memberNo = memberNo+","+$(".chkbox").eq(i).next().val();	
+						}
+						
+						
+					}
+				}
+				
+				
+				$.ajax({
+	    			url:"rePermission.do",
 	    			type:"post",
 	    			data : {memberNo:memberNo},
 	    			success: function(data){

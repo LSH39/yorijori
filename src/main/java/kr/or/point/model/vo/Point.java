@@ -9,4 +9,5 @@ public class Point {
 	private int pointLevel;
 	private int pointAmount;
 	private String pointDate;
+	private String pointContent;
 }

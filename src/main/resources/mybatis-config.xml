@@ -13,6 +13,7 @@
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
+		<typeAlias type="kr.or.chat.model.vo.ChatBot" alias="chatbot"/>
 		<typeAlias type="kr.or.order.model.vo.Order" alias="o"/>
 		<typeAlias type="kr.or.order.model.vo.OrderOption" alias="oo"/>
 		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
@@ -64,7 +65,7 @@
 		<typeAlias type="kr.or.mypage.model.vo.DetailOrder" alias="dd" />
 		<typeAlias type="kr.or.milkit.model.vo.Product" alias="pd" />
 		<typeAlias type="kr.or.mypage.model.vo.followCount" alias="f"/>      
-
+        <typeAlias type="kr.or.mypage.model.vo.Mypoint" alias="mp"/>     
 	</typeAliases>
 </configuration>
 

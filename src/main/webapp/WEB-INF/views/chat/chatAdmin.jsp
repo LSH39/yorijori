@@ -8,10 +8,6 @@
     <div class="chatTop"><p>요리조리 1:1 문의 목록</p></div>
     <div class="chatMain">
         <table id="chatAdminHomeTbl">
-            <colgroup>
-                <col style="width:80%"/>
-                <col style="width:20%" />
-            </colgroup>
             <!-- ajax로 추가 -->
         </table>
 
@@ -24,7 +20,7 @@
 <!-- admin -->
 <div class="chatFrm shadow" id="chatFrmAdmin">
     <div class="chatTop"><p>요리조리 1:1 문의</p></div>
-    <div class="chatMain">
+    <div class="chatMain scrollBottom">
         <table id="chatAdminTbl">
             <!-- ajax로 추가 -->
         </table>
@@ -37,40 +33,37 @@
 
 <script>
 	var sessionMemberNo = ${sessionScope.m.memberNo};
+	var selectUser;
+	var sendMsg;
+	var sendTextBefore;
+	var ws;
+	var webSocketType;
+	var alarm = 0;
     $(function(){
         $("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatFrmAdmin").css("display","none").prop("on",false);
+        $(".chatAlarm").css("display","none");
+	    $("#chatAdminAlarm").text(alarm);
+        ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
     });
 
     $("#chatAdmin").click(function(){
-    	//$("#chatFrmAdmin").css("display","none").prop("on",false);
-        //$("#chatAdminTbl").children().remove();
+    	// alarm
+		$(".chatAlarm").css("display","inline");
+		alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
+		// chat
+        ws.onopen = startChat;
+        ws.onmessage = receiveMsg;
+        ws.onclose = endChat;
         if($("#chatFrmAdminHome").prop("on") == false){
-            $("#chatFrmAdminHome").css("display","block").prop("on",true);
-            $.ajax({
-                type: "post",
-                url: "/chatAdminHomeFrm.do",
-                success: function (data) {
-                    if(data != null){
-                    	var appendMsg = "";
-                    	appendMsg += "<tbody>";
-                    	for(var i=0; i<data.length;i++){
-	                    	var chatList = data;
-	                    	var chatSenderNickname = chatList[i].memberNickname;
-	                    	var chatContent = chatList[i].chatContent;
-	                    	var chatDate = chatList[i].strDate;
-	                    	
-	                    	appendMsg += "<tr class='chatHomeTr'><td colspan='2' class='chatId'>"+chatSenderNickname+"</td></tr>";
-	                    	appendMsg += "<tr><td class='chatText'><div>"+chatContent+"</div></td><td><span>"+chatDate+"</span></td></tr>";
-                    	}
-                    	appendMsg += "</tbody>";
-						$("#chatAdminHomeTbl").append(appendMsg);
-                	}else{
-                		alert("로그인 후 이용가능합니다.");
-                		location.href="/loginFrm.do";
-                	}
-            	}
-	        });
+        	if($("#chatFrmAdmin").prop("on") == false){
+	            $("#chatFrmAdminHome").css("display","block").prop("on",true);
+	            startChat();        		
+        	}else{
+                $("#chatFrmAdmin").css("display","none").prop("on",false);
+                $("#chatAdminTbl").children().remove();
+        	}
         }else{
         	$("#chatFrmAdminHome").css("display","none").prop("on",false);
             $("#chatAdminHomeTbl").children().remove();
@@ -78,6 +71,47 @@
             $("#chatAdminTbl").children().remove();
         }
     });
+    
+    function startChat(){
+    	webSocketType = "start";
+		var data = {type:"start",memberNo:sessionMemberNo};
+	    ws.send(JSON.stringify(data));
+	}
+    function receiveMsg(param){
+		appendChat(param.data);
+	}
+	function endChat(){
+		
+	}
+	
+	function appendChat(appendMsg){
+		// alarm
+		if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
+			alarm += 1;
+			$("#chatAdminAlarm").text(alarm);
+		}
+		// chat
+		if(appendMsg != "noMsg"){
+			if(webSocketType == "start"){
+				$("#chatAdminHomeTbl").append(appendMsg);
+			}else if(webSocketType == "chat"){
+		      	$("#chatFrmAdminHome").css("display","none").prop("on",false);
+		        $("#chatAdminHomeTbl").children().remove();
+				$("#chatAdminTbl").append(appendMsg);
+				$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
+				$("#chatText").val("");
+				sendMsg = "";
+				sendTextBefore = "";
+			}			
+		}
+	}
+	function reStartChat(){
+		$("#chatFrmAdminHome").css("display","none").prop("on",false);
+        $("#chatAdminHomeTbl").children().remove();
+		webSocketType = "reStart";
+		var data = {type:"start",memberNo:sessionMemberNo};
+	    ws.send(JSON.stringify(data));
+	}
 	
     // ajax로 불러온 새로운 데이터에 function을 적용하려면, $(document).on() 사용
     $(document).on("mouseenter",".chatHomeTr",function(){
@@ -102,67 +136,53 @@
     });
     
  	function chatAdmin(selectUser){
+ 		$("#chatFrmAdminHome").css("display","none").prop("on",false);
+        $("#chatAdminHomeTbl").children().remove();
         $("#chatFrmAdmin").css("display","block").prop("on",true);
-        $.ajax({
-               type: "post",
-               url: "/chatAdminFrm.do",
-               data: {selectUser:selectUser, sessionMemberNo:sessionMemberNo},
-               success: function (data) {
-                   if(data != null){
-                   	var receiveDate;
-                   	var sendDate;
-                   	for(var i=0; i<data.length;i++){
-                    	var chatList = data;
-                    	var chatNo = chatList[i].chatNo;
-                    	var chatSend = chatList[i].chatSend;
-                    	var chatReceive = chatList[i].chatReceive;
-                    	var chatContent = chatList[i].chatContent;
-                    	var chatDate = chatList[i].strDate;
-                    	var chatSendMemberNickname = chatList[i].memberNickname;
-                    	var appendMsg = "";
-                    	if(chatReceive == sessionMemberNo){
-                    		if(chatDate == receiveDate){
-                    			appendMsg += "<tr><td class='receiveText'><div>"+chatContent+"</div></td></tr>";
-                    		}else{
-	                    		appendMsg += "<tr><th class='receive'><p class='userId'>"+chatSendMemberNickname+"</p><span>10:20</span></th></tr>";
-		    					appendMsg += "<tr><td class='receiveText'><div>"+chatContent+"</div></td></tr>";		                    			
-                    		}
-                    		receiveDate = chatDate;
-                    	}else{
-                    		if(chatDate == sendDate){
-                    			appendMsg += "<tr><td class='sendText'><div>"+chatContent+"</div></td></tr>";
-                    		}else{
-	                    		appendMsg += "<tr><th class='send'><div><span>"+chatDate+"</span></div></th></tr>";
-								appendMsg += "<tr><td class='sendText'><div>"+chatContent+"</div></td></tr>";		                    			
-                    		}
-                    		sendDate = chatDate;
-                    	}
-						$("#chatAdminTbl").append(appendMsg);
-                   	}
-                   	$(".chatMain").scrollTop($(".chatMain")[0].scrollHeight);  // div scroll bottom으로
-               	}else{
-               		alert("로그인 후 이용가능합니다.");
-               		location.href="/loginFrm.do";
-               	}
-           	}
-        });
-	    
+        webSocketType = "chat";
+        var data = {type:"selectUser",selectUser:selectUser, sessionMemberNo:sessionMemberNo};
+      	ws.send(JSON.stringify(data));
  	}
- 	
- 	/*
-    $("#chatAdmin").click(function(){
-        if($("#chatFrmAdmin").prop("on") == false){
-            $("#chatFrmAdmin").css("display","block").prop("on",true);
-        }else{
-            $("#chatFrmAdmin").css("display","none").prop("on",false);
-        }
-
-    });
-
+	
     $("#chatEnter").click(function(){
-        var sendMsg = $("#chatText").val();
-        console.log(sendMsg);
-    });
-	*/ 
-
+    	if(sendMsg.trim() != ""){
+		    var sender = sessionMemberNo;
+		    var receiver = selectUser;
+		    var data = {type:"chat", chatSend:sender, selectUser:selectUser, chatContent:sendMsg};
+		    ws.send(JSON.stringify(data));
+		}
+    }); 
+	
+	$("#chatText").keyup(function(){  // textarea 글자수 제한 (엔터 포함)
+		var sendText = $(this).val();
+		var sendMsgBr = sendText.replace(/(\n|\r\n)/g,"<br>");
+		// 글자수
+		var maxByte = 1000;  // max
+	    var textVal = sendMsgBr;
+	    var textLen = 0;  // 문자 갯수 check
+	    var totalByte=0;
+	    for(var i=0; i<textVal.length; i++){
+	    	var eachChar = textVal.charAt(i);
+	        var uniChar = escape(eachChar) //유니코드 형식으로 변환
+	        if(uniChar.length>4){
+	        	// 한글 : 3Byte
+	            totalByte += 3;
+	        }else{
+	        	// 영문,숫자,특수문자 : 1Byte
+	            totalByte += 1;
+	        }
+	        // 문자 갯수 check
+	        if(totalByte<=maxByte){
+	        	textLen = i+1;
+	        }
+	    }
+	    // 결과처리
+	    if(totalByte>maxByte){
+	    	alert("최대 1000Byte까지만 입력가능합니다.");
+	    	$(this).val(sendTextBefore);
+        }else{
+        	sendTextBefore = sendText;  // 전역변수 sendTextBefore
+        	sendMsg = sendMsgBr;
+        }
+	});
 </script>

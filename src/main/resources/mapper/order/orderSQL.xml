@@ -22,7 +22,7 @@
 	</select>
 	
 	<insert id="orderInsert" parameterType="o">
-		insert into order_tbl values(order_seq.nextval, #{memberNo}, #{orderName}, #{orderEmail}, #{orderPhone}, #{orderPostcode}, #{orderAddrRoad}, #{orderAddrDetail}, #{orderRequest}, #{orderPayOption}, #{orderPrice}, #{orderSale}, #{orderPayment}, #{impUid}, 1)
+		insert into order_tbl values(order_seq.nextval, #{memberNo}, #{orderName}, #{orderEmail}, #{orderPhone}, #{orderPostcode}, #{orderAddrRoad}, #{orderAddrDetail}, #{orderRequest}, #{orderPayOption}, #{orderPrice}, #{orderSale}, #{orderPayment}, #{impUid})
 		<selectKey resultType="_int" order="AFTER" keyProperty="orderNo">
 			select max(order_no) from order_tbl
 		</selectKey>
@@ -36,7 +36,7 @@
 		delete from cart where cart_no=#{cartNo}
 	</delete>
 	<insert id="orderOptionInsert" parameterType="oo">
-		insert into order_option values(order_option_seq.nextval, #{orderNo}, #{productNo}, #{orderOptionAmount})
+		insert into order_option values(order_option_seq.nextval, #{orderNo}, #{productNo}, #{orderOptionAmount}, 1)
 	</insert>
 	<update id="memberCouponUpdate" parameterType="_int">
 		update coupon_list set coupon_use=1, coupon_date=to_char(sysdate,'yyyy-mm-dd') where coupon_list_no=#{couponNo}
@@ -45,7 +45,7 @@
 		update member set member_point=member_point-#{memberPoint} where member_no=#{memberNo}
 	</update>
 	<insert id="pointUpdate" parameterType="p">
-		insert into point values(point_seq.nextval,#{memberNo},2,#{pointAmount},to_char(sysdate,'yyyy-mm-dd'))
+		insert into point values(point_seq.nextval,#{memberNo},2,#{pointAmount},to_char(sysdate,'yyyy-mm-dd'), '결제 시 사용')
 	</insert>
 </mapper>
 
