@@ -138,7 +138,9 @@
 		</div>	
 			
 			<c:forEach items="${rb.RList }" var="rc" varStatus="i">
+				<span>${i.count }</span>
 			<div class="contents">		
+		
 			<div class="ds">${rc.rContentBr }</div>
 			<img src="/resources/upload/recipeContent/${rc.filepath }">
 			</div>

@@ -17,4 +17,5 @@ public class Product {
 	private String milkitDate;
 	private int milkitStock;
 	private int milkitDelete;
+	private String nickname;
 }
