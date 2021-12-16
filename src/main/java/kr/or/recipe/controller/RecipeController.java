@@ -172,4 +172,10 @@ public class RecipeController {
 		return result;
 		
 	}
+	@RequestMapping(value="updateRecipe.do")
+	public String updateRecipe(int recipeNo, int memberNo,Model model) {
+		RecipeBoard rb = service.selectOneRecipe(recipeNo,memberNo);
+		model.addAttribute("rb", rb);
+		return "/recipe/updateRecipe";
+	}
 }

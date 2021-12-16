@@ -27,7 +27,7 @@
 	 <div style="background-color: #F7F7E5; height: 200px;">
         <div style="float: left;">
             <img src="resources/img/mainpage/logo_header.png" style="width: 200px;">
-        <button class="btn btn-warning">로고 변경하기</button>
+      	고민중
         
         </div>
         

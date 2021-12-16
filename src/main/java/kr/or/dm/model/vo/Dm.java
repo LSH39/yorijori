@@ -13,4 +13,6 @@ public class Dm {
 	private int dmReadFlag;
 	private int dmRoomNo;
 	private String dmDate;
+	private String dmRpic;
+	private String dmSpic;	
 }

@@ -169,15 +169,20 @@ color:#9f90cf;
 	<div class="row start">
 	<div class="col-md-2"></div>
 	<div class="col-md-3" >오늘 작성 게시글 수<br>
-	<span id="todayBoard">${freeCount }</span>
+	<span id="todayBoard">${freeCount }</span><br>
+	오늘 작성 레시피 수
+	<br>
+	<span id="todayRecipe">${recipeCount }</span>
+	
 	</div>
 	<div class="col-md-2" >오늘 가입 회원 수
 	<br>
 	<span id="todayJoin">${joinCount }</span>
 	</div>
-	<div class="col-md-3" >오늘 작성 레시피 수
-	<br>
-	<span id="todayRecipe">${recipeCount }</span>
+	<div class="col-md-3" >오늘 비회원 방문 수<br>
+	<span id="todayVisit">${visitCount.today }</span><br>
+	오늘 회원 방문 수<br>
+	<span id="todayLogin">${loginCount.today }</span>
 	</div>
 	<div class="col-md-2"></div>
 	</div>
@@ -489,7 +494,7 @@ color:#9f90cf;
 		case "3" :$(".joinChart").show();
 			break;
 		case "4" : $(".visitChart").show();
-		
+			break;
 		}
 		$("#chartName").html($(this).html()+" 그래프");
 		

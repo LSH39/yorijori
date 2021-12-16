@@ -397,9 +397,11 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
+							<c:if test="${not empty sessionScope.m && ccls.memberNickname != sessionScope.m.memberNickname}">
 							<div class="d-grid gap-2 mt-4">
 								<a href="/dmView.do?classNo=${ccls.classNo }" class="btn btn-primary btn-lg" >문의하기</a>
 							</div>
+							</c:if>
 							<div class="d-grid gap-2 mt-4">
 								<a href="/dmList.do" class="btn btn-primary btn-lg" >문의 목록(테스트)</a>
 							</div>

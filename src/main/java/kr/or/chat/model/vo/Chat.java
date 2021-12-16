@@ -8,9 +8,12 @@ import lombok.Data;
 public class Chat {
 	private int chatNo;
 	private int chatSend;
-	private int chatRecive;
+	private int chatReceive;
 	private String chatContent;
 	private Date chatDate;
+	// 추가
+	private String strDate;
+	private String memberNickname;
 	
 	public String getChatContentBr() {
 		return chatContent.replaceAll("\r\n", "<br>");
