@@ -10,6 +10,7 @@ import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.main.model.dao.MainDao;
 import kr.or.main.model.vo.MainSearchResult;
+import kr.or.main.model.vo.MainViewData;
 import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
@@ -34,6 +35,11 @@ public class MainService {
 		msr.setFreeList(freeList);
 		msr.setProductList(productList);
 		return msr;
+	}
+
+	public MainViewData getMainViewData() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -75,7 +75,7 @@
 		</c:when>
 		
        	<c:otherwise>
-	       	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
+	       	<a href="/mypage.do?memberId=${sessionScope.m.memberId }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
 	        <a class="qna chat" id="chatUser">1:1문의하기 <span class='chatAlarm'>+<span id='chatUserAlarm'></span></span></a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
@@ -240,8 +240,8 @@
   	<ul>
   		<li><img src="/resources/img/mainpage/delivery.jpg" style="width:80px;height:110px;"> <a style="margin-bottom: 85px;">새벽배송</a></li>
   		<li><a href="#"><img src="/resources/img/mainpage/basket.png"> 최근 본 상품</a></li>
-  		<li><a href="#"><img src="/resources/img/mainpage/q_mark.png"> 질문있어요</a></li>
-  		<li><a href="#"><img src="/resources/img/mainpage/message.png"> 내 메세지</a></li>
+  		<li><a href="/profile.do?memberId=${sessionScope.m.memberId }"><img src="/resources/img/mainpage/q_mark.png"> 내 프로필</a></li>
+  		<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname }"><img src="/resources/img/mainpage/message.png"> 내 메세지</a></li>
   	</ul>
   </div>
   

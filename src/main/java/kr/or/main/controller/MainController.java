@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.main.model.service.MainService;
 import kr.or.main.model.vo.MainSearchResult;
+import kr.or.main.model.vo.MainViewData;
 @Controller
 public class MainController {
 	
@@ -15,7 +16,8 @@ public class MainController {
 	private MainService service;
 	
 	@RequestMapping(value="/mainpage.do")
-	public String mainpage() {
+	public String mainpage(Model model) {
+		MainViewData mvd = service.getMainViewData();
 		return "common/main";
 	}
 	

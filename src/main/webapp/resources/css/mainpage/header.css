@@ -86,39 +86,77 @@
 .main-search-icon:hover{
 	cursor: pointer;
 }
+.main-banner-pic{
+	height: 300px;
+}
+.liked-recipes>div:first-child .main-banner-pic{
+	background-image: url("/resources/img/mainpage/homeingredients.png");
+}
+.liked-recipes>div:nth-child(2) .main-banner-pic{
+	background-image: url("/resources/img/mainpage/ddeokbok.gif");
+}
+.liked-recipes>div:nth-child(3) .main-banner-pic{
+	background-image: url("/resources/img/mainpage/dongatsu.gif");
+}
+.liked-recipes>div:nth-child(4) .main-banner-pic{
+	background-image: url("/resources/img/mainpage/samgyetang.gif");
+}
+.liked-recipes>div:nth-child(5) .main-banner-pic{
+	background-image: url("/resources/img/mainpage/sandwich-re.jpg");
+}
+.liked-recipes>div:nth-child(6) .main-banner-pic{
+	background-image: url("/resources/img/mainpage/cookie-re.jpg");
+}
+.main-banner-pic>div{
+	margin-top: 50px;
+	text-align: center;
+}
+.main-banner-pic h4, .main-banner-pic p{
+	color: #fff;
+	transition: ease-in-out 0.3s;
+}
+.main-banner-pic h4{
+	font-size: 26px;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: black;
+}
+.main-banner-pic:hover h4{
+	color: #C994FF;
+}
+.services .main-banner-pic h4 {
+  margin: 10px 0 15px 0;
+  font-size: 28px;
+}
 
 a:hover{
 	cursor: pointer;
 }
-
-  .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
-
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-      }
-
-      .swiper-slide img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      
-           .swiper {
-        width: 100%;
-        height: 100%;
-      }
+.main-newproducts{
+	background: rgb(250, 250, 250);
+}
+.main-newproducts .swiper-slide img {
+  transition: 0.3s;
+  opacity: 0.9;
+}
+.main-newproducts .swiper-slide img:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+.main-newproducts .swiper-slide{
+	background: #FFF;
+	padding: 15px;
+}
+.main-newproducts .swiper-pagination {
+  margin-top: 15px;
+  position: relative;
+}
+.main-newproducts .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  opacity: 1;
+  border: 1px solid #8E44AD;
+}
+.main-newproducts .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #8E44AD;
+}
