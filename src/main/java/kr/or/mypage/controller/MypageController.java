@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.cookingCls.model.vo.CookingClsPageData;
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCouponPageData;
 import kr.or.member.model.vo.Member;
@@ -54,7 +55,13 @@ public class MypageController {
 		model.addAttribute("m", m);
 		return "mypage/sellerProfile";
 	}
-
+   //내 자격증 조회
+	@RequestMapping(value = "/selPath.do")
+	public String selPath(String memberId, Model model) {
+		Member m = service.sellerPage(memberId);
+		model.addAttribute("m", m);
+		return "mypage/updateFrm";
+	}
 	//회원탈퇴폼
 	@RequestMapping(value = "/deleteFrm.do")
 	public String joinFrm() {
@@ -230,7 +237,7 @@ public class MypageController {
 		model.addAttribute("dd", dd);
 		return "mypage/orderDetail";
 	}
-	//판매자 정보보기
+	//판매내역조회
 	@RequestMapping(value = "/sellList.do")
 	public String sellList(int memberNo, Model model) {
 		ArrayList<Mysell> list= service.mySellList(memberNo);
@@ -284,7 +291,19 @@ public class MypageController {
 		model.addAttribute("usePoint", ppd.getUsePoint());
 		return "mypage/myPoint";
 	}
-	
+	//쿠킹 클래스
+	@RequestMapping(value="/mycookingList.do")
+	public String SelectAllClass(String memberNickname,int reqPage, Model model) {
+		//새로
+		CookingClsPageData ccpd = service.selectMyClass(reqPage);
+		
+		model.addAttribute("list", ccpd.getList());
+		model.addAttribute("pageNavi", ccpd.getPageNavi());
+		model.addAttribute("start", ccpd.getList());
+		return "mypage/myCooking";
+		
+
+	}
 	/*
 	@RequestMapping(value = "/myPoint.do")
 	public String myPoint(String memberNo,Model model) {

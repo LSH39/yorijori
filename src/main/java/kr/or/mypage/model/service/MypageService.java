@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.cookingCls.model.vo.CookingCls;
+import kr.or.cookingCls.model.vo.CookingClsPageData;
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.coupon.model.vo.MyCouponPageData;
@@ -587,5 +589,74 @@ public class MypageService {
 			pageNavi += "</ul>";
 			MyPointPageData ppd = new MyPointPageData(list,pageNavi,start,totalCount,totalPoint,usePoint);
 			return ppd;
+		}
+   //내 쿠킹클래스
+		
+		public CookingClsPageData selectMyClass(int reqPage) {
+			int numPerPage =5;
+			
+			int end = reqPage * numPerPage;
+			int start = end - numPerPage + 1;
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+			
+			ArrayList<CookingCls> list = dao.selectMyClass(map);
+			
+			int totalCount = dao.totalClass();
+			
+			int totalPage = 0;
+			if(totalCount%numPerPage==0) {
+				totalPage = totalCount/numPerPage;
+			}else {
+				totalPage = (totalCount/numPerPage)+1;			
+			}
+			
+			int pageNaviSize = 5; 
+//			int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize +1;
+			int pageNo = 0;
+			if(reqPage>0 && reqPage<totalPage-4) {
+				pageNo = reqPage;
+			}else {
+				pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize +1;
+			}
+			
+			//페이지 네비 제작
+			String pageNavi = "<ul class='pagination pagination-lg'>";
+			
+			//이전 버튼 생성
+			if(pageNo != 1) {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class='page-link' href='/cookingClsList.do?reqPage="+(pageNo-1)+"'>";
+				pageNavi += "&lt;</a></li>";
+			}
+			
+			//페이지 숫자 생성
+			for (int i = 0; i < pageNaviSize; i++) {
+				if(pageNo == reqPage) {
+					pageNavi += "<li class='page-item active'>";
+					pageNavi += "<a class='page-link' href='/cookingClsList.do?reqPage="+pageNo+"'>";
+					pageNavi += pageNo+"</a></li>";
+				}else {
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class='page-link' href='/cookingClsList.do?reqPage="+pageNo+"'>";
+					pageNavi += pageNo+"</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
+			}
+			
+			//다음 버튼 생성
+			if(pageNo < totalPage) {
+				pageNavi += "<li class='page-item'><a class='page-link' href='/cookingClsList.do?reqPage="+(reqPage+1)+"'>&gt;</a></li>";
+			}
+			
+			pageNavi +="<ul>";
+			
+			CookingClsPageData ccpd = new CookingClsPageData(list, pageNavi, start);
+			return ccpd;
 		}
 }

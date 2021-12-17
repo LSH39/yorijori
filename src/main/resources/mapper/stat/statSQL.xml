@@ -149,7 +149,7 @@ select member_no as memberNo , member_id as memberId,(select count(*) from follo
   <select id="subs" resultType="m2">
   select member_id as memberId, member.postcode, member.address_road as addressRoad,
 member.address_detail as addressDetail ,member.member_phone as memberPhone,member.member_name as memberName,membership_end as withdrawDate
-from sub_payment join membership using(membership_no) join member using(member_no) where membership_end <![CDATA[<]]> to_char(sysdate,'yyyy-mm-dd')
+from sub_payment join membership using(membership_no) join member using(member_no) where membership_end <![CDATA[>]]> to_char(sysdate,'yyyy-mm-dd')
   </select>
   
   

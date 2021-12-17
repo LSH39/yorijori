@@ -1,0 +1,106 @@
+@charset "UTF-8";
+    .main{
+            width: 1200px;
+            margin: 0 auto;
+            margin-top:50px;
+        }
+        #title{
+            width: 1000px;
+            margin: 0 auto;
+            align-items: center;
+            display: flex;    
+        }
+        #titleImg>img{            
+            width: 450px;
+        
+        }
+        #title>div{
+            float: left;
+           
+        }
+        #titleText{
+            width: 550px;
+        }
+        #titleText p{
+            padding-left: 75px;
+        }
+        #price{   
+            font-size: 24px;
+            font-weight: 800;
+        }
+         #totalPrice{   
+            font-size: 24px;
+            font-weight: 800;
+        }
+        .main hr{
+            width: 450px;
+            margin-left: 70px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        #pName{
+            font-size: 32px;
+            font-weight: 900;
+        }
+        #pComment{
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .boldTxt{
+            font-size: 18px;
+            font-weight: 900;
+        }
+       .thinTxt{
+           padding-left: 45px;
+       }
+     
+       .thinTxt button:hover{
+          transform: translate(2px,2px);
+       }
+       #amount{
+         padding: 0 13px;
+         font-size: 18px;
+       }
+       #count{
+            margin-left: 30px;
+            width: 50px;
+           border:2px solid #dfdfdf;
+           border-radius: 5px;
+           padding-top: 3px;
+           padding-bottom: 3px;
+       }
+       #count button{
+           border:none;
+           background: none;
+           font-size: 20px;
+           width: 40px;
+           color: #b6b6b6;
+       }
+       #count button:hover{
+           cursor: pointer;
+           font-size:larger;
+       }
+       #order{
+           margin-top: 30px;
+       }
+       #amountPrice{
+            float: right;
+       }
+       #cart>a{
+           text-decoration: none;
+           float: right;
+           width: 420px;
+           height: 50px;
+           line-height: 50px;
+           font-size: 24px;
+            font-weight: 900;
+            color: white;
+       }
+       #cart{
+        margin-top: 10px;
+        margin-left: 90px;
+        background-color: #9A86B3;
+        border: none;
+        border-radius: 3px;
+       
+       }

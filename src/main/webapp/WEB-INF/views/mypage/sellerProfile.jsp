@@ -101,7 +101,7 @@
 .mbord{
 
     width:800px;
-    height:600px;
+    height:700px;
     background-color: rgb(224, 224, 224);
     margin: 0 auto;
     margin-bottom: 40px;
@@ -115,7 +115,7 @@
 }
 .myInfo{
     width:450px;
-    height:1000px;
+    height:600px;
     background-color:rgb(234, 217, 241);
     float:left;
     margin-top:50px;
@@ -249,27 +249,8 @@ function loadImg(obj) {
 							</tr>
 				               <tr>
 				                   <td>자격증</td>
-				              	<td> 
-				                
-				             <input type="hidden" name="status" value="1">
-				             <c:choose>
-							<c:when test="${not empty m.certificatePath }">
-								<img src="resources/img/mypage/file.png" width="16px" class="delFile">
-								<span class="delFile">${m.certificatePath}</span>
-								<button type="button" id="delBtn"
-									class="btn btn-primary btn-sm delFile">수정</button>
-
-								<input type="file" name="upfile" style="display: none;">
-								<input type="hidden" name="oldFilename" value="${m.certificatePath}"
-									placeholder="자격증">
-							</c:when>
-							<c:otherwise>
-								<input type="file" name="upfile">
-							</c:otherwise>
-						</c:choose>
-						
-						</td>
-				 
+				              	<td><input type="text" name="certificatePath" id="certificatePath"
+									onfocus="this.placeholder=''" value="${m.certificatePath }"></td> 	 
 				               </tr>
 				                
 				               <tr>
@@ -290,7 +271,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원등급</td>
 								<td><input type="text" name="memberLevel" id="memberLevel"
-									onfocus="this.placeholder=''" value="${m.memberLevel }" readonly></td>
+									onfocus="this.placeholder=''" value="${m.grade }" readonly></td>
 							</tr>
 							<tr>
 								<td>포인트내역</td>
