@@ -88,6 +88,7 @@
 }
 .main-banner-pic{
 	height: 300px;
+	box-shadow : 2px 2px 5px #999;
 }
 .liked-recipes>div:first-child .main-banner-pic{
 	background-image: url("/resources/img/mainpage/homeingredients.png");
@@ -114,11 +115,10 @@
 .main-banner-pic h4, .main-banner-pic p{
 	color: #fff;
 	transition: ease-in-out 0.3s;
+	text-shadow: 1px 1px 5px #000;
 }
 .main-banner-pic h4{
 	font-size: 26px;
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: black;
 }
 .main-banner-pic:hover h4{
 	color: #C994FF;
@@ -145,6 +145,7 @@ a:hover{
 .main-newproducts .swiper-slide{
 	background: #FFF;
 	padding: 15px;
+	box-shadow : 2px 2px 7px #999;
 }
 .main-newproducts .swiper-pagination {
   margin-top: 15px;

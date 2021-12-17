@@ -34,9 +34,9 @@
         <div class="carousel-item" style="background-image: url(resources/img/mainpage/mainbanner_2.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', serif; font-weight: 700; font-size: 36px;">2021년 <span style="color:rgb(192, 57, 43); margin-bottom: 0px;">12</span>월의 레시피</h2>
-              <h4 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #fff; margin-top: 5px;">요리조리의 크리스마스는 현재진행중!</h4>
-              <p class="animate__animated animate__fadeInUp" style="font-size: 18px;">매월 진행되는 요리조리 <span style="color:#BD0000;">레시피 경연대회</span>. 올해의 마지막 달인만큼 더욱 풍성하게 준비하였습니다.<br>포인트 적립부터 밀키트 상품 제작까지, 요리조리와 함께 설레는 크리스마스를 맞이하세요.</p>
+              <h2 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', serif; font-weight: 700; font-size: 40px;"><span style="color:rgb(192, 57, 43); margin-bottom: 0px;">2021</span>년 <span style="color:rgb(192, 57, 43); margin-bottom: 0px;">12</span>월의 기적</h2>
+              <h3 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #fff; margin-top: 5px;">요리조리의 크리스마스는 경연대회로 현재진행중!</h3>
+              <h3 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #fff; margin-top: 5px; margin-bottom: 10px;">최대 <span style="color:rgb(192, 57, 43);">20</span>만 포인트 + <span style="color:rgb(192, 57, 43);">밀키트</span> 상품 제작</h3>
               <a href="/siteInfo.do" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
             </div>
           </div>
@@ -110,7 +110,7 @@
 	            <div class="main-banner-pic">
 	            	<div>
 	              		<h4>분식 요리 베스트</h4>
-	              		<p style="color: black;font-weight:bolder;">떡볶이는 집에서 만들면 맛이 없다? 노우노우~</p>
+	              		<p>떡볶이는 집에서 만들면 맛이 없다? 노우노우~</p>
 	            	</div>
 	            </div>
 	         </a>
@@ -140,7 +140,7 @@
 	            <div class="main-banner-pic">
 	            	<div>
 	              		<h4>다이어트 레시피 베스트</h4>
-	              		<p style="color: black;font-weight:bolder;">다이어트 음식에 대한 편견을 버리게 해 줄 레시피 모음</p>
+	              		<p>다이어트 음식에 대한 편견을 버리게 해 줄 레시피 모음</p>
 	            	</div>
 	            </div>
 	         </a>
@@ -150,7 +150,7 @@
 	            <div class="main-banner-pic">
 	            	<div>
 	              		<h4>베이킹 요리 베스트</h4>
-	              		<p style="color: black;font-weight:bolder;">만들기 어렵지 않아요. 정성을 <span style="color:white;">선물하기 좋은 기회</span></p>
+	              		<p>만들기 어렵지 않아요. 정성을 선물하기 좋은 기회</p>
 	            	</div>
 	            </div>
 	         </a>
