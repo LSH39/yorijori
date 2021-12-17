@@ -73,7 +73,7 @@
              <c:forEach items="${list}" var="fb" varStatus="i">
 					<tr>
 						<td>${fb.freeNo}</td>
-						<td><a href="#">${fb.freeTitle}</a></td>
+						<td><a href="/freeView.do?freeNo=${fb.freeNo}">${fb.freeTitle}</a></td>
 						<td>${fb.freeContent}</td>
 						<td>${fb.regDate}</td>
 						<td>${fb.freeReadcount}</td>

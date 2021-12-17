@@ -18,7 +18,7 @@ public class Mysell {
 	private int orderSale;
 	private int orderPayment;
 	private String impUid;
-	private int orderStatus;
+	
 	//밀키트
 	private int productNo;
 	private int recipeNo;
@@ -32,6 +32,7 @@ public class Mysell {
 	private int milkitStock;
 	private int milkitDelete;
 	//주문옵션
+	private int orderStatus;
 	private int orderOptionNo;
 	private int orderOptionAmount;
 	

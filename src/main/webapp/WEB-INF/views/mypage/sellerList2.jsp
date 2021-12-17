@@ -115,7 +115,12 @@
      background-color: rgb(191, 190, 190);
  
 }
-
+.li{
+    width:3px;
+    height:180px;
+    background-color: gray;
+    float: left;
+}
 .sellItem{
     width:398px;
     height:220px;
@@ -134,19 +139,7 @@
   width:30px;
   height:30px;
   margin-left:660px;
-  margin-top:3px;
-  }
-  #product{
-  width:300px;
-    height:130px;
-  
-  }
-  .it{
-  margin-left:70px;
-  }
- 
-  .request{
-  color:navy;
+  margin-top:5px;
   }
 </style>
 <script>
@@ -179,35 +172,22 @@ function orderDetail(orderNo){
                 <div class="sellNo">   
                 <span>주문번호 :${ms.orderNo }</span><img id="sell" src="/resources/img/mypage/sell.png">  </div>
                 <div class="sellItem">
-                    <span class="it"><b id="m">●상품번호:</b>&emsp;${ms.productNo}번 상품●</span>&emsp;<br> 
-                    <span class="it_info1">&emsp;<img id="product" src="/resources/upload/product/milkit_test.jpg"></span><br>
-                    
-                  
+                    <span class="it_info1"><b id="m">밀키트: </b>&emsp;${ms.milkitName}</span><br>
+                      <span class="it_info1"><b id="m">주문수량: </b>&emsp;${ms.orderOptionAmount}개</span>&emsp;<br>
+                     <span class="it_info1"><b id="m">결제금액: </b>&emsp;${ms.orderPayment}원</span><br>
+                     <span class="it_info1"><b id="m">배송비:</b>&emsp;무료배송</span>&emsp;<br> 
+                     <span class="it_info1"><b id="m">결제방식: </b>&emsp;${ms.card}</span>&emsp;<br> 
+                    <span class="it_info1"><b id="m">결제번호: </b>&emsp;${ms.impUid}</span>&emsp;<br>
 
                 </div>
-                
+                <div class="li"></div>
                 <div class="orderInfo">
-               <span class="it_info1"><b id="m">밀키트: </b>&emsp;${ms.milkitName}</span><br>     
-             <span class="it_info1"><b id="m">주문수량: </b>&emsp;${ms.orderOptionAmount}개</span>&emsp;<br>
-                     <span class="it_info1"><b id="m">결제금액: </b>&emsp;${ms.milkitPrice*ms.orderOptionAmount}원</span><br>
-                  
+                    <span class="it_info1"><b id="m">주문자이름: </b>&emsp;${ms.orderName}</span>&emsp;<br>
+                    <span class="it_info1"><b id="m">주문자이메일: </b>&emsp;${ms.orderEmail}</span><br>
+                     <span class="it_info1"><b id="m">주문자 연락처: </b>&emsp;${ms.orderPhone}</span><br>
                     <span class="it_info1"><b id="m">주문상태: </b>&emsp;${ms.status}</span>&emsp;<br>
-						<c:choose>
-							<c:when test="${ms.orderRequest !=null}">
-								<span class="request"><b id="ms">요청사항: </b>&emsp;${ms.orderRequest}</span>
-								&emsp;
-								<br>
-							</c:when>
-
-							<c:otherwise>
-								<span class="it_info1"><b id="m">요청사항: </b>&emsp;요청사항 없음</span>
-								&emsp;
-								<br>
-
-							</c:otherwise>
-						</c:choose>
-
-					</div>
+                    <span class="it_info1"><b id="m">요청사항: </b>&emsp;${ms.orderRequest}</span>&emsp;<br>
+                </div>
              </div>
              </c:forEach>
 

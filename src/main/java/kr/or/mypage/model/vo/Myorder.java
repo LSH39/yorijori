@@ -18,7 +18,7 @@ public class Myorder {
 	private int orderSale;
 	private int orderPayment;
 	private String impUid;
-	private int orderStatus;
+	
 	//밀키트
 	private int productNo;
 	private int recipeNo;
@@ -34,6 +34,7 @@ public class Myorder {
 	//주문옵션
 	private int orderOptionNo;
 	private int orderOptionAmount;
+	private int orderStatus;
 	
 	public String getCard(){
 		if(orderPayOption == 1) {
