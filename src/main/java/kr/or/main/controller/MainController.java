@@ -19,13 +19,14 @@ public class MainController {
 		return "common/main";
 	}
 	
-	@RequestMapping(value="/mainpagesearch.do")
-	public String mainpageSearch(Model model, int reqPage, String keyword) {
-		MainSearchResult msr = service.mainpageSearch(reqPage, keyword);
+	@RequestMapping(value="/mainpageSearch.do")
+	public String mainpageSearch(Model model, String keyword) {
+		MainSearchResult msr = service.mainpageSearch(keyword);
 		model.addAttribute("recipeList", msr.getRecipeList());
 		model.addAttribute("memberList", msr.getMemberList());
 		model.addAttribute("classList", msr.getClassList());
 		model.addAttribute("freeList", msr.getFreeList());
+		model.addAttribute("productList", msr.getProductList());
 		return "main/searchResult";
 	}
 }

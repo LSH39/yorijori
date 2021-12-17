@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="main">
-
+	<select id="selectRecipeList" parameterType="String" resultType="rb">
+		select
+			recipe_no as recipeNo,
+			recipe_writer as recipeWriter,
+			recipe_title as recipeTitle,
+			filepath
+		from recipe_board
+        where recipe_title like '%' || #{keyword} || '%'
+        order by recipe_no desc
+	</select>
+	<select id="selectMemberList" parameterType="String" resultType="m">
+		select
+			member_no as memberNo,
+			member_id as memberId,
+			member_nickname as memberNickname,
+			profile_path as profilePath,
+			member_level as memberLevel
+		from member
+		where member_level in (1, 2) and
+		(member_id like '%' || #{keyword} || '%' or
+        member_nickname like '%' || #{keyword} || '%')
+        order by member_no desc
+	</select>
+	<select id="selectClassList" parameterType="String" resultType="ccls">
+		select
+			class_no as classNo,
+			class_title as classTitle,
+			class_rate as classRate,
+			class_start as classStart,
+			class_status as classStatus,
+			class_location1 as classLocation1
+		from cooking_class
+		where class_title like '%' || #{keyword} || '%'
+		order by class_no desc
+	</select>
+	<select id="selectFreeboardList" parameterType="String" resultType="fb">
+		    select ff.* from
+		    (select
+				  		free_no as freeNo,
+				  		free_writer as freeWriter,
+				  		free_title as freeTitle,
+				  		free_content as freeContent,
+				  		reg_date as regDate,
+				  		free_readcount as freeReadcount,
+		                (select member_nickname from member where member_id=free_writer) as memberNickname,
+		                (select profile_path from member where member_id=free_writer) as profilePath,
+		                (select count(*) from freeboard_comment fc where fc.free_no=f.free_no) as fcCount,
+		                (select count(*) from freeboard_like fl where fl.free_no=f.free_no) as freeLikeCount 
+		    from freeboard f
+            where free_title like '%' || #{keyword} || '%'
+            order by free_no desc)ff
+	</select>
+	<select id="selectProductList" parameterType="String" resultType="product">
+		select
+			product_no as productNo,
+			milkit_name as milkitName,
+			milkit_price as milkitPrice,
+			milkit_comment as milkitComment,
+			filepath
+		from product
+		where milkit_name like '%' || #{keyword} || '%'
+		order by product_no desc
+	</select>
 </mapper>

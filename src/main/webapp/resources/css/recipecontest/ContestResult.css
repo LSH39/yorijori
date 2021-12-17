@@ -95,7 +95,9 @@ ul{
 .prize-tower li:nth-child(3){
 	height: 150px;
 }
-
+.points{
+	color: #8E44AD;
+}
 
 
 

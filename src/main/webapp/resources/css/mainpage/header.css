@@ -4,7 +4,7 @@
 .header-wrap{
 	position:relative;
 }
-.recipe-category {
+.main-recipe-category {
 	width: 100%;
 	border-bottom: 1px solid #adadad;
 	background-color: rgba(255, 255, 255, 0.9);
@@ -15,58 +15,58 @@
 	display:none;
 	padding-top: 10px;
 }
-.recipe-category>ul{
+.main-recipe-category>ul{
 	margin: 0;
 	padding: 0;
 	border: 0;
 	text-align: center;
 }
-.recipe-category>ul{
+.main-recipe-category>ul{
 	margin: 0;
 	padding: 0;
 	border: 0;
 }
 
-.recipe-category li{
+.main-recipe-category li{
 	display: inline-block;
 	vertical-align: top;
 	padding: 0 50px 0 0;
 	box-sizing: border-box;
 	text-align: left;
 }
-.recipe-category ul>li{
+.main-recipe-category ul>li{
 	display: flex;
 	flex-direction: column;
 }
-.recipe-category span{
+.main-recipe-category span{
 	display: block;
 	font-weight: bold;
 	color: rgb(155, 89, 182);
 	padding: 5px 0;
 }
 
-.recipe-category label:hover{
+.main-recipe-category label:hover{
 	color: #C4BFE3;
 }
-.recipe-category-box{
+.main-recipe-category-box{
 	display: flex;
 	justify-content: center;
 }
-.category-btn-area{
+.main-main-recipe-category-btn-area{
 	text-align: center;
 	padding: 30px 0px;
 }
-.recipe-btn-search, .recipe-category-close{
+.recipe-btn-search, .main-recipe-category-close{
 	font-family: "Jua";
 	font-size: 18px;
 	border-radius: 15px;
 	padding: 5px 15px;
 	border: none;
 }
-.recipe-category label{
+.main-recipe-category label{
 	font-size: 18px;
 }
-.recipe-category span{
+.main-recipe-category span{
 	font-size: 24px;
 }
 .recipe-btn-search{
@@ -79,9 +79,12 @@
 	color: #8E44AD;
 	margin-right: 15px;
 }
-.recipe-category-close:hover{
+.main-recipe-category-close:hover{
 	background-color: rgb(20, 20, 20);
 	color: #f1f1f1;
+}
+.main-search-icon:hover{
+	cursor: pointer;
 }
 
 a:hover{

@@ -167,10 +167,10 @@
       	</div>
       	<div class="prize-tower row">
       			<ul>
-      				<li><h4>20만 포인트</h4></li>
-      				<li><h4>20만 포인트</h4></li>
-      				<li><h4>20만 포인트</h4></li>
-      				<li><h4>20만 포인트</h4></li>
+      				<li><h4><span class="points">20</span>만 포인트 지급<br>+<br>밀키트 상품<br>제작 및 판매 지원</h4></li>
+      				<li><h4><span class="points">20</span>만 포인트 지급</h4></li>
+      				<li><h4><span class="points">10</span>만 포인트 지급</h4></li>
+      				<li><img src="https://img.icons8.com/external-icongeek26-outline-gradient-icongeek26/64/000000/external-gift-essentials-icongeek26-outline-gradient-icongeek26.png"/><h4>투표수 <span class="points">30</span> 이상 <br>전원<br> <span class="points">1</span>만 포인트 지급</h4></li>
       			</ul>
       	</div>
       </div>	
