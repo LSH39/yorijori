@@ -18,7 +18,8 @@ public class CartService {
 	public ArrayList<Cart> cartList(int memberNo) {
 		return dao.cartList(memberNo);
 	}
-
+	
+	@Transactional
 	public int changeCart(Cart cart) {
 		return dao.changeCart(cart);
 	}

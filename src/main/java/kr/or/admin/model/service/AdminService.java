@@ -277,6 +277,17 @@ public class AdminService {
 		ArrayList<Notice> list = dao.selectNotice();
 		return list;
 	}
+
+	public ArrayList<Member2> subs() {
+		ArrayList<Member2> list = dao.subs();
+		
+		return list;
+	}
+
+	public int rePermission(String memberNo) {
+		int result = dao.rePermission(memberNo);
+		return result;
+	}
 	
 	
 	

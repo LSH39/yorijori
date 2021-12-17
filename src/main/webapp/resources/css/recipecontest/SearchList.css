@@ -1,0 +1,7 @@
+@charset "UTF-8";
+.total-count{
+	display: flex;
+}
+.total{
+	color: #9F90CF;
+}

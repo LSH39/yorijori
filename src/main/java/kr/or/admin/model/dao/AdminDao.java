@@ -271,6 +271,25 @@ public class AdminDao {
 	}
 
 
+	public ArrayList<Member2> subs() {
+		List list = sqlSession.selectList("stat.subs");
+		
+		return (ArrayList<Member2>) list;
+	}
+
+
+	public int rePermission(String memberNo) {
+		StringTokenizer st = new StringTokenizer(memberNo, ",");
+		String[] arr = new String[st.countTokens()];
+		for(int i = 0; i<arr.length;i++) {
+			arr[i]=st.nextToken();
+		}
+		int result = sqlSession.update("member.rePermission",arr);
+		return result;
+		
+	}
+
+
 	
 		
 		

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.notice.model.vo.NoticePageData;
 import kr.or.recipecontest.model.service.RecipeContestService;
 import kr.or.recipecontest.model.vo.ContestPageData;
 import kr.or.recipecontest.model.vo.RecipeContest;
@@ -50,4 +51,14 @@ public class RecipeContestController {
 			return "common/msg";
 	}
 	
+	@RequestMapping(value="/recipeContestSearch.do")
+	public String contestSearch(Model model, String searchtype, String searchword) {
+		ContestPageData searchResult = service.selectContestList(searchtype, searchword);
+		model.addAttribute("list", searchResult.getList());
+		model.addAttribute("pageNavi", searchResult.getPageNavi());
+		model.addAttribute("start", searchResult.getStart());
+		model.addAttribute("totalCount", searchResult.getTotalCount());
+		return "recipecontest/searchList";
+		
+	}
 }

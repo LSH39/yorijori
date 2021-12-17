@@ -38,16 +38,21 @@
 	      					<input type="file" class="form-control" id="fileUpload" name="upfile" accept=".gif, .jpg, .png, .jpeg">
 	      				</div>
 	      			</div>
-	      			<div class="form-group row">
+	      			<div class="form-group row fixed">
 	      				<label for="noticeWriter" class="col-sm-2 col-form-label">작성자</label>
 	      				<div class="col-sm-4">
 	      					<input type="text" readonly class="form-control-plaintext" name="noticeWriter" id="noticeWriter" value="${sessionScope.m.memberId }">
 	      				</div>
+	      				<label for="fixedNotice" class="col-sm-2 col-form-label">고정글</label>
+	      				<div class="col-sm-4">
+	      					<input type="checkbox" id="fixedNotice" name="noticePriority" value='y'>
+	      					<input type="hidden" name="noticePriority" id="fixedNoticeHidden" value='n'>
+	      				</div>
 	      			</div>
 	      			<div class="form-group row">
-	      				<label for="noticeContent" class="col-sm-2 col-form-label">내용</label>
+	      				<label for="content" class="col-sm-2 col-form-label">내용</label>
 	      				<div class="col-sm-10">
-	      				<textarea class="form-control" name="noticeContent" id="noticeContent" rows="20"></textarea>
+	      				<textarea class="form-control" name="noticeContent" id="content" rows="20"></textarea>
 						</div>	      			
 	      			</div>
 	      			<div class="form-group submitFrm">
@@ -64,7 +69,7 @@
   </main><!-- End #main -->
   <script>
 		$(function(){
-			$("#noticeContent").summernote({
+			$("#content").summernote({
 				height : 400,
 				lang : "ko-KR",
 				callbacks : {
@@ -96,6 +101,7 @@
 					url : "/uploadNoticeImage.do",
 					type : "post",
 					data : form,
+					enctype : 'multipart/form-data',
 					processData : false,
 					contentType : false,
 					success : function(data){
@@ -103,6 +109,16 @@
 					}
 				});
 			}
+			
+			$("#fixedNotice").on("change", function(){
+				if($(this).prop('checked')){
+					$("#fixedNoticeHidden").prop("disabled", true);
+				} else {
+					$("#fixedNoticeHidden").prop("disabled", false);
+				}
+			})
+			
+
 		});
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

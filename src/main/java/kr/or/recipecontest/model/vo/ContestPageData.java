@@ -21,9 +21,18 @@ public class ContestPageData {
 		this.totalCount = totalCount;
 		this.orderIndex = orderIndex;
 	}
+	
 	public ContestPageData() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public ContestPageData(ArrayList<RecipeContest> list2, String pageNavi2, int start2, int totalCount2) {
+		super();
+		this.list = list2;
+		this.pageNavi = pageNavi2;
+		this.start = start2;
+		this.totalCount = totalCount2;
 	}
 	
 	

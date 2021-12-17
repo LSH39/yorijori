@@ -14,34 +14,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <script src="resources/summernote/jquery-3.3.1.js"></script>
 <main id="main">
-      <div class="container">
-      	<div class="christmas-lights">
-	      		<ul class="lightrope">
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				  <li></li>
-				 </ul>
-	      	</div>
-	      	<div class="contest-banner">
-	      	</div>
+		<div class="contest-banner">
 	      	<div class="contest-banner-content">
 	      		<h2><span class="thisyr"></span>년 <span class="thismonth"></span>월</h2>
 	      		<h2>레시피경연대회 온라인 투표</h2><br>
@@ -57,12 +30,15 @@
 	      			<button class="btn-main btn-announce">경연대회 안내</button>
 	      		</a>
 	      	</div>
+	    </div>
+      <div class="container">
+	      	
 			<div class="board-content">
 	      		<div class="contest-outline">
 	      			<div>총 <span id="totalCount">${totalCount }</span>개</div>
 	      			<div>
 	      				<c:choose>
-	      					<c:when test="${not empty sessionScope.m }">
+	      					<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel eq 1 || sessionScope.m.memberLevel eq 2 }">
 	      					<input type="hidden" class="memberNo" value="${sessionScope.m.memberNo }">
 	      					<button class="btn-main btn-enter">대회 참가하기</button>
 	      					</c:when>
@@ -204,6 +180,14 @@
   			}
   		});
   		
+  		//검색어 선택 확인
+  		$(".btn-search").on("click", function(){
+			var radioSearch = $("input[name='searchtype']").is(":checked");
+			if(radioSearch != true){
+				alert("검색어 선택 후 버튼을 눌러주세요!");
+				return false;
+			}
+		});
   		
   		});
   		

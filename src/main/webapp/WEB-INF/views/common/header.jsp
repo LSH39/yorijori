@@ -14,8 +14,8 @@
 
 <!-- header 및 기본 CSS-->
 <link rel="stylesheet" href="resources/css/mainpage/header.css">
-<!-- 부트스트랩용 jQuery -->
-<script type="text/javascript" src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- 부트스트랩용 jQuery
+<script type="text/javascript" src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <!-- 부트스트랩 icon -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <!-- Favicons -->
@@ -30,7 +30,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 
+<!-- slick css -->
+<link rel="stylesheet" type="text/css" href="resources/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="resources/slick/slick-theme.css"/>
 <!-- Vendor CSS Files -->
 <link href="resources/vendor/animate.css/animate.min.css" rel="stylesheet">
 <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +69,7 @@
 		<c:when test="${sessionScope.m.memberLevel ==  3 }">
 			<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="/admin.do">관리자 페이지 </a>
-	        <a class="qna chat" id="chatAdmin">1:1문의하기</a>
+	        <a class="qna chat" id="chatAdmin">1:1문의하기 <span class="chatAlarm">+<span id="chatAdminAlarm"></span></span></a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
 	       	<!-- LSH -->
 			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
@@ -79,7 +85,7 @@
        	<c:otherwise>
 	       	<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
-	        <a class="qna chat" id="chatUser">1:1문의하기</a>
+	        <a class="qna chat" id="chatUser">1:1문의하기 <span class='chatAlarm'>+<span id='chatUserAlarm'></span></span></a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
 	       	<!-- LSH -->
 	       	<%@include file = "/WEB-INF/views/chat/chatUser.jsp" %>
@@ -123,7 +129,7 @@
           </li>
           <li>
           <form action="/mainpagesearch.do" method="get" id="headersearchBar">
-          <input type="search" class="nav-link scrollto" id="header-mainsearch" placeholder="검색"></li>
+          <input type="search" class="nav-link scrollto" id="header-mainsearch" name="keyword" placeholder="검색"></li>
           <input type="hidden" name="reqPage" value=1>
           <input type="submit" id="headersearchsubmit" style="display: none;"></input>
           <label for="headersearchsubmit"><img src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
@@ -237,9 +243,11 @@
 		</div>
 	</form>
   </div>
+  
      <!-- 따라다니는 우측 퀵 메뉴 -->
   <div class="quickmenu"> 
   	<ul>
+  		<li><img src="/resources/img/mainpage/delivery.jpg" style="width:80px;height:110px;"> <a style="margin-bottom: 85px;">새벽배송</a></li>
   		<li><a href="#"><img src="/resources/img/mainpage/basket.png"> 최근 본 상품</a></li>
   		<li><a href="#"><img src="/resources/img/mainpage/q_mark.png"> 질문있어요</a></li>
   		<li><a href="#"><img src="/resources/img/mainpage/message.png"> 내 메세지</a></li>
