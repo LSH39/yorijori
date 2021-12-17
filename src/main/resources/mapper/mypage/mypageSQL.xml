@@ -269,7 +269,7 @@
 	</select>
 
 	<select id="orderDetail" resultType="dd" parameterType="_int">
-		select
+	select
 		b.order_no as orderNo,
 		b.MEMBER_NO as memberNo,
 		b.ORDER_NAME as orderName,
@@ -283,8 +283,7 @@
 		b.ORDER_PRICE as orderPrice,
 		b.ORDER_SALE as orderSale,
 		b.ORDER_PAYMENT as orderPayment,
-		b.IMP_UID as impUid,
-		b.ORDER_STATUS as orderStatus
+		b.IMP_UID as impUid
 
 		from
 		order_tbl b
@@ -311,7 +310,7 @@
 		b.ORDER_SALE as orderSale,
 		b.ORDER_PAYMENT as orderPayment,
 		b.IMP_UID as impUid,
-		b.ORDER_STATUS as orderStatus,
+		a.ORDER_STATUS as orderStatus,
 		c.milkit_name as milkitName ,
 		c.milkit_price as milkitPrice,
 		c.filepath
@@ -340,14 +339,15 @@
 		b.ORDER_SALE as orderSale,
 		b.ORDER_PAYMENT as orderPayment,
 		b.IMP_UID as impUid,
-		b.ORDER_STATUS as orderStatus,
+		a.ORDER_STATUS as orderStatus,
 		c.milkit_writer as milkitWriter,
 		c.recipe_no as recipeNo,
-		c.milkit_name as milkitName
+		c.milkit_name as milkitName,
+        c.milkit_price as milkitPrice
 		from
 		order_option a,order_tbl b,product c
 		where a.order_no =b.order_no and a.product_no=c.product_no and
-		c.milkit_writer=5
+		c.milkit_writer=103
 
 
 	</select>
@@ -358,7 +358,6 @@
 		member_phone=#{memberPhone},
 		member_birth=#{memberBirth},
 		postcode=#{postcode},
-		PROFILE_PATH=#{profilePath},
 		address_road=#{addressRoad},
 		address_detail=#{addressDetail},
 		profile_intro=#{profileIntro},
@@ -427,8 +426,7 @@
 		ORDER_PRICE as orderPrice,
 		ORDER_SALE as orderSale,
 		ORDER_PAYMENT as orderPayment,
-		IMP_UID as impUid,
-		ORDER_STATUS as orderStatus
+		IMP_UID as impUid
 		from order_tbl where member_No=111 order by order_No desc)o)
 		where rnum
 		between #{start} and #{end}
@@ -585,17 +583,6 @@
 		select Count(*) from point where member_no=104
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 		<select id="mypoint" resultType="mp" parameterType="_int">
 		 
         select
@@ -610,6 +597,29 @@
 		member_no=104 order by point_date desc
 
 
+	</select>
+	
+		<select id="selectClassList" parameterType="map"  resultType="ccls">
+	       
+         	select *
+		from
+		(select 
+			rownum as rnum,
+			c.*
+		from
+		(select
+			class_no as classNo,
+			member_nickname as memberNickname,
+			class_title as classTitle,
+			class_price as classPrice,
+			class_start as classStart
+		from cooking_class  where member_nickname='승민전문가' order by class_no asc) c)
+		where rnum between #{start} and #{end}
+	
+	</select>
+	
+	<select id="totalClass" resultType="_int">
+	select count(*) from cooking_class where member_nickname='승민전문가'
 	</select>
 </mapper>
 

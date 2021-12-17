@@ -42,7 +42,16 @@ public class MilkitService {
 		HashMap<String, Object>map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		ArrayList<Product>list = dao.selectMoreProduct(map);
+		ArrayList<Product>list = null;
+		if(boardNo == 1) {
+			list = dao.selectMoreProduct1(map);
+		}else if(boardNo == 2) {
+			list = dao.selectMoreProduct2(map);
+		}	
+		return list;
+	}
+	public ArrayList<Product> selectOneProduct(int productNo) {
+		ArrayList<Product>list = dao.selectOneProduct(productNo);
 		return list;
 	}
 

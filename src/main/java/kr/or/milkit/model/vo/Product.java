@@ -3,7 +3,6 @@ package kr.or.milkit.model.vo;
 import lombok.Data;
 
 @Data
-
 public class Product {
 
 	private int productNo;
@@ -17,4 +16,6 @@ public class Product {
 	private String milkitDate;
 	private int milkitStock;
 	private int milkitDelete;
+	private String nickname;
 }
+

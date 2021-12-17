@@ -61,6 +61,7 @@
 .ppa{
     width:800px;
     height:300px; 
+    
 }
 .orl{
     width:800px;
@@ -85,7 +86,8 @@
   background-color: #F7F7E5;
  }
   .tt{
-   text-align:center;
+  text-align:center;
+  background-color: skyblue;
 
 
   }
@@ -95,6 +97,7 @@
   .tb2-td{
     text-align:center;
   }
+
 </style>
     <script>
         $(function(){
@@ -128,14 +131,22 @@
                     <table border="1" class="orl">
                    
                         <tr >
-                        <th class="tt" colspan="3">주문번호:${dd.orderNo}</th>
-                       
+                        <th class="tt" colspan="5">주문번호:${dd.orderNo}</th>
+ 
+                    </tr>
+                   <tr class="thh">
+                        <td class="tb2-td">상품이미지</td>
+                        <td class="tb2-td">밀키트이름</td>
+                        <td class="tb2-td">밀키트가격</td>
+                        <td class="tb2-td">주문수량</td>
+                        <td class="tb2-td">주문상태</td>
                     </tr>
                          <c:forEach items="${list}" var="mo" varStatus="i">
                     <tr class="tb2-tr2">
                         <td class="tb2-td"><img src="resources/img/mypage/house.png" id="sort" ></td>
                         <td class="tb2-td">${mo.milkitName}</td>
                         <td class="tb2-td">${mo.milkitPrice}원</td>
+                        <td class="tb2-td">${mo.orderOptionAmount}개</td>
                         <td class="tb2-td">${mo.orderOptionAmount}개</td>
                     </tr>
                   </c:forEach>

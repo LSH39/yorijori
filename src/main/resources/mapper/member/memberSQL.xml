@@ -359,7 +359,7 @@ and memberLevel = 5
 		</selectKey>
 	</insert>
 	<insert id="joinPro" parameterType="m">
-		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberEmail},#{memberName},#{memberNickname},#{memberPhone},#{memberBirth},#{postcode},#{addressRoad},#{addressDetail},#{memberConsent},'profile_basic.png',null,#{certificatePath},2,0,to_char(sysdate,'yyyy-mm-dd'),null,0)
+		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberEmail},#{memberName},#{memberNickname},#{memberPhone},#{memberBirth},#{postcode},#{addressRoad},#{addressDetail},#{memberConsent},'profile_basic.png',null,#{certificatePath},4,0,to_char(sysdate,'yyyy-mm-dd'),null,0)
 		<selectKey resultType="_int" order="AFTER" keyProperty="memberNo">
 			select member_no from member where member_id=#{memberId}
 		</selectKey>
@@ -418,6 +418,16 @@ and memberLevel = 5
 		from member
 		where member_no=#{memberNo}
 	</select>
+	
+	<select id="searchMemberNo" parameterType="string" resultType="_int">
+		select member_no as memberNo from member where member_nickname=#{selectUser}
+	</select>
+	<select id="searchMemberNickname" parameterType="_int" resultType="string">
+		select member_nickname as memberNickname from member where member_no=#{receiveNo}
+	</select>
+
+
+
 	<update id="rePermission" parameterType="string" >
 	update member set 
 	member_level = 6
@@ -426,5 +436,4 @@ and memberLevel = 5
 	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
 	
 	</update>
-
 </mapper>

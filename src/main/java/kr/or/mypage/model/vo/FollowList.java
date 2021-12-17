@@ -14,5 +14,6 @@ public class FollowList {
 	private String subhead;
 	private String memberNickname;
 	private int cnt;
+	private int recipeNo;
 
 }

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.backTo>*:hover{
+	cursor: pointer;
+}
+.backTo>*{
+	height: 45px;
+}
+.backTo>i{
+	font-style: normal;
+}

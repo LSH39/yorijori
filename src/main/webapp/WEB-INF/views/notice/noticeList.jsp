@@ -42,23 +42,39 @@
 	      					<tr>
 	      						<th scope="col">번호</th>
 	      						<th scope="col">제목</th>
-	      						<th scope="col">작성자</th>
+	      						<th scope="col">작성자(ID)</th>
 	      						<th scope="col">작성일</th>
 	      						<th scope="col">조회</th>
 	      					</tr>
 	      				</thead>
 	      				<tbody>
 	      					<c:forEach items="${list }" var="n" varStatus="i">
-	      						<tr>
-	      							<td>${start+i.index }</td>
-	      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
-											${n.noticeTitle }
-										</a>
-									</td>
-									<td>${n.noticeWriter }</td>
-									<td>${n.regDate }</td>
-									<td>${n.noticeReadcount }</td>
-								</tr>
+	      						<c:choose>
+	      							<c:when test="${n.noticePriority eq 'y' }">
+	      								<tr style="background: #FFFDE7; border-bottom: 1px solid #607D8B;">
+			      							<td>${start+i.index }</td>
+			      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
+													${n.noticeTitle }
+												</a>
+											</td>
+											<td>${n.noticeWriter }</td>
+											<td>${n.regDate }</td>
+											<td>${n.noticeReadcount }</td>
+										</tr>
+	      							</c:when>
+	      							<c:otherwise>
+	      								<tr>
+			      							<td>${start+i.index }</td>
+			      							<td><a href='/noticeView.do?noticeNo=${n.noticeNo }'>
+													${n.noticeTitle }
+												</a>
+											</td>
+											<td>${n.noticeWriter }</td>
+											<td>${n.regDate }</td>
+											<td>${n.noticeReadcount }</td>
+										</tr>
+	      							</c:otherwise>
+	      						</c:choose>
 							</c:forEach>
 	      				</tbody>
 	      			</table>
@@ -92,4 +108,15 @@
   </main><!-- End #main -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+<script>
+	$(function(){
+		$(".btn-search").on("click", function(){
+			var radioSearch = $("input[name='searchtype']").is(":checked");
+			if(radioSearch != true){
+				alert("검색어 선택 후 버튼을 눌러주세요!");
+				return false;
+			}
+		});
+	});
+</script>
 </html>

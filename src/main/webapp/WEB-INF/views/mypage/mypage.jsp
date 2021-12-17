@@ -189,7 +189,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원등급</td>
 								<td><input type="text" name="memberLevel" id="memberLevel"
-									onfocus="this.placeholder=''" value="${m.memberLevel }" readonly></td>
+									onfocus="this.placeholder=''" value="${m.grade }" readonly></td>
 							</tr>
 							<tr>
 								<td>포인트내역</td>

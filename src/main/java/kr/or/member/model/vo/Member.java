@@ -24,4 +24,22 @@ public class Member {
 	private String enrollDate;
 	private String withdrawDate;
 	private int memberBlack;
+	
+	public String getGrade(){
+		if(memberLevel == 1) {
+			return "요리꾼";
+		}else if(memberLevel == 2) {
+			return "조리꾼";
+		}else if(memberLevel == 3) {
+			return "관리자";
+		}else if(memberLevel == 4) {
+			return "미인증(조리꾼)";
+		}else if(memberLevel == 5) {
+			return "탈퇴요청(조리꾼)";
+		}else if(memberLevel == 6) {
+			return "재인증이 필요합니다";
+		}else {
+			return null;
+		}
+	}
 }

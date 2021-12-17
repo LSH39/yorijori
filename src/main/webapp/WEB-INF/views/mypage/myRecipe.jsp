@@ -60,12 +60,12 @@
        </c:choose>   
         <!-- 메인 콘텐츠 -->
         <div class="main-content">
-     
+    
             <h3 id="h_hotel">my recipe</h3>
              <div id="line2"></div><br>
              <c:forEach items="${list}" var="rb" varStatus="i">
             <div class="item">
-                <a href="#"> 
+                <a href="/recipeView.do?recipeNo=${rb.recipeNo}&memberNo=${rb.recipeWriter}"> 
                     <img id="itemI" src="/resources/img/mypage/house.png">
                 </a>
                 <div id="items">

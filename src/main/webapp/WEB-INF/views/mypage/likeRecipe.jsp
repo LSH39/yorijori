@@ -68,7 +68,7 @@
 			      <c:forEach items="${list}" var="lr" varStatus="i">
 			 <div class="recipe">
 				<div class="recImg">
-					<a href="#"> <img id="itemI"
+					<a href="/recipeView.do?recipeNo=${lr.recipeNo}&memberNo=${lr.recipeWriter}"> <img id="itemI"
 						src="resources/img/mypage/house.png">
 					</a>
 				</div>

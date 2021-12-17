@@ -117,7 +117,13 @@ public class MilkitController {
 	@RequestMapping(value = "/moreProduct.do" ,produces = "application/json;charset=utf-8" )
 	public String moreProduct(int start,int boardNo) {
 		ArrayList<Product>list = service.selectMoreProduct(start,boardNo);
-		return new Gson().toJson(list);
-		
+		System.out.println(boardNo);
+		return new Gson().toJson(list);	
+	}
+	@RequestMapping(value="/milkitView.do")
+	public String milkitView(int productNo,Model model) {
+		ArrayList<Product>list = service.selectOneProduct(productNo);
+		model.addAttribute("list", list);
+		return "/product/milkitView";
 	}
 }

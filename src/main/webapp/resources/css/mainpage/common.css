@@ -53,6 +53,7 @@
 }
 .btn-update:hover{
 	background: #F7F7E5;
+	font-weight: bolder;
 }
 .btn-delete{
 	background: #f1f1f1;

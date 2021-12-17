@@ -403,7 +403,6 @@ label[for="searchsubmit"]:hover{
 }
 #hero .carousel-item::before {
   content: "";
-  background-color: rgba(40, 40, 40, 0.1);
 }
 
 #hero .carousel-item:nth-child(2)::before{

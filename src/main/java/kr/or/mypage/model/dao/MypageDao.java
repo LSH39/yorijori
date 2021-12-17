@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.freeboard.model.vo.Freeboard;
@@ -255,6 +256,16 @@ public class MypageDao {
 	public int usePoint() {
 		int usePoint = sqlSession.selectOne("mypage.usePoint");
 		return usePoint;
+	}
+	//내 쿠킹클래스 1번
+	public ArrayList<CookingCls> selectMyClass(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<CookingCls> list = sqlSession.selectList("mypage.selectClassList", map);
+		return (ArrayList<CookingCls>) list;
+	}
+	//내 쿠킹클래스 개수
+	public int totalClass() {
+		return sqlSession.selectOne("mypage.totalClass");
 	}
 	
 

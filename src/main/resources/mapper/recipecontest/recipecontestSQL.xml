@@ -37,4 +37,81 @@
 	<select id="selectContestNo" parameterType="_int" resultType="_int">
 		select contest_no as contestNo from contest_vote where member_no=#{memberNo} and vote_date like '%' || to_char(sysdate, 'yyyy-mm') || '%'
 	</select>
+	<select id="searchList" parameterType="map" resultType="rc">
+		     select ccc.* from
+            (select rownum as rnum, cc.* from
+            (select c.*,
+			  (select member_id from member where recipeWriterNo=member_no) as recipeWriter,
+			  (select profile_path from member where recipeWriterNo=member_no) as profilePath,
+			  (select member_nickname from member where recipeWriterNo=member_no) as memberNickname,
+			  (select count(*) from contest_vote cv where c.contestNo = cv.contest_no) as voteCount
+			  from
+			  (select
+			    cr.recipe_no as recipeNo,
+			    contest_no as contestNo,
+			    enter_date as enterDate,
+			    contest_result as contestResult,
+			    contest_month as contestMonth,
+			    recipe_delete as recipeDelete,
+			    recipe_writer as recipeWriterNo,
+			    recipe_title as recipeTitle,
+			    filepath as recipePath,
+			    subhead as recipeContent
+			    from contest_recipe cr
+			    left join recipe_board rb on rb.recipe_no=cr.recipe_no
+                order by contest_no desc)c)cc
+	        <choose>
+	           <when test="searchtype.equals('writerNickname')"> 
+	        where memberNickname like '%' || #{searchword} || '%' )ccc
+	            </when>
+	            <when test="searchtype.equals('writerId')">
+	        where recipeWriter like '%' || #{searchword} || '%' )ccc
+	            </when>
+	            <when test="searchtype.equals('title')">
+	        where recipeTitle like '%' || #{searchword} || '%' )ccc
+	            </when>
+	            <when test="searchtype.equals('content')">
+	        where recipeContent like '%' || #{searchword} || '%' )ccc
+	            </when>
+	        </choose>
+	        where rnum between #{start} and #{end}
+	</select>
+	<select id="searchCount" parameterType="map" resultType="_int">
+		   select count(*) from
+            (select cc.* from
+            (select c.*,
+			  (select member_id from member where recipeWriterNo=member_no) as recipeWriter,
+			  (select profile_path from member where recipeWriterNo=member_no) as profilePath,
+			  (select member_nickname from member where recipeWriterNo=member_no) as memberNickname,
+			  (select count(*) from contest_vote cv where c.contestNo = cv.contest_no) as voteCount
+			  from
+			  (select
+			    cr.recipe_no as recipeNo,
+			    contest_no as contestNo,
+			    enter_date as enterDate,
+			    contest_result as contestResult,
+			    contest_month as contestMonth,
+			    recipe_delete as recipeDelete,
+			    filepath as recipePath,
+			    recipe_writer as recipeWriterNo,
+			    recipe_title as recipeTitle,
+			    subhead as recipeContent
+			    from contest_recipe cr
+			    left join recipe_board rb on rb.recipe_no=cr.recipe_no
+                order by contest_no desc)c)cc
+	        <choose>
+	           <when test="searchtype.equals('writerNickname')"> 
+	        where memberNickname like '%' || #{searchword} || '%' )ccc
+	            </when>
+	            <when test="searchtype.equals('writerId')">
+	        where recipeWriter like '%' || #{searchword} || '%' )ccc
+	            </when>
+	            <when test="searchtype.equals('title')">
+	        where recipeTitle like '%' || #{searchword} || '%' )ccc
+	            </when>
+	            <when test="searchtype.equals('content')">
+	        where recipeContent like '%' || #{searchword} || '%' )ccc
+	            </when>
+	        </choose>
+	</select>
 </mapper>

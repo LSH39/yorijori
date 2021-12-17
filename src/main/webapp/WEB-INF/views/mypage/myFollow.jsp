@@ -60,6 +60,7 @@
     width: 250px;
     height:130px;
 }
+
 </style>
 </head>
 <body>
@@ -88,20 +89,20 @@
                     <h5 id="nickName">${fol.memberNickname }</h5>
                 </div>
                 <div class="pr">
-                    <a href="#"> 
+                    <a href="/recipeView.do?recipeNo=${fol.recipeNo}&memberNo=${fol.recipeWriter}"> 
                         <img id="itemI" src="resources/img/mypage/house.png">
                     </a>
                 </div>
                 <div class="pw">
                    <h5 style="color: rgb(126, 30, 166);"> 좋아요 ${fol.cnt }개</h5>
                     <h5>#${fol.recipeTitle}</h5>
-                    <h5>#${fol.subhead }</h5>
+                    <h5>#${fol.subhead}</h5>
                 </div>
 
             </div>
             </c:forEach>
         </div>
-        
+  
         </div>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
