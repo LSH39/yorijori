@@ -27,6 +27,7 @@ public class MainController {
 		model.addAttribute("classList", msr.getClassList());
 		model.addAttribute("freeList", msr.getFreeList());
 		model.addAttribute("productList", msr.getProductList());
+		model.addAttribute("keyword", keyword);
 		return "main/searchResult";
 	}
 }

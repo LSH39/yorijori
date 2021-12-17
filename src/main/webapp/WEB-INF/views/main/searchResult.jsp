@@ -21,11 +21,11 @@
 		      	</div>
 		    </div>
 			<div class="board-content">
-				<div class="title"><h2>검색결과</h2></div>
+				<div class="title"><h2>검색결과</h2><h3 style="margin-top:10px; font-size: 24px;">검색어 : '${keyword }'</h3></div>
 	      		<div class="result-outline">
 	      			<div>총 <span id="totalCount">${fn:length(recipeList) }</span>개</div>
 	      			<div>
-	      				<input type="hidden" id="orderIndex" value="${orderIndex }">
+	      				<input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
 	      				<span style="margin-right:10px;">항목</span><button class="btn-main select-type">레시피</button> <button class="btn-main select-type">밀키트</button> <button class="btn-main select-type">회원</button> <button class="btn-main select-type">클래스</button> <button class="btn-main select-type">게시판</button>
 	      			</div>
 	      		</div><hr>
@@ -36,8 +36,8 @@
 		      						<c:forEach items="${recipeList }" var="r" varStatus="i">
 		      							<li>
 		      								<a href="/recipeView.do?recipeNo=${r.recipeNo }">
-		      									<div class="recipePic"><img src="resources/upload/recipeboard/${r.filepath }" style="width: 150px;height:150px;"></div>
-		      									<div class="recipeTitle"><h5>${r.recipeTitle }</h5></div>
+		      									<div class="resultPic"><img src="resources/upload/recipeboard/${r.filepath }" style="width: 150px;height:150px;"></div>
+		      									<div class="resultTitle"><h5>${r.resultTitle }</h5></div>
 		      								</a>
 		      							</li>
 		      						</c:forEach>
@@ -57,8 +57,8 @@
 		      						<c:forEach items="${productList }" var="p" varStatus="i">
 		      							<li>
 		      								<a href="/productView.do?productNo=${p.productNo } }">
-		      									<div class="recipePic"><img src="resources/upload/product/${p.filepath }" style="width: 150px;height:150px;"></div>
-		      									<div class="recipeTitle"><h5>${p.milkitName }</h5></div>
+		      									<div class="resultPic"><img src="resources/upload/product/${p.filepath }" style="width: 150px;height:150px;"></div>
+		      									<div class="resultTitle"><h5>${p.milkitName }</h5></div>
 		      								</a>
 		      							</li>
 		      						</c:forEach>
@@ -77,10 +77,19 @@
 		      					<ul>
 		      						<c:forEach items="${memberList }" var="m" varStatus="i">
 		      							<li>
-		      								<a href="/recipeView.do?recipeNo=${m.memberNo }">
-		      									<div class="recipePic"><img src="https://img.icons8.com/officel/80/000000/cooking-pot.png"/></div>
-		      									<div class="recipeTitle"><h5>${m.memberId }</h5></div>
-		      									<div class="recipeTitle"><h5>${m.memberNickname }</h5></div>
+		      								<a href="/profile.do?memberId=${m.memberId }">
+		      									<div class="resultPic"><img src="resources/upload/member/${m.profilePath }" style="width: 150px; height: 150px;"></div>
+		      									<div class="resultTitle"><h5>${m.memberId } (${m.memberNickname })</h5></div>
+		      									<div class="resultContent"><h6>
+		      										<c:choose>
+		      											<c:when test="${m.memberLevel eq 1 }">
+		      												[요리꾼]
+		      											</c:when>
+		      											<c:when test="${m.memberLevel eq 2 }">
+		      												[조리꾼]
+		      											</c:when>
+		      										</c:choose>
+		      									</h6></div>
 		      								</a>
 		      							</li>
 		      						</c:forEach>
@@ -100,11 +109,31 @@
 		      						<c:forEach items="${classList }" var="c" varStatus="i">
 		      							<li>
 		      								<a href="/classView.do?classNo=${c.classNo }">
-		      									<div class="recipePic"><img src="resources/upload/recipeboard/${r.filepath }" style="width: 150px;height:150px;"></div>
-		      									<div class="recipeTitle"><h5>${c.classTitle }</h5></div>
-		      									<div class="recipeTitle"><h6>평점 : ${c.classRate }</h6></div>
-		      									<div class="recipeTitle"><h6>시작일 : ${c.classTitle }</h6></div>
-		      									<div class="recipeTitle"><h5>상태 : ${c.classStatus }</h5></div>
+		      									<div class="resultPic"><img src="https://img.icons8.com/officel/80/000000/cooking-pot.png"/></div>
+		      									<div class="resultTitle"><h5>${c.classTitle }</h5></div>
+		      									<div class="resultContent"><h6>평점 : ${c.classRate }</h6></div>
+		      									<div class="resultContent"><p>시작일 : ${c.classTitle }</p></div>
+		      									<div class="resultContent">
+													<h6>상태 : 
+														<c:choose>
+															<c:when test="${c.classStatus eq 1}">
+																<span style="color:#3ECB2D;">모집중!</span>
+															</c:when>
+															<c:when test="${c.classStatus eq 2}">
+																<span style="color:#FFC05F;">모집마감</span>
+															</c:when>
+															<c:when test="${c.classStatus eq 3}">
+																<span style="color:#FFEE5F;">진행중</span>
+															</c:when>
+															<c:when test="${c.classStatus eq 4}">
+																<span style="color:red;">종강</span>
+															</c:when>
+															<c:when test="${c.classStatus eq 5}">
+																<span style="color:red;">종료</span>
+															</c:when>
+														</c:choose>
+													</h6>
+												</div>
 		      								</a>
 		      							</li>
 		      						</c:forEach>
@@ -124,8 +153,9 @@
 		      						<c:forEach items="${freeList }" var="f" varStatus="i">
 		      							<li>
 		      								<a href="/freeView.do?freeNo=${f.freeNo }">
-		      									<div class="recipeTitle"><h5>${f.freeTitle }</h5></div>
-		      									<div><h6>${f.memberNickname }</h6></div>
+		      									<div class="resultPic"><img src="https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/64/000000/external-writing-mental-health-inipagistudio-mixed-inipagistudio.png"/></div>
+		      									<div class="resultTitle"><h5>${f.freeTitle }</h5></div>
+		      									<div class="resultContent"><h6>작성자 : ${f.memberNickname }</h6></div>
 		      								</a>
 		      							</li>
 		      						</c:forEach>
@@ -144,49 +174,48 @@
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script>
   	$(function(){
-  		//현재 날짜 가져오기 (년/월)
-  		var today = new Date();
-  		var year = today.getFullYear();
-  		var month = today.getMonth()+1;
-  		var voted = false; //투표여부 확인
-  		$(".thisyr").html(year);
-  		$(".thismonth").html(month);
   		//검색 default
   		$(".select-type").eq(0).addClass("active");
   		$(".result-content").hide();
   		$(".result-content").eq(0).show();
   		
-  		//정렬기준
+  		//검색항목 선택
   		$(".select-type").on("click", function(){
   			var index = $(".select-type").index(this);
+  			var memberId = $("#memberId").val();
   			var totalCount = $("#totalCount");
-  			$(".select-type").removeClass("active");
-  			$(this).addClass("active");
-  			$(".result-content").hide();
-  			$(".result-content").eq(index).show();
-  			switch(index){
-  			case 0:
-  				var html = "<c:choose><c:when test='${not empty recipeList}'>${fn:length(recipeList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
-  				totalCount.html(html);
-  				break;
-  			case 1:
-  				var html = "<c:choose><c:when test='${not empty productList}'>${fn:length(productList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
-  				totalCount.html(html);
-  				break;
-  			case 2:
-  				var html = "<c:choose><c:when test='${not empty memberList}'>${fn:length(memberList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
-  				totalCount.html(html);
-  				break;
-  			case 3:
-  				var html = "<c:choose><c:when test='${not empty classList}'>${fn:length(classList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
-  				totalCount.html(html);
-  				break;
-  			case 4:
-  				var html = "<c:choose><c:when test='${not empty freeList}'>${fn:length(freeList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
-  				totalCount.html(html);
-  				break;
-  			default:
-  				break;
+  			if(memberId == "" && index == 2){
+  				alert("로그인시 이용 가능합니다.");
+  				return false;
+  			} else {
+	  			$(".select-type").removeClass("active");
+	  			$(this).addClass("active");
+	  			$(".result-content").hide();
+	  			$(".result-content").eq(index).show();
+	  			switch(index){
+	  			case 0:
+	  				var html = "<c:choose><c:when test='${not empty recipeList}'>${fn:length(recipeList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
+	  				totalCount.html(html);
+	  				break;
+	  			case 1:
+	  				var html = "<c:choose><c:when test='${not empty productList}'>${fn:length(productList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
+	  				totalCount.html(html);
+	  				break;
+	  			case 2:
+	  				var html = "<c:choose><c:when test='${not empty memberList}'>${fn:length(memberList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
+	  				totalCount.html(html);
+	  				break;
+	  			case 3:
+	  				var html = "<c:choose><c:when test='${not empty classList}'>${fn:length(classList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
+	  				totalCount.html(html);
+	  				break;
+	  			case 4:
+	  				var html = "<c:choose><c:when test='${not empty freeList}'>${fn:length(freeList)}</c:when><c:otherwise>0</c:otherwise></c:choose>";
+	  				totalCount.html(html);
+	  				break;
+	  			default:
+	  				break;
+	  			}
   			}
   		});
   		

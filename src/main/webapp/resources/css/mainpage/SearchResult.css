@@ -12,8 +12,8 @@ ul>li{
 	text-align: center;
 	height: 250px;
 	background-image: url("/resources/img/mainpage/ingredients-banner-re.jpg");
-	filter: opacity(0.9);
 	position: relative;
+	opacity: 0.9;
 	border-bottom: 10px solid rgb(154, 134, 179);
 }
 .result-banner-content{
@@ -34,7 +34,7 @@ ul>li{
 }
 .result-outline {
     display: flex;
-    padding: 20px 0px;
+    padding: 10px 0px;
     align-items: center;
 }
 .result-outline>div:first-child {
@@ -55,8 +55,18 @@ ul>li{
 	margin: 20px 30px;
 	text-align: center;
 }
-.recipeTitle {
+.resultTitle {
 	margin-top: 5px;
+}
+.resultContent{
+	margin-top: 0;
+	color: #353535;
+}
+.resultContent>h6{
+	margin-bottom: 5px;
+}
+.resultContent>p{
+	margin-bottom: 5px;
 }
 .no-result{
 	padding-top: 20px;
@@ -64,6 +74,6 @@ ul>li{
 	padding-left: 10px;
 }
 .no-result>h4{
-	font-size: 20px;
+	font-size: 18px;
 	font-family: "TmoneyRoundWindRegular";
 }
