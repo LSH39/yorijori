@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,30 +46,40 @@ text-overflow: ellipsis;
 <!-- Template Main CSS File -->
 <link href="resources/css/mainpage/style.css" rel="stylesheet">
 
+<style>
+.d{
+
+color: #8E44AD;
+
+width:200px;
+margin:0 auto;
+
+display:none;
+position:absolute;
+left:300px;
+top:50%;
+}
+button ,input[type=submit],input[type=reset]{
+color: #fff;
+background-color: #9F90CF;
+
+}
+</style>
 </head>
 
 <body>
 	
 	
-    <div class="container">
-    <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div style="margin-top: 20px;" class="container">
+    
     
     <h2>구독 회원 조회</h2>
-    
-    
-    
-        
-    
-
-    <span>구독 회원 수</span> <span class="amount">${totalCount }</span>
-
+   <button class="copy">조회 내용 복사하기</button> 
     <hr>
     
+   
     
-    
-    
+   
     <table class="table table-hover allmember">
     <tr>
     
@@ -81,7 +92,7 @@ text-overflow: ellipsis;
     
     </tr>
     <c:forEach items="${list }" var="m" varStatus="i">
-    <tr>
+    <tr class="item">
     
     <td>${m.memberId }</td>
     <td>${m.memberName }</td>
@@ -100,25 +111,43 @@ text-overflow: ellipsis;
     </table>
     
     
+    <textarea style="padding:0; margin:0; position: absolute; top:-2000px;" id="copy"></textarea>
     
     
-    
-    
-    
-    </div>
-    <div class="col-md-1"></div>
+    <div class="d">
+    클립보드에 복사되었습니다</div>
     
     </div>
-        
-   
-   </div>
- 
- 	
-    
-    
+
     <script>
-    
    
+    
+    $(".copy").click(function(){
+    	 var i = 0;
+    	    var text = "";
+    	while(true){
+        	if(typeof($(".item").eq(i).children().eq(0).html())=="undefined"){
+        		break;
+        	}
+        	
+        	
+        	text +="이름 : "+ $(".item").eq(i).children().eq(1).html();
+        	text +="도로명 주소 : "+ $(".item").eq(i).children().eq(2).html();
+        	text +="상세 주소 : "+ $(".item").eq(i).children().eq(3).html();
+        	text +="전화번호 : "+ $(".item").eq(i).children().eq(4).html();
+        	
+        	
+        	i++;	
+        }
+        $("#copy").val(text);
+        $("#copy").select();
+        document.execCommand('copy');
+        $(".d").fadeIn(1000);
+        $(".d").fadeOut(1000);
+        
+    });
+    
+    
     </script>
     
     

@@ -475,6 +475,7 @@ color:#9f90cf;
 		$(".recipeChart").hide();
 		$(".joinChart").hide();
 		$(".visitChart").hide();
+		
 	}, 100);
 	
 	

@@ -64,7 +64,7 @@
     <div class="col-md-10">
     <table class="table table-hover">
         <tr class="table-warning">
-            <td><a href="#">구독 회원 조회</a></td>
+            <td><a class="subs" href="#">구독 회원 조회</a></td>
             <td><a href="stat.do">일간 현황</a></td>
             <td><a href="ranking.do">순위</a></td>
             <td><a href="#">쿠폰</a></td>
@@ -99,13 +99,15 @@
     
     
     </div>
-    <div class="col-md-1"></div>
+    
      </div>
     
     
 	</div>
 	<script type="text/javascript">
-	
+	$(".subs").click(function(){
+    	window.open("adminSubs.do","구독회원","left=500,width=800,height=1000,location=no,status=no");
+    });
 	
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
