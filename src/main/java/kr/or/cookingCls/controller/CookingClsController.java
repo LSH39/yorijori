@@ -28,6 +28,7 @@ import kr.or.cookingCls.model.service.CookingClsService;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingCls.model.vo.CookingClsPageData;
 import kr.or.cookingCls.model.vo.CookingClsPicVO;
+import kr.or.cookingRsrv.model.vo.CookingRsrv;
 import kr.or.member.model.vo.Member;
 import kr.or.review.model.vo.Review;
 
@@ -201,15 +202,30 @@ public class CookingClsController {
 	//쿠킹 클래스 조회
 	@RequestMapping(value="/cookingClsView.do")
 	public String CookingClsListView(int classNo, HttpSession session , Model model) {
-		CookingCls ccls = service.selectOneClass(classNo);
-		//Member member = (Member)session.getAttribute("m");
-		//String memberNickname = member.getMemberNickname();
+		Member member = (Member)session.getAttribute("m");
+		int sessionMemberNo = 0;
+		String sessionMemberNickname = member.getMemberNickname();
+		try {
+			sessionMemberNo = member.getMemberNo();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			sessionMemberNo = -1;
+		}
 		//int dmRoomNo = service.selectOneDmRoomNo(classNo, memberNickname);
-		ArrayList<Review> list = service.selectReviewList(classNo);
-		double reviewAvg = service.avgReviewRate(classNo);
+		CookingCls ccls = service.selectOneClass(classNo); //해당 클래스 번호에 대한 정보 불러오기
+		ArrayList<Review> list = service.selectReviewList(classNo); //해당 클래스에 대한 리뷰 리스트 불러오기
+		double reviewAvg = service.avgReviewRate(classNo); // 리뷰 점수 평균
+		System.out.println(classNo);
+		System.out.println(sessionMemberNo);
+		boolean rsrvChk = service.selectOneRsrvChk(classNo, sessionMemberNo);//수강 여부 
+		boolean reviewChk = service.selectOneReviewChk(classNo, sessionMemberNickname);//리뷰 작성 여부
+		System.out.println(rsrvChk);
+		System.out.println(reviewChk);
 		model.addAttribute("ccls", ccls);
 		model.addAttribute("list", list);
 		model.addAttribute("reviewAvg", reviewAvg);
+		model.addAttribute("rsrvChk", rsrvChk);
+		model.addAttribute("reviewChk", reviewChk);
 		return "cookingcls/cookingClsView";
 	}
 	

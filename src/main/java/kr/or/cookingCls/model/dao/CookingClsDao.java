@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingCls.model.vo.CookingClsPicVO;
+import kr.or.cookingRsrv.model.vo.CookingRsrv;
 import kr.or.review.model.vo.Review;
 
 @Repository
@@ -76,5 +77,17 @@ public class CookingClsDao {
 	public int updateOneClass(CookingCls ccls) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("cookingcls.updateCookingCls", ccls);
+	}
+
+	//수강 했는지 확인 여부
+	public CookingRsrv selectOneRsrvChk(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cookingrsrv.selectOneRsrvChk", map);
+	}
+
+	//수강한 사람이 리뷰 작성했는지 확인 여부
+	public Review selectOneReviewChk(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("review.selectOneReviewChk", map);
 	}
 }

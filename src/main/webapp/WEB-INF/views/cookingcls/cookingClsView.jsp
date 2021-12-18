@@ -81,7 +81,7 @@
 <script>
 	$(function(){
 		//리뷰 작성 버튼
-		$("#reviewWrite").click(function(){
+		$(document).on("click", "#reviewWrite", function(){
 			let classNo = $("#classNo").val();
 			let memberNickname = $("#memberNickname").val();
 			let reviewContent = $("#reviewContent").val();
@@ -110,6 +110,7 @@
 					}
 				//location.reload();
 				$(".table").load(location.href+" .table");
+				$(".writeSection").load(location.href+" .writeSection");
 				
 				},
 				complete : function(){
@@ -128,15 +129,36 @@
 				data : {reviewNo:reviewNo},
 				success : function(data){
 					$(".table").load(location.href+" .table");
+					$(".writeSection").load(location.href+" .writeSection");
 				}
 			});
 			
 		});
 		
+		//내 클래스 예약할때
 		$("#noPayBtn").click(function(){
 			alert("자신의 클래스는 예약이 안됩니다!");
 		});
 		
+		//클래스 이미 예약했을때
+		$("#alreadyPayBtn").click(function(){
+			alert("이미 예약한 클래스 입니다!");
+		});
+	
+		//리뷰 이미 작성했을때
+		$(document).on("click", "#reviewAlrdy", function(){
+			alert("이미 리뷰를 작성하셨습니다!");
+		});
+		
+		//리뷰 이미 작성했을때
+		$(document).on("click", "#reviewRsrv", function(){
+			alert("클래스 수강 회원만 작성할 수 있습니다!");
+		});
+		
+		//비회원 로그인
+		$(document).on("click", "#reviewLogin", function(){
+			alert("로그인 하세요!");
+		});
 		//강의 결제
 		$("#payBtn").click(function(){
 			let date = new Date();
@@ -309,14 +331,21 @@
 									</select>
 								</td>							
 								<td>
-									<div class="d-grid gap-2">
+									<div class="d-grid gap-2 writeSection">
 										<c:choose>
 											<c:when test="${empty sessionScope.m }">
-												<button type="button" class="btn btn-danger btn-md">작성</button>
+												<button type="button" id="reviewLogin" class="btn btn-secondary btn-md">작성</button>
 											</c:when>
-											<c:otherwise>
+											<c:when test="${not empty sessionScope.m and rsrvChk eq false}">
+												<button type="button" id="reviewRsrv" class="btn btn-secondary btn-md">작성</button>
+											</c:when>
+											<c:when test="${rsrvChk eq true and reviewChk eq false}">
 												<button type="button" id="reviewWrite" class="btn btn-danger btn-md">작성</button>											
-											</c:otherwise>
+											</c:when>
+											<c:when test="${rsrvChk eq true and reviewChk eq true}">
+												<button type="button" id="reviewAlrdy" class="btn btn-secondary btn-md">작성</button>											
+											</c:when>
+
 										</c:choose>
 									</div>
 								</td>							
@@ -366,7 +395,7 @@
 							</c:when>
 							</c:choose>
 							</h5>
-							<h5>정원 : <span id="classNop">${ccls.classCurrNop }</span>&nbsp;/&nbsp;<span>${ccls.classNop }</span></h5>
+							<h5>정원 : <span id="classCurrNop">${ccls.classCurrNop }</span>&nbsp;/&nbsp;<span id="classNop">${ccls.classNop }</span></h5>
 							<c:choose>
 								<c:when test="${not empty ccls.classLocation1 }">
 									<h5>장소 : <span id="classLocation1">${ccls.classLocation1}</span></h5>
@@ -391,6 +420,9 @@
 									</c:when>
 									<c:when test="${empty sessionScope.m  }">									
 										<a href="/loginFrm.do" class="btn btn-warning btn-lg" >로그인 하세요!</a>
+									</c:when>
+									<c:when test="${rsrvChk eq true }">
+										<button type="button" id="alreadyPayBtn" class="btn btn-secondary btn-lg" >등록완료</button>									
 									</c:when>
 									<c:otherwise>
 										<button type="button" id="payBtn" class="btn btn-primary btn-lg" >수강하기</button>

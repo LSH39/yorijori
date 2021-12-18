@@ -96,7 +96,7 @@ text-align: center;}
         <button class="deleteMember">강제 탈퇴</button>
         <button>쪽지</button>
         <button class="showAllDetail">전체 상세 보기</button>
-        <button class="subs">구독회원 보기</button>
+        
     </div>
     
     <div style="float: right;">
@@ -474,9 +474,7 @@ text-align: center;}
     $(".showAllDetail").click(function(){
     	$(".showDetailBtn").click();
     });
-    $(".subs").click(function(){
-    	window.open("adminSubs.do","구독회원","left=500,width=600,height=1000,location=no,status=no");
-    });
+    
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     
