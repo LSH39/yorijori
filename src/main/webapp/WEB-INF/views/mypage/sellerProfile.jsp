@@ -203,14 +203,11 @@ function loadImg(obj) {
         <div class="main-content">
         <div class="mbord">
           <div class="profile">
-          <img id="pp" src="resources/upload/profile/${m.profilePath }" width="130px">
-          <input type="file" id="myProfile" name="myProfile" onchange="loadImg(this);"
-			accept=".jpg,.jpeg,.png,.gif" style="display: none;" id="myProfile">
-              <button value="프로필바꾸기" id="rePro">프로필바꾸기</button>
-              
+          <img id="pp" src="resources/upload/member_profile/${m.profilePath }" width="130px">
+     
           </div>
           <div class="myInfo">
-                  <form action="/updateSeller.do" method="post" name="updateSellerFrm" enctype="multipart/form-data">
+                <form action="/updateSeller.do" method="post">
         			<table class="mine" border="1">
 							<tr>
 								<td>회원소개</td>
@@ -250,7 +247,7 @@ function loadImg(obj) {
 				               <tr>
 				                   <td>자격증</td>
 				              	<td><input type="text" name="certificatePath" id="certificatePath"
-									onfocus="this.placeholder=''" value="${m.certificatePath }"></td> 	 
+									onfocus="this.placeholder=''" value="${m.certificatePath }" readonly></td> 	 
 				               </tr>
 				                
 				               <tr>
@@ -288,11 +285,11 @@ function loadImg(obj) {
               <div class="buttonBox">
               <input type="submit" value="수정하기" id="update">
               </div>
-            </form>
+            
   
-         
+         </form>
       </div>
-   
+ 
           </div>
 
         </div>

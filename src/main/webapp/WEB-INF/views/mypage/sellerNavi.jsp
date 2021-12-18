@@ -92,11 +92,12 @@
 				<li>
 					<ul class="subnavi">
 						<li><a href="/selPage.do?memberId=${sessionScope.m.memberId }">내정보 조회 및 수정<span>&gt;</span></a></li>
+						<li><a href="/profilePath.do?memberId=${sessionScope.m.memberId }">프로필 사진 바꾸기<span>&gt;</span></a></li>
 						<li><a href="/selPath.do?memberId=${sessionScope.m.memberId }">자격증조회 및 변경<span>&gt;</span></a></li>
 						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 구매내역<span>&gt;</span></a></li>
 						<li><a href="/mycouponList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">쿠폰함<span>&gt;</span></a></li>
 						<li><a href="/delSelFrm.do?">회원탈퇴<span>&gt;</span></a></li>
-						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span></a></li>
+						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
 						<li><a href="/myChatList.do?chatRecive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
 						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
 						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">찜한 레시피<span>&gt;</span></a></li>			

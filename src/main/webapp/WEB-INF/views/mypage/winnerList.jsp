@@ -96,7 +96,7 @@
   		
 	      	</div>
 	      	  	<div class="contest-info">
-	      		<a href="#">
+	      		<a href="/contestResult.do">
 	      			<button class="month-winner">>>이번달 우승작 보러가기</button>
 	      		</a>
 	      	</div>

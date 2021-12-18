@@ -173,7 +173,7 @@ $(function() {
           <form action="/deleteSeller.do" method="post">
               <div class="delete">
                     <tr>
-				                   <td>자격증</td>
+				       <td>자격증</td>
 				              	<td> 
 				                
 				             <input type="hidden" name="status" value="1">
@@ -195,7 +195,7 @@ $(function() {
 						
 						</td>
 				 
-				               </tr>
+				    </tr>
                <input type="text" id="memberId" placeholder="아이디 입력"><br>
                <input type="password" id="memberPw" placeholder="비밀번호 입력"><br>
                <button type="submit" id="delbutton">회원탈퇴하기</button>

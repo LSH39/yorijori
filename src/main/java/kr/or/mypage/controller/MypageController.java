@@ -1,5 +1,10 @@
 package kr.or.mypage.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +21,7 @@ import kr.or.cookingCls.model.vo.CookingClsPageData;
 import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCouponPageData;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.ReadMember;
 import kr.or.mypage.model.service.MypageService;
 import kr.or.mypage.model.vo.ContestWin;
 import kr.or.mypage.model.vo.DetailOrder;
@@ -38,16 +44,20 @@ import kr.or.review.model.vo.MyItemReview;
 public class MypageController {
 	@Autowired 
 	private MypageService service;
-	
-	
+
+
 	//내 정보보기(회원)
 	@RequestMapping(value = "/mypage.do")
-	public String mypage(String memberId, Model model) {
-		Member m = service.mypage(memberId);
-		
-		model.addAttribute("m", m);
+	public String mypage(String memberId, Model model,HttpSession session) {
+		ReadMember rm =service.mypage(memberId);
+     session.setAttribute("rm", rm);
+	model.addAttribute("rm", rm);
+	
+		//Member m = service.mypage(memberId);
+       //model.addAttribute("m", m);
 		return "mypage/mypage";
 	}
+	
 	//내 정보보기(전문가)
 	@RequestMapping(value = "/selPage.do")
 	public String selPage(String memberId, Model model) {
@@ -55,12 +65,19 @@ public class MypageController {
 		model.addAttribute("m", m);
 		return "mypage/sellerProfile";
 	}
-   //내 자격증 조회
+	//내 자격증 조회
 	@RequestMapping(value = "/selPath.do")
 	public String selPath(String memberId, Model model) {
 		Member m = service.sellerPage(memberId);
 		model.addAttribute("m", m);
 		return "mypage/updateFrm";
+	}
+	//내 프로필 조회
+	@RequestMapping(value = "/profilePath.do")
+	public String profilePath(String memberId, Model model) {
+		Member m = service.profile(memberId);
+		model.addAttribute("m", m);
+		return "mypage/updateProfile";
 	}
 	//회원탈퇴폼
 	@RequestMapping(value = "/deleteFrm.do")
@@ -69,7 +86,11 @@ public class MypageController {
 	}
 	@RequestMapping(value = "/deleteMember.do")
 	public String deleteMember(Member m, Model model) {
+		System.out.println("아이디 :"+m.getMemberId());
+		System.out.println("비번 :"+m.getMemberPw());
+		
 		int result = service.deleteMember(m);
+	    
 		if (result > 0) {
 			model.addAttribute("msg", "탈퇴 되었습니다.");
 		} else {
@@ -78,15 +99,15 @@ public class MypageController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
-   //내 레시피내역
+	//내 레시피내역
 	@RequestMapping(value = "/myRecipe.do")
 	public String myRecipe(int recipeWriter, Model model) {
 		ArrayList<RecipeBoard> list= service.myRecipe(recipeWriter);
 		model.addAttribute("list", list);
 		return "mypage/myRecipe";
 	}
-		
-    //예약 클래스내역
+
+	//예약 클래스내역
 	@RequestMapping(value = "/myclass.do")
 	public String myclass(String memberNickname, Model model) {
 		ArrayList<MyCookingRsrv> list= service.myclass(memberNickname);
@@ -114,7 +135,7 @@ public class MypageController {
 		model.addAttribute("list", list);
 		return "mypage/winnerList";
 	}
-   //내 밀키트상품조회
+	//내 밀키트상품조회
 	@RequestMapping(value = "/myItem.do")
 	public String myItem(int milkitWriter,Model model) {
 		ArrayList<MyItem> list= service.myItem(milkitWriter);
@@ -123,7 +144,7 @@ public class MypageController {
 	}
 
 
-//내 채팅리스트
+	//내 채팅리스트
 	@RequestMapping(value = "/myChatList.do")
 	public String myChatList(String chatReceive,Model model) {
 		ArrayList<Mychat> list= service.myChatList(chatReceive);
@@ -146,7 +167,7 @@ public class MypageController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
-  //내 주문내역보기
+	//내 주문내역보기
 	@RequestMapping(value = "/myOrderList.do")
 	public String myOrderList1(int memberNo,Model model,int reqPage) {
 		MyorderPageData mpd =service.orderList(reqPage);
@@ -155,9 +176,9 @@ public class MypageController {
 		model.addAttribute("start", mpd.getStart());
 		model.addAttribute("totalCount", mpd.getTotalCount());
 		return "mypage/myOrder";
-	
+
 	}
- //내 쿠폰내역
+	//내 쿠폰내역
 	@RequestMapping(value = "/mycouponList.do")
 	public String mycoupon(int memberNo, Model model,int reqPage) {
 		MyCouponPageData cpd =service.mycouponList(reqPage);
@@ -165,7 +186,7 @@ public class MypageController {
 		model.addAttribute("pageNavi", cpd.getPageNavi());
 		model.addAttribute("start", cpd.getStart());
 		model.addAttribute("totalCount", cpd.getTotalCount());
-		
+
 		return "mypage/myCoupon";
 	}
 	//내 참여대회내역
@@ -176,7 +197,7 @@ public class MypageController {
 		model.addAttribute("pageNavi", ctpd.getPageNavi());
 		model.addAttribute("start", ctpd.getStart());
 		model.addAttribute("totalCount", ctpd.getTotalCount());
-		
+
 		return "mypage/myContest";
 	}
 	//내 팔로우리스트
@@ -185,7 +206,7 @@ public class MypageController {
 		followCount fct =service.followList(memberNo);
 		model.addAttribute("list", fct.getList());
 		model.addAttribute("totalCount", fct.getTotalCount());
-	
+
 		return "mypage/myFollow";
 	}
 	//내 dm 내역(쪽지)
@@ -193,7 +214,7 @@ public class MypageController {
 	public String myDmList(String dmReceiver,Model model,HttpSession session) {
 		ReadDm rd =service.myDmList(dmReceiver);
 		//ArrayList<Mydm> list= service.myDmList(dmReceiver);
-		session.setAttribute("rd", rd);
+		session.setAttribute("rm", rd);
 		model.addAttribute("list", rd.getList());
 		model.addAttribute("dmCount", rd.getDmCount());
 		return "mypage/dmList";
@@ -206,7 +227,7 @@ public class MypageController {
 		model.addAttribute("pageNavi", fpd.getPageNavi());
 		model.addAttribute("start", fpd.getStart());
 		model.addAttribute("totalCount", fpd.getTotalCount());
-		
+
 		return "mypage/myBoard";
 	}
 	/*
@@ -216,7 +237,7 @@ public class MypageController {
 		model.addAttribute("list", list);
 		return "mypage/likeRecipe";
 	}*/
-	
+
 	//내가 찜한 레시피내역
 	@RequestMapping(value = "/myLikeList.do")
 	public String myLikeList(int memberNo, Model model,int reqPage) {
@@ -225,7 +246,7 @@ public class MypageController {
 		model.addAttribute("pageNavi", rpd.getPageNavi());
 		model.addAttribute("start", rpd.getStart());
 		model.addAttribute("totalCount", rpd.getTotalCount());
-		
+
 		return "mypage/likeRecipe";
 	}
 	//주문상세 내역
@@ -252,34 +273,54 @@ public class MypageController {
 		return "mypage/amountSell";
 	}
 	//전문가 정보변경
-		@RequestMapping(value = "/updateSeller.do")
-		public String updateSeller(Member m, Model model, MultipartFile upfile, HttpServletRequest request) {
+	@RequestMapping(value = "/updateSeller.do")
+	public String updateSeller(Member m, Model model, HttpServletRequest request,HttpServletResponse response) {
+		 System.out.println(m.getMemberConsent());
+		System.out.println(m.getMemberId());
+		 
+       System.out.println(m.getMemberName());
+       System.out.println(m.getMemberEmail());
+       System.out.println(m.getAddressDetail());
+       System.out.println(m.getAddressRoad());
+       System.out.println(m.getCertificatePath());
+       System.out.println(m.getEnrollDate());
+       System.out.println(m.getMemberBirth());
+       System.out.println(m.getMemberBlack());
+      
+       System.out.println(m.getProfilePath());
+      
+      
+       System.out.println(m.getMemberLevel());
+       System.out.println(m.getMemberNo());
+       System.out.println(m.getMemberPhone());
+       System.out.println(m.getMemberPoint());
+       
+		int result = service.updateSeller(m);
 
-			int result = service.updateSeller(m);
-			if (result > 0) {
-				model.addAttribute("msg", "정보변경 성공");
-			} else {
-				model.addAttribute("msg", "정보변경 실패");
-			}
-			model.addAttribute("loc", "/");
-			return "common/msg";
+		if (result > 0) {
+			model.addAttribute("msg", "정보변경 성공");
+		} else {
+			model.addAttribute("msg", "정보변경 실패");
 		}
-		//회원정보변경
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	}
+	//회원정보변경
 	@RequestMapping(value = "/updateMember.do")
 	public String updateMember(Member m, Model model,HttpServletRequest request,HttpServletResponse response) {
-	
-				int result = service.upMember(m);
-				if (result > 0) {
-					model.addAttribute("msg", "정보변경 성공");
-				} else {
-					model.addAttribute("msg", "정보변경 실패");
-				}
-				model.addAttribute("loc", "/mypage.do");
-				return "common/msg";
-			}
 
-//포인트 내역확인하기
-	
+		int result = service.upMember(m);
+		if (result > 0) {
+			model.addAttribute("msg", "정보변경 성공");
+		} else {
+			model.addAttribute("msg", "정보변경 실패");
+		}
+		model.addAttribute("loc", "/mypage.do");
+		return "common/msg";
+	}
+
+	//포인트 내역확인하기
+
 	@RequestMapping(value = "/myPoint.do")
 	public String myPoint(int memberNo, Model model,int reqPage) {
 		MyPointPageData ppd =service.pointList(reqPage);
@@ -296,59 +337,196 @@ public class MypageController {
 	public String SelectAllClass(String memberNickname,int reqPage, Model model) {
 		//새로
 		CookingClsPageData ccpd = service.selectMyClass(reqPage);
-		
+
 		model.addAttribute("list", ccpd.getList());
 		model.addAttribute("pageNavi", ccpd.getPageNavi());
 		model.addAttribute("start", ccpd.getList());
 		return "mypage/myCooking";
-		
+
 
 	}
-	/*
+
+	//자격증 변경하기(조리꾼,미인증 재제출)
+
+	@RequestMapping(value="/updateCerPath.do")
+	public String updateCerPath(Model model, Member m,MultipartFile upfile, HttpServletRequest request, String oldFilepath) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member_certificate/");
+
+		//기존 파일 삭제
+		if(oldFilepath != null) {
+			String fullPath = savePath + m.getCertificatePath();
+			File f = new File(fullPath);
+			if(f.isFile()) {
+				f.delete();
+			}
+		}
+	
+		if(!upfile.isEmpty()) {
+			savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member_certificate/");
+			
+				String filename = upfile.getOriginalFilename();
+				String onlyFilename = filename.substring(0,filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count=0;
+				while(true) {  
+					if(count == 0) {
+						filepath = onlyFilename+extention;
+					}else {
+						filepath = onlyFilename+"_"+count+extention;
+					}
+					File checkFile = new File(savePath+filepath);
+					if(!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+				//업로드 시작
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					//보조스트림
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					//파일 업로드
+					byte[] bytes = upfile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+				
+					e.printStackTrace();
+				}
+				m.setCertificatePath(filepath);
+
+			}
+		int result = service.updateCer(m);
+	
+		if(result >0) {
+			model.addAttribute("msg", "자격증수정 완료");
+		} else {
+			model.addAttribute("msg", "자격증 다시 올려주십셔ㅠㅠ");
+		}
+		model.addAttribute("loc", "/selPath.do?memberId="+m.getMemberId());
+		return "common/msg";
+
+	}
+
+	/*프로필 사진 변경하기*/
+	@RequestMapping(value="/updateProfile.do")
+	public String updateProfile(Model model, Member m,MultipartFile upfile, HttpServletRequest request, String oldFilepath) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member_profile/");
+
+		//기존 파일 삭제
+		if(oldFilepath != null) {
+			String fullPath = savePath + m.getProfilePath();
+			File f = new File(fullPath);
+			if(f.isFile()) {
+				f.delete();
+			}
+		}
+	
+		if(!upfile.isEmpty()) {
+			savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member_profile/");
+			
+				String filename = upfile.getOriginalFilename();
+				String onlyFilename = filename.substring(0,filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count=0;
+				while(true) {  
+					if(count == 0) {
+						filepath = onlyFilename+extention;
+					}else {
+						filepath = onlyFilename+"_"+count+extention;
+					}
+					File checkFile = new File(savePath+filepath);
+					if(!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+				//업로드 시작
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					//보조스트림
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					//파일 업로드
+					byte[] bytes = upfile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+				
+					e.printStackTrace();
+				}
+				m.setProfilePath(filepath);
+
+			}
+	
+		int result = service.updateSell(m);
+	
+		if(result >0) {
+			model.addAttribute("msg", "프로필사진 수정 완료");
+		} else {
+			model.addAttribute("msg", "프로필 사진 수정 실패");
+		}
+		model.addAttribute("loc", "/profilePath.do?memberId="+m.getMemberId());
+		return "common/msg";
+
+	}
+}
+
+
+
+
+
+/*
 	@RequestMapping(value = "/myPoint.do")
 	public String myPoint(String memberNo,Model model) {
 		ArrayList<Mypoint> list= service.myPoint(memberNo);
 		model.addAttribute("list", list);
 		return "mypage/myPoint";
 	}
-	*/
-	/*
+ */
+/*
 	@RequestMapping(value = "/myBoard.do")
 	public String myBoard(String freeWriter,Model model) {
 		ArrayList<Freeboard> list= service.myBoard(freeWriter);
 		model.addAttribute("list", list);
 		return "mypage/myBoard";
 	}*/
-	/*
+/*
 	@RequestMapping(value = "/myOrderDetail.do")
 	public String myOrderDetail(int orderNo, Model model) {
 		Myorder mo = service.myOrderDetail(orderNo);
 		model.addAttribute("mo", mo);
-		
+
 		return "mypage/orderDetail";
 	}
-	*/
-	/*
+ */
+/*
 	@RequestMapping(value = "/mycoupon.do")
 	public String mycoupon(int memberNo, Model model) {
 		ArrayList<MyCoupon> list= service.mycoupon(memberNo);
 		model.addAttribute("list", list);
 		return "mypage/myCoupon";
 	}*/
-	/*
+/*
 	@RequestMapping(value = "/myContest.do")
 	public String myContest(int recipeWriter,Model model) {
 		ArrayList<MyContest> list= service.myContest(recipeWriter);
 		model.addAttribute("list", list);
 		return "mypage/myContest";
 	}*/
-	/*
+/*
 	@RequestMapping(value = "/myOrder.do")
 	public String myOrderList(int memberNo,Model model) {
 		ArrayList<Myorder> list= service.myOrderList(memberNo);
 		model.addAttribute("list", list);
 		return "mypage/myOrder";
 	}
-	*/
+ */
 
-}
