@@ -36,5 +36,20 @@
 	<delete id="deleteReview" parameterType="_int">
 		delete from review where review_no=#{reviewNo}
 	</delete>
+	
+	<!-- 수강했던 클래스 리뷰 작성했는지 확인 -->
+	<select id="selectOneReviewChk" parameterType="map" resultType="review">
+		select 
+			review_no as reviewNo,
+			class_no as classNo,
+			product_no as productNo,
+			member_nickname as memberNickname,
+			review_content as reviewContent,
+			review_rate as reviewRate,
+			review_flag as reviewFlag,
+			review_date as reviewDate
+		from review
+		where class_no=#{classNo} and member_nickname=#{sessionMemberNickname} and review_flag=2
+	</select>
 </mapper>
 

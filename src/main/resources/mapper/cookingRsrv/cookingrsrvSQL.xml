@@ -29,7 +29,21 @@
 		delete from cooking_rsrv where rsrv_no=#{rsrvNo}
 	</delete>
 	 
-	 <update id="cancelCookingRsrv" parameterType="_int">
-	 	update cooking_rsrv set cancel_flag=1 where class_no=#{classNo}
-	 </update>
+	<!-- 취소하면 취소 플래그 변경 -->
+	<update id="cancelCookingRsrv" parameterType="_int">
+		update cooking_rsrv set cancel_flag=1 where class_no=#{classNo}
+	</update>
+	 
+	<!-- 클래스 등록했는지 확인여부 -->
+	<select id="selectOneRsrvChk" parameterType="map" resultType="crsrv">
+	 	select
+	 		rsrv_no as rsrvNo,
+			member_no as memberNo,
+			member_nickname as memberNickname,
+			class_no as classNo,
+			imp_uid as impUid,
+			rsrv_date as rsrvDate,
+			cancel_flag as cancelFlag 
+	 	from cooking_rsrv where class_no=#{classNo} and member_no=#{sessionMemberNo} and cancel_flag=0
+	</select>
 </mapper>

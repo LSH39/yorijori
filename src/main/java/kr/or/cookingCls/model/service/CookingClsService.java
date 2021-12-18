@@ -11,6 +11,7 @@ import kr.or.cookingCls.model.dao.CookingClsDao;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.cookingCls.model.vo.CookingClsPageData;
 import kr.or.cookingCls.model.vo.CookingClsPicVO;
+import kr.or.cookingRsrv.model.vo.CookingRsrv;
 import kr.or.review.model.vo.Review;
 
 @Service
@@ -158,5 +159,41 @@ public class CookingClsService {
 		// TODO Auto-generated method stub
 		int result = dao.updateOneClass(ccls);
 		return result;
+	}
+
+	//수강 했는지 확인 여부
+	public boolean selectOneRsrvChk(int classNo, int sessionMemberNo) {
+		// TODO Auto-generated method stub
+		boolean rsrvChk = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("classNo", classNo);
+		map.put("sessionMemberNo", sessionMemberNo);
+		CookingRsrv crsrv = dao.selectOneRsrvChk(map);
+		if(crsrv != null) {
+			//결과 나올때, 수강 했을때
+			rsrvChk=true;
+		}else {
+			//결과 안나올때, 수강 안했을때
+			rsrvChk=false;
+		}
+		return rsrvChk;
+	}
+	
+	//수강한 사람이 리뷰 작성했는지 확인 여부
+	public boolean selectOneReviewChk(int classNo, String sessionMemberNickname) {
+		// TODO Auto-generated method stub
+		boolean reviewChk = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("classNo", classNo);
+		map.put("sessionMemberNickname", sessionMemberNickname);
+		Review review = dao.selectOneReviewChk(map);
+		if(review != null) {
+			//리뷰 작성했을때
+			reviewChk=true;
+		}else {
+			//리뷰 작성 안했을때
+			reviewChk=false;
+		}
+		return reviewChk;
 	}
 }
