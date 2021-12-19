@@ -109,7 +109,7 @@
 
 #confirm {
 	width:600px;
-	height: 200px;
+	height: 300px;
     margin: 0 auto;
 	margin-bottom: 50px;
     background-color: rgb(244, 232, 250);
@@ -158,13 +158,20 @@ text-align:center;
 	margin-top:80px;
   background-color: rgb(244, 232, 250);
 }
+#delbutton{
+   background-color:rgb(126, 30, 166);
+   color:whitesmoke;
+   margin-left: 90px;
+   border:none;
+   width:150px;
+   height:40px;
+   
+
+}
 </style>
 <script>
 $(function() {
-	$("#rePro").click(function(e) {
-		e.preventDefault();
-		$("#myProfile").click();
-	});	
+	
 	
      $("#delBtn").click(function() {
 		//alert("수정하시겠습니까?");
@@ -177,6 +184,29 @@ $(function() {
 });
 
 </script>
+<script>
+function loadImg(obj) {
+	  var files = obj.files;
+	  console.log(files);
+	  if(files.length != 0){
+		  var reader = new FileReader();
+		  reader.readAsDataURL(files[0]);
+		  reader.onload = function(e) {
+			$("#pp").attr("src",e.target.result);
+			$("#pp").css("height","150px");
+			$("#upfile").css("display","none");
+			
+		}
+	  }
+	}
+		$(function() {
+			$("#rePro").click(function(e) {
+				e.preventDefault();
+				$("#myProfile").click();
+			});	
+				
+		});
+	</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -193,29 +223,29 @@ $(function() {
 		</c:choose>
 		<!-- 메인 콘텐츠 -->
 		<div class="main-content">
-			<h2 id="nn"><전문가 자격증></h2>
+			<h2 id="nn"><프로필 사진 변경></h2>
 		
 
 			<div id="confirm">
-				<form action="updateCerPath.do" method="post" enctype="multipart/form-data">
-					<input type="text" name="memberId" value="${m.memberId}">
-						<input type="text" name="memberLevel" value="${m.memberLevel}">
+				<form action="updateProfile.do" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="memberId" value="${m.memberId}">
+						
 					<div class="uu">
 						<table border="1" class="cer">
 							<tr>
-								<td>자격증</td>
+								<td><img id="pp" src="resources/upload/member_profile/${m.profilePath}" width="150px" ></td>
 								  
-							<td><input type="hidden" name="status" value="1">
+							<td>
 				             <c:choose>
-							<c:when test="${not empty m.certificatePath }">
+							<c:when test="${not empty m.profilePath }">
 								<img src="resources/img/mypage/file.png" width="16px" class="delFile">
-								<span class="delFile">${m.certificatePath}</span>
+								<span class="delFile">${m.profilePath}</span>
 								<button type="button" id="delBtn"
-									class="btn btn-primary btn-sm delFile">수정</button>
+									class="btn btn-primary btn-sm delFile">바꾸기</button>
 
-								<input type="file" name="upfile" id="upfile" style="display: none;">
-								<input type="hidden" name="oldFilepath" value="${m.certificatePath}"
-									placeholder="자격증">
+								<input type="file" name="upfile" id="upfile" style="display: none;" onchange="loadImg(this);"accept=".jpg,.jpeg,.png,.gif" style="display: none;" >
+								<input type="hidden" name="oldFilepath" value="${m.profilePath}"
+									placeholder="프로필">
 							</c:when>
 							<c:otherwise>
 								<input type="file" class="form-control" id="upfile" name="upfile" accept=".gif, .jpg, .png, .jpeg" multiple>
@@ -227,7 +257,7 @@ $(function() {
 						</table>
 						<div class="buttons">
 						 
-							<button type="submit" id="delbutton">자격증바꾸기</button>
+							<button type="submit" id="delbutton">프로필 변경</button>
 						</div>
 					</div>
 				</form>

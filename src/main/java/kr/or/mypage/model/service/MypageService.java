@@ -13,6 +13,7 @@ import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.coupon.model.vo.MyCouponPageData;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.ReadMember;
 import kr.or.mypage.model.dao.MypageDao;
 import kr.or.mypage.model.vo.ContestWin;
 import kr.or.mypage.model.vo.DetailOrder;
@@ -41,9 +42,17 @@ public class MypageService {
 	@Autowired
 	private MypageDao dao;
 
-	public Member mypage(String memberId) {
-		Member m =dao.mypage(memberId);
-		return m;
+	public ReadMember mypage(String memberId) {
+		//Member m =dao.mypage(memberId);
+		//return m;
+		//System.out.println("memberId :"+memberId);
+		ReadMember rm =dao.mypage(memberId);
+		//System.out.println("memberId11 :"+rm.getMemberId());
+		
+		int dmCount =dao.countsDm();
+		//System.out.println("dmCount:"+dmCount);
+       rm.setDmCount(dmCount);
+		return rm;
 	}
 
 	public int upMember(Member m) {
@@ -658,5 +667,22 @@ public class MypageService {
 			
 			CookingClsPageData ccpd = new CookingClsPageData(list, pageNavi, start);
 			return ccpd;
+		}
+		
+		
+     /*자격증 변경,재인증*/
+		public int updateCer(Member m) {
+			int result = dao.upCerPath(m);
+			return result;
+		}
+    /*조리꾼 정보변경(프로필 이미지 포함)*/
+		public int updateSell(Member m) {
+			int result = dao.upSellerInfo(m);
+			return result;
+		}
+
+		public Member profile(String memberId) {
+			Member m =dao.profile(memberId);
+			return m;
 		}
 }

@@ -38,6 +38,7 @@ public class MemberController {
 	public String login(Member member, HttpSession session, Model model) {
 		
 		//Member m = service.loginMember(member); // 임시 로그인
+		
 		Member m = service.loginMemberEnc(member);  // 로그인
 		
 		if(m != null) {

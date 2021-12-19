@@ -13,6 +13,7 @@ import kr.or.cookingRsrv.model.vo.MyCookingRsrv;
 import kr.or.coupon.model.vo.MyCoupon;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.ReadMember;
 import kr.or.mypage.model.vo.ContestWin;
 import kr.or.mypage.model.vo.DetailOrder;
 import kr.or.mypage.model.vo.FollowList;
@@ -34,7 +35,7 @@ public class MypageDao {
 	private SqlSessionTemplate sqlSession;
 	
 	/*마이페이지*/
-	public Member mypage(String memberId) {
+	public ReadMember mypage(String memberId) {
 		return sqlSession.selectOne("mypage.mypage",memberId);
 	}
     /*회원정보수정*/
@@ -268,6 +269,20 @@ public class MypageDao {
 		return sqlSession.selectOne("mypage.totalClass");
 	}
 	
+	//자격증파일  수정하기
+	public int upCerPath(Member m) {
+		return sqlSession.update("mypage.updateCerPath",m);
 
-
+		}
+	//조리꾼 정보변경하기
+	public int upSellerInfo(Member m) {
+		return sqlSession.update("mypage.updateSellerInfo",m);
+		
+	}
+	//프로필조회*/
+	public Member profile(String memberId) {
+		return sqlSession.selectOne("mypage.profile",memberId);
+	}
 }
+	
+

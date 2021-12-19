@@ -75,7 +75,7 @@
 			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
 		</c:when>
 		<c:when test="${sessionScope.m.memberLevel ==  1 }">
-			<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
+			<a href="mypage.do?memberId=${sessionScope.m.memberId }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
 	        <a class="qna chat" id="chatAdmin">1:1문의하기</a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
@@ -83,6 +83,7 @@
 			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
 		</c:when>
        	<c:otherwise>
+
 	       	<a href="/mypage.do?memberId=${sessionScope.m.memberId }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
 	        <a class="qna chat" id="chatUser">1:1문의하기 <span class='chatAlarm'>+<span id='chatUserAlarm'></span></span></a>

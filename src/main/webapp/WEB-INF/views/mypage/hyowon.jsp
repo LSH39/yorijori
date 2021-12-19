@@ -36,7 +36,7 @@
                         <li><a href="/myitemReview.do?memberNo=111">밀키트후기<span></span></a></li>
                         <li><a href="myBoard.do?freeWriter=hyo">작성 게시글<span></span></a></li>
                         <li><a href="/myRecipe.do?recipeWriter=111">내 작성 레시피<span></span></a></li>
-                        <li><a href="/myItem.do?milkitWriter=111">내 판매밀키트<span></span></a></li>판매자
+                        <li><a href="/myItem.do?milkitWriter=111">내 판매밀키트<span></span></a></li>
                          <li><a href="/followList.do?memberNo=111">팔로우리스트<span></span></a></li>
                          <li><a href="/myOrder.do?memberNo=111" id="lf-click">내 구매내역<span></span></a></li>   
                           <li><a href="/sellList.do?memberNo=5" id="lf-click">내 판매내역<span></span></a></li>    

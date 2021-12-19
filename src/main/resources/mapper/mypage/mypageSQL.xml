@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mypage">
-	<select id="mypage" resultType="m" parameterType="string">
+	<select id="mypage" resultType="rm" parameterType="string">
 		select
 		MEMBER_NO as memberNo,
 		MEMBER_ID as memberId,
@@ -620,6 +620,51 @@
 	
 	<select id="totalClass" resultType="_int">
 	select count(*) from cooking_class where member_nickname='승민전문가'
+	</select>
+	
+	
+		<update id="updateCerPath" parameterType="m">
+	
+    update member set certificate_path= #{certificatePath} , member_level=4 where member_id=#{memberId}
+
+	</update>
+	
+			<update id="updateSellerInfo" parameterType="m">
+	    update member set
+	profile_path=#{profilePath}
+		where member_id=#{memberId}
+    
+
+	</update>
+	
+		<select id="profile" resultType="m" parameterType="string">
+		select
+		MEMBER_NO as memberNo,
+		MEMBER_ID as memberId,
+		MEMBER_PW as memberPw,
+		MEMBER_EMAIL as memberEmail,
+		MEMBER_NAME as memberName,
+		MEMBER_NICKNAME
+		as memberNickname,
+		MEMBER_PHONE as memberPhone,
+		MEMBER_BIRTH as
+		memberBirth,
+		postcode,
+		ADDRESS_ROAD as addressRoad,
+		ADDRESS_DETAIL as
+		addressDetail,
+		MEMBER_CONSENT as memberConsent,
+		PROFILE_PATH as
+		profilePath,
+		PROFILE_INTRO as profileIntro,
+		MEMBER_LEVEL as memberLevel,
+		MEMBER_POINT as
+		memberPoint,
+		ENROLL_DATE as enrollDate,
+		WITHDRAW_DATE as withdrawDate,
+		MEMBER_BLACK as memberBlack
+		from member where
+		member_id=#{memberId}
 	</select>
 </mapper>
 

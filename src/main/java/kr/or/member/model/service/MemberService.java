@@ -20,6 +20,7 @@ public class MemberService {
 		if(member.getMemberId().isEmpty() || member.getMemberPw().isEmpty()) {
 			m = null;
 		}else {
+			
 			m = dao.loginMember(member);
 		}
 		return m;
