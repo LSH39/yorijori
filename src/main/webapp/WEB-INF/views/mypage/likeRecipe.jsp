@@ -68,8 +68,9 @@
 			      <c:forEach items="${list}" var="lr" varStatus="i">
 			 <div class="recipe">
 				<div class="recImg">
-					<a href="/recipeView.do?recipeNo=${lr.recipeNo}&memberNo=${lr.recipeWriter}"> <img id="itemI"
-						src="resources/img/mypage/house.png">
+					<a href="/recipeView.do?recipeNo=${lr.recipeNo}&memberNo=${lr.recipeWriter}">
+					 <img id="itemI" src="resources/img/mypage/house.png">
+					 <%-- <img id="itemI" src="resources/upload/recipe/${lr.filepath}">--%>
 					</a>
 				</div>
 				<div id="recipes">
@@ -78,9 +79,9 @@
 					<span class="it_info1">	${lr.recipeTitle }</span><br>			
 					<span class="it_info1"><b id="it1"><레시피 설명 ></b>&emsp;</span>&emsp;<br>
 					<span class="it_info1">${lr.subhead }</span><br>
-					<span class="it_info1"><b id="it1">레시피번호 :</b>&emsp;${lr.recipeNo }</span><br>	
-					<span class="it_info1"><b id="it1">작성자 :</b>&emsp;${lr.recipeWriter }</span>&emsp;<br>
-					<span class="it_info1"><b id="it1">조회수 :</b>&emsp;${lr.readCount }</span>&emsp;<br>
+					<span class="it_info1"><b id="it1">레시피번호 :</b>&emsp;${lr.recipeNo }</span><br>					
+					<span class="it_info1"><b id="it1">작성자 :</b>&emsp;${lr.memberNickname }님</span>&emsp;<br>
+					<span class="it_info1"><b id="it1">조회수 :</b>&emsp;${lr.readCount }회</span>&emsp;<br>
 					<span class="it_info1"><b id="it1">등록일 :</b>&emsp;${lr.recipeDate }</span>&emsp;<br>
 					<input type="hidden" value="${lr.likeNo}">
 

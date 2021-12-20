@@ -36,6 +36,10 @@ public class Mysell {
 	private int orderOptionNo;
 	private int orderOptionAmount;
 	
+	//총 누적 개수
+	private int totalAmount;
+
+	
 	public String getCard(){
 		if(orderPayOption == 1) {
 			return "신용카드";

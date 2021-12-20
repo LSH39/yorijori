@@ -151,7 +151,16 @@
 #nn{
 text-align:center;
 }
+#delbutton{
+   background-color:rgb(126, 30, 166);
+   color:whitesmoke;
+   margin-left: 80px;
+   border:none;
+   width:150px;
+   height:40px;
+   
 
+}
 /* 메인 콘텐츠 설정 */
 .main-content {
 	width: 875px;
@@ -198,8 +207,8 @@ $(function() {
 
 			<div id="confirm">
 				<form action="updateCerPath.do" method="post" enctype="multipart/form-data">
-					<input type="text" name="memberId" value="${m.memberId}">
-						<input type="text" name="memberLevel" value="${m.memberLevel}">
+					<input type="hidden" name="memberId" value="${m.memberId}">
+						<input type="hidden" name="memberLevel" value="${m.memberLevel}">
 					<div class="uu">
 						<table border="1" class="cer">
 							<tr>

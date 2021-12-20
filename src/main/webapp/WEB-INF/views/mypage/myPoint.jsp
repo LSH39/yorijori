@@ -74,6 +74,24 @@ table.amountp th {
 .rowTint {
 	background-color: #CDFA83;
 }
+.pagenation{
+display: flex;
+}
+.pagenation ul{
+align-self: center;
+margin : 0 auto;
+}
+.pagenation a{
+color: #9F90CF;
+background-color :#fff; }
+.pagenation a:hover{
+color: #9F90CF;
+}
+.page-item.active .page-link{
+  color: #fff;
+  background: #9F90CF;
+  border-color : #9F90CF;
+}
 </style>
 <script type="text/javascript">
 	window.onload = colorRows;
@@ -117,27 +135,27 @@ table.amountp th {
                     <th scope="cols">사용여부</th>
                     
                     </tr>
-                   <c:forEach items="${list}" var="mp" varStatus="i">
-                    <tr>
-                        <td>${mp.pointNo}</td>
-                        <td>${mp.pointDate }</td>
-                        <td>${mp.pointContent }</td>
-                 	   <c:choose>
-				<c:when test="${mp.pointLevel==1}">
-		      	      <td> +${mp.pointAmount}P</td>	
-		        </c:when>
-		
-		       	 <c:otherwise>
-		   	   <td> -${mp.pointAmount}P</td>	
-		        
-		       	</c:otherwise>
-		       </c:choose> 
-		                   
-                  <td>${mp.usePoint}</td>
-                        
-                  </tr>
-          </c:forEach>
-                    </table>
+				<c:forEach items="${list}" var="mp" varStatus="i">
+					<tr>
+						<td>${mp.pointNo}</td>
+						<td>${mp.pointDate }</td>
+						<td>${mp.pointContent }</td>
+						<c:choose>
+							<c:when test="${mp.pointLevel==1}">
+								<td>+${mp.pointAmount}P</td>
+							</c:when>
+
+							<c:otherwise>
+								<td>-${mp.pointAmount}P</td>
+
+							</c:otherwise>
+						</c:choose>
+
+						<td>${mp.usePoint}</td>
+
+					</tr>
+				</c:forEach>
+			</table>
               
 		</div>
 		<div class="pagenation">

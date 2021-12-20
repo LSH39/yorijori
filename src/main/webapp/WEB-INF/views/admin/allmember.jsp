@@ -133,7 +133,7 @@ text-align: center;}
     </tr>
     <c:forEach items="${list }" var="m" varStatus="i">
     <tr>
-    <td><input class="chkbox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
+    <td><input class="cbhkox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
     <td><img src="${m.profilePath }">${m.memberNickname }(${m.memberId })</td>
     <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>

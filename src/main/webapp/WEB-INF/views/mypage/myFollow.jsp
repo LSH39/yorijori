@@ -27,11 +27,12 @@
     
     float: left;
     margin-right: 30px;
+    margin-bottom:40px;
 }
 .pt{
     width:250px;
     height: 60px;
-    background-color:rgb(217, 129, 253);
+    background-color:rgb(224, 224, 224);
 }
 .pr{
     width:250px;
@@ -85,7 +86,8 @@
               <c:forEach items="${list}" var="fol" varStatus="i">
             <div class="followR">
                 <div class="pt">
-                    <img id="pp" src="resources/img/mypage/profile.jpeg">
+                <img id="pp" src="resources/upload/member_profile/${fol.profilePath }">
+                  <%--    <img id="pp" src="resources/img/mypage/profile.jpeg">--%>
                     <h5 id="nickName">${fol.memberNickname }</h5>
                 </div>
                 <div class="pr">

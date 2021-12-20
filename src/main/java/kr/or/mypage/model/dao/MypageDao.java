@@ -25,7 +25,6 @@ import kr.or.mypage.model.vo.Mydm;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.Mypoint;
 import kr.or.mypage.model.vo.Mysell;
-import kr.or.point.model.vo.Point;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;
@@ -141,7 +140,7 @@ public class MypageDao {
 		return (ArrayList<Mysell>) list;
 	}
 	/*판매량 */
-	public ArrayList<Mysell> totalSell(int memberNo) {
+	public ArrayList<Mysell> totalSell(int milkitWriter) {
 		List<Mysell> list = sqlSession.selectList("mypage.totalSell");
 		return (ArrayList<Mysell>) list;
 	}
@@ -240,7 +239,7 @@ public class MypageDao {
 	}
 	//포인트리스트
 	public ArrayList<Mypoint> selectPointList(HashMap<String, Object> map) {
-		List<Mypoint> list = sqlSession.selectList("mypage.pointList");
+		List<Mypoint> list = sqlSession.selectList("mypage.selectPointList",map);
 		return (ArrayList<Mypoint>) list;
 	}
 	//1.포인트내역 개수
@@ -282,6 +281,29 @@ public class MypageDao {
 	//프로필조회*/
 	public Member profile(String memberId) {
 		return sqlSession.selectOne("mypage.profile",memberId);
+	}
+	//주문상태 변경하기*/
+	public int updateOrder(Mysell ms) {
+		return sqlSession.update("mypage.updateOrder",ms);
+	}
+	//포인트 등록하기
+	public int raisePoint(Mysell ms) {
+		return sqlSession.insert("mypage.raisePoint",ms);
+	}
+	//내판매내역
+	public ArrayList<Mysell> mySellerList1(HashMap<String, Object> map) {
+		List<Mysell> list = sqlSession.selectList("mypage.sellerList1",map);
+		return (ArrayList<Mysell>) list;
+	}
+	
+	//판매내역 개수 세기
+	public int sellCount() {
+		int totalSell = sqlSession.selectOne("mypage.SellCount");
+		return totalSell;
+	}
+	//포인트 적립하기
+	public int updatePoint(Mysell ms) {
+		return  sqlSession.update("mypage.updatePoint",ms);
 	}
 }
 	

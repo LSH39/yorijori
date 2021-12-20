@@ -147,7 +147,7 @@
                         <td class="tb2-td">${mo.milkitName}</td>
                         <td class="tb2-td">${mo.milkitPrice}원</td>
                         <td class="tb2-td">${mo.orderOptionAmount}개</td>
-                        <td class="tb2-td">${mo.orderOptionAmount}개</td>
+                        <td class="tb2-td">${mo.status}</td>
                     </tr>
                   </c:forEach>
                     
