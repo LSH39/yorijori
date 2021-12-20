@@ -108,6 +108,12 @@ public class RecipeService {
 		return 0;
 	}
 
+
+	public int deleteRecipe(int recipeNo) {
+		int result = dao.deleteRecipe(recipeNo);
+		return result;
+	}
+
 }
 	
 

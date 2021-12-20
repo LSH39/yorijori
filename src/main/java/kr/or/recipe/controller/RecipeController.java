@@ -172,10 +172,36 @@ public class RecipeController {
 		return result;
 		
 	}
-	@RequestMapping(value="updateRecipe.do")
+	@RequestMapping(value="/updateRecipe.do")
 	public String updateRecipe(int recipeNo, int memberNo,Model model) {
 		RecipeBoard rb = service.selectOneRecipe(recipeNo,memberNo);
 		model.addAttribute("rb", rb);
-		return "/recipe/updateRecipe";
+		return "/recipe/updateRecipeFrm";
+	}
+	@RequestMapping(value = "/deleteRecipe.do")
+	public String deleteRecipe(int recipeNo ,Model model) {
+		int result = service.deleteRecipe(recipeNo);
+		model.addAttribute("msg", "삭제완료");
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	}
+	@RequestMapping(value = "updateRecipeFrm.do")
+	public String updateRecipeFrm(RecipeBoard rb,Material m, RecipeContent rc,MultipartFile uploadImg,Model model,MultipartFile[] files,HttpServletRequest request) {
+		String filename = uploadImg.getOriginalFilename();
+		String savepath = request.getSession().getServletContext().getRealPath("/resources/upload/recipe/");
+		String filepath = rb.getFilepath();
+		if(filename != "") {
+			 File file = new File(savepath+filepath);
+			 if(file.isFile()) {
+				 file.delete();
+				 
+			 }
+		}else {
+			System.out.println(rb.getFilepath());
+		}
+		
+		
+		return null;
+		
 	}
 }

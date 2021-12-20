@@ -19,6 +19,7 @@ public class RecipeBoard {
 	private int recipeLevel;
 	private int situation;
 	private int material;
+	private int recipeDelete;
 	private ArrayList<RecipeContent>rList;
 	private ArrayList<Material>mList;
 	private String nickname;
