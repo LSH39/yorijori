@@ -124,7 +124,7 @@
 
               <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
               <li><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판</a></li>
-              <li><a href="#">메뉴추천</a></li>
+              <li><a href="/randomMenuFrm.do">메뉴추천</a></li>
             </ul>
           </li>
           <li>
