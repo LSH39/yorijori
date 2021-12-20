@@ -34,7 +34,6 @@ import kr.or.mypage.model.vo.Mypoint;
 import kr.or.mypage.model.vo.Mysell;
 import kr.or.mypage.model.vo.ReadDm;
 import kr.or.mypage.model.vo.followCount;
-import kr.or.point.model.vo.Point;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.MyClassReview;
 import kr.or.review.model.vo.MyItemReview;

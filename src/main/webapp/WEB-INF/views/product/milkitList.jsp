@@ -17,7 +17,7 @@
 		<div><a href="/milkitFrm1.do?memberNo=${sessionScope.m.memberNo }">밀키트 만들기</a></div>
 	</c:if>
 	<c:forEach items="${list }" var="p">
-	<div><a href="/milkitView.do?productNo=${p.productNo }">
+	<div><a href="/milkitView.do?productNo=${p.productNo }&recipeNo=${p.recipeNo}">
 		<p><img src="/resources/upload/product/${p.filepath }"></p>
 		<p>${p.milkitName}</p>
 		<p><fmt:formatNumber value="${p.milkitPrice}"/>원</p>
@@ -31,7 +31,6 @@
 		 	var boardNo = ${boardNo};
 		 	console.log(boardNo);
 		 	var start = $(this).val();
-		 	var seleted = $("#selected").val();
 			$.ajax({
 				url : "/moreProduct.do",
 				data : {start:start,
@@ -41,7 +40,8 @@
 					for(var i=0;i<data.length;i++){
 						var price = data[i].milkitPrice.toLocaleString('ko-KR')
 						var html ="";
-						html += "<div><p><img src='/resources/upload/product/"+data[i].filepath+"'></p></div>";					
+						html += "<div><a href='/milkitView.do?productNo="+data[i].productNo+"&recipeNo="+data[i].recipeNo+"'>";	
+						html += "<p><img src='/resources/upload/product/"+data[i].filepath+"'></p>";
 						html += "<p>"+data[i].milkitName+"</p>";
 						html += "<p><span class='price'>"+price+"</span><span>원</span></p>";
 						html += "<p>"+data[i].milkitComment+"</p></div>";

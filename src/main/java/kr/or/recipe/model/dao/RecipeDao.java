@@ -95,6 +95,10 @@ public class RecipeDao {
 		return 0;
 	}
 
+	public int deleteRecipe(int recipeNo) {
+		return sqlSession.update("recipe.deleteRecipe", recipeNo);
+	}
+
 
 
 }

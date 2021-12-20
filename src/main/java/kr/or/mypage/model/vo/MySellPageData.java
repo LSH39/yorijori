@@ -2,7 +2,6 @@ package kr.or.mypage.model.vo;
 
 import java.util.ArrayList;
 
-import kr.or.freeboard.model.vo.Freeboard;
 import lombok.Data;
 
 @Data
@@ -20,6 +19,7 @@ public class MySellPageData {
 		this.start = start;
 		this.totalCount = totalCount;
 	}
+
 
 
 	public MySellPageData() {
