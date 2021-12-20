@@ -164,11 +164,11 @@
 	      											<div class="fc-like">
 	      											<img src="resources/img/freeboard/spoonknife.png" style="width:30px;height:30px;" class="fcLike">
 	      											<p>추천 <span class="fcLikeCount">${fc.fcLikeCount }</span></p>
+	      											<input type="hidden" value="${fc.fcNo }" class="fcNo">
 	      											</div>
 	      											<c:choose>
 	      												<c:when test="${fc.memberNickname eq sessionScope.m.memberNickname }">
 	      													<div>
-	      														<input type="hidden" value="${fc.fcNo }" class="fcNo">
 	      														<span class="comment-upd">수정</span> / <span class="comment-del">삭제</span>
 	      													</div>
 	      													<div>
@@ -289,34 +289,36 @@
 				type: "get",
 				data: {memberId:memberId, freeNo:freeNo},
 				success: function(data){
-					var list = data.list;
-					var fcNoList = new Array();
+					var list = data;
+					console.log(list);
 					if(list != null){
-						for(var i=0; i<list.length; i++){
-							fcNoList[i] = list[i].fcNo;
-						}
-						var fcNo = $(".fcNo").val();
-						for(var j = 0; j < fcNoList.length; j++){
-							if(fcNo == fcNoList[j]){
-								var img = fcNo.parents(".fcLike").children().eq(0).children("img");
-								var p = fcNo.parents(".fcLike").children().eq(0).children("p");
-								img.css("");
-								p.html("추천취소");
-								p.css("font-weight", "bolder");
+						for(var i=0;i<list.length;i++){
+							var fcNo = $(".fcNo");
+							var fcLikeCount = fcNo.prev().children().html();
+							if(fcNo.val() == list[i].fcNo){
+								fcNo.parent().removeClass("fc-like");
+								fcNo.parent().addClass("fc-unlike");
+								fcNo.prev("p").html("<span class='fcLikeCount'>"+fcLikeCount+"</span> 추천취소");
 							}
 						}
-					}
+						
+						}
 				}
 		
   			});
   		}
   		
-  		//댓글 추천하기
+  		
+  		//댓글 추천 or 비추천
   		$(".fc-like").on("click", function(){
   			var freeNo = $("#freeNo").val();
-  			var fcNo = $(this).parent().find(".fcNo").val();
-  			var memberId = $("#fcWriter").val();
-  			location.href="/insertFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
+	  		var fcNo = $(this).children(".fcNo").val();
+	  		var memberId = $("#fcWriter").val();
+  			if($(this).hasClass("fc-like")){
+  	  			location.href="/insertFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
+  			} else if ($(this).hasClass("fc-unlike")){
+  	  			location.href="/deleteFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
+  			}
   		});
   		
   		//파일다운로드 제한
@@ -328,7 +330,11 @@
   			}
   		})
   		
+  		
   	});
+  		
+
+
   	
   	
   </script>

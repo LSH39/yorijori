@@ -373,4 +373,16 @@ public class FreeboardController {
 				
 			}
 	
+	@RequestMapping(value="deleteFcLike.do")
+	public String deleteFcLike(int fcNo, String memberId, int freeNo, Model model) {
+		int result = service.deleteFcLike(fcNo, memberId, freeNo);
+		if(result>0) {
+			model.addAttribute("msg", "취소 완료");
+		} else {
+			model.addAttribute("msg", "취소 실패");
+		}
+			model.addAttribute("loc", "/freeView.do?freeNo="+freeNo);
+			return "common/msg";
+	}
+	
 }

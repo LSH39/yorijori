@@ -279,11 +279,11 @@
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
   	
-  	//현재 일자 체크 (대회 투표기간 확인)
+	//현재 일자 체크 (대회 투표기간 확인)
   	function chkDate(){
   		var today = new Date();
   		var date = today.getDate();
-  		if(date >= 1 && date <= 15){
+  		if(date >= 1 && date <= 31){
   			location.href="/contestList.do?reqPage=1&orderIndex=0";
   		}else {
   			alert("대회 투표기간이 아닙니다.");

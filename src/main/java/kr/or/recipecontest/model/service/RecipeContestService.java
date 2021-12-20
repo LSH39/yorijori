@@ -6,8 +6,10 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipecontest.model.dao.RecipeContestDao;
 import kr.or.recipecontest.model.vo.ContestPageData;
+import kr.or.recipecontest.model.vo.ContestViewData;
 import kr.or.recipecontest.model.vo.RecipeContest;
 
 @Service
@@ -142,6 +144,35 @@ public class RecipeContestService {
 		pageNavi += "</ul>";
 		ContestPageData searchResult = new ContestPageData(list,pageNavi,start,totalCount);
 		return searchResult;
+	}
+
+	public ArrayList<ContestViewData> selectRecipeList(int memberNo, int year, int month) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("year", year);
+		map.put("month", month);
+		ArrayList<ContestViewData> list = dao.selectRecipeList(map);
+		return list;
+	}
+
+	public int contestEnter(int recipeNo, int memberNo, int enteredNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("recipeNo", recipeNo);
+		int result = 0;
+		if(enteredNo > 0) {
+			int del = dao.deleteContestRecipe(enteredNo);
+			if(del>0) {
+				result = dao.insertContestRecipe(map);
+			}
+		}
+			result = dao.insertContestRecipe(map);
+		return result;
+	}
+
+	public ArrayList<RecipeContest> selectContestRecipeList() {
+		ArrayList<RecipeContest> list = dao.selectContestRecipeList();
+		return list;
 	}
 
 }

@@ -63,7 +63,7 @@
 	      					<a href="#">
 	      						<div class="recipe-profile">
 	      							<div class="profile-pic">
-	      								<img src="#">
+	      								<img src="resources/upload/member/${r.profilePath }">
 	      								<h5>${r.memberNickname }</h5>
 	      							</div>
 	      					</a>
@@ -108,6 +108,49 @@
 						</div>
 					</div>
 					</form>
+					
+				<!-- 모달창 부분 대회 참가 -->
+					<div class="enter-contest modal fade" id="enterModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="enterModalLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-xl" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="enterModalLabel" style="color:#8E44AD;">참가할 레시피 목록</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true"></span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					 		<form class="enter-contest" action="/contestEnter.do" method="post">
+								<fieldset>
+								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+									<table class="table table-hover">
+										<thead>
+											<tr class="table-secondary">
+												<th scope="col">선택</th>
+												<th scope="col">이미지</th>
+												<th scope="col">제목</th>
+												<th scope="col">음식이름</th>
+												<th scope="col">내용</th>
+												<th scope="col">조회수</th>
+												<th scope="col">작성일</th>
+												<th scope="col">참가여부</th>
+											</tr>
+										</thead>
+										<tbody>
+										
+										</tbody>
+									</table>
+									<input type="hidden" name="enteredNo" value='0'>
+					      </div>
+					      <div class="modal-footer">
+					        <input type="submit" class="recipeSubmit btn btn-primary" value="레시피 등록">
+					        	</fieldset>
+					        </form>
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 	      	</div>
   </main><!-- End #main -->
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -118,6 +161,9 @@
   		var year = today.getFullYear();
   		var month = today.getMonth()+1;
   		var voted = false; //투표여부 확인
+  		var written = false; //레시피 작성여부 확인
+
+  		
   		$(".thisyr").html(year);
   		$(".thismonth").html(month);
   		//정렬 default
@@ -130,7 +176,6 @@
   			var reqPage = 1;
   			var body = $(".contest-content").children("ul");
   			var totalCount = $("#totalCount");
-  			console.log(index);
   			location.href="contestList.do?reqPage="+reqPage+"&orderIndex="+index;
   		});
   		
@@ -145,8 +190,6 @@
 					if(data > 0){
 						var contestNo = data;
 						var vote = $('.contestNo[value='+contestNo+']').parent('div');
-						console.log(vote);
-						console.log(img);
 						var img = vote.children('img');
 						var label = vote.children("label[for='vote']");
 						img.attr("src", "");
@@ -160,6 +203,60 @@
 		
   			});
   		}
+  		
+		//레시피 목록 가져오기
+		if(memberNo != null){
+			$.ajax({
+				url: "/getRecipeList.do",
+				type: "get",
+				data: {memberNo:memberNo, year:year, month:month},
+				success: function(data){
+					var list = data;
+					if(list.length == 0){
+						written = false;	
+					} else {
+						written = true;
+						for(var i=0;i<list.length;i++){
+							var tbody = $("#enterModal").find("tbody");
+							var table = "<tr><th scope='row'><input type='radio' name='recipeNo' value='"+list[i].recipeNo+"'><th scope='row'><img src='/resources/upload/recipe/"+list[i].filepath+"' style='width:50px;height:50px;'></th><th scope='row'>"+list[i].recipeTitle+"</th><th scope='row'>"+list[i].foodName+"</th><th scope='row'>"+list[i].recipeContent+
+  							"</th><th scope='row'>"+list[i].readCount+"</th><th scope='row'>"+list[i].recipeDate+"</th>";
+  								if(list[i].enterDate != null){
+  									var html = "<th scope='row' class='entered'>참가중</th></tr><input type='hidden' name='enteredNo' value='"+list[i].recipeNo+"'>";
+	  								table += html;
+  								} else {
+  									var html = "<th scope='row'></th></tr>";
+	  								table += html;
+  								}
+  								tbody.append(table);
+						}	
+  							
+						}
+					}
+					
+				});
+		}
+		
+		$(".recipeSubmit").on("click", function(){
+			var selected = $("#enterModal").find("input[type='radio']:checked").val();
+			if(selected == null){
+				alert("레시피를 선택해주세요!");
+				return false;
+			}else {
+				var submit_ans = confirm("해당 레시피로 참가하시겠습니까? 기존의 참가 레시피는 무효화됩니다.");
+				if(submit_ans == false){
+					return false;
+				}
+			}
+		});
+								
+  	
+  		$(".btn-enter").on("click", function(){
+  			if(written == false){
+  				alert("작성하신 레시피가 아직 없습니다.");
+  			} else {
+  				$("#enterModal").modal('show');
+  			}
+  		});
   		
   		
   		//투표 or 투표 취소
@@ -189,8 +286,6 @@
 			}
 		});
   		
-  		});
-  		
   	//게시글 삭제 확인
   	function delCheck(){
   		var delNotice_ans = confirm("게시글을 삭제하시겠습니까?");
@@ -201,6 +296,8 @@
 			return false;
 		}
   	}
+  	
+  	});
   </script>
 </body>
 </html>

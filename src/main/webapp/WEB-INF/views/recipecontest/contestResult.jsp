@@ -56,7 +56,7 @@
 	      	<div class="contest-banner-content-r">
 	      		<h2 style="color: #FFF;"><span class="thisyr" style="color:rgb(255, 84, 67);"></span>년 <span class="thismonth" style="color:rgb(255, 84, 67);"></span>월</h2>
 	      		<h2 style="color: #FFF;">레시피경연대회 우승자 발표</h2><br>
-	      		<h5><span style="color:black;font-weight: bolder;">발표일: 매월</span> 20일</h5>
+	      		<h5><span style="color:black;font-weight: bolder;">발표일: 매월</span> 25일</h5>
 	      		<h5 style="color:#FFF;">우승을 진심으로 축하드립니다.</h5>
 	      	</div>
 	      	<div class="contest-info">
@@ -116,52 +116,52 @@
       		<div class="winners-profile col-sm-9">
       			<ul>
       				<li>
-      					<a href="#">
+      					<a href="/recipeView.do?recipeNo=${list[0].recipeNo }">
       						<div><img src="#" style="width:250px;height:200px;"></div>
-      						<div><h4>레시피 제목</h4></div>
+      						<div><h4>${list[0].recipeTitle }</h4></div>
       					</a>
-      					<a href="#">
+      					<a href="/profile.do?memberId=${list[0].memberId } ">
       						<div><img src="#" style="width: 100px;height:100px;"></div>
-      						<div><h4>아이디</h4></div>
+      						<div><h4>${list[0].memberId }</h4></div>
       					</a>
-      					<div class="total-vote"><h5>110 </h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
+      					<div class="total-vote"><h5>${list[0].voteCount } </h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
       				</li>
       				<li>
       					<a href="#">
       						<div><img src="#" style="width:250px;height:200px;"></div>
-      						<div><h4>레시피 제목</h4></div>
+      						<div><h4>${list[1].recipeTitle }</h4></div>
       					</a>
-      					<a href="#">
+      					<a href="/profile.do?memberId=${list[1].memberId }">
       						<div><img src="#" style="width: 100px;height:100px;"></div>
-      						<div><h4>아이디</h4></div>
+      						<div><h4>${list[1].memberId }</h4></div>
       					</a>
       					<div class="total-vote">
-      						<h5>110</h5>
+      						<h5>${list[1].voteCount }</h5>
       						<img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;">
       					</div>
       				</li>
       				<li>
       					<a href="#">
       						<div><img src="#" style="width:250px;height:200px;"></div>
-      						<div><h4>레시피 제목</h4></div>
+      						<div><h4>${list[2].recipeTitle }</h4></div>
       					</a>
-      					<a href="#">
+      					<a href="/profile.do?memberId=${list[2].memberId }">
       						<div><img src="#" style="width: 100px;height:100px;"></div>
-      						<div><h4>아이디</h4></div>
+      						<div><h4>${list[2].memberId }</h4></div>
       					</a>
-      					<div class="total-vote"><h5>110</h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
+      					<div class="total-vote"><h5>${list[2].voteCount }</h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
       				</li>
       			</ul>
       		</div>
       		<div class="special-winners col-sm-3">
       			<ul class="winners">
-				  <li>Branding</li>
-				  <li>Identity Design</li>
-				  <li>Web Development</li>
-				  <li>Social Media Setup</li>
-				  <li>Email Marketing</li>
-				  <li>Brochure Development</li>
-				  <li>Logo Design</li>
+				  <c:forEach items="${list }" var="w" varStatus="i">
+				  	<c:choose>
+				  		<c:when test="${w.voteCount >= 30 }">
+				  			<li>${list[i].memberId }</li>
+				  		</c:when>
+				  	</c:choose>
+				  </c:forEach>
 				</ul>
       		</div>
       	</div>

@@ -21,6 +21,7 @@
 		<typeAlias type="kr.or.freeboard.model.vo.Freeboard" alias="fb"/>
 		<typeAlias type="kr.or.notice.model.vo.Notice" alias="n"/>
 		<typeAlias type="kr.or.recipecontest.model.vo.RecipeContest" alias="rc"/>
+		<typeAlias type="kr.or.recipecontest.model.vo.ContestViewData" alias="cvd"/>
 		<typeAlias type="kr.or.freeboard.model.vo.FreeboardComment" alias="fc"/>
 		<typeAlias type="kr.or.freeboard.model.vo.FreeboardLike" alias="flike"/>
 		<typeAlias type="kr.or.freeboard.model.vo.FreeboardCommentLike" alias="fcl"/>

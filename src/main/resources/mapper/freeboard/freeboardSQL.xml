@@ -194,5 +194,10 @@
 		delete from freeboard_file
 		where free_no = #{freeNo}
 	</delete>
+	<delete id="deleteFcLike" parameterType="map">
+		delete from fc_like
+		where
+		fc_no = #{fcNo} and fc_liker = #{memberId}
+	</delete>
 </mapper>
 
