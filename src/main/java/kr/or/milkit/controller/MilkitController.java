@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import kr.or.milkit.model.service.MilkitService;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.review.model.vo.Review;
 
 @Controller
 public class MilkitController {
@@ -60,7 +61,7 @@ public class MilkitController {
 	public String image(MultipartFile file, HttpServletRequest request) {
 		String savepath = request.getSession().getServletContext().getRealPath("/resources/upload/product/");
 		String filepath = uploadFile(file, savepath);
-		return new Gson().toJson("/resources/upload/product"+filepath);
+		return new Gson().toJson("/resources/upload/product/"+filepath);
 	}
 	@RequestMapping(value = "/insertMilkit.do")
 	public String insertMilkit(MultipartFile uploadImg , Product p, Model model,HttpServletRequest request) {
@@ -117,13 +118,14 @@ public class MilkitController {
 	@RequestMapping(value = "/moreProduct.do" ,produces = "application/json;charset=utf-8" )
 	public String moreProduct(int start,int boardNo) {
 		ArrayList<Product>list = service.selectMoreProduct(start,boardNo);
-		System.out.println(boardNo);
 		return new Gson().toJson(list);	
 	}
 	@RequestMapping(value="/milkitView.do")
-	public String milkitView(int productNo,Model model) {
-		ArrayList<Product>list = service.selectOneProduct(productNo);
-		model.addAttribute("list", list);
+	public String milkitView(int productNo,int recipeNo,Model model) {
+		Product p = service.selectOneProduct(productNo, recipeNo);
+	
+		model.addAttribute("p", p);
 		return "/product/milkitView";
 	}
+	
 }

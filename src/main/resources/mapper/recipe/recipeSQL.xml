@@ -125,7 +125,9 @@
  	<insert id="insertReport" parameterType="report">
  		insert into recipe_report values(report_seq.nextval,#{recipeNo},#{memberNo},#{reportComment})
  	</insert>
- 	
+ 	<update id="deleteRecipe" parameterType="_int">
+ 		update recipe_board set recipe_delete=0 where recipe_no=#{recipeNo}
+ 	</update>
  	<!-- 성승민 프로필 연동 레시피 게시물 수 -->
  	<select id="selectOneReceipeCnt" parameterType="_int" resultType="_int">
  		select count(*) 
