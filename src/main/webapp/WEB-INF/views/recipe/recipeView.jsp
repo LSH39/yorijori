@@ -17,7 +17,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
 	<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">
-	<div><span><a href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span><span><a href="/delRecipe.do">삭제</a></span></div>
+	<div><span><a href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span><span><a href="/deleteRecipe.do">삭제</a></span></div>
 	</c:if>
 		<div id="topImg">
 			<img src="/resources/img/recipe/recipe.jpg">
@@ -150,12 +150,17 @@
 		</div>
 	</div>
 	<script>
+		 window.onload=function(){
+			 $(".view").eq(0).css("font-size", "28px");
+			 $(".view").eq(0).css("background-color", "#9A86B3");
+			 $(".view").eq(0).css("color", "#6D5874");
+		 }
+		 
 		var memberNo = $("#memberNo").val();
 
 		function initTab() {
 			var frms = $(".view");
-			for (var i = 0; i < frms.length; i++) {
-				
+			for (var i = 0; i < frms.length; i++) {			
 				$(".view").eq(i).css("font-size", "25px");
 				$(".view").eq(i).css("background-color", "#C4BFE3");
 				$(".view").eq(i).css("color", "#8E44AD");
@@ -163,8 +168,7 @@
 		}
 		function selectOne(i) {
 			initTab();
-			$(".view").eq(i).css("font-size", "30px");
-			
+			$(".view").eq(i).css("font-size", "28px");		
 			$(".view").eq(i).css("background-color", "#9A86B3");
 			$(".view").eq(i).css("color", "#6D5874");
 		}

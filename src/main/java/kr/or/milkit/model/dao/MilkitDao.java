@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.review.model.vo.Review;
 
 @Repository
 public class MilkitDao {
@@ -49,9 +50,19 @@ public class MilkitDao {
 			return  (ArrayList<Product>)list;
 	}
 
-	public ArrayList<Product> selectOneProduct(int productNo) {
-		List<Product>list = sqlSession.selectList("milkit.selectOneProduct",productNo);
-		return (ArrayList<Product>)list;
+	public Product selectOneProduct(int productNo) {
+		return sqlSession.selectOne("milkit.selectOneProduct",productNo);
 	}
+
+	public ArrayList<Review> selectReview(int productNo) {
+		List<Review>list = sqlSession.selectList("milkit.selectReview",productNo);
+		return (ArrayList<Review>)list;
+	}
+
+	public ArrayList<RecipeBoard> selectRecipeBoard(int recipeNo) {
+		List<RecipeBoard>list = sqlSession.selectList("milkit.selectRecipeBoard", recipeNo);
+		return (ArrayList<RecipeBoard>)list;
+	}
+
 
 }
