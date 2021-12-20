@@ -111,6 +111,7 @@ $("#modalbtn").click(function(){
         $(".join_check").eq(2).text("이메일을 입력해주세요.");
         return;
     }else{
+    	$("#modalbtn").append("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>");
         var inputEmail = email+"@"+$("[name=domain]").val();
         $.ajax({
             type: "post",
@@ -127,9 +128,9 @@ $("#modalbtn").click(function(){
                         url: "/mailSend.do",
                         data: {subject:subject, receiver:receiver},
                         success: function (data) {
+                        	$("#modalbtn").children().remove();
                         	mailKey = data;  // mailKey:인증번호
                          	$('#exampleModalCenter').modal({backdrop: 'static', keyboard: false}).modal('show');
-                            
                         }
                     });
                 }

@@ -17,6 +17,7 @@
 		<typeAlias type="kr.or.order.model.vo.Order" alias="o"/>
 		<typeAlias type="kr.or.order.model.vo.OrderOption" alias="oo"/>
 		<typeAlias type="kr.or.point.model.vo.Point" alias="p"/>
+		<typeAlias type="kr.or.about.model.vo.FoodList" alias="food"/>
 		<!-- 태경 alias -->
 		<typeAlias type="kr.or.freeboard.model.vo.Freeboard" alias="fb"/>
 		<typeAlias type="kr.or.notice.model.vo.Notice" alias="n"/>

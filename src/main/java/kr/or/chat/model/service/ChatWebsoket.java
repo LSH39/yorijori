@@ -35,6 +35,8 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 		@Override
 		public void afterConnectionEstablished(WebSocketSession session) throws Exception{
 			sessionList.add(session);
+			System.out.println("시작");
+			System.out.println("접속 : "+sessionList.size());
 		}
 		
 		// 웹소켓 데이터 받으면
@@ -49,6 +51,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 			// start
 			if(type.equals("start")) {
 				int memberNo = element.getAsJsonObject().get("memberNo").getAsInt();
+				System.out.println(memberNo);
 				memberList.put(session,memberNo);
 				if(memberNo != 86) {  // 일반/전문가
 					ArrayList<Chat> chatList = service.chatUserList(memberNo);
@@ -209,7 +212,6 @@ public class ChatWebsoket  extends TextWebSocketHandler{
             		String chatContent = chatList.get(i).getChatContent();
             		String chatDate = chatList.get(i).getStrDate();
             		String chatSenderNick = chatList.get(i).getMemberNickname();
-            		System.out.println(chatSenderNick);
                 	if(chatReceive == sessionMemberNo){
                 		if(chatDate.equals(receiveDate)){
                 			appendMsg += "<tr><td class='receiveText'><div>"+chatContent+"</div></td></tr>";
@@ -240,5 +242,6 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 		public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 			sessionList.remove(session);
 			memberList.remove(session);
+			System.out.println("종료");
 		}
 }
