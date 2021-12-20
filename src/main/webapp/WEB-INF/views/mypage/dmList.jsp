@@ -38,10 +38,10 @@
     float: left;
 }
 .dmC{
-    width:550px;
+    width:530px;
     height:100px;
     float: left;
-    
+  
    
 
 }
@@ -68,12 +68,21 @@
     height:5px;
     
 }
-#read{
-margin-left:550px;
-}
+
 #mydm{
 float:left;
 
+}
+.read{
+width:50px;
+height:27px;
+background-color:rgb(248, 248, 161);
+float:left;
+font-size:12px;
+color:red;
+font-weight:600;
+text-align:center;
+border-radius:50px;
 }
 </style>
 </head>
@@ -109,17 +118,30 @@ float:left;
 					<table class="dContent">
 						<tr>
 							<td id="name">${md.dmSender}</td>
+							
 						</tr>
 						<tr>
 							<td id="content"><a href="#">${md.dmContent }</a></td>
 						</tr>
 						<tr>
 							<td id="time">${md.dmDate}</td>
+							
 						</tr>
 					</table>
 				</div>
-
+				<div class="read">
+				<c:choose>
+					<c:when test="${md.dmReadFlag ==0 }">
+						읽지않음
+					</c:when>
+				     <c:when test="${md.dmReadFlag ==1 }">
+						읽음
+					</c:when> 
+				</c:choose>
+              </div>
+               
 			</div>
+		
 			</c:forEach>
 		</div>
 	</div>

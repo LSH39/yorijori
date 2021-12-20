@@ -103,7 +103,7 @@
 .amount{
     width:800px;
     height:200px;
-    background-color: bisque;
+    background-color: rgb(247, 247, 229);
     margin-bottom:30px;
 }
 .mim{
@@ -150,6 +150,7 @@
             <div id="line2"></div><br>
             <c:forEach items="${list}" var="ms" varStatus="i">
             <div class="amount">
+            <h3>${i.count}</h3>
                <div class="mim"><img id="pic" src="resources/img/mypage/profile.jpeg"></div>
                <div class="tot"> 
                 <span class="it_info1"><b id="m"><밀키트이름></b>&emsp;${ms.milkitName}</span>&emsp;<br>

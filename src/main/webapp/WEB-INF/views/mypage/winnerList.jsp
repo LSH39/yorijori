@@ -77,10 +77,17 @@
 #win{
     width: 60px;
     height:60px;
+     float:left;
 }
 #winners{
  line-height: 30px;
  overflow: hidden;
+ }
+ .ww{
+ float:left;
+ color:red;
+ margin-left:100px;
+  margin-top:20px;
  }
 </style>
 <link rel="stylesheet" href="resources/css/mypage/win.css">
@@ -109,14 +116,14 @@
        
                <c:forEach items="${list}" var="ct" varStatus="i">
               <div class="win">
-                 <img id="win" src="resources/img/mypage/win.jpeg">
+                 <img id="win" src="resources/img/mypage/win.jpeg"><h5 class="ww">총 ${ct.voteCount}표</h5>
                 <a href="#"> 
-                    <img id="recipeI" src="resources/img/mypage/house.png">
+                    <img id="recipeI" src="resources/upload/recipe/${ct.filePath}">
                 </a>
                 <div id="winners">
                    <span class="it_info1"><b id="it1">경연날짜 :</b>&emsp;${ct.contestMonth }</span><br>
                    <span class="it_info1"><b id="it1">레시피이름 :</b>&emsp;${ct.recipeTitle}</span><br>
-                   <span class="it_info1"><b id="it1">우승자 :</b>&emsp;${ct.recipeWriter }</span>&emsp;<br>
+                   <span class="it_info1"><b id="it1">우승자 :</b>&emsp;${ct.memberNickName }</span>&emsp;<br>
             
     
                 </div>

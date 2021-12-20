@@ -15,5 +15,6 @@ public class FollowList {
 	private String memberNickname;
 	private int cnt;
 	private int recipeNo;
+	private String profilePath;
 
 }

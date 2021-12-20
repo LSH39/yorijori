@@ -97,13 +97,11 @@
             }
             var subject="요리조리 메일 인증";
         	var receiver = $("#memberEmail").val();
-        	$("#mailSend").append("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>");
         	$.ajax({
                 type: "post",
                 url: "/mailSend.do",
                 data: {subject:subject, receiver:receiver},
                 success: function (data) {
-                	$("#mailSend").children().remove();
                 	code = data;  // 인증번호저장
                 	$("#codeTr").css("display","table-row");
                 	$("#sub_txt").css("display","table-row");

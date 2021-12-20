@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ import kr.or.mypage.model.vo.MyFreeBoardPageData;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.MyLikeRecipePageData;
 import kr.or.mypage.model.vo.MyPointPageData;
+import kr.or.mypage.model.vo.MySellPageData;
 import kr.or.mypage.model.vo.Mychat;
 import kr.or.mypage.model.vo.MycontestPagedata;
 import kr.or.mypage.model.vo.Myorder;
@@ -60,9 +60,12 @@ public class MypageController {
 	
 	//내 정보보기(전문가)
 	@RequestMapping(value = "/selPage.do")
-	public String selPage(String memberId, Model model) {
-		Member m = service.sellerPage(memberId);
-		model.addAttribute("m", m);
+	public String selPage(String memberId, Model model,HttpSession session) {
+		ReadMember rm =service.seller(memberId);
+		   session.setAttribute("rm", rm);
+			model.addAttribute("rm", rm);
+		//Member m = service.sellerPage(memberId);
+		//model.addAttribute("m", m);
 		return "mypage/sellerProfile";
 	}
 	//내 자격증 조회
@@ -140,7 +143,7 @@ public class MypageController {
 	public String myItem(int milkitWriter,Model model) {
 		ArrayList<MyItem> list= service.myItem(milkitWriter);
 		model.addAttribute("list", list);
-		return "mypage/myItem";
+		return "mypage/myItem1";
 	}
 
 
@@ -258,23 +261,35 @@ public class MypageController {
 		model.addAttribute("dd", dd);
 		return "mypage/orderDetail";
 	}
-	//판매내역조회
+	/*판매내역조회
 	@RequestMapping(value = "/sellList.do")
 	public String sellList(int memberNo, Model model) {
 		ArrayList<Mysell> list= service.mySellList(memberNo);
 		model.addAttribute("list", list);
 		return "mypage/sellerList";
 	}
+	*/
+	@RequestMapping(value = "/sellList.do")
+	public String sellList(int memberNo, Model model,int reqPage) {
+		MySellPageData spd =service.mySellList1(reqPage,memberNo);
+		model.addAttribute("list", spd.getList());
+		model.addAttribute("pageNavi", spd.getPageNavi());
+		model.addAttribute("start", spd.getStart());
+		model.addAttribute("totalCount", spd.getTotalCount());
+		model.addAttribute("reqPage", reqPage);
+		return "mypage/sellerList";
+	}
 	//누적판매량
 	@RequestMapping(value = "/totalSell.do")
-	public String totalSell(int memberNo, Model model) {
-		ArrayList<Mysell> list= service.totalSell(memberNo);
+	public String totalSell(int milkitWriter, Model model) {
+		ArrayList<Mysell> list= service.totalSell(milkitWriter);
 		model.addAttribute("list", list);
-		return "mypage/amountSell";
+		return "mypage/myItem";
 	}
 	//전문가 정보변경
 	@RequestMapping(value = "/updateSeller.do")
-	public String updateSeller(Member m, Model model, HttpServletRequest request,HttpServletResponse response) {
+	public String updateSeller(Member m, Model model) {
+		/*
 		 System.out.println(m.getMemberConsent());
 		System.out.println(m.getMemberId());
 		 
@@ -294,7 +309,7 @@ public class MypageController {
        System.out.println(m.getMemberNo());
        System.out.println(m.getMemberPhone());
        System.out.println(m.getMemberPoint());
-       
+       */
 		int result = service.updateSeller(m);
 
 		if (result > 0) {
@@ -302,12 +317,12 @@ public class MypageController {
 		} else {
 			model.addAttribute("msg", "정보변경 실패");
 		}
-		model.addAttribute("loc", "/");
+		model.addAttribute("loc", "/selPage.do?memberId="+m.getMemberId());
 		return "common/msg";
 	}
 	//회원정보변경
 	@RequestMapping(value = "/updateMember.do")
-	public String updateMember(Member m, Model model,HttpServletRequest request,HttpServletResponse response) {
+	public String updateMember(Member m, Model model) {
 
 		int result = service.upMember(m);
 		if (result > 0) {
@@ -315,7 +330,7 @@ public class MypageController {
 		} else {
 			model.addAttribute("msg", "정보변경 실패");
 		}
-		model.addAttribute("loc", "/mypage.do");
+		model.addAttribute("loc", "/mypage.do?memberId="+m.getMemberId());
 		return "common/msg";
 	}
 
@@ -477,7 +492,40 @@ public class MypageController {
 		return "common/msg";
 
 	}
+
+	//주문 상태 변경
+	@RequestMapping(value="/updateOrder.do")
+	public String updateOrder(Mysell ms, Model model,int reqPage) {
+		System.out.println("주문상태111111111 start");
+		System.out.println("주문상태 : "+ms.getOrderStatus() );
+        System.out.println("옵션번호 : "+ms.getOrderOptionNo());
+		int result = service.uporder(ms);
+		
+		if (result > 0) {
+			model.addAttribute("msg", "주문상태 변경 성공");
+		} else {
+			model.addAttribute("msg", "주문상태 변경 실패");
+		}
+
+		if(ms.getOrderStatus()== 4) {
+			System.out.println("수량 : "+ms.getOrderOptionAmount());	
+			System.out.println("금액 : "+ms.getMilkitPrice());	
+			result =service.raisePoint(ms);
+			if (result == 0) {
+				model.addAttribute("msg", "포인트 적립 실패");
+			}
+			result =service.updatePoint(ms);
+			if (result == 0) {
+				model.addAttribute("msg", "포인트 적립 실패1");
+			}
+		}	
+		model.addAttribute("loc", "/sellList.do?memberNo="+ms.getMemberNo()+"&reqPage="+reqPage);
+		System.out.println("주문상태111111111 end");
+		return "common/msg";
+	}
+
 }
+
 
 
 

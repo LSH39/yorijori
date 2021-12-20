@@ -8,15 +8,12 @@
 		MEMBER_PW as memberPw,
 		MEMBER_EMAIL as memberEmail,
 		MEMBER_NAME as memberName,
-		MEMBER_NICKNAME
-		as memberNickname,
+		MEMBER_NICKNAME as memberNickname,
 		MEMBER_PHONE as memberPhone,
-		MEMBER_BIRTH as
-		memberBirth,
+		MEMBER_BIRTH as memberBirth,
 		postcode,
 		ADDRESS_ROAD as addressRoad,
-		ADDRESS_DETAIL as
-		addressDetail,
+		ADDRESS_DETAIL as addressDetail,
 		MEMBER_CONSENT as memberConsent,
 		PROFILE_PATH as
 		profilePath,
@@ -167,14 +164,17 @@
 	</select>
 
 	<select id="contestWinner" resultType="ct">
-		select cr.contest_no as contestNo,
-		cr.contest_month as contestMonth,
-		rb.recipe_title as recipeTitle,
-		rb.recipe_writer as recipeWriter
-		from contest_recipe cr,recipe_board rb
-		where cr.recipe_no=rb.recipe_no and cr.contest_result=1
+        	    select 
+	       cr.contest_no as contestNo,
+		   cr.contest_month as contestMonth,
+		   rb.recipe_title as recipeTitle,
+		   rb.recipe_writer as recipeWriter,
+           rb.filePath,
+           m.member_nickname as memberNickName,
+           ( select count(*) from contest_vote where contest_no=cr.contest_no ) as voteCount
+		from contest_recipe cr,recipe_board rb,member m
+		where cr.recipe_no=rb.recipe_no and m.member_No=rb.recipe_writer and cr.contest_result=1
 		order by contest_month asc
-
 
 	</select>
 
@@ -213,7 +213,8 @@
 		     , a.subhead as subhead
 		     , a.recipe_no as recipeNo             
              , (select count(*)from recipe_like where recipe_no=a.recipe_no) as cnt
-		     , (select member_nickName from member where member_no = a.recipe_writer) as memberNickname
+		     , (select member_nickName from member where member_no = a.recipe_writer) as memberNickname,
+             (select profile_path from member where member_no=recipe_writer)as profilePath
 		  from recipe_board a
                
 		 where a.recipe_writer in (SELECT follow_no from follow where member_no=111) 
@@ -367,21 +368,16 @@
 	</update>
 	<select id="totalSell" resultType="ms" parameterType="_int">
 
-		select a.ORDER_NO as orderNo,
-		a.PRODUCT_NO as productNo,
-		a.ORDER_OPTION_AMOUNT as orderOptionAmount,
-		b.milkit_writer as milkitWriter,
-		b.recipe_no as recipeNo,
-		b.milkit_name as milkitName,
-		b.milkit_price as milkitPrice,
-		b.milkit_stock as milkitStock,
-		b.filePath,
-		c.member_no as memberNo,
-		c.order_name as orderName
-
-		from order_option a,product b,order_tbl c
-		where a.product_no=b.product_no
-		and c.order_no =a.order_no and c.member_no=111
+    	select
+		a.product_no as productNo,
+		a.milkit_name as milkitName,
+		a.milkit_writer as milkitWriter,
+		a.milkit_price as milkitPrice,
+		a.filePath as filepath,
+		a.milkit_date as milkitDate,
+		a.milkit_stock as milkitStock,
+         (select sum(order_option_amount) from order_option where a.product_no=product_no ) as totalAmount
+		from product a where milkit_writer=103
 
 
 	</select>
@@ -389,13 +385,15 @@
 	<select id="dmList" resultType="md" parameterType="_int">
 		 
         select dm_no as dmNo,
-		dm_receiver as dmReceiver,
-		dm_sender as dmSender,
-		dm_content as dmContent,
-		dm_read_flag as dmReadFlag,
-		dm_date as dmDate,
-       (select profile_path from member where member_nickname=dm_sender)as profilePath
-		from dm where dm_receiver='승민전문가'
+		       dm_receiver as dmReceiver,
+		       dm_sender as dmSender,
+		       dm_content as dmContent,
+			   dm_read_flag as dmReadFlag,
+			   dm_date as dmDate,
+              (select profile_path from member where member_nickname=dm_sender)as profilePath
+		from dm 
+		where dm_receiver='승민전문가'
+		order by dmDate desc
 
 
 	</select>
@@ -536,7 +534,8 @@
 		rb.recipe_writer as recipeWriter,
 		rb.filepath as filepath,
 		rb.read_count as readCount,
-		rb.subhead as subhead
+		rb.subhead as subhead,
+		 (select member_nickname from member where member_no=recipe_writer)as memberNickname
 		from recipe_board rb,recipe_like rl where rb.recipe_no=rl.recipe_no and
 		rl.member_no=111 order by recipe_date desc)r)
 
@@ -549,7 +548,7 @@
 		select Count(*) from dm where dm_receiver='승민전문가' and dm_read_flag=0
 	</select>
 	
-		<select id="pointList" resultType="mp" parameterType="map">
+		<select id="selectPointList" resultType="mp" parameterType="map">
 	 select *
 		from
 		(select rownum as rnum,
@@ -560,6 +559,7 @@
 		member_no as memberNo,
 		point_level as pointLevel,
 		point_amount as pointAmount,
+		point_content as pointContent,
 		point_date as pointDate
 		from point where
 		
@@ -666,5 +666,60 @@
 		from member where
 		member_id=#{memberId}
 	</select>
+	
+	<update id="updateOrder" parameterType="ms">
+		
+	
+		update  order_option set order_status=#{orderStatus} 
+		where order_option_no=#{orderOptionNo}
+	</update>
+	
+	<insert id="raisePoint" parameterType="ms">
+	insert into point  values (POINT_SEQ.nextval,#{memberNo} ,1, ((#{milkitPrice}*#{orderOptionAmount})*0.02) ,sysdate,'배송완료 적립')
+	</insert>
+	
+			<select id="sellerList1" resultType="ms" parameterType="map">
+          select *
+		from
+		(select rownum as rnum,
+		s.*
+		from
+		( select a.ORDER_OPTION_NO as orderOptionNo,
+		a.ORDER_NO as orderNo,
+		a.PRODUCT_NO as productNo,
+		a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+		b.MEMBER_NO as memberNo,
+		b.ORDER_NAME as orderName,
+		b.ORDER_EMAIL as orderEmail,
+		b.ORDER_PHONE as orderPhone,
+		b.ORDER_POSTCODE as orderPostcode,
+		b.ORDER_ADDR_ROAD as orderAddrRoad,
+		b.ORDER_ADDR_DETAIL as orderAddrDetail,
+		b.ORDER_REQUEST as orderRequest,
+		b.ORDER_PAY_OPTION as orderPayOption,
+		b.ORDER_PRICE as orderPrice,
+		b.ORDER_SALE as orderSale,
+		b.ORDER_PAYMENT as orderPayment,
+		b.IMP_UID as impUid,
+		a.ORDER_STATUS as orderStatus,
+		c.milkit_writer as milkitWriter,
+		c.recipe_no as recipeNo,
+		c.milkit_name as milkitName,
+        c.milkit_price as milkitPrice
+		from order_option a,order_tbl b,product c where
+		
+		 a.order_no =b.order_no and a.product_no=c.product_no and
+		c.milkit_writer=103 order by a.order_no desc)s)
+		where rnum between #{start} and #{end}
+
+	</select>
+		<select id="SellCount" resultType="_int">
+	 select count(*) from order_option a,product b where a.product_no=b.product_no and b.milkit_writer=103
+	</select>
+	
+	<update id="updatePoint" parameterType="ms">
+	update member set member_point= member_point+ ((#{milkitPrice}*#{orderOptionAmount})*0.02) where member_No=#{memberNo}
+	
+	</update>
 </mapper>
 
