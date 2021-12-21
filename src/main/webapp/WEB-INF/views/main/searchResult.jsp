@@ -170,6 +170,7 @@
 	      		</div>
 	      		<hr style="margin-bottom: 80px;">
 	      	</div>
+	  </div>
   </main><!-- End #main -->
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script>
