@@ -2,6 +2,7 @@ package kr.or.recipe.model.vo;
 
 import java.util.ArrayList;
 
+import kr.or.milkit.model.vo.Product;
 import lombok.Data;
 
 @Data
@@ -26,4 +27,5 @@ public class RecipeBoard {
 	private int likeCheck;
 	private int reportCheck;
 	private int likeCnt;
+	private ArrayList<Product>pList;
 }

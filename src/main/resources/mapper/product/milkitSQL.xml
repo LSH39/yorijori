@@ -112,8 +112,9 @@
   		recipe_no as recipeNo,
   		recipe_title as recipeTitle,
   		filepath,
-  		subhead
-  	from recipe_board where recipe_no=#{recipeNo}	
+  		subhead,
+  		recipe_delete as recipeDelete
+  	from recipe_board where recipe_no=#{recipeNo} and recipe_delete=1
   </select>
  
 </mapper>

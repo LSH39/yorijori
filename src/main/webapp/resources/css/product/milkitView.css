@@ -16,6 +16,7 @@
 
 #titleImg>img {
 	width: 450px;
+	max-height: 400px;
 }
 
 #title>div {
