@@ -66,6 +66,12 @@ public class ProfileDao {
 		List<RecipeBoard> list = sqlSession.selectList("recipe.selectAllList", memberNo);
 		return (ArrayList<RecipeBoard>) list;
 	}
+
+	public ArrayList<RecipeBoard> selectAllAjaxList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<RecipeBoard> list1 = sqlSession.selectList("recipe.selectAllAjaxList", map);
+		return (ArrayList<RecipeBoard>) list1;
+	}
 	
 
 	
