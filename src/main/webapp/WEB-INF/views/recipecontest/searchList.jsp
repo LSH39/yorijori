@@ -23,7 +23,7 @@
 	      		<span class="thisyr"></span>.
 	      		<span class="thismonth"></span>.01 ~ 
 	      		<span class="thisyr"></span>.
-	      		<span class="thismonth"></span>.15 자정까지(23:59)
+	      		<span class="thismonth"></span>.20 자정까지(23:59)
 	      		</h5>
 	      	</div>
 	      	<div class="contest-info">
@@ -32,8 +32,7 @@
 	      		</a>
 	      	</div>
 	    </div>
-      <div class="container">
-	      	
+      <div class="container">	
 			<div class="board-content">
 	      		<div class="contest-outline">
 	      			<c:choose>
@@ -69,20 +68,27 @@
 	      					<a href="#">
 	      						<div class="recipe-profile">
 	      							<div class="profile-pic">
-	      								<img src="#">
+	      								<img src="resources/upload/member_profile/${r.profilePath }">
 	      								<h5>${r.memberNickname }</h5>
 	      							</div>
 	      					</a>
 	      							<div class="vote-count">
-	      								<span>${r.voteCount }</span>
 	      								<c:choose>
 	      									<c:when test="${not empty sessionScope.m }">
 	      										<div class="vote">
+	      											<span>${r.voteCount }</span>
 	      											<input type="hidden" class="contestNo" value="${r.contestNo }">
 	      											<img src="resources/img/recipecontest/vote-before.png" id="vote">
 	      											<label for="vote">투표하기</label>
 	      										</div>	
 	      									</c:when>
+	      									<c:otherwise>
+	      										<div class="vote">
+	      											<span>${r.voteCount }</span>
+	      											<input type="hidden" class="contestNo" value="${r.contestNo }">
+	      											<img src="resources/img/recipecontest/vote-before.png" id="vote">
+	      										</div>	
+	      									</c:otherwise>
 	      								</c:choose>
 	      							</div>
 	      						</div>
@@ -161,10 +167,13 @@
   		
   		//투표 or 투표 취소
   		$(".vote").on("click", function(){
-  			var voteRecipe_ans = confirm("투표하시겠습니까?");
   			var memberNo = $(".memberNo").val();
   			var contestNo = $(this).children(".contestNo").val();
-  			console.log(contestNo);
+  			if(memberNo == null){
+  				alert("로그인시 투표가 가능합니다.");
+  				return false;
+  			}
+  			var voteRecipe_ans = confirm("투표하시겠습니까?");
   			if(voteRecipe_ans == true){
   				if (voted == false){
   					location.href="/insertVote.do?contestNo="+contestNo+"&memberNo="+memberNo;
