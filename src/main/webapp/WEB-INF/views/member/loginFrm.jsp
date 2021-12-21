@@ -8,6 +8,7 @@
 <title>Login</title>
 <link href="/resources/css/member/LoginCommon.css" rel="stylesheet">
 <link href="/resources/css/member/Login.css" rel="stylesheet">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 	<%@include file = "/WEB-INF/views/common/header.jsp" %>
@@ -22,7 +23,7 @@
                     <input type="submit" value="로그인" class="purple_btn">    
                 </form>
                 <p>또는</p>
-                <button type="button" class="kakao_btn" onclick="location.href='/'">KAKAO 로그인</button>
+                <button type="button" class="kakao_btn">KAKAO 로그인</button>
                 <div class="joinSearch">
                     <div onclick="location.href='/joinCommon.do'">
                         <img src="/resources/img/login/Login_JoinG.png">
@@ -44,6 +45,45 @@
 	
         </div>
     </div>
+    
+    <script>
+	 	// key
+		Kakao.init('e7a47deb2cb2e373f86a6aa99bf4fb5a');
+	    
+	    $(".kakao_btn").click(function(){
+			Kakao.Auth.login({
+			    success: function (response) {
+			      	Kakao.API.request({
+			        	url: '/v2/user/me',
+			        	success: function (data) {
+			        		var id = data.id;
+			        		$.ajax({
+			                    type: "post",
+			                    url: "/joinSearch.do",
+			                    data: {memberId:id},
+			                    success: function (data) {
+			                        if(data != 0){
+			                        	var memberNo = data;
+			                        	location.href="/loginKakao.do?memberNo="+memberNo;
+			                        }else{
+			                        	alert("가입된 정보가 없습니다.");
+			                        	location.href="/joinCommon.do";
+			                        }
+			                    }
+			                });
+			        	},
+			        	fail: function (error) {
+			          	console.log(error);
+			        	},
+			      	})
+			    },
+			    fail: function (error) {
+			      	console.log(error);
+			  	},
+			})	
+	    });
+    </script>
+    
     <%@include file = "/WEB-INF/views/common/footer.jsp" %>
 
 </body>
