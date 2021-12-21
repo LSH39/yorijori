@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.dm.model.dao.DmDao;
 import kr.or.dm.model.vo.Dm;
@@ -22,6 +23,7 @@ public class DmService {
 		map.put("dmSender", dmSender);
 		map.put("memberLevel", memberLevel);
 		ArrayList<Dm> list = dao.selectAllDm(map);
+
 		return list;
 	}
 
@@ -80,7 +82,7 @@ public class DmService {
 		return receiver;
 	}
 	
-	//dm방 번호 찾기
+	//DM 문의방 번호 있는지 찾기
 	public int selectOneDmRoomNo(int classNo, String dmSender) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -96,18 +98,40 @@ public class DmService {
 		return dmRoomNo;
 	}
 
-	//dm작성할때 보내는 사람이 클래스 개설한 사람인지 확인
+	//DM작성할때 보내는 사람이 클래스 개설한 사람인지 확인
 	public String selectOneNickname(int classNo) {
 		// TODO Auto-generated method stub
 		String ClassNoNickname = dao.selectOneNickname(classNo);
 		return ClassNoNickname;
 	}
 
-	//문의 목록에서 조회
+	//문의 방 번호 기준 문의 목록에서 조회
 	public ArrayList<Dm> selectOneDm(int dmRoomNo) {
 		// TODO Auto-generated method stub
 		ArrayList<Dm> list = dao.selectOneDm(dmRoomNo);
 		dao.updateReadflag(dmRoomNo);
 		return list;
 	}
+
+	//클래스 뷰에서 작성하는거
+	@Transactional
+	public int insertDm(int classNo, String dmReceiver, String dmSender, String dmContent, int dmRoomNo) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("classNo", classNo);
+		map.put("dmReceiver", dmReceiver);
+		map.put("dmSender", dmSender);
+		map.put("dmContent", dmContent);
+		map.put("dmRoomNo", dmRoomNo);
+		int result = dao.insertDm(map);
+		return result;
+	}
+
+	//클래스 뷰에서 ajax로 조회 하는거
+	public ArrayList<Dm> selectOneDmList(int dmRoomNo) {
+		// TODO Auto-generated method stub
+		ArrayList<Dm> list = dao.selectOneDmList(dmRoomNo);		
+		return list;
+	}
+
 }

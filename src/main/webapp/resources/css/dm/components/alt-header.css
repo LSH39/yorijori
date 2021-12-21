@@ -14,6 +14,25 @@
   padding-bottom: 15px;
 }
 
+/*이게 ajax*/
+.alt-header-ajax {
+  display: flex;
+  align-items: center;
+  padding: var(--horizontal-space);
+  margin-bottom: 15px;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  top: 20.38px;
+  z-index: 999;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.alt-header-ajax a{
+	color: #444 !important;
+}
+
 .alt-header__column {
   display: flex;
   width: 33%;
