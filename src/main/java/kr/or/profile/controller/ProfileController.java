@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import kr.or.member.model.vo.Member;
 import kr.or.mypage.model.vo.Follow;
 import kr.or.profile.model.service.ProfileService;
@@ -48,8 +50,16 @@ public class ProfileController {
 		return "mypage/profile";
 	}
 	
+	//AJAX로 게시물 추가로딩
+	@ResponseBody
+	@RequestMapping(value="/morePhoto.do", produces = "application/json;charset=utf-8")
+	public String morePhoto(int start, int memberNo, String memberId) {
+		ArrayList<RecipeBoard> list = service.selectAllAjaxList(memberNo, start);
+		return new Gson().toJson(list); //리스트 리턴할때 이거로 했음
+
+	}
 	
-	//Ajax 사용해서 팔로우
+	//AJAX로 사용해서 팔로우
 	@ResponseBody
 	@RequestMapping(value="/profileFollow.do")
 	public int ProfileFollow(int memberNo, int myMemberNo) {

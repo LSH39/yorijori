@@ -134,36 +134,36 @@
  		from recipe_board 
  		where recipe_writer=#{recipeWriter}
  	</select>
- 	
- 	<!-- 성승민 프로필 연동 레시피 게시물 리스트 -->
- 	<!-- 
+ 	 
+ 	<!-- 성승민 프로필 연동 레시피 게시물 + 좋아유 수 리스트 2021.12.21 --> 
  	<select id="selectAllList" parameterType="_int" resultType="rb">
- 		select 
- 		 	recipe_no as recipeNo, 
- 		 	recipe_writer as recipeWriter,
- 			recipe_title as recipeTitle, 
- 			filepath,
- 			read_count as readCount,
- 			recipe_date as recipeDate
- 		from recipe_board
- 		where recipe_writer=#{memberNo}
- 		order by recipe_no desc
+	 	select * 
+	 	from
+			(select rownum as rnum, rb.*
+				from(
+				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt
+					from recipe_board 
+					left outer join recipe_like
+					using(recipe_no) 
+					where recipe_writer in #{memberNo}
+					group by recipe_no, recipe_writer, filepath, read_count, recipe_video
+				order by recipe_no desc) rb )) 
+		where rnum between 1 and 15
  	</select>
- 	 -->
  	
- 	<!-- 성승민 프로필 연동 레시피 게시물 + 좋아유 수 리스트 --> 
- 	<select id="selectAllList" parameterType="_int" resultType="rb">
- 		select 
- 			recipe_no as recipeNo, 
- 			recipe_writer as recipeWriter, 
- 			filepath, 
- 			read_count as readCount, 
- 			count(member_no) likeCnt
-		from recipe_board 
-		left outer join recipe_like
-		using(recipe_no) 
-		where recipe_writer in #{member_No}
-		group by recipe_no, recipe_writer, filepath, read_count
-		order by recipe_no desc
+ 	<!-- 성승민 프로필 레시피 더보기 로딩 2021.12.21-->
+ 	<select id="selectAllAjaxList" parameterType="map" resultType="rb">
+	 	select * 
+	 	from
+			(select rownum as rnum, rb.*
+				from(
+				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt
+					from recipe_board 
+					left outer join recipe_like
+					using(recipe_no) 
+					where recipe_writer in #{memberNo}
+					group by recipe_no, recipe_writer, filepath, read_count, recipe_video
+				order by recipe_no desc) rb )) 
+		where rnum between #{start} and #{end}
  	</select>
 </mapper>
