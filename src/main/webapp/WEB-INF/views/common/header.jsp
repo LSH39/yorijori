@@ -290,6 +290,15 @@
   		}
   		
   	}
+	//검색어 글자 길이 제한 (2글자 이상)
+	$(".main-search-icon").on("click", function(){
+		var keyword = $("#header-mainsearch").val();
+		if(keyword.length < 2){
+			alert("두 글자 이상 입력해주세요.");
+			return false;
+		}
+	})
+	
   	//방문자수 기록용 쿠키 스크립트
   	function setCookie(cname,cvalue,exdays){
   	    var d = new Date();

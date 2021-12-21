@@ -64,4 +64,40 @@
 		where milkit_name like '%' || #{keyword} || '%'
 		order by product_no desc
 	</select>
+	<select id="selectProductList2" resultType="product">
+		select
+			product_no as productNo,
+			milkit_name as milkitName,
+			milkit_price as milkitPrice,
+			milkit_comment as milkitComment,
+			filepath
+		from product
+		order by product_no desc
+	</select>
+	<select id="selectYoriList" resultType="m">
+		  select
+			member_no as memberNo,
+			member_id as memberId,
+			member_level as memberLevel,
+			member_nickname as memberNickname,
+			profile_path as profilePath,
+			profile_intro as profileIntro,
+			(select count(*) from follow f where f.member_no=m.member_no) as followerCount
+		from member m
+		where member_level = 1
+		and member_black = 0
+	</select>
+	<select id="selectJoriList" resultType="m">
+		select
+			member_no as memberNo,
+			member_id as memberId,
+			member_level as memberLevel,
+			member_nickname as memberNickname,
+			profile_path as profilePath,
+			profile_intro as profileIntro,
+			(select count(*) from follow f where f.member_no=m.member_no) as followerCount
+		from member m
+		where member_level = 2
+		and member_black = 0
+	</select>
 </mapper>

@@ -18,6 +18,9 @@ public class MainController {
 	@RequestMapping(value="/mainpage.do")
 	public String mainpage(Model model) {
 		MainViewData mvd = service.getMainViewData();
+		model.addAttribute("productList", mvd.getProductList());
+		model.addAttribute("yoriList", mvd.getYoriList());
+		model.addAttribute("joriList", mvd.getJoriList());
 		return "common/main";
 	}
 	

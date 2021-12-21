@@ -161,3 +161,9 @@ a:hover{
 .main-newproducts .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #8E44AD;
 }
+.main-newproducts h6{
+	color: #5A5A5A;
+}
+.main-product-price{
+	color: #A51200;
+}

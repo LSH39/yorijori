@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -178,22 +180,17 @@
 	  </div>
 	  <div class="clients-slider swiper">
           <div class="swiper-wrapper align-items-center">
+            <c:forEach items="${productList }" var="p" begin="1" end="8">
             <div class="swiper-slide">
-            	<a href="#">
-            		<img src="resources/img/mainpage/pancake-re.jpg" class="img-fluid" alt="">
-            		<h5>상품명</h5>
-            		<h6>가격 : 
-            			<span></span>원
+            	<a href="/milkitView.do?productNo=${p.productNo }">
+            		<img src="resources/upload/product/${p.filepath }" class="img-fluid" alt="">
+            		<h5>${p.milkitName }</h5>
+            		<h6> 
+            			<span class="main-product-price"><fmt:formatNumber value="${p.milkitPrice}" pattern="#,###"/></span>원
             		</h6>
             	</a>
             </div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-8.png" class="img-fluid" alt=""></div>
+            </c:forEach>
           </div>
           <div class="swiper-pagination"></div>
         </div>

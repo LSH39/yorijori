@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class MainViewData {
-	private ArrayList<Product> productList;
-	private ArrayList<Member> yoriList;
-	private ArrayList<Member> joriList;
+	private ArrayList<Product> productList; //신상품
+	private ArrayList<Member> yoriList; //요리꾼
+	private ArrayList<Member> joriList; //조리꾼
 }

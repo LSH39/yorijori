@@ -42,4 +42,19 @@ public class MainDao {
 		List<Product> list = sqlSession.selectList("main.selectProductList", keyword);
 		return (ArrayList<Product>) list;
 	}
+
+	public ArrayList<Product> selectProductList() {
+		List<Product> list = sqlSession.selectList("main.selectProductList2");
+		return (ArrayList<Product>) list;
+	}
+
+	public ArrayList<Member> selectYoriList() {
+		List<Member> list = sqlSession.selectList("main.selectYoriList");
+		return (ArrayList<Member>) list;
+	}
+
+	public ArrayList<Member> selectJoriList() {
+		List<Member> list = sqlSession.selectList("main.selectJoriList");
+		return (ArrayList<Member>) list;
+	}
 }

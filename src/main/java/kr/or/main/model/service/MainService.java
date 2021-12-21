@@ -38,8 +38,14 @@ public class MainService {
 	}
 
 	public MainViewData getMainViewData() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Product> productList = dao.selectProductList();
+		ArrayList<Member> yoriList = dao.selectYoriList();
+		ArrayList<Member> joriList = dao.selectJoriList();
+		MainViewData mvd = new MainViewData();
+		mvd.setProductList(productList);
+		mvd.setYoriList(yoriList);
+		mvd.setJoriList(joriList);
+		return mvd;
 	}
 
 	
