@@ -1,14 +1,19 @@
 package kr.or.main.controller;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.main.model.service.MainService;
+import kr.or.main.model.vo.FollowingData;
 import kr.or.main.model.vo.MainSearchResult;
 import kr.or.main.model.vo.MainViewData;
+import kr.or.member.model.vo.Member;
 @Controller
 public class MainController {
 	
@@ -21,6 +26,7 @@ public class MainController {
 		model.addAttribute("productList", mvd.getProductList());
 		model.addAttribute("yoriList", mvd.getYoriList());
 		model.addAttribute("joriList", mvd.getJoriList());
+		model.addAttribute("classList", mvd.getClassList());
 		return "common/main";
 	}
 	
@@ -35,4 +41,26 @@ public class MainController {
 		model.addAttribute("keyword", keyword);
 		return "main/searchResult";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/followCheck.do")
+	public ArrayList<FollowingData> followCheck(Model model, int memberNo){
+		ArrayList<FollowingData> list = service.selectFollowingList(memberNo);
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/followMem.do")
+	public int insertFollow(Model model, int memberNo, int followNo){
+		int followerCount = service.insertFollow(memberNo, followNo);
+		return followerCount;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/delFollow.do")
+	public int deleteFollow(Model model, int memberNo, int followNo){
+		int followerCount = service.deleteFollow(memberNo, followNo);
+		return followerCount;
+	}
+	
 }

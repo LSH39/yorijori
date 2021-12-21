@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>요리조리 - 메인</title>
+<link rel="stylesheet" href="resources/css/mainpage/common.css">
 </head>
 <body>
 
@@ -38,7 +39,7 @@
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', serif; font-weight: 700; font-size: 40px;"><span style="color:rgb(192, 57, 43); margin-bottom: 0px;">2021</span>년 <span style="color:rgb(192, 57, 43); margin-bottom: 0px;">12</span>월의 기적</h2>
               <h3 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #fff; margin-top: 5px;">요리조리의 크리스마스는 경연대회로 현재진행중!</h3>
-              <h3 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #fff; margin-top: 5px; margin-bottom: 10px;">최대 <span style="color:rgb(192, 57, 43);">20</span>만 포인트 + <span style="color:rgb(192, 57, 43);">밀키트</span> 상품 제작</h3>
+              <h3 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #000; margin-top: 5px; margin-bottom: 10px;">최대 <span style="color:rgb(192, 57, 43);">20</span>만 포인트 <span style="color:rgb(192, 57, 43);">+</span> <span style="color:rgb(192, 57, 43);">밀키트</span> 상품 제작</h3>
               <a href="/siteInfo.do" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
             </div>
           </div>
@@ -122,7 +123,7 @@
 	            <div class="main-banner-pic">
 	            	<div>
 	              		<h4>튀김요리 베스트</h4>
-	              		<p>바삭바삭한 튀김 요리는 정말 못 참지!</p>
+	              		<p>바삭바삭한 튀김 요리는 못 참지!</p>
 	            	</div>
 	            </div>
 	         </a>
@@ -197,22 +198,222 @@
    </div>
   </section><!-- 밀키트 신상품 Section 끝 -->
   
-     <!-- ======= Cta Section ======= -->
+     <!-- ======= 광고 Section ======= -->
     <section id="cta" class="cta">
       <div class="container">
-
         <div class="row">
-          <div class="col-lg-9 text-center text-lg-start">
-            <h3>Call To Action</h3>
-            <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="col-lg-10">
+            <img src="resources/img/mainpage/ad-banner-re.gif" style="height:550px;">
           </div>
-          <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#">Call To Action</a>
+        </div>
+      </div>
+    </section><!-- End 광고 Section -->
+    
+    <!-- ======= 회원목록 Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container">
+      <input type="hidden" id="loginMemberNo" value="${sessionScope.m.memberNo }">
+      <input type="hidden" id="loginMemberId" value="${sessionScope.m.memberId }">
+
+        <div class="section-title">
+          <h2>지금 뜨는 회원</h2>
+          <div>
+          	<button class="btn-main mainmemberlist">요리꾼</button><button class="btn-main mainmemberlist">조리꾼</button>
+          </div>
+        </div>
+		
+		<!-- 요리꾼 목록 -->
+        <div class="row main-memberList"> 
+          <c:forEach items="${yoriList }" var="y" begin="1" end="4">
+          	<div class="col-lg-3 col-md-5 d-flex align-items-stretch">
+          		<div class="member">
+          			<img src="resources/upload/member_profile/${y.profilePath }" alt="">
+          			<h4 class="memberNick">${y.memberNickname }</h4>
+          			<input type="hidden" class="memberNo" value="${y.memberNo }">
+          			<span></span>
+          			<p>
+          			 <c:choose>
+          			 	<c:when test="${y.profileIntro eq null }">
+          			 		안녕하세요.
+          			 	</c:when>
+          			 	<c:otherwise>
+          			 		${y.profileIntro }
+          			 	</c:otherwise>
+          			 </c:choose>
+          			</p>
+          			<c:choose>
+						<c:when test="${y.memberNo eq sessionScope.m.memberNo && sessionScope.m.memberNo ne null }">
+							<div class="social main-myself">
+		          				<span class="main-follower-count" style="color:#BE44AD;font-weight:bolder;">${y.followerCount }</span>
+		          				<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<lord-icon
+								    src="https://cdn.lordicon.com/jpdtnwas.json"
+								    trigger="click"
+								    colors="primary:#121331,secondary:#e86830"
+								    style="width:50px;height:50px">
+								</lord-icon>
+		          			</div>
+						</c:when>
+						<c:when test="${y.memberNo ne sessionScope.m.memberNo || sessionScope.m.memberNo eq null }">
+							<div class="social main-follow">
+		          				<span class="main-follower-count" style="color:#BE44AD;font-weight:bolder;">${y.followerCount }</span>
+		          				<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<lord-icon
+								    src="https://cdn.lordicon.com/jpdtnwas.json"
+								    trigger="click"
+								    colors="primary:#121331,secondary:#e86830"
+								    style="width:50px;height:50px">
+								</lord-icon>
+								<span class="main-follow-stat">팔로우</span>
+		          			</div>
+						</c:when>
+					</c:choose>
+          		</div>
+          	  </div>
+          	</c:forEach>
+      </div>
+      
+      <!-- 조리꾼 목록 -->
+      <div class="row main-memberList">
+          <c:forEach items="${joriList }" var="j" begin="1" end="4">
+          	<div class="col-lg-3 col-md-5 d-flex align-items-stretch">
+          		<div class="member">
+          			<img src="resources/upload/member_profile/${j.profilePath }" alt="">
+          			<h4 class="memberNick">${j.memberNickname }</h4>
+          			<input type="hidden" class="memberNo" value="${j.memberNo }">
+          			<span></span>
+          			<p>
+          			 <c:choose>
+          			 	<c:when test="${j.profileIntro eq null }">
+          			 		안녕하세요.
+          			 	</c:when>
+          			 	<c:otherwise>
+          			 		${j.profileIntro }
+          			 	</c:otherwise>
+          			 </c:choose>
+          			</p>
+          			<c:choose>
+						<c:when test="${j.memberNo eq sessionScope.m.memberNo && sessionScope.m.memberNo ne null}">
+							<div class="social main-myself">
+		          				<span class="main-follower-count" style="color:#BE44AD;font-weight:bolder;">${j.followerCount }</span>
+		          				<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<lord-icon
+								    src="https://cdn.lordicon.com/jpdtnwas.json"
+								    trigger="click"
+								    colors="primary:#121331,secondary:#e86830"
+								    style="width:50px;height:50px">
+								</lord-icon>
+		          			</div>
+						</c:when>
+						<c:when test="${j.memberNo ne sessionScope.m.memberNo || sessionScope.m.memberNo eq null }">
+							<div class="social main-follow">
+		          				<span class="main-follower-count" style="color:#BE44AD;font-weight:bolder;">${j.followerCount }</span>
+		          				<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+								<lord-icon
+								    src="https://cdn.lordicon.com/jpdtnwas.json"
+								    trigger="click"
+								    colors="primary:#121331,secondary:#e86830"
+								    style="width:50px;height:50px">
+								</lord-icon>
+								<span class="main-follow-stat">팔로우</span>
+		          			</div>
+						</c:when>
+					</c:choose>
+          		</div>
+          	  </div>
+          	</c:forEach>
+      </div>
+      
+    </section><!-- End Team Section -->
+    
+    <!-- ======= 요리클래스 Section ======= -->
+  <section id="main-newclasses" class="main-newclasses">
+  <div class="container">
+	  <div class="section-title">
+	          <h2>
+	          	모집중인 클래스
+	          	<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+				<lord-icon
+				    src="https://cdn.lordicon.com/ajyyzcwv.json"
+				    trigger="loop"
+				    colors="primary:#121331,secondary:#e5d1fa"
+				    style="width:50px;height:50px">
+				</lord-icon>
+	          </h2>
+	          <p>걱정마세요. 이젠 원격으로도 가능해요.</p>
+	  </div>
+	  <div class="classes-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <c:forEach items="${classList }" var="c" begin="1" end="8">
+            <div class="swiper-slide">
+            	<a href="/cookingClsView.do?classNo=${c.classNo }">
+            		<img src="resources/img/mainpage/cooking-cls.jpg" class="img-fluid" alt="">
+            		<h5>${c.classTitle }</h5>
+            		<h6>평점 <span class="main-classrate"><i class="bi bi-star-fill"></i>${c.classRate }</span></h6>
+            		<h6><span>수강인원: ${c.classNop }</span></h6>
+            		<h6 class="classLocation1">
+            		<c:choose>
+            			<c:when test="${c.classLocation1 eq null }">
+            				<span>원격</span> <i class="bi bi-laptop"></i>
+            			</c:when>
+            			<c:otherwise>
+            				<span>${c.classLocation1 }</span>	
+            			</c:otherwise>
+            		</c:choose>
+            		</h6>
+            	</a>
+            </div>
+            </c:forEach>
+          </div>
+          <div class="swiper-button-next"></div>
+      	  <div class="swiper-button-prev"></div>
+      	  <div class="swiper-pagination"></div>
+        </div>
+   </div>
+  </section><!-- 요리클래스 Section 끝 -->
+  
+  <!-- ======= 왜 요리조리 섹션 ======= -->
+    
+    <section id="featured-services" class="featured-services section-bg">
+      <div class="container">
+		 <div class="section-title">
+	          <h2>
+	          	밀키트 구독권
+	          	<i class="bi bi-egg-fried"></i>
+	          </h2>
+	          <p>요리조리의 밀키트 구독권 서비스를 선택해야 하는 이유!</p>
+	     </div>
+        <div class="row no-gutters">
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-laptop"></i></div>
+              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-briefcase"></i></div>
+              <h4 class="title"><a href="">Dolor Sitema</a></h4>
+              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
+              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur trade stravi</p>
+            </div>
           </div>
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section><!-- End Featured Services Section -->
+  
   
   <!-- ======= why-us Section ======= -->
     <section id="why-us" class="why-us">
@@ -260,37 +461,7 @@
       </div>
     </section><!-- End Why Us Section -->
 
-    <!-- ======= featured-services ======= -->
     
-    <section id="featured-services" class="featured-services section-bg">
-      <div class="container">
-
-        <div class="row no-gutters">
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-laptop"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-briefcase"></i></div>
-              <h4 class="title"><a href="">Dolor Sitema</a></h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur trade stravi</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Featured Services Section -->
 
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
@@ -326,35 +497,6 @@
 
       </div>
     </section><!-- End About Us Section -->
-
-    
-
-    <!-- ======= Our Clients Section ======= -->
-    <section id="clients" class="clients">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Our Clients</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="clients-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="resources/img/mainpage/clients/client-8.png" class="img-fluid" alt=""></div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Our Clients Section -->
-
     
 
  
@@ -512,71 +654,7 @@
       </div>
     </section><!-- End Portfolio Section -->
 
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <img src="resources/img/mainpage/team/team-1.jpg" alt="">
-              <h4>Walter White</h4>
-              <span>Chief Executive Officer</span>
-              <p>
-                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <img src="resources/img/mainpage/team/team-2.jpg" alt="">
-              <h4>Sarah Jhinson</h4>
-              <span>Product Manager</span>
-              <p>
-                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member">
-              <img src="resources/img/mainpage/team/team-3.jpg" alt="">
-              <h4>William Anderson</h4>
-              <span>CTO</span>
-              <p>
-                Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
-              </p>
-              <div class="social">
-                <a href=""><i class="bi bi-twitter"></i></a>
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <a href=""><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Team Section -->
+    
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -652,14 +730,92 @@
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
   <script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
+  	  $(function(){
+  		  var memberbtn = $(".mainmemberlist");
+  		  memberbtn.eq(0).addClass("active-btn");
+  		  $(".main-memberList").eq(1).hide();
+  		  
+  		  memberbtn.on("click", function(){
+  			 var index = $(this).index();
+  			 memberbtn.removeClass("active-btn");
+  			 $(this).addClass("active-btn");
+  			 $(".main-memberList").hide();
+  			 $(".main-memberList").eq(index).show();
+  		  });
+  		  
+  		  $(".cta").find("img").on("mouseover", function(){
+  			  $(this).attr("src", "resources/img/mainpage/ad-banner-static.png");
+  		  });
+  		  
+  		  
+  		  //팔로우 여부 확인
+    		var memberNo = $("#loginMemberNo").val();
+    		if(memberNo != null){
+    	 		$.ajax({
+	  				url: "/followCheck.do",
+	  				type: "get",
+	  				data: {memberNo:memberNo},
+	  				success: function(data){
+	  					if(data.length>0){
+	  						var list = data;
+	  						for(var i=0;i<list.length; i++){
+	  							var label = $('.memberNick:contains('+list[i].followingNick+')').parent().children('.main-follow').children('.main-follow-stat');
+	  							label.html("팔로우중");
+	  							label.css("color", "#8E44AD").css("font-weight", "bolder");
+	  						}
+	  						
+	  					}
+	  				}
+  		
+    			});
+    		}
+  		  
+  		  //팔로우하기 / 언팔로우하기
+  		  $(".main-follow").on("click", function(){
+  			var memberId = $("#loginMemberId").val();
+  			var memberNo = $("#loginMemberNo").val();
+  			var followCheck = $(this).children(".main-follow-stat");
+  			var followNo = $(this).parent().children(".memberNo").val();
+  			var followerCount = $(this).children(".main-follower-count");
+  			if(memberId != "" && followCheck.html() == "팔로우"){
+  				$.ajax({
+  					url: "/followMem.do",
+  					type: "get",
+  					data: {memberNo:memberNo, followNo:followNo},
+  					success: function(data){
+  						var count = data;
+  						followerCount.html(count);
+  						followCheck.html("팔로우중");
+  						followCheck.css("color", "#8E44AD").css("font-weight", "bolder");
+  					}
+  				});
+  			} else if (memberId != "" && followCheck.html() == "팔로우중"){
+  				var unfollow_ans = confirm("팔로우를 취소하시겠습니까?");
+  				if(unfollow_ans == true){
+  					$.ajax({
+  	  					url: "/delFollow.do",
+  	  					type: "get",
+  	  					data: {memberNo:memberNo, followNo:followNo},
+  	  					success: function(data){
+  	  						var count = data;
+  	  						followerCount.html(count);
+  	  						followCheck.html("팔로우");
+  							followCheck.css("color", "#000").css("font-weight", "lighter");
+  	  					}
+  	  				});
+  				} else {
+  					return false;
+  				}
+  			} else if (memberId == ""){
+  				alert("로그인시 이용 가능합니다.");
+  				return false;
+  			}
+  			
+  		  });
+  		  
+  		  
+  		  
+  	  });
     </script>
 </body>
 </html>

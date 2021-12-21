@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.main.model.dao.MainDao;
+import kr.or.main.model.vo.FollowingData;
 import kr.or.main.model.vo.MainSearchResult;
 import kr.or.main.model.vo.MainViewData;
 import kr.or.member.model.vo.Member;
@@ -41,12 +42,42 @@ public class MainService {
 		ArrayList<Product> productList = dao.selectProductList();
 		ArrayList<Member> yoriList = dao.selectYoriList();
 		ArrayList<Member> joriList = dao.selectJoriList();
+		ArrayList<CookingCls> classList = dao.selectClassList();
 		MainViewData mvd = new MainViewData();
 		mvd.setProductList(productList);
 		mvd.setYoriList(yoriList);
 		mvd.setJoriList(joriList);
+		mvd.setClassList(classList);
 		return mvd;
 	}
 
+	public ArrayList<FollowingData> selectFollowingList(int memberNo) {
+		ArrayList<FollowingData> list = dao.selectFollowingList(memberNo);
+		return list;
+	}
+
+	public int insertFollow(int memberNo, int followNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("followNo", followNo);
+		int result = dao.insertFollow(map);
+		int followerCount = -1;
+		if(result>0) {
+			followerCount = dao.selectFollowerCount(followNo);
+		}
+		return followerCount;
+	}
+
+	public int deleteFollow(int memberNo, int followNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("followNo", followNo);
+		int result = dao.deleteFollow(map);
+		int followerCount = -1;
+		if(result>0) {
+			followerCount = dao.selectFollowerCount(followNo);
+		}
+		return followerCount;
+	}
 	
 }

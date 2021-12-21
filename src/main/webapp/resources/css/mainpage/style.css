@@ -223,7 +223,7 @@ label[for="searchsubmit"]:hover{
 .quickmenu {
 	position:absolute;
 	width:100px;
-	top:50%;
+	top:35%;
 	right: 40px;
 	background:#fff;
 	margin: 0;
@@ -549,7 +549,7 @@ section {
 }
 
 .section-bg {
-  background-color: #f8fcf9;
+  background-color: rgb(250, 250, 250);
 }
 
 .section-title {
@@ -590,10 +590,10 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Featured Services
+# 밀키트 구독권 선택해야 하는 이유
 --------------------------------------------------------------*/
 .featured-services {
-  padding: 20px 0;
+  padding: 80px 0;
 }
 .featured-services .main-banner-pic {
   padding: 20px;
@@ -743,16 +743,9 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: #8E44AD;
-  padding: 80px 0;
-}
-.cta h3 {
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
-}
-.cta p {
-  color: #fff;
+  background: #BAA4CA;
+  padding: 0;
+  z-index: -1;
 }
 .cta .cta-btn {
   font-family: "TmoneyRoundWind", sans-serif;
@@ -784,6 +777,77 @@ section {
     justify-content: flex-end;
   }
 }
+
+/*--------------------------------------------------------------
+# 요리꾼 조리꾼 섹션
+--------------------------------------------------------------*/
+
+.team .section-title{
+	display: flex;
+}
+.team .section-title>div{
+	margin-left: auto;
+}
+.team .section-title button{
+	margin-right: 15px;
+}
+.team .section-title h2::before {
+	margin-left: 80px;
+}
+.team .section-title h2::after {
+	margin-left: 80px;
+}
+.active-btn{
+	background: rgb(246, 240, 255);
+	color: #8E44AD;
+}
+.team .member {
+  text-align: center;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 12px 0px rgba(34, 34, 34, 0.07);
+  padding: 25px 15px;
+  background: #fff;
+}
+.team .member img {
+  max-width: 60%;
+  border-radius: 50%;
+  margin: 0 0 30px 0;
+}
+.team .member h4 {
+  font-weight: 700;
+  margin-bottom: 2px;
+  font-size: 20px;
+}
+.team .member span {
+  font-style: italic;
+  display: block;
+  font-size: 13px;
+}
+.team .member p {
+  padding-top: 10px;
+  font-size: 16px;
+  font-style: italic;
+  color: #aaaaaa;
+}
+.team .member .social {
+  margin-top: 15px;
+  display: flex;
+  margin-left: 33%;
+}
+.team .member .social a {
+  color: #919191;
+  transition: 0.3s;
+}
+.team .member .social:hover{
+	cursor: pointer;
+}
+.team .member .social:hover>*{
+	transform: scale(1.2);
+}
+.team .member .social>span{
+	font-size: 16px;
+}
+
 
 /*--------------------------------------------------------------
 # Portfolio
@@ -945,51 +1009,7 @@ section {
   padding: 0;
 }
 
-/*--------------------------------------------------------------
-# Team
---------------------------------------------------------------*/
-.team .member {
-  text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 0px 0px 12px 0px rgba(34, 34, 34, 0.07);
-  padding: 30px 20px;
-  background: #fff;
-}
-.team .member img {
-  max-width: 60%;
-  border-radius: 50%;
-  margin: 0 0 30px 0;
-}
-.team .member h4 {
-  font-weight: 700;
-  margin-bottom: 2px;
-  font-size: 18px;
-}
-.team .member span {
-  font-style: italic;
-  display: block;
-  font-size: 13px;
-}
-.team .member p {
-  padding-top: 10px;
-  font-size: 14px;
-  font-style: italic;
-  color: #aaaaaa;
-}
-.team .member .social {
-  margin-top: 15px;
-}
-.team .member .social a {
-  color: #919191;
-  transition: 0.3s;
-}
-.team .member .social a:hover {
-  color: #8E44AD;
-}
-.team .member .social i {
-  font-size: 18px;
-  margin: 0 2px;
-}
+
 
 /*--------------------------------------------------------------
 # Contact

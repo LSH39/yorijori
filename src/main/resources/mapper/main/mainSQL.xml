@@ -82,10 +82,11 @@
 			member_nickname as memberNickname,
 			profile_path as profilePath,
 			profile_intro as profileIntro,
-			(select count(*) from follow f where f.member_no=m.member_no) as followerCount
+			(select count(*) from follow f where f.follow_no=m.member_no) as followerCount
 		from member m
 		where member_level = 1
 		and member_black = 0
+		order by followerCount desc
 	</select>
 	<select id="selectJoriList" resultType="m">
 		select
@@ -95,9 +96,45 @@
 			member_nickname as memberNickname,
 			profile_path as profilePath,
 			profile_intro as profileIntro,
-			(select count(*) from follow f where f.member_no=m.member_no) as followerCount
+			(select count(*) from follow f where f.follow_no=m.member_no) as followerCount
 		from member m
 		where member_level = 2
 		and member_black = 0
+		order by followerCount desc
 	</select>
+	<select id="selectClassList2" resultType="ccls">
+		 select
+			class_no as classNo,
+			class_title as classTitle,
+			class_rate as classRate,
+			class_content as classContent,
+			class_start as classStart,
+			class_end as classEnd,
+			class_nop as classNop,
+			class_status as classStatus,
+			class_location1 as classLocation1
+		from cooking_class
+		where class_status = 1
+        order by class_no desc
+	</select>
+	<select id="selectFollowingList" parameterType="_int" resultType="fd">
+		 select
+            following,
+            member_no as memberNo,
+            follow_no as followNo,
+            (select member_nickname from member m where follow_no=m.member_no) as followingNick
+        from follow
+        where member_no= #{memberNo}
+	</select>
+	<insert id="insertFollow" parameterType="map">
+		insert into follow
+		values (follow_seq.nextval, #{memberNo}, #{followNo})
+	</insert>
+	<select id="selectFollowerCount" parameterType="_int" resultType="_int">
+		select count(*) from follow where follow_no=#{followNo}
+	</select>
+	<delete id="deleteFollow" parameterType="map">
+		delete from follow
+		where member_no=#{memberNo} and follow_no = #{followNo}
+	</delete>
 </mapper>

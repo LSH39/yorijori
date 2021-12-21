@@ -26,6 +26,7 @@
 		<typeAlias type="kr.or.freeboard.model.vo.FreeboardLike" alias="flike"/>
 		<typeAlias type="kr.or.freeboard.model.vo.FreeboardCommentLike" alias="fcl"/>
 		<typeAlias type="kr.or.freeboard.model.vo.FreeboardFile" alias="ff"/>
+		<typeAlias type="kr.or.main.model.vo.FollowingData" alias="fd"/>
 		<!-- 태경 alias 끝 -->
 		
 		<!-- 성승민 별칭 추가 -->
