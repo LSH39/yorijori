@@ -156,6 +156,24 @@
 	<update id="updateReadflag">
 		update dm set dm_read_flag=1 where dm_room_no=#{dmRoomNo}
 	</update>
+	
+	<!-- 클래스뷰에서 문의 하기 눌러서 바로조회 이전거 있는지 확인 -->
+	<select id="selectOneDmList" parameterType="_int" resultType="dm">
+		select
+			dm_no as dmNo,
+			class_no as classNo,
+			dm_receiver as dmReceiver,
+			dm_sender as dmSender,
+			dm_content as dmContent,
+			dm_read_flag as dmReadFlag,
+			dm_date as dmDate, 
+			dm_room_no as dmRoomNo,
+			dm_rpic as dmRpic,
+			dm_spic as dmSpic
+		from dm 
+		where dm_room_no=#{dmRoomNo}
+	</select>
+
 </mapper>
 		<!-- 
 		 -->

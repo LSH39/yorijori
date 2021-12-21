@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import kr.or.dm.model.service.DmService;
 import kr.or.dm.model.vo.Dm;
 import kr.or.member.model.vo.Member;
@@ -32,6 +34,14 @@ public class DmController {
 		return "dm/dmList";
 	}
 	
+	//클래스 뷰에서 문의 목록 ajax테스트 
+	@ResponseBody
+	@RequestMapping(value="/dmAjaxList.do", produces = "application/json;charset=utf-8")
+	public String dmAjaxList(String dmSender, int memberLevel) {
+		ArrayList<Dm> list1 = service.selectAllDm(dmSender, memberLevel);
+		return new Gson().toJson(list1);
+	}
+	
 	//문의 조회
 	@RequestMapping(value="/dmView.do")
 	public String dmView(int classNo, HttpSession session , Model model) {
@@ -46,6 +56,30 @@ public class DmController {
 		model.addAttribute("classNo", classNo);
 		model.addAttribute("receiver", receiver);
 		return "dm/dmView";
+	}
+	
+	//클래스 뷰에서 AJAX로 문의하기
+	@ResponseBody
+	@RequestMapping(value="/selectDmListAjax.do", produces = "application/json;charset=utf-8")
+	public String dmView2(int classNo, String dmSender) {
+		int dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
+		ArrayList<Dm> list2 = service.selectOneDmList(dmRoomNo);
+		return new Gson().toJson(list2);
+	}
+	
+	//클래스 뷰에서 AJAX로 문의 작성
+	@ResponseBody
+	@RequestMapping(value="/dmSendAjax.do")
+	public int dmSendAjax(int classNo, String dmReceiver, String dmSender, String dmContent) {
+		//정보 가져와서  클래스랑 내가 쓴거 있는지 우선 검색
+		int dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
+		
+		int result = service.insertDm(classNo, dmReceiver, dmSender, dmContent, dmRoomNo);
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;			
+		}
 	}
 	
 	//문의 목록에서 조회하는거

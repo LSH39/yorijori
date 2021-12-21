@@ -1,6 +1,8 @@
 #chat-screen {
+	display: flex;
+  flex-direction: column;
   background-color: #abc1d1;
-  height: 1000vh;
+  height: 100%;
 }
 
 #chat-screen .alt-header,
@@ -18,11 +20,14 @@
 }
 
 .main-screen {
-  margin-top: 40px;
+  /*margin-top: 40px;*/
+  overflow-y: scroll;
+  flex-grow: 1;
+  
 }
 
 .main-chat {
-  margin-top: 70px;
+  /*margin-top: 70px;*/
 }
 
 .chat__timestamp {
@@ -45,6 +50,7 @@
 
 .message-row {
   display: flex;
+  margin-top: 15px;
 }
 
 .message-row img {
@@ -69,6 +75,7 @@
   background: white;
   border-radius: 15px;
   margin-right: 5px;
+  word-break: break-all;
 }
 
 .message__time {
@@ -95,7 +102,6 @@
 .message-row--own {
   justify-content: flex-end;
   margin-right: -15px;
-  margin-top: 10px;
 }
 
 .message-row--own .message__bubble {
@@ -109,7 +115,7 @@
 }
 
 .reply {
-  position: fixed;
+  /*position: fixed;*/
   width: 100%;
   align-items: center;
   box-sizing: border-box;
@@ -130,7 +136,7 @@
   width: 10%;
 }
 .reply__column i {
-  font-size: 30px;
+
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -143,17 +149,17 @@
   background-color: #f8f8f8;
   border-radius: 18px;
   border: 2px solid #e5e5e6;
-  padding: 10px;
+  padding: 5px 30px 5px 10px;
   display: flex;
   box-sizing: border-box;
   width: 100%;
   font-family: "TmoneyRoundWindRegular", cursive;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .reply__column:last-child input::placeholder {
   font-family: "TmoneyRoundWindRegular", cursive;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -164,8 +170,8 @@
 .reply__column:last-child button {
   background-color: var(--yellow);
   border-radius: 50%;
-  width: 31px;
-  height: 31px;
+  width: 25px;
+  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -180,7 +186,7 @@
 }
 
 .reply__column:last-child button i {
-  font-size: 25px;
+  font-size: 15px;
   color: #191917;
 }
 
