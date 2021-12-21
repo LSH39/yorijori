@@ -22,7 +22,7 @@
                         <input type="text" name="memberId" class="input_txt" value="${id }" readonly>
 						
 						<span class="join_check" style="display:none;"></span>
-                        <input type="hidden" name="memberPw" class="input_txt" value="kakao_${id }">
+                        <input type="hidden" name="memberPw" class="input_txt" value="kakao">
 						
 						<p class="title">이메일 <span>*</span><span class="join_check"></span></p>
                         <input type="text" name="memberEmail" class="input_txt" value="${email }" readonly>

@@ -148,7 +148,26 @@ public class MemberController {
 		}else {
 			member.setMemberConsent(0);
 		}
+		Random r = new Random();
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<16;i++) {
+			int flag = r.nextInt(3);
+			if(flag==0) {
+				int randomNum = r.nextInt(10);
+				sb.append(randomNum);
+			}else if(flag==1) {
+				char randomChar = (char)(r.nextInt(26)+65);
+				sb.append(randomChar);
+			}else if(flag==2) {
+				char randomChar = (char)(r.nextInt(26)+97);
+				sb.append(randomChar);
+			}
+		}
+		System.out.println(member.getMemberPw());
+        member.setMemberPw(sb.toString());
+        System.out.println(member.getMemberPw());
 		int result = service.joinKakaoEnc(member);
+		System.out.println(member.getMemberPw());
 		if(result>0) {
 			return "1";
 		}else {
