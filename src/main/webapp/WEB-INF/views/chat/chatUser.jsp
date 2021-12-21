@@ -29,7 +29,7 @@
 	    $("#chatFrmUser").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","none");
 	    $("#chatUserAlarm").text(alarm);
-	    ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
+	    ws = new WebSocket("ws://192.168.219.102/chatWebsoket.do");
 	});
 	
 	$("#chatUser").click(function(){

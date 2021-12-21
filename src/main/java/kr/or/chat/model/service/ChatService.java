@@ -72,8 +72,6 @@ public class ChatService {
 			String newDate = simpleDateFormat.format(beforeDate);
 			newChatList.get(i).setStrDate(newDate);
 		}
-		System.out.println("size : "+newChatList.size());
-		
 		return newChatList;
 	}
 
