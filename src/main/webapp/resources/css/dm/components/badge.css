@@ -1,17 +1,19 @@
-.badge {
-  width: 25px;
-  height: 25px;
+.dm-badge {
+  width: 15px;
+  height: 15px;
   background-color: tomato;
   border-radius: 50%;
   color: white;
-  font-weight: 600;
+  /*font-weight: 600;*/
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 11px;
 }
 
-.no-badge {
+.dm-no-badge {
   width: 25px;
   height: 25px;
   display: flex;
+  text-indent: -9999px;
 }

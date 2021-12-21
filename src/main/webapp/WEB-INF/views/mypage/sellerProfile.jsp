@@ -153,6 +153,15 @@
     margin-left: 30px;
   
 }
+.noLevel{
+color:red;
+font-weight:600;
+
+}
+.admin{
+color:navy;
+font-weight:600;
+}
 </style>
 <script>
 function loadImg(obj) {
@@ -211,8 +220,8 @@ function loadImg(obj) {
         			<table class="mine" border="1">
 							<tr>
 								<td>회원소개</td>
-								<td><input type="text" name="memberConsent" id="memberConsent"
-									onfocus="this.placeholder=''" value="${m.memberConsent }"></td>
+								<td><input type="text" name="profileIntro" id="profileIntro"
+									onfocus="this.placeholder=''" value="${m.profileIntro}"></td>
 							</tr>
 							<tr>
 								<td>회원아이디</td>
@@ -267,13 +276,42 @@ function loadImg(obj) {
 							</tr>
 							<tr>
 								<td>회원등급</td>
-								<td><input type="text" name="memberLevel" id="memberLevel"
-									onfocus="this.placeholder=''" value="${m.grade }" readonly></td>
+								<td>
+									<c:choose>
+
+										<c:when test="${m.memberLevel == 1}">
+											<input type="text" id="memberLevel"
+												onfocus="this.placeholder=''" value="${m.grade }" readonly>
+										</c:when>
+										<c:when test="${m.memberLevel ==2 }">
+											<input type="text" id="memberLevel"
+												onfocus="this.placeholder=''" value="${m.grade }" readonly>
+										</c:when>
+										<c:when test="${m.memberLevel == 3 }">
+											<input type="text" id="memberLevel" class="admin"
+												onfocus="this.placeholder=''" value="${m.grade }" readonly>
+										</c:when>
+										<c:when test="${m.memberLevel == 4 }">
+											<input type="text" id="memberLevel" class="noLevel"
+												onfocus="this.placeholder=''" value="${m.grade }" readonly>
+										</c:when>
+										<c:when test="${m.memberLevel == 5 }">
+											<input type="text" id="memberLevel" class="noLevel"
+												onfocus="this.placeholder=''" value="${m.grade }" readonly>
+										</c:when>
+										<c:when test="${m.memberLevel == 6 }">
+											<input type="text" id="memberLevel" class="noLevel"
+												onfocus="this.placeholder=''" value="${m.grade }" readonly>
+										</c:when>
+
+									</c:choose>
+								</td>
+								
 							</tr>
 							<tr>
 								<td>포인트내역</td>
-								<td><input type="text" name="memberPoint" id="memberPoint"
-									onfocus="this.placeholder=''" value="${m.memberPoint }" readonly></td>
+								<td><input type="text"  id="memberPoint"
+									onfocus="this.placeholder=''" value="${m.memberPoint }P" readonly></td>
 							</tr>
 							<tr>
 								<td>가입일</td>
@@ -283,7 +321,7 @@ function loadImg(obj) {
 
               </table>
               <div class="buttonBox">
-              <input type="submit" value="수정하기" id="update">
+              <button type="submit" value="수정하기" id="update">수정하기</button>
               </div>
             
   

@@ -67,10 +67,11 @@
             <div class="item">
                 <a href="/recipeView.do?recipeNo=${rb.recipeNo}&memberNo=${rb.recipeWriter}"> 
                     <img id="itemI" src="/resources/img/mypage/house.png">
+                    <%--<img id="itemI" src="/resources/upload/recipe/${rb.filepath}">--%>
                 </a>
                 <div id="items">
                     <span class="it_info1"><b id="it1">#</b>${rb.recipeTitle}</span><br>
-                    <span class="it_info1"><b id="it1">#</b>난이도 ${rb.recipeLevel}</span><br>
+                    <span class="it_info1"><b id="it1">#</b>난이도 ${rb.level}</span><br>
                     <span class="it_info1"><b id="it1">#</b>${rb.recipeTime}조리</span><br>   
                 </div>
                 

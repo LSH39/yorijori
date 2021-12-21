@@ -1,106 +1,261 @@
 @charset "UTF-8";
-    .main{
-            width: 1200px;
-            margin: 0 auto;
-            margin-top:50px;
-        }
-        #title{
-            width: 1000px;
-            margin: 0 auto;
-            align-items: center;
-            display: flex;    
-        }
-        #titleImg>img{            
-            width: 450px;
-        
-        }
-        #title>div{
-            float: left;
-           
-        }
-        #titleText{
-            width: 550px;
-        }
-        #titleText p{
-            padding-left: 75px;
-        }
-        #price{   
-            font-size: 24px;
-            font-weight: 800;
-        }
-         #totalPrice{   
-            font-size: 24px;
-            font-weight: 800;
-        }
-        .main hr{
-            width: 450px;
-            margin-left: 70px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-        #pName{
-            font-size: 32px;
-            font-weight: 900;
-        }
-        #pComment{
-            font-size: 16px;
-            font-weight: 700;
-        }
-        .boldTxt{
-            font-size: 18px;
-            font-weight: 900;
-        }
-       .thinTxt{
-           padding-left: 45px;
-       }
-     
-       .thinTxt button:hover{
-          transform: translate(2px,2px);
-       }
-       #amount{
-         padding: 0 13px;
-         font-size: 18px;
-       }
-       #count{
-            margin-left: 30px;
-            width: 50px;
-           border:2px solid #dfdfdf;
-           border-radius: 5px;
-           padding-top: 3px;
-           padding-bottom: 3px;
-       }
-       #count button{
-           border:none;
-           background: none;
-           font-size: 20px;
-           width: 40px;
-           color: #b6b6b6;
-       }
-       #count button:hover{
-           cursor: pointer;
-           font-size:larger;
-       }
-       #order{
-           margin-top: 30px;
-       }
-       #amountPrice{
-            float: right;
-       }
-       #cart>a{
-           text-decoration: none;
-           float: right;
-           width: 420px;
-           height: 50px;
-           line-height: 50px;
-           font-size: 24px;
-            font-weight: 900;
-            color: white;
-       }
-       #cart{
-        margin-top: 10px;
-        margin-left: 90px;
-        background-color: #9A86B3;
-        border: none;
-        border-radius: 3px;
-       
-       }
+
+.main {
+	width: 1200px;
+	margin: 0 auto;
+	margin-top: 50px;
+	margin-bottom: 100px;
+}
+
+#title {
+	width: 1000px;
+	margin: 0 auto;
+	align-items: center;
+	display: flex;
+}
+
+#titleImg>img {
+	width: 450px;
+}
+
+#title>div {
+	float: left;
+}
+
+#titleText {
+	width: 550px;
+}
+
+#titleText p {
+	padding-left: 75px;
+}
+
+#price {
+	font-size: 24px;
+	font-weight: 800;
+}
+
+#totalPrice {
+	font-size: 24px;
+	font-weight: 800;
+}
+
+#titleText hr {
+	width: 450px;
+	margin-left: 70px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+#pName {
+	font-size: 32px;
+	font-weight: 900;
+}
+
+#pComment {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.boldTxt {
+	font-size: 18px;
+	font-weight: 900;
+}
+
+.thinTxt {
+	padding-left: 45px;
+}
+
+.thinTxt button:hover {
+	transform: translate(2px, 2px);
+}
+
+#amount {
+	padding: 0 13px;
+	font-size: 18px;
+}
+
+#count {
+	margin-left: 30px;
+	width: 50px;
+	border: 2px solid #dfdfdf;
+	border-radius: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+#count button {
+	border: none;
+	background: none;
+	font-size: 20px;
+	width: 40px;
+	color: #b6b6b6;
+}
+
+#count button:hover {
+	cursor: pointer;
+	font-size: larger;
+}
+
+#order {
+	margin-top: 30px;
+}
+
+#amountPrice {
+	float: right;
+}
+
+#cart>a {
+	text-decoration: none;
+	float: right;
+	width: 420px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 24px;
+	font-weight: 900;
+	color: white;
+}
+
+#cart {
+	margin-top: 10px;
+	margin-left: 90px;
+	background-color: #9A86B3;
+	border: none;
+	border-radius: 3px;
+}
+
+#soldOut>a {
+	text-decoration: none;
+	float: right;
+	width: 420px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 24px;
+	font-weight: 900;
+	color: white;
+}
+
+#soldOut {
+	margin-top: 10px;
+	margin-left: 90px;
+	background-color: #9A86B3;
+	border: none;
+	border-radius: 3px;
+}
+
+.viewNavi ul {
+	margin: 50px auto;
+	overflow: hidden;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 0;
+}
+
+.viewNavi li {
+	list-style-type: none;
+	float: left;
+	width: calc(100%/ 3);
+	background-color: #C4BFE3;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #8E44AD;
+	font-size: 25px;
+	border-left: 2px solid #E0D8EF;
+	box-sizing: border-box;
+	font-weight: 800;
+}
+
+.viewNavi li:first-child {
+	border: none;
+}
+
+.viewNavi li:hover {
+	cursor: pointer;
+	color: #E0D8EF;
+}
+
+.review {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+.star img {
+	width: 20px;
+}
+
+.reviewDate {
+	margin-left: 20px;
+}
+
+.rvContent {
+	margin-left: 100px;
+}
+
+.user {
+	display: flex;
+	align-items: center;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	width: 650px;
+	display: inline-block;
+	font-size: 22px;
+}
+
+.review hr {
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.pContent {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#detail {
+	text-align: center;
+}
+
+#detail p {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.recipe {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.rbContent {
+	text-align: center;
+}
+
+.rbContent img {
+	width: 550px;
+	margin: 30px;
+	border-radius: 15px;
+}
+
+.rbTitle {
+	font-size: 32px;
+	font-weight: 800;
+	color: #757575;
+}
+
+.rbSub {
+	font-size: 17px;
+	font-weight: bold;
+	color: #757575;
+}
+
+.recipe hr {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}

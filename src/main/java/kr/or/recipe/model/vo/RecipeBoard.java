@@ -19,10 +19,24 @@ public class RecipeBoard {
 	private int recipeLevel;
 	private int situation;
 	private int material;
+	private int recipeDelete;
 	private ArrayList<RecipeContent>rList;
 	private ArrayList<Material>mList;
 	private String nickname;
 	private int likeCheck;
 	private int reportCheck;
 	private int likeCnt;
+	
+	public String getLevel(){
+		if(recipeLevel == 1) {
+			return "상";
+		}else if(recipeLevel == 2) {
+			return "중";
+	    }else if(recipeLevel == 3) {
+			return "하";
+	
+		}else {
+			return null;
+		}
+	}
 }

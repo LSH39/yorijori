@@ -7,6 +7,7 @@
 <head>
 <!-- 별칭 ccls -->
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./resources/css/dm/styles.css"/>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qg5b1hs250&submodules=geocoder"></script>
@@ -77,9 +78,80 @@
     	margin-left: 5px;
 	}
 	
+	/*여기부터 채팅 목록 css 시작*/
+	#result{
+	    height: 80%;
+    	position: relative;
+    	overflow-y: scroll;
+	}
+	
+	.dmList{
+		position: fixed !important;
+		bottom: 25px !important;
+		z-index: 1000000000 !important;
+		width: 370px !important;
+		height: 80% !important;
+		min-height: 520px !important;
+		max-height: 680px !important;
+		overflow: hidden !important;
+		background-color: white !important;
+		border-radius: 30px !important;
+		box-shadow: rgb(0 0 0 / 30%) 0px 12px 60px 5px !important;
+		display:none;
+	}
+	
+	.posRight{
+		right: 25px !important;
+	}
+	
+	.scrollBar::-webkit-scrollbar{
+		display:none;
+	}
+	
+	.dmView{
+		position: fixed !important;
+		bottom: 25px !important;
+		z-index: 1000000000 !important;
+		width: 370px !important;
+		height: 80% !important;
+		min-height: 520px !important;
+		max-height: 680px !important;
+		overflow: hidden !important;
+		background-color: #abc1d1 !important;
+		border-radius: 30px !important;
+		box-shadow: rgb(0 0 0 / 30%) 0px 12px 60px 5px !important;
+		display:none;
+	}
+
+	
 </style>
 <script>
 	$(function(){
+		
+		//강의장 장소 보기
+		$(".showLoc").click(function(){
+		var classLocation1 = $("#classLocation1").html();
+		var mapOptions = {
+			    center: new naver.maps.LatLng(37.3595704, 127.105399),
+			    zoom: 15
+			};
+		var map = new naver.maps.Map('map', mapOptions);
+		
+		naver.maps.Service.geocode({ address: classLocation1 }, function(status, response) { 
+			if (status === naver.maps.Service.Status.ERROR) { 
+				console.log('Something wrong!'); 
+				} 
+			var new_position = new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x) 
+			map.setCenter(new_position); 
+			
+			var marker = new naver.maps.Marker({ 
+				position: new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x), 
+				map: map 
+			}); 
+		});
+			
+		});
+		
 		//리뷰 작성 버튼
 		$(document).on("click", "#reviewWrite", function(){
 			let classNo = $("#classNo").val();
@@ -119,6 +191,7 @@
 			});
 		});
 		
+		//리뷰 삭제 AJAX
 		$(document).on("click", ".reviewDelete", function(){
 			//let reviewNoParam = $(this).attr("href");
 			let reviewNo = $(this).children(".deleteLinkVal").val();
@@ -208,32 +281,180 @@
 		});
 
 		
-		var classLocation1 = $("#classLocation1").html();
-		var mapOptions = {
-			    center: new naver.maps.LatLng(37.3595704, 127.105399),
-			    zoom: 15
-			};
-		var map = new naver.maps.Map('map', mapOptions);
+
 		
-		naver.maps.Service.geocode({ address: classLocation1 }, function(status, response) { 
-			if (status === naver.maps.Service.Status.ERROR) { 
-				console.log('Something wrong!'); 
-				} 
-			var new_position = new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x) 
-			map.setCenter(new_position); 
+		
+		//문의 목록 AJAX시작
+		$(".ajaxList").click(function(){
+			$(".dmView").hide();
+			$(".dmList").toggle();
+			let dmSender = $("#memberNickname").val();
+			let memberLevel = $("#memberLevel").val();
 			
-			var marker = new naver.maps.Marker({ 
-				position: new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x), 
-				map: map 
-			}); 
+			console.log(dmSender);
+			console.log(memberLevel);
+			
+			$.ajax({
+				url : "/dmAjaxList.do",
+				type : "post",
+				data : {dmSender:dmSender, memberLevel:memberLevel},
+				success : function(data){
+					console.log(data);
+					$("#result").empty();
+					var readFlag = -1;
+					var flagClass = "";
+					var main = $("<main class='main-screen'>");
+					for(var i=0 ; i<data.length ; i++){
+						if(dmSender == data[i].dmReceiver){
+							if(data[i].dmSpic == undefined){
+								data[i].dmSpic = "img/dm/classtest.jpg";
+								console.log("받는사람이 나랑 같을때"+data[i].dmSpic);
+							}else if(data[i].dmSpic != undefined){
+								data[i].dmSpic = "upload/member_profile/"+data[i].dmSpic;
+								console.log("else받는사람이 나랑 같을때"+data[i].dmSpic);
+							}
+						}else if(dmSender != data[i].dmReceiver){
+							if(data[i].dmRpic == undefined){
+								data[i].dmSpic = "img/dm/classtest.jpg";
+								console.log("보내는사람이 나랑 같을때"+data[i].dmSpic);
+							}else if(data[i].dmSpic != undefined){
+								data[i].dmSpic = "upload/member_profile/"+data[i].dmRpic;
+								console.log("else보내는사람이 나랑 같을때"+data[i].dmSpic);
+							}
+						}
+						
+						if(dmSender == data[i].dmReceiver){
+							data[i].dmSender = data[i].dmSender;
+						}else if(dmSender != data[i].dmReceiver){							
+							data[i].dmSender = data[i].dmReceiver;
+						}
+						
+						if(data[i].dmReadFlag == 1){
+							flagClass = "dm-no-badge";
+						}else if(data[i].dmReadFlag == 0){							
+							flagClass = "dm-badge";
+						}
+						///dmView1.do?dmRoomNo="+data[i].dmNo+"
+						main.append("<a class='link' href='#'>"+
+								"<div class='user-component'>"+
+								"<div class='user-component__column'>"+
+								"<img class='user-component__profile_img' src='./resources/"+data[i].dmSpic+"'/>"+
+								"<div class='user-component__text'>"+
+								"<h4 class='user-component__text-name'>"+data[i].dmSender+"</h4>"+
+								"<h6 class='user-component__text-preview'>"+data[i].dmContent+"</h6>"+
+								"</div></div><div class='user-component__column'>"+
+								"<span class='user-component__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
+								"<div class='"+flagClass+"'>x</div>"+
+								"</div></div></a>");
+						
+						
+					}
+					$("#result").append(main);
+
+				}
+			});
+		});
+		
+		//문의하기 바로 눌렀을때 이전내용 보여줌
+		$(document).on("click", ".doDm", function(){
+			$(".dmList").hide();
+			$(".dmView").toggle();
+			let dmSender = $("#memberNickname").val(); //나
+			let classNo = $("#classNo").val(); //해당 클래스 번호
+			
+			$(".main-chat").empty();
+			$.ajax({
+				url : "/selectDmListAjax.do",
+				type : "post",
+				data : {classNo:classNo, dmSender:dmSender },
+				success : function(data){
+					for (var i = 0; i < data.length; i++) {
+						if(dmSender != data[i].dmSender){
+							if(data[i].dmSpic == undefined){
+								$(".main-chat").append("<div class='message-row'>"+
+									"<img src='./resources/img/dm/classtest.jpg'/>"+
+									"<div class='message-row__content'>"+
+									"<span class='message__author'>"+data[i].dmSender+"</span>"+
+									"<div class='message__info'>"+
+					            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+					           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+							}else{
+								$(".main-chat").append("<div class='message-row'>"+
+									"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
+									"<div class='message-row__content'>"+
+									"<span class='message__author'>"+data[i].dmSender+"</span>"+
+									"<div class='message__info'>"+
+					            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+					           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+							}
+						}else if(dmSender == data[i].dmSender){
+							$(".main-chat").append("<div class='message-row message-row--own'>"+
+									"<div class='message-row__content'>"+
+									"<div class='message__info'>"+
+					            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
+					           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
+						}
+					}
+					$(".main-screen").scrollTop($(".main-screen").height()+4000);
+					
+				}
+				
+			});
+					
+			
 		});
 
+		
+		//문의 글 내용 엔터키
+		$(".dmContent").keyup(function(key){
+			if(key.keyCode==13){ //keyCode가 13이면 엔터키임
+				sendMsg();
+			}
+		});
+		
+		//문의글 내용 화살표 클릭하거나
+		$("#message__send").click(function(){
+			sendMsg();
+		});
+		
+		//문의 글 함수
+    	function sendMsg(){
+			let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
+			let dmSender = $("#memberNickname").val(); //나
+			let classNo = $("#classNo").val(); //해당 클래스 번호
+			let dmContent = $(".dmContent").val(); //문의 내용
+			
+			console.log(dmReceiver);
+			console.log(dmSender);
+			console.log(classNo);
+			console.log(dmContent);
+			
+			//메세지 작성을 할때 필요한 것
+			//1. dmReceiver, dmSender<-sessionScope.m.memberId, (classNo)로 사용할것, dmContent
+			if(dmContent != ""){
+				//내용 공백 아닐때
+				$.ajax({
+					url : "/dmSendAjax.do",
+					type : "post",
+					data : {classNo:classNo, dmReceiver:dmReceiver, dmSender:dmSender, dmContent:dmContent},
+					success : function(data){
+						if(data==1){
+							console.log("성공!(테스트용)");
+						}else if(data==0){
+							console.log("실패!(테스트용)");						
+						}
+						location.reload();
+					}
+				});				
+			}
+    	}
 		
 	});
 </script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 	<div class="container">
 		<div>
 		<h1>쿠킹클래스 뷰</h1>
@@ -241,24 +462,6 @@
 				<div class="left position-static">
 					<div class="class-content">
 					<h5>내용은 ${ccls.classContent }</h5>
-					<!-- 
-					<img src="./resources/img/cookingcls/classtest.jpg">
-					<h5>클래스 번호는 ${ccls.classNo }</h5>
-					<h5>클래스 등록한 사람의 닉네임은 ${ccls.memberNickname }</h5>			
-					<h5>내용은 ${ccls.classContent }</h5>
-					<h5>시작일은 ${ccls.classStart }</h5>
-					<h5>종료일은 ${ccls.classEnd }</h5>
-					<h5>평점은 ${ccls.classRate }</h5>
-					<h5>총인원수는 ${ccls.classNop }</h5>
-					<h5>현재인원수는 ${ccls.classCurrNop }</h5>
-					<h5>상태는 ${ccls.classStatus }</h5>
-					<h5>등록일은 ${ccls.classRegDate }</h5>
-					<hr>
-					<p>Lorem ipsum dolor sit amet, consecteti</p>
-					<hr>
-					<img src="./resources/img/cookingcls/classtest.jpg">
-					 -->
-				
 					<c:forEach items="${ccls.clsFileList }" var="f">
 					<h1>파일 이름 : ${f.classFilepath }</h1>
 						<img src="./resources/upload/cookingcls/${f.classFilepath }">
@@ -266,6 +469,7 @@
 					</div>
 					<h3>리뷰 부분</h3>
 						<h5>클래스의 평점은 ${reviewAvg }</h5>
+						<button type="button" class="ajaxList">목록확인</button>
 					<div class="reviewSection">
 						<c:choose>
 							<c:when test="${not empty list }">
@@ -309,6 +513,7 @@
 								<td colspan="2">
 									<input type="hidden" name="classNo" value="${ccls.classNo }" id="classNo">
 									<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }" id="memberNickname">
+									<input type="hidden" name="memberLevel" value="${sessionScope.m.memberLevel }" id="memberLevel">
 									<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }" id="memberNo">
 									<input type="hidden" name="clsMemberNickname" value="${ccls.memberNickname }" id="clsMemberNickname">
 									
@@ -407,7 +612,7 @@
 							</c:choose>
 							<div class="d-grid gap-2 mt-4">
 								<c:if test="${not empty ccls.classLocation1 && not empty ccls.classLocation2}">
-									<button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">장소보기</button>
+									<button type="button" class="btn btn-danger btn-lg showLoc" data-bs-toggle="modal" data-bs-target="#exampleModal">장소보기</button>
 								</c:if>
 							</div>
 							<div class="d-grid gap-2 mt-4">
@@ -432,6 +637,7 @@
 							<c:if test="${not empty sessionScope.m && ccls.memberNickname != sessionScope.m.memberNickname}">
 							<div class="d-grid gap-2 mt-4">
 								<a href="/dmView.do?classNo=${ccls.classNo }" class="btn btn-primary btn-lg" >문의하기</a>
+								<a class="btn btn-primary btn-lg doDm" >AJAX문</a>
 							</div>
 							</c:if>
 							<div class="d-grid gap-2 mt-4">
@@ -465,6 +671,70 @@
   			</div>
 		</div>
 	</div>
+	
+	<!-- 문의 목록 시작 부분 -->
+	<div class="dmList posRight">
+	    <header class="screen-header">
+      		<h1 class="screen-header_title">Chats</h1>
+      		<div class="screen-header_icons">
+        		<span><i class="fas fa-search fa-2x"></i></span>
+        		<span><i class="far fa-comment-dots fa-2x"></i></span>
+        		<span><i class="fas fa-music fa-2x"></i></span>
+        		<span class="screen-header_setting">
+          			<a href="#">
+            		<i class="fas fa-cog fa-2x"></i>
+            		<p class="screen-header_dot"></p>
+          			</a>
+        		</span>
+      		</div>
+    </header>
+
+	<div id="result" class="scrollBar"></div>
+    <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
+	</div>
+	<!-- 문의 목록 끝남 -->
+	
+	<!-- 문의 답변 시작 -->
+	<div class="dmView posRight">
+		<div id="chat-screen">
+			<div class="alt-header-ajax">
+		      	<div class="alt-header__column">
+		        	<a class="link" href="/dmList.do">
+		          		<i class="fas fa-chevron-left fa-1x"></i>
+		        	</a>
+		      	</div>
+		      	<div class="alt-header__column">
+		        <h1 class="alt-header__title">${ccls.memberNickname }</h1>
+		      	</div>
+		      	<div class="alt-header__column">
+		        	<a class="link" href="#">
+		        		<i class="fas fa-search fa-1x"></i>
+		        	</a>
+		        	<a class="link" href="/dmList.do">
+		        		<i class="fas fa-sliders-h fa-1x"></i>
+		        	</a>
+		      	</div>
+	    	</div>
+	    	<div class="main-screen scrollBar">
+				<div class="main-chat">
+			<!-- 여기에 메세지 내용 시작 -->
+			<!-- 여기에 메세지 내용 끝 -->
+				</div>
+
+
+	    	</div>
+	    	<div class="reply">
+      			<div class="reply__column"><i class="far fa-plus-square"></i></div>
+      			<div class="reply__column">
+        			<input type="text" placeholder="메세지를 입력해주세요" class="dmContent">
+        			<button type="button" id="message__send">
+          			<i class="fas fa-paper-plane"></i>
+        			</button>
+      			</div>
+    		</div>
+		</div>
+	</div>
+	<!-- 문의 답변 끝 -->
 	<script>
 	
 	</script>

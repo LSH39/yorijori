@@ -124,17 +124,18 @@
 }
 .orderInfo{
     width:399px;
-    height:220px;
+    height:200px;
     float: left;
     line-height: 35px;
+    
    
    
 }
 #sell{
   width:30px;
   height:30px;
-  margin-left:660px;
-  margin-top:3px;
+  
+  
   }
   #product{
   width:300px;
@@ -148,6 +149,39 @@
   .request{
   color:navy;
   }
+
+  .upOrr{
+   width:90px;
+   height:30px;
+   font-size:12px;
+   background-color:purple;
+   color:white;
+   border:none;
+   margin-left:20px;
+  }
+  
+.pagenation{
+ margin-left:600px;
+}
+.pagenation ul{
+align-self: center;
+margin : 0 auto;
+}
+.pagenation a{
+color: #9F90CF;
+background-color :#fff;
+ }
+.pagenation hover{
+color: #9F90CF;
+}
+.page-item.active .page-link{
+  color: #fff;
+  background: #9F90CF;
+  border-color : #9F90CF;
+}
+#tt{
+margin-left:660px;
+}
 </style>
 <script>
 function orderDetail(orderNo){
@@ -155,6 +189,9 @@ function orderDetail(orderNo){
 	}
 
 </script>
+
+
+
 </head>
 <body>
   <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -174,45 +211,108 @@ function orderDetail(orderNo){
         <div class="main-content">
             <h3 id="h_hotel">판매내역 조회</h3>
             <div id="line2"></div><br>
-            <c:forEach items="${list}" var="ms" varStatus="i">
-             <div class="mySell">
-                <div class="sellNo">   
-                <span>주문번호 :${ms.orderNo }</span><img id="sell" src="/resources/img/mypage/sell.png">  </div>
-                <div class="sellItem">
-                    <span class="it"><b id="m">●상품번호:</b>&emsp;${ms.productNo}번 상품●</span>&emsp;<br> 
-                    <span class="it_info1">&emsp;<img id="product" src="/resources/upload/product/milkit_test.jpg"></span><br>
-                    
-                  
+			<h5 id="tt">
+				판매개수 : <span style="color: rgb(159, 144, 207);" class="amount">${totalCount }</span>개
+			</h5>
+					<c:forEach items="${list}" var="ms" varStatus="i">
+			           <form action="/updateOrder.do" method="POST">
+		
+				  
+					<div class="mySell">
+						<div class="sellNo">
+						
+							<span id="dd">주문번호 :${ms.orderNo }</span><img id="sell"
+								src="/resources/img/mypage/sell.png">
+						</div>
+						<div class="sellItem">
+							<span class="it"><b id="m">●상품번호:</b>&emsp;${ms.productNo}번
+								상품●</span>&emsp;<br> <span class="it_info1">&emsp;<img
+								id="product" src="/resources/upload/product/milkit_test.jpg"></span><br>
 
-                </div>
-                
-                <div class="orderInfo">
-               <span class="it_info1"><b id="m">밀키트: </b>&emsp;${ms.milkitName}</span><br>     
-             <span class="it_info1"><b id="m">주문수량: </b>&emsp;${ms.orderOptionAmount}개</span>&emsp;<br>
-                     <span class="it_info1"><b id="m">결제금액: </b>&emsp;${ms.milkitPrice*ms.orderOptionAmount}원</span><br>
-                  
-                    <span class="it_info1"><b id="m">주문상태: </b>&emsp;${ms.status}</span>&emsp;<br>
-						<c:choose>
-							<c:when test="${ms.orderRequest !=null}">
-								<span class="request"><b id="ms">요청사항: </b>&emsp;${ms.orderRequest}</span>
-								&emsp;
-								<br>
-							</c:when>
+							<%--hidden 값으로 숨기는 값들 --%>
+							<input type="hidden" value="${ms.orderOptionNo}"name="orderOptionNo" id="orderOptionNo">
+							 <input type="hidden" value="${sessionScope.m.memberNo}" name="memberNo" id="memberNo">
+							  <input type="hidden" value="${ms.orderOptionAmount}" name="orderOptionAmount"id="orderOptionAmount"> 
+							  <input type="hidden" value="${ms.milkitPrice}" name="milkitPrice" id="milkitPrice">
+								<input type="hidden" name="reqPage" value="${reqPage }">
+							<%--hidden 값으로 숨기는 값들끝 --%>
+						</div>
 
-							<c:otherwise>
-								<span class="it_info1"><b id="m">요청사항: </b>&emsp;요청사항 없음</span>
-								&emsp;
-								<br>
+						<div class="orderInfo">
+							<span class="it_info1"><b id="m">밀키트: </b>&emsp;${ms.milkitName}</span><br>
+							<span class="it_info1"><b id="m">주문수량: </b>&emsp;${ms.orderOptionAmount}개</span>&emsp;<br>
+							<span class="it_info1"><b id="m">결제금액: </b>&emsp;${ms.milkitPrice*ms.orderOptionAmount}원</span><br>
 
-							</c:otherwise>
-						</c:choose>
+			
+							<b id="m">주문상태: </b> <select name="orderStatus" class="order"
+								id="orderStatus">
+								<c:choose>
+									<c:when test="${ms.status eq '주문완료' }">
+										<option value="1" selected>주문완료</option>
+										<option value="2">배송 준비중</option>
+										<option value="3">배송중</option>
+										<option value="4">배송완료</option>
+										<option value="0">주문취소</option>
+									</c:when>
+									<c:when test="${ms.status eq '배송준비중' }">
+										<option value="1">주문완료</option>
+										<option value="2" selected>배송 준비중</option>
+										<option value="3">배송중</option>
+										<option value="4">배송완료</option>
+										<option value="0">주문취소</option>
+									</c:when>
+									<c:when test="${ms.status eq '배송중' }">
+										<option value="1">주문완료</option>
+										<option value="2">배송 준비중</option>
+										<option value="3" selected>배송중</option>
+										<option value="4">배송완료</option>
+										<option value="0">주문취소</option>
+									</c:when>
+									<c:when test="${ms.status eq '배송완료' }">
+										<option value="1">주문완료</option>
+										<option value="2">배송 준비중</option>
+										<option value="3">배송중</option>
+										<option value="4" selected>배송완료</option>
+										<option value="0">주문취소</option>
+									</c:when>
+									<c:when test="${ms.status eq '주문취소' }">
+
+										<option value="1">주문완료</option>
+										<option value="2">배송 준비중</option>
+										<option value="3">배송중</option>
+										<option value="4">배송완료</option>
+										<option value="0" selected>주문취소</option>
+									</c:when>
+								</c:choose>
+							</select>
+
+							<button   class="upOrr" >주문상태 변경</button><br>
+
+							<c:choose>
+								<c:when test="${ms.orderRequest !=null}">
+									<span class="request"><b id="ms">요청사항: </b>&emsp;${ms.orderRequest}</span>
+									&emsp;
+									<br>
+								</c:when>
+
+								<c:otherwise>
+									<span class="it_info1"><b id="m">요청사항: </b>&emsp;요청사항 없음</span>
+									&emsp;
+									<br>
+
+								</c:otherwise>
+							</c:choose>
+
+						</div>
 
 					</div>
-             </div>
-             </c:forEach>
-
-        </div>
-        
+			
+				 </form>
+				 	</c:forEach>
+		</div>
+          <div class="pagenation">
+						${pageNavi }
+					</div>
         </div>
    
       <jsp:include page="/WEB-INF/views/common/footer.jsp" />

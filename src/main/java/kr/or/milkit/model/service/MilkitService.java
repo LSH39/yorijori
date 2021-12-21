@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.milkit.model.dao.MilkitDao;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.review.model.vo.Review;
 
 @Service
 public class MilkitService {
@@ -50,11 +51,14 @@ public class MilkitService {
 		}	
 		return list;
 	}
-	public ArrayList<Product> selectOneProduct(int productNo) {
-		ArrayList<Product>list = dao.selectOneProduct(productNo);
-		return list;
+	public Product selectOneProduct(int productNo, int recipeNo) {
+		Product p = dao.selectOneProduct(productNo);
+		ArrayList<Review>rList = dao.selectReview(productNo);
+		ArrayList<RecipeBoard>rbList =dao.selectRecipeBoard(recipeNo); 
+		p.setRList(rList);
+		p.setRbList(rbList);
+		return p;
 	}
-
 	
 	
 }
