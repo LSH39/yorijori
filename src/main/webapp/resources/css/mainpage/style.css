@@ -790,6 +790,7 @@ section {
 }
 .team .section-title button{
 	margin-right: 15px;
+	border-radius: 25px;
 }
 .team .section-title h2::before {
 	margin-left: 80px;

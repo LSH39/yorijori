@@ -175,4 +175,12 @@ public class RecipeContestService {
 		return list;
 	}
 
+	public int insertContestRecipe(int recipeNo, int enteredNo) {
+		if(enteredNo != 0) {
+			dao.deleteContestRecipe(enteredNo);
+		}
+		int result = dao.insertContestRecipe(recipeNo);
+		return result;
+	}
+
 }

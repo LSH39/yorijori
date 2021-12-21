@@ -162,7 +162,7 @@
 	</delete>
 	<insert id="insertContestRecipe" parameterType="map">
 		insert into contest_recipe
-		values (contest_seq.nextval, #{recipeNo}, 9, to_char(sysdate, 'yyyy-mm'), 1, to_char(sysdate, 'yyyy-mm-dd'))
+		values (contest_seq.nextval, #{recipeNo}, 0, to_char(sysdate, 'yyyy-mm'), 1, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
 	<select id="selectContestRecipeList" resultType="rc">
 		  select rrr.* from    
@@ -179,4 +179,8 @@
     on rr.recipe_writer=m.member_no)rrr
     order by voteCount desc
 	</select>
+	<insert id="insertContest" parameterType="_int">
+		insert into contest_recipe
+		values (contest_seq.nextval, #{recipeNo}, 0, to_char(sysdate, 'yyyy-mm'), 1, sysdate)
+	</insert>
 </mapper>

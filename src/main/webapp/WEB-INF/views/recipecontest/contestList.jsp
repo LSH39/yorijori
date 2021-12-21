@@ -127,8 +127,6 @@
 					        </button>
 					      </div>
 					      <div class="modal-body">
-					 		<form class="enter-contest" action="/contestEnter.do" method="post">
-								<fieldset>
 								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 									<table class="table table-hover">
 										<thead>
@@ -150,10 +148,8 @@
 									<input type="hidden" name="enteredNo" value='0'>
 					      </div>
 					      <div class="modal-footer">
-					        <input type="submit" class="recipeSubmit btn btn-primary" value="레시피 등록">
-					        	</fieldset>
-					        </form>
-					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					        <input type="submit" class="recipeSubmit btn-main" value="레시피 등록">
+					        <button type="button" class="btn-main btn-delete" data-bs-dismiss="modal">취소</button>
 					      </div>
 					    </div>
 					  </div>
@@ -225,10 +221,10 @@
 						written = true;
 						for(var i=0;i<list.length;i++){
 							var tbody = $("#enterModal").find("tbody");
-							var table = "<tr><th scope='row'><input type='radio' name='recipeNo' value='"+list[i].recipeNo+"'><th scope='row'><img src='/resources/upload/recipe/"+list[i].filepath+"' style='width:50px;height:50px;'></th><th scope='row'>"+list[i].recipeTitle+"</th><th scope='row'>"+list[i].foodName+"</th><th scope='row'>"+list[i].recipeContent+
+							var table = "<tr><th scope='row'><input type='radio' name='recipeNo' value='"+list[i].recipeNo+"'><th scope='row'><img src='resources/upload/recipe/"+list[i].filepath+"' style='width:50px;height:50px;'></th><th scope='row'>"+list[i].recipeTitle+"</th><th scope='row'>"+list[i].foodName+"</th><th scope='row'>"+list[i].recipeContent+
   							"</th><th scope='row'>"+list[i].readCount+"</th><th scope='row'>"+list[i].recipeDate+"</th>";
   								if(list[i].enterDate != null){
-  									var html = "<th scope='row' class='entered'>참가중</th></tr><input type='hidden' name='enteredNo' value='"+list[i].recipeNo+"'>";
+  									var html = "<th scope='row' class='entered' style='color:#8E44AD;'>참가중</th></tr><input type='hidden' name='enteredNo' value='"+list[i].recipeNo+"'>";
 	  								table += html;
   								} else {
   									var html = "<th scope='row'></th></tr>";
@@ -245,15 +241,19 @@
 		
 		$(".recipeSubmit").on("click", function(){
 			var selected = $("#enterModal").find("input[type='radio']:checked").val();
+			var entered = $("input[name='enteredNo']").val();
 			if(selected == null){
 				alert("레시피를 선택해주세요!");
 				return false;
 			}else {
-				var submit_ans = confirm("해당 레시피로 참가하시겠습니까? 기존의 참가 레시피는 무효화됩니다.");
+				var submit_ans = confirm("해당 레시피로 참가하시겠습니까? 기존의 참가한 레시피는 무효화됩니다.");
 				if(submit_ans == false){
 					return false;
+				} else {
+					location.href="/insertContestRecipe.do?recipeNo="+selected+"&enteredNo="+entered;
 				}
-			}
+		}
+		
 		});
 								
   	

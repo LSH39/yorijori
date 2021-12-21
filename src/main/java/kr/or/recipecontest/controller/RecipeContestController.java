@@ -85,4 +85,17 @@ public class RecipeContestController {
 			model.addAttribute("loc", "/contestList.do?reqPage=1&orderIndex=0");
 			return "common/msg";
 	}
+	
+	@RequestMapping(value="/insertContestRecipe.do")
+	public String insertContestRecipe(Model model, int recipeNo, int enteredNo) {
+		int result = service.insertContestRecipe(recipeNo, enteredNo);
+		if(result>0) {
+			model.addAttribute("msg", "참가 완료");
+		} else {
+			model.addAttribute("msg", "참가 실패");
+		}
+			model.addAttribute("loc", "/contestList.do?reqPage=1&orderIndex=0");
+			return "common/msg";
+		
+	}
 }

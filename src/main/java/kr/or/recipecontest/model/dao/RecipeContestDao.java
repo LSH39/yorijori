@@ -75,4 +75,9 @@ public class RecipeContestDao {
 		return (ArrayList<RecipeContest>) list;
 	}
 
+	public int insertContestRecipe(int recipeNo) {
+		int result = sqlSession.insert("recipecontest.insertContest", recipeNo);
+		return result;
+	}
+
 }
