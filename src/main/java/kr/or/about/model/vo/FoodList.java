@@ -10,4 +10,5 @@ public class FoodList {
 	// 추가
 	private int rNum;
 	private String imgSrc;
+	
 }

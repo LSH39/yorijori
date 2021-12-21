@@ -15,4 +15,5 @@
 		</if>
 		) F) F2 WHERE rNum=#{rNum}
 	</select>
+	
 </mapper>

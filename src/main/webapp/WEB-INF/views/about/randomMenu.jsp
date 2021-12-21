@@ -41,7 +41,6 @@
 	            	<!-- ajax로 추가 -->
 	            </div>
 	        </div>
-			
 			<hr>
 			<div class="bottom">
 	            <table id="wheelTbl" style="border:0">
