@@ -21,7 +21,7 @@
 		      	</div>
 		    </div>
 			<div class="board-content">
-				<div class="title"><h2>검색결과</h2><h3 style="margin-top:10px; font-size: 24px;">검색어 : '${keyword }'</h3></div>
+				<div class="title"><h2>검색결과</h2><h3 style="margin-top:10px; font-size: 24px;">검색어 : '<span style="color:#FB672F;">${keyword }</span>'</h3></div>
 	      		<div class="result-outline">
 	      			<div>총 <span id="totalCount">${fn:length(recipeList) }</span>개</div>
 	      			<div>
@@ -37,7 +37,7 @@
 		      							<li>
 		      								<a href="/recipeView.do?recipeNo=${r.recipeNo }">
 		      									<div class="resultPic"><img src="resources/upload/recipeboard/${r.filepath }" style="width: 150px;height:150px;"></div>
-		      									<div class="resultTitle"><h5>${r.resultTitle }</h5></div>
+		      									<div class="resultTitle"><h5>${r.recipeTitle }</h5></div>
 		      								</a>
 		      							</li>
 		      						</c:forEach>
@@ -78,7 +78,7 @@
 		      						<c:forEach items="${memberList }" var="m" varStatus="i">
 		      							<li>
 		      								<a href="/profile.do?memberId=${m.memberId }">
-		      									<div class="resultPic"><img src="resources/upload/member/${m.profilePath }" style="width: 150px; height: 150px;"></div>
+		      									<div class="resultPic"><img src="resources/upload/member_profile/${m.profilePath }" style="width: 150px; height: 150px; border-radius: 150px;"></div>
 		      									<div class="resultTitle"><h5>${m.memberId } (${m.memberNickname })</h5></div>
 		      									<div class="resultContent"><h6>
 		      										<c:choose>
@@ -168,7 +168,7 @@
 	      					</c:otherwise>
 	      				</c:choose>
 	      		</div>
-	      		<hr>
+	      		<hr style="margin-bottom: 80px;">
 	      	</div>
   </main><!-- End #main -->
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
