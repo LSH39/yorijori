@@ -1,5 +1,6 @@
 package kr.or.about.model.dao;
 
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,18 +13,15 @@ public class AboutDao {
 	private SqlSessionTemplate sqlSession;
 
 	public int foodTotalCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("about.foodTotalCount");
 	}
-
+	
 	public int foodCount(FoodList f) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("about.foodCount",f);
 	}
-
+	
 	public FoodList foodList(FoodList f) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("about.foodList", f);
 	}
 
 
