@@ -26,7 +26,7 @@ function idCheck(obj) {
                 url: "/joinSearch.do",
                 data: {memberId:inputId},
                 success: function (data) {
-                    if(data == "1"){
+                    if(data != 0){
                     	$(".join_check").eq(0).text("이미 사용중인 아이디입니다.");
                     }else{
                     	$(".join_check").eq(0).text("사용가능한 아이디입니다.").css("color","#0000FF");
@@ -117,9 +117,7 @@ $("#modalbtn").click(function(){
             url: "/joinSearch.do",
             data: {memberEmail:inputEmail},
             success: function (data) {
-                if(data == "1"){
-                	$(".join_check").eq(2).text("이미 등록된 이메일입니다.");
-                }else{
+                if(data == 0){
                 	var subject="요리조리 메일 인증";
                 	var receiver = inputEmail;
                 	$.ajax({
@@ -132,6 +130,8 @@ $("#modalbtn").click(function(){
                             
                         }
                     });
+                }else{
+                	$(".join_check").eq(2).text("이미 등록된 이메일입니다.");
                 }
             }
         });
@@ -201,11 +201,11 @@ $("#memberNickname").on("keyup change", function(){
                 url: "/joinSearch.do",
                 data: {memberNickname:inputNickname},
                 success: function (data) {
-                    if(data == "1"){
-                    	$(".join_check").eq(4).text("이미 사용중인 닉네임입니다.");
-                    }else{
+                    if(data == 0){
                     	$(".join_check").eq(4).text("사용가능한 닉네임입니다.").css("color","#0000FF");
                     	checkNickname = 1;
+                    }else{
+                    	$(".join_check").eq(4).text("이미 사용중인 닉네임입니다.");
                     }
                 }
             });
@@ -232,11 +232,11 @@ $("#memberPhone").on("keyup change", function(){
                 url: "/joinSearch.do",
                 data: {memberPhone:inputPhone},
                 success: function (data) {
-                    if(data == "1"){
-                    	$(".join_check").eq(5).text("이미 등록된 번호입니다.");
-                    }else{
+                    if(data == 0){
                     	$(".join_check").eq(5).text("사용가능한 번호입니다.").css("color","#0000FF");
                     	checkPhone = 1;
+                    }else{
+                    	$(".join_check").eq(5).text("이미 등록된 번호입니다.");
                     }
                 }
             });

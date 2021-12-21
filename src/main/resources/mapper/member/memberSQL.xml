@@ -346,8 +346,16 @@ and memberLevel = 5
 			withdraw_date as withdrawDate,
 			member_black as memberBlack
 		from member
-		where member_id=#{memberId} and member_pw=#{memberPw}
+		<choose>
+			<when test="memberId!=null">
+				where member_id=#{memberId} and member_pw=#{memberPw}
+			</when>
+			<when test="memberNo!=null">
+				where member_no=#{memberNo}
+			</when>
+		</choose>
 	</select>
+	
 	
 	<insert id="joinAdmin" parameterType="m">
 		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberEmail},#{memberName},#{memberNickname},#{memberPhone},'1900-01-01','00000','admin','admin',0,'profile_admin.png','admin',null,3,0,to_char(sysdate,'yyyy-mm-dd'),null,0)
