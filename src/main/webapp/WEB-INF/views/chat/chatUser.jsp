@@ -7,7 +7,7 @@
        <div class="chatTop"><p>요리조리 1:1 문의</p></div>
        <div class="chatMain scrollBottom">
            <table id="chatUserTbl">
-			<!-- ajax로 추가 -->
+			<!-- WebSocket으로 추가 -->
            </table>
            <button id="qnaBtn">자주묻는질문</button>
            <div id="blank"></div>
@@ -24,26 +24,26 @@
 	var sendTextBefore;
 	var ws;
 	var chatbotCheck = 0;
-	var alarm = 0;
+	var alarm;
 	$(function(){
 	    $("#chatFrmUser").css("display","none").prop("on",false);
-	    $(".chatAlarm").css("display","none");
-	    $("#chatUserAlarm").text(alarm);
+	    $(".chatAlarm").css("display","inline");
+		alarm = -1;
+		$("#chatUserAlarm").text(alarm);
 	    ws = new WebSocket("ws://192.168.219.102/chatWebsoket.do");
+		ws.onopen = startChat;
+		ws.onmessage = receiveMsg;
+        ws.onclose = endChat;
 	});
 	
 	$("#chatUser").click(function(){
 		// alarm
-		$(".chatAlarm").css("display","inline");
-		alarm = 0;
-		$("#chatUserAlarm").text(alarm);
+ 		alarm = 0;
+ 		$("#chatUserAlarm").text(alarm);
 		// chat
-	    ws.onopen = startChat;
-        ws.onmessage = receiveMsg;
-        ws.onclose = endChat;
 		if($("#chatFrmUser").prop("on") == false){
 	        $("#chatFrmUser").css("display","block").prop("on",true);
-	    	startChat();    
+	        startChat();
 		}else{
 			$("#chatFrmUser").css("display","none").prop("on",false);
 			$("#chatUserTbl").children().remove();
