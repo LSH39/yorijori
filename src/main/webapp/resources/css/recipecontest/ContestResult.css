@@ -62,6 +62,10 @@ ul{
 .winners-profile li div{
 	text-align: center;
 }
+.profile-pic>img{
+	border-radius: 50px;
+	margin: auto;
+}
 .total-vote{
 	display: flex;
 	justify-content: center;
@@ -87,6 +91,7 @@ ul{
 	background: rgb(246, 240, 255);
 }
 .prize-tower li:first-child{
+	margin-left: 30px;
 	height: 500px;
 }
 .prize-tower li:nth-child(2){

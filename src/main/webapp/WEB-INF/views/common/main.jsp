@@ -383,7 +383,7 @@
 		 <div class="section-title">
 	          <h2>
 	          	밀키트 구독권
-	          	<i class="bi bi-egg-fried"></i>
+	          	<i class="bi bi-egg-fried" style="color:#FBDC2F;"></i>
 	          </h2>
 	          <p>요리조리의 밀키트 구독권 서비스를 선택해야 하는 이유!</p>
 	     </div>

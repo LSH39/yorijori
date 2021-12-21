@@ -13,7 +13,6 @@ import kr.or.main.model.service.MainService;
 import kr.or.main.model.vo.FollowingData;
 import kr.or.main.model.vo.MainSearchResult;
 import kr.or.main.model.vo.MainViewData;
-import kr.or.member.model.vo.Member;
 @Controller
 public class MainController {
 	
