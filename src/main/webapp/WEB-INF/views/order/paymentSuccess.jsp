@@ -27,7 +27,7 @@
                         <p class="p2_txt"><span>${orderNo }</span> 입니다.</p>
                     </div>
                     <div>
-                        <p class="p1_txt">주문내역 및 배송에 관한 안내는 <a href="#"><button type="button" class="purple_btn">주문조회</button></a> 를 통하여 가능합니다.</p>
+                        <p class="p1_txt">주문내역 및 배송에 관한 안내는 <a href="/myOrderList.do?memberNo=${memberNo }&reqPage=1"><button type="button" class="purple_btn">주문조회</button></a> 를 통하여 가능합니다.</p>
                     </div>
                 </div>
             </div>
