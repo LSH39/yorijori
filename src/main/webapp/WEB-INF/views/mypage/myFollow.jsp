@@ -36,13 +36,13 @@
 }
 .pr{
     width:250px;
-    height: 140px;
+    height: 160px;
      background-color:rgb(224, 219, 239) ;
   
 }
 .pw{
     width:250px;
-    height: 150px;
+    height: 140px;
     background-color:rgb(224, 219, 239) ;
 }
 #pp{
@@ -59,9 +59,14 @@
 }
 #itemI{
     width: 250px;
-    height:130px;
+    height:150px;
 }
+.noCou{
+color:gray;
+margin-left:300px;
+margin-top:120px;
 
+}
 </style>
 </head>
 <body>
@@ -82,17 +87,18 @@
             <h3 id="h_hotel">★my Follow★</h3>
             <div id="line2"></div><br>
             <h5>팔로우 게시글 수: <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
-            
+               <c:choose>
+                  	<c:when test="${ not empty list }">
               <c:forEach items="${list}" var="fol" varStatus="i">
             <div class="followR">
                 <div class="pt">
                 <img id="pp" src="resources/upload/member_profile/${fol.profilePath }">
-                  <%--    <img id="pp" src="resources/img/mypage/profile.jpeg">--%>
+                
                     <h5 id="nickName">${fol.memberNickname }</h5>
                 </div>
                 <div class="pr">
                     <a href="/recipeView.do?recipeNo=${fol.recipeNo}&memberNo=${fol.recipeWriter}"> 
-                        <img id="itemI" src="resources/img/mypage/house.png">
+                         <img id="itemI" src="resources/upload/product/${fol.filepath }">
                     </a>
                 </div>
                 <div class="pw">
@@ -103,6 +109,11 @@
 
             </div>
             </c:forEach>
+               </c:when>
+                
+                  	<c:otherwise><h6 class="noCou">팔로워 게시글이 존재하지 않습니다.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
         </div>
   
         </div>

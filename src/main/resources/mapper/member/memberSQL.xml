@@ -436,4 +436,6 @@ and memberLevel = 5
 	<foreach collection="array" item="memberNo" open="(" close=")" separator=",">#{memberNo}</foreach>
 	
 	</update>
+	
+
 </mapper>

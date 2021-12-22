@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.main{
+margin-bottom:20px;
+
+}
 #line2 {
 	background-color: gray;
 	height: 3px;
@@ -75,7 +79,8 @@ table.amountp th {
 	background-color: #CDFA83;
 }
 .pagenation{
-display: flex;
+margin-left:370px;
+margin-top:100px;
 }
 .pagenation ul{
 align-self: center;
@@ -83,7 +88,9 @@ margin : 0 auto;
 }
 .pagenation a{
 color: #9F90CF;
-background-color :#fff; }
+background-color :#fff; 
+
+}
 .pagenation a:hover{
 color: #9F90CF;
 }

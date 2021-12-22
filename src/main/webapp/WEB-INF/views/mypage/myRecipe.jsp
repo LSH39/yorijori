@@ -42,7 +42,12 @@
 }
 
 
+.noCou{
+color:gray;
+margin-left:300px;
+margin-top:120px;
 
+}
 </style>
 </head>
 <body>
@@ -63,11 +68,13 @@
     
             <h3 id="h_hotel">my recipe</h3>
              <div id="line2"></div><br>
+               <c:choose>
+                <c:when test="${ not empty list }">
              <c:forEach items="${list}" var="rb" varStatus="i">
             <div class="item">
                 <a href="/recipeView.do?recipeNo=${rb.recipeNo}&memberNo=${rb.recipeWriter}"> 
-                    <img id="itemI" src="/resources/img/mypage/house.png">
-                    <%--<img id="itemI" src="/resources/upload/recipe/${rb.filepath}">--%>
+                   <%-- <img id="itemI" src="/resources/img/mypage/house.png">--%>
+                   <img id="itemI" src="/resources/upload/recipe/${rb.filepath}">
                 </a>
                 <div id="items">
                     <span class="it_info1"><b id="it1">#</b>${rb.recipeTitle}</span><br>
@@ -77,6 +84,11 @@
                 
               </div>
               </c:forEach>
+                </c:when>
+                
+                  	<c:otherwise><h6 class="noCou">작성하신 레시피 게시글이 존재하지 않습니다.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
 
         </div>
         

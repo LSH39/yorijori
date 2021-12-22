@@ -49,5 +49,7 @@ public class MemberDao {
 	public int findPwRe(Member member) {
 		return sqlSession.update("member.findPwRe",member);
 	}
+
+
 	
 }

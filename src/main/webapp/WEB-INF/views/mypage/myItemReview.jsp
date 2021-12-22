@@ -42,11 +42,17 @@
 #rti{
     width: 800px;
     margin-bottom: 20px;
-    background-color: #d696e2;
+    background-color:rgb(196, 191, 227);
     border-left: none;
 }
 .rrr{
     margin-bottom: 20px;
+}
+.noCou{
+color:gray;
+margin-left:350px;
+margin-top:120px;
+
 }
 </style>
 </head>
@@ -78,6 +84,8 @@
                     <th>등록일</th>
                 </tr>
             </table>
+             <c:choose>
+                  	<c:when test="${ not empty list }">
              <c:forEach items="${list}" var="ireview" varStatus="i">
             <div class="rrr">
               <table border="1" class="re">
@@ -98,6 +106,11 @@
               </div>
               </div>
              </c:forEach>
+                       </c:when>
+                
+                  	<c:otherwise><h6 class="noCou">작성한 후기가 없어요.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
               <div>
                 
 
