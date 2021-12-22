@@ -90,7 +90,7 @@ text-align: center;}
         <button class="addJori">조리꾼 승인</button>
         <button class="deleteMember">강제 탈퇴</button>
         <button class="rePermission">재인증 요구</button>
-        <button>쪽지</button>
+        
         <button class="showAllDetail">전체 상세 보기</button>
     </div>
     
@@ -143,9 +143,13 @@ text-align: center;}
     </div>
     <div class="row">
     <div class="col-md-3">자기소개 : ${m.profileIntro }</div>
-    <div class="col-md-3">자격증 : </div>
     
     
+    
+    </div>
+    <div class="row">
+    <div class="col-md-3" style="line-height: 500px;">자격증 :  </div>
+    <div class="col-md-7"><img style="width:500px;" src="/resources/upload/member_certificate/${m.certificatePath }"></div>
     </div>
   	
     </td></tr>
@@ -171,7 +175,7 @@ text-align: center;}
     		
     		
     		
-    		
+    		$(".showDetail").hide();
     		
     		$(".showDetail"+index).fadeToggle();
     	});
@@ -449,7 +453,7 @@ text-align: center;}
 
     });
     $(".showAllDetail").click(function(){
-    	$(".showDetailBtn").click();
+    	$(".showDetail").fadeIn();
     });
     </script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
