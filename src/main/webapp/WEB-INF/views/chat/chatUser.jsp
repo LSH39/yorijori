@@ -37,9 +37,7 @@
 	});
 	
 	$("#chatUser").click(function(){
-		// alarm
- 		var alarm = 0;
-		$("#chatUserAlarm").text(alarm);
+		openChat();
 		// chat
 		if($("#chatFrmUser").prop("on") == false){
 	        $("#chatFrmUser").css("display","block").prop("on",true);
@@ -48,13 +46,13 @@
 		}else{
 			$("#chatFrmUser").css("display","none").prop("on",false);
 			$("#chatUserTbl").children().remove();
-			closeChat();
 		}
 		startNo += 1;
 	});
 	
 	function startChat(){
-	    var data = {type:"start",memberNo:sessionMemberNo};
+		var alarm = 0;
+	    var data = {type:"start",memberNo:sessionMemberNo, alarm:alarm};
 	   	ws.send(JSON.stringify(data));
 	   	chatbotCheck = 0;
 	}
@@ -73,10 +71,10 @@
 	   	chatbotCheck = 0;
 	}
 	
-	function closeChat(){
+	function openChat(){
 		var alarm = 0;
 		$("#chatUserAlarm").text(alarm);
-	    var data = {type:"closeChat",memberNo:sessionMemberNo, alarm:alarm};
+	    var data = {type:"openChat",memberNo:sessionMemberNo, alarm:alarm};
 	   	ws.send(JSON.stringify(data));
 	   	chatbotCheck = 0;
 	}
@@ -89,12 +87,11 @@
 		}
 		// chat
 		if(msg.appendMsg.length != 0){
-			if(msg.appendMsg != "noAnswer" && msg.appendMsg != "noMsg") {
+			if(msg.appendMsg != "noAnswer") {
 				$("#chatUserTbl").append(msg.appendMsg);
 	    		$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-			}else if(msg.appendMsg == "noMsg"){
-				// closeChat
-				$("#chatUserAlarm").text(msg.alarm);
+			}else if(msg.appendMsg == "openChat"){
+				// openChat
 			}else{  // chatbot 호출
 				var sMsg = "<tr><td class='sendText'><div>"+sendMsg+"</div></td></tr>";
 				$("#chatUserTbl").append(sMsg);
