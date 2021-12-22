@@ -114,18 +114,7 @@
 				}
 			  }
 			}
-		function uploadImg(obj) {
-			  var files = obj.files;
-			  if(files.length != 0){
-				  var reader = new FileReader();
-				  reader.readAsDataURL(files[0]);
-				  reader.onload = function(e) {
-					$(".recipeImg0").attr("src",e.target.result);
-					$("#img").css("height","200px");
-					$("#img").css("width","200px");
-				}
-			  }
-			}
+	
 		function subBtn() {
 			var mName = $("input[name='mNameList']").length;
 			var rContent = $("textarea[name='rContentList']").length;
@@ -174,9 +163,6 @@
 				$("#imgName").css("display","none");
 			});
 			
-			$(".contentImg").change(function() {
-				 $(this).prev().css("display","none");
-			});
 		});
 		</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -234,7 +234,7 @@
 }
 
 .conText {
-	padding-top:10px;
+	padding-top: 10px;
 	width: 600px;
 	background-color: white;
 	float: left;
@@ -295,4 +295,23 @@
 
 .mPrice {
 	font-weight: 800;
+}
+
+#update {
+	width: 200px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
+}
+
+#update span:first-child {
+	margin-right: 10px;
+}
+
+#update a:hover {
+	border-bottom: 1px solid #9F90CF;
+}
+
+.checkImg span:hover {
+	cursor: pointer;
 }

@@ -42,7 +42,7 @@
 		</div>
 		<div class="milkitFrm">
 		<label for="summernote">상세설명</label>
-		<textarea id="summernote" name="milkitContent"></textarea>
+		<textarea id="summernote" name="milkitContent" ></textarea>
 		</div>
 		<input type="submit" value="등록하기">
 		</form>
@@ -64,6 +64,7 @@
 		$('#summernote').summernote({
 			height: 400,
 			lang:"ko-KR",
+			disableResizeEditor: true,
 			callbacks: {
 				onImageUpload : function(files, editor, welEditable) {       
 					for (var i = 0; i < files.length; i++) {
@@ -91,10 +92,7 @@
 				}
 		});
 	}
-	$("#uploadImg").change(function() {
-		var img = $(this).val();
-		console.log(img);
-	})
+	
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

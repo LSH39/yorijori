@@ -64,5 +64,13 @@ public class MilkitDao {
 		return (ArrayList<RecipeBoard>)list;
 	}
 
+	public int deleteMilkit(int productNo) {
+		return sqlSession.update("milkit.deleteMilkit",productNo);
+	}
+
+	public int updateMilkit(Product p) {
+		return sqlSession.update("milkit.updateMilkit", p);
+	}
+
 
 }
