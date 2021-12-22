@@ -67,8 +67,9 @@
 
 #total {
 	color: #6D5874;
-	font-weight: 800;
+	font-weight: bold;
 	width: 80px;
+	margin-left:70px;
 }
 
 #make a {

@@ -14,7 +14,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <div class="main">
-	<p>총 <fmt:formatNumber value="${totalCount}"/>개</p>
+	<p id="total">총  <fmt:formatNumber value="${totalCount}"/>개</p>
 	<c:if test="${sessionScope.m.memberNo != null}">	
 		<div id="make"><a href="/milkitFrm1.do?memberNo=${sessionScope.m.memberNo }">밀키트 만들기</a></div>
 	</c:if>
