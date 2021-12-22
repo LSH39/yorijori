@@ -26,7 +26,7 @@
 	      		</h5>
 	      	</div>
 	      	<div class="contest-info">
-	      		<a href="#">
+	      		<a href="/contestInfo.do">
 	      			<button class="btn-main btn-announce">경연대회 안내</button>
 	      		</a>
 	      	</div>
@@ -60,7 +60,7 @@
 	      							<div class="recipe-content" style="color:#454545;">${r.recipeContent }</div>
 	      						</div>
 	      					</a>
-	      					<a href="#">
+	      					<a href="/profile.do?memberId=${r.memberId }">
 	      						<div class="recipe-profile">
 	      							<div class="profile-pic">
 	      								<img src="resources/upload/member_profile/${r.profilePath }">

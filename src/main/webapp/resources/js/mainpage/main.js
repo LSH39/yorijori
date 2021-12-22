@@ -175,13 +175,13 @@
   });
 
   /**
-   * Clients Slider
+   * 신상품 slider
    */
   new Swiper('.clients-slider', {
     speed: 400,
     loop: true,
     autoplay: {
-      delay: 5000,
+      delay: 3000,
       disableOnInteraction: false
     },
     slidesPerView: 'auto',
@@ -211,11 +211,15 @@
   });
   
   /**
-   * 신상품 Slider
+   * 클래스 slider
    */
   new Swiper('.classes-slider', {
-    speed: 800,
+    speed: 1000,
     loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: true
+    },
     slidesPerView: '4',
     slidesPerGroup: '4',
     pagination: {

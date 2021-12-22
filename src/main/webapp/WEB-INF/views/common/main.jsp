@@ -40,7 +40,7 @@
               <h2 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', serif; font-weight: 700; font-size: 40px;"><span style="color:rgb(192, 57, 43); margin-bottom: 0px;">2021</span>년 <span style="color:rgb(192, 57, 43); margin-bottom: 0px;">12</span>월의 기적</h2>
               <h3 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #fff; margin-top: 5px;">요리조리의 크리스마스는 경연대회로 현재진행중!</h3>
               <h3 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 24px; color: #000; margin-top: 5px; margin-bottom: 10px;">최대 <span style="color:rgb(192, 57, 43);">20</span>만 포인트 <span style="color:rgb(192, 57, 43);">+</span> <span style="color:rgb(192, 57, 43);">밀키트</span> 상품 제작</h3>
-              <a href="/siteInfo.do" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
+              <a href="/contestInfo.do" class="btn-get-started animate__animated animate__fadeInUp scrollto">자세히</a>
             </div>
           </div>
         </div> 

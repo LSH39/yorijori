@@ -98,4 +98,9 @@ public class RecipeContestController {
 			return "common/msg";
 		
 	}
+	
+	@RequestMapping(value="/contestInfo.do")
+	public String contestInfo() {
+		return "recipecontest/contestInfo";
+	}
 }
