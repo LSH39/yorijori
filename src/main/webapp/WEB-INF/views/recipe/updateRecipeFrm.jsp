@@ -12,7 +12,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="main">
 		<form action="/updateRecipeFrm.do" method="post"	enctype="multipart/form-data">
-			<input type="hidden" value="${sessionScope.m.memberNo }">
+			<input type="hidden" name="recipeNo" value="${rb.recipeNo }">
 			<div class="recipeFrm">
 				<label for="recipeTitle">레시피 제목 </label>
 				<input type="text" id="recipeTitle" name="recipeTitle" value="${rb.recipeTitle }">
@@ -46,6 +46,7 @@
 					<p>재료정보</p>
 					<c:forEach items="${rb.MList }" var="m">
 					<div class="materialBox">
+						<input type="hidden" name="mNoList" value="${m.materialNo }">
 						<input type="text"  name="mNameList" value="${m.materialName }"> 
 						<input type="text"	name="mAmountList" value="${m.MAmount }">
 					</div>
@@ -89,10 +90,9 @@
 				<div class="cookOrder">		
 				<c:set var="num" value="${num+1 }"></c:set>			
 					<p>STEP${i.count }</p>
-					<textarea name="rContentList" >${rc.recipeContent}</textarea>
-					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">
-					<input type="file" name="files" class="contentImg" accept=".jpg,.jpeg,.png,.gif"
-						multiple >						
+					<input type="hidden" name="rcNoList" value="${rc.RFileNo }">
+					<textarea name="rContentList">${rc.recipeContent}</textarea>
+					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">					
 				</div>
 			</c:forEach>
 				<div class="newContent"></div>
@@ -148,8 +148,6 @@
 		 		     alert("빈칸없이 작성해주세요"); 
 					 return false;
 				}else if( $("#situation").val()=="" || $("#material").val()=="" || $("#recipeLevel").val()=="" ){
-					var situation = $("#situation").val();	 
-			 		console.log(situation);
 			 		     alert("카테고리를 선택해주세요"); 
 						 return false;
 				}

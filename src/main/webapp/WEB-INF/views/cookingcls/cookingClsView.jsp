@@ -443,7 +443,8 @@
 						}else if(data==0){
 							console.log("실패!(테스트용)");						
 						}
-						location.reload();
+						$(".main-screen").load(location.href+" .main-screen");
+						//location.reload();
 					}
 				});				
 			}
@@ -636,7 +637,9 @@
 							</div>
 							<c:if test="${not empty sessionScope.m && ccls.memberNickname != sessionScope.m.memberNickname}">
 							<div class="d-grid gap-2 mt-4">
+							<!-- 
 								<a href="/dmView.do?classNo=${ccls.classNo }" class="btn btn-primary btn-lg" >문의하기</a>
+							 -->
 								<a class="btn btn-primary btn-lg doDm" >AJAX문</a>
 							</div>
 							</c:if>

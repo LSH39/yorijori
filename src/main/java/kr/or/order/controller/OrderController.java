@@ -36,6 +36,7 @@ public class OrderController {
 		int result = service.orderInsert((ArrayList<Integer>)cartNoList, order, couponList, point);
 		if(result>0) {
 			model.addAttribute("orderNo", result);
+			model.addAttribute("memberNo", order.getMemberNo());
 			return "order/paymentSuccess";
 		}else {
 			model.addAttribute("msg","에러 : "+result);
