@@ -88,7 +88,7 @@ text-align: center;}
         <span>선택 회원을</span>
         
         <button class="deleteMember">탈퇴</button>
-        <button>쪽지</button>
+        
         <button class="showAllDetail">전체 상세 보기</button>
     </div>
     

@@ -94,7 +94,7 @@ text-align: center;}
         <span>선택 회원을</span>
         <button class="addBlack">블랙리스트 추가</button>
         <button class="deleteMember">강제 탈퇴</button>
-        <button>쪽지</button>
+        
         <button class="showAllDetail">전체 상세 보기</button>
         
     </div>
@@ -134,7 +134,7 @@ text-align: center;}
     <c:forEach items="${list }" var="m" varStatus="i">
     <tr>
     <td><input class="chkbox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
-    <td><img src="${m.profilePath }">${m.memberNickname }(${m.memberId })</td>
+    <td><img style="width:50px;" src="resources/upload/member_profile/${m.profilePath }">${m.memberNickname }(${m.memberId })</td>
     <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>
     <c:choose >

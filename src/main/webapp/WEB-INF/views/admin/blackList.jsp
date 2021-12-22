@@ -90,7 +90,7 @@ text-align: center;}
         <span>선택 회원을</span>
         <button class="addNormal">일반회원으로 변경</button>
         <button>강제 탈퇴</button>
-        <button>쪽지</button>
+        
         <button class="showAllDetail">전체 상세 보기</button>
     </div>
     
