@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/product/milkitFrm2.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
@@ -28,23 +29,24 @@
 		<input type="text" id="milkitComment" name="milkitComment" placeholder="밀키트를 소개할 수 있는 한줄 설명을 입력해주세요">
 		</div>
 		<div class="milkitFrm">
-		<label >대표이미지</label>
-		<img id="img">
-		<input type="file" id="uploadImg" name="uploadImg" accept=".jpg,.jpeg,.png,.gif" onchange="loadImg(this);">
+		<label >대표이미지</label>	
+		<input type="file" id="uploadImg" name="uploadImg" accept=".jpg,.jpeg,.png,.gif" onchange="loadImg(this);"><br>
+		<img id="img" width="200px" height="150px">
 		</div>
 		<div class="milkitFrm">
+		<span class="priceWrap">
 		<label for="milkitPrice">가격</label>
-		<input type="text" id="milkitPrice" name="milkitPrice" placeholder="숫자만 입력해주세요">원
-		</div>
-		<div class="milkitFrm">
-		<label for="milkitStock">재고수량</label>
-		<input type="text" id="milkitStock" name="milkitStock" placeholder="숫자만 입력해주세요">개
+		<input type="text" id="milkitPrice" name="milkitPrice" value="${p.milkitPrice}"> 원
+		</span>
+		<span id="stock">재고수량</span>
+		<input type="text" id="milkitStock" name="milkitStock"  value="${p.milkitStock}"> 개
+		
 		</div>
 		<div class="milkitFrm">
 		<label for="summernote">상세설명</label>
-		<textarea id="summernote" name="milkitContent" ></textarea>
 		</div>
-		<input type="submit" value="등록하기">
+		<textarea id="summernote" name="milkitContent" ></textarea>
+		<div id="insertBtn"><input type="submit" value="등록하기"></div>
 		</form>
 	</div>
 	<script>

@@ -39,8 +39,7 @@
 		<input type="text" id="milkitPrice" name="milkitPrice" value="${p.milkitPrice}"> 원
 		</span>
 		<span id="stock">재고수량</span>
-		<input type="text" id="milkitStock" name="milkitStock"  value="${p.milkitStock}"> 개
-		
+		<input type="text" id="milkitStock" name="milkitStock"  value="${p.milkitStock}"> 개		
 		</div>
 		
 		<div class="milkitFrm">
