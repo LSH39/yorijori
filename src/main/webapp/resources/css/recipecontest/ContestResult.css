@@ -56,10 +56,11 @@ ul{
 	overflow: hidden;
 }
 .winners-profile li{
-	background: #f1f1f1;
+	background: rgb(251, 251, 251);
 	float: left;
 	margin: 20px 15px;
 	padding: 10px;
+	box-shadow : 2px 2px 7px #C3AAFF;
 }
 .winners-profile li div{
 	text-align: center;
@@ -86,6 +87,7 @@ ul{
 	float: left;
 	width: calc(100%/4);
 	text-align: center;
+	box-shadow : 2px 2px 5px #999;
 }
 .prize-tower li>h4{
 	padding: 30px;
@@ -102,6 +104,9 @@ ul{
 }
 .prize-tower li:nth-child(3){
 	height: 150px;
+}
+.prize-tower li:last-child{
+	box-shadow: none;
 }
 .points{
 	color: #8E44AD;

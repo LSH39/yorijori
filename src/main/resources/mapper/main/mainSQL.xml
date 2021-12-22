@@ -137,4 +137,43 @@
 		delete from follow
 		where member_no=#{memberNo} and follow_no = #{followNo}
 	</delete>
+	<select id="bestRecipes" parameterType="_int" resultType="rld">
+		 select
+            r.recipe_no as recipeNo,
+            r.recipe_title as recipeTitle,
+            r.food_name as foodName,
+            r.subhead as recipeContent,
+            r.recipe_writer as recipeWriterNo,
+            (select m.member_id from member m where r.recipe_writer=m.member_no) as memberId,
+            (select m.member_nickname from member m where r.recipe_writer=m.member_no) as memberNickname,
+            r.filepath as recipePath,
+            r.recipe_time as recipeTime,
+            r.recipe_level as recipeLevel,
+            r.situation,
+            r.material as ingredient,
+            r.read_count as readCount,
+            (select count(*) from recipe_like rl where rl.recipe_no=r.recipe_no) as likeCount
+            from recipe_board r
+	       <choose>
+	           <when test="_parameter == 1"> <!-- 쉬운 술안주 -->
+	        where situation=1 and recipe_level=1
+	        	</when>
+	        	<when test="_parameter == 2"> <!-- 분식 -->
+	        where food_name like '%' || '떡볶이' or food_name like '%' || '김밥' or food_name like '%' || '라면'
+	        	</when>
+	        	<when test="_parameter == 3"> <!-- 튀김요리 -->
+	        where (recipe_title like '%' || '돈까스' or recipe_title like '%' || '튀김' || '%') and recipe_level in (1, 2)
+	        	</when>
+	        	<when test="_parameter == 4"> <!-- 몸보신 -->
+	        where recipe_title like '%' || '삼계탕' || '%' or food_name like '%' || '탕' or food_name like '%' || '전골' || '%' or subhead like '%' || '원기' || '%'
+	        	</when>
+	        	<when test="_parameter == 5"> <!-- 다이어트 -->
+	        where situation=2 or recipe_title like '%' || '샐러드' || '%'
+	        	</when>
+	        	<when test="_parameter == 6"> <!-- 베이킹 -->
+	        where (situation=5 or food_name like '%' || '쿠키' || '%' or food_name like '%' || '케이크' || '%' or food_name like '%' || '머핀' || '%') and recipe_level in (1, 2)
+	        	</when>
+	        </choose>
+        order by likeCount desc, readCount desc   
+	</select>
 </mapper>

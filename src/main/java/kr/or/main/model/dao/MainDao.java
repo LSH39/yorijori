@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.main.model.vo.FollowingData;
+import kr.or.main.model.vo.RecipeListData;
 import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
@@ -83,5 +84,10 @@ public class MainDao {
 	public int deleteFollow(HashMap<String, Object> map) {
 		int result = sqlSession.delete("main.deleteFollow", map);
 		return result;
+	}
+
+	public ArrayList<RecipeListData> selectBestRecipes(int category) {
+		List<RecipeListData> rld = sqlSession.selectList("main.bestRecipes", category);
+		return (ArrayList<RecipeListData>) rld;
 	}
 }

@@ -13,6 +13,8 @@ import kr.or.main.model.service.MainService;
 import kr.or.main.model.vo.FollowingData;
 import kr.or.main.model.vo.MainSearchResult;
 import kr.or.main.model.vo.MainViewData;
+import kr.or.main.model.vo.RecipeListData;
+import kr.or.recipe.model.vo.RecipeBoard;
 @Controller
 public class MainController {
 	
@@ -60,6 +62,13 @@ public class MainController {
 	public int deleteFollow(Model model, int memberNo, int followNo){
 		int followerCount = service.deleteFollow(memberNo, followNo);
 		return followerCount;
+	}
+	
+	@RequestMapping(value="/bestRecipes.do")
+	public String bestRecipes(Model model, int category) {
+		ArrayList<RecipeListData> rld = service.selectBestRecipes(category);
+		model.addAttribute("list", rld);
+		return "main/bestRecipes";
 	}
 	
 }

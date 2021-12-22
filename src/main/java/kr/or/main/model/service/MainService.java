@@ -12,6 +12,7 @@ import kr.or.main.model.dao.MainDao;
 import kr.or.main.model.vo.FollowingData;
 import kr.or.main.model.vo.MainSearchResult;
 import kr.or.main.model.vo.MainViewData;
+import kr.or.main.model.vo.RecipeListData;
 import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
@@ -78,6 +79,11 @@ public class MainService {
 			followerCount = dao.selectFollowerCount(followNo);
 		}
 		return followerCount;
+	}
+
+	public ArrayList<RecipeListData> selectBestRecipes(int category) {
+		ArrayList<RecipeListData> rld = dao.selectBestRecipes(category);
+		return rld;
 	}
 	
 }
