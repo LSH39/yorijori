@@ -59,6 +59,12 @@
 #name{
     font-weight: 600;
 }
+.noCou{
+color:gray;
+margin-left:300px;
+margin-top:120px;
+
+}
 </style>
 </head>
 <body>
@@ -80,29 +86,38 @@
 			<h3 id="h_hotel">●chat ●</h3>
 			<div id="line2"></div>
 			<br>
-			   <c:forEach items="${list}" var="mc" varStatus="i">
-			<div class="dm">
+			<c:choose>
+				<c:when test="${ not empty list }">
+					<c:forEach items="${list}" var="mc" varStatus="i">
+						<div class="dm">
 
-				<div class="pho">
-					<%-- <img id="pic" src="resources/img/mypage/profile.jpeg">--%>
-					<img id="pic" src="resources/upload/member_profile/${mc.profilePath}">
-				</div>
-				<div class="dmC">
-					<table class="dContent">
-						<tr>
-							<td id="name">${mc.chatSend}</td>
-						</tr>
-						<tr>
-							<td><a href="#">${mc.chatContent }</a></td>
-						</tr>
-						<tr>
-							<td id="time">${mc.chatDate }</td>
-						</tr>
-					</table>
-				</div>
+							<div class="pho">
+								<%-- <img id="pic" src="resources/img/mypage/profile.jpeg">--%>
+								<img id="pic"
+									src="resources/upload/member_profile/${mc.profilePath}">
+							</div>
+							<div class="dmC">
+								<table class="dContent">
+									<tr>
+										<td id="name">${mc.chatSend}</td>
+									</tr>
+									<tr>
+										<td><a href="#">${mc.chatContent }</a></td>
+									</tr>
+									<tr>
+										<td id="time">${mc.chatDate }</td>
+									</tr>
+								</table>
+							</div>
 
-			</div>
-			</c:forEach>
+						</div>
+					</c:forEach>
+				</c:when>
+
+				<c:otherwise>
+					<h6 class="noCou">채팅내역이 존재하지 않습니다.</h6>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 

@@ -7,7 +7,7 @@
        <div class="chatTop"><p>요리조리 1:1 문의</p></div>
        <div class="chatMain scrollBottom">
            <table id="chatUserTbl">
-			<!-- ajax로 추가 -->
+			<!-- WebSocket으로 추가 -->
            </table>
            <button id="qnaBtn">자주묻는질문</button>
            <div id="blank"></div>
@@ -24,30 +24,33 @@
 	var sendTextBefore;
 	var ws;
 	var chatbotCheck = 0;
-	var alarm = 0;
+	var startNo = 0;
+	var enter = 0;
+	//var alarm;
 	$(function(){
 	    $("#chatFrmUser").css("display","none").prop("on",false);
-	    $(".chatAlarm").css("display","none");
-	    $("#chatUserAlarm").text(alarm);
-	    ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
+	    $(".chatAlarm").css("display","inline");
+	    ws = new WebSocket("ws://192.168.219.102/chatWebsoket.do");
+		ws.onopen = startChat;
+		ws.onmessage = receiveMsg;
+        ws.onclose = endChat;
 	});
 	
 	$("#chatUser").click(function(){
 		// alarm
-		$(".chatAlarm").css("display","inline");
-		alarm = 0;
+ 		var alarm = 0;
 		$("#chatUserAlarm").text(alarm);
 		// chat
-	    ws.onopen = startChat;
-        ws.onmessage = receiveMsg;
-        ws.onclose = endChat;
 		if($("#chatFrmUser").prop("on") == false){
 	        $("#chatFrmUser").css("display","block").prop("on",true);
-	    	startChat();    
+        	$("#chatUserTbl").children().remove();
+           	reStartChat();
 		}else{
 			$("#chatFrmUser").css("display","none").prop("on",false);
 			$("#chatUserTbl").children().remove();
+			closeChat();
 		}
+		startNo += 1;
 	});
 	
 	function startChat(){
@@ -62,46 +65,75 @@
 		
 	}
 	
-	function appendChat(appendMsg){
+	function reStartChat(){
+		var alarm = 0;
+		$("#chatUserAlarm").text(alarm);
+	    var data = {type:"reStart",memberNo:sessionMemberNo, alarm:alarm};
+	   	ws.send(JSON.stringify(data));
+	   	chatbotCheck = 0;
+	}
+	
+	function closeChat(){
+		var alarm = 0;
+		$("#chatUserAlarm").text(alarm);
+	    var data = {type:"closeChat",memberNo:sessionMemberNo, alarm:alarm};
+	   	ws.send(JSON.stringify(data));
+	   	chatbotCheck = 0;
+	}
+	
+	function appendChat(textMsg){
+		var msg = JSON.parse(textMsg);
 		// alarm
 		if($("#chatFrmUser").prop("on") == false){
-			alarm += 1;
-			$("#chatUserAlarm").text(alarm);
+			$("#chatUserAlarm").text(msg.alarm);
 		}
 		// chat
-		if(appendMsg.length != 0){
-			if(appendMsg != "noAnswer") {
-				$("#chatUserTbl").append(appendMsg);
+		if(msg.appendMsg.length != 0){
+			if(msg.appendMsg != "noAnswer" && msg.appendMsg != "noMsg") {
+				$("#chatUserTbl").append(msg.appendMsg);
 	    		$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-				$("#chatText").val("");
-	    		sendMsg = "";
-	    		sendTextBefore = "";
-			}else{
+			}else if(msg.appendMsg == "noMsg"){
+				// closeChat
+				$("#chatUserAlarm").text(msg.alarm);
+			}else{  // chatbot 호출
 				var sMsg = "<tr><td class='sendText'><div>"+sendMsg+"</div></td></tr>";
 				$("#chatUserTbl").append(sMsg);
 				$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-				$("#chatText").val("");
-	    		sendMsg = "";
-	    		sendTextBefore = "";
 				chatbotCheck = 1;
 			}
 		}else{
 			$("#qnaBtn").click();
 		}
+		// enter
+		if(enter == 1){
+			$("#chatText").val("");
+			sendMsg = "";
+			sendTextBefore = "";
+		}
+		enter = 0;
+		startNo += 1;
 	}
 	
 	$("#chatEnter").click(function(){
+		enter = 1;
 		if(chatbotCheck != 1){
-			console.log(chatbotCheck);
 			if(sendMsg.trim() != ""){  // 문자열에서 공백 제거한 값 != ""
 			    var sender = sessionMemberNo;
 			    var receiver = 86;
 			    var data = {type:"chat", chatSend:sender, chatReceive:receiver, chatContent:sendMsg};
 			    ws.send(JSON.stringify(data));
 			}
+		}else if(chatbotCheck==1 && sendMsg=="0"){
+			// 챗봇 종료
+			var sMsg = "<tr><td class='sendText'><div>"+sendMsg+"</div></td></tr>";
+			$("#chatUserTbl").append(sMsg);
+			$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
+			$("#chatText").val("");
+			sendMsg = "";
+			sendTextBefore = "";
 		}else{  // 챗봇 호출시
 			if(sendMsg != null){
-				var data = {type:"chatbotAnswer", chatContent:sendMsg};
+				var data = {type:"chatbotAnswer", chatContent:sendMsg, memberNo:sessionMemberNo};
 				ws.send(JSON.stringify(data));
 			}
 		}
@@ -111,7 +143,7 @@
 	$("#qnaBtn").click(function(){
 		// chatbot 기본list 출력
 		// keyward : start1, start2
-		var data = {type:"chatbot"};
+		var data = {type:"chatbot", memberNo:sessionMemberNo};
       	ws.send(JSON.stringify(data));
       	chatbotCheck = 1;
 	});

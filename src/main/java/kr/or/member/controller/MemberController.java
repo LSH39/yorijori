@@ -36,11 +36,7 @@ public class MemberController {
 	}
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session, Model model) {
-		
-		//Member m = service.loginMember(member); // 임시 로그인
-		
-		Member m = service.loginMemberEnc(member);  // 로그인
-		
+		Member m = service.loginMemberEnc(member);
 		if(m != null) {
 			session.setAttribute("m", m);
 			return "redirect:/";
@@ -49,6 +45,12 @@ public class MemberController {
 			model.addAttribute("loc","/loginFrm.do");
 		}
 		return "common/msg";
+	}
+	@RequestMapping(value="/loginKakao.do")
+	public String loginKakao(Member member, HttpSession session) {
+		Member m = service.loginKakao(member);
+		session.setAttribute("m", m);
+		return "redirect:/";
 	}
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
@@ -72,15 +74,21 @@ public class MemberController {
 	public String joinAdminFrm() {
 		return "member/joinAdminFrm";
 	}
+	@RequestMapping(value="/joinKakaoFrm.do")
+	public String joinKakaoFrm(String id, String email, Model model) {
+		model.addAttribute("id", id);
+		model.addAttribute("email",email);
+		return "member/joinKakaoFrm";
+	}
 	// join check
 	@ResponseBody
 	@RequestMapping(value="/joinSearch.do")
-	public String joinSearch(Member member) {
-		String memberNo = service.joinSearch(member);
-		if(memberNo!=null) {
-			return "1";
+	public int joinSearch(Member member) {
+		int memberNo = service.joinSearch(member);
+		if(memberNo!=0) {
+			return memberNo;
 		}else {
-			return "0";
+			return 0;
 		}
 	}
 	// mail check
@@ -126,6 +134,40 @@ public class MemberController {
 			member.setMemberConsent(0);
 		}
 		int result = service.joinBasicEnc(member, domain);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/joinKakao.do")
+	public String joinKakao(Member member, String consentCheck) {
+		if(consentCheck != null) {
+			member.setMemberConsent(1);
+		}else {
+			member.setMemberConsent(0);
+		}
+		Random r = new Random();
+		StringBuilder sb = new StringBuilder();
+		for(int i=0;i<16;i++) {
+			int flag = r.nextInt(3);
+			if(flag==0) {
+				int randomNum = r.nextInt(10);
+				sb.append(randomNum);
+			}else if(flag==1) {
+				char randomChar = (char)(r.nextInt(26)+65);
+				sb.append(randomChar);
+			}else if(flag==2) {
+				char randomChar = (char)(r.nextInt(26)+97);
+				sb.append(randomChar);
+			}
+		}
+		System.out.println(member.getMemberPw());
+        member.setMemberPw(sb.toString());
+        System.out.println(member.getMemberPw());
+		int result = service.joinKakaoEnc(member);
+		System.out.println(member.getMemberPw());
 		if(result>0) {
 			return "1";
 		}else {
@@ -226,6 +268,7 @@ public class MemberController {
 		}
 		return "common/msg";
 	}
+	
 	
 }
 

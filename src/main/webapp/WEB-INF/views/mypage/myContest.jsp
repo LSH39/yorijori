@@ -66,7 +66,25 @@
 #winn{
  color:red;
 }
+.noCou{
+color:gray;
+margin-left:300px;
+margin-top:120px;
 
+}
+.pagenation{
+margin-top:200px;
+margin-left:370px;
+}
+
+.pagenation a{
+color: #9F90CF;
+background-color :#fff; 
+
+}
+.pagenation a:hover{
+color: #9F90CF;
+}
 </style>
 </head>
 <body>
@@ -99,6 +117,8 @@
                 
                 </tr>
                 </table>
+                  <c:choose>
+                  	<c:when test="${ not empty list }">
                   <c:forEach items="${list}" var="myc" varStatus="i">
                 <div class="events">
                 <div class="eve1">${myc.contestNo }</div>
@@ -109,6 +129,12 @@
 
                 </div>
                </c:forEach>
+               </c:when>
+                
+                  	<c:otherwise><h6 class="noCou">참여한 경연대회가 존재하지 않습니다.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
+                
         </div>
                 <div class="pagenation">
 						${pageNavi }

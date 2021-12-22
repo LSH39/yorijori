@@ -10,7 +10,10 @@
  			recipe_time as recipeTime, 
  			recipe_level as recipeLevel,
 		(select member_nickname from Member m  where m.member_no = r.recipe_writer) as nickname 
-		from recipe_board r
+		from recipe_board r 	
+		<if test="situation == null and material == null and recipeLevel == null">
+		where recipe_delete=1</if>
+	<trim suffix="and recipe_delete=1" >
 	<choose>
 		<when test="situation gt 0 and material gt 0 and recipeLevel gt 0 ">
 		 where situation=#{situation} and  material=#{material} and recipe_level=#{recipeLevel}
@@ -41,12 +44,12 @@
 			<if test="recipeLevel gt 0">
 			and recipe_level=#{recipeLevel}
 			</if>
-		</when>
+		</when>		
 	</choose>
-		
+</trim>
  	</select>
  	<insert id="insertRecipeBoard" parameterType="rb" >
- 		insert into recipe_board values(recipe_seq.nextval,#{recipeWriter},#{recipeTitle},#{filepath},0,to_char(sysdate,'yyyy-mm-dd'),#{subhead},#{recipeVideo},#{recipeTime},#{foodName},#{recipeLevel},#{situation},#{material})
+ 		insert into recipe_board values(recipe_seq.nextval,#{recipeWriter},#{recipeTitle},#{filepath},0,to_char(sysdate,'yyyy-mm-dd'),#{subhead},#{recipeVideo},#{recipeTime},#{foodName},#{recipeLevel},#{situation},#{material},1)
  	</insert>
  	<select id="selectRecipeNo" resultType="_int">
  		select max(recipe_no) from recipe_board 
@@ -125,43 +128,71 @@
  	<insert id="insertReport" parameterType="report">
  		insert into recipe_report values(report_seq.nextval,#{recipeNo},#{memberNo},#{reportComment})
  	</insert>
- 	
+ 	<update id="deleteRecipe" parameterType="_int">
+ 		update recipe_board set recipe_delete=0 where recipe_no=#{recipeNo}
+ 	</update>
+ 	<update id="updateRecipeBoard" parameterType="rb">
+ 		update recipe_board set 
+	 		recipe_title=#{recipeTitle}, subhead=#{subhead}, filepath=#{filepath}, 
+	 		recipe_video=#{recipeVideo}, food_name=#{foodName},situation=#{situation},
+	 		material=#{material}, recipe_level=#{recipeLevel} 
+ 		where recipe_no=#{recipeNo}
+ 	</update>
+ 	<update id="updateMaterial" parameterType="material">
+ 		update material set 
+ 			material_name=#{materialName}, m_amount=#{mAmount} 
+ 		where material_no=#{materialNo}
+ 	</update>
+ 	<update id="updateRecipeContent" parameterType="rcontent">
+ 		update recipe_content set recipe_content=#{recipeContent} where r_file_no=#{rFileNo}
+ 	</update>
+ 	<select id="selectProduct" parameterType="_int" resultType="product">
+ 		select 
+ 			product_no as productNo,
+ 			recipe_no as recipeNo,
+ 			milkit_name as milkitName,
+ 			milkit_price as milkitPrice,
+ 			milkit_comment as milkitComment,
+ 			filepath,
+ 			milkit_delete as milkitDelte
+ 		from product where recipe_no=#{recipeNo} and milkit_delete=1
+ 	</select>
  	<!-- 성승민 프로필 연동 레시피 게시물 수 -->
  	<select id="selectOneReceipeCnt" parameterType="_int" resultType="_int">
  		select count(*) 
  		from recipe_board 
  		where recipe_writer=#{recipeWriter}
  	</select>
- 	
- 	<!-- 성승민 프로필 연동 레시피 게시물 리스트 -->
- 	<!-- 
+ 	 
+ 	<!-- 성승민 프로필 연동 레시피 게시물 + 좋아유 수 리스트 2021.12.21 --> 
  	<select id="selectAllList" parameterType="_int" resultType="rb">
- 		select 
- 		 	recipe_no as recipeNo, 
- 		 	recipe_writer as recipeWriter,
- 			recipe_title as recipeTitle, 
- 			filepath,
- 			read_count as readCount,
- 			recipe_date as recipeDate
- 		from recipe_board
- 		where recipe_writer=#{memberNo}
- 		order by recipe_no desc
+	 	select * 
+	 	from
+			(select rownum as rnum, rb.*
+				from(
+				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt
+					from recipe_board 
+					left outer join recipe_like
+					using(recipe_no) 
+					where recipe_writer in #{memberNo}
+					group by recipe_no, recipe_writer, filepath, read_count, recipe_video
+				order by recipe_no desc) rb )) 
+		where rnum between 1 and 15
  	</select>
- 	 -->
  	
- 	<!-- 성승민 프로필 연동 레시피 게시물 + 좋아유 수 리스트 --> 
- 	<select id="selectAllList" parameterType="_int" resultType="rb">
- 		select 
- 			recipe_no as recipeNo, 
- 			recipe_writer as recipeWriter, 
- 			filepath, 
- 			read_count as readCount, 
- 			count(member_no) likeCnt
-		from recipe_board 
-		left outer join recipe_like
-		using(recipe_no) 
-		where recipe_writer in #{member_No}
-		group by recipe_no, recipe_writer, filepath, read_count
-		order by recipe_no desc
+ 	<!-- 성승민 프로필 레시피 더보기 로딩 2021.12.21-->
+ 	<select id="selectAllAjaxList" parameterType="map" resultType="rb">
+	 	select * 
+	 	from
+			(select rownum as rnum, rb.*
+				from(
+				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt
+					from recipe_board 
+					left outer join recipe_like
+					using(recipe_no) 
+					where recipe_writer in #{memberNo}
+					group by recipe_no, recipe_writer, filepath, read_count, recipe_video
+				order by recipe_no desc) rb )) 
+		where rnum between #{start} and #{end}
  	</select>
 </mapper>

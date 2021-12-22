@@ -9,6 +9,7 @@ public class Material {
 	private String materialName;
 	private String mAmount;
 	
+	private String []mNoList;
 	private String[] mNameList;
 	private String[] mAmountList;
 }

@@ -155,8 +155,8 @@
           <div id="delFrm">
           <form action="/deleteSeller.do" method="post">
               <div class="delete">
-               <input type="text" id="memberId" placeholder="아이디 입력"><br>
-               <input type="password" id="memberPw" placeholder="비밀번호 입력"><br>
+               <input type="text" id="memberId" placeholder="아이디 입력" name="memberId" value="${sessionScope.m.memberId}"><br>
+               <input type="password" id="memberPw" placeholder="비밀번호 입력" name="memberPw"><br>
                <button type="submit" id="delbutton">회원탈퇴하기</button>
               </div>
         </form>

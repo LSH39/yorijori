@@ -3,8 +3,11 @@ package kr.or.recipe.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.vo.Product;
@@ -27,24 +30,27 @@ public class RecipeService {
 	}
 
 
-	public int insertRecipe(RecipeBoard rb, RecipeContent rc, Material m) {
+	public int insertRecipe(RecipeBoard rb) {
 		int result = dao.insertRecipeBoard(rb);
 		int recipeNo = 0;
 		if(result>0) {
 			recipeNo = dao.selectRecipeNo();
-			if(recipeNo>0) {
-			m.setRecipeNo(recipeNo);
-			result = dao.insertMaterial(m);
-			  if(result>0) {
-				  rc.setRecipeNo(recipeNo);
-				  result = dao.insertContent(rc);
-			  }
-			}
 		}
-		return result;
+		return recipeNo;
 	}
 
-
+	public int insertMaterial(Material m, int recipeNo) {
+		m.setRecipeNo(recipeNo);
+		int result = dao.insertMaterial(m);
+		return result;
+	}
+	public int insertContent(RecipeContent rc, int recipeNo) {
+		
+		rc.setRecipeNo(recipeNo);
+		int result = dao.insertContent(rc);
+		return result;
+	}
+	
 	public RecipeBoard selectOneRecipe(int recipeNo, int memberNo) {
 		HashMap<String, Object>map = new HashMap<String, Object>();
 		map.put("recipeNo", recipeNo);
@@ -52,11 +58,13 @@ public class RecipeService {
 		RecipeBoard rb = dao.selectOneRecipe(map);
 		ArrayList<Material>mList = dao.selectMaterial(recipeNo);
 		ArrayList<RecipeContent>rList = dao.selectContent(recipeNo);
+		ArrayList<Product>pList = dao.selectProduct(recipeNo);
 		if(rb != null) {
 			int result = dao.updateCount(rb);
 		}
 		rb.setMList(mList);
 		rb.setRList(rList);
+		rb.setPList(pList);
 		return rb;
 	}
 
@@ -102,12 +110,34 @@ public class RecipeService {
 		return result;
 	}
 
-
-	public int updateRecipe(int recipeNo, int memberNo) {
-		int result = dao.updateRecipe(recipeNo,memberNo);
-		return 0;
+	public int deleteRecipe(int recipeNo) {
+		int result = dao.deleteRecipe(recipeNo);
+		return result;
 	}
 
+
+	public int updateRecipe(RecipeBoard rb) {
+		int result = dao.updateRecipeBoard(rb);
+		return result;
+	}
+
+
+	public int updateMaterial(Material m) {
+		int result = dao.updateMaterial(m);
+		return result;
+	}
+
+
+	public int updateRecipeContent(RecipeContent rc) {
+		int result = dao.updateRecipeContent(rc);
+		return result;
+	}
+
+
+	
+
+	
+	
 }
 	
 

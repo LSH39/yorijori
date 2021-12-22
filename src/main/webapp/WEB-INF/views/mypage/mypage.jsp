@@ -79,6 +79,19 @@
     margin-left: 30px;
   
 }
+select{
+ width:184px;
+ height:36px;
+}
+.noLevel{
+color:red;
+font-weight:600;
+
+}
+.admin{
+color:navy;
+font-weight:600;
+}
 </style>
 <script>
 function loadImg(obj) {
@@ -129,51 +142,58 @@ function loadImg(obj) {
       
           </div>
            
-         <form action="/updateMember.do" method="post" >
+        
           <div class="myInfo">
-          
-        			<table class="mine" border="1">
+              <form action="/updateMember.do" method="post">
+        		<table class="mine" border="1">
 							<tr>
 								<td>회원소개</td>
-								<td><input type="text" name="memberConsent" id="memberConsent"
-									onfocus="this.placeholder=''" value="${rm.memberConsent }"></td>
+								<td><input type="text" name="profileIntro" id="profileIntro"
+									onfocus="this.placeholder=''" value="${rm.profileIntro }"></td>
 							</tr>
+							
 							<tr>
 								<td>회원아이디</td>
 								<td><input type="text" name="memberId" id="memberId"
 									onfocus="this.placeholder=''" value="${rm.memberId }"></td>
 							</tr>
+						
 							<tr>
 								<td>회원이름</td>
 								<td><input type="text" name="memberName" id="memberName"
 									onfocus="this.placeholder=''" value="${rm.memberName }"></td>
 							</tr>
+							 
 							<tr>
 								<td>회원이메일</td>
 								<td><input type="text" name="memberEmail" id="memberEmail"
 									onfocus="this.placeholder=''" value="${rm.memberEmail }"></td>
 							</tr>
+							
 							<tr>
 								<td>회원닉네임</td>
 								<td><input type="text" name="memberNickname" id="memberNickname"
 									onfocus="this.placeholder=''" value="${rm.memberNickname }"></td>
 							</tr>
+						
 							<tr>
 								<td>휴대폰번호</td>
 								<td><input type="text" name="memberPhone" id="memberPhone"
 									onfocus="this.placeholder=''"value="${rm.memberPhone }"></td>
 							</tr>
+							
 							<tr>
 								<td>생년월일</td>
 								<td><input type="text" name="memberBirth" id="memberBirth"
 									onfocus="this.placeholder=''" value="${rm.memberBirth }"></td>
 							</tr>
-				                
+				                	
 				               <tr>
 								<td>우편번호</td>
 								<td><input type="text" name="postcode" id="postcode"
 									onfocus="this.placeholder=''" value="${rm.postcode }"></td>
 							</tr>
+						
 							<tr>
 								<td>도로명주소</td>
 								<td><input type="text" name="addressRoad" id="addressRoad"
@@ -184,16 +204,48 @@ function loadImg(obj) {
 								<td><input type="text" name="addressDetail" id="addressDetail"
 									onfocus="this.placeholder=''" value="${rm.addressDetail }"></td>
 							</tr>
+						
 							<tr>
 								<td>회원등급</td>
-								<td><input type="text" name="memberLevel" id="memberLevel"
-									onfocus="this.placeholder=''" value="${rm.grade }" readonly></td>
+					
+								<td>
+									<c:choose>
+									<c:when test="${m.memberLevel == 1}">
+									<input type="text" id="memberLevel"
+									onfocus="this.placeholder=''" value="${m.grade }" readonly>
+									</c:when>
+									<c:when test="${m.memberLevel ==2 }">
+									<input type="text" id="memberLevel"
+									onfocus="this.placeholder=''" value="${m.grade }" readonly>
+									</c:when>
+									<c:when test="${m.memberLevel == 3 }">
+									<input type="text" id="memberLevel" class="admin"
+									onfocus="this.placeholder=''" value="${m.grade }" readonly>
+									</c:when>
+								<c:when test="${m.memberLevel == 4 }">
+									<input type="text" id="memberLevel" class="noLevel"
+									onfocus="this.placeholder=''" value="${m.grade }" readonly>
+									</c:when>
+									<c:when test="${m.memberLevel == 5 }">
+									<input type="text" id="memberLevel" class="noLevel"
+									onfocus="this.placeholder=''" value="${m.grade }" readonly>
+									</c:when>
+									<c:when test="${m.memberLevel == 6 }">
+									<input type="text" id="memberLevel" class="noLevel"
+									onfocus="this.placeholder=''" value="${m.grade }" readonly>
+									</c:when>
+								
+								</c:choose>
+								</td>
 							</tr>
+						
+						
 							<tr>
-								<td>포인트내역</td>
-								<td><input type="text" name="memberPoint" id="memberPoint"
+								<td>총 포인트</td>
+								<td><input type="text"  id="memberPoint"
 									onfocus="this.placeholder=''" value="${rm.memberPoint }" readonly></td>
 							</tr>
+						
 							<tr>
 								<td>가입일</td>
 								<td><input type="text" name="enrollDate" id="enrollDate"
@@ -201,12 +253,12 @@ function loadImg(obj) {
 							</tr>
 
               </table>
-              <div class="buttonBox">
-              <input type="submit" value="수정하기" id="update">
-              </div>
-        
+              
+              <button type="submit" id="update">수정하기</button>
+              
+        </form>
       </div>
-   </form>
+   
           </div>
           
 

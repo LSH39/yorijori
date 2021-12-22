@@ -20,13 +20,17 @@ public class MemberService {
 		if(member.getMemberId().isEmpty() || member.getMemberPw().isEmpty()) {
 			m = null;
 		}else {
-			
+
 			m = dao.loginMember(member);
 		}
 		return m;
 	}
+
+	public Member loginKakao(Member member) {
+		return dao.loginMember(member);
+	}
 	
-	public String joinSearch(Member member) {
+	public int joinSearch(Member member) {
 		return dao.joinSearch(member);
 	}
 	
@@ -42,6 +46,15 @@ public class MemberService {
 	public int joinBasicEnc(Member member, String domain) {
 		String memberEmail = member.getMemberEmail()+"@"+domain;
 		member.setMemberEmail(memberEmail);
+		int result1 = dao.joinBasic(member);
+		int result2 = 0;
+		if(result1>0) {
+			result2 = dao.joinCoupon(member);
+		}
+		return result2;
+	}
+	@Transactional
+	public int joinKakaoEnc(Member member) {
 		int result1 = dao.joinBasic(member);
 		int result2 = 0;
 		if(result1>0) {
@@ -71,7 +84,8 @@ public class MemberService {
 		return dao.findPwRe(member);
 	}
 
-	
+
+
 	
 	
 }

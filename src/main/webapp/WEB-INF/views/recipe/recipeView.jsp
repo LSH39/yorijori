@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +11,19 @@
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="/resources/css/recipe/recipeView.css">
 <style>
-
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
-	<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">
-	<div><span><a href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span><span><a href="/delRecipe.do">삭제</a></span></div>
-	</c:if>
-		<div id="topImg">
-			<img src="/resources/img/recipe/recipe.jpg">
-		</div>
+		<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">
+			<div>
+				<span><a
+					href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span><span><a
+					href="/deleteRecipe.do">삭제</a></span>
+			</div>
+		</c:if>
+
 
 		<div id="modal-wrap" style="display: none;">
 			<h1>신고하기</h1>
@@ -49,7 +51,7 @@
 		</div>
 
 		<div class="mainImg">
-			<img src="/resources/upload/recipe/${rb.filepath }">
+			<img src="/resources/upload/recipe/${rb.filepath }" id="titleImg">
 			<div id="count">
 				<span id="countImg"><img src="/resources/img/recipe/eye.png"
 					width="20px"></span><span id="countText"> ${rb.readCount }</span>
@@ -91,6 +93,7 @@
 		</div>
 
 		<div class="mList">
+			<hr>
 			<p id="mTitle">[ 재료 ]</p>
 			<ul>
 				<c:forEach items="${rb.MList}" var="m">
@@ -98,6 +101,7 @@
 							${m.MAmount}</span></li>
 				</c:forEach>
 			</ul>
+			<hr>
 		</div>
 		<div class="recipeNavi">
 			<ul>
@@ -119,43 +123,75 @@
 				</c:if>
 			</div>
 			<c:forEach items="${list}" var="rc">
-				<img src="/resources/img/recipe/person.png" width="30px">
-				<span class="rcNmae">${rc.nickname }</span>
-				<span class="rcDate">${rc.rcDate }</span>
-				<p class="rcContents">${rc.rcContentBr }</p>
-				<textarea id="updateContent" name="rcContent" class="form-control"
-					style="display: none;">${rc.rcContent }</textarea>
+				<div>
+					<img src="/resources/img/recipe/person.png" width="30px"> <span
+						class="rcNmae">${rc.nickname }</span> <span class="rcDate">${rc.rcDate }</span>
+					<p class="rcContents">${rc.rcContentBr }</p>		
+				<textarea id="updateContent" name="rcContent" class="form-control" style="display: none;">${rc.rcContent }</textarea>
 				<button style="display: none;">수정완료</button>
 				<c:if test="${sessionScope.m.memberNo == rc.memberNo}">
 					<p class="commentsBtn">
-						<a href="javascript:void(0)"
-							onclick="updateComment(this,'${rc.RCommentNo}');">수정</a> <a
-							href="javascript:void(0)"
-							onclick="deleteComment(this,'${rc.RCommentNo}');">삭제</a>
+						<a href="javascript:void(0)" onclick="updateComment(this,'${rc.RCommentNo}');">수정</a> 
+						<a href="javascript:void(0)" onclick="deleteComment(this,'${rc.RCommentNo}');">삭제</a>
 					</p>
 				</c:if>
+				</div>
 			</c:forEach>
-		</div>	
-			
-			<c:forEach items="${rb.RList }" var="rc" varStatus="i">
-				<span>${i.count }</span>
-			<div class="contents">		
-		
-			<div class="ds">${rc.rContentBr }</div>
-			<img src="/resources/upload/recipeContent/${rc.filepath }">
-			</div>
-			</c:forEach>	
-		<div class="product" style="display:none;">
-			sds
 		</div>
+		<div class="contentsWrap">
+			<c:forEach items="${rb.RList }" var="rc" varStatus="i">
+				<div class="contents">
+					<div class="conNum">${i.count }</div>
+					<div class="conText">${rc.rContentBr }</div>
+					<img src="/resources/upload/recipeContent/${rc.filepath }">
+					<hr>
+				</div>
+			</c:forEach>
+		</div>
+
+		<div class="product" style="display: none;">
+			<hr>
+			<c:forEach items="${rb.PList }" var="p">
+				<div class="milkit">
+					<c:if test="${sessionScope.m.memberNo != null}">
+						<a
+							href="/milkitView.do?productNo=${p.productNo }&memberNo=${sessionScope.m.memberNo}&recipeNo=${p.recipeNo}">
+							<img src="/resources/upload/product/${p.filepath }">
+							<p class="pTitle">${p.milkitName }</p>
+							<p class="pComment">${p.milkitComment}</p>
+							<p class="mPrice">${p.milkitPrice }</p>
+						</a>
+					</c:if>
+					<c:if test="${sessionScope.m.memberNo == null}">
+						<a
+							href="/milkitView.do?productNo=${p.productNo }&memberNo=0&recipeNo=${p.recipeNo}">
+							<img src="/resources/upload/product/${p.filepath }">
+							<p class="pTitle">${p.milkitName }</p>
+							<p class="pComment">${p.milkitComment}</p>
+							<p class="mPrice">
+								<fmt:formatNumber value="${p.milkitPrice}" />
+								원</span>
+							</p>
+						</a>
+					</c:if>
+					<hr>
+				</div>
+			</c:forEach>
+		</div>
+
 	</div>
 	<script>
+		window.onload = function() {
+			$(".view").eq(0).css("font-size", "28px");
+			$(".view").eq(0).css("background-color", "#9A86B3");
+			$(".view").eq(0).css("color", "#6D5874");
+		}
+
 		var memberNo = $("#memberNo").val();
 
 		function initTab() {
 			var frms = $(".view");
 			for (var i = 0; i < frms.length; i++) {
-				
 				$(".view").eq(i).css("font-size", "25px");
 				$(".view").eq(i).css("background-color", "#C4BFE3");
 				$(".view").eq(i).css("color", "#8E44AD");
@@ -163,30 +199,29 @@
 		}
 		function selectOne(i) {
 			initTab();
-			$(".view").eq(i).css("font-size", "30px");
-			
+			$(".view").eq(i).css("font-size", "28px");
 			$(".view").eq(i).css("background-color", "#9A86B3");
 			$(".view").eq(i).css("color", "#6D5874");
 		}
 		$(".view").eq(0).click(function() {
 			selectOne(0);
 			$(".rcList").css("display", "none");
-			$(".contents").css("display", "block");
+			$(".contentsWrap").css("display", "block");
 			$(".product").css("display", "none");
 		})
 		$(".view").eq(1).click(function() {
 			selectOne(1)
 			$(".rcList").css("display", "block");
-			$(".contents").css("display", "none");
+			$(".contentsWrap").css("display", "none");
 			$(".product").css("display", "none");
 		});
 		$(".view").eq(2).click(function() {
 			selectOne(2)
 			$(".rcList").css("display", "none");
-			$(".contents").css("display", "none");
+			$(".contentsWrap").css("display", "none");
 			$(".product").css("display", "block");
 		});
-		
+
 		$("#insertBtn").click(function() {
 			var rcContent = $("#rcContent").val();
 			var recipeNo = $
@@ -316,11 +351,7 @@
 		});
 
 		$("#reportBtn").click(function() {
-			var recipeNo = $
-			{
-				rb.recipeNo
-			}
-			;
+			var recipeNo = $	{rb.recipeNo};
 
 			var reportComment = $("input[name=reportComment]:checked").val();
 			var reportCheck = $
@@ -357,7 +388,6 @@
 		$("#cancelBtn").click(function() {
 			$("#modal-wrap").hide();
 		});
-		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

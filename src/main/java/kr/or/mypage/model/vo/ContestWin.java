@@ -6,9 +6,11 @@ import lombok.Data;
 public class ContestWin {
 //private int winNo;
 private int contestNo;
-//private int voteCount;
+private int voteCount;
 private String contestMonth;
 private int contestResult;
 private int recipeWriter;
+private String memberNickName;
+private String filePath;
 private String recipeTitle;
 }

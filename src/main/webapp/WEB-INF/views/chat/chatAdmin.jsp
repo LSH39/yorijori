@@ -22,7 +22,7 @@
     <div class="chatTop"><p>요리조리 1:1 문의</p></div>
     <div class="chatMain scrollBottom">
         <table id="chatAdminTbl">
-            <!-- ajax로 추가 -->
+            <!-- WebSocket으로 추가 -->
         </table>
     </div>
     <div class="chatBottom">
@@ -38,38 +38,43 @@
 	var sendTextBefore;
 	var ws;
 	var webSocketType;
-	var alarm = 0;
+	var startNo = 0;
+	var enter = 0;
     $(function(){
         $("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatFrmAdmin").css("display","none").prop("on",false);
-        $(".chatAlarm").css("display","none");
-	    $("#chatAdminAlarm").text(alarm);
-        ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
+	    $(".chatAlarm").css("display","inline");
+        ws = new WebSocket("ws://192.168.219.102/chatWebsoket.do");
+        ws.onopen = startChat;  // ws.onopen 은 웹소켓 연결시 자동으로 실행됨
+        ws.onmessage = receiveMsg;
+        ws.onclose = endChat;
     });
 
     $("#chatAdmin").click(function(){
     	// alarm
-		$(".chatAlarm").css("display","inline");
-		alarm = 0;
+		var alarm = 0;
 		$("#chatAdminAlarm").text(alarm);
 		// chat
-        ws.onopen = startChat;
-        ws.onmessage = receiveMsg;
-        ws.onclose = endChat;
         if($("#chatFrmAdminHome").prop("on") == false){
         	if($("#chatFrmAdmin").prop("on") == false){
 	            $("#chatFrmAdminHome").css("display","block").prop("on",true);
-	            startChat();        		
+	            if(startNo>1){
+	            	$("#chatAdminHomeTbl").children().remove();
+		           	reStartChat();
+	            }
         	}else{
                 $("#chatFrmAdmin").css("display","none").prop("on",false);
                 $("#chatAdminTbl").children().remove();
+                closeChat();
         	}
         }else{
         	$("#chatFrmAdminHome").css("display","none").prop("on",false);
             $("#chatAdminHomeTbl").children().remove();
             $("#chatFrmAdmin").css("display","none").prop("on",false);
             $("#chatAdminTbl").children().remove();
+            closeChat();
         }
+		startNo += 1;
     });
     
     function startChat(){
@@ -84,33 +89,48 @@
 		
 	}
 	
-	function appendChat(appendMsg){
+	 function reStartChat(){
+    	webSocketType = "reStart";
+    	var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
+		var data = {type:"reStart",memberNo:sessionMemberNo, alarm:alarm};
+	    ws.send(JSON.stringify(data));
+	}
+	
+	function closeChat(){
+	   	webSocketType = "closeChat";
+	   	var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
+		var data = {type:"closeChat",memberNo:sessionMemberNo, alarm:alarm};
+	    ws.send(JSON.stringify(data));
+	}
+	
+	function appendChat(textMsg){
+		var msg = JSON.parse(textMsg);
 		// alarm
 		if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
-			alarm += 1;
-			$("#chatAdminAlarm").text(alarm);
+			//alarm += 1;
+			$("#chatAdminAlarm").text(msg.alarm);
 		}
 		// chat
-		if(appendMsg != "noMsg"){
-			if(webSocketType == "start"){
-				$("#chatAdminHomeTbl").append(appendMsg);
+		if(msg.appendMsg != "noMsg"){
+			if(webSocketType == "start" || webSocketType == "reStart"){
+				$("#chatAdminHomeTbl").append(msg.appendMsg);
 			}else if(webSocketType == "chat"){
 		      	$("#chatFrmAdminHome").css("display","none").prop("on",false);
 		        $("#chatAdminHomeTbl").children().remove();
-				$("#chatAdminTbl").append(appendMsg);
+				$("#chatAdminTbl").append(msg.appendMsg);
 				$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-				$("#chatText").val("");
-				sendMsg = "";
-				sendTextBefore = "";
-			}			
+			}
 		}
-	}
-	function reStartChat(){
-		$("#chatFrmAdminHome").css("display","none").prop("on",false);
-        $("#chatAdminHomeTbl").children().remove();
-		webSocketType = "reStart";
-		var data = {type:"start",memberNo:sessionMemberNo};
-	    ws.send(JSON.stringify(data));
+		// enter
+		if(enter == 1){
+			$("#chatText").val("");
+			sendMsg = "";
+			sendTextBefore = "";
+		}
+		enter = 0;
+		startNo += 1;
 	}
 	
     // ajax로 불러온 새로운 데이터에 function을 적용하려면, $(document).on() 사용
@@ -136,19 +156,24 @@
     });
     
  	function chatAdmin(selectUser){
+ 		var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
  		$("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatAdminHomeTbl").children().remove();
         $("#chatFrmAdmin").css("display","block").prop("on",true);
         webSocketType = "chat";
-        var data = {type:"selectUser",selectUser:selectUser, sessionMemberNo:sessionMemberNo};
+        var data = {type:"selectUser",selectUser:selectUser, sessionMemberNo:sessionMemberNo, alarm:alarm};
       	ws.send(JSON.stringify(data));
  	}
 	
     $("#chatEnter").click(function(){
+    	enter = 1;
+    	var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
     	if(sendMsg.trim() != ""){
 		    var sender = sessionMemberNo;
 		    var receiver = selectUser;
-		    var data = {type:"chat", chatSend:sender, selectUser:selectUser, chatContent:sendMsg};
+		    var data = {type:"chat", chatSend:sender, selectUser:selectUser, chatContent:sendMsg, alarm:alarm};
 		    ws.send(JSON.stringify(data));
 		}
     }); 

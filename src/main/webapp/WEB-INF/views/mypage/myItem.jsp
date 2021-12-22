@@ -26,8 +26,8 @@
 }
 /*밀키트*/
 .item{
-    width: 250px;
-    height:360px;
+    width: 700px;
+    height:300px;
     background-color: rgba(224, 224, 224, 0.41);
     float: left;
     margin-left: 15px;
@@ -41,11 +41,70 @@
 #itemI{
     width: 250px;
     height:180px;
+    float:left;
 }
 #items{
    margin-top:12px;
+   float:left;
   
    }
+   
+   .mySell{
+         width:800px;
+         height:230px;
+         background-color:rgb(251, 251, 137);
+         margin-bottom:30px;
+}
+
+
+.sellItem{
+    width:300px;
+    height:200px;
+    float: left; 
+    line-height: 30px;
+  
+}
+
+#sell{
+  width:30px;
+  height:30px;
+  
+  
+  }
+  #product{
+  width:270px;
+    height:180px;
+    margin-left:30px;
+  
+  }
+  .it{
+  margin-left:70px;
+  }
+#ii{
+
+width:400px;
+height:150px;
+float:left;
+margin-left:20px;
+line-height: 30px;
+}
+#total{
+
+width:300px;
+height:50px;
+float:left;
+margin-left:200px;
+text-align:right;
+color:navy;
+font-weight:600;
+
+}
+.noCou{
+color:gray;
+margin-left:350px;
+margin-top:120px;
+
+}
 </style>
 </head>
 <body>
@@ -62,28 +121,49 @@
        	</c:otherwise>
        </c:choose>   
 		<!-- 메인 콘텐츠 -->
-		<div class="main-content">
-			<h3 id="h_hotel">내가 판매하는 밀키트</h3>
-			<div id="line2"></div>
-			<br>
+     <div class="main-content">
+            <h3 id="h_hotel">내가 판매하는 밀키트</h3>
+            <div id="line2"></div><br>
+
+			<c:choose>
+				<c:when test="${ not empty list }">
+					<c:forEach items="${list}" var="ms" varStatus="i">
+
+						<div class="mySell">
+							<div class="sellNo">
+
+								<span id="dd">${i.count }</span>
+							</div>
+							<div class="sellItem">
+
+								<img id="product"
+									src="/resources/upload/product/milkit_test.jpg"></span><br>
+							</div>
+
+							<div id="ii">
+								<span class="it_info1"><b id="it1">상품번호 :</b>&emsp;${ms.productNo}</span><br>
+								<span class="it_info1"><b id="it1">밀키트이름 :</b>&emsp;${ms.milkitName}</span><br>
+								<span class="it_info1"><b id="it1">밀키트가격 :</b>&emsp;${ms.milkitPrice}원</span>&emsp;<br>
+								<span class="it_info1"><b id="it1">등록일:</b>&emsp;${ms.milkitDate}</span>&emsp;<br>
+								<span class="it_info1"><b id="it1">재고 :</b>&emsp;${ms.milkitStock}개남음</span>&emsp;<br>
+								<input type="hidden" value="${ms.milkitWriter}">
+
+							</div>
+							<div id="total">
+								<span class="it_info1"><b id="m">총 판매수량: </b>&emsp;${ms.totalAmount}개</span>&emsp;<br>
+								<span class="it_info1"><b id="m">총 누적금액: </b>&emsp;${ms.totalAmount*ms.milkitPrice}원</span>&emsp;<br>
 
 
-            <c:forEach items="${list}" var="mi" varStatus="i">
-			<div class="item">
-				<a href="#"> <img id="itemI"
-					src="resources/img/mypage/house.png">
-				</a>
-				<div id="items">
-					<span class="it_info1"><b id="it1">상품번호 :</b>&emsp;${mi.productNo}</span><br>
-					<span class="it_info1"><b id="it1">밀키트이름 :</b>&emsp;${mi.milkitName}</span><br>
-					<span class="it_info1"><b id="it1">밀키트가격 :</b>&emsp;${mi.milkitPrice}원</span>&emsp;<br>
-					<span class="it_info1"><b id="it1">등록일:</b>&emsp;${mi.milkitDate}</span>&emsp;<br>
-					<span class="it_info1"><b id="it1">재고 :</b>&emsp;${mi.milkitStock}개 남음</span>&emsp;<br>
-					<input type="hidden" value="${mi.milkitWriter}">
-					
-				</div>
-			</div>
-			</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+
+				<c:otherwise>
+					<h6 class="noCou">판매하시는 상품이 없습니다.</h6>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 	</div>
 

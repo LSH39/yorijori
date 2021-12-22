@@ -50,6 +50,7 @@
       <c:choose>
       	<c:when test="${dm.dmSender != sessionScope.m.memberNickname }">
       <div class="message-row">
+      	
         <img src="./resources/img/dm/classtest.jpg"/>
         <div class="message-row__content">
           <span class="message__author">${dm.dmSender }</span>

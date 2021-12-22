@@ -48,7 +48,7 @@ public class DmDao {
 		return sqlSession.selectOne("direct.selectOneDmRoomNo", map);
 	}
 
-	//시퀀스 증가
+	//조회했는데 없으면 시퀀스로 증가
 	public int incDmRoomNo() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("direct.incDmRoomNo");
@@ -73,9 +73,18 @@ public class DmDao {
 		return (ArrayList<Dm>)list;
 	}
 
+	//읽음 처리 하는거
 	public void updateReadflag(int dmRoomNo) {
 		// TODO Auto-generated method stub
 		sqlSession.update("updateReadflag", dmRoomNo);
 	}
+
+	//클래스뷰에서 문의 내용 이전거 있는지 조회하는거
+	public ArrayList<Dm> selectOneDmList(int dmRoomNo) {
+		// TODO Auto-generated method stub
+		List<Dm> list = sqlSession.selectList("direct.selectOneDmList", dmRoomNo);
+		return (ArrayList<Dm>)list;
+	}
+
 
 }

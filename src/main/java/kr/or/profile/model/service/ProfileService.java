@@ -84,6 +84,19 @@ public class ProfileService {
 		return list;
 	}
 
+	//AJAX로 프로필 추가 로딩
+	public ArrayList<RecipeBoard> selectAllAjaxList(int memberNo, int start) {
+		// TODO Auto-generated method stub
+		int len = 9; //불러올 레시피 게시물 갯수
+		int end = start + len - 1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<RecipeBoard> list1 = dao.selectAllAjaxList(map);
+		return list1;
+	}
+
 	
 	
 }

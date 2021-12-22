@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipe.model.vo.RecipeComment;
@@ -90,9 +91,25 @@ public class RecipeDao {
 		return sqlSession.insert("recipe.insertReport", rp);
 	}
 
-	public int updateRecipe(int recipeNo, int memberNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteRecipe(int recipeNo) {
+		return sqlSession.update("recipe.deleteRecipe", recipeNo);
+	}
+
+	public int updateRecipeBoard(RecipeBoard rb) {
+		return sqlSession.update("updateRecipeBoard", rb);
+	}
+
+	public int updateMaterial(Material m) {
+		return sqlSession.update("updateMaterial", m);
+	}
+
+	public int updateRecipeContent(RecipeContent rc) {
+		return sqlSession.update("updateRecipeContent",rc);
+	}
+
+	public ArrayList<Product> selectProduct(int recipeNo) {
+		List<Product>list = sqlSession.selectList("recipe.selectProduct",recipeNo);
+		return (ArrayList<Product>)list;
 	}
 
 

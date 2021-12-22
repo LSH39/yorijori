@@ -11,8 +11,8 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="main">
-		<form action="/updateRecipe2.do" method="post"	enctype="multipart/form-data">
-			<input type="hidden" value="${sessionScope.m.memberNo }">
+		<form action="/updateRecipeFrm.do" method="post"	enctype="multipart/form-data">
+			<input type="hidden" name="recipeNo" value="${rb.recipeNo }">
 			<div class="recipeFrm">
 				<label for="recipeTitle">레시피 제목 </label>
 				<input type="text" id="recipeTitle" name="recipeTitle" value="${rb.recipeTitle }">
@@ -23,6 +23,7 @@
 			</div>
 			<div class="recipeFrm">
 				<label for="uploadImg">대표이미지</label> 
+				<input type="hidden" name="filepath" value="${rb.filepath }">
 				<img id="img" src="/resources/upload/recipe/${rb.filepath }"  width="150px">
 				<span id="imgName">${rb.filepath }</span>
 				<input type="file" id="uploadImg" name="uploadImg" onchange="loadImg(this);" 
@@ -45,6 +46,7 @@
 					<p>재료정보</p>
 					<c:forEach items="${rb.MList }" var="m">
 					<div class="materialBox">
+						<input type="hidden" name="mNoList" value="${m.materialNo }">
 						<input type="text"  name="mNameList" value="${m.materialName }"> 
 						<input type="text"	name="mAmountList" value="${m.MAmount }">
 					</div>
@@ -56,7 +58,7 @@
 			<div class="recipeFrm">
 				<p>카테고리</p>
 				<select name="situation" id="situation">
-					<option selected>상황별</option>
+					<option selected value="">상황별</option>
 					<option value="1">술안주</option>
 					<option value="2">다이어트</option>
 					<option value="3">손님초대</option>
@@ -66,7 +68,7 @@
 					<option value="7">비건/채식</option>
 					<option value="8">기타</option>
 				</select> <select name="material" id="material">
-					<option selected>재료별</option>
+					<option selected value="">재료별</option>
 					<option value="1">육류</option>
 					<option value="2">채소류</option>
 					<option value="3">해산물</option>
@@ -76,7 +78,7 @@
 					<option value="7">과일</option>
 					<option value="8">기타</option>
 				</select> <select name="recipeLevel" id="recipeLevel">
-					<option selected>난이도별</option>
+					<option selected value="">난이도별</option>
 					<option value="1">상</option>
 					<option value="2">중</option>
 					<option value="3">하</option>
@@ -88,10 +90,9 @@
 				<div class="cookOrder">		
 				<c:set var="num" value="${num+1 }"></c:set>			
 					<p>STEP${i.count }</p>
-					<textarea name="rContentList" >${rc.recipeContent}</textarea>
-					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">
-					<input type="file" name="files" class="contentImg" accept=".jpg,.jpeg,.png,.gif"
-						multiple >						
+					<input type="hidden" name="rcNoList" value="${rc.RFileNo }">
+					<textarea name="rContentList">${rc.recipeContent}</textarea>
+					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">					
 				</div>
 			</c:forEach>
 				<div class="newContent"></div>
@@ -130,7 +131,7 @@
 			var rContent = $("textarea[name='rContentList']").length;
 			
 			for(i=0; i<rContent; i++){
-				if($("textarea[name='rContentList']").eq(i).val()=="" || $("input[name='files']").eq(i).val()==""){
+				if($("textarea[name='rContentList']").eq(i).val()==""){
 					alert("조리순서를 빈칸없이 작성해주세요");
 					return false;
 				}
@@ -143,9 +144,12 @@
 				}
 			}	
 			
-		 	if($("#recipeTitle").val()=="" || $("#subhead").val()=="" || $("#uploadImg").val()=="" || $("#foodname").val()=="" || $("#situation").val()=="" || $("#material").val()=="" || $("#recipeLevel").val()=="" ){
-					 alert("빈칸없이 작성해주세요"); 
+		 	if($("#recipeTitle").val()=="" || $("#subhead").val()=="" ||  $("#foodname").val()=="" ){
+		 		     alert("빈칸없이 작성해주세요"); 
 					 return false;
+				}else if( $("#situation").val()=="" || $("#material").val()=="" || $("#recipeLevel").val()=="" ){
+			 		     alert("카테고리를 선택해주세요"); 
+						 return false;
 				}
 			}
 			

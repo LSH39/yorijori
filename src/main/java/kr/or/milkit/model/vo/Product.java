@@ -1,5 +1,9 @@
 package kr.or.milkit.model.vo;
 
+import java.util.ArrayList;
+
+import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.review.model.vo.Review;
 import lombok.Data;
 
 @Data
@@ -17,5 +21,7 @@ public class Product {
 	private int milkitStock;
 	private int milkitDelete;
 	private String nickname;
+	private ArrayList<Review> rList;
+	private ArrayList<RecipeBoard> rbList;
 }
 

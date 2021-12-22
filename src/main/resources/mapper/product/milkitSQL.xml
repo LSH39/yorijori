@@ -97,4 +97,24 @@
   		(select member_nickname from member m where m.member_no=p.milkit_writer)as nickname
   	from product p where product_no=#{productNo}
   </select>
+  <select id="selectReview" parameterType="_int" resultType="review">
+  	select 
+  		review_no as reviewNo,
+  		product_no as productNo,
+  		member_nickname as memberNickname,
+  		review_content as reviewContent,
+  		review_rate as reviewRate,
+  		review_date as reviewDate
+  	from review where product_no=#{productNo} 		
+  </select>
+  <select id="selectRecipeBoard" parameterType="_int" resultType="rb">
+  	select 
+  		recipe_no as recipeNo,
+  		recipe_title as recipeTitle,
+  		filepath,
+  		subhead,
+  		recipe_delete as recipeDelete
+  	from recipe_board where recipe_no=#{recipeNo} and recipe_delete=1
+  </select>
+ 
 </mapper>

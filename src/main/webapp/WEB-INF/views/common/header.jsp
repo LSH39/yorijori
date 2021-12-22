@@ -75,15 +75,15 @@
 			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
 		</c:when>
 		<c:when test="${sessionScope.m.memberLevel ==  1 }">
-			<a href="mypage.do?memberId=${sessionScope.m.memberId }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
+			<a href="/mypage.do?memberId=${sessionScope.m.memberId }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
-	        <a class="qna chat" id="chatAdmin">1:1문의하기</a>
+	        <a class="qna chat" id="chatUser">1:1문의하기 <span class='chatAlarm'>+<span id='chatUserAlarm'></span></span></a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
 	       	<!-- LSH -->
-			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
+			<%@include file = "/WEB-INF/views/chat/chatUser.jsp" %>
 		</c:when>
        	<c:otherwise>
-	       	<a href="mypage.do?memberId=${sessionScope.m.memberId }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
+	       	<a href="/selPage.do?memberId=${sessionScope.m.memberId }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
 	        <a class="qna chat" id="chatUser">1:1문의하기 <span class='chatAlarm'>+<span id='chatUserAlarm'></span></span></a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
@@ -124,7 +124,7 @@
 
               <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
               <li><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판</a></li>
-              <li><a href="#">메뉴추천</a></li>
+              <li><a href="/randomMenuFrm.do">메뉴추천</a></li>
             </ul>
           </li>
           <li>

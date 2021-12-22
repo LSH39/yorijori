@@ -24,6 +24,10 @@
   position: relative;
 }
 
+.screen-header_setting a{
+	color: #444;
+}
+
 .screen-header_dot {
   width: 5px;
   height: 5px;

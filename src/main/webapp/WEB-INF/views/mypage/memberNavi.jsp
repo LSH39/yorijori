@@ -105,11 +105,11 @@ color:red;
 						<li><a href="/deleteFrm.do?">회원탈퇴<span>&gt;</span></a></li>
 						<li><a href="/myContestList.do?recipeWriter=${sessionScope.m.memberNo }&reqPage=1">참여한 경연대회<span>&gt;</span></a></li>
 						<li><a href="/myclass.do?memberNickname=${sessionScope.m.memberNickname}">요리클래스 예약내역<span>&gt;</span></a></li>
-						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
+						<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
 						<li><a href="/myChatList.do?chatReceive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
 						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
-						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">찜한 레시피<span>&gt;</span></a></li>
-						<li><a href="/myPoint.do?memberNo=104&reqPage=1">포인트 내역<span>&gt;</span></a></li>
+						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">좋아요 레시피<span>&gt;</span></a></li>
+						<li><a href="/myPoint.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">포인트 내역<span>&gt;</span></a></li>
 					</ul>
 				</li>
 				<li><span><b>내 작성글</b></span>

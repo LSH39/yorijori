@@ -14,4 +14,5 @@ public class LikeRecipe {
 	private String recipeLevel;
 	private String subhead;
 	private String recipeDate;
+	private String memberNickname;
 }

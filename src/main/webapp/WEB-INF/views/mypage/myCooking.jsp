@@ -233,12 +233,18 @@
    	}
 
 #pageNavi{
-	display: flex;
+
 	justify-content: center;
-	margin-left:500px;
+	margin-left:400px;
+	margin-top:100px;
 	
 }
+.noCou{
+color:gray;
+margin-left:350px;
+margin-top:120px;
 
+}
 </style>
 </head>
 <body>
@@ -260,7 +266,8 @@
 			<div id="line2"></div>
 			<div>
 			<ul class="grid-list">
-	
+	  <c:choose>
+                  	<c:when test="${ not empty list }">
 			<c:forEach items="${list }" var="ccls">
 				<li>
 					<div>
@@ -291,6 +298,11 @@
 					</div>
 				</li>
 			</c:forEach>
+			       </c:when>
+                
+                  	<c:otherwise><h6 class="noCou">작성 클래스가 없습니다.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
 			</ul>
 		</div>
 		</div>

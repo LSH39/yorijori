@@ -83,6 +83,10 @@
 .subnavi>li>a:hover{
 		 background-color:rgb(177, 109, 204);
 		 }
+ #count{
+color:red;
+
+}
 </style>
 </head>
 <body>
@@ -94,11 +98,11 @@
 						<li><a href="/selPage.do?memberId=${sessionScope.m.memberId }">내정보 조회 및 수정<span>&gt;</span></a></li>
 						<li><a href="/profilePath.do?memberId=${sessionScope.m.memberId }">프로필 사진 바꾸기<span>&gt;</span></a></li>
 						<li><a href="/selPath.do?memberId=${sessionScope.m.memberId }">자격증조회 및 변경<span>&gt;</span></a></li>
-						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 구매내역<span>&gt;</span></a></li>
+						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 주문내역<span>&gt;</span></a></li>
 						<li><a href="/mycouponList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">쿠폰함<span>&gt;</span></a></li>
 						<li><a href="/delSelFrm.do?">회원탈퇴<span>&gt;</span></a></li>
-						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
-						<li><a href="/myChatList.do?chatRecive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
+					    <li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
+						<li><a href="/myChatList.do?chatReceive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
 						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
 						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">찜한 레시피<span>&gt;</span></a></li>			
 						<li><a href="/myRecipe.do?recipeWriter=${sessionScope.m.memberNo }">내 작성 레시피<span>&gt;</span></a></li>
@@ -109,10 +113,10 @@
 				</li>
 				<li><span>클래스/판매</span>
 					<ul class="subnavi">
-						<li><a href="/mycookingList.do?memberNickname=승민전문가&reqPage=1">내 요리클래스<span>&gt;</span></a></li>
-					    <li><a href="/myItem.do?milkitWriter=111">내 판매밀키트<span></span></a></li>
-						<li><a href="/sellList.do?memberNo=5" id="lf-click">내 판매내역<span>&gt;</span></a></li>
-					    <li><a href="/totalSell.do?memberNo=111" id="lf-click">내 판매량통계<span></span></a></li> 
+						<li><a href="/mycookingList.do?memberNickname=${sessionScope.m.memberNickname }&reqPage=1">내 요리클래스<span>&gt;</span></a></li>
+					   <%--  <li><a href="/myItem.do?milkitWriter=${sessionScope.m.memberNo }">내 판매밀키트/통계량<span></span></a></li>--%>
+						<li><a href="/sellList.do?milkitWriter=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 판매내역<span>&gt;</span></a></li>
+					    <li><a href="/totalSell.do?milkitWriter=${sessionScope.m.memberNo }" id="lf-click">내 판매밀키트/판매량<span></span></a></li> 
 					 
 
 					</ul></li>

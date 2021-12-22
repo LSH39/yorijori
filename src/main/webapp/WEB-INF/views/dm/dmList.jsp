@@ -55,7 +55,7 @@
               	<c:when test="${sessionScope.m.memberNickname eq dm.dmReceiver}">
               		<c:choose>
               			<c:when test="${not empty dm.dmSpic }">
-	            			<img class="user-component__profile_img" src="./resources/upload/member/${dm.dmSpic }" />          		
+	            			<img class="user-component__profile_img" src="./resources/upload/member_profile/${dm.dmSpic }" />          		
               			</c:when>
               			<c:otherwise>
 	            			<img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />          		
@@ -65,7 +65,7 @@
               	<c:when test="${sessionScope.m.memberNickname ne dm.dmReceiver}">
               		<c:choose>
               			<c:when test="${not empty dm.dmRpic }">
-            				<img class="user-component__profile_img" src="./resources/upload/member/${dm.dmRpic }" />
+            				<img class="user-component__profile_img" src="./resources/upload/member_profile/${dm.dmRpic }" />
               			</c:when>
               			<c:otherwise>
 	            			<img class="user-component__profile_img" src="./resources/img/dm/classtest.jpg" />          		
@@ -108,9 +108,6 @@
       </a>
     </main>
     </c:forEach>
-    <script
-      src="https://kit.fontawesome.com/6478f529f2.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 </body>
 </html>

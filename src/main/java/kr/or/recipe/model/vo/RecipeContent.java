@@ -10,6 +10,7 @@ public class RecipeContent {
 	private String filepath;
 	private String recipeContent;
 	
+	private String[] rcNoList;
 	private String[] rContentList;
 
 	public String getrContentBr() {
