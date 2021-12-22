@@ -445,5 +445,15 @@ and memberLevel = 5
 	
 	</update>
 	
+	<delete id="deleteMember1" parameterType="string">
+		delete from member where member_id=#{memberId} and member_pw=#{memberPw}
 
+	</delete>
+	
+	
+	<update id="upSeller" parameterType="string">
+		update member set member_level=5 where member_Id=#{memberId} and
+		member_pw=#{memberPw}
+
+	</update>
 </mapper>

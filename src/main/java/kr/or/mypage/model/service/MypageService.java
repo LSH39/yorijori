@@ -149,10 +149,7 @@ public class MypageService {
 		return list;
 	}
 
-	public int upSeller(Member m) {
-		int result = dao.upSeller(m);
-		return result;
-	}
+
 	/*
 	public ArrayList<Myorder> myOrderList(int memberNo) {
 		ArrayList<Myorder> list = dao.myOrderList(memberNo);

@@ -135,22 +135,7 @@ public class MypageController {
 		model.addAttribute("list", list);
 		return "mypage/chatList";
 	}
-	//전문가 탈퇴요청폼
-	@RequestMapping(value = "/delSelFrm.do")
-	public String deleteSelFrm() {
-		return "mypage/deleteSeller";
-	}
-	@RequestMapping(value = "/deleteSeller.do")
-	public String deleteSeller(Member m, Model model) {
-		int result = service.upSeller(m);
-		if (result > 0) {
-			model.addAttribute("msg", "탈퇴요청 성공");
-		} else {
-			model.addAttribute("msg", "탈퇴 요청 실패");
-		}
-		model.addAttribute("loc", "/");
-		return "common/msg";
-	}
+
 	//내 주문내역보기
 	@RequestMapping(value = "/myOrderList.do")
 	public String myOrderList1(int memberNo,Model model,int reqPage) {

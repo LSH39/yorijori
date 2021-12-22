@@ -268,7 +268,39 @@ public class MemberController {
 		}
 		return "common/msg";
 	}
-	
-	
+  /*회원탈퇴 */
+	@RequestMapping(value = "/deleteFrm.do")
+	public String delFrm() {
+		return "mypage/deleteMember";
+	}
+	@RequestMapping(value = "/deleteMember.do")
+	public String deleteMember(Member member, Model model) {
+     int result =service.deleteMemberEnc(member);
+		if (result > 0) {
+			model.addAttribute("msg", "탈퇴요청 성공");
+			model.addAttribute("loc", "/");
+		} else {
+			model.addAttribute("msg", "탈퇴 요청 실패");
+			model.addAttribute("loc", "/deleteFrm.do");
+		}
+		return "common/msg";
+	}
+	//전문가 탈퇴요청폼
+	@RequestMapping(value = "/delSelFrm.do")
+	public String deleteSelFrm() {
+		return "mypage/deleteSeller";
+	}
+	@RequestMapping(value = "/deleteSeller.do")
+	public String deleteSeller(Member member, Model model) {
+		int result = service.upSellerEnc(member);
+		if (result > 0) {
+			model.addAttribute("msg", "탈퇴요청 성공");
+			model.addAttribute("loc", "/");
+		} else {
+			model.addAttribute("msg", "탈퇴 요청 실패");
+			model.addAttribute("loc", "/delSelFrm.do");
+		}
+		return "common/msg";
+	}
 }
 
