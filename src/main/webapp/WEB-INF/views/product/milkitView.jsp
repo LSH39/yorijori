@@ -17,6 +17,12 @@
 		<div id="title">
 			<div id="titleImg">
 				<img src="/resources/upload/product/${p.filepath }">
+				<c:choose>
+					<c:when test="${not empty sessionScope.m }">
+						<input type="hidden" name="memberId" class="memberId" value="${sessionScope.m.memberId }">
+						<input type="hidden" name="productNo" class="productNo" value="${p.productNo }">
+					</c:when>
+				</c:choose>
 			</div>
 			<div id="titleText">
 				<p id="pName">${p.milkitName }</p>
@@ -195,6 +201,20 @@
 				$(".pContent").css("display", "none");
 				$(".review").css("display", "none");
 				$(".recipe").css("display", "block");
+			});
+			
+			//최근 본 상품 기록용
+			$(function(){
+				var memberId = $(".memberId").val();
+				var productNo = $(".productNo").val();
+				$.ajax({
+					url: "/insertRecentProduct.do",
+					method: "get",
+					data: {memberId:memberId, productNo:productNo},
+					success: function(data){
+						console.log(data);
+					}
+				});
 			});
 			
 	

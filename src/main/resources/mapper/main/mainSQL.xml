@@ -176,4 +176,7 @@
 	        </choose>
         order by likeCount desc, readCount desc   
 	</select>
+	<insert id="insertRecentProduct" parameterType="map">
+		insert into recent_product values (rp_seq.nextval, #{productNo}, #{memberId})
+	</insert>
 </mapper>

@@ -90,4 +90,9 @@ public class MainDao {
 		List<RecipeListData> rld = sqlSession.selectList("main.bestRecipes", category);
 		return (ArrayList<RecipeListData>) rld;
 	}
+
+	public int insertRecentProduct(HashMap<String, Object> map) {
+		int result = sqlSession.insert("main.insertRecentProduct", map);
+		return result;
+	}
 }

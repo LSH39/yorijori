@@ -13,6 +13,7 @@ import kr.or.main.model.service.MainService;
 import kr.or.main.model.vo.FollowingData;
 import kr.or.main.model.vo.MainSearchResult;
 import kr.or.main.model.vo.MainViewData;
+import kr.or.main.model.vo.RecentProductData;
 import kr.or.main.model.vo.RecipeListData;
 import kr.or.recipe.model.vo.RecipeBoard;
 @Controller
@@ -69,6 +70,24 @@ public class MainController {
 		ArrayList<RecipeListData> rld = service.selectBestRecipes(category);
 		model.addAttribute("list", rld);
 		return "main/bestRecipes";
+	}
+	
+	@RequestMapping(value="/recentProducts.do")
+	public String recentProducts(Model model, String memberId) {
+		ArrayList<RecentProductData> rpd = service.selectRecentProducts(memberId);
+		model.addAttribute("list", rpd);
+		return "main/recentProducts";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/insertRecentProduct.do")
+	public String insertRecentProduct(int productNo, String memberId) {
+		int result = service.insertRecentProduct(productNo, memberId);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
 	}
 	
 }

@@ -249,7 +249,7 @@
   		<div class="quickmenu"> 
 		  	<ul>
 		  		<li><img src="/resources/img/mainpage/delivery.jpg" style="width:80px;height:110px;"> <a style="margin-bottom: 85px;">새벽배송</a></li>
-		  		<li><a href="#"><img src="/resources/img/mainpage/basket.png"> 최근 본 상품</a></li>
+		  		<li><a href="/recentProducts.do?memberId=${sessionScope.m.memberId }"><img src="/resources/img/mainpage/basket.png"> 최근 본 상품</a></li>
 		  		<li><a href="/profile.do?memberId=${sessionScope.m.memberId }"><img src="/resources/img/mainpage/q_mark.png"> 내 프로필</a></li>
 		  		<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname }"><img src="/resources/img/mainpage/message.png"> 내 메세지</a></li>
 		  	</ul>

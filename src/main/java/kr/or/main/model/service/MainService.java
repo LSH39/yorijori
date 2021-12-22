@@ -12,6 +12,7 @@ import kr.or.main.model.dao.MainDao;
 import kr.or.main.model.vo.FollowingData;
 import kr.or.main.model.vo.MainSearchResult;
 import kr.or.main.model.vo.MainViewData;
+import kr.or.main.model.vo.RecentProductData;
 import kr.or.main.model.vo.RecipeListData;
 import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.vo.Product;
@@ -84,6 +85,19 @@ public class MainService {
 	public ArrayList<RecipeListData> selectBestRecipes(int category) {
 		ArrayList<RecipeListData> rld = dao.selectBestRecipes(category);
 		return rld;
+	}
+
+	public ArrayList<RecentProductData> selectRecentProducts(String memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int insertRecentProduct(int productNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("memberId", memberId);
+		int result = dao.insertRecentProduct(map);
+		return result;
 	}
 	
 }
