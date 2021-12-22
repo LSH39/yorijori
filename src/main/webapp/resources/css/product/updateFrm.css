@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.main {
+	width: 1200px;
+	margin: 0 auto;
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+.main h1{
+		margin-bottom: 70px;
+		text-align: center;
+		color:#6D5874;
+
+}
+.milkitFrm {
+	height: 80px;
+	
+}
+.milkitFrm label {
+	width: 200px;
+	float: left;
+	font-size:20px;
+	font-weight: 800;
+	border-left: 3px solid #E0D8EF;
+	border-radius:2px;
+	padding-left: 10px;
+}
+
+.milkitFrm input {
+	height: 45px;
+	width: 250px;
+}
+.milkitFrm:nth-child(3) input {
+	width: 800px;
+}
+.milkitFrm:first-of-type input{
+	width: 400px;
+}
+.milkitFrm:nth-of-type(3)  {
+	height: 200px;
+	
+}
+.milkitFrm:nth-of-type(3) img{
+	max-height: 150px;
+}
+#updateBtn{
+	margin: 0 auto;
+	margin-top:50px;
+	width: 350px;
+}
+#updateBtn input{
+	width: 350px;
+	border: none;
+	height: 50px;
+	background-color: #C4BFE3;
+	font-size: 18px;
+	color:white;
+	border-radius: 3px;
+}
+#updateBtn input:hover{
+	color:rgba(255, 255, 255,0.5);
+}
+.priceWrap{
+	width:600px;
+	margin-right: 50px;
+	
+}
+#stock{
+	font-size: 20px;
+	font-weight: 800;
+	margin-right: 100px;
+	border-left: 3px solid #E0D8EF;
+	border-radius:2px;
+	padding-left: 10px;
+}

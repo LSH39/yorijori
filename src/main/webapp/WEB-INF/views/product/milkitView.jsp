@@ -17,6 +17,9 @@
 		<div id="title">
 			<div id="titleImg">
 				<img src="/resources/upload/product/${p.filepath }">
+				<c:if test="${sessionScope.m.memberNo == p.milkitWriter }">
+				 <p id="update"><a href="/updateMilkit.do?productNo=${p.productNo }">수정</a> <a href="/deleteMilkit.do?productNo=${p.productNo} "> 삭제</a></p>
+				 </c:if>
 			</div>
 			<div id="titleText">
 				<p id="pName">${p.milkitName }</p>

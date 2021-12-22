@@ -59,6 +59,16 @@ public class MilkitService {
 		p.setRbList(rbList);
 		return p;
 	}
+	public int deleteMilkit(int productNo) {
+		return dao.deleteMilkit(productNo);
+	}
+	public Product selectOneProduct2(int productNo) {
+		Product p = dao.selectOneProduct(productNo);
+		return p;
+	}
+	public int updateMilkit(Product p) {
+		return dao.updateMilkit(p);
+	}
 	
 	
 }
