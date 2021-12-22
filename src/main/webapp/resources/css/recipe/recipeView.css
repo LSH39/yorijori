@@ -3,13 +3,17 @@
 .main {
 	margin: 0 auto;
 	margin-top: 50px;
-	margin-bottom:100px;
+	margin-bottom: 100px;
 	width: 1200px;
 }
 
 .mainImg {
 	text-align: center;
 	position: relative;
+}
+
+#titleImg {
+	border-radius: 20px;
 }
 
 .checkImg {
@@ -73,7 +77,6 @@
 }
 
 .mList {
-	background-color: #F7F7E5;
 	width: 300px;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -88,13 +91,10 @@
 }
 
 .mList li {
-	margin-top: 10px; list-style-type : none;
+	margin-top: 10px;
+	list-style-type: none;
 	padding-left: 50px;
 	list-style-type: none;
-}
-
-.contents {
-	width: 1000px;
 }
 
 .amount {
@@ -210,24 +210,89 @@
 	margin-bottom: 30px;
 }
 
+.contentsWrap {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 100px;
+}
+
+.
 .contents {
 	width: 1000px;
 	margin: 0 auto;
-	margin-bottom:50px;
+	margin-bottom: 50px;
 	overflow: hidden;
 }
 
 .contents img {
 	width: 300px;
-	border-radius: 25px;
+	border-radius: 10px;
 }
-.contents:first-child{
+
+.contents:first-child {
 	margin-bottom: 50px;
 }
-.ds {
+
+.conText {
+	padding-top:10px;
 	width: 600px;
 	background-color: white;
 	float: left;
 	padding-left: 50px;
 	font-size: 25px;
+}
+
+.conNum {
+	float: left;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #6D5874;
+	border-radius: 30px;
+	font-size: 30px;
+	font-weight: 900;
+	color: white;
+	margin-top: 10px;
+}
+
+.contents hr {
+	margin-top: 50px;
+}
+
+.product {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.milkit {
+	text-align: center;
+}
+
+.milkit img {
+	width: 550px;
+	max-height: 300px;
+	margin: 30px;
+	border-radius: 15px;
+}
+
+.pTitle {
+	font-size: 32px;
+	font-weight: 800;
+	color: #757575;
+}
+
+.pComment {
+	font-size: 17px;
+	font-weight: bold;
+	color: #757575;
+}
+
+.product hr {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.mPrice {
+	font-weight: 800;
 }

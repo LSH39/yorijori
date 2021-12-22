@@ -20,9 +20,15 @@ public class MemberDao {
 		Member m = sqlSession.selectOne("member.loginMember",member);
 		return m;
 	}
-
-	public String joinSearch(Member member) {
-		String memberNo = sqlSession.selectOne("member.joinSearch",member);
+	
+	public int joinSearch(Member member) {
+		String resultNo = sqlSession.selectOne("member.joinSearch",member);
+		int memberNo = 0;
+		if(resultNo != null) {
+			memberNo = Integer.parseInt(resultNo);
+		}else {
+			memberNo = 0;
+		}
 		return memberNo;
 	}
 
@@ -50,6 +56,6 @@ public class MemberDao {
 		return sqlSession.update("member.findPwRe",member);
 	}
 
-
+	
 	
 }

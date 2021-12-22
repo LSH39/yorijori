@@ -204,28 +204,35 @@ public class CookingClsController {
 	public String CookingClsListView(int classNo, HttpSession session , Model model) {
 		Member member = (Member)session.getAttribute("m");
 		int sessionMemberNo = 0;
-		String sessionMemberNickname = member.getMemberNickname();
+		String sessionMemberNickname = "";
+		/*
 		try {
 			sessionMemberNo = member.getMemberNo();
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 			sessionMemberNo = -1;
 		}
+		*/
 		//int dmRoomNo = service.selectOneDmRoomNo(classNo, memberNickname);
+		
 		CookingCls ccls = service.selectOneClass(classNo); //해당 클래스 번호에 대한 정보 불러오기
 		ArrayList<Review> list = service.selectReviewList(classNo); //해당 클래스에 대한 리뷰 리스트 불러오기
 		double reviewAvg = service.avgReviewRate(classNo); // 리뷰 점수 평균
-		System.out.println(classNo);
-		System.out.println(sessionMemberNo);
-		boolean rsrvChk = service.selectOneRsrvChk(classNo, sessionMemberNo);//수강 여부 
-		boolean reviewChk = service.selectOneReviewChk(classNo, sessionMemberNickname);//리뷰 작성 여부
-		System.out.println(rsrvChk);
-		System.out.println(reviewChk);
+		
+		if(member != null) {
+			sessionMemberNickname = member.getMemberNickname();
+			System.out.println(classNo);
+			System.out.println(sessionMemberNo);
+			boolean rsrvChk = service.selectOneRsrvChk(classNo, sessionMemberNo);//수강 여부 
+			boolean reviewChk = service.selectOneReviewChk(classNo, sessionMemberNickname);//리뷰 작성 여부
+			System.out.println(rsrvChk);
+			System.out.println(reviewChk);
+			model.addAttribute("rsrvChk", rsrvChk);
+			model.addAttribute("reviewChk", reviewChk);
+		}
 		model.addAttribute("ccls", ccls);
 		model.addAttribute("list", list);
 		model.addAttribute("reviewAvg", reviewAvg);
-		model.addAttribute("rsrvChk", rsrvChk);
-		model.addAttribute("reviewChk", reviewChk);
 		return "cookingcls/cookingClsView";
 	}
 	

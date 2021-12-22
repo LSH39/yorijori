@@ -123,7 +123,6 @@ public class MilkitController {
 	@RequestMapping(value="/milkitView.do")
 	public String milkitView(int productNo,int recipeNo,Model model) {
 		Product p = service.selectOneProduct(productNo, recipeNo);
-	
 		model.addAttribute("p", p);
 		return "/product/milkitView";
 	}

@@ -38,14 +38,12 @@
 	var sendTextBefore;
 	var ws;
 	var webSocketType;
-	var alarm;
 	var startNo = 0;
+	var enter = 0;
     $(function(){
         $("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatFrmAdmin").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
-	    alarm = -1;
-		$("#chatAdminAlarm").text(alarm);
         ws = new WebSocket("ws://192.168.219.102/chatWebsoket.do");
         ws.onopen = startChat;  // ws.onopen 은 웹소켓 연결시 자동으로 실행됨
         ws.onmessage = receiveMsg;
@@ -54,24 +52,27 @@
 
     $("#chatAdmin").click(function(){
     	// alarm
-		alarm = 0;
+		var alarm = 0;
 		$("#chatAdminAlarm").text(alarm);
 		// chat
         if($("#chatFrmAdminHome").prop("on") == false){
         	if($("#chatFrmAdmin").prop("on") == false){
 	            $("#chatFrmAdminHome").css("display","block").prop("on",true);
 	            if(startNo>1){
-	            	reStartChat();
+	            	$("#chatAdminHomeTbl").children().remove();
+		           	reStartChat();
 	            }
         	}else{
                 $("#chatFrmAdmin").css("display","none").prop("on",false);
                 $("#chatAdminTbl").children().remove();
+                closeChat();
         	}
         }else{
         	$("#chatFrmAdminHome").css("display","none").prop("on",false);
             $("#chatAdminHomeTbl").children().remove();
             $("#chatFrmAdmin").css("display","none").prop("on",false);
             $("#chatAdminTbl").children().remove();
+            closeChat();
         }
 		startNo += 1;
     });
@@ -90,32 +91,45 @@
 	
 	 function reStartChat(){
     	webSocketType = "reStart";
-		var data = {type:"start",memberNo:sessionMemberNo};
+    	var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
+		var data = {type:"reStart",memberNo:sessionMemberNo, alarm:alarm};
 	    ws.send(JSON.stringify(data));
 	}
 	
-	function appendChat(appendMsg){
+	function closeChat(){
+	   	webSocketType = "closeChat";
+	   	var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
+		var data = {type:"closeChat",memberNo:sessionMemberNo, alarm:alarm};
+	    ws.send(JSON.stringify(data));
+	}
+	
+	function appendChat(textMsg){
+		var msg = JSON.parse(textMsg);
 		// alarm
 		if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
-			alarm += 1;
-			$("#chatAdminAlarm").text(alarm);
+			//alarm += 1;
+			$("#chatAdminAlarm").text(msg.alarm);
 		}
 		// chat
-		if(appendMsg != "noMsg"){
-			if(webSocketType == "start"){
-				$("#chatAdminHomeTbl").append(appendMsg);
-			}else if(webSocketType == "reStart"){
-				$("#chatAdminHomeTbl").append(appendMsg);
+		if(msg.appendMsg != "noMsg"){
+			if(webSocketType == "start" || webSocketType == "reStart"){
+				$("#chatAdminHomeTbl").append(msg.appendMsg);
 			}else if(webSocketType == "chat"){
 		      	$("#chatFrmAdminHome").css("display","none").prop("on",false);
 		        $("#chatAdminHomeTbl").children().remove();
-				$("#chatAdminTbl").append(appendMsg);
+				$("#chatAdminTbl").append(msg.appendMsg);
 				$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-				$("#chatText").val("");
-				sendMsg = "";
-				sendTextBefore = "";
-			}			
+			}
 		}
+		// enter
+		if(enter == 1){
+			$("#chatText").val("");
+			sendMsg = "";
+			sendTextBefore = "";
+		}
+		enter = 0;
 		startNo += 1;
 	}
 	
@@ -142,19 +156,24 @@
     });
     
  	function chatAdmin(selectUser){
+ 		var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
  		$("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatAdminHomeTbl").children().remove();
         $("#chatFrmAdmin").css("display","block").prop("on",true);
         webSocketType = "chat";
-        var data = {type:"selectUser",selectUser:selectUser, sessionMemberNo:sessionMemberNo};
+        var data = {type:"selectUser",selectUser:selectUser, sessionMemberNo:sessionMemberNo, alarm:alarm};
       	ws.send(JSON.stringify(data));
  	}
 	
     $("#chatEnter").click(function(){
+    	enter = 1;
+    	var alarm = 0;
+		$("#chatAdminAlarm").text(alarm);
     	if(sendMsg.trim() != ""){
 		    var sender = sessionMemberNo;
 		    var receiver = selectUser;
-		    var data = {type:"chat", chatSend:sender, selectUser:selectUser, chatContent:sendMsg};
+		    var data = {type:"chat", chatSend:sender, selectUser:selectUser, chatContent:sendMsg, alarm:alarm};
 		    ws.send(JSON.stringify(data));
 		}
     }); 
