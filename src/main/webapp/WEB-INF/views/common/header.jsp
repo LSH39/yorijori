@@ -131,7 +131,7 @@
           </li>
           <li>
           <form action="/mainpageSearch.do" method="get" id="headersearchBar">
-          <input type="search" class="nav-link scrollto" id="header-mainsearch" name="keyword" placeholder="검색"></li>
+          <input type="text" class="nav-link scrollto" id="header-mainsearch" name="keyword" placeholder="검색" autocomplete="off" style="color:#8E44AD;"></li>
           <input type="submit" id="headersearchsubmit" style="display: none;"></input>
           <label for="headersearchsubmit"><img class="main-search-icon" src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
           </form>
