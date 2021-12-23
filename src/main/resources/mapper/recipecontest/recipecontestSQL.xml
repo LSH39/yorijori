@@ -177,7 +177,7 @@
         where contest_month like to_char(sysdate, 'yyyy-mm') || '%')rr
     left join member m
     on rr.recipe_writer=m.member_no)rrr
-    order by voteCount desc
+    order by voteCount desc, contestNo
 	</select>
 	<insert id="insertContest" parameterType="_int">
 		insert into contest_recipe

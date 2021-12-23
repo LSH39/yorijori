@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -240,7 +241,6 @@
   		//정렬 default
   		var orderIndex = $("#orderIndex").val();
   		$(".order-by").eq(orderIndex).addClass("active");
-  		
   		
   	});
   </script>

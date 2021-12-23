@@ -20,10 +20,12 @@
 		</div>
       <div class="container">
 			<div class="board-content">
+				<div class="recipes-title">
+					<h2><span style="border: 5px double #CAB765; padding: 0.3em;">베스트 레시피</span></h2>
+				</div>
 	      		<div class="recipes-outline">
 	      			<c:choose>
 	      				<c:when test="${not empty list }">
-	      					<div>총 <span id="totalCount">${fn:length(list) }</span>개 </div>
 	      				</c:when>
 	      				<c:otherwise>
 	      					<div>아직 레시피가 없어요 ㅠㅠ</div>
@@ -36,7 +38,7 @@
 	      			<ul>
 	      				<c:choose>
 	      					<c:when test="${not empty list }">
-	      						<c:forEach items="${list }" var="r" varStatus="i">
+	      						<c:forEach items="${list }" var="r" begin="1" end="12">
 	      							<li>
 	      								<a href="/recipeView.do?boardNo=${r.recipeNo }&memberNo=0">
 	      									<img src="resources/upload/recipe/${r.recipePath }">

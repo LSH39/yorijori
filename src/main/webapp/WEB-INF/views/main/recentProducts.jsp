@@ -24,7 +24,6 @@
 	      		<div class="products-outline">
 	      			<c:choose>
 	      				<c:when test="${not empty list }">
-	      					<div>총 <span id="totalCount">${fn:length(list) }</span>개 </div>
 	      				</c:when>
 	      				<c:otherwise>
 	      					<div>아직 본 상품이 없어요.</div>
@@ -37,7 +36,7 @@
 	      			<ul>
 	      				<c:choose>
 	      					<c:when test="${not empty list }">
-	      						<c:forEach items="${list }" var="p" varStatus="i">
+	      						<c:forEach items="${list }" var="p" begin="1" end="20">
 	      							<li>
 	      								<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
 	      									<img src="resources/upload/product/${p.productPath }">

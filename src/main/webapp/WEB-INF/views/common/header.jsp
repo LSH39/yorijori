@@ -115,7 +115,7 @@
            <li class="dropdown"><a href="#"><span>이벤트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a class="nav-link" onclick="chkDate();">경연대회투표</a></li>
-              <li><a href="/contestResult.do">우승자 발표</a></li>
+              <li><a class="nav-link" onclick="chkDate2();">우승자 발표</a></li>
               <li><a href="/contestWinner.do">역대 우승자</a></li>
             </ul>
           </li>
@@ -294,6 +294,19 @@
   		}
   		
   	}
+	
+	//현재 일자 체크 (우승자발표 날짜 확인)
+  	function chkDate2(){
+  		var today = new Date();
+  		var date = today.getDate();
+  		if(date >= 25 && date <= 31){
+  			location.href="/contestResult.do";
+  		}else {
+  			alert("우승자 발표기간이 아닙니다.");
+  		}
+  		
+  	}
+	
 	//검색어 글자 길이 제한 (2글자 이상)
 	$(".main-search-icon").on("click", function(){
 		var keyword = $("#header-mainsearch").val();
