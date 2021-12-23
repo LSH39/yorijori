@@ -39,7 +39,7 @@
 	      					<c:when test="${not empty list }">
 	      						<c:forEach items="${list }" var="p" varStatus="i">
 	      							<li>
-	      								<a href="/milkitView.do?productNo=${p.productNo }">
+	      								<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
 	      									<img src="resources/upload/product/${p.productPath }">
 	      									<h4>${p.productName }</h4>
 	      									<h5><span class="rContent">${p.productComment }</span></h5>
@@ -49,8 +49,6 @@
 	      									<span class="rLevel">원</span>
 	      									</h5>
 	      									<div class="likeCount">
-	      										<h5>좋아요</h5>
-	      										<i class="bi bi-heart-fill" style="color:#D4A7FF;"></i>
 	      										<span>${p.regDate }</span>
 	      									</div>
 	      								</a>

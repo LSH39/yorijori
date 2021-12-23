@@ -183,7 +183,7 @@
           <div class="swiper-wrapper align-items-center">
             <c:forEach items="${productList }" var="p" begin="1" end="8">
             <div class="swiper-slide">
-            	<a href="/milkitView.do?productNo=${p.productNo }">
+            	<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
             		<img src="resources/upload/product/${p.filepath }" class="img-fluid" alt="">
             		<h5>${p.milkitName }</h5>
             		<h6> 

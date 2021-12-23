@@ -101,4 +101,14 @@ public class MainDao {
 		List<RecentProductData> rpd = sqlSession.selectList("main.selectRecentProducts", memberId);
 		return (ArrayList<RecentProductData>) rpd;
 	}
+
+	public int selectRecentProducts(HashMap<String, Object> map) {
+		int count = sqlSession.selectOne("main.selectRecentProduct", map);
+		return count;
+	}
+
+	public int deleteRecentProduct(HashMap<String, Object> map) {
+		int del = sqlSession.delete("main.deleteRecentProduct", map);
+		return del;
+	}
 }

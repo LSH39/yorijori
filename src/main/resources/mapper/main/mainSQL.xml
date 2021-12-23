@@ -177,7 +177,7 @@
         order by likeCount desc, readCount desc   
 	</select>
 	<insert id="insertRecentProduct" parameterType="map">
-		insert into recent_product values (rp_seq.nextval, #{productNo}, #{memberId})
+		insert into recent_product values (rp_seq.nextval, #{productNo}, #{memberId}, sysdate)
 	</insert>
 	<select id="selectRecentProducts" parameterType="String" resultType="rpd">
 		 select
@@ -193,4 +193,11 @@
         where member_id=#{memberId}
         order by rpNo desc
 	</select>
+	<select id="selectRecentProduct" parameterType="map" resultType="_int">
+		select
+			count(*) from recent_product where product_no=#{productNo} and member_id=#{memberId}
+	</select>
+	<delete id="deleteRecentProduct" parameterType="map">
+		delete from recent_product where product_no=#{productNo} and member_id=#{memberId}
+	</delete>
 </mapper>

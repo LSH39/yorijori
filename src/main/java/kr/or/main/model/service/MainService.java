@@ -96,6 +96,10 @@ public class MainService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("productNo", productNo);
 		map.put("memberId", memberId);
+		int count = dao.selectRecentProducts(map);
+		if(count>0) {
+			dao.deleteRecentProduct(map);
+		}
 		int result = dao.insertRecentProduct(map);
 		return result;
 	}
