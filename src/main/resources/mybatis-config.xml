@@ -29,6 +29,7 @@
 		<typeAlias type="kr.or.freeboard.model.vo.FreeboardFile" alias="ff"/>
 		<typeAlias type="kr.or.main.model.vo.FollowingData" alias="fd"/>
 		<typeAlias type="kr.or.main.model.vo.RecipeListData" alias="rld"/>
+		<typeAlias type="kr.or.main.model.vo.RecentProductData" alias="rpd"/>
 		<!-- 태경 alias 끝 -->
 		
 		<!-- 성승민 별칭 추가 -->

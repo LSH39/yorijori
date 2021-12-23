@@ -179,4 +179,18 @@
 	<insert id="insertRecentProduct" parameterType="map">
 		insert into recent_product values (rp_seq.nextval, #{productNo}, #{memberId})
 	</insert>
+	<select id="selectRecentProducts" parameterType="String" resultType="rpd">
+		 select
+            r.rp_no as rpNo,
+            r.product_no as productNo,
+            r.member_id as memberId,
+            r.reg_date as regDate,
+            (select p.milkit_name from product p where p.product_no=r.product_no) as productName,
+            (select p.milkit_comment from product p where p.product_no=r.product_no) as productComment,
+            (select p.milkit_price from product p where p.product_no=r.product_no) as productPrice,
+            (select p.filepath from product p where p.product_no=r.product_no) as productPath
+        from recent_product r
+        where member_id=#{memberId}
+        order by rpNo desc
+	</select>
 </mapper>

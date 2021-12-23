@@ -11,4 +11,5 @@ public class RecentProductData {
 	private String productPrice;
 	private String productComment;
 	private String productPath;
+	private String regDate;
 }

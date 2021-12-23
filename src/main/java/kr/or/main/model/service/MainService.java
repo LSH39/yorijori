@@ -88,8 +88,8 @@ public class MainService {
 	}
 
 	public ArrayList<RecentProductData> selectRecentProducts(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<RecentProductData> rpd = dao.selectRecentProducts(memberId);
+		return rpd;
 	}
 
 	public int insertRecentProduct(int productNo, String memberId) {

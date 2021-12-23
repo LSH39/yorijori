@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.cookingCls.model.vo.CookingCls;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.main.model.vo.FollowingData;
+import kr.or.main.model.vo.RecentProductData;
 import kr.or.main.model.vo.RecipeListData;
 import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.vo.Product;
@@ -94,5 +95,10 @@ public class MainDao {
 	public int insertRecentProduct(HashMap<String, Object> map) {
 		int result = sqlSession.insert("main.insertRecentProduct", map);
 		return result;
+	}
+
+	public ArrayList<RecentProductData> selectRecentProducts(String memberId) {
+		List<RecentProductData> rpd = sqlSession.selectList("main.selectRecentProducts", memberId);
+		return (ArrayList<RecentProductData>) rpd;
 	}
 }
