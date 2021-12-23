@@ -42,12 +42,12 @@ public class MypageService {
 	@Autowired
 	private MypageDao dao;
 
-	public ReadMember mypage(String memberId) {
+	public ReadMember mypage(String memberNickname) {
 		//Member m =dao.mypage(memberId);
 		//return m;
 
-		ReadMember rm =dao.mypage(memberId);
-		int dmCount =dao.countsDmFirst(memberId);
+		ReadMember rm =dao.mypage(memberNickname);
+		int dmCount =dao.countsDmFirst(memberNickname);
 		rm.setDmCount(dmCount);
 		return rm;
 	}
@@ -101,8 +101,8 @@ public class MypageService {
 		return list;
 	}
 	 */
-	public ArrayList<MyCookingRsrv> myclass(String memberNickname) {
-		ArrayList<MyCookingRsrv> list =dao.myClass(memberNickname);
+	public ArrayList<MyCookingRsrv> myclass(int memberNo) {
+		ArrayList<MyCookingRsrv> list =dao.myClass(memberNo);
 		return list;
 	}
 
@@ -188,7 +188,7 @@ public class MypageService {
 	/*주문내역 페이징*/
 	public MyorderPageData orderList(int reqPage,int memberNo) {
 		//페이지당 게시물 개수
-		int numPerPage = 2;
+		int numPerPage = 5;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 
@@ -215,15 +215,15 @@ public class MypageService {
 
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"page\">";
-			pageNavi += "<a class=\"page-link\" href='/myOrderList.do?memberNo=111&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/myOrderList.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class='page-link' href='/myOrderList.do?memberNo=111&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/myOrderList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/myOrderList.do?memberNo=111&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/myOrderList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -233,7 +233,7 @@ public class MypageService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page'>";
-			pageNavi += "<a class='page-link' href='/myOrderList.do?memberNo=111&reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/myOrderList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -244,7 +244,7 @@ public class MypageService {
 	/*쿠폰내역 페이징*/
 	public MyCouponPageData mycouponList(int reqPage,int memberNo) {
 		//페이지당 게시물 개수
-		int numPerPage = 1;
+		int numPerPage = 5;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 
@@ -271,15 +271,15 @@ public class MypageService {
 
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"page\">";
-			pageNavi += "<a class=\"page-link\" href='/mycouponList.do?memberNo=111&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/mycouponList.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo=111&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo=111&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -289,7 +289,7 @@ public class MypageService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page'>";
-			pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo=111&reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/mycouponList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -300,7 +300,7 @@ public class MypageService {
 	/*내 대회 참여내역 페이징*/
 	public MycontestPagedata mycontestList(int reqPage,int recipeWriter) {
 		//페이지당 게시물 개수
-		int numPerPage = 1;
+		int numPerPage = 5;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 
@@ -327,15 +327,15 @@ public class MypageService {
 
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"page\">";
-			pageNavi += "<a class=\"page-link\" href='/myContestList.do?recipeWriter=111&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/myContestList.do?recipeWriter="+recipeWriter+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class='page-link' href='/myContestList.do?recipeWriter=111&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/myContestList.do?recipeWriter="+recipeWriter+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/myContestList.do?recipeWriter=111&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/myContestList.do?recipeWriter="+recipeWriter+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -345,7 +345,7 @@ public class MypageService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page'>";
-			pageNavi += "<a class='page-link' href='/myContestList.do?recipeWriter=111&reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/myContestList.do?recipeWriter="+recipeWriter+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -357,7 +357,7 @@ public class MypageService {
     /*내 게시판 페이징*/
 	public MyFreeBoardPageData myfreeBoardList(int reqPage,String freeWriter) {
 		//페이지당 게시물 개수
-		int numPerPage = 1;
+		int numPerPage = 5;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 
@@ -384,15 +384,15 @@ public class MypageService {
 
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"page\">";
-			pageNavi += "<a class=\"page-link\" href='/myBoardList.do?freeWriter=111&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/myBoardList.do?freeWriter="+freeWriter+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter="+freeWriter+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter="+freeWriter+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -402,7 +402,7 @@ public class MypageService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page'>";
-			pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter="+freeWriter+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -441,15 +441,15 @@ public class MypageService {
 
 		if(pageNo != 1) {
 			pageNavi += "<li class=\"page\">";
-			pageNavi += "<a class=\"page-link\" href='/myLikeList.do?memberNo=17&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			pageNavi += "<a class=\"page-link\" href='/myLikeList.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++){
 			if(pageNo == reqPage) {
 				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class='page-link' href='/myLikeList.do?memberNo=17&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				pageNavi += "<a class='page-link' href='/myLikeList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 			} else {
 				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/myLikeList.do?memberNo=17&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/myLikeList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -459,7 +459,7 @@ public class MypageService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page'>";
-			pageNavi += "<a class='page-link' href='/myLikeList.do?memberNo=17&reqPage="+pageNo+"'>";
+			pageNavi += "<a class='page-link' href='/myLikeList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -482,62 +482,7 @@ public class MypageService {
 		     ReadDm rd = new ReadDm(list,dmCount);
 				return rd;
 		}
-    /*내 포인트 내역*/
-		/*
-		public MyPointPageData pointList(int reqPage) {
-			//페이지당 게시물 개수
-			int numPerPage = 1;
-			int end = reqPage * numPerPage;
-			int start = end - numPerPage + 1;
 
-			//한 페이지
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("start", start);
-			map.put("end", end);
-			ArrayList<Mypoint> list = dao.pointList(map);
-
-			//페이지 네비게이션 제작
-			int totalCount = dao.pointCount();
-			int totalPage = 0;
-
-			if(totalCount%numPerPage == 0) {
-				totalPage = totalCount/numPerPage;
-			} else {
-				totalPage = totalCount/numPerPage+1;
-			}
-			int pageNaviSize = 5;
-			int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
-
-			String pageNavi = "<ul class='pagination'>";
-
-			if(pageNo != 1) {
-				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class=\"page-link\" href='/myBoardList.do?freeWriter=111&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
-			}
-			for(int i=0;i<pageNaviSize;i++){
-				if(pageNo == reqPage) {
-					pageNavi += "<li class=\"page\">";
-					pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
-				} else {
-					pageNavi += "<li class='page'>";
-					pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>";
-					pageNavi += pageNo+"</a></li>";
-				}
-				pageNo++;
-				if(pageNo>totalPage) {
-					break;
-				}
-			}
-			if(pageNo <= totalPage) {
-				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/myBoardList.do?freeWriter=111&reqPage="+pageNo+"'>";
-				pageNavi += "&gt;</a></li>";
-			}
-			pageNavi += "</ul>";
-			MyPointPageData ppd = new MyPointPageData(list,pageNavi,start,totalCount);
-			return ppd;
-		}
-	*/
      
 		public ArrayList<Mypoint> myPoint(String memberNo) {
 			ArrayList<Mypoint> list = dao.mypoint(memberNo);
@@ -576,15 +521,15 @@ public class MypageService {
 
 			if(pageNo != 1) {
 				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class=\"page-link\" href='/myPoint.do?memberNo=104&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+				pageNavi += "<a class=\"page-link\" href='/myPoint.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 			}
 			for(int i=0;i<pageNaviSize;i++){
 				if(pageNo == reqPage) {
 					pageNavi += "<li class=\"page\">";
-					pageNavi += "<a class='page-link' href='/myPoint.do?memberNo=104&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+					pageNavi += "<a class='page-link' href='/myPoint.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 				} else {
 					pageNavi += "<li class='page'>";
-					pageNavi += "<a class='page-link' href='/myPoint.do?memberNo=104&reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-link' href='/myPoint.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 					pageNavi += pageNo+"</a></li>";
 				}
 				pageNo++;
@@ -594,13 +539,14 @@ public class MypageService {
 			}
 			if(pageNo <= totalPage) {
 				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/myPoint.do?memberNo=104&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/myPoint.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
 				pageNavi += "&gt;</a></li>";
 			}
 			pageNavi += "</ul>";
 			MyPointPageData ppd = new MyPointPageData(list,pageNavi,start,totalCount,totalPoint,usePoint);
 			return ppd;
 		}
+		
    //내 쿠킹클래스
 		
 		public CookingClsPageData selectMyClass(int reqPage, String memberNickname) {
@@ -640,7 +586,8 @@ public class MypageService {
 			//이전 버튼 생성
 			if(pageNo != 1) {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class='page-link' href='/cookingClsList.do?reqPage="+(pageNo-1)+"'>";
+				pageNavi += "<a class='page-link' href='/mycookingList.do?memberNickname="+memberNickname+"&reqPage="+(pageNo-1)+"'>";
+	
 				pageNavi += "&lt;</a></li>";
 			}
 			
@@ -648,11 +595,11 @@ public class MypageService {
 			for (int i = 0; i < pageNaviSize; i++) {
 				if(pageNo == reqPage) {
 					pageNavi += "<li class='page-item active'>";
-					pageNavi += "<a class='page-link' href='/cookingClsList.do?reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-link' href='/mycookingList.do?memberNickname="+memberNickname+"&reqPage="+pageNo+"'>";
 					pageNavi += pageNo+"</a></li>";
 				}else {
 					pageNavi += "<li class='page-item'>";
-					pageNavi += "<a class='page-link' href='/cookingClsList.do?reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-link' href='/mycookingList.do?memberNickname="+memberNickname+"&reqPage="+pageNo+"'>";
 					pageNavi += pageNo+"</a></li>";
 				}
 				pageNo++;
@@ -663,7 +610,7 @@ public class MypageService {
 			
 			//다음 버튼 생성
 			if(pageNo < totalPage) {
-				pageNavi += "<li class='page-item'><a class='page-link' href='/cookingClsList.do?reqPage="+(reqPage+1)+"'>&gt;</a></li>";
+				pageNavi += "<li class='page-item'><a class='page-link' href='/mycookingList.do?memberNickname="+memberNickname+"&reqPage="+(reqPage+1)+"'>&gt;</a></li>";
 			}
 			
 			pageNavi +="<ul>";
@@ -762,11 +709,19 @@ public class MypageService {
 		}
 		
         //전문가 정보조회(쪽지수)
-		public ReadMember seller(String memberId) {
-			ReadMember rm =dao.mypage(memberId);
-			int dmCount =dao.countsDmFirst(memberId);
+		public ReadMember seller(String memberNickname) {
+			ReadMember rm =dao.mypage(memberNickname);
+			int dmCount =dao.countsDmFirst(memberNickname);
 			rm.setDmCount(dmCount);
 			return rm;
+		}
+       //주문취소
+		public int cancelOrder(int orderNo) {
+			int result =dao.cancelOrder(orderNo);
+			if(result>0) {
+				 result=dao.cancelOrderList(orderNo);
+			}
+			return result;
 		}
 
 	

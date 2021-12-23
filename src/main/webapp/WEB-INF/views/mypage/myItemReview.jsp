@@ -21,9 +21,9 @@
 }
 /*후기*/
 .review{
-    width:800px;
+    width:900px;
     height:100px;
-   
+     text-align:center;
 }
 .re{
     width:800px;
@@ -31,8 +31,8 @@
     
 }
 .butt{
-    text-align: right;
-    margin-top: 10px;
+   margin-left:600px;
+    margin-top: 20px;
     
 }
 #del,#upd{
@@ -50,8 +50,23 @@
 }
 .noCou{
 color:gray;
-margin-left:350px;
 margin-top:120px;
+
+}
+.rno,.no{
+ width:100px;
+}
+.name{
+width:200px;
+
+}
+.con{
+width:260px;
+}
+
+
+.sc,.en{
+width:120px;
 
 }
 </style>
@@ -76,12 +91,12 @@ margin-top:120px;
              <div class="review">
                  <table  id="rti">
                 <tr>
-                    <th>후기번호</th>
-                    <th>밀키트번호</th>
-                    <th>밀키트 이름</th>
-                    <th>리뷰내용</th>
-                    <th>리뷰평점</th>
-                    <th>등록일</th>
+                    <th class="rno">후기번호</th>
+                    <th class="no">밀키트번호</th>
+                    <th class="name">밀키트 이름</th>
+                    <th class="con">리뷰내용</th>
+                    <th class="sc">리뷰평점</th>
+                    <th class="en">등록일</th>
                 </tr>
             </table>
              <c:choose>
@@ -91,12 +106,29 @@ margin-top:120px;
               <table border="1" class="re">
                   
                   <tr>
-                    <td>${ireview.reviewNo}</td>
-                    <td>${ireview.productNo}</td>
-                    <td>${ireview.milkitName}</td>
-                    <td>${ireview.reviewContent }</td>
-                    <td>${ireview.reviewRate}</td>
-                    <td>${ireview.reviewDate }</td>
+                    <td class="rno">${ireview.reviewNo}</td>
+                    <td class="no">${ireview.productNo}</td>
+                    <td class="name">${ireview.milkitName}</td>
+                    <td class="con">${ireview.reviewContent }</td>
+                      <c:choose>
+                    <c:when test="${ireview.reviewRate==1}">
+                     <td class="sc">★</td>
+                     </c:when>
+                      <c:when test="${ireview.reviewRate==2}">
+                     <td class="sc">★★</td>
+                     </c:when>
+                      <c:when test="${ireview.reviewRate==3}">
+                     <td class="sc">★★★</td>
+                     </c:when>
+                      <c:when test="${ireview.reviewRate==4}">
+                     <td class="sc">★★★★</td>
+                     </c:when>
+                      <c:when test="${ireview.reviewRate==5}">
+                     <td class="sc">★★★★★</td>
+                     </c:when>
+                     </c:choose>
+                   
+                    <td class="en">${ireview.reviewDate }</td>
                 </tr>
               </table>
 

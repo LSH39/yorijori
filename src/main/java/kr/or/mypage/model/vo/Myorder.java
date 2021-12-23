@@ -36,6 +36,10 @@ public class Myorder {
 	private int orderOptionAmount;
 	private int orderStatus;
 	
+	//주문취소가능여부
+	private String cancleOrder;
+	
+	
 	public String getCard(){
 		if(orderPayOption == 1) {
 			return "신용카드";

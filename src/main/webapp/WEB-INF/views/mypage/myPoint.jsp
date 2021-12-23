@@ -142,6 +142,7 @@ color: #9F90CF;
                     <th scope="cols">사용여부</th>
                     
                     </tr>
+                   
 				<c:forEach items="${list}" var="mp" varStatus="i">
 					<tr>
 						<td>${mp.pointNo}</td>
@@ -162,6 +163,8 @@ color: #9F90CF;
 
 					</tr>
 				</c:forEach>
+				  
+                
 			</table>
               
 		</div>

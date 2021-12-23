@@ -161,8 +161,8 @@
   }
   
 .pagenation{
- margin-left:570px;
- margin-top:50px;
+ margin-left:400px;
+ margin-top:100px;
 }
 .pagenation ul{
 align-self: center;
@@ -221,7 +221,8 @@ function orderDetail(orderNo){
 			<h5 id="tt">
 				판매개수 : <span style="color: rgb(159, 144, 207);" class="amount">${totalCount }</span>개
 			</h5>
-
+                <c:choose>
+                  	<c:when test="${ not empty list }">
 					<c:forEach items="${list}" var="ms" varStatus="i">
 						<form action="/updateOrder.do" method="POST">
 
@@ -238,13 +239,11 @@ function orderDetail(orderNo){
 										id="product" src="/resources/upload/product/milkit_test.jpg"></span><br>
 
 									<%--hidden 값으로 숨기는 값들 --%>
-									<input type="hidden" value="${ms.orderOptionNo}"
-										name="orderOptionNo" id="orderOptionNo"> <input
-										type="hidden" value="${sessionScope.m.memberNo}"
-										name="memberNo" id="memberNo"> <input type="hidden"
-										value="${ms.orderOptionAmount}" name="orderOptionAmount"
-										id="orderOptionAmount"> <input type="hidden"
-										value="${ms.milkitPrice}" name="milkitPrice" id="milkitPrice">
+									<input type="hidden" value="${ms.orderOptionNo}"name="orderOptionNo" id="orderOptionNo">
+										 <input type="hidden" value="${sessionScope.m.memberNo}" name="milkitWriter" id="milkitWriter"> 
+										 	 <input type="hidden" value="${sessionScope.m.memberNo}" name="memberNo" id="memberNo"> 
+										 <input type="hidden" value="${ms.orderOptionAmount}" name="orderOptionAmount" id="orderOptionAmount"> 
+										 <input type="hidden" value="${ms.milkitPrice}" name="milkitPrice" id="milkitPrice">
 									<input type="hidden" name="reqPage" value="${reqPage }">
 									<%--hidden 값으로 숨기는 값들끝 --%>
 								</div>
@@ -322,6 +321,11 @@ function orderDetail(orderNo){
 
 						</form>
 					</c:forEach>
+					</c:when>
+                
+                  	<c:otherwise><h6 class="noCou">판매내역이 텅~~~.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
 		
 			
 		</div>

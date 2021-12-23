@@ -22,8 +22,9 @@
 }
 /*후기*/
 .review{
-    width:800px;
+    width:900px;
     height:100px;
+    text-align:center;
    
 }
 .re{
@@ -32,9 +33,9 @@
     
 }
 .butt{
-    text-align: right;
-    margin-top: 10px;
-    
+   margin-left:580px;
+    margin-top: 20px;
+
 }
 #del,#upd{
     background-color: rgb(196, 191, 227);
@@ -53,6 +54,22 @@
 color:gray;
 margin-left:350px;
 margin-top:120px;
+
+}
+.rno,.no{
+ width:100px;
+}
+.name{
+width:200px;
+
+}
+.con{
+width:260px;
+}
+
+
+.sc,.en{
+width:120px;
 
 }
 </style>
@@ -77,12 +94,12 @@ margin-top:120px;
              <div class="review">
                  <table  id="rti">
                 <tr>
-                    <th>후기번호</th>
-                    <th>요리클래스번호</th>
-                    <th>요리클래스이름</th>
-                    <th>리뷰내용</th>
-                    <th>리뷰평점</th>
-                    <th>등록일</th>
+                    <th class="rno">후기번호</th>
+                    <th class="no">클래스번호</th>
+                    <th class="name">요리클래스이름</th>
+                    <th class="con">리뷰내용</th>
+                    <th class="sc">평점</th>
+                    <th class="en">등록일</th>
                 </tr>
             </table>
                 <c:choose>
@@ -92,19 +109,38 @@ margin-top:120px;
               <table border="1" class="re">
                   
                   <tr>
-                    <td>${mreview.reviewNo}</td>
-                    <td>${mreview.classNo}</td>
-                    <td>${mreview.classTitle}</td>
-                    <td>${mreview.reviewContent }</td>
-                    <td>${mreview.reviewRate}</td>
-                    <td>${mreview.reviewDate }</td>
+                    <td class="rno">${mreview.reviewNo}</td>
+                    <td class="no">${mreview.classNo}</td>
+                    <td class="name">${mreview.classTitle}</td>
+                    <td class="con">${mreview.reviewContent }</td>
+                    <c:choose>
+                    <c:when test="${mreview.reviewRate==1}">
+                     <td class="sc">★</td>
+                     </c:when>
+                      <c:when test="${mreview.reviewRate==2}">
+                     <td class="sc">★★</td>
+                     </c:when>
+                      <c:when test="${mreview.reviewRate==3}">
+                     <td class="sc">★★★</td>
+                     </c:when>
+                      <c:when test="${mreview.reviewRate==4}">
+                     <td class="sc">★★★★</td>
+                     </c:when>
+                      <c:when test="${mreview.reviewRate==5}">
+                     <td class="sc">★★★★★</td>
+                     </c:when>
+                     </c:choose>
+                    <%-- <td class="sc">${mreview.reviewRate}</td>--%>
+                    <td class="en">${mreview.reviewDate }</td>
                 </tr>
               </table>
-
+              
               <div class="butt">
-                <input type="button" value="수정" id="upd">
-                <input type="button" value="삭제" id="del">
+              <a href="/cookingClsView.do?classNo=${mreview.classNo}">
+                <input type="button" value="후기 보러가기" id="upd"></a>
+               
               </div>
+              
               </div>
              </c:forEach>
                 </c:when>
