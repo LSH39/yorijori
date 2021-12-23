@@ -42,17 +42,9 @@ public class DmDao {
 		return sqlSession.selectOne("cookingcls.selectOneNickname", classNo);
 	}
 	
-	//dm 채팅방 번호 조회
-	public int selectOneDmRoomNo(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("direct.selectOneDmRoomNo", map);
-	}
 
-	//조회했는데 없으면 시퀀스로 증가
-	public int incDmRoomNo() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("direct.incDmRoomNo");
-	}
+
+
 
 	//dm조회할때 dm 채팅방 번호 가져옴
 	public int selectDmRoomNo2(HashMap<String, Object> map2 ) {
@@ -66,24 +58,43 @@ public class DmDao {
 		return sqlSession.selectOne("direct.changeReceiver", dmRoomNo);
 	}
 
-	//문의 목록에서 조회하는거
-	public ArrayList<Dm> selectOneDm(int dmRoomNo) {
+	//문의 목록에서 조회하는거(12-23)
+	public ArrayList<Dm> selectOneDmAjax(int dmRoomNo) {
 		// TODO Auto-generated method stub
-		List<Dm> list = sqlSession.selectList("direct.selectOneDm2", dmRoomNo);
+		List<Dm> list = sqlSession.selectList("direct.selectOneDmAjax", dmRoomNo);
 		return (ArrayList<Dm>)list;
 	}
 
-	//읽음 처리 하는거
-	public void updateReadflag(int dmRoomNo) {
+	//읽음 처리 하는거(12-23)
+	public void updateReadflag(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		sqlSession.update("updateReadflag", dmRoomNo);
+		sqlSession.update("updateReadflag", map);
 	}
 
 	//클래스뷰에서 문의 내용 이전거 있는지 조회하는거
 	public ArrayList<Dm> selectOneDmList(int dmRoomNo) {
 		// TODO Auto-generated method stub
-		List<Dm> list = sqlSession.selectList("direct.selectOneDmList", dmRoomNo);
-		return (ArrayList<Dm>)list;
+		List<Dm> list2 = sqlSession.selectList("direct.selectOneDmList", dmRoomNo);
+		return (ArrayList<Dm>)list2;
+	}
+
+	//클래스 뷰에서 바로 문의 (12-23)
+	public ArrayList<Dm> selectOneDmAjaxList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<Dm> list4 = sqlSession.selectList("direct.selectOneDmAjaxList", map);
+		return (ArrayList<Dm>)list4;
+	}
+	
+	//문의 최초 작성 할때 채팅방 번호 발급 (12-23)
+	public int selectOneDmRoomNo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("direct.selectOneDmRoomNo", map);
+	}
+	
+	//조회했는데 없으면 시퀀스로 증가 (12-23)
+	public int incDmRoomNo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("direct.incDmRoomNo");
 	}
 
 

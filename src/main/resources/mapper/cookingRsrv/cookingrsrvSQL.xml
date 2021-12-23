@@ -24,12 +24,12 @@
 		order by rsrv_no desc
 	</select>
 	
-	<!-- 클래스 예약 취소 -->
+	<!-- 내역까지 아예 삭제하는것 -->
 	<delete id="deleteCookingRsrv" parameterType="_int">
 		delete from cooking_rsrv where rsrv_no=#{rsrvNo}
 	</delete>
 	 
-	<!-- 취소하면 취소 플래그 변경 -->
+	<!-- 클래스 예약 취소하고 취소하면 취소 플래그 변경 -->
 	<update id="cancelCookingRsrv" parameterType="_int">
 		update cooking_rsrv set cancel_flag=1 where class_no=#{classNo}
 	</update>

@@ -105,7 +105,7 @@
 	}
 	
 	.scrollBar::-webkit-scrollbar{
-		display:none;
+		display:none !important;
 	}
 	
 	.dmView{
@@ -123,32 +123,37 @@
 		display:none;
 	}
 
+	.class-content{
+		overflow:hidden;
+	}
 	
 </style>
 <script>
 	$(function(){
+		var dmRoomNo = -1;
+		var dmClassNoVal = -1;
 		
 		//강의장 장소 보기
 		$(".showLoc").click(function(){
-		var classLocation1 = $("#classLocation1").html();
-		var mapOptions = {
-			    center: new naver.maps.LatLng(37.3595704, 127.105399),
-			    zoom: 15
-			};
-		var map = new naver.maps.Map('map', mapOptions);
-		
-		naver.maps.Service.geocode({ address: classLocation1 }, function(status, response) { 
-			if (status === naver.maps.Service.Status.ERROR) { 
-				console.log('Something wrong!'); 
-				} 
-			var new_position = new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x) 
-			map.setCenter(new_position); 
+			var classLocation1 = $("#classLocation1").html();
+			var mapOptions = {
+				    center: new naver.maps.LatLng(37.3595704, 127.105399),
+				    zoom: 15
+				};
+			var map = new naver.maps.Map('map', mapOptions);
 			
-			var marker = new naver.maps.Marker({ 
-				position: new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x), 
-				map: map 
-			}); 
-		});
+			naver.maps.Service.geocode({ address: classLocation1 }, function(status, response) { 
+				if (status === naver.maps.Service.Status.ERROR) { 
+					console.log('Something wrong!'); 
+					} 
+				var new_position = new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x) 
+				map.setCenter(new_position); 
+				
+				var marker = new naver.maps.Marker({ 
+					position: new naver.maps.LatLng(response.v2.addresses[0].y, response.v2.addresses[0].x), 
+					map: map 
+				}); 
+			});
 			
 		});
 		
@@ -181,7 +186,7 @@
 						console.log("실패!(테스트용)");						
 					}
 				//location.reload();
-				$(".table").load(location.href+" .table");
+				$(".reviewTable").load(location.href+" .reviewTable");
 				$(".writeSection").load(location.href+" .writeSection");
 				
 				},
@@ -201,7 +206,7 @@
 				type : "post",
 				data : {reviewNo:reviewNo},
 				success : function(data){
-					$(".table").load(location.href+" .table");
+					$(".reviewTable").load(location.href+" .reviewTable");
 					$(".writeSection").load(location.href+" .writeSection");
 				}
 			});
@@ -210,7 +215,7 @@
 		
 		//내 클래스 예약할때
 		$("#noPayBtn").click(function(){
-			alert("자신의 클래스는 예약이 안됩니다!");
+			alert("자신의 클래스는 수강이 안됩니다!");
 		});
 		
 		//클래스 이미 예약했을때
@@ -225,7 +230,7 @@
 		
 		//리뷰 이미 작성했을때
 		$(document).on("click", "#reviewRsrv", function(){
-			alert("클래스 수강 회원만 작성할 수 있습니다!");
+			alert("클래스를 수강한 회원만 작성할 수 있습니다!");
 		});
 		
 		//비회원 로그인
@@ -278,14 +283,10 @@
 					});
 				}
 			});
-		});
-
+		});	
 		
-
-		
-		
-		//문의 목록 AJAX시작
-		$(".ajaxList").click(function(){
+		//문의 목록 AJAX시작 12-23 클래스뷰에서 
+		$(".ajaxList, .toList").click(function(){
 			$(".dmView").hide();
 			$(".dmList").toggle();
 			let dmSender = $("#memberNickname").val();
@@ -300,73 +301,127 @@
 				data : {dmSender:dmSender, memberLevel:memberLevel},
 				success : function(data){
 					console.log(data);
-					$("#result").empty();
-					var readFlag = -1;
-					var flagClass = "";
-					var main = $("<main class='main-screen'>");
-					for(var i=0 ; i<data.length ; i++){
-						if(dmSender == data[i].dmReceiver){
-							if(data[i].dmSpic == undefined){
-								data[i].dmSpic = "img/dm/classtest.jpg";
-								console.log("받는사람이 나랑 같을때"+data[i].dmSpic);
-							}else if(data[i].dmSpic != undefined){
-								data[i].dmSpic = "upload/member_profile/"+data[i].dmSpic;
-								console.log("else받는사람이 나랑 같을때"+data[i].dmSpic);
+					if(data.length == 0){
+						let c = "";
+						c+="<h3 style='display:flex;justify-content:center;align-items: center;height: 90%;'>문의가 없습니다!</h3>";
+						$(".main-screen__list").append(c);
+					}else{
+						$(".main-screen__list").empty();
+	
+						for (var i = 0; i < data.length; i++) {
+							let b = "";
+							b+="<a class='link' href='#'>";
+							b+="<div class='user-component'>";
+							b+="<div class='user-component__column'>";
+							if(dmSender == data[i].dmReceiver){ //상대방이 나한테 보낸 메세지
+								if(data[i].dmSpic == undefined){ //상대방 프사가 없을때 
+									b+="<img class='user-component__profile_img' src='./resources/upload/member_profile/profile_basic.png'/>";								
+								}else if(data[i].dmSpic != undefined){ //상대방 프사가 있을때
+									b+="<img class='user-component__profile_img' src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>";
+								}
+							}else if(dmSender == data[i].dmSender){ //내가 상대방한테 보낸 메세지
+								if(data[i].dmRpic == undefined){ //상대방 프사가 없을때 
+									b+="<img class='user-component__profile_img' src='./resources/upload/member_profile/profile_basic.png'/>";								
+								}else if(data[i].dmRpic != undefined){ //상대방 프사가 있을때
+									b+="<img class='user-component__profile_img' src='./resources/upload/member_profile/"+data[i].dmRpic+"'/>";
+								}
 							}
-						}else if(dmSender != data[i].dmReceiver){
-							if(data[i].dmRpic == undefined){
-								data[i].dmSpic = "img/dm/classtest.jpg";
-								console.log("보내는사람이 나랑 같을때"+data[i].dmSpic);
-							}else if(data[i].dmSpic != undefined){
-								data[i].dmSpic = "upload/member_profile/"+data[i].dmRpic;
-								console.log("else보내는사람이 나랑 같을때"+data[i].dmSpic);
+							b+="<div class='user-component__text'>";
+							if(dmSender == data[i].dmSender){ //최근 메세지 보낸 사람이 나랑 같으면 상대방으로 이름만 바꿔줌
+								b+="<h4 class='user-component__text-name'>"+data[i].dmReceiver+"</h4>";
+							} else if(dmSender == data[i].dmReceiver){ //그게 아니면 그대로 둠
+								b+="<h4 class='user-component__text-name'>"+data[i].dmSender+"</h4>";
 							}
+							b+="<h6 class='user-component__text-preview'>"+data[i].dmContent+"</h6>";
+							b+="</div></div>";
+							b+="<div class='user-component__last'>";
+							b+="<span class='user-component__time'>"+data[i].dmDate.substring(11, 16)+"</span>";
+							if(dmSender == data[i].dmReceiver && data[i].dmReadFlag == 0){
+								b+="<div class='dm-badge'>x</div>";
+							}else{
+								b+="<div class='dm-no-badge'>x</div>";							
+							}
+							b+="</div><input type='hidden' class='dmRoomNoChk' value="+data[i].dmRoomNo+"><input type='hidden' class='dmClassNoChk' value="+data[i].classNo+"></div></a>";
+							$(".main-screen__list").append(b);
 						}
-						
-						if(dmSender == data[i].dmReceiver){
-							data[i].dmSender = data[i].dmSender;
-						}else if(dmSender != data[i].dmReceiver){							
-							data[i].dmSender = data[i].dmReceiver;
-						}
-						
-						if(data[i].dmReadFlag == 1){
-							flagClass = "dm-no-badge";
-						}else if(data[i].dmReadFlag == 0){							
-							flagClass = "dm-badge";
-						}
-						///dmView1.do?dmRoomNo="+data[i].dmNo+"
-						main.append("<a class='link' href='#'>"+
-								"<div class='user-component'>"+
-								"<div class='user-component__column'>"+
-								"<img class='user-component__profile_img' src='./resources/"+data[i].dmSpic+"'/>"+
-								"<div class='user-component__text'>"+
-								"<h4 class='user-component__text-name'>"+data[i].dmSender+"</h4>"+
-								"<h6 class='user-component__text-preview'>"+data[i].dmContent+"</h6>"+
-								"</div></div><div class='user-component__column'>"+
-								"<span class='user-component__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
-								"<div class='"+flagClass+"'>x</div>"+
-								"</div></div></a>");
-						
 						
 					}
-					$("#result").append(main);
-
 				}
 			});
+			
 		});
 		
-		//문의하기 바로 눌렀을때 이전내용 보여줌
+
+		
+		//문의 목록에서 눌렀을때 문의 채팅 내역 보는거 12-23 문의목록->해당하는 메세지
+		$(document).on("click", ".user-component", function(){
+				$(".dmList").hide();
+				$(".dmView").toggle();
+				$(".main-chat").empty();
+			dmRoomNo = $(this).find(".dmRoomNoChk").val();
+			dmClassNoVal = $(this).find(".dmClassNoChk").val();
+			var dmSender = $("#memberNickname").val(); //로그인한 나
+			console.log("문의 목록에서 클릭 방번호"+dmRoomNo);
+			console.log("문의 목록에서 클릭 클래스명"+dmClassNoVal);
+			
+				//let dmSender = $("#memberNickname").val(); //나
+
+				$.ajax({
+					url : "/selectDmRoomNoAjax.do",
+					type : "post",
+					data : {dmRoomNo:dmRoomNo, dmSender:dmSender},
+					success : function(data){
+						console.log(data);
+						for (var i = 0; i < data.length; i++) {
+							if(dmSender != data[i].dmSender){
+								$(".alt-header__title").html(data[i].dmSender);
+								if(data[i].dmSpic == undefined){
+									$(".main-chat").append("<div class='message-row'>"+
+										"<img src='./resources/img/dm/classtest.jpg'/>"+
+										"<div class='message-row__content'>"+
+										"<span class='message__author'>"+data[i].dmSender+"</span>"+
+										"<div class='message__info'>"+
+						            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+						           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+								}else{
+									$(".main-chat").append("<div class='message-row'>"+
+										"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
+										"<div class='message-row__content'>"+
+										"<span class='message__author'>"+data[i].dmSender+"</span>"+
+										"<div class='message__info'>"+
+						            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+						           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+								}
+							}else if(dmSender == data[i].dmSender){
+								$(".alt-header__title").html(data[i].dmReceiver);
+								$(".main-chat").append("<div class='message-row message-row--own'>"+
+										"<div class='message-row__content'>"+
+										"<div class='message__info'>"+
+						            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
+						           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
+							}
+						}
+						$(".main-screen").scrollTop($(".main-screen").height()+4000);
+					}
+				});
+			});
+		
+		
+		
+		
+		//문의하기 바로 눌렀을때 이전내용 보여줌 12-23
 		$(document).on("click", ".doDm", function(){
 			$(".dmList").hide();
 			$(".dmView").toggle();
+			let dmReceiver = $(".alt-header__title").html($("#clsMemberNickname").val()); //상대방
 			let dmSender = $("#memberNickname").val(); //나
 			let classNo = $("#classNo").val(); //해당 클래스 번호
-			
+			console.log("dmRoomNo 번호는 과연 "+dmRoomNo);
 			$(".main-chat").empty();
 			$.ajax({
-				url : "/selectDmListAjax.do",
+				url : "/selectDmAjax.do",
 				type : "post",
-				data : {classNo:classNo, dmSender:dmSender },
+				data : {classNo:classNo, dmSender:dmSender, dmRoomNo:dmRoomNo },
 				success : function(data){
 					for (var i = 0; i < data.length; i++) {
 						if(dmSender != data[i].dmSender){
@@ -396,19 +451,18 @@
 						}
 					}
 					$(".main-screen").scrollTop($(".main-screen").height()+4000);
-					
 				}
-				
 			});
-					
-			
 		});
+		
+		
 
 		
 		//문의 글 내용 엔터키
-		$(".dmContent").keyup(function(key){
+		$(document).on("keyup", ".dmContent", function(key){
 			if(key.keyCode==13){ //keyCode가 13이면 엔터키임
 				sendMsg();
+				$(".dmContent").val("");
 			}
 		});
 		
@@ -417,9 +471,89 @@
 			sendMsg();
 		});
 		
+		//문의 글 함수 방번호 있는거 12-23
+    	function sendMsg(){
+			//let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
+			let dmReceiver = $(".alt-header__title").html(); //상대방
+			let dmSender = $("#memberNickname").val(); //나
+			let classNo = $("#classNo").val(); //해당 클래스 번호
+			let dmContent = $(".dmContent").val(); //문의 내용
+			
+			console.log("목록 위에 있는 닉네임 "+dmReceiver);
+			console.log("나 "+dmSender);
+			console.log("클래스 뷰에서 가져온 클래스번호 "+classNo);
+			console.log(dmContent);
+			console.log("채팅방 있을때 번호 "+dmRoomNo);
+			console.log("목록에서 가져온 클래스번호 "+dmClassNoVal);
+			
+			//메세지 작성을 할때 필요한 것
+			//1. dmReceiver, dmSender<-sessionScope.m.memberId, (classNo)로 사용할것, dmContent
+			if(dmContent != ""){
+
+				//내용 공백 아닐때
+				$.ajax({
+					url : "/dmSendAjax.do",
+					type : "post",
+					data : {classNo:classNo, dmReceiver:dmReceiver, dmSender:dmSender, dmContent:dmContent, dmRoomNo:dmRoomNo},
+					success : function(data){
+						if(data==1){
+							console.log("성공!(테스트용)");
+						}else if(data==0){
+							console.log("실패!(테스트용)");						
+						}
+						//$(".main-screen").load(location.href+" .main-screen");
+						//location.reload();
+						
+						//var dmSender = $("#memberNickname").val(); //나
+						//var classNo = $("#classNo").val(); //해당 클래스 번호
+						
+						$.ajax({
+							url : "/selectDmListAjax.do",
+							type : "post",
+							data : {dmRoomNo:dmRoomNo, dmSender:dmSender },
+							success : function(data){
+								$(".main-chat").empty();
+								for (var i = 0; i < data.length; i++) {
+									if(dmSender != data[i].dmSender){
+										if(data[i].dmSpic == undefined){
+											$(".main-chat").append("<div class='message-row'>"+
+												"<img src='./resources/img/dm/classtest.jpg'/>"+
+												"<div class='message-row__content'>"+
+												"<span class='message__author'>"+data[i].dmSender+"</span>"+
+												"<div class='message__info'>"+
+								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+										}else{
+											$(".main-chat").append("<div class='message-row'>"+
+												"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
+												"<div class='message-row__content'>"+
+												"<span class='message__author'>"+data[i].dmSender+"</span>"+
+												"<div class='message__info'>"+
+								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+										}
+									}else if(dmSender == data[i].dmSender){
+										$(".main-chat").append("<div class='message-row message-row--own'>"+
+												"<div class='message-row__content'>"+
+												"<div class='message__info'>"+
+								            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
+								           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
+									}
+								}
+								$(".main-screen").scrollTop($(".main-screen").height()+4000);
+							}
+						});
+					}
+				});		
+			}
+
+    	}
+		
+		/*
 		//문의 글 함수
     	function sendMsg(){
-			let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
+			//let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
+			let dmReceiver = $(".alt-header__title").html(); //상대방
 			let dmSender = $("#memberNickname").val(); //나
 			let classNo = $("#classNo").val(); //해당 클래스 번호
 			let dmContent = $(".dmContent").val(); //문의 내용
@@ -443,12 +577,61 @@
 						}else if(data==0){
 							console.log("실패!(테스트용)");						
 						}
-						$(".main-screen").load(location.href+" .main-screen");
+						//$(".main-screen").load(location.href+" .main-screen");
 						//location.reload();
+						
+						var dmSender = $("#memberNickname").val(); //나
+						var classNo = $("#classNo").val(); //해당 클래스 번호
+						
+						$(".main-chat").empty();
+						$.ajax({
+							url : "/selectDmListAjax.do",
+							type : "post",
+							data : {classNo:classNo, dmSender:dmSender },
+							success : function(data){
+								for (var i = 0; i < data.length; i++) {
+									if(dmSender != data[i].dmSender){
+										if(data[i].dmSpic == undefined){
+											$(".main-chat").append("<div class='message-row'>"+
+												"<img src='./resources/img/dm/classtest.jpg'/>"+
+												"<div class='message-row__content'>"+
+												"<span class='message__author'>"+data[i].dmSender+"</span>"+
+												"<div class='message__info'>"+
+								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+										}else{
+											$(".main-chat").append("<div class='message-row'>"+
+												"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
+												"<div class='message-row__content'>"+
+												"<span class='message__author'>"+data[i].dmSender+"</span>"+
+												"<div class='message__info'>"+
+								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
+								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+										}
+									}else if(dmSender == data[i].dmSender){
+										$(".main-chat").append("<div class='message-row message-row--own'>"+
+												"<div class='message-row__content'>"+
+												"<div class='message__info'>"+
+								            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
+								           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
+									}
+								}
+								$(".main-screen").scrollTop($(".main-screen").height()+4000);
+							}
+						});
 					}
 				});				
 			}
     	}
+		*/
+		
+
+		
+		//빨강 버튼 누를때 숨김
+		$(".screen-header_dot").click(function(){
+			$(".dmList").hide();
+			//$(".dmList").empty();
+		});
 		
 	});
 </script>
@@ -470,11 +653,10 @@
 					</div>
 					<h3>리뷰 부분</h3>
 						<h5>클래스의 평점은 ${reviewAvg }</h5>
-						<button type="button" class="ajaxList">목록확인</button>
 					<div class="reviewSection">
 						<c:choose>
 							<c:when test="${not empty list }">
-								<table class="table">
+								<table class="table reviewTable">
 								<tr>
 									<th>번호</th>
 									<th>내용</th>
@@ -509,9 +691,9 @@
 							</c:otherwise>
 						</c:choose>
 						
-						<table>
+						<table class="table table-borderless">
 							<tr>
-								<td colspan="2">
+								<td colspan="2" class="col-8">
 									<input type="hidden" name="classNo" value="${ccls.classNo }" id="classNo">
 									<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }" id="memberNickname">
 									<input type="hidden" name="memberLevel" value="${sessionScope.m.memberLevel }" id="memberLevel">
@@ -527,7 +709,7 @@
 										</c:otherwise>
 									</c:choose>
 								</td>							
-								<td>
+								<td class="col-2">
 									<select class="form-select form-select-md" name="reviewRate" id="reviewRate">
 										<option value="1">★☆☆☆☆</option>
 										<option value="2">★★☆☆☆</option>
@@ -536,7 +718,7 @@
 										<option value="5">★★★★★</option>
 									</select>
 								</td>							
-								<td>
+								<td class="col-2">
 									<div class="d-grid gap-2 writeSection">
 										<c:choose>
 											<c:when test="${empty sessionScope.m }">
@@ -640,11 +822,13 @@
 							<!-- 
 								<a href="/dmView.do?classNo=${ccls.classNo }" class="btn btn-primary btn-lg" >문의하기</a>
 							 -->
-								<a class="btn btn-primary btn-lg doDm" >AJAX문</a>
+							<c:if test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
+								<a class="btn btn-primary btn-lg doDm" >AJAX로 문의</a>
+							</c:if>
 							</div>
 							</c:if>
 							<div class="d-grid gap-2 mt-4">
-								<a href="/dmList.do" class="btn btn-primary btn-lg" >문의 목록(테스트)</a>
+								<button type="button" class="btn btn-primary btn-lg ajaxList">문의목록확인</button>
 							</div>
 							<c:if test="${sessionScope.m.memberNickname eq ccls.memberNickname }">
 								<div class="mt-4 d-grid gap-8 d-md-flex justify-content-md-between">
@@ -678,21 +862,19 @@
 	<!-- 문의 목록 시작 부분 -->
 	<div class="dmList posRight">
 	    <header class="screen-header">
-      		<h1 class="screen-header_title">Chats</h1>
+      		<h1 class="screen-header_title">채팅</h1>
       		<div class="screen-header_icons">
         		<span><i class="fas fa-search fa-2x"></i></span>
         		<span><i class="far fa-comment-dots fa-2x"></i></span>
         		<span><i class="fas fa-music fa-2x"></i></span>
         		<span class="screen-header_setting">
-          			<a href="#">
             		<i class="fas fa-cog fa-2x"></i>
             		<p class="screen-header_dot"></p>
-          			</a>
         		</span>
       		</div>
     </header>
-
-	<div id="result" class="scrollBar"></div>
+	<!-- 불러올 부분 -->
+	<main class="main-screen__list scrollBar"></main>
     <script src="https://kit.fontawesome.com/6478f529f2.js" crossorigin="anonymous"></script>
 	</div>
 	<!-- 문의 목록 끝남 -->
@@ -702,18 +884,18 @@
 		<div id="chat-screen">
 			<div class="alt-header-ajax">
 		      	<div class="alt-header__column">
-		        	<a class="link" href="/dmList.do">
-		          		<i class="fas fa-chevron-left fa-1x"></i>
+		        	<a class="link" href="#">
+		          		<i class="fas fa-chevron-left fa-1x toList"></i>
 		        	</a>
 		      	</div>
 		      	<div class="alt-header__column">
-		        <h1 class="alt-header__title">${ccls.memberNickname }</h1>
+		        <h1 class="alt-header__title"></h1>
 		      	</div>
 		      	<div class="alt-header__column">
 		        	<a class="link" href="#">
 		        		<i class="fas fa-search fa-1x"></i>
 		        	</a>
-		        	<a class="link" href="/dmList.do">
+		        	<a class="link" href="#">
 		        		<i class="fas fa-sliders-h fa-1x"></i>
 		        	</a>
 		      	</div>
