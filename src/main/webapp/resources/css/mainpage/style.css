@@ -617,6 +617,9 @@ section {
   color: #222222;
   transition: 0.3s;
 }
+.featured-services .title a:hover {
+  cursor:default;
+}
 .featured-services .main-banner-pic:hover .title a {
   color: #8E44AD;
 }

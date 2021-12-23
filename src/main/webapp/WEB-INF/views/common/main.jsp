@@ -227,20 +227,22 @@
           <c:forEach items="${yoriList }" var="y" begin="1" end="4">
           	<div class="col-lg-3 col-md-5 d-flex align-items-stretch">
           		<div class="member">
-          			<img src="resources/upload/member_profile/${y.profilePath }" alt="">
-          			<h4 class="memberNick">${y.memberNickname }</h4>
-          			<input type="hidden" class="memberNo" value="${y.memberNo }">
-          			<span></span>
-          			<p>
-          			 <c:choose>
-          			 	<c:when test="${y.profileIntro eq null }">
-          			 		안녕하세요.
-          			 	</c:when>
-          			 	<c:otherwise>
-          			 		${y.profileIntro }
-          			 	</c:otherwise>
-          			 </c:choose>
-          			</p>
+ 					<a href="/profile.do?memberId=${y.memberId }">
+	          			<img src="resources/upload/member_profile/${y.profilePath }" alt="">
+	          			<h4 class="memberNick">${y.memberNickname }</h4>
+	          			<input type="hidden" class="memberNo" value="${y.memberNo }">
+	          			<span></span>
+	          			<p>
+	          			 <c:choose>
+	          			 	<c:when test="${y.profileIntro eq null }">
+	          			 		안녕하세요.
+	          			 	</c:when>
+	          			 	<c:otherwise>
+	          			 		${y.profileIntro }
+	          			 	</c:otherwise>
+	          			 </c:choose>
+	          			</p>
+          			</a>
           			<c:choose>
 						<c:when test="${y.memberNo eq sessionScope.m.memberNo && sessionScope.m.memberNo ne null }">
 							<div class="social main-myself">
@@ -280,20 +282,22 @@
           <c:forEach items="${joriList }" var="j" begin="1" end="4">
           	<div class="col-lg-3 col-md-5 d-flex align-items-stretch">
           		<div class="member">
-          			<img src="resources/upload/member_profile/${j.profilePath }" alt="">
-          			<h4 class="memberNick">${j.memberNickname }</h4>
-          			<input type="hidden" class="memberNo" value="${j.memberNo }">
-          			<span></span>
-          			<p>
-          			 <c:choose>
-          			 	<c:when test="${j.profileIntro eq null }">
-          			 		안녕하세요.
-          			 	</c:when>
-          			 	<c:otherwise>
-          			 		${j.profileIntro }
-          			 	</c:otherwise>
-          			 </c:choose>
-          			</p>
+          			<a href="/profile.do?memberId=${j.memberId }">
+	          			<img src="resources/upload/member_profile/${j.profilePath }" alt="">
+	          			<h4 class="memberNick">${j.memberNickname }</h4>
+	          			<input type="hidden" class="memberNo" value="${j.memberNo }">
+	          			<span></span>
+	          			<p>
+	          			 <c:choose>
+	          			 	<c:when test="${j.profileIntro eq null }">
+	          			 		안녕하세요.
+	          			 	</c:when>
+	          			 	<c:otherwise>
+	          			 		${j.profileIntro }
+	          			 	</c:otherwise>
+	          			 </c:choose>
+	          			</p>
+          			</a>
           			<c:choose>
 						<c:when test="${j.memberNo eq sessionScope.m.memberNo && sessionScope.m.memberNo ne null}">
 							<div class="social main-myself">
@@ -391,21 +395,21 @@
           <div class="col-lg-4 col-md-6">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-basket"></i></div>
-              <h4 class="title"><a href="">신선한 재료</a></h4>
+              <h4 class="title"><a>신선한 재료</a></h4>
               <p class="description">MD가 전국 각지의 신선한 제철 농/축/수산물을 찾고 까다로운 위생기준으로 빈틈없이 평가합니다. 채소는 꼼꼼히 손질하고 신선도를 위해 저온 유지로 준비합니다.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-activity"></i></div>
-              <h4 class="title"><a href="">균형잡힌 식단</a></h4>
+              <h4 class="title"><a>균형잡힌 식단</a></h4>
               <p class="description">국내 및 글로벌 헬스 분야 최고의 전문 영양사가 메뉴를 고민합니다. 맛을 살리는 재료, 육수, 소스부터 칼로리와 균형잡힌 영양소를 고려하는 깊은 고민을 통해 지속가능한 메뉴가 만들어집니다.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box">
               <div class="icon"><i class="bi bi-cash-coin"></i></div>
-              <h4 class="title"><a href="">합리적인 가격</a></h4>
+              <h4 class="title"><a>합리적인 가격</a></h4>
               <p class="description">다양한 프로모션과 이벤트로 최선의 가격을 제안합니다. 포장재를 최대한으로 줄여 가격 뿐만 아니라 소중한 지구 환경 또한 생각합니다.</p>
             </div>
           </div>
