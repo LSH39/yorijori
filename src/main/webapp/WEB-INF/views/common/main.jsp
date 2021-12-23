@@ -184,7 +184,7 @@
             <c:forEach items="${productList }" var="p" begin="1" end="8">
             <div class="swiper-slide">
             	<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
-            		<img src="resources/upload/product/${p.filepath }" class="img-fluid" alt="">
+            		<img src="resources/upload/product/${p.filepath }" class="img-fluid" style="width:250px;height:180px;" alt="">
             		<h5>${p.milkitName }</h5>
             		<h6> 
             			<span class="main-product-price"><fmt:formatNumber value="${p.milkitPrice}" pattern="#,###"/></span>원
@@ -278,7 +278,7 @@
       </div>
       
       <!-- 조리꾼 목록 -->
-      <div class="row main-memberList">
+      <div class="row main-memberList" style="display:none;">
           <c:forEach items="${joriList }" var="j" begin="1" end="4">
           	<div class="col-lg-3 col-md-5 d-flex align-items-stretch">
           		<div class="member">
@@ -425,7 +425,6 @@
   	  $(function(){
   		  var memberbtn = $(".mainmemberlist");
   		  memberbtn.eq(0).addClass("active-btn");
-  		  $(".main-memberList").eq(1).hide();
   		  
   		  memberbtn.on("click", function(){
   			 var index = $(this).index();

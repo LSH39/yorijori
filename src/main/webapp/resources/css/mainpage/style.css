@@ -739,6 +739,9 @@ section {
 .team .section-title h2::after {
 	margin-left: 80px;
 }
+.main-memberList{
+	transition-delay: 0.5s;
+}
 .active-btn{
 	background: rgb(246, 240, 255);
 	color: #8E44AD;
@@ -746,12 +749,13 @@ section {
 .team .member {
   text-align: center;
   margin-bottom: 15px;
-  box-shadow: 0px 0px 12px 0px rgba(34, 34, 34, 0.07);
-  padding: 25px 15px;
+  box-shadow: 0px 0px 10px 0px rgba(34, 34, 34, 0.07);
+  padding: 25px 50px;
   background: #fff;
 }
 .team .member img {
-  max-width: 60%;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   margin: 0 0 30px 0;
 }
@@ -774,7 +778,7 @@ section {
 .team .member .social {
   margin-top: 15px;
   display: flex;
-  margin-left: 33%;
+  margin-left: 15%;
 }
 .team .member .social a {
   color: #919191;
