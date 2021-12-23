@@ -46,14 +46,14 @@
 			<div id="count">
 				<span id="countImg"><img src="/resources/img/recipe/eye.png"
 					width="20px"></span><span id="countText"> ${rb.readCount }</span>
-			</div>
-				<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">	
-		</c:if>
+			</div>				
 		</div>
+		<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">
 		<div id="update">
 				<span><a href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span>
 					<span><a href="/deleteRecipe.do?recipeNo=${rb.recipeNo }">삭제</a></span>
 			</div>
+			</c:if>
 		<c:if test="${sessionScope.m.memberNo != null }">
 			<c:if test="${rb.likeCheck eq 0 }">
 				<div class="checkImg">
@@ -138,6 +138,12 @@
 				</div>
 			</c:forEach>
 		</div>
+		<c:if test="${rb.recipeVideo != null }">
+		<div id="recipeVideo">
+		<iframe width="703" height="395" src="https://www.youtube.com/embed/${rb.recipeVideo }" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+		</c:if>
+		
 		<div class="contentsWrap">
 			<c:forEach items="${rb.RList }" var="rc" varStatus="i">
 				<div class="contents">
@@ -369,6 +375,8 @@
 		$("#cancelBtn").click(function() {
 			$("#modal-wrap").hide();
 		});
+		
+
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 

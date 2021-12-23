@@ -134,6 +134,19 @@ public class RecipeService {
 	}
 
 
+	public ArrayList<RecipeBoard> moreRecipe(int start, RecipeBoard rb) {
+		int length=3;
+		int end = start+length-1;
+		ArrayList<RecipeBoard>list = dao.moreRecipe(rb,start,end);
+		return list;
+	}
+
+
+	public int recipeTotalCount(RecipeBoard rb) {
+		return dao.recipeTotalCount(rb);
+	}
+
+
 	
 
 	

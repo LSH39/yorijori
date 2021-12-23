@@ -17,7 +17,9 @@
 	<div class="main">
     <h1>레시피</h1>
 	<div id="recipeList">
-		<c:forEach items="${list }" var="rb" varStatus="i">	 
+	
+	
+		<c:forEach items="${list }" var="rb" varStatus="i">	 	
 	     <div class="recipe">
 	     <c:if test="${sessionScope.m.memberNo != null }">
             <a href="/recipeView.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">
@@ -48,7 +50,7 @@
               <p >중</p>  
               </c:if>
                 <c:if test="${rb.recipeLevel eq 3}">
-              <p>히</p>  
+              <p>하</p>  
               </c:if>
             </div>
         </div>
@@ -58,23 +60,62 @@
 		</c:forEach>
 		<div id="moreRecipe"></div>
 		</div>
-		<div class="btnWrap" ><button currentCount="6" totalCount="${totalCount }" value="7" id="more">리워드 프로젝트 더보기</button></div>
+		<div class="btnWrap" ><button currentCount="6" totalCount="${totalCount }" value="7" id="more">레시피 더보기</button></div>
 	</div>		
 	<script>
 	 $("#more").click(function(){
 		 	var start = $(this).val();
+		 	var situation = ${c.situationNum};
+		 	var material = ${c.materialNum};
+		 	var recipeLevel = ${c.levelNum};
+		 	
 			$.ajax({
 				url : "/moreRecipe.do",
-				data : {start:start
+				data : {start:start,
+					situation:situation,
+					 material: material,
+					 recipeLevel:recipeLevel
 						},
 				type : "post",
 				success : function(data){			
 					for(var i=0;i<data.length;i++){
-						var price = data[i].milkitPrice.toLocaleString('ko-KR')
-						var html ="";		
-						$("#moreRecipe").append(html);	
+						var html ="";
+						if(${sessionScope.m.memberNo == null}){
+							html += "<div class='recipe'><a href='/recipeView.do?recipeNo="+data[i].recipeNo+"&memberNo=0'>";
+							html += "<img src='/resources/upload/product/"+data[i].filepath+"'>";
+							html +=" <p class='name'>"+data[i].nickname+"</p> <p class='title'>"+data[i].recipeTitle+"</p>"; 
+							html += "<div class='info'><div><p class='infoText'>조회수</p> <p>"+data[i].readCount+"회</p></div> ";
+							html +="<div>  <p class='infoText'>조리시간</p> <p>"+data[i].recipeTime+"</p></div>";
+							html +="<div> <p class='infoText'>난이도</p>";
+							if(data[i].recipeLevel == 1){
+								html +="<p>상</p>";
+							}else if(data[i].recipeLevel == 2){
+								html +="<p>중</p>";
+							}else{
+								html +="<p>하</p>";
+							}
+							html +="</div></div></a></div>";
+							$("#moreRecipe").append(html);	
+						}else{
+							html += "<div class='recipe'><a href='/recipeView.do?recipeNo="+data[i].recipeNo+"&memberNo="+${sessionScope.m.memberNo}+"'>";
+							html += "<img src='/resources/upload/product/"+data[i].filepath+"'>";
+							html +=" <p class='name'>"+data[i].nickname+"</p> <p class='title'>"+data[i].recipeTitle+"</p>"; 
+							html += "<div class='info'><div><p class='infoText'>조회수</p> <p>"+data[i].readCount+"회</p></div> ";
+							html +="<div>  <p class='infoText'>조리시간</p> <p>"+data[i].recipeTime+"</p></div>";
+							html +="<div> <p class='infoText'>난이도</p>";
+							if(data[i].recipeLevel == 1){
+								html +="<p>상</p>";
+							}else if(data[i].recipeLevel == 2){
+								html +="<p>중</p>";
+							}else{
+								html +="<p>하</p>";
+							}
+							html +="</div></div></a></div>";
+							$("#moreRecipe").append(html);	
+						}
+						
 					}
-
+					
 					$("#more").val(Number(start)+3);
 					var curr = Number($("#more").attr("currentCount"));
 					$("#more").attr("currentCount", curr + data.length);
@@ -82,7 +123,10 @@
 					var currCount = $("#more").attr("currentCount");
 					if(curr == totalCount){				
 						$("#more").prop("disabled",false);
-						alert("마지막 페이지 입니다.")
+						alert("마지막 페이지 입니다.");
+					}else if(totalCount < 7){
+						$("#more").prop("disabled",false);
+						alert("마지막 페이지 입니다.");
 					}
 				}
 			});

@@ -84,3 +84,22 @@
 	
 }
 
+.btnWrap {
+	margin: 0 auto;
+	width: 350px;
+}
+
+.btnWrap button {
+	width: 350px;
+	border: none;
+	height: 50px;
+	background-color: #C4BFE3;
+	font-size: 18px;
+	color: white;
+	border-radius: 3px;
+		margin-top: 70px;
+}
+
+.btnWrap button:hover {
+	color: rgba(255, 255, 255, 0.5);
+}
