@@ -466,7 +466,7 @@
   			var memberId = $("#loginMemberId").val();
   			var memberNo = $("#loginMemberNo").val();
   			var followCheck = $(this).children(".main-follow-stat");
-  			var followNo = $(this).parent().children(".memberNo").val();
+  			var followNo = $(this).parent().find(".memberNo").val();
   			var followerCount = $(this).children(".main-follower-count");
   			if(memberId != "" && followCheck.html() == "팔로우"){
   				$.ajax({
