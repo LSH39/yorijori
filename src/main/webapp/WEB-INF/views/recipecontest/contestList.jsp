@@ -38,9 +38,11 @@
 	      			<div>총 <span id="totalCount">${totalCount }</span>개</div>
 	      			<div>
 	      				<c:choose>
-	      					<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel eq 1 || sessionScope.m.memberLevel eq 2 }">
+	      					<c:when test="${not empty sessionScope.m }">
 	      					<input type="hidden" class="memberNo" value="${sessionScope.m.memberNo }">
-	      					<button class="btn-main btn-enter">대회 참가하기</button>
+	      						<c:if test="${sessionScope.m.memberLevel eq 1 }">
+	      							<button class="btn-main btn-enter">대회 참가하기</button>
+	      						</c:if>
 	      					</c:when>
 	      				</c:choose>
 	      				<input type="hidden" id="orderIndex" value="${orderIndex }">

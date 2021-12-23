@@ -301,7 +301,7 @@
   	function chkDate2(){
   		var today = new Date();
   		var date = today.getDate();
-  		if(date >= 25 && date <= 31){
+  		if(date >= 1 && date <= 31){
   			location.href="/contestResult.do";
   		}else {
   			alert("우승자 발표기간이 아닙니다.");
