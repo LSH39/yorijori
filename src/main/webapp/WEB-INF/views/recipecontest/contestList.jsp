@@ -130,7 +130,7 @@
 								<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 									<table class="table table-hover">
 										<thead>
-											<tr class="table-secondary">
+											<tr class="table-th">
 												<th scope="col">선택</th>
 												<th scope="col">이미지</th>
 												<th scope="col">제목</th>

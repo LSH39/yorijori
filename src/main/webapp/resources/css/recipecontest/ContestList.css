@@ -83,6 +83,9 @@
 .vote-count{
 	display: flex;
 }
+.table-th{
+	background: #F8F1FF;
+}
 .pagi{
 	margin-left: 50%;
 }
