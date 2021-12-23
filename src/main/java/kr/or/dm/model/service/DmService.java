@@ -82,21 +82,7 @@ public class DmService {
 		return receiver;
 	}
 	
-	//DM 문의방 번호 있는지 찾기
-	public int selectOneDmRoomNo(int classNo, String dmSender) {
-		// TODO Auto-generated method stub
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("classNo", classNo);
-		map.put("dmSender", dmSender);
-		int dmRoomNo = 0;
-		try {
-			dmRoomNo  = dao.selectOneDmRoomNo(map);	
-		}catch(Exception e){
-			dmRoomNo = dao.incDmRoomNo();
-			return dmRoomNo;
-		}
-		return dmRoomNo;
-	}
+
 
 	//DM작성할때 보내는 사람이 클래스 개설한 사람인지 확인
 	public String selectOneNickname(int classNo) {
@@ -105,13 +91,6 @@ public class DmService {
 		return ClassNoNickname;
 	}
 
-	//문의 방 번호 기준 문의 목록에서 조회
-	public ArrayList<Dm> selectOneDm(int dmRoomNo) {
-		// TODO Auto-generated method stub
-		ArrayList<Dm> list = dao.selectOneDm(dmRoomNo);
-		dao.updateReadflag(dmRoomNo);
-		return list;
-	}
 
 	//클래스 뷰에서 작성하는거
 	@Transactional
@@ -130,8 +109,45 @@ public class DmService {
 	//클래스 뷰에서 ajax로 조회 하는거
 	public ArrayList<Dm> selectOneDmList(int dmRoomNo) {
 		// TODO Auto-generated method stub
-		ArrayList<Dm> list = dao.selectOneDmList(dmRoomNo);		
+		ArrayList<Dm> list2 = dao.selectOneDmList(dmRoomNo);		
+		return list2;
+	}
+
+	//채팅방 번호 기준 조회(12-23)
+	public ArrayList<Dm> selectOneDmAjax(int dmRoomNo, String dmSender) {
+		// TODO Auto-generated method stub
+		ArrayList<Dm> list = dao.selectOneDmAjax(dmRoomNo);
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		map.put("dmRoomNo", dmRoomNo);
+		map.put("dmSender", dmSender);
+		dao.updateReadflag(map);
 		return list;
+	}
+
+	//클래스 뷰에서 바로 문의 (12-23)
+	public ArrayList<Dm> selectOneDmAjaxList(int classNo, int dmRoomNo) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		map.put("classNo", classNo);
+		map.put("dmRoomNo", dmRoomNo);
+		ArrayList<Dm> list4 = dao.selectOneDmAjaxList(map);
+		return list4;
+	}
+	
+	//문의 최초 작성 할때 채팅방 번호 발급 (12-23)
+	public int selectOneDmRoomNo(int classNo, String dmSender) {
+		// TODO Auto-generated method stub
+		int dmRoomNo = -1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("classNo", classNo);
+		map.put("dmSender", dmSender);
+		try {
+			dmRoomNo  = dao.selectOneDmRoomNo(map);	
+		}catch(Exception e){
+			dmRoomNo = dao.incDmRoomNo();
+			return dmRoomNo;
+		}
+		return dmRoomNo;
 	}
 
 }

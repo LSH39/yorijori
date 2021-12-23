@@ -19,10 +19,11 @@
   z-index: 1;
 }
 
-.main-screen {
-  /*margin-top: 40px;*/
+.main-screen,
+.main-screen__list {
   overflow-y: scroll;
   flex-grow: 1;
+  height: 80%;
   
 }
 
