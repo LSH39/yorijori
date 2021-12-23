@@ -70,7 +70,14 @@
 										</a>
 									</td>
 									<td>${f.freeLikeCount }</td>
-									<td>${f.memberNickname }</td>
+									<c:choose>
+										<c:when test="${f.memberNickname eq null }">
+											<td>탈퇴회원</td>
+										</c:when>
+										<c:otherwise>
+											<td>${f.memberNickname }</td>
+										</c:otherwise>
+									</c:choose>
 									<td>${f.regDate }</td>
 									<td>${f.freeReadcount }</td>
 								</tr>
