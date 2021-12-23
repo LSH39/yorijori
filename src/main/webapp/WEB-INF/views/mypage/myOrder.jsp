@@ -26,21 +26,20 @@
          
 }
 .foodI{
-background-color: rgb(224, 224, 224);
+background-color:rgb(244, 244, 191);
 height:220px;
 width:300px;
 float: left;
 }
 .orders{
-    
     height:220px;
     width:300px;
     float: left;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(244, 244, 191);
 
 }
 .rebutton{
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(244, 244, 191);
     height:220px;
     width:200px;
     float: left;
@@ -48,7 +47,7 @@ float: left;
     
 
 }
-#reClick{
+.reClick{
     margin-top: 70px;
     width:100px;
     height:30px;
@@ -58,7 +57,7 @@ float: left;
     border-radius: 30px;
     
 }
-#orderN{
+.orderN{
    
     width:300px;
     height:35px;
@@ -107,11 +106,39 @@ margin-left:300px;
 margin-top:120px;
 
 }
+
 </style>
 <script>
 function orderDetail(orderNo){
 	   location.href="/detailOrder.do?orderNo="+orderNo;
 	}
+
+
+$(function() {
+	
+	
+    $(".reClick").click(function() {
+    	var index =$(".reClick").index(this);
+    	var orderNo =$(this).next().val();
+	$.ajax({
+		url:"cancleOrder.do",
+		type:"post",
+		data : {orderNo:orderNo},
+		success: function(data){
+			alert("주문이 취소되었습니다")
+			
+		},
+		error:function(){
+			console.log("err");
+			
+		}
+		
+		
+	});
+	
+  });
+
+});
 
 </script>
 
@@ -139,7 +166,7 @@ function orderDetail(orderNo){
 					<c:forEach items="${list}" var="mo" varStatus="i">
 						<div class="myorder">
 							<div class="foodI">
-								<div id="orderN">
+								<div class="orderN">
 									<span>주문번호 :${mo.orderNo }</span>
 								</div>
 								<div id="imgItem">
@@ -148,10 +175,10 @@ function orderDetail(orderNo){
 							</div>
 							<div class="orders">
 
-								<span class="it_info1"><b id="m">결제방식: </b>&emsp;${mo.card}</span><br>
+								<span class="pay"><b id="m">결제방식: </b>&emsp;${mo.card}</span><br>
 								<span class="it_info1"><b id="m">배송비: </b>&emsp;무료배송</span><br>
 								<span class="it_info1"><b id="m">결제금액:</b>&emsp;${mo.orderPayment }원</span>&emsp;<br>
-								<span class="it_info1"><b id="m">주문상태: </b>&emsp;${mo.status }</span>&emsp;<br>
+								 <span class="it_info1"><b id="m">결제번호: </b>&emsp;${mo.impUid }</span>&emsp;<br>
 								<span class="it_info1"><b id="m">요청사항: </b>&emsp;${mo.orderRequest }</span>&emsp;<br>
 							</div>
 							<div class="rebutton">
@@ -159,9 +186,16 @@ function orderDetail(orderNo){
 									<input type="button" value="<<주문상세보러가기" id="detail"
 										onclick="orderDetail(${mo.orderNo})">
 								</div>
+								<c:choose>
+				                  	<c:when test="${mo.cancleOrder=='Y'}">
 								<div class="review">
-									<input type="button" value="후기작성" id="reClick">
+									<input type="button" value="주문취소" class="reClick">
+									<input type="hidden" value="${mo.orderNo }" >
 								</div>
+								</c:when>
+								<c:otherwise>
+								</c:otherwise>
+								</c:choose>
 							</div>
 
 						</div>

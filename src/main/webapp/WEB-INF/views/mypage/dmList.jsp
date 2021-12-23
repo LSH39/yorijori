@@ -94,6 +94,14 @@ margin-top:120px;
 #read{
  margin-left:640px;
 }
+#content{
+       width:350px;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+}
 </style>
 </head>
 <body>

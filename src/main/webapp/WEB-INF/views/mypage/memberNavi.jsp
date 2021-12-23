@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,25 +99,33 @@ color:red;
 			<ul>
 				<li>
 					<ul class="subnavi">
-						<li><a href="/mypage.do?memberId=${sessionScope.m.memberId }">내정보 조회 및 수정<span>&gt;</span></a></li>
+						<li><a href="/mypage.do?memberNickname=${sessionScope.m.memberNickname }">내정보 조회 및 수정<span>&gt;</span></a></li>
 						<li><a href="/profilePath.do?memberId=${sessionScope.m.memberId }">프로필 사진 바꾸기<span>&gt;</span></a></li>
 						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 구매내역<span>&gt;</span></a></li>
 						<li><a href="/mycouponList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">내 쿠폰함<span>&gt;</span></a></li>
 						<li><a href="/deleteFrm.do?">회원탈퇴<span>&gt;</span></a></li>
 						<li><a href="/myContestList.do?recipeWriter=${sessionScope.m.memberNo }&reqPage=1">참여한 경연대회<span>&gt;</span></a></li>
-						<li><a href="/myclass.do?memberNickname=${sessionScope.m.memberNickname}">요리클래스 예약내역<span>&gt;</span></a></li>
-						<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
+						<li><a href="/myclass.do?memberNo=${sessionScope.m.memberNo}">요리클래스 예약내역<span>&gt;</span></a></li>
+						<c:choose>
+						 	<c:when test="${sessionScope.rm.dmCount==0}">
+						<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
+						</c:otherwise>
+						</c:choose>
+						
 						<li><a href="/myChatList.do?chatReceive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
 						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
 						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">좋아요 레시피<span>&gt;</span></a></li>
-						<li><a href="/myPoint.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">포인트 내역<span>&gt;</span></a></li>
+						<li><a href="/myPoint.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">포인트 내역<span>&gt;</span></a></li>            
 					</ul>
 				</li>
 				<li><span><b>내 작성글</b></span>
 					<ul class="subnavi">
 					    <li><a href="/myRecipe.do?recipeWriter=${sessionScope.m.memberNo }">내 작성 레시피<span>&gt;</span></a></li>
-						<li><a href="/myitemReview.do?memberNo=${sessionScope.m.memberNickname }">구매 밀키트후기<span>&gt;</span></a></li>
-						<li><a href="/myclassReview.do?memberNo=${sessionScope.m.memberNickname }">작성 클래스후기<span>&gt;</span></a></li>
+						<li><a href="/myitemReview.do?memberNickname=${sessionScope.m.memberNickname }">구매 밀키트후기<span>&gt;</span></a></li>
+						<li><a href="/myclassReview.do?memberNickname=${sessionScope.m.memberNickname }">작성 클래스후기<span>&gt;</span></a></li>
 						<li><a href="/myBoardList.do?freeWriter=${sessionScope.m.memberId }&reqPage=1" id="lf-click">내 작성 게시글<span>&gt;</span></a></li>
 						
 

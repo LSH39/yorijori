@@ -271,11 +271,11 @@ margin-top:120px;
 			<c:forEach items="${list }" var="ccls">
 				<li>
 					<div>
-						<a href="/cookingClsView.do?classNo=${ccls.classNo}" class="class-img"></a>
+						<a href="/cookingClsView.do?classNo=${ccls.classNo}" class="class-img">
 							<div class="img-container">
 								<div class="class-img-span">
 									<span>										
-										<img src="./resources/img/cookingcls/a.jpg" class="image-source">
+						<img src="./resources/img/cookingcls/a.jpg" class="image-source">
 									</span>
 								</div>
 								<div>
@@ -294,6 +294,7 @@ margin-top:120px;
 									<div>${ccls.classStart } 부터 시작</div>
 								</div>
 							</div>
+							</a>
 						
 					</div>
 				</li>

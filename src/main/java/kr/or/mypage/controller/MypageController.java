@@ -48,10 +48,10 @@ public class MypageController {
 
 	//내 정보보기(회원)
 	@RequestMapping(value = "/mypage.do")
-	public String mypage(String memberId, Model model,HttpSession session) {
-		ReadMember rm =service.mypage(memberId);
-     session.setAttribute("rm", rm);
-	model.addAttribute("rm", rm);
+	public String mypage(String memberNickname, Model model,HttpSession session) {
+		ReadMember rm =service.mypage(memberNickname);
+        session.setAttribute("rm", rm);
+	    model.addAttribute("rm", rm);
 	
 		//Member m = service.mypage(memberId);
        //model.addAttribute("m", m);
@@ -60,8 +60,8 @@ public class MypageController {
 	
 	//내 정보보기(전문가)
 	@RequestMapping(value = "/selPage.do")
-	public String selPage(String memberId, Model model,HttpSession session) {
-		ReadMember rm =service.seller(memberId);
+	public String selPage(String memberNickname, Model model,HttpSession session) {
+		ReadMember rm =service.seller(memberNickname);
 		   session.setAttribute("rm", rm);
 			model.addAttribute("rm", rm);
 		//Member m = service.sellerPage(memberId);
@@ -93,8 +93,8 @@ public class MypageController {
 
 	//예약 클래스내역
 	@RequestMapping(value = "/myclass.do")
-	public String myclass(String memberNickname, Model model) {
-		ArrayList<MyCookingRsrv> list= service.myclass(memberNickname);
+	public String myclass(int memberNo, Model model) {
+		ArrayList<MyCookingRsrv> list= service.myclass(memberNo);
 		model.addAttribute("list", list);
 		return "mypage/myReserve";
 	}
@@ -255,7 +255,7 @@ public class MypageController {
 		} else {
 			model.addAttribute("msg", "정보변경 실패");
 		}
-		model.addAttribute("loc", "/selPage.do?memberId="+m.getMemberId());
+		model.addAttribute("loc", "/selPage.do?memberNickname="+m.getMemberNickname());
 		return "common/msg";
 	}
 	//회원정보변경
@@ -268,7 +268,7 @@ public class MypageController {
 		} else {
 			model.addAttribute("msg", "정보변경 실패");
 		}
-		model.addAttribute("loc", "/mypage.do?memberId="+m.getMemberId());
+		model.addAttribute("loc", "/mypage.do?memberNickname="+m.getMemberNickname());
 		return "common/msg";
 	}
 
@@ -276,6 +276,8 @@ public class MypageController {
 
 	@RequestMapping(value = "/myPoint.do")
 	public String myPoint(int memberNo, Model model,int reqPage) {
+		System.out.println("회원번호 :"+memberNo);
+		System.out.println("페이지번호 :"+reqPage);
 		MyPointPageData ppd =service.pointList(reqPage,memberNo);
 		model.addAttribute("list", ppd.getList());
 		model.addAttribute("pageNavi",ppd.getPageNavi());
@@ -434,6 +436,7 @@ public class MypageController {
 	//주문 상태 변경
 	@RequestMapping(value="/updateOrder.do")
 	public String updateOrder(Mysell ms, Model model,int reqPage) {
+		System.out.println(ms.getMilkitWriter());
 		//System.out.println("주문상태 : "+ms.getOrderStatus() );
        // System.out.println("옵션번호 : "+ms.getOrderOptionNo());
 		int result = service.uporder(ms);
@@ -456,10 +459,25 @@ public class MypageController {
 				model.addAttribute("msg", "포인트 적립 실패1");
 			}
 		}	
-		model.addAttribute("loc", "/sellList.do?memberNo="+ms.getMemberNo()+"&reqPage="+reqPage);
+		System.out.println(ms.getMilkitWriter());
+		
+		model.addAttribute("loc", "/sellList.do?milkitWriter="+ms.getMilkitWriter()+"&reqPage="+reqPage);
 		return "common/msg";
 	}
 
+	@RequestMapping(value = "/cancleOrder.do")
+	public String deleteMember(int orderNo,Model model) {
+		
+		int result = service.cancleOrder(orderNo);
+	    
+		if (result > 0) {
+			model.addAttribute("msg", "주문이 취소되었습니다.");
+		} else {
+			model.addAttribute("msg", "주문취소가 실패했습니다");
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	}
 }
 
 

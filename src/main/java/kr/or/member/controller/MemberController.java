@@ -274,13 +274,14 @@ public class MemberController {
 		return "mypage/deleteMember";
 	}
 	@RequestMapping(value = "/deleteMember.do")
-	public String deleteMember(Member member, Model model) {
+	public String deleteMember(Member member, Model model,HttpSession session) {
      int result =service.deleteMemberEnc(member);
 		if (result > 0) {
-			model.addAttribute("msg", "탈퇴요청 성공");
+			model.addAttribute("msg", "탈퇴되었습니다.그동안  요리조리를 이용해주셔서 감사합니다");
+			session.invalidate();
 			model.addAttribute("loc", "/");
 		} else {
-			model.addAttribute("msg", "탈퇴 요청 실패");
+			model.addAttribute("msg", "탈퇴 요청 실패이 실패했습니다");
 			model.addAttribute("loc", "/deleteFrm.do");
 		}
 		return "common/msg";
@@ -294,10 +295,10 @@ public class MemberController {
 	public String deleteSeller(Member member, Model model) {
 		int result = service.upSellerEnc(member);
 		if (result > 0) {
-			model.addAttribute("msg", "탈퇴요청 성공");
+			model.addAttribute("msg", "탈퇴신청이 접수되었습니다.");
 			model.addAttribute("loc", "/");
 		} else {
-			model.addAttribute("msg", "탈퇴 요청 실패");
+			model.addAttribute("msg", "탈퇴 요청 실패했습니다");
 			model.addAttribute("loc", "/delSelFrm.do");
 		}
 		return "common/msg";

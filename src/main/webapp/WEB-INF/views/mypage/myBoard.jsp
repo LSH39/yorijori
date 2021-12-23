@@ -59,6 +59,13 @@ background-color :#fff;
 .pagenation a:hover{
 color: #9F90CF;
 }
+
+#content{
+ 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -86,20 +93,20 @@ color: #9F90CF;
 				<table border="1" class="re">
 					<tr>
 						<th>번호</th>
-						<th>제목</th>
-						<th>내용</th>
-						<th>작성일</th>
+						<th>제목</th>					
 						<th>조회수</th>
+						<th>작성일</th>
+						<th>작성자</th>
 					</tr>
 					  <c:choose>
                   	<c:when test="${ not empty list }">
              <c:forEach items="${list}" var="fb" varStatus="i">
 					<tr>
 						<td>${fb.freeNo}</td>
-						<td><a href="/freeView.do?freeNo=${fb.freeNo}">${fb.freeTitle}</a></td>
-						<td>${fb.freeContent}</td>
-						<td>${fb.regDate}</td>
+						<td id="content"><a href="/freeView.do?freeNo=${fb.freeNo}">${fb.freeTitle}</a></td>
 						<td>${fb.freeReadcount}</td>
+						<td>${fb.regDate}</td>
+						<td>${fb.freeWriter}</td>
 
 					</tr>
 					</c:forEach>

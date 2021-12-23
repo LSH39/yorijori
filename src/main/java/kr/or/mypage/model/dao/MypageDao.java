@@ -34,8 +34,8 @@ public class MypageDao {
 	private SqlSessionTemplate sqlSession;
 	
 	/*마이페이지*/
-	public ReadMember mypage(String memberId) {
-		return sqlSession.selectOne("mypage.mypage",memberId);
+	public ReadMember mypage(String memberNickname) {
+		return sqlSession.selectOne("mypage.mypage",memberNickname);
 	}
     /*회원정보수정*/
 	public int updateMember(Member m) {
@@ -64,8 +64,8 @@ public class MypageDao {
 	}
 	*/
 	/*내 예약내역*/
-	public ArrayList<MyCookingRsrv> myClass(String memberNickname) {
-		List<MyCookingRsrv> list = sqlSession.selectList("mypage.myClass",memberNickname);
+	public ArrayList<MyCookingRsrv> myClass(int memberNo) {
+		List<MyCookingRsrv> list = sqlSession.selectList("mypage.myClass",memberNo);
 		return (ArrayList<MyCookingRsrv>)list;
 	}
 	/*내 클래스후기 조회*/
@@ -305,9 +305,17 @@ public class MypageDao {
 		return  sqlSession.update("mypage.updatePoint",ms);
 	}
 	//dmCount 첫번째 장
-	public int countsDmFirst(String memberId) {
-		int dmCount = sqlSession.selectOne("mypage.countDmFirst",memberId);
+	public int countsDmFirst(String memberNickname) {
+		int dmCount = sqlSession.selectOne("mypage.countDmFirst",memberNickname);
 		return dmCount;
+	}
+	//주문취소(옵션테이블)
+	public int cancleOrder(int orderNo) {
+		return sqlSession.delete("mypage.cancleOrder",orderNo);
+	}
+	//주문취소(주문내역테이블)
+	public int cancleOrderList(int orderNo) {
+		return sqlSession.delete("mypage.cancleOrderList",orderNo);
 	}
 }
 	
