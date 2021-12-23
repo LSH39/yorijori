@@ -51,9 +51,7 @@
     });
 
     $("#chatAdmin").click(function(){
-    	// alarm
-		var alarm = 0;
-		$("#chatAdminAlarm").text(alarm);
+    	openChat();
 		// chat
         if($("#chatFrmAdminHome").prop("on") == false){
         	if($("#chatFrmAdmin").prop("on") == false){
@@ -91,29 +89,34 @@
 	
 	 function reStartChat(){
     	webSocketType = "reStart";
-    	var alarm = 0;
-		$("#chatAdminAlarm").text(alarm);
-		var data = {type:"reStart",memberNo:sessionMemberNo, alarm:alarm};
+		var data = {type:"reStart",memberNo:sessionMemberNo};
+	    ws.send(JSON.stringify(data));
+	}
+	
+	function openChat(){
+	   	webSocketType = "openChat";
+		var data = {type:"openChat",memberNo:sessionMemberNo};
 	    ws.send(JSON.stringify(data));
 	}
 	
 	function closeChat(){
 	   	webSocketType = "closeChat";
-	   	var alarm = 0;
-		$("#chatAdminAlarm").text(alarm);
-		var data = {type:"closeChat",memberNo:sessionMemberNo, alarm:alarm};
+		var data = {type:"closeChat"};
 	    ws.send(JSON.stringify(data));
 	}
 	
 	function appendChat(textMsg){
 		var msg = JSON.parse(textMsg);
 		// alarm
-		if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
-			//alarm += 1;
+		//if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
 			$("#chatAdminAlarm").text(msg.alarm);
-		}
+		//}
 		// chat
-		if(msg.appendMsg != "noMsg"){
+		if(msg.appendMsg == "noMsg"){
+			$("#chatAdmin").click();  // close
+			$("#chatAdmin").click();  // open
+		}else if(msg.appendMsg == "openChat"){
+		}else{
 			if(webSocketType == "start" || webSocketType == "reStart"){
 				$("#chatAdminHomeTbl").append(msg.appendMsg);
 			}else if(webSocketType == "chat"){
@@ -148,10 +151,10 @@
 	
  	// user이름 갖고옴. ajax로 채팅 데이터 가져오기, 웹소켓 연동
     $(document).on("click",".chatHomeTr",function(){
-    	selectUser = $(this).children().text();
+    	selectUser = $(this).children().eq(0).text();
     	chatAdmin(selectUser);
     }).on("click",".chatHomeTr+",function(){
-    	selectUser = $(this).prev().children().text();
+    	selectUser = $(this).prev().children().eq(0).text();
     	chatAdmin(selectUser);
     });
     

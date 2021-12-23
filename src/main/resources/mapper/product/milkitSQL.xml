@@ -116,5 +116,14 @@
   		recipe_delete as recipeDelete
   	from recipe_board where recipe_no=#{recipeNo} and recipe_delete=1
   </select>
- 
+  <update id="deleteMilkit" parameterType="_int">
+  	update product set milkit_delete=0 where product_no=#{productNo}
+  </update>
+  <update id="updateMilkit" parameterType="product">
+  	update product set 
+	  	milkit_name=#{milkitName},milkit_price=#{milkitPrice},
+	  	milkit_comment=#{milkitComment},filepath=#{filepath},
+	  	milkit_content=#{milkitContent},milkit_stock=#{milkitStock} 
+  	where product_no=#{productNo}
+  </update>
 </mapper>

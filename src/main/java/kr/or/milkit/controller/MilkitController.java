@@ -15,12 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterReturnValueHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.or.milkit.model.service.MilkitService;
 import kr.or.milkit.model.vo.Product;
+import kr.or.recipe.model.vo.FileVo;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.Review;
 
@@ -126,5 +128,52 @@ public class MilkitController {
 		model.addAttribute("p", p);
 		return "/product/milkitView";
 	}
-	
+	@RequestMapping(value = "/deleteMilkit.do")
+	public String deleteMilkit(int productNo,Model model) {
+		int result = service.deleteMilkit(productNo);
+		if(result>0) {
+			model.addAttribute("msg", "삭제성공");
+			model.addAttribute("loc", "/");
+		}else {
+			model.addAttribute("msg", "삭제실패");
+			model.addAttribute("loc", "/");
+		}
+		return "common/msg";	
+	}
+	@RequestMapping(value = "/updateMilkit.do")
+	public String updateMilkit(int productNo,Model model) {
+		Product p = service.selectOneProduct2(productNo);
+		model.addAttribute("p", p);
+		return "/product/updateFrm";	
+	}
+	@RequestMapping(value = "/updateFrm.do")
+	public String updateFrm(Product p,Model model,MultipartFile uploadImg,HttpServletRequest request) {
+		String filename = uploadImg.getOriginalFilename();
+		String savepath = request.getSession().getServletContext().getRealPath("/resources/upload/product/");
+		String filepath = p.getFilepath();
+		if (filename != "") {
+			File file = new File(savepath + filepath);
+			if (file.isFile()) {
+				if (file.delete()) {
+					String filepath2 = uploadFile(uploadImg, savepath);  
+					p.setFilepath(filepath2);
+				} else {
+					System.out.println("파일 삭제 실패");
+				}
+			}else {
+				String filepath2 = uploadFile(uploadImg, savepath);  
+				p.setFilepath(filepath2);
+			}
+		}
+		int result = service.updateMilkit(p);
+		if(result>0) {
+		model.addAttribute("msg", "수정 성공");
+		model.addAttribute("loc", "/");
+		}else {
+			model.addAttribute("msg", "수정 실패");
+			model.addAttribute("loc", "/");
+		}
+		return "common/msg";
+	}
+
 }

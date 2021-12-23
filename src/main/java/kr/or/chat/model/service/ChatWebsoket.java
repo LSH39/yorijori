@@ -2,6 +2,7 @@ package kr.or.chat.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
@@ -25,13 +26,15 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 		@Autowired
 		private ChatDao dao;
 		private int adminOpenUser;  // 관리자와 대화중인 memberNo 
-		private HashMap<Integer, Integer> alarmList;
+		private HashMap<Integer, Integer> alarmList;   // header 알림표시
+		private HashMap<Integer, Integer> adminAlarm;  // adminHome 알림표시
 
 		public ChatWebsoket() {
 			super();
 			sessionList = new ArrayList<WebSocketSession>();
 			memberList = new HashMap<WebSocketSession, Integer>();
 			alarmList = new HashMap<Integer, Integer>();
+			adminAlarm = new HashMap<Integer, Integer>();
 		}
 
 		// 웹소켓 시작
@@ -54,12 +57,15 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 			if(type.equals("start")||type.equals("reStart")) {
 				int memberNo = element.getAsJsonObject().get("memberNo").getAsInt();
 				memberList.put(session,memberNo);
+				int totalAlarm = 0;
 
 				if(alarmList.get(memberNo)==null) {
 					alarmList.put(memberNo, 0);
 				}
 				
 				if(memberNo != 86) {  // 일반/전문가
+					int alarm = element.getAsJsonObject().get("alarm").getAsInt();
+					alarmList.put(memberNo, alarm);
 					ArrayList<Chat> chatList = service.chatUserList(memberNo);
 	            	for(int i=0; i<chatList.size();i++){
 	            		int chatNo = chatList.get(i).getChatNo();
@@ -86,13 +92,25 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 	                	}
 	            	}
             	}else {  // 관리자
+            		Set<Integer> keySet = adminAlarm.keySet();
+					for (Integer key : keySet) {
+						totalAlarm += adminAlarm.get(key);
+					}
+					alarmList.put(memberNo, totalAlarm);
             		ArrayList<Chat> chatList = service.chatAdminHomeList(memberNo);
             		appendMsg += "<colgroup><col style='width:80%'/><col style='width:20%'/></colgroup><tbody>";
             		for(int i=0; i<chatList.size(); i++) {
             			String chatSenderNickname = chatList.get(i).getMemberNickname();
             			String chatContent = chatList.get(i).getChatContent();
 	            		String chatDate = chatList.get(i).getStrDate();
-	            		appendMsg += "<tr class='chatHomeTr'><td colspan='2' class='chatId'>"+chatSenderNickname+"</td></tr>";
+	            		int senderNo = dao.selectMemberNo(chatSenderNickname);  // 보낸사람 memberNo
+	            		String adminAlarmNo = "";
+	            		if(adminAlarm.get(senderNo) != null) {
+	            			adminAlarmNo = adminAlarm.get(senderNo).toString();  // 보낸사람 미확인 Alarm 갯수
+	            			appendMsg += "<tr class='chatHomeTr'><td class='chatId'>"+chatSenderNickname+"</td><td class='chatAdminAlarm'><span class='chatAdminAlarmSpan'>"+adminAlarmNo+"</span></td></tr>";
+	            		}else {
+	            			appendMsg += "<tr class='chatHomeTr'><td colspan='2' class='chatId'>"+chatSenderNickname+"</td></tr>";
+	            		}
                     	appendMsg += "<tr><td class='chatText'><div>"+chatContent+"</div></td><td><span>"+chatDate+"</span></td></tr>";
             		}
                 	appendMsg += "</tbody>";
@@ -102,27 +120,43 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 				obj.addProperty("appendMsg", appendMsg);
 				session.sendMessage(new TextMessage(obj.toString()));
 				
-			// closeChat - admin
-			}else if(type.equals("closeChat")) {
+			// open chat
+			}else if(type.equals("openChat")) {
 				int memberNo = element.getAsJsonObject().get("memberNo").getAsInt();
-				int alarm = element.getAsJsonObject().get("alarm").getAsInt();
-				alarmList.put(memberNo, alarm);
+				int totalAlarm = 0;
+				if(memberNo == 86) {  // 관리자
+					Set<Integer> keySet = adminAlarm.keySet();
+					for (Integer key : keySet) {
+						totalAlarm += adminAlarm.get(key);
+					}
+					alarmList.put(memberNo, totalAlarm);
+				}else {  // 일반,전문가
+					int alarm = element.getAsJsonObject().get("alarm").getAsInt();
+					alarmList.put(memberNo, alarm);
+				}
 				JsonObject obj = new JsonObject();
 				obj.addProperty("alarm", alarmList.get(memberNo));
-				obj.addProperty("appendMsg", "noMsg");
+				obj.addProperty("appendMsg", "openChat");
 				session.sendMessage(new TextMessage(obj.toString()));
+				
+			// close chat - admin
+			}else if(type.equals("closeChat")) {
+				adminOpenUser = 0;
 				
 			// chat enter
 			}else if(type.equals("chat")) {
 				int chatSend = element.getAsJsonObject().get("chatSend").getAsInt();
 				int chatReceive = 0;
-				//int alarm = element.getAsJsonObject().get("alarm").getAsInt();
-				//alarmList.put(chatSend, alarm);
 				if(chatSend == 86) {  // 관리자가 보내면
 					String selectUser = element.getAsJsonObject().get("selectUser").getAsString();
 					chatReceive = dao.selectMemberNo(selectUser);
 				}else {
 					chatReceive = element.getAsJsonObject().get("chatReceive").getAsInt();
+					if(chatSend != adminOpenUser) {  // 관리자와 대화중인 유저가 아니면
+						if(adminAlarm.get(chatSend) == null) {
+							adminAlarm.put(chatSend, 0);
+						}
+					}
 				}
 				String chatContent = element.getAsJsonObject().get("chatContent").getAsString();
 				Chat chat = new Chat();
@@ -156,7 +190,16 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 							}
 							sendDate = newChat.getStrDate();
 							JsonObject obj = new JsonObject();
-							obj.addProperty("alarm", alarmList.get(chatSend));
+							if(chatSend == 86) {
+								int totalAlarm = 0;
+                            	Set<Integer> keySet = adminAlarm.keySet();
+                				for (Integer key : keySet) {
+                					totalAlarm += adminAlarm.get(key);
+                					obj.addProperty("alarm", totalAlarm);
+                				}
+							}else {
+								obj.addProperty("alarm", alarmList.get(chatSend));
+							}
 							obj.addProperty("appendMsg", appendMsg);
 							s.sendMessage(new TextMessage(obj.toString()));
 						}else if(s!=null && recSocket!=null && s==recSocket){  // 받는사람 화면
@@ -168,8 +211,11 @@ public class ChatWebsoket  extends TextWebSocketHandler{
                     				if(chatSend == adminOpenUser) {
                     					receiverMsg += "<tr><th class='receive'><p class='userId'>"+newChat.getMemberNickname()+"</p><span>"+newChat.getStrDate()+"</span></th></tr>";
                     					receiverMsg += "<tr><td class='receiveText'><div>"+newChat.getChatContent()+"</div></td></tr>";
+                    					adminAlarm.remove(chatSend);
                     				}else {
                     					receiverMsg = "noMsg";
+                    					int reA = adminAlarm.get(chatSend);
+                						adminAlarm.put(chatSend, ++reA);
                     				}
                     			}else {  // 받는사람 = 일반,전문가
                     				receiverMsg += "<tr><th class='receive'><div><img src='/resources/img/about/logo_header.png'><span>"+newChat.getStrDate()+"</span></div></th></tr>";
@@ -177,10 +223,20 @@ public class ChatWebsoket  extends TextWebSocketHandler{
                     			}
                     		}
                     		receiveDate = newChat.getStrDate();
-        					int currentAlarm = alarmList.get(chatReceive);
-        					alarmList.put(chatReceive, currentAlarm+1);
                     		JsonObject obj = new JsonObject();
-							obj.addProperty("alarm", alarmList.get(chatReceive));
+                    		// alarm
+                    		if(chatReceive==86) {
+                				int totalAlarm = 0;
+                            	Set<Integer> keySet = adminAlarm.keySet();
+                				for (Integer key : keySet) {
+                					totalAlarm += adminAlarm.get(key);
+                					obj.addProperty("alarm", totalAlarm);
+                				}
+                    		}else {
+                    			int currentAlarm = alarmList.get(chatReceive);
+                    			alarmList.put(chatReceive, currentAlarm+1);
+                    			obj.addProperty("alarm", alarmList.get(chatReceive));
+                    		}
 							obj.addProperty("appendMsg", receiverMsg);
 							s.sendMessage(new TextMessage(obj.toString()));
 						}
@@ -237,6 +293,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 				String selectUser = element.getAsJsonObject().get("selectUser").getAsString();
 				int sendMemberNo = dao.selectMemberNo(selectUser);
 				adminOpenUser = sendMemberNo;
+				adminAlarm.remove(adminOpenUser);  // 채팅창 열면 알림목록 삭제
 				int sessionMemberNo = element.getAsJsonObject().get("sessionMemberNo").getAsInt();
 				Chat searchChat = new Chat();
 				searchChat.setChatSend(sendMemberNo);
@@ -266,8 +323,13 @@ public class ChatWebsoket  extends TextWebSocketHandler{
                 		sendDate = chatDate;
                 	}
             	}
+            	int totalAlarm = 0;
+            	Set<Integer> keySet = adminAlarm.keySet();
+				for (Integer key : keySet) {
+					totalAlarm += adminAlarm.get(key);
+				}
             	JsonObject obj = new JsonObject();
-				obj.addProperty("alarm", alarmList.get(sessionMemberNo));
+				obj.addProperty("alarm", totalAlarm);
 				obj.addProperty("appendMsg", appendMsg);
 				session.sendMessage(new TextMessage(obj.toString()));
 			}
@@ -280,6 +342,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 		public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
 			sessionList.remove(session);
 			memberList.remove(session);
+			adminOpenUser = 0;
 		}
 		
 }
