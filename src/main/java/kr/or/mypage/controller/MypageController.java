@@ -465,10 +465,10 @@ public class MypageController {
 		return "common/msg";
 	}
 
-	@RequestMapping(value = "/cancleOrder.do")
+	@RequestMapping(value = "/cancelOrder.do")
 	public String deleteMember(int orderNo,Model model) {
 		
-		int result = service.cancleOrder(orderNo);
+		int result = service.cancelOrder(orderNo);
 	    
 		if (result > 0) {
 			model.addAttribute("msg", "주문이 취소되었습니다.");

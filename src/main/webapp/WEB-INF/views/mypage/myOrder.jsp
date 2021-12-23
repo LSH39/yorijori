@@ -121,7 +121,7 @@ $(function() {
     	var index =$(".reClick").index(this);
     	var orderNo =$(this).next().val();
 	$.ajax({
-		url:"cancleOrder.do",
+		url:"cancelOrder.do",
 		type:"post",
 		data : {orderNo:orderNo},
 		success: function(data){
@@ -179,6 +179,7 @@ $(function() {
 								<span class="it_info1"><b id="m">배송비: </b>&emsp;무료배송</span><br>
 								<span class="it_info1"><b id="m">결제금액:</b>&emsp;${mo.orderPayment }원</span>&emsp;<br>
 								 <span class="it_info1"><b id="m">결제번호: </b>&emsp;${mo.impUid }</span>&emsp;<br>
+								  <span class="it_info1"><b id="m">할인금액: </b>&emsp;${mo.orderSale }원 할인</span>&emsp;<br>
 								<span class="it_info1"><b id="m">요청사항: </b>&emsp;${mo.orderRequest }</span>&emsp;<br>
 							</div>
 							<div class="rebutton">

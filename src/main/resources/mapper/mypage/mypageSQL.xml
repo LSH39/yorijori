@@ -805,12 +805,12 @@
 
 	</update>
 
-	<delete id="cancleOrder" parameterType="_int">
+	<delete id="cancelOrder" parameterType="_int">
 		delete order_option where order_no=#{orderNo}
 
 	</delete>
 	
-		<delete id="cancleOrderList" parameterType="_int">
+		<delete id="cancelOrderList" parameterType="_int">
 		delete from order_tbl where order_no=#{orderNo}
 
 	</delete>

@@ -716,10 +716,10 @@ public class MypageService {
 			return rm;
 		}
        //주문취소
-		public int cancleOrder(int orderNo) {
-			int result =dao.cancleOrder(orderNo);
+		public int cancelOrder(int orderNo) {
+			int result =dao.cancelOrder(orderNo);
 			if(result>0) {
-				 result=dao.cancleOrderList(orderNo);
+				 result=dao.cancelOrderList(orderNo);
 			}
 			return result;
 		}

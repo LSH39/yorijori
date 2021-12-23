@@ -89,24 +89,78 @@
  margin-left:100px;
   margin-top:20px;
  }
+
+/*역대우승작*/
+.contest-banner{
+  text-align: center;
+	height: 400px;
+	background-image: url("/resources/img/mypage/2.jpeg");
+	position: relative;
+	border-bottom: 10px solid red;
+	
+}
+.contest-banner-content>h2{
+	font-family: "Noto Sans KR", serif;
+	font-weight: bolder;
+	color:white;
+}
+.contest-banner-content>h2>span{
+	color: #BD0000;
+}
+.contest-banner-content>h5{
+	font-family: "TmoneyRoundWindRegular";
+	font-size: 18px;
+}
+.contest-banner-content>h5, .contest-banner-content>h5>span{
+	color: #FFF;
+}
+
+.contest-info{
+	position: absolute;
+	left: 75%;
+	top: 100px;
+}
+.contest-banner-content{
+	text-align: center;
+	position: absolute;
+	top: 120px;
+	right: 42%;
+}
+.btn-announce{
+  background-color:green;
+  border:none;
+  border-radius:40px;
+  width:220px;
+  height:40px;
+  color:white;
+ font-family: "TmoneyRoundWindRegular";
+  
+
+}
+
 </style>
-<link rel="stylesheet" href="resources/css/mypage/win.css">
+
+
+
 </head>
 <body>
  <jsp:include page="/WEB-INF/views/common/header.jsp" />
  <script src="resources/summernote/jquery-3.3.1.js"></script>
-     <div>
-    <div class="contest-banner"></div>
-        	<div class="contest-banner-content">
-	      		<h2><span class="thisyr"></span>년 <span class="thismonth"></span>월</h2>
-	      		<h2>이번달 경연대회 우승작은 무엇일까요?</h2><br>
-  		
+ <div class="contest-banner">
+ 	<div class="contest-banner-content">
+	      		<h2 style="color: #FFF;"><span class="thisyr" style="color:rgb(255, 84, 67);"></span>년 <span class="thismonth" style="color:rgb(255, 84, 67);"></span>월</h2>
+	      		<h2 style="color: #FFF;">이번달 우승작은 과연 무엇일까요?</h2><br>
+	      		<h5 style="color:#FFF;">1등 우승작은 밀키트로 제작되어 판매합니다.</h5>
 	      	</div>
-	      	  	<div class="contest-info">
+ 	<div class="contest-info">
 	      		<a href="/contestResult.do">
-	      			<button class="month-winner">>>이번달 우승작 보러가기</button>
+	      			<button class="btn-announce">>>>이번달 우승작 보러가기</button>
 	      		</a>
 	      	</div>
+
+ </div>
+
+
     <div class="main">
 
         <!-- 메인 콘텐츠 -->
@@ -133,7 +187,7 @@
         </div>
         
         </div>
-        </div>
+        
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
       <script>

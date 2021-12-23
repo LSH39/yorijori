@@ -310,12 +310,12 @@ public class MypageDao {
 		return dmCount;
 	}
 	//주문취소(옵션테이블)
-	public int cancleOrder(int orderNo) {
-		return sqlSession.delete("mypage.cancleOrder",orderNo);
+	public int cancelOrder(int orderNo) {
+		return sqlSession.delete("mypage.cancelOrder",orderNo);
 	}
 	//주문취소(주문내역테이블)
-	public int cancleOrderList(int orderNo) {
-		return sqlSession.delete("mypage.cancleOrderList",orderNo);
+	public int cancelOrderList(int orderNo) {
+		return sqlSession.delete("mypage.cancelOrderList",orderNo);
 	}
 }
 	
