@@ -143,7 +143,7 @@
                     </tr>
                          <c:forEach items="${list}" var="mo" varStatus="i">
                     <tr class="tb2-tr2">
-                        <td class="tb2-td"><img src="resources/img/mypage/house.png" id="sort" ></td>
+                        <td class="tb2-td"><img src="resources/upload/product/${mo.filepath}" id="sort" ></td>
                         <td class="tb2-td">${mo.milkitName}</td>
                         <td class="tb2-td">${mo.milkitPrice}원</td>
                         <td class="tb2-td">${mo.orderOptionAmount}개</td>

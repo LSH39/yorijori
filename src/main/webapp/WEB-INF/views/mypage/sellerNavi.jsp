@@ -101,8 +101,8 @@ color:red;
 						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 주문내역<span>&gt;</span></a></li>
 						<li><a href="/mycouponList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">쿠폰함<span>&gt;</span></a></li>
 						<li><a href="/delSelFrm.do?">회원탈퇴<span>&gt;</span></a></li>
-						<li><a href="/mydmList.do?dmReceiver=승민전문가">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
-						<li><a href="/myChatList.do?chatRecive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
+					    <li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
+						<li><a href="/myChatList.do?chatReceive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
 						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
 						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">찜한 레시피<span>&gt;</span></a></li>			
 						<li><a href="/myRecipe.do?recipeWriter=${sessionScope.m.memberNo }">내 작성 레시피<span>&gt;</span></a></li>
@@ -113,10 +113,10 @@ color:red;
 				</li>
 				<li><span>클래스/판매</span>
 					<ul class="subnavi">
-						<li><a href="/mycookingList.do?memberNickname=승민전문가&reqPage=1">내 요리클래스<span>&gt;</span></a></li>
+						<li><a href="/mycookingList.do?memberNickname=${sessionScope.m.memberNickname }&reqPage=1">내 요리클래스<span>&gt;</span></a></li>
 					   <%--  <li><a href="/myItem.do?milkitWriter=${sessionScope.m.memberNo }">내 판매밀키트/통계량<span></span></a></li>--%>
-						<li><a href="/sellList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 판매내역<span>&gt;</span></a></li>
-					    <li><a href="/totalSell.do?milkitWriter=103" id="lf-click">내 판매밀키트/판매량<span></span></a></li> 
+						<li><a href="/sellList.do?milkitWriter=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 판매내역<span>&gt;</span></a></li>
+					    <li><a href="/totalSell.do?milkitWriter=${sessionScope.m.memberNo }" id="lf-click">내 판매밀키트/판매량<span></span></a></li> 
 					 
 
 					</ul></li>

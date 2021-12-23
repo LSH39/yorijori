@@ -47,7 +47,7 @@ public class MypageService {
 		//return m;
 
 		ReadMember rm =dao.mypage(memberId);
-		int dmCount =dao.countsDm();
+		int dmCount =dao.countsDmFirst(memberId);
 		rm.setDmCount(dmCount);
 		return rm;
 	}
@@ -56,12 +56,12 @@ public class MypageService {
 		int result = dao.updateMember(m);
 		return result;
 	}
-
+/*
 	public int deleteMember(Member m) {
 		int result =dao.deleteMember(m);
 		return result;
 	}
-
+*/
 	/*
 	public MyCoupon mycoupon(int memberNo) {
 		MyCoupon mc =dao.myCoupon(memberNo);
@@ -91,6 +91,7 @@ public class MypageService {
 	}
 	 */
 	public ArrayList<RecipeBoard> myRecipe(int recipeWriter) {
+		
 		ArrayList<RecipeBoard> list = dao.myRecipe(recipeWriter);
 		return list;
 	}
@@ -143,15 +144,12 @@ public class MypageService {
 		return list;
 	}
 
-	public ArrayList<Mychat> myChatList(String chatReceive) {
+	public ArrayList<Mychat> myChatList(int chatReceive) {
 		ArrayList<Mychat> list = dao.myChatList(chatReceive);
 		return list;
 	}
 
-	public int upSeller(Member m) {
-		int result = dao.upSeller(m);
-		return result;
-	}
+
 	/*
 	public ArrayList<Myorder> myOrderList(int memberNo) {
 		ArrayList<Myorder> list = dao.myOrderList(memberNo);
@@ -188,7 +186,7 @@ public class MypageService {
 	
 	
 	/*주문내역 페이징*/
-	public MyorderPageData orderList(int reqPage) {
+	public MyorderPageData orderList(int reqPage,int memberNo) {
 		//페이지당 게시물 개수
 		int numPerPage = 2;
 		int end = reqPage * numPerPage;
@@ -196,12 +194,13 @@ public class MypageService {
 
 		//한 페이지
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<Myorder> list = dao.selectOrderList(map);
 
 		//페이지 네비게이션 제작
-		int totalCount = dao.selectTotalCount();
+		int totalCount = dao.selectTotalCount(memberNo);
 		int totalPage = 0;
 
 		if(totalCount%numPerPage == 0) {
@@ -243,7 +242,7 @@ public class MypageService {
 	}
 
 	/*쿠폰내역 페이징*/
-	public MyCouponPageData mycouponList(int reqPage) {
+	public MyCouponPageData mycouponList(int reqPage,int memberNo) {
 		//페이지당 게시물 개수
 		int numPerPage = 1;
 		int end = reqPage * numPerPage;
@@ -251,12 +250,13 @@ public class MypageService {
 
 		//한 페이지
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<MyCoupon> list = dao.selectCouponList(map);
 
 		//페이지 네비게이션 제작
-		int totalCount = dao.couponTotalCount();
+		int totalCount = dao.couponTotalCount(memberNo);
 		int totalPage = 0;
 
 		if(totalCount%numPerPage == 0) {
@@ -298,7 +298,7 @@ public class MypageService {
 	}
 	
 	/*내 대회 참여내역 페이징*/
-	public MycontestPagedata mycontestList(int reqPage) {
+	public MycontestPagedata mycontestList(int reqPage,int recipeWriter) {
 		//페이지당 게시물 개수
 		int numPerPage = 1;
 		int end = reqPage * numPerPage;
@@ -306,12 +306,13 @@ public class MypageService {
 
 		//한 페이지
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("recipeWriter", recipeWriter);
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<MyContest> list = dao.selectContestList(map);
 
 		//페이지 네비게이션 제작
-		int totalCount = dao.contestCount();
+		int totalCount = dao.contestCount(recipeWriter);
 		int totalPage = 0;
 
 		if(totalCount%numPerPage == 0) {
@@ -354,7 +355,7 @@ public class MypageService {
 	
 	
     /*내 게시판 페이징*/
-	public MyFreeBoardPageData myfreeBoardList(int reqPage) {
+	public MyFreeBoardPageData myfreeBoardList(int reqPage,String freeWriter) {
 		//페이지당 게시물 개수
 		int numPerPage = 1;
 		int end = reqPage * numPerPage;
@@ -362,12 +363,13 @@ public class MypageService {
 
 		//한 페이지
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("freeWriter", freeWriter);
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<Freeboard> list = dao.myBoardList(map);
 
 		//페이지 네비게이션 제작
-		int totalCount = dao.freeBoardCount();
+		int totalCount = dao.freeBoardCount(freeWriter);
 		int totalPage = 0;
 
 		if(totalCount%numPerPage == 0) {
@@ -410,7 +412,7 @@ public class MypageService {
 	
 	
     /*찜 레시피 페이징*/
-	public MyLikeRecipePageData likeRecipeList(int reqPage) {
+	public MyLikeRecipePageData likeRecipeList(int reqPage,int memberNo) {
 		//필요한 정보 - 페이지당 게시물 개수
 		int numPerPage = 1;
 		int end = reqPage * numPerPage;
@@ -418,12 +420,13 @@ public class MypageService {
 
 		//한 페이지에 보여줄 게시물 목록 조회
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<LikeRecipe> list = dao.likeRecipeList(map);
 
 		//페이지 네비게이션 제작
-		int totalCount = dao.recipeCount();
+		int totalCount = dao.recipeCount(memberNo);
 		int totalPage = 0;
 
 		if(totalCount%numPerPage == 0) {
@@ -467,7 +470,7 @@ public class MypageService {
 	/*팔로우*/
 		public followCount followList(int memberNo) {
 		ArrayList<FollowList> list = dao.followList(memberNo);
-	     int totalCount = dao.followCount();
+	     int totalCount = dao.followCount(memberNo);
 	     followCount fct = new followCount(list,totalCount);
 			return fct;
 		}
@@ -475,7 +478,7 @@ public class MypageService {
 
 		public ReadDm myDmList(String dmReceiver) {
 			ArrayList<Mydm> list = dao.myDmList(dmReceiver);
-		     int dmCount = dao.countsDm();
+		     int dmCount = dao.countsDm(dmReceiver);
 		     ReadDm rd = new ReadDm(list,dmCount);
 				return rd;
 		}
@@ -542,7 +545,7 @@ public class MypageService {
 		}
 
 		
-		public MyPointPageData pointList(int reqPage) {
+		public MyPointPageData pointList(int reqPage,int memberNo) {
 			//페이지당 게시물 개수
 			int numPerPage = 10;
 			int end = reqPage * numPerPage;
@@ -550,14 +553,15 @@ public class MypageService {
 
 			//한 페이지
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("memberNo", memberNo);
 			map.put("start", start);
 			map.put("end", end);
 			ArrayList<Mypoint> list = dao.selectPointList(map);
 
 			//페이지 네비게이션 제작
-			int totalCount = dao.pointCount();
-			int totalPoint = dao.totalPoint();
-			int usePoint = dao.usePoint();
+			int totalCount = dao.pointCount(memberNo);
+			int totalPoint = dao.totalPoint(memberNo);
+			int usePoint = dao.usePoint(memberNo);
 			int totalPage = 0;
 
 			if(totalCount%numPerPage == 0) {
@@ -599,19 +603,20 @@ public class MypageService {
 		}
    //내 쿠킹클래스
 		
-		public CookingClsPageData selectMyClass(int reqPage) {
+		public CookingClsPageData selectMyClass(int reqPage, String memberNickname) {
 			int numPerPage =5;
 			
 			int end = reqPage * numPerPage;
 			int start = end - numPerPage + 1;
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("memberNickname",memberNickname);
 			map.put("start", start);
 			map.put("end", end);
 			
 			ArrayList<CookingCls> list = dao.selectMyClass(map);
 			
-			int totalCount = dao.totalClass();
+			int totalCount = dao.totalClass(memberNickname);
 			
 			int totalPage = 0;
 			if(totalCount%numPerPage==0) {
@@ -701,7 +706,7 @@ public class MypageService {
 		}
 
       //판매내역페이징처리하기
-		public MySellPageData mySellList1(int reqPage,int memberNo) {
+		public MySellPageData mySellList1(int reqPage,int milkitWriter) {
 			//필요한 정보 - 페이지당 게시물 개수
 			int numPerPage = 5;
 			int end = reqPage * numPerPage;
@@ -709,12 +714,13 @@ public class MypageService {
 
 			//한 페이지에 보여줄 게시물 목록 조회
 			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("milkitWriter", milkitWriter);
 			map.put("start", start);
 			map.put("end", end);
 			ArrayList<Mysell> list = dao.mySellerList1(map);
 
 			//페이지 네비게이션 제작
-			int totalCount = dao.sellCount();
+			int totalCount = dao.sellCount(milkitWriter);
 			int totalPage = 0;
 
 			if(totalCount%numPerPage == 0) {
@@ -729,15 +735,15 @@ public class MypageService {
 
 			if(pageNo != 1) {
 				pageNavi += "<li class=\"page\">";
-				pageNavi += "<a class=\"page-link\" href='/sellList.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+				pageNavi += "<a class=\"page-link\" href='/sellList.do?milkitWriter="+milkitWriter+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
 			}
 			for(int i=0;i<pageNaviSize;i++){
 				if(pageNo == reqPage) {
 					pageNavi += "<li class=\"page\">";
-					pageNavi += "<a class='page-link' href='/sellList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+					pageNavi += "<a class='page-link' href='/sellList.do?milkitWriter="+milkitWriter+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
 				} else {
 					pageNavi += "<li class='page'>";
-					pageNavi += "<a class='page-link' href='/sellList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-link' href='/sellList.do?milkitWriter="+milkitWriter+"&reqPage="+pageNo+"'>";
 					pageNavi += pageNo+"</a></li>";
 				}
 				pageNo++;
@@ -747,7 +753,7 @@ public class MypageService {
 			}
 			if(pageNo <= totalPage) {
 				pageNavi += "<li class='page'>";
-				pageNavi += "<a class='page-link' href='/sellList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-link' href='/sellList.do?milkitWriter="+milkitWriter+"&reqPage="+pageNo+"'>";
 				pageNavi += "&gt;</a></li>";
 			}
 			pageNavi += "</ul>";
@@ -758,7 +764,7 @@ public class MypageService {
         //전문가 정보조회(쪽지수)
 		public ReadMember seller(String memberId) {
 			ReadMember rm =dao.mypage(memberId);
-			int dmCount =dao.countsDm();
+			int dmCount =dao.countsDmFirst(memberId);
 			rm.setDmCount(dmCount);
 			return rm;
 		}

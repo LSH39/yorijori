@@ -60,7 +60,25 @@ margin-bottom:40px;
 #dis{
    width: 150px;
 }
+.pagenation{
+margin-top:200px;
+margin-left:350px;
+}
 
+.pagenation a{
+color: #9F90CF;
+background-color :#fff; 
+
+}
+.pagenation a:hover{
+color: #9F90CF;
+}
+.noCou{
+color:gray;
+margin-left:300px;
+margin-top:120px;
+
+}
 </style>
 </head>
 <body>
@@ -91,7 +109,8 @@ margin-bottom:40px;
                 
                 </tr>
                 </table>
-                
+                   <c:choose>
+                  	<c:when test="${ not empty list }">
                        <c:forEach items="${list}" var="mcou" varStatus="i">
                 <div class="coupons">
                     <table class="cou1">
@@ -107,6 +126,13 @@ margin-bottom:40px;
 
                 </div>
                 </c:forEach>
+                </c:when>
+                
+                  	<c:otherwise><h6 class="noCou">사용가능한 쿠폰이 존재하지 않습니다.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
+                
+                
         </div>
          <div class="pagenation">
 						${pageNavi }

@@ -79,10 +79,7 @@
 		member_pw=#{memberPw}
 
 	</update>
-	<delete id="deleteMember" parameterType="string">
-		delete from member where member_id=#{memberId} and member_pw=#{memberPw}
-
-	</delete>
+	
 
 
 
@@ -124,12 +121,11 @@
 		,cr.rsrv_no as rsrvNo,
 		cr.member_nickname as memberNickname
 		from cooking_rsrv cr,cooking_class cc
-		where cc.class_no =cr.class_no and cr.member_nickname='승민전문가'
+		where cc.class_no =cr.class_no and cr.member_nickname=#{memberNickname}
 
 
 	</select>
-	<select id="myclassReview" parameterType="_int"
-		resultType="mreview">
+	<select id="myclassReview" parameterType="string" resultType="mreview">
 		select r.REVIEW_NO as reviewNo ,
 		r.REVIEW_FLAG as reviewFlag,
 		r.CLASS_NO as
@@ -140,13 +136,12 @@
 		cook.class_title as classTitle
 		from review
 		r,cooking_class cook
-		where r.CLASS_NO =cook.class_no and r.member_nickname='테스트16' and
+		where r.CLASS_NO =cook.class_no and r.member_nickname=#{memberNickname} and
 		r.review_flag=2
 
 
 	</select>
-	<select id="myitemReview" parameterType="_int"
-		resultType="ireview">
+	<select id="myitemReview" parameterType="string" resultType="ireview">
 		select r.REVIEW_NO as reviewNo,
 		r.REVIEW_FLAG as reviewFlag,
 		r.product_NO as
@@ -157,7 +152,7 @@
 		r.REVIEW_DATE as reviewDate,
 		p.milkit_name as milkitName
 		from review r,product p
-		where r.product_NO =p.product_no and r.member_nickname='테스트16' and
+		where r.product_NO =p.product_no and r.member_nickname=#{memberNickname} and
 		r.review_flag=1
 
 
@@ -187,7 +182,7 @@
 		filePath as filepath,
 		milkit_date as milkitDate,
 		milkit_stock as milkitStock
-		from product where milkit_writer=111
+		from product where milkit_writer=#{memberNo}
 
 
 	</select>
@@ -215,13 +210,12 @@
              , (select count(*)from recipe_like where recipe_no=a.recipe_no) as cnt
 		     , (select member_nickName from member where member_no = a.recipe_writer) as memberNickname,
              (select profile_path from member where member_no=recipe_writer)as profilePath
-		  from recipe_board a
-               
-		 where a.recipe_writer in (SELECT follow_no from follow where member_no=111) 
+		  from recipe_board a     
+		 where a.recipe_writer in (SELECT follow_no from follow where member_no=#{memberNo}) 
 
 	</select>
-	<select id="followCount" resultType="_int">
-		 select count(*) from recipe_board where recipe_writer in (SELECT follow_no from follow where member_no=111) 
+	<select id="followCount" resultType="_int" parameterType="_int">
+		 select count(*) from recipe_board where recipe_writer in (SELECT follow_no from follow where member_no=#{memberNo}) 
 
 	</select>
 	<select id="chatList" resultType="mc" parameterType="_int">
@@ -230,12 +224,12 @@
         (select profile_path from member where member_no=a.chat_send)as profilePath,
 		a.chat_receive as chatReceive,
 		a.chat_content as chatContent,
-		a.chat_date as chatDate
+		to_date(a.chat_date,'yyyy-mm-dd') as chatDate
       
 	  from chat a 
 	     , (select chat_send , max(chat_no) as chat_no
 	          from chat
-	         where chat_receive = 111
+	         where chat_receive = #{chatReceive}
 	         group by chat_send
 	         ) b
 	  where a.chat_send = b.chat_send
@@ -265,7 +259,7 @@
 
 		from
 		order_tbl b
-		where b.member_no=111
+		where b.member_no=#{memberNo}
 
 	</select>
 
@@ -319,7 +313,7 @@
 		from
 		order_option a,order_tbl b,product c
 		where a.order_no =b.order_no and a.product_no =c.product_no and
-		b.order_no=11
+		b.order_no=#{orderNo}
 
 	</select>
 	<select id="sellerList" resultType="ms" parameterType="_int">
@@ -377,30 +371,30 @@
 		a.milkit_date as milkitDate,
 		a.milkit_stock as milkitStock,
          (select sum(order_option_amount) from order_option where a.product_no=product_no ) as totalAmount
-		from product a where milkit_writer=103
+		from product a where milkit_writer=#{milkitWriter}
 
 
 	</select>
 
-	<select id="dmList" resultType="md" parameterType="_int">
+	<select id="dmList" resultType="md" parameterType="string">
 		 
         select dm_no as dmNo,
 		       dm_receiver as dmReceiver,
 		       dm_sender as dmSender,
 		       dm_content as dmContent,
 			   dm_read_flag as dmReadFlag,
-			   dm_date as dmDate,
+			   	dm_date as dmDate,
               (select profile_path from member where member_nickname=dm_sender)as profilePath
 		from dm 
-		where dm_receiver='승민전문가'
+		where dm_receiver=#{dmReceiver}
 		order by dmDate desc
 
 
 	</select>
 
-	<select id="totalCount" resultType="_int">
+	<select id="totalCount" resultType="_int" parameterType="map">
 		select count(*) from order_tbl b
-		where b.member_no=111
+		where b.member_no=#{memberNo}
 	</select>
 
 	<select id="orderList1" parameterType="map" resultType="mo">
@@ -425,24 +419,13 @@
 		ORDER_SALE as orderSale,
 		ORDER_PAYMENT as orderPayment,
 		IMP_UID as impUid
-		from order_tbl where member_No=111 order by order_No desc)o)
+		from order_tbl where member_No=#{memberNo} order by order_No desc)o)
 		where rnum
 		between #{start} and #{end}
 
 
 	</select>
-	<select id="myCoupon" resultType="mcou" parameterType="_int">
-		select
-		c.coupon_name as couponName,
-		c.coupon_Start as couponStart,
-		c.coupon_end as couponEnd,
-		c.coupon_disCount as
-		couponDiscount,
-		cl.coupon_use as couponUse
-		from coupon c,coupon_list cl
-		where c.coupon_No =cl.coupon_no
-		and member_No=111 and coupon_use=0
-	</select>
+
 	<select id="myCouponList" resultType="mcou" parameterType="map">
 		select *
 		from
@@ -458,12 +441,12 @@
 		cl.coupon_use as
 		couponUse
 		from coupon c,coupon_list cl where c.coupon_No =cl.coupon_no and
-		member_No=111 order by coupon_end desc)c)
+		member_No=#{memberNo} order by coupon_end desc)c)
 		where rnum between #{start} and #{end}
 	</select>
 
-	<select id="couponCount" resultType="_int">
-		select count(*)from coupon_List where member_no=111
+	<select id="couponCount" resultType="_int" parameterType="map">
+		select count(*)from coupon_List where member_no=#{memberNo}
 
 	</select>
 	<select id="myContestList" resultType="myc" parameterType="map">
@@ -480,13 +463,13 @@
 		rb.recipe_writer as recipeWriter,
 		cr.contest_result as contestResult
 		from contest_recipe cr,recipe_board rb where cr.recipe_no=rb.recipe_no and
-		recipe_writer=111 order by contest_no asc)c)
+		recipe_writer=#{recipeWriter} order by contest_no asc)c)
 		where rnum between #{start} and #{end}
 
 	</select>
-	<select id="contestCount" resultType="_int">
+	<select id="contestCount" resultType="_int" parameterType="map">
 		select count(*) from contest_recipe cr,recipe_board rb where
-		cr.recipe_no=rb.recipe_no and recipe_writer=111
+		cr.recipe_no=rb.recipe_no and recipe_writer=#{recipeWriter}
 
 	</select>
 	<select id="myBoardList" resultType="fb" parameterType="map">
@@ -503,19 +486,19 @@
 		reg_date as regDate,
 		free_readcount as
 		freeReadcount
-		from freeboard where free_writer='hyo' order by free_no desc)f)
+		from freeboard where free_writer=#{freeWriter} order by free_no desc)f)
 		where rnum between #{start} and #{end}
 
 	</select>
-	<select id="boardCount" resultType="_int">
-		select count(*) from freeboard where free_writer='hyo'
+	<select id="boardCount" resultType="_int" parameterType="string">
+		select count(*) from freeboard where free_writer=#{freeWriter}
 
 	</select>
 
-	<select id="likeRecipeCount" resultType="_int">
+	<select id="likeRecipeCount" resultType="_int" parameterType="_int">
 
 		select count(*) from recipe_board rb,recipe_like rl where
-		rb.recipe_no=rl.recipe_no and rl.member_no=111
+		rb.recipe_no=rl.recipe_no and rl.member_no=#{memberNo}
 	</select>
 
 	<select id="likeRecipe" resultType="lr" parameterType="map">
@@ -537,15 +520,21 @@
 		rb.subhead as subhead,
 		 (select member_nickname from member where member_no=recipe_writer)as memberNickname
 		from recipe_board rb,recipe_like rl where rb.recipe_no=rl.recipe_no and
-		rl.member_no=111 order by recipe_date desc)r)
+		rl.member_no=#{memberNo}  order by recipe_date desc)r)
 
 		where rnum between #{start} and #{end}
 
 	</select>
 
-	<select id="countDm" resultType="_int">
+	<select id="countDm" resultType="_int" parameterType="string">
 
-		select Count(*) from dm where dm_receiver='승민전문가' and dm_read_flag=0
+		select Count(*) from dm where dm_receiver=#{dmReceiver} and dm_read_flag=0
+	</select>
+	
+	
+	<select id="countDmFirst" resultType="_int" parameterType="string">
+
+		select Count(*) from dm where dm_receiver=#{memberId} and dm_read_flag=0
 	</select>
 	
 		<select id="selectPointList" resultType="mp" parameterType="map">
@@ -563,24 +552,24 @@
 		point_date as pointDate
 		from point where
 		
-		member_no=104 order by point_date desc)p)
+		member_no=#{memberNo} order by point_date desc)p)
 		where rnum between #{start} and #{end}
 
 	</select>
-		<select id="totalPoint" resultType="_int">
+		<select id="totalPoint" resultType="_int" parameterType="map">
 
-	select sum(point_amount)as sumPoint from point where member_no=104 and point_level=1 
+	select sum(point_amount)as sumPoint from point where member_no=#{memberNo} and point_level=1 
 	</select>
 	
-		<select id="usePoint" resultType="_int">
+		<select id="usePoint" resultType="_int" parameterType="map">
 
-		select sum(point_amount) as sumPoint from point where member_no=104 and point_level=2 
+		select sum(point_amount) as sumPoint from point where member_no=#{memberNo} and point_level=2 
 	</select>
 	
 	
-	<select id="countPoint" resultType="_int">
+	<select id="countPoint" resultType="_int" parameterType="map">
 
-		select Count(*) from point where member_no=104
+		select Count(*) from point where member_no=#{memberNo}
 	</select>
 	
 		<select id="mypoint" resultType="mp" parameterType="_int">
@@ -594,7 +583,7 @@
 		point_content as pointContent
 		from point where
 		
-		member_no=104 order by point_date desc
+		member_no=#{memberNo} order by point_date desc
 
 
 	</select>
@@ -613,13 +602,13 @@
 			class_title as classTitle,
 			class_price as classPrice,
 			class_start as classStart
-		from cooking_class  where member_nickname='승민전문가' order by class_no asc) c)
+		from cooking_class  where member_nickname=#{memberNickname} order by class_no asc) c)
 		where rnum between #{start} and #{end}
 	
 	</select>
 	
-	<select id="totalClass" resultType="_int">
-	select count(*) from cooking_class where member_nickname='승민전문가'
+	<select id="totalClass" resultType="_int" parameterType="string" >
+	select count(*) from cooking_class where member_nickname=#{memberNickname}
 	</select>
 	
 	
@@ -631,8 +620,8 @@
 	
 			<update id="updateSellerInfo" parameterType="m">
 	    update member set
-	profile_path=#{profilePath}
-		where member_id=#{memberId}
+	         profile_path=#{profilePath}
+		     where member_id=#{memberId}
     
 
 	</update>
@@ -709,12 +698,12 @@
 		from order_option a,order_tbl b,product c where
 		
 		 a.order_no =b.order_no and a.product_no=c.product_no and
-		c.milkit_writer=103 order by a.order_no desc)s)
+		c.milkit_writer=#{milkitWriter} order by a.order_no desc)s)
 		where rnum between #{start} and #{end}
 
 	</select>
-		<select id="SellCount" resultType="_int">
-	 select count(*) from order_option a,product b where a.product_no=b.product_no and b.milkit_writer=103
+		<select id="SellCount" resultType="_int" parameterType="_int">
+	 select count(*) from order_option a,product b where a.product_no=b.product_no and b.milkit_writer=#{milkitWriter}
 	</select>
 	
 	<update id="updatePoint" parameterType="ms">

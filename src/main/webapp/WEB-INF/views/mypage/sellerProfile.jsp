@@ -212,7 +212,7 @@ function loadImg(obj) {
         <div class="main-content">
         <div class="mbord">
           <div class="profile">
-          <img id="pp" src="resources/upload/member_profile/${m.profilePath }" width="130px">
+           <img id="pp" src="resources/upload/member_profile/${rm.profilePath }" width="130px">
      
           </div>
           <div class="myInfo">
@@ -221,58 +221,58 @@ function loadImg(obj) {
 							<tr>
 								<td>회원소개</td>
 								<td><input type="text" name="profileIntro" id="profileIntro"
-									onfocus="this.placeholder=''" value="${m.profileIntro}"></td>
+									onfocus="this.placeholder=''" value="${rm.profileIntro}"></td>
 							</tr>
 							<tr>
 								<td>회원아이디</td>
 								<td><input type="text" name="memberId" id="memberId"
-									onfocus="this.placeholder=''" value="${m.memberId }" readonly></td>
+									onfocus="this.placeholder=''" value="${rm.memberId }" readonly></td>
 							</tr>
 							<tr>
 								<td>회원이름</td>
 								<td><input type="text" name="memberName" id="memberName"
-									onfocus="this.placeholder=''" value="${m.memberName }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberName }"></td>
 							</tr>
 							<tr>
 								<td>회원이메일</td>
 								<td><input type="text" name="memberEmail" id="memberEmail"
-									onfocus="this.placeholder=''" value="${m.memberEmail }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberEmail }"></td>
 							</tr>
 							<tr>
 								<td>회원닉네임</td>
 								<td><input type="text" name="memberNickname" id="memberNickname"
-									onfocus="this.placeholder=''" value="${m.memberNickname }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberNickname }"></td>
 							</tr>
 							<tr>
 								<td>휴대폰번호</td>
 								<td><input type="text" name="memberPhone" id="memberPhone"
-									onfocus="this.placeholder=''"value="${m.memberPhone }"></td>
+									onfocus="this.placeholder=''"value="${rm.memberPhone }"></td>
 							</tr>
 							<tr>
 								<td>생년월일</td>
 								<td><input type="text" name="memberBirth" id="memberBirth"
-									onfocus="this.placeholder=''" value="${m.memberBirth }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberBirth }"></td>
 							</tr>
 				               <tr>
 				                   <td>자격증</td>
 				              	<td><input type="text" name="certificatePath" id="certificatePath"
-									onfocus="this.placeholder=''" value="${m.certificatePath }" readonly></td> 	 
+									onfocus="this.placeholder=''" value="${rm.certificatePath }" readonly></td> 	 
 				               </tr>
 				                
 				               <tr>
 								<td>우편번호</td>
 								<td><input type="text" name="postcode" id="postcode"
-									onfocus="this.placeholder=''" value="${m.postcode }"></td>
+									onfocus="this.placeholder=''" value="${rm.postcode }"></td>
 							</tr>
 							<tr>
 								<td>도로명주소</td>
 								<td><input type="text" name="addressRoad" id="addressRoad"
-									onfocus="this.placeholder=''" value="${m.addressRoad }"></td>
+									onfocus="this.placeholder=''" value="${rm.addressRoad }"></td>
 							</tr>
 							<tr>
 								<td>상세주소</td>
 								<td><input type="text" name="addressDetail" id="addressDetail"
-									onfocus="this.placeholder=''" value="${m.addressDetail }"></td>
+									onfocus="this.placeholder=''" value="${rm.addressDetail }"></td>
 							</tr>
 							<tr>
 								<td>회원등급</td>
@@ -311,12 +311,12 @@ function loadImg(obj) {
 							<tr>
 								<td>포인트내역</td>
 								<td><input type="text"  id="memberPoint"
-									onfocus="this.placeholder=''" value="${m.memberPoint }P" readonly></td>
+									onfocus="this.placeholder=''" value="${rm.memberPoint }P" readonly></td>
 							</tr>
 							<tr>
 								<td>가입일</td>
 								<td><input type="text" name="enrollDate" id="enrollDate"
-									onfocus="this.placeholder=''" value="${m.enrollDate }" readonly></td>
+									onfocus="this.placeholder=''" value="${rm.enrollDate }" readonly></td>
 							</tr>
 
               </table>

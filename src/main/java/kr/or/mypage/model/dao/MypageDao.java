@@ -42,11 +42,11 @@ public class MypageDao {
 		return sqlSession.update("mypage.updateMember",m);
 
 	}
-	 /*회원탈퇴(회원)*/
+	 /*회원탈퇴(회원)
 	public int deleteMember(Member m) {
 		return sqlSession.delete("mypage.deleteMember",m);
 	}
-
+*/
 	/*판매자 마이페이지 조회*/
 	public Member sellerPage(String memberId) {
 
@@ -108,8 +108,8 @@ public class MypageDao {
 		return (ArrayList<Freeboard>) list;
 	}
 	/*내 채팅리스트*/
-	public ArrayList<Mychat> myChatList(String chatReceive) {
-		List<Mychat> list = sqlSession.selectList("mypage.chatList");
+	public ArrayList<Mychat> myChatList(int chatReceive) {
+		List<Mychat> list = sqlSession.selectList("mypage.chatList",chatReceive);
 		return (ArrayList<Mychat>) list;
 	}
 	/*회원탈퇴(판매자)*/
@@ -131,7 +131,7 @@ public class MypageDao {
 	}
 	/*상세리스트*/
 	public ArrayList<Myorder> orderDetail(int orderNo) {
-		List<Myorder> list = sqlSession.selectList("mypage.detailOrder");
+		List<Myorder> list = sqlSession.selectList("mypage.detailOrder",orderNo);
 		return (ArrayList<Myorder>) list;
 	}
 	/*판매내역조회*/
@@ -141,7 +141,7 @@ public class MypageDao {
 	}
 	/*판매량 */
 	public ArrayList<Mysell> totalSell(int milkitWriter) {
-		List<Mysell> list = sqlSession.selectList("mypage.totalSell");
+		List<Mysell> list = sqlSession.selectList("mypage.totalSell",milkitWriter);
 		return (ArrayList<Mysell>) list;
 	}
 	/*판매자정보수정*/
@@ -156,8 +156,8 @@ public class MypageDao {
 		return (ArrayList<Myorder>) list;
 	}
 	/*주문게시글 총개수*/
-	public int selectTotalCount() {
-		int totalCount = sqlSession.selectOne("mypage.totalCount");
+	public int selectTotalCount(int memberNo) {
+		int totalCount = sqlSession.selectOne("mypage.totalCount",memberNo);
 		return totalCount;
 	}
 	/*내 쿠폰함 페이징*/
@@ -166,8 +166,8 @@ public class MypageDao {
 		return (ArrayList<MyCoupon>)list;
 	}
 	/*쿠폰함 총개수*/
-	public int couponTotalCount() {
-		int totalCount = sqlSession.selectOne("mypage.couponCount");
+	public int couponTotalCount(int memberNo) {
+		int totalCount = sqlSession.selectOne("mypage.couponCount",memberNo);
 		return totalCount;
 	}
 	/*참여대회내역 페이징*/
@@ -175,9 +175,9 @@ public class MypageDao {
 		List<MyContest> list = sqlSession.selectList("mypage.myContestList",map);
 		return (ArrayList<MyContest>)list;
 	}
-	/*대회내역 페이징*/
-	public int contestCount() {
-		int totalCount = sqlSession.selectOne("mypage.contestCount");
+	/*대회내역 */
+	public int contestCount(int recipeWriter) {
+		int totalCount = sqlSession.selectOne("mypage.contestCount",recipeWriter);
 		return totalCount;
 	}
 	/* 내 게시판 페이징*/
@@ -186,8 +186,8 @@ public class MypageDao {
 		return (ArrayList<Freeboard>)list;
 	}
 	/*게시판 게시글수*/
-	public int freeBoardCount() {
-		int totalCount = sqlSession.selectOne("mypage.boardCount");
+	public int freeBoardCount(String freeWriter) {
+		int totalCount = sqlSession.selectOne("mypage.boardCount",freeWriter);
 		return totalCount;
 	}
 	/* 찜한 레시피*/
@@ -196,29 +196,29 @@ public class MypageDao {
 		return (ArrayList<LikeRecipe>)list;
 	}
 	/*찜한 레시피 수*/
-	public int recipeCount() {
-		int totalCount = sqlSession.selectOne("mypage.likeRecipeCount");
+	public int recipeCount(int memberNo) {
+		int totalCount = sqlSession.selectOne("mypage.likeRecipeCount",memberNo);
 		return totalCount;
 	}
 	
 	//1.팔로우리스트
 	public ArrayList<FollowList> followList(int memberNo) {
-		List<FollowList> list = sqlSession.selectList("mypage.followList");
+		List<FollowList> list = sqlSession.selectList("mypage.followList",memberNo);
 		return (ArrayList<FollowList>) list;
 	}
 	//2.
-	public int followCount() {
-		int totalCount = sqlSession.selectOne("mypage.followCount");
+	public int followCount(int memberNo) {
+		int totalCount = sqlSession.selectOne("mypage.followCount",memberNo);
 		return totalCount;
 	}
 	/*dm리스트1번*/
 	public ArrayList<Mydm> myDmList(String dmReceiver) {
-		List<Mydm> list = sqlSession.selectList("mypage.dmList");
+		List<Mydm> list = sqlSession.selectList("mypage.dmList",dmReceiver);
 		return (ArrayList<Mydm>) list;
 	}
 	//*dm개수*/
-	public int countsDm() {
-		int dmCount = sqlSession.selectOne("mypage.countDm");
+	public int countsDm(String dmReceiver) {
+		int dmCount = sqlSession.selectOne("mypage.countDm",dmReceiver);
 		return dmCount;
 	}
 	/*
@@ -243,29 +243,28 @@ public class MypageDao {
 		return (ArrayList<Mypoint>) list;
 	}
 	//1.포인트내역 개수
-	public int pointCount() {
-		int totalCount = sqlSession.selectOne("mypage.countPoint");
+	public int pointCount(int memberNo) {
+		int totalCount = sqlSession.selectOne("mypage.countPoint",memberNo);
 		return totalCount;
 	}
 	//2.총포인트
-	public int totalPoint() {
-		int totalPoint = sqlSession.selectOne("mypage.totalPoint");
+	public int totalPoint(int memberNo) {
+		int totalPoint = sqlSession.selectOne("mypage.totalPoint",memberNo);
 		return totalPoint;
 	}
 	//3.사용가능포인트
-	public int usePoint() {
-		int usePoint = sqlSession.selectOne("mypage.usePoint");
+	public int usePoint(int memberNo) {
+		int usePoint = sqlSession.selectOne("mypage.usePoint",memberNo);
 		return usePoint;
 	}
 	//내 쿠킹클래스 1번
 	public ArrayList<CookingCls> selectMyClass(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
 		List<CookingCls> list = sqlSession.selectList("mypage.selectClassList", map);
 		return (ArrayList<CookingCls>) list;
 	}
 	//내 쿠킹클래스 개수
-	public int totalClass() {
-		return sqlSession.selectOne("mypage.totalClass");
+	public int totalClass(String memberNickname) {
+		return sqlSession.selectOne("mypage.totalClass",memberNickname);
 	}
 	
 	//자격증파일  수정하기
@@ -297,13 +296,18 @@ public class MypageDao {
 	}
 	
 	//판매내역 개수 세기
-	public int sellCount() {
-		int totalSell = sqlSession.selectOne("mypage.SellCount");
+	public int sellCount(int milkitWriter) {
+		int totalSell = sqlSession.selectOne("mypage.SellCount",milkitWriter);
 		return totalSell;
 	}
 	//포인트 적립하기
 	public int updatePoint(Mysell ms) {
 		return  sqlSession.update("mypage.updatePoint",ms);
+	}
+	//dmCount 첫번째 장
+	public int countsDmFirst(String memberId) {
+		int dmCount = sqlSession.selectOne("mypage.countDmFirst",memberId);
+		return dmCount;
 	}
 }
 	

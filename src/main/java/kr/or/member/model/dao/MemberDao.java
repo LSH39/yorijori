@@ -56,6 +56,12 @@ public class MemberDao {
 		return sqlSession.update("member.findPwRe",member);
 	}
 
-	
+	public int deleteMember(Member member) {
+		return sqlSession.delete("member.deleteMember1",member);
+	}
+
+	public int upSeller(Member member) {
+		return sqlSession.update("member.upSeller",member);
+	}
 	
 }

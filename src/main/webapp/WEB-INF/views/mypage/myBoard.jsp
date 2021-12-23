@@ -27,6 +27,7 @@
 .re{
     width:800px;
     height:60px; 
+    text-align:center;
     
 }
 .butt{
@@ -37,6 +38,26 @@
 #del,#upd{
     background-color: rgb(196, 191, 227);
     border: none;
+}
+.nono{
+color:gray;
+text-align:center;
+
+
+
+}
+.pagenation{
+margin-top:200px;
+margin-left:370px;
+}
+
+.pagenation a{
+color: #9F90CF;
+background-color :#fff; 
+
+}
+.pagenation a:hover{
+color: #9F90CF;
 }
 </style>
 </head>
@@ -70,6 +91,8 @@
 						<th>작성일</th>
 						<th>조회수</th>
 					</tr>
+					  <c:choose>
+                  	<c:when test="${ not empty list }">
              <c:forEach items="${list}" var="fb" varStatus="i">
 					<tr>
 						<td>${fb.freeNo}</td>
@@ -80,7 +103,16 @@
 
 					</tr>
 					</c:forEach>
-
+                  </c:when>
+                
+                  	<c:otherwise>
+                  	     <td></td>
+						<td></td>
+						<td class="nono">작성한 게시글이 없습니다</td>
+						<td></td>
+						<td></td>
+                  	</c:otherwise>
+                  	</c:choose>
 				</table>
 
 			</div>

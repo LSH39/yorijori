@@ -82,26 +82,7 @@ public class MypageController {
 		model.addAttribute("m", m);
 		return "mypage/updateProfile";
 	}
-	//회원탈퇴폼
-	@RequestMapping(value = "/deleteFrm.do")
-	public String joinFrm() {
-		return "mypage/deleteMember";
-	}
-	@RequestMapping(value = "/deleteMember.do")
-	public String deleteMember(Member m, Model model) {
-		System.out.println("아이디 :"+m.getMemberId());
-		System.out.println("비번 :"+m.getMemberPw());
-		
-		int result = service.deleteMember(m);
-	    
-		if (result > 0) {
-			model.addAttribute("msg", "탈퇴 되었습니다.");
-		} else {
-			model.addAttribute("msg", "탈퇴 실패했습니다");
-		}
-		model.addAttribute("loc", "/");
-		return "common/msg";
-	}
+
 	//내 레시피내역
 	@RequestMapping(value = "/myRecipe.do")
 	public String myRecipe(int recipeWriter, Model model) {
@@ -149,31 +130,16 @@ public class MypageController {
 
 	//내 채팅리스트
 	@RequestMapping(value = "/myChatList.do")
-	public String myChatList(String chatReceive,Model model) {
+	public String myChatList(int chatReceive,Model model) {
 		ArrayList<Mychat> list= service.myChatList(chatReceive);
 		model.addAttribute("list", list);
 		return "mypage/chatList";
 	}
-	//전문가 탈퇴요청폼
-	@RequestMapping(value = "/delSelFrm.do")
-	public String deleteSelFrm() {
-		return "mypage/deleteSeller";
-	}
-	@RequestMapping(value = "/deleteSeller.do")
-	public String deleteSeller(Member m, Model model) {
-		int result = service.upSeller(m);
-		if (result > 0) {
-			model.addAttribute("msg", "탈퇴요청 성공");
-		} else {
-			model.addAttribute("msg", "탈퇴 요청 실패");
-		}
-		model.addAttribute("loc", "/");
-		return "common/msg";
-	}
+
 	//내 주문내역보기
 	@RequestMapping(value = "/myOrderList.do")
 	public String myOrderList1(int memberNo,Model model,int reqPage) {
-		MyorderPageData mpd =service.orderList(reqPage);
+		MyorderPageData mpd =service.orderList(reqPage,memberNo);
 		model.addAttribute("list", mpd.getList());
 		model.addAttribute("pageNavi", mpd.getPageNavi());
 		model.addAttribute("start", mpd.getStart());
@@ -184,7 +150,7 @@ public class MypageController {
 	//내 쿠폰내역
 	@RequestMapping(value = "/mycouponList.do")
 	public String mycoupon(int memberNo, Model model,int reqPage) {
-		MyCouponPageData cpd =service.mycouponList(reqPage);
+		MyCouponPageData cpd =service.mycouponList(reqPage,memberNo);
 		model.addAttribute("list", cpd.getList());
 		model.addAttribute("pageNavi", cpd.getPageNavi());
 		model.addAttribute("start", cpd.getStart());
@@ -195,7 +161,7 @@ public class MypageController {
 	//내 참여대회내역
 	@RequestMapping(value = "/myContestList.do")
 	public String myContestList(int recipeWriter, Model model,int reqPage) {
-		MycontestPagedata ctpd =service.mycontestList(reqPage);
+		MycontestPagedata ctpd =service.mycontestList(reqPage,recipeWriter);
 		model.addAttribute("list", ctpd.getList());
 		model.addAttribute("pageNavi", ctpd.getPageNavi());
 		model.addAttribute("start", ctpd.getStart());
@@ -225,7 +191,7 @@ public class MypageController {
 	//내 게시판리스트
 	@RequestMapping(value = "/myBoardList.do")
 	public String myBoardList(String freeWriter, Model model,int reqPage) {
-		MyFreeBoardPageData fpd =service.myfreeBoardList(reqPage);
+		MyFreeBoardPageData fpd =service.myfreeBoardList(reqPage,freeWriter);
 		model.addAttribute("list", fpd.getList());
 		model.addAttribute("pageNavi", fpd.getPageNavi());
 		model.addAttribute("start", fpd.getStart());
@@ -244,7 +210,7 @@ public class MypageController {
 	//내가 찜한 레시피내역
 	@RequestMapping(value = "/myLikeList.do")
 	public String myLikeList(int memberNo, Model model,int reqPage) {
-		MyLikeRecipePageData rpd =service.likeRecipeList(reqPage);
+		MyLikeRecipePageData rpd =service.likeRecipeList(reqPage,memberNo);
 		model.addAttribute("list", rpd.getList());
 		model.addAttribute("pageNavi", rpd.getPageNavi());
 		model.addAttribute("start", rpd.getStart());
@@ -261,17 +227,10 @@ public class MypageController {
 		model.addAttribute("dd", dd);
 		return "mypage/orderDetail";
 	}
-	/*판매내역조회
+
 	@RequestMapping(value = "/sellList.do")
-	public String sellList(int memberNo, Model model) {
-		ArrayList<Mysell> list= service.mySellList(memberNo);
-		model.addAttribute("list", list);
-		return "mypage/sellerList";
-	}
-	*/
-	@RequestMapping(value = "/sellList.do")
-	public String sellList(int memberNo, Model model,int reqPage) {
-		MySellPageData spd =service.mySellList1(reqPage,memberNo);
+	public String sellList(int milkitWriter, Model model,int reqPage) {
+		MySellPageData spd =service.mySellList1(reqPage,milkitWriter);
 		model.addAttribute("list", spd.getList());
 		model.addAttribute("pageNavi", spd.getPageNavi());
 		model.addAttribute("start", spd.getStart());
@@ -289,27 +248,6 @@ public class MypageController {
 	//전문가 정보변경
 	@RequestMapping(value = "/updateSeller.do")
 	public String updateSeller(Member m, Model model) {
-		/*
-		 System.out.println(m.getMemberConsent());
-		System.out.println(m.getMemberId());
-		 
-       System.out.println(m.getMemberName());
-       System.out.println(m.getMemberEmail());
-       System.out.println(m.getAddressDetail());
-       System.out.println(m.getAddressRoad());
-       System.out.println(m.getCertificatePath());
-       System.out.println(m.getEnrollDate());
-       System.out.println(m.getMemberBirth());
-       System.out.println(m.getMemberBlack());
-      
-       System.out.println(m.getProfilePath());
-      
-      
-       System.out.println(m.getMemberLevel());
-       System.out.println(m.getMemberNo());
-       System.out.println(m.getMemberPhone());
-       System.out.println(m.getMemberPoint());
-       */
 		int result = service.updateSeller(m);
 
 		if (result > 0) {
@@ -338,7 +276,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/myPoint.do")
 	public String myPoint(int memberNo, Model model,int reqPage) {
-		MyPointPageData ppd =service.pointList(reqPage);
+		MyPointPageData ppd =service.pointList(reqPage,memberNo);
 		model.addAttribute("list", ppd.getList());
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("start", ppd.getStart());
@@ -351,7 +289,7 @@ public class MypageController {
 	@RequestMapping(value="/mycookingList.do")
 	public String SelectAllClass(String memberNickname,int reqPage, Model model) {
 		//새로
-		CookingClsPageData ccpd = service.selectMyClass(reqPage);
+		CookingClsPageData ccpd = service.selectMyClass(reqPage,memberNickname);
 
 		model.addAttribute("list", ccpd.getList());
 		model.addAttribute("pageNavi", ccpd.getPageNavi());
@@ -496,9 +434,8 @@ public class MypageController {
 	//주문 상태 변경
 	@RequestMapping(value="/updateOrder.do")
 	public String updateOrder(Mysell ms, Model model,int reqPage) {
-		System.out.println("주문상태111111111 start");
-		System.out.println("주문상태 : "+ms.getOrderStatus() );
-        System.out.println("옵션번호 : "+ms.getOrderOptionNo());
+		//System.out.println("주문상태 : "+ms.getOrderStatus() );
+       // System.out.println("옵션번호 : "+ms.getOrderOptionNo());
 		int result = service.uporder(ms);
 		
 		if (result > 0) {
@@ -520,7 +457,6 @@ public class MypageController {
 			}
 		}	
 		model.addAttribute("loc", "/sellList.do?memberNo="+ms.getMemberNo()+"&reqPage="+reqPage);
-		System.out.println("주문상태111111111 end");
 		return "common/msg";
 	}
 

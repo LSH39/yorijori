@@ -83,6 +83,16 @@ color:red;
 font-weight:600;
 text-align:center;
 border-radius:50px;
+
+}
+.noCou{
+color:gray;
+margin-left:350px;
+margin-top:120px;
+
+}
+#read{
+ margin-left:640px;
 }
 </style>
 </head>
@@ -106,6 +116,8 @@ border-radius:50px;
 			<div id="line2"></div>
 			 	
 			<br>
+			 <c:choose>
+                  	<c:when test="${ not empty list }">
 			   <c:forEach items="${list}" var="md" varStatus="i">
 			<div class="dm">
             
@@ -143,6 +155,11 @@ border-radius:50px;
 			</div>
 		
 			</c:forEach>
+			  </c:when>
+                
+                  	<c:otherwise><h6 class="noCou">Dm내역이 없습니다.</h6>
+                  	</c:otherwise>
+                  	</c:choose>
 		</div>
 	</div>
 

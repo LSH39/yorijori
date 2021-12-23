@@ -30,7 +30,9 @@
 }
 #itemI{
     width: 180px;
-    height:180px;
+    height:200px;
+    margin-top:20px;
+    margin-left:10px;
 }
 .recImg{
     width: 200px;
@@ -43,6 +45,25 @@
     float:left;
     margin-top: 10px;
     
+}
+.noCou{
+color:gray;
+margin-left:300px;
+margin-top:120px;
+
+}
+.pagenation{
+margin-top:200px;
+margin-left:370px;
+}
+
+.pagenation a{
+color: #9F90CF;
+background-color :#fff; 
+
+}
+.pagenation a:hover{
+color: #9F90CF;
 }
 </style>
 </head>
@@ -65,29 +86,38 @@
 			<div id="line2"></div>
 			<br>
 				<h5>좋아요 레시피 수 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>개</h5>
-			      <c:forEach items="${list}" var="lr" varStatus="i">
-			 <div class="recipe">
-				<div class="recImg">
-					<a href="/recipeView.do?recipeNo=${lr.recipeNo}&memberNo=${lr.recipeWriter}">
-					 <img id="itemI" src="resources/img/mypage/house.png">
-					 <%-- <img id="itemI" src="resources/upload/recipe/${lr.filepath}">--%>
-					</a>
-				</div>
-				<div id="recipes">
-				
-					<span class="it_info1"><b id="it1"><레시피제목></b>&emsp;</span><br>
-					<span class="it_info1">	${lr.recipeTitle }</span><br>			
-					<span class="it_info1"><b id="it1"><레시피 설명 ></b>&emsp;</span>&emsp;<br>
-					<span class="it_info1">${lr.subhead }</span><br>
-					<span class="it_info1"><b id="it1">레시피번호 :</b>&emsp;${lr.recipeNo }</span><br>					
-					<span class="it_info1"><b id="it1">작성자 :</b>&emsp;${lr.memberNickname }님</span>&emsp;<br>
-					<span class="it_info1"><b id="it1">조회수 :</b>&emsp;${lr.readCount }회</span>&emsp;<br>
-					<span class="it_info1"><b id="it1">등록일 :</b>&emsp;${lr.recipeDate }</span>&emsp;<br>
-					<input type="hidden" value="${lr.likeNo}">
+			<c:choose>
+				<c:when test="${ not empty list }">
+					<c:forEach items="${list}" var="lr" varStatus="i">
+						<div class="recipe">
+							<div class="recImg">
+								<a
+									href="/recipeView.do?recipeNo=${lr.recipeNo}&memberNo=${lr.recipeWriter}">
+									<img id="itemI" src="resources/upload/recipe/${lr.filepath}">
+								</a>
+							</div>
+							<div id="recipes">
 
-				</div>
-			</div>
-			</c:forEach>
+								<span class="it_info1"><b id="it1"><레시피제목></b>&emsp;</span><br>
+								<span class="it_info1"> ${lr.recipeTitle }</span><br> <span
+									class="it_info1"><b id="it1"><레시피 설명></b>&emsp;</span>&emsp;<br>
+								<span class="it_info1">${lr.subhead }</span><br> <span
+									class="it_info1"><b id="it1">레시피번호 :</b>&emsp;${lr.recipeNo }</span><br>
+								<span class="it_info1"><b id="it1">작성자 :</b>&emsp;${lr.memberNickname }님</span>&emsp;<br>
+								<span class="it_info1"><b id="it1">조회수 :</b>&emsp;${lr.readCount }회</span>&emsp;<br>
+								<span class="it_info1"><b id="it1">등록일 :</b>&emsp;${lr.recipeDate }</span>&emsp;<br>
+								<input type="hidden" value="${lr.likeNo}">
+
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+
+				<c:otherwise>
+					<h6 class="noCou">찜한 레시피 내역이 존재하지 않습니다!</h6>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 		     <div class="pagenation">
 						${pageNavi }

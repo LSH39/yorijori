@@ -16,15 +16,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
-		<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">
-			<div>
-				<span><a
-					href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span><span><a
-					href="/deleteRecipe.do">삭제</a></span>
-			</div>
-		</c:if>
-
-
 		<div id="modal-wrap" style="display: none;">
 			<h1>신고하기</h1>
 			<div id="modal-content">
@@ -56,7 +47,13 @@
 				<span id="countImg"><img src="/resources/img/recipe/eye.png"
 					width="20px"></span><span id="countText"> ${rb.readCount }</span>
 			</div>
+				<c:if test="${sessionScope.m.memberNo eq rb.recipeWriter }">	
+		</c:if>
 		</div>
+		<div id="update">
+				<span><a href="/updateRecipe.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">수정</a></span>
+					<span><a href="/deleteRecipe.do?recipeNo=${rb.recipeNo }">삭제</a></span>
+			</div>
 		<c:if test="${sessionScope.m.memberNo != null }">
 			<c:if test="${rb.likeCheck eq 0 }">
 				<div class="checkImg">
@@ -126,15 +123,18 @@
 				<div>
 					<img src="/resources/img/recipe/person.png" width="30px"> <span
 						class="rcNmae">${rc.nickname }</span> <span class="rcDate">${rc.rcDate }</span>
-					<p class="rcContents">${rc.rcContentBr }</p>		
-				<textarea id="updateContent" name="rcContent" class="form-control" style="display: none;">${rc.rcContent }</textarea>
-				<button style="display: none;">수정완료</button>
-				<c:if test="${sessionScope.m.memberNo == rc.memberNo}">
-					<p class="commentsBtn">
-						<a href="javascript:void(0)" onclick="updateComment(this,'${rc.RCommentNo}');">수정</a> 
-						<a href="javascript:void(0)" onclick="deleteComment(this,'${rc.RCommentNo}');">삭제</a>
-					</p>
-				</c:if>
+					<p class="rcContents">${rc.rcContentBr }</p>
+					<textarea id="updateContent" name="rcContent" class="form-control"
+						style="display: none;">${rc.rcContent }</textarea>
+					<button style="display: none;">수정완료</button>
+					<c:if test="${sessionScope.m.memberNo == rc.memberNo}">
+						<p class="commentsBtn">
+							<a href="javascript:void(0)"
+								onclick="updateComment(this,'${rc.RCommentNo}');">수정</a> <a
+								href="javascript:void(0)"
+								onclick="deleteComment(this,'${rc.RCommentNo}');">삭제</a>
+						</p>
+					</c:if>
 				</div>
 			</c:forEach>
 		</div>
@@ -224,11 +224,7 @@
 
 		$("#insertBtn").click(function() {
 			var rcContent = $("#rcContent").val();
-			var recipeNo = $
-			{
-				rb.recipeNo
-			}
-			;
+			var recipeNo = ${rb.recipeNo};
 			var memberNo = $("#memberNo").val();
 			$.ajax({
 				url : "/insertComment.do",
@@ -253,11 +249,9 @@
 			$(obj).parent().prev().prev().show();
 			$(obj).parent().prev().prev().prev().hide();
 			$(obj).hide();
-			$(obj).parent().prev().attr("onclick",
-					"updateComplete(this,'" + rCommentNo + "');");
+			$(obj).parent().prev().attr("onclick","updateComplete(this,'" + rCommentNo + "');");
 			$(obj).next().html("취소");
-			$(obj).next().attr("onclick",
-					"updateCancel(this,'" + rCommentNo + "');");
+			$(obj).next().attr("onclick","updateCancel(this,'" + rCommentNo + "');");
 		}
 		function updateCancel(obj, rCommentNo) {
 			$(obj).parent().prev().hide();
@@ -307,12 +301,7 @@
 			}
 		}
 		$("#heart").click(function() {
-			var recipeNo = $
-			{
-				rb.recipeNo
-			}
-			;
-
+			var recipeNo = ${rb.recipeNo};
 			$.ajax({
 				url : "/insertLike.do",
 				data : {
@@ -328,12 +317,7 @@
 			})
 		});
 		$("#heart2").click(function() {
-			var recipeNo = $
-			{
-				rb.recipeNo
-			}
-			;
-
+			var recipeNo = ${rb.recipeNo};
 			$.ajax({
 				url : "/deleteLike.do",
 				data : {
@@ -351,14 +335,11 @@
 		});
 
 		$("#reportBtn").click(function() {
-			var recipeNo = $	{rb.recipeNo};
+			console.log("dd");
+			var recipeNo = ${rb.recipeNo}	;
 
 			var reportComment = $("input[name=reportComment]:checked").val();
-			var reportCheck = $
-			{
-				rb.reportCheck
-			}
-			;
+			var reportCheck = ${rb.reportCheck};
 			if (reportCheck == 0) {
 				if (reportComment != null) {
 					$.ajax({

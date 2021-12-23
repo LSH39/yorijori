@@ -23,6 +23,9 @@
 						<input type="hidden" name="productNo" class="productNo" value="${p.productNo }">
 					</c:when>
 				</c:choose>
+				<c:if test="${sessionScope.m.memberNo == p.milkitWriter }">
+				 <p id="update"><a href="/updateMilkit.do?productNo=${p.productNo }">수정</a> <a href="/deleteMilkit.do?productNo=${p.productNo} "> 삭제</a></p>
+				 </c:if>
 			</div>
 			<div id="titleText">
 				<p id="pName">${p.milkitName }</p>

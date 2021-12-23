@@ -81,9 +81,9 @@ float: left;
     margin-left: 40px;
 }
 .pagenation{
-display: flex;
-margin-left : 500px;
-margin-bottom:30px;
+
+margin-left : 400px;
+margin-top:100px;
 }
 .pagenation ul{
 align-self: center;
@@ -100,6 +100,12 @@ color: #9F90CF;
   color: #fff;
   background: #9F90CF;
   border-color : #9F90CF;
+}
+.noCou{
+color:gray;
+margin-left:300px;
+margin-top:120px;
+
 }
 </style>
 <script>
@@ -128,38 +134,47 @@ function orderDetail(orderNo){
             <h3 id="h_hotel">주문내역 조회</h3>
             <div id="line2"></div><br>
             	<h5>총  주문횟수 : <span style="color: rgb(159, 144, 207);">${totalCount }</span>번</h5>
-             <c:forEach items="${list}" var="mo" varStatus="i">
-             <div class="myorder">
-               <div class="foodI">
-                 <div id="orderN">
-                 <span>주문번호 :${mo.orderNo }</span>
-                 </div>
-                 <div id="imgItem">
-                    <img id="milkit" src="/resources/img/mypage/orders.jpeg">  
-                 </div>
-               </div>
-               <div class="orders">
-        
-                <span class="it_info1"><b id="m">결제방식: </b>&emsp;${mo.card}</span><br>
-                 <span class="it_info1"><b id="m">배송비: </b>&emsp;무료배송</span><br>
-                <span class="it_info1"><b id="m">결제금액:</b>&emsp;${mo.orderPayment }원</span>&emsp;<br>
-                <span class="it_info1"><b id="m">주문상태: </b>&emsp;${mo.status }</span>&emsp;<br>
-                <span class="it_info1"><b id="m">요청사항: </b>&emsp;${mo.orderRequest }</span>&emsp;<br>
-               </div>
-                <div class="rebutton">
-                   <div class="detailOrder">
-                    <input type="button" value="<<주문상세보러가기" id="detail" onclick="orderDetail(${mo.orderNo})">
-                   </div>
-                   <div class="review">
-                   <input type="button" value="후기작성" id="reClick">
-                </div>
-               </div>
+			<c:choose>
+				<c:when test="${ not empty list }">
+					<c:forEach items="${list}" var="mo" varStatus="i">
+						<div class="myorder">
+							<div class="foodI">
+								<div id="orderN">
+									<span>주문번호 :${mo.orderNo }</span>
+								</div>
+								<div id="imgItem">
+									<img id="milkit" src="/resources/img/mypage/orders.jpeg">
+								</div>
+							</div>
+							<div class="orders">
 
-             </div>
-             </c:forEach>
-             
+								<span class="it_info1"><b id="m">결제방식: </b>&emsp;${mo.card}</span><br>
+								<span class="it_info1"><b id="m">배송비: </b>&emsp;무료배송</span><br>
+								<span class="it_info1"><b id="m">결제금액:</b>&emsp;${mo.orderPayment }원</span>&emsp;<br>
+								<span class="it_info1"><b id="m">주문상태: </b>&emsp;${mo.status }</span>&emsp;<br>
+								<span class="it_info1"><b id="m">요청사항: </b>&emsp;${mo.orderRequest }</span>&emsp;<br>
+							</div>
+							<div class="rebutton">
+								<div class="detailOrder">
+									<input type="button" value="<<주문상세보러가기" id="detail"
+										onclick="orderDetail(${mo.orderNo})">
+								</div>
+								<div class="review">
+									<input type="button" value="후기작성" id="reClick">
+								</div>
+							</div>
 
-        </div>
+						</div>
+					</c:forEach>
+				</c:when>
+
+				<c:otherwise>
+					<h6 class="noCou">주문하신 내역이 존재하지 않습니다.</h6>
+				</c:otherwise>
+			</c:choose>
+
+
+		</div>
         <div class="pagenation">
 						${pageNavi }
 					</div>

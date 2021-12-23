@@ -84,7 +84,15 @@ public class MemberService {
 		return dao.findPwRe(member);
 	}
 
+	public int deleteMemberEnc(Member member) {
+		int result =dao.deleteMember(member);
+		return result;
+	}
 
+	public int upSellerEnc(Member member) {
+		int result = dao.upSeller(member);
+		return result;
+	}
 
 	
 	

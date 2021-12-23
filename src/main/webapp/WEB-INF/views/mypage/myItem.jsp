@@ -99,6 +99,12 @@ color:navy;
 font-weight:600;
 
 }
+.noCou{
+color:gray;
+margin-left:350px;
+margin-top:120px;
+
+}
 </style>
 </head>
 <body>
@@ -119,37 +125,44 @@ font-weight:600;
             <h3 id="h_hotel">내가 판매하는 밀키트</h3>
             <div id="line2"></div><br>
 
+			<c:choose>
+				<c:when test="${ not empty list }">
+					<c:forEach items="${list}" var="ms" varStatus="i">
 
-			<c:forEach items="${list}" var="ms" varStatus="i">
+						<div class="mySell">
+							<div class="sellNo">
 
-				<div class="mySell">
-					<div class="sellNo">
+								<span id="dd">${i.count }</span>
+							</div>
+							<div class="sellItem">
 
-						<span id="dd">${i.count }</span>
-					</div>
-					<div class="sellItem">
-					
-						<img id="product"
-							src="/resources/upload/product/milkit_test.jpg"></span><br>
-					</div>
+								<img id="product"
+									src="/resources/upload/product/milkit_test.jpg"></span><br>
+							</div>
 
-					<div id="ii">
-						<span class="it_info1"><b id="it1">상품번호 :</b>&emsp;${ms.productNo}</span><br>
-						<span class="it_info1"><b id="it1">밀키트이름 :</b>&emsp;${ms.milkitName}</span><br>
-						<span class="it_info1"><b id="it1">밀키트가격 :</b>&emsp;${ms.milkitPrice}원</span>&emsp;<br>
-						<span class="it_info1"><b id="it1">등록일:</b>&emsp;${ms.milkitDate}</span>&emsp;<br>
-						<span class="it_info1"><b id="it1">재고 :</b>&emsp;${ms.milkitStock}개남음</span>&emsp;<br> 
-						<input type="hidden" value="${ms.milkitWriter}">
+							<div id="ii">
+								<span class="it_info1"><b id="it1">상품번호 :</b>&emsp;${ms.productNo}</span><br>
+								<span class="it_info1"><b id="it1">밀키트이름 :</b>&emsp;${ms.milkitName}</span><br>
+								<span class="it_info1"><b id="it1">밀키트가격 :</b>&emsp;${ms.milkitPrice}원</span>&emsp;<br>
+								<span class="it_info1"><b id="it1">등록일:</b>&emsp;${ms.milkitDate}</span>&emsp;<br>
+								<span class="it_info1"><b id="it1">재고 :</b>&emsp;${ms.milkitStock}개남음</span>&emsp;<br>
+								<input type="hidden" value="${ms.milkitWriter}">
 
-					</div>
-	                 <div id="total">
-						 <span class="it_info1"><b id="m">총 판매수량: </b>&emsp;${ms.totalAmount}개</span>&emsp;<br>
-                      <span class="it_info1"><b id="m">총 누적금액: </b>&emsp;${ms.totalAmount*ms.milkitPrice}원</span>&emsp;<br>
+							</div>
+							<div id="total">
+								<span class="it_info1"><b id="m">총 판매수량: </b>&emsp;${ms.totalAmount}개</span>&emsp;<br>
+								<span class="it_info1"><b id="m">총 누적금액: </b>&emsp;${ms.totalAmount*ms.milkitPrice}원</span>&emsp;<br>
 
 
-					</div>
-				</div>
-			</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+
+				<c:otherwise>
+					<h6 class="noCou">판매하시는 상품이 없습니다.</h6>
+				</c:otherwise>
+			</c:choose>
 
 		</div>
 	</div>
