@@ -42,6 +42,9 @@
 	cursor: pointer;
 	transform: scale(1.2);
 }
+.fcContent-o{
+	border: none;
+}
 .comment-upd:hover, .comment-del:hover{
 	font-weight: bolder;
 	cursor: pointer;
