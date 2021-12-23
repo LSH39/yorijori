@@ -69,7 +69,9 @@
 		<c:when test="${sessionScope.m.memberLevel ==  3 }">
 			<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="/admin.do">관리자 페이지 </a>
-	        <a class="qna chat" id="chatAdmin">1:1문의하기 <span class="chatAlarm">+<span id="chatAdminAlarm"></span></span></a>
+	        <a class="qna chat" id="chatAdmin">1:1문의하기 
+	        <c:if test="${sessionScope.m.memberNo == 86 }"><span class="chatAlarm">+<span id="chatAdminAlarm"></span></span></c:if>
+	        </a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
 	       	<!-- LSH -->
 			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
