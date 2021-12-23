@@ -79,10 +79,10 @@ public class RecipeController {
 		}
 		if (result > 0) {
 			model.addAttribute("msg", "등록성공");
-			model.addAttribute("loc", "/recipeBoard.jsp");
+			model.addAttribute("loc", "/");
 		} else {
 			model.addAttribute("msg", "등록실패");
-			model.addAttribute("loc", "/recipeBoard.jsp");
+			model.addAttribute("loc", "/");
 		}
 		return "common/msg";
 	}
@@ -243,4 +243,5 @@ public class RecipeController {
 		return "common/msg";
 
 	}
+	
 }
