@@ -102,13 +102,13 @@ public class MainDao {
 		return (ArrayList<RecentProductData>) rpd;
 	}
 
-	public int selectRecentProducts(HashMap<String, Object> map) {
-		int count = sqlSession.selectOne("main.selectRecentProduct", map);
-		return count;
-	}
-
 	public int deleteRecentProduct(HashMap<String, Object> map) {
 		int del = sqlSession.delete("main.deleteRecentProduct", map);
 		return del;
+	}
+
+	public int selectRecentProduct(HashMap<String, Object> map) {
+		int count = sqlSession.selectOne("main.selectRecentProduct", map);
+		return count;
 	}
 }

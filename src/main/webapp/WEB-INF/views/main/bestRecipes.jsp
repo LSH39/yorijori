@@ -38,7 +38,7 @@
 	      			<ul>
 	      				<c:choose>
 	      					<c:when test="${not empty list }">
-	      						<c:forEach items="${list }" var="r" begin="1" end="12">
+	      						<c:forEach items="${list }" var="r" begin="0" end="11">
 	      							<li>
 	      								<a href="/recipeView.do?boardNo=${r.recipeNo }&memberNo=0">
 	      									<img src="resources/upload/recipe/${r.recipePath }">

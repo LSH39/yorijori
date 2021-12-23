@@ -20,9 +20,9 @@
 				<c:choose>
 					<c:when test="${not empty sessionScope.m }">
 						<input type="hidden" name="memberId" class="memberId" value="${sessionScope.m.memberId }">
-						<input type="hidden" name="productNo" class="productNo" value="${p.productNo }">
 					</c:when>
 				</c:choose>
+				<input type="hidden" name="productNo" class="productNo" value="${p.productNo }">
 				<c:if test="${sessionScope.m.memberNo == p.milkitWriter }">
 				 <p id="update"><a href="/updateMilkit.do?productNo=${p.productNo }">수정</a> <a href="/deleteMilkit.do?productNo=${p.productNo} "> 삭제</a></p>
 				 </c:if>
@@ -210,14 +210,16 @@
 			$(function(){
 				var memberId = $(".memberId").val();
 				var productNo = $(".productNo").val();
-				$.ajax({
-					url: "/insertRecentProduct.do",
-					method: "get",
-					data: {memberId:memberId, productNo:productNo},
-					success: function(data){
-						console.log(data);
-					}
-				});
+				if(memberId != null){
+					$.ajax({
+						url: "/insertRecentProduct.do",
+						method: "get",
+						data: {memberId:memberId, productNo:productNo},
+						success: function(data){
+							console.log(data);
+						}
+					});
+				}
 			});
 			
 	

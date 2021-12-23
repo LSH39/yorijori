@@ -181,7 +181,7 @@
 	  </div>
 	  <div class="clients-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <c:forEach items="${productList }" var="p" begin="1" end="8">
+            <c:forEach items="${productList }" var="p" begin="0" end="7">
             <div class="swiper-slide">
             	<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
             		<img src="resources/upload/product/${p.filepath }" class="img-fluid" style="width:250px;height:180px;" alt="">
@@ -224,7 +224,7 @@
 		
 		<!-- 요리꾼 목록 -->
         <div class="row main-memberList"> 
-          <c:forEach items="${yoriList }" var="y" begin="1" end="4">
+          <c:forEach items="${yoriList }" var="y" begin="0" end="3">
           	<div class="col-lg-3 col-md-5 d-flex align-items-stretch">
           		<div class="member">
  					<a href="/profile.do?memberId=${y.memberId }">
@@ -279,7 +279,7 @@
       
       <!-- 조리꾼 목록 -->
       <div class="row main-memberList" style="display:none;">
-          <c:forEach items="${joriList }" var="j" begin="1" end="4">
+          <c:forEach items="${joriList }" var="j" begin="0" end="3">
           	<div class="col-lg-3 col-md-5 d-flex align-items-stretch">
           		<div class="member">
           			<a href="/profile.do?memberId=${j.memberId }">
@@ -352,7 +352,7 @@
 	  </div>
 	  <div class="classes-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <c:forEach items="${classList }" var="c" begin="1" end="8">
+            <c:forEach items="${classList }" var="c" begin="0" end="7">
             <div class="swiper-slide">
             	<a href="/cookingClsView.do?classNo=${c.classNo }">
             		<img src="resources/img/mainpage/cooking-cls.jpg" class="img-fluid" alt="">

@@ -36,7 +36,7 @@
 	      			<ul>
 	      				<c:choose>
 	      					<c:when test="${not empty list }">
-	      						<c:forEach items="${list }" var="p" begin="1" end="20">
+	      						<c:forEach items="${list }" var="p" begin="0" end="15">
 	      							<li>
 	      								<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
 	      									<img src="resources/upload/product/${p.productPath }">
