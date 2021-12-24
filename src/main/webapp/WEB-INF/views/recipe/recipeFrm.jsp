@@ -31,7 +31,7 @@
 			</div>
 			<div class="recipeFrm">
 				<label for="recipeVideo">유튜브 링크(생략가능)</label>
-				https://www.youtube.com/watch?v=
+				https://youtu.be/
 				<input type="text" name="recipeVideo" placeholder="xsTFsunt6-8">
 			</div>
 			<div class="recipeFrm">

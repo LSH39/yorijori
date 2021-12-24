@@ -13,6 +13,16 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
+	
+		<div id="modal-wrap" style="display:none;">	
+					<p>장바구니에 담겼습니다.</p>
+				<div id="modal-btn">
+					<button id="reportBtn"><a href="/cart.do">장바구니 가기</a></button>
+					<button id="cancelBtn">계속 쇼핑하기</button>
+				</div>	
+	
+		</div>
+		
 	<input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
 		<div id="title">
 			<div id="titleImg">
@@ -146,24 +156,24 @@
 			</div>
 		</div>
 		<script>
-			var currAmount = 0;
-			var totalPrice = 0;
+			var productAmount = 0;
+			var productPrice = 0;
 			$("#count>button").click(
 					function() {
-						currAmount = Number($("#amount").html());
+						productAmount = Number($("#amount").html());
 						if ($(this).html() == "+") {
-							$("#amount").html(++currAmount);
+							$("#amount").html(++ productAmount);
 
 						} else {
-							if (currAmount != 1) {
-								$("#amount").html(--currAmount);
+							if (productAmount != 1) {
+								$("#amount").html(-- productAmount);
 							}
 						}
 
 						var price = Number($("#milkitPrice").val());
-						totalPrice = currAmount * price;
+						 productPrice =  productAmount * price;
 						$("#totalPrice").html(
-								totalPrice.toLocaleString('ko-KR') + "원");
+								productPrice.toLocaleString('ko-KR') + "원");
 					});
 			window.onload = function() {
 				$(".view").eq(0).css("font-size", "28px");
@@ -221,15 +231,34 @@
 				}
 			});
 			$("#cart").click(function() {
-				var loginCheck = $("#loginCheck").val();
+				var memberNo = $("#loginCheck").val();
 				var productNo = ${p.productNo};
 				
-				if(loginCheck == ""){
+				if(memberNo != ""){
+					$.ajax({
+						url:"/insertCart.do",
+						data:{productNo:productNo,
+							memberNo:memberNo,
+							productPrice:productPrice,
+							productAmount:productAmount},
+						type:"post",
+						success:function(data){
+							if(data==1){
+								$("#modal-wrap").css("display","block");
+							}else{
+								alert("장바구니 담기 실패");
+							}
+						}
+					});
+				}else{
 					alert("로그인 후 이용해주세요");
-					$(location).attr("href","/loginFrm.do");	
+					$(location).attr("href","/loginFrm.do");
 				}
 			});
-	
+			$("#cancelBtn").click(function() {
+				$("#modal-wrap").hide();
+			});
+			
 		</script>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
