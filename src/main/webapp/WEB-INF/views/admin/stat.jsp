@@ -55,7 +55,10 @@ background-color: #E0D8EF;
 color:#9f90cf;
 
 }
-
+.container{
+margin-top: 30px;
+margin-bottom: 30px;
+}
 
 </style>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -500,6 +503,13 @@ color:#9f90cf;
 		$("#chartName").html($(this).html()+" 그래프");
 		
 	});
+	var k = 0;
+	if(k=0){
+		
+		location.reload();
+		k=1;
+	}
+	
 	
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

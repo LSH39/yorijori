@@ -16,6 +16,10 @@ padding : 10px;
 border: 1px solid black;
 border-radius: 10px;
 }
+.container{
+margin-top: 30px;
+margin-bottom: 30px;
+}
 </style>
 </head>
 <body>

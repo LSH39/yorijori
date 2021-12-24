@@ -56,6 +56,7 @@
 	<select id="selectProductList" parameterType="String" resultType="product">
 		select
 			product_no as productNo,
+			recipe_no as recipeNo,
 			milkit_name as milkitName,
 			milkit_price as milkitPrice,
 			milkit_comment as milkitComment,
@@ -67,6 +68,7 @@
 	<select id="selectProductList2" resultType="product">
 		select
 			product_no as productNo,
+			recipe_no as recipeNo,
 			milkit_name as milkitName,
 			milkit_price as milkitPrice,
 			milkit_comment as milkitComment,
@@ -185,6 +187,7 @@
             r.product_no as productNo,
             r.member_id as memberId,
             r.reg_date as regDate,
+            (select p.recipe_no from product p where p.product_no=r.product_no) as recipeNo,
             (select p.milkit_name from product p where p.product_no=r.product_no) as productName,
             (select p.milkit_comment from product p where p.product_no=r.product_no) as productComment,
             (select p.milkit_price from product p where p.product_no=r.product_no) as productPrice,

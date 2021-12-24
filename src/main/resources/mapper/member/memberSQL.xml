@@ -159,7 +159,7 @@ from member) where ${searchType} like '%'||#{searchText}||'%'
 	select * from ( select rownum as rnum, memberNo,memberId,memberPw,memberEmail,memberName,memberNickname,
 memberPhone,memberBirth,
 postcode,addressRoad,addressDetail,memberConsent,profilePath,profileIntro,
-certificatePath,memberLevel,memberPoint,enrollDate,withdrawDate,memberBlack, boardCount,recipeCount, fcCount from (select member_no as memberNo,
+certificatePath,memberLevel,memberPoint,enrollDate,withdrawDate,memberBlack, boardCount,recipeCount, fcCount,rc from (select member_no as memberNo,
 member_id as memberId,
 member_pw as memberPw,
 member_email as memberEmail,
@@ -182,7 +182,8 @@ member_black as memberBlack,
 (select count(*) from freeboard where free_writer = member_id)boardCount,
 (select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
 (select count(*) from freeboard_comment where fc_writer = member_id)fcCount
-
+,
+(select report_comment from recipe_report where recipe_report.member_no = member.member_no and rownum=1 )rc
 from member order by enrollDate desc) where memberBlack = #{level}
 
 <if test="detail==1">

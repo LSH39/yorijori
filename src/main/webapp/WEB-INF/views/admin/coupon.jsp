@@ -23,6 +23,10 @@
 	margin:10px auto;
 	
 }
+.container{
+margin-top: 30px;
+margin-bottom: 30px;
+}
 </style>
 </head>
 <body>
@@ -30,9 +34,12 @@
 	<jsp:include page="/WEB-INF/views/admin/sidenavi.jsp" />
 	<div class="container">
 	
-	<h2>혜택 등록</h2>
+	<h2 style="margin-left: 200px;">혜택 등록</h2>
 	<form action="createCoupon.do" method="post">
+	
+	
 	<div class="row">
+	
 	<div class="col-md-2"></div>
 	<div class="col-md-2">혜택 이름</div>
 	<div class="col-md-5"> <input name="couponName" id="couponName" maxlength="30" style="width:100%;" type="text" ></div>
