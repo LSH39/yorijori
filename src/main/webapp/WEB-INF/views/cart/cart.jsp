@@ -43,10 +43,10 @@
 												       	<span class="none">${c.cartNo }</span>
 												   	</td>
 												   	<td><img src="/resources/upload/product/${c.productFilepath }"></td>
-												   	<td class="infoTd"><a href="/milkitView.do?productNo=${c.productNo }&recipeNo=${c.recipeNo }" class="milkit_a">
+												   	<td class="infoTd" onClick="location.href='/milkitView.do?productNo=${c.productNo }&recipeNo=${c.recipeNo }'">
 												       	<p>[ ${c.sellerNickname } ]</p>
 												       	<p>${c.milkitName }</p>
-												       	<p><span>${c.milkitPrice }</span>원</p></a>
+												       	<p><span>${c.milkitPrice }</span>원</p>
 												   	</td>
 												   	<td>
 												       	<span class="less"></span><span class="count">${c.productAmount }</span><span class="more"></span>

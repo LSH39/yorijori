@@ -56,7 +56,6 @@
 	    });
 	    
 	    $("#pw_hidden+span").click(function(){
-	    	console.log($("#pw_hidden").is(":checked") == false);
 	    	if($("#pw_hidden").is(":checked") == false){
 	    		$(this).prev().prev().attr("type","text");
 	    		$("#pw_hidden").prop("checked", true);

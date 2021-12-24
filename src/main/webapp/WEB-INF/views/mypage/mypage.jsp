@@ -155,7 +155,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원아이디</td>
 								<td><input type="text" name="memberId" id="memberId"
-									onfocus="this.placeholder=''" value="${rm.memberId }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberId }" readonly></td>
 							</tr>
 						
 							<tr>
@@ -173,7 +173,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원닉네임</td>
 								<td><input type="text" name="memberNickname" id="memberNickname"
-									onfocus="this.placeholder=''" value="${rm.memberNickname }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberNickname }" readonly></td>
 							</tr>
 						
 							<tr>
