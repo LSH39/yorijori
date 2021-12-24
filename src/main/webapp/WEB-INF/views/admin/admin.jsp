@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>yorijori</title>
+<style>
+.container{
+margin-top: 30px;
+margin-bottom: 30px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -67,19 +73,19 @@
             <td><a class="subs" href="#">구독 회원 조회</a></td>
             <td><a href="stat.do">일간 현황</a></td>
             <td><a href="ranking.do">순위</a></td>
-            <td><a href="#">쿠폰</a></td>
+            <td><a href="coupon.do">쿠폰발행</a></td>
         </tr>
         <tr class="table-warning">
             <td><a href="allmember.do?reqPage=1">전체회원조회</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
-            <td><a href="coupon.do">쿠폰발행</a></td>
+            <td><a href="couponList.do?reqPage=1">쿠폰 관리</a></td>
         </tr>
         <tr class="table-warning">
             <td><a href="blackList.do?reqPage=1">블랙리스트관리</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
-            <td><a href="couponList.do?reqPage=1">쿠폰 관리</a></td>
+            <td><a href="#"></a></td>
         </tr>
         <tr class="table-warning">
             <td><a href="permissionJoin.do?reqPage=1">전문가 가입 승인</a></td>

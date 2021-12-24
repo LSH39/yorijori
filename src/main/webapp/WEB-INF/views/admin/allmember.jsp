@@ -9,7 +9,10 @@
 <style>
 .allmember{
 text-align: center;}
-
+.container{
+margin-top: 30px;
+margin-bottom: 30px;
+}
 
 
 </style>
@@ -134,7 +137,7 @@ text-align: center;}
     <c:forEach items="${list }" var="m" varStatus="i">
     <tr>
     <td><input class="chkbox" type="checkbox"><input type="hidden" value="${m.memberNo }"></td>
-    <td><img style="width:50px;" src="resources/upload/member_profile/${m.profilePath }">${m.memberNickname }(${m.memberId })</td>
+    <td style="text-align: left;"><img style="width:50px;" src="resources/upload/member_profile/${m.profilePath }">${m.memberNickname }(${m.memberId })</td>
     <td><button class="showDetailBtn" value="${i.index }">상세보기</button></td>
     <td>
     <c:choose >
