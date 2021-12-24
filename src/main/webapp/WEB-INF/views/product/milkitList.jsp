@@ -14,10 +14,10 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <div class="main">
+<h1>밀키트</h1>
+<input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
 	<p id="total">총  <fmt:formatNumber value="${totalCount}"/>개</p>
-	<c:if test="${sessionScope.m.memberNo != null}">	
-		<div id="make"><a href="/milkitFrm1.do?memberNo=${sessionScope.m.memberNo }">밀키트 만들기</a></div>
-	</c:if>
+		<div id="make"><button >밀키트 만들기</button></div>
 	<div class="milkitList">
 	<c:forEach items="${list }" var="p">
 	<div class="milkit">
@@ -66,6 +66,17 @@
 				}
 			});
 		});
+	 $("#make").click(function() {
+		var login = $("#loginCheck").val();
+		console.log(login);
+		if(login == ""){
+			alert("로그인 후 이용해주세요");
+			$(location).attr("href","/loginFrm.do");	
+		}else{
+			$(location).attr("href","/milkitFrm1.do?memberNo="+login);
+		}	
+		
+	});
 	 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

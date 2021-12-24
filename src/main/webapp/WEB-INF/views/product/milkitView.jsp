@@ -52,7 +52,7 @@
 				</p>
 				<c:if test="${p.milkitStock != 0 }">
 					<button id="cart">
-						<a href="#">장바구니 담기</a>
+						<a href="/cart.do">장바구니 담기</a>
 					</button>
 				</c:if>
 				<c:if test="${p.milkitStock eq 0 }">
