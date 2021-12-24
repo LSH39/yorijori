@@ -56,7 +56,7 @@
 		      					<ul>
 		      						<c:forEach items="${productList }" var="p" varStatus="i">
 		      							<li>
-		      								<a href="/productView.do?productNo=${p.productNo }&recipeNo=${p.recipeNo } }">
+		      								<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=${p.recipeNo }">
 		      									<div class="resultPic"><img src="resources/upload/product/${p.filepath }" style="width: 150px;height:150px;"></div>
 		      									<div class="resultTitle"><h5>${p.milkitName }</h5></div>
 		      								</a>
