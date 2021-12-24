@@ -67,7 +67,6 @@
         </c:when>
 
 		<c:when test="${sessionScope.m.memberLevel ==  3 }">
-			<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="/admin.do">관리자 페이지 </a>
 	        <a class="qna chat" id="chatAdmin">1:1문의하기 
 	        <c:if test="${sessionScope.m.memberId == 'adminchat01' }"><span class="chatAlarm">+<span id="chatAdminAlarm"></span></span></c:if>
