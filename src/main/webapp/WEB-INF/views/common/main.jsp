@@ -188,7 +188,7 @@
             <c:forEach items="${productList }" var="p" begin="0" end="7">
             <div class="swiper-slide">
             	<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
-            		<img src="resources/upload/product/${p.filepath }" class="img-fluid" style="width:250px;height:180px;" alt="">
+            		<img src="resources/upload/product/${p.filepath }" style="width:250px;height:180px;" alt="">
             		<h5>${p.milkitName }</h5>
             		<h6> 
             			<span class="main-product-price"><fmt:formatNumber value="${p.milkitPrice}" pattern="#,###"/></span>원

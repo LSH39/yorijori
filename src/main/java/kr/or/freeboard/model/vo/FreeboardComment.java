@@ -12,5 +12,6 @@ public class FreeboardComment {
 	private int fcLikeCount;
 	private String profilePath;
 	private String memberNickname;
+	private int memberLevel;
 
 }

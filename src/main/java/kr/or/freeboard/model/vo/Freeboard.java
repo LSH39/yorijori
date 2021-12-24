@@ -11,6 +11,7 @@ public class Freeboard {
 	private String regDate;
 	private int freeReadcount;
 	private String memberNickname;
+	private int memberLevel;
 	private int freeLikeCount;
 	private int fcCount;
 	private String profilePath;

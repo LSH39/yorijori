@@ -174,10 +174,6 @@ a:hover{
 	overflow:visible;
 	height: 280px;
 }
-#main-newproducts .clients-slider{
-	overflow:visible;
-	height: 280px;
-}
 #main-newproducts{
 	height: 600px;
 }
@@ -238,10 +234,6 @@ a:hover{
 	height: 600px;
 }
 #main-newclasses .swiper-wrapper{
-	overflow:visible;
-	height: 280px;
-}
-#main-newclasses .classes-slider{
 	overflow:visible;
 	height: 280px;
 }
