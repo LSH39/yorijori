@@ -10,6 +10,7 @@ private int voteCount;
 private String contestMonth;
 private int contestResult;
 private int recipeWriter;
+private int recipeNo;
 private String memberNickName;
 private String memberId;
 private String profilePath;
