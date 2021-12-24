@@ -47,10 +47,20 @@
 	                                <th><p class="title_txt">비밀번호<span id="pw_check"></span></p></th>
 	                            </tr>
 	                            <tr>
-	                                <td><input type="password" name="memberPw" id="memberPw" class="input_txt" maxlength="16" placeholder="새 비밀번호 입력"></td>
+	                                <td>
+	                                	<div class="pw_div">
+						                    <input type="password" name="memberPw" id="memberPw" class="input_txt" maxlength="16" placeholder="새 비밀번호 입력">
+						                    <input type="checkbox" id="pw_hidden"><span style="top:15px;"></span>
+				                    	</div>
+	                                </td>
 	                            </tr>
 	                            <tr>
-	                                <td><input type="password" id="memberPw2" class="input_txt" maxlength="16" placeholder="새 비밀번호 재입력"></td>
+	                                <td>
+	                                	<div class="pw_div">
+						                    <input type="password" id="memberPw2" class="input_txt" maxlength="16" placeholder="새 비밀번호 재입력">
+						                    <input type="checkbox" id="pw_hidden2"><span style="top:15px;"></span>
+				                    	</div>
+	                                </td>
 	                            </tr>
 	                            <tr>
 	                                <td id="sub_txt">8~16자리 / 영어 소문자, 숫자, 특수문자(#?!@$%^&*-) 모두 포함</td>
@@ -69,6 +79,10 @@
 	
 	    <script>
 	        var checkPw = 0;
+	        $(function(){
+	            $("#pw_hidden").prop("checked", false);
+	            $("#pw_hidden2").prop("checked", false);
+	        });
 	        $("#memberPw").on("keyup change", function(){
 	            $(this).val($(this).val().replace(/[^a-z0-9#?!@$%^&*-]/g,''));
 	            var inputPw = $("#memberPw").val();
@@ -102,8 +116,28 @@
 	            }
 	            $("#findPwReFrm").submit();
 	        });
+	        
+	        $("#pw_hidden+span").click(function(){
+	        	if($("#pw_hidden").is(":checked") == false){
+	        		$(this).prev().prev().attr("type","text");
+	        		$("#pw_hidden").prop("checked", true);
+	        	}else{
+	        		$(this).prev().prev().attr("type","password");
+	        		$("#pw_hidden").prop("checked", false);
+	        	}
+	        });
+
+	        $("#pw_hidden2+span").click(function(){
+	        	if($("#pw_hidden2").is(":checked") == false){
+	        		$(this).prev().prev().attr("type","text");
+	        		$("#pw_hidden2").prop("checked", true);
+	        	}else{
+	        		$(this).prev().prev().attr("type","password");
+	        		$("#pw_hidden2").prop("checked", false);
+	        	}
+	        });
 	    </script>
-		<%@include file = "/WEB-INF/views/common/header.jsp" %>
+		<%@include file = "/WEB-INF/views/common/footer.jsp" %>
     </c:otherwise>
 </c:choose>
 </body>

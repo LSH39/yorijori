@@ -21,8 +21,14 @@
                         <input type="text" id="memberId" name="memberId" class="input_txt" placeholder="아이디 입력" maxlength='30' onkeyup="idCheck(this);" onchange="idCheck(this);">
 
                         <p class="title">비밀번호 <span>*</span><span class="join_check"></span></p>
-                        <input type="password" id="memberPw" name="memberPw" class="input_txt" placeholder="비밀번호 입력" maxlength='16' onkeyup="pwCheck(this);" onchange="pwCheck(this);">
-                        <input type="password" id="memberPw2" class="input_txt" placeholder="비밀번호 재입력" maxlength='16' onkeyup="pwCheck2(this);" onchange="pwCheck2(this);">
+                        <div class="pw_div">
+		                    <input type="password" id="memberPw" name="memberPw" class="input_txt" placeholder="비밀번호 입력" maxlength='16' onkeyup="pwCheck(this);" onchange="pwCheck(this);">
+		                    <input type="checkbox" id="pw_hidden"><span style="top:10px;"></span>
+                    	</div>
+                    	<div class="pw_div">
+		                    <input type="password" id="memberPw2" class="input_txt" placeholder="비밀번호 재입력" maxlength='16' onkeyup="pwCheck2(this);" onchange="pwCheck2(this);">
+		                    <input type="checkbox" id="pw_hidden2"><span style="top:20px;"></span>
+	                    </div>
                         <p class="sub">조건 : 8~16자리 / 영어 소문자, 숫자, 특수문자(#?!@$%^&*- 가능) 모두 포함</p>
 						
 						<p class="title">이메일 <span>*</span><span class="join_check"></span></p>
