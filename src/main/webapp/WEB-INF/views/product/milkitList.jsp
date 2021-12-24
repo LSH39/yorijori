@@ -61,7 +61,9 @@
 					var currCount = $("#more").attr("currentCount");
 					if(curr == totalCount){				
 						$("#more").prop("disabled",false);
-						alert("마지막 페이지 입니다.")
+						alert("마지막 페이지 입니다.");
+					}else if(totalCount<7){
+						alert("마지막 페이지 입니다.");
 					}
 				}
 			});

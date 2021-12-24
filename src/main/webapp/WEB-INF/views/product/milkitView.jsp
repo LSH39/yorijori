@@ -8,12 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/css/product/milkitView.css">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript"	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
+	<input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
 		<div id="title">
 			<div id="titleImg">
 				<img src="/resources/upload/product/${p.filepath }">
@@ -51,9 +51,7 @@
 							value="${p.milkitPrice}" />원</span>
 				</p>
 				<c:if test="${p.milkitStock != 0 }">
-					<button id="cart">
-						<a href="/cart.do">장바구니 담기</a>
-					</button>
+					<button id="cart">장바구니 담기</button>
 				</c:if>
 				<c:if test="${p.milkitStock eq 0 }">
 					<button id="soldOut">
@@ -148,9 +146,11 @@
 			</div>
 		</div>
 		<script>
+			var currAmount = 0;
+			var totalPrice = 0;
 			$("#count>button").click(
 					function() {
-						var currAmount = Number($("#amount").html());
+						currAmount = Number($("#amount").html());
 						if ($(this).html() == "+") {
 							$("#amount").html(++currAmount);
 
@@ -161,8 +161,7 @@
 						}
 
 						var price = Number($("#milkitPrice").val());
-						console.log(price);
-						var totalPrice = currAmount * price;
+						totalPrice = currAmount * price;
 						$("#totalPrice").html(
 								totalPrice.toLocaleString('ko-KR') + "원");
 					});
@@ -221,7 +220,15 @@
 					});
 				}
 			});
-			
+			$("#cart").click(function() {
+				var loginCheck = $("#loginCheck").val();
+				var productNo = ${p.productNo};
+				
+				if(loginCheck == ""){
+					alert("로그인 후 이용해주세요");
+					$(location).attr("href","/loginFrm.do");	
+				}
+			});
 	
 		</script>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
