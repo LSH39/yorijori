@@ -12,4 +12,5 @@ public class RecentProductData {
 	private String productComment;
 	private String productPath;
 	private String regDate;
+	private int recipeNo;
 }

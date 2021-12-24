@@ -38,7 +38,7 @@
 	      					<c:when test="${not empty list }">
 	      						<c:forEach items="${list }" var="p" begin="0" end="15">
 	      							<li>
-	      								<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
+	      								<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=${p.recipeNo}">
 	      									<img src="resources/upload/product/${p.productPath }">
 	      									<h4>${p.productName }</h4>
 	      									<h5><span class="rContent">${p.productComment }</span></h5>
