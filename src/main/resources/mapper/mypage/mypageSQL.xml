@@ -250,7 +250,7 @@
 		(select profile_path from member where member_no=a.chat_send)as profilePath,
 		a.chat_receive as chatReceive,
 		a.chat_content as chatContent,
-		to_date(a.chat_date,'yyyy-mm-dd') as chatDate
+		a.chat_date as chatDate
 
 		from chat a
 		, (select chat_send , max(chat_no) as chat_no

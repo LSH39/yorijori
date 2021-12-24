@@ -12,4 +12,5 @@ public class Mychat {
 	private Date chatDate;
 	private String memberId;
 	private String profilePath;
+	private String chatDateStr;
 }
