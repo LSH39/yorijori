@@ -5,7 +5,7 @@
     /*margin-top: 70px;*/
 }
 
-.input_txt, .purple_btn, .light_btn, .gray_btn, .kakao_btn{
+.input_txt, .purple_btn, .light_btn, .gray_btn, .kakao_btn, .toss_light_btn, .toss_btn{
     width: 300px;
     height: 45px;
     box-sizing: border-box;
@@ -51,12 +51,31 @@
     margin-top: 0;
     font-weight: bold;
 }
-.purple_btn:hover, .light_btn:hover, .kakao_btn:hover{
+.toss_light_btn{
+	color: #3182f6;
+    background-color: #FFFFFF;
+    border: 3px solid #3182f6;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.toss_btn{
+    color: #f9fafb;
+    background-color: #3182f6;
+    border: 0;
+    border-radius: 5px;
+    margin-top: 0;
+    font-weight: bold;
+}
+.purple_btn:hover, .light_btn:hover, .kakao_btn:hover, .toss_light_btn:hover, .toss_btn:hover{
     cursor: pointer;
 }
 .light_btn:hover{
     color: #6D5874;
     border: 3px solid #6D5874;
+}
+.toss_light_btn:hover{
+    color: #3182f6;
+    border: 3px solid #3182f6;
 }
 
 .h2_txt{

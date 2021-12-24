@@ -25,7 +25,7 @@
                         <input type="hidden" name="memberPw" class="input_txt" value="kakao">
 						
 						<p class="title">이메일 <span>*</span><span class="join_check"></span></p>
-                        <input type="text" name="memberEmail" class="input_txt" value="${email }" readonly>
+                        <input type="text" id="kakaoMail" name="memberEmail" class="input_txt" value="${email }" readonly>
 						<p class="sub">아이디 / 비밀번호 찾기 시 사용됩니다.</p>
 
                         <p class="title">이름 <span>*</span><span class="join_check"></span></p>
@@ -70,26 +70,50 @@
 
     <%@include file = "/WEB-INF/views/member/joinJs.jsp" %>
     <script>
+	    $(function(){
+	    	var inputEmail = "${email}";
+	    	$.ajax({
+		        type: "post",
+		        url: "/joinSearch.do",
+		        data: {memberEmail:inputEmail},
+		        success: function (data) {
+		            if(data == 0){
+		            	checkEmail = 1;
+		            }else{
+		            	checkEmail = 0;
+		            	$(".join_check").eq(2).text("이미 등록된 이메일입니다.");
+		            }
+		        }
+		    });
+	    	console.log(checkEmail);
+	    });
+	    
+    
         // submit
         $("#submit_btn").click(function(){
-            if(checkName*checkNickname*checkPhone*checkBirth*checkAddr*checkBox!=1){
-                alert("입력사항을 다시 확인해주세요.");
-                return;
-            }
-            var form = $("#join_form").serialize();
-            $.ajax({
-                type: "post",
-                url: "/joinKakao.do",
-                data: form,
-                success: function (data) {
-                    if(data == "1"){
-                    		alert("회원가입 성공");
-                    		location.href="/loginFrm.do";
-                    }else{
-                    	alert("error");
-                    }
-                }
-            });
+        	if(checkEmail == 0){
+        		alert("이미 등록된 메일입니다.\n일반회원가입으로 진행해주세요.");
+        		location.href="/joinCommon.do";
+        	}else{
+	            if(checkName*checkNickname*checkPhone*checkBirth*checkAddr*checkBox!=1){
+	                alert("입력사항을 다시 확인해주세요.");
+	                return;
+	            }
+	            var form = $("#join_form").serialize();
+	            $.ajax({
+	                type: "post",
+	                url: "/joinKakao.do",
+	                data: form,
+	                success: function (data) {
+	                    if(data == "1"){
+	                    		alert("회원가입 성공");
+	                    		location.href="/loginFrm.do";
+	                    }else{
+	                    	alert("error");
+	                    }
+	                }
+	            });
+        	}
         });
     </script>
 	<%@include file = "/WEB-INF/views/common/footer.jsp" %>
