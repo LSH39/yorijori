@@ -190,7 +190,6 @@
 		order by contest_month asc
 
 	</select>
-
 	<select id="myItem" resultType="mi" parameterType="_int">
 		select
 		product_no as productNo,
@@ -203,8 +202,6 @@
 		milkit_stock as milkitStock
 		from product
 		where milkit_writer=#{memberNo}
-
-
 	</select>
 
 	<select id="myBoard" resultType="fb" parameterType="_int">
