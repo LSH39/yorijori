@@ -3,7 +3,7 @@
 <mapper namespace="cart">
 	<select id="cartList" parameterType="_int" resultType="cart">
 		SELECT C.CART_NO as cartNo, C.MEMBER_NO as memberNo, C.PRODUCT_NO as productNo, C.PRODUCT_AMOUNT as productAmount, C.PRODUCT_PRICE as productPrice,
-				M2.MEMBER_NICKNAME as sellerNickname, P.MILKIT_NAME as milkitName, P.MILKIT_PRICE as milkitPrice, P.FILEPATH as productFilepath
+				M2.MEMBER_NICKNAME as sellerNickname, P.RECIPE_NO as recipeNo, P.MILKIT_NAME as milkitName, P.MILKIT_PRICE as milkitPrice, P.FILEPATH as productFilepath
 		FROM CART C
 		JOIN MEMBER M ON M.MEMBER_NO=C.MEMBER_NO
 		JOIN PRODUCT P ON P.PRODUCT_NO=C.PRODUCT_NO

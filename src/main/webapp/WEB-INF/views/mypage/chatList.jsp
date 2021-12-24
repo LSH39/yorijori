@@ -69,7 +69,7 @@ margin-top:120px;
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
 $(function(){
-$(".mypageChat").click(function(){
+$(".mypageChat").eq(0).click(function(){
 	$("#chatUser").click();
 });
 });
@@ -113,7 +113,7 @@ $(".mypageChat").click(function(){
 										<td><a class="mypageChat">${mc.chatContent }</a></td>
 									</tr>
 									<tr>
-										<td id="time">${mc.chatDate }</td>
+										<td id="time">${mc.chatDateStr }</td>
 									</tr>
 								</table>
 							</div>
