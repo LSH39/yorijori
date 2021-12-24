@@ -135,9 +135,9 @@ margin-top:120px;
 								<span id="dd">${i.count }</span>
 							</div>
 							<div class="sellItem">
-
+                                <a href="/milkitView.do?productNo=${ms.productNo}&recipeNo=${ms.recipeNo}">
 								<img id="product"
-									src="/resources/upload/product/${ms.filepath}"></span><br>
+									src="/resources/upload/product/${ms.filepath}"><br></a>
 							</div>
 
 							<div id="ii">

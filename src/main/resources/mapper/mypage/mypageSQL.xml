@@ -180,6 +180,8 @@
 		rb.recipe_writer as recipeWriter,
 		rb.filePath,
 		m.member_nickname as memberNickName,
+        m.profile_Path as profilePath,
+        m.member_Id as memberId,
 		( select count(*) from contest_vote where contest_no=cr.contest_no ) as
 		voteCount
 		from contest_recipe cr,recipe_board rb,member m
@@ -220,7 +222,6 @@
 
 	</select>
 	<select id="followList" resultType="fol" parameterType="_int">
-
 		select a.recipe_Writer as recipeWriter
 		, a.recipe_Title as recipeTitle
 		, a.filepath as filepath
@@ -229,10 +230,13 @@
 		, (select count(*)from recipe_like where recipe_no=a.recipe_no) as cnt
 		, (select member_nickName from member where member_no =
 		a.recipe_writer) as memberNickname,
+        (select member_Id from member where member_no =
+		a.recipe_writer) as memberId,
 		(select profile_path from member where member_no=recipe_writer)as profilePath
 		from recipe_board a
 		where a.recipe_writer in (SELECT follow_no from follow where
 		member_no=#{memberNo})
+	
 
 	</select>
 	<select id="followCount" resultType="_int" parameterType="_int">

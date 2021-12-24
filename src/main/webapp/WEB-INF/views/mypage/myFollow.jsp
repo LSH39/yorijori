@@ -91,11 +91,15 @@ margin-top:120px;
                   	<c:when test="${ not empty list }">
               <c:forEach items="${list}" var="fol" varStatus="i">
             <div class="followR">
+        
                 <div class="pt">
-                <img id="pp" src="resources/upload/member_profile/${fol.profilePath }">
+                 <a href="/profile.do?memberId=${fol.memberId}">
+                <img id="pp" src="resources/upload/member_profile/${fol.profilePath }"></a>
                 
                     <h5 id="nickName">${fol.memberNickname }</h5>
+                    
                 </div>
+                
                 <div class="pr">
                     <a href="/recipeView.do?recipeNo=${fol.recipeNo}&memberNo=${fol.recipeWriter}"> 
                          <img id="itemI" src="resources/upload/product/${fol.filepath }">

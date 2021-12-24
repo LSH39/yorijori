@@ -57,7 +57,7 @@
 
 .win{
     width: 250px;
-    height:400px;
+    height:430px;
     background-color:rgb(240, 240, 191);
     float: left;
     margin-left: 30px;
@@ -82,6 +82,7 @@
 #winners{
  line-height: 30px;
  overflow: hidden;
+   height:100px;
  }
  .ww{
  float:left;
@@ -137,7 +138,18 @@
   
 
 }
-
+.winnerName{
+height:50px;
+width:240px;
+overflow:hidden;
+}
+#wina{
+    width: 60px;
+    height:60px;
+     float:left;
+     border-radius:30px;
+     margin-left:20px;
+}
 </style>
 
 
@@ -177,11 +189,12 @@
                 <div id="winners">
                    <span class="it_info1"><b id="it1">경연날짜 :</b>&emsp;${ct.contestMonth }</span><br>
                    <span class="it_info1"><b id="it1">레시피이름 :</b>&emsp;${ct.recipeTitle}</span><br>
-                   <span class="it_info1"><b id="it1">우승자 :</b>&emsp;${ct.memberNickName }</span>&emsp;<br>
-            
-    
                 </div>
-                
+                <div class="winnerName">
+                <a href="/profile.do?memberId=${ct.memberId }">
+                  <span ><img id="wina" src="resources/upload/member_profile/${ct.profilePath} ">&emsp;<b>(우승)${ct.memberNickName }</b></span>&emsp;
+              </a>
+              </div>
               </div>
               </c:forEach>
         </div>

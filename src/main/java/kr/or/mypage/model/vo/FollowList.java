@@ -13,6 +13,7 @@ public class FollowList {
 	private String recipeDate;
 	private String subhead;
 	private String memberNickname;
+	private String memberId;
 	private int cnt;
 	private int recipeNo;
 	private String profilePath;
