@@ -135,8 +135,9 @@
           <label for="headersearchsubmit"><img class="main-search-icon" src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
           </form>
           <li><a class="nav-link scrollto" href="/cart.do"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
+          <c:if test="${sessionScope.m.memberNo != null }">
           <li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
-          
+          </c:if>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

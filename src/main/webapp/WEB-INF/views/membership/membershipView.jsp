@@ -38,7 +38,7 @@
     </div>
     <div >
     <form action="/premium.do" method="post" id="premium">
-        <img src="/resources/img/membership/오븐3.jpg">
+        <img src="/resources/img/membership/premium.jpg">
         <p class="name">PREMIUM</p>
         <select name="membershipPrice">
             <option value="20000">1개월 20,000원</option>
