@@ -134,9 +134,10 @@
 .none{
     display: none;
 }
-.milkit_a>*{
+.infoTd>*{
 	color : #444444;
 }
-.milkit_a:hover>*{
+.infoTd:hover>*{
 	color : #8E44AD;
+	cursor : pointer;
 }

@@ -29,6 +29,8 @@ function countPrice(){
         var count = $(".count").eq(i).text();
         var total = Number(price)*Number(count);
         $(".infoTd").eq(i).next().next().children().text(total);
+        console.log(price);
+        console.log(total);
     }
 }
 // checkbox
