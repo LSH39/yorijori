@@ -29,6 +29,9 @@ public class RecipeBoard {
 	private int likeCnt;
 	private ArrayList<Product>pList;
 
+	private int start;
+	private int end;
+	
 	public String getLevel(){
 		if(recipeLevel == 1) {
 			return "상";

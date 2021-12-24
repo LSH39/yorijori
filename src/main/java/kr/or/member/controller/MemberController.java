@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.common.EmailSender;
+import kr.or.common.SessionConfig;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -38,22 +39,39 @@ public class MemberController {
 	public String login(Member member, HttpSession session, Model model) {
 		Member m = service.loginMemberEnc(member);
 		if(m != null) {
-			session.setAttribute("m", m);
-			return "redirect:/";
+			String check = SessionConfig.getSessionidCheck(m.getMemberId(), session);
+			if(check.equals("중복")) {
+				session.setAttribute("m", m);
+				model.addAttribute("msg", "이미 로그인 된 다른 기기가 있습니다.\\n기존에 로그인된 기기는 자동으로 로그아웃처리 됩니다.");
+				model.addAttribute("loc","/");
+				return "common/msg";
+			}else {
+				session.setAttribute("m", m);
+				return "redirect:/";
+			}
 		}else {
 			model.addAttribute("msg", "아이디 또는 비밀번호를 확인해주세요.");
 			model.addAttribute("loc","/loginFrm.do");
+			return "common/msg";
 		}
-		return "common/msg";
 	}
 	@RequestMapping(value="/loginKakao.do")
-	public String loginKakao(Member member, HttpSession session) {
+	public String loginKakao(Member member, HttpSession session, Model model) {
 		Member m = service.loginKakao(member);
-		session.setAttribute("m", m);
-		return "redirect:/";
+		String check = SessionConfig.getSessionidCheck(m.getMemberId(), session);
+		if(check.equals("중복")) {
+			session.setAttribute("m", m);
+			model.addAttribute("msg", "이미 로그인 된 다른 기기가 있습니다.\\n기존에 로그인된 기기는 자동으로 로그아웃처리 됩니다.");
+			model.addAttribute("loc","/");
+			return "common/msg";
+		}else {
+			session.setAttribute("m", m);
+			return "redirect:/";
+		}
 	}
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
+		SessionConfig.deleteSession(session);
 		session.invalidate();
 		return "redirect:/";
 	}

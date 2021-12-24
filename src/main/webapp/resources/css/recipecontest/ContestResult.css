@@ -38,7 +38,6 @@
 	top: 50px;
 }
 ul{
-	overflow: hidden;
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
@@ -53,14 +52,22 @@ ul{
 .winners-profile{
 	width: 75%;
 }
+.winners-profile>ul{
+	overflow: hidden;
+}
 .winners-profile li{
-	background: #f1f1f1;
+	background: rgb(251, 251, 251);
 	float: left;
 	margin: 20px 15px;
 	padding: 10px;
+	box-shadow : 2px 2px 7px #C3AAFF;
 }
 .winners-profile li div{
 	text-align: center;
+}
+.profile-pic>img{
+	border-radius: 50px;
+	margin: auto;
 }
 .total-vote{
 	display: flex;
@@ -74,11 +81,13 @@ ul{
 .prize-tower>ul{
 	display: flex;
 	align-items: flex-end;
+	overflow: hidden;
 }
 .prize-tower li{
 	float: left;
 	width: calc(100%/4);
 	text-align: center;
+	box-shadow : 2px 2px 5px #999;
 }
 .prize-tower li>h4{
 	padding: 30px;
@@ -87,6 +96,7 @@ ul{
 	background: rgb(246, 240, 255);
 }
 .prize-tower li:first-child{
+	margin-left: 30px;
 	height: 500px;
 }
 .prize-tower li:nth-child(2){
@@ -95,7 +105,12 @@ ul{
 .prize-tower li:nth-child(3){
 	height: 150px;
 }
-
+.prize-tower li:last-child{
+	box-shadow: none;
+}
+.points{
+	color: #8E44AD;
+}
 
 
 
@@ -134,6 +149,159 @@ ul.winners li:nth-child(2) {
   background: #1998c4;
 }
 
+
+/*크리스마스 전등효과*/
+.christmas-lights{
+	position: relative;
+}
+.lightrope{
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	margin: -15px 0 0 0;
+	padding: 0;
+	pointer-events: none;
+	width: 100%;
+	top: 0;
+	filter: opacity(0.6);
+}
+.lightrope li{
+	position: relative;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-iteration-count: infinite;
+	animation-interation-count: infinite;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: block;
+	width: 12px;
+	height: 28px;
+	border-radius: 50%;
+	margin: 20px;
+	display: inline-block;
+	background:#f02241;
+	box-shadow: 0px 4.66667px 24px 3px #f02241;
+	-webkit-animation-name: flash-1;
+	animation-name: flash-1;
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
+}
+.lightrope li:nth-child(2n+1){
+	background: #42b261;
+	box-shadow: 0px 4.66667px 24px 3px rgba(0, 255, 255, 0.5);
+	-webkit-animation-name: flash-2;
+	animation-name: flash-2;
+	-webkit-animation-duration: 0.4s;
+	animation-duration: 0.4s;
+}
+.lightrope li:nth-child(4n+2){
+	background: #f9fbee;
+	box-shadow: 0px 4.66667px 24px 3px #f9fbee;
+	-webkit-animation-name: flash-3;
+	animation-name: flash-3;
+	-webkit-animation-duration: 1.1s;
+	animation-duration: 1.1s;
+}
+.lightrope li:nth-child(odd){
+	-webkit-animation-duration: 1.8s;
+	animation-duration: 1.8s;
+}
+.lightrope li:nth-child(3n+1){
+	-webkit-animation: 1.4s;
+	animation-duration: 1.4s;
+}
+.lightrope li:before{
+	content: "";
+	position: absolute;
+	background: #222;
+	width: 10px;
+	height: 9.33333px;
+	border-radius: 3px;
+	top: -4.66667px;
+	left: 1px;
+}
+.lightrope li:after{
+	content: "";
+	top: -14px;
+	left: 9px;
+	position: absolute;
+	width: 52px;
+	height: 18.66667px;
+	border-bottom: solid #222 2px;
+	border-radius: 50%;
+}
+.lightrope li:last-child:after{
+	content: none;
+}
+.lightrope li:first-child{
+	margin-left: 40px;
+}
+@-webkit-keyframes flash-1{
+	0%, 100%{
+		background: #f02241;
+		box-shadow: 0px 4.66667px 24px 3px #f02241;
+	}
+	50%{
+		background: rgba(240, 34, 65, 0.4);
+		box-shadow: 0px 4.66667px 24px 3px rgba(240, 35, 65, .02);
+	}
+}
+@keyframes flash-1{
+	0%,
+  100% {
+    background: #f02241;
+    box-shadow: 0px 4.66667px 24px 3px #f02241;
+  }
+  50% {
+    background: rgba(240, 34, 65, 0.4);
+    box-shadow: 0px 4.66667px 24px 3px rgba(240, 35, 65, 0.2);
+  }
+}
+@-webkit-keyframes flash-2{
+	0,
+	100%{
+		background: #42b261;
+		box-shadow: 0px 4.66667px 24px 3px #42b261;
+	}
+	50%{
+		background: rgba(66, 178, 97, 0.4);
+		box-shadow: 0px 4.6667px 24px 3px rgba(66, 178, 97, 0.2);
+	}
+}
+@keyframes flash-2{
+	0%,
+  100% {
+    background: #42b261;
+    box-shadow: 0px 4.66667px 24px 3px #42b261;
+  }
+  50% {
+    background: rgba(66, 178, 97, 0.4);
+    box-shadow: 0px 4.66667px 24px 3px rgba(66, 178, 97, 0.2);
+  }
+}
+@-webkit-keyframes flash-3{
+	0%,
+	100%{
+		background: #f9fbee;
+		box-shadow: 0px 4.6667px 24px 3px #f9fbee;
+	}
+	50%{
+		background: rgba(249, 251, 238, .4);
+		box-shadow: 0px 4.66667px 24px 3px rgba(249, 251, 238, .2);
+	}
+	@keyframes flash-3{
+		0%,
+  100% {
+    background: #F9FBEE;
+    box-shadow: 0px 4.66667px 24px 3px #F9FBEE;
+  }
+  50% {
+    background: rgba(249, 251, 238, 0.4);
+    box-shadow: 0px 4.66667px 24px 3px rgba(249, 251, 238, 0.2);
+   }
 
 
 

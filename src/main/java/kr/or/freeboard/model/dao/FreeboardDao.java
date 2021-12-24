@@ -132,4 +132,9 @@ public class FreeboardDao {
 		int result = sqlSession.delete("freeboard.deleteFreeboardFile", freeNo);
 		return result;
 	}
+
+	public int deleteFcLike(HashMap<String, Object> map) {
+		int result = sqlSession.delete("freeboard.deleteFcLike", map);
+		return result;
+	}
 }

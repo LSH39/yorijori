@@ -187,6 +187,10 @@ public class CookingClsController {
 			bos.close();
 			jsonObject.addProperty("url", "/resources/upload/cookingcls/"+filepath); // contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
+			jsonObject.addProperty("filename", filename);
+			jsonObject.addProperty("filepath", filepath);
+			System.out.println(filename);
+			System.out.println(filepath);
 				
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -195,6 +199,7 @@ public class CookingClsController {
 			e.printStackTrace();
 		}
 		String a = jsonObject.toString();
+		System.out.println(a);
 		return a;
 		
 	}
@@ -221,11 +226,12 @@ public class CookingClsController {
 		
 		if(member != null) {
 			sessionMemberNickname = member.getMemberNickname();
+			sessionMemberNo = member.getMemberNo();
 			System.out.println(classNo);
 			System.out.println(sessionMemberNo);
 			boolean rsrvChk = service.selectOneRsrvChk(classNo, sessionMemberNo);//수강 여부 
 			boolean reviewChk = service.selectOneReviewChk(classNo, sessionMemberNickname);//리뷰 작성 여부
-			System.out.println(rsrvChk);
+			System.out.println("수강했나요? : "+rsrvChk);
 			System.out.println(reviewChk);
 			model.addAttribute("rsrvChk", rsrvChk);
 			model.addAttribute("reviewChk", reviewChk);

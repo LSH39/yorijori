@@ -51,28 +51,32 @@
     });
 
     $("#chatAdmin").click(function(){
-    	openChat();
-		// chat
-        if($("#chatFrmAdminHome").prop("on") == false){
-        	if($("#chatFrmAdmin").prop("on") == false){
-	            $("#chatFrmAdminHome").css("display","block").prop("on",true);
-	            if(startNo>1){
-	            	$("#chatAdminHomeTbl").children().remove();
-		           	reStartChat();
-	            }
-        	}else{
-                $("#chatFrmAdmin").css("display","none").prop("on",false);
-                $("#chatAdminTbl").children().remove();
-                closeChat();
-        	}
-        }else{
-        	$("#chatFrmAdminHome").css("display","none").prop("on",false);
-            $("#chatAdminHomeTbl").children().remove();
-            $("#chatFrmAdmin").css("display","none").prop("on",false);
-            $("#chatAdminTbl").children().remove();
-            closeChat();
-        }
-		startNo += 1;
+    	if(sessionMemberNo == 86){
+	    	openChat();
+			// chat
+	        if($("#chatFrmAdminHome").prop("on") == false){
+	        	if($("#chatFrmAdmin").prop("on") == false){
+		            $("#chatFrmAdminHome").css("display","block").prop("on",true);
+		            if(startNo>1){
+		            	$("#chatAdminHomeTbl").children().remove();
+			           	reStartChat();
+		            }
+	        	}else{
+	                $("#chatFrmAdmin").css("display","none").prop("on",false);
+	                $("#chatAdminTbl").children().remove();
+	                closeChat();
+	        	}
+	        }else{
+	        	$("#chatFrmAdminHome").css("display","none").prop("on",false);
+	            $("#chatAdminHomeTbl").children().remove();
+	            $("#chatFrmAdmin").css("display","none").prop("on",false);
+	            $("#chatAdminTbl").children().remove();
+	            closeChat();
+	        }
+			startNo += 1;
+    	}else{
+    		alert("채팅관리자만 접근 가능합니다.");
+    	}
     });
     
     function startChat(){
@@ -87,7 +91,7 @@
 		
 	}
 	
-	 function reStartChat(){
+	function reStartChat(){
     	webSocketType = "reStart";
 		var data = {type:"reStart",memberNo:sessionMemberNo};
 	    ws.send(JSON.stringify(data));

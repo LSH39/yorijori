@@ -175,13 +175,13 @@
   });
 
   /**
-   * Clients Slider
+   * 신상품 slider
    */
   new Swiper('.clients-slider', {
     speed: 400,
     loop: true,
     autoplay: {
-      delay: 5000,
+      delay: 3000,
       disableOnInteraction: false
     },
     slidesPerView: 'auto',
@@ -192,20 +192,61 @@
     },
     breakpoints: {
       320: {
-        slidesPerView: 2,
-        spaceBetween: 40
+        slidesPerView: 1,
+        spaceBetween: 10
       },
       480: {
-        slidesPerView: 3,
-        spaceBetween: 60
+        slidesPerView: 2,
+        spaceBetween: 20
       },
       640: {
-        slidesPerView: 4,
-        spaceBetween: 80
+        slidesPerView: 3,
+        spaceBetween: 40
       },
       992: {
-        slidesPerView: 6,
-        spaceBetween: 120
+        slidesPerView: 4,
+        spaceBetween: 60
+      }
+    }
+  });
+  
+  /**
+   * 클래스 slider
+   */
+  new Swiper('.classes-slider', {
+    speed: 1000,
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: true
+    },
+    slidesPerView: '4',
+    slidesPerGroup: '4',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'fraction',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 10
+      },
+      480: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 40
+      },
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 60
       }
     }
   });

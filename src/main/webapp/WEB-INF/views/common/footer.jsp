@@ -5,7 +5,7 @@
     <div class="container">
       <h3>요리조리</h3>
       <div class="footer-content">
-      	<a href="#"><span>회사소개</span></a> |
+      	<a href="/siteInfo.do"><span>회사소개</span></a> |
       	<a href="#"><span>이용약관</span></a> |
       	<a href="#"><span>개인정보취급방침</span></a> |
       	<a href="#"><span>1:1문의</span></a> |

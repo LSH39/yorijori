@@ -112,6 +112,17 @@ public class RecipeDao {
 		return (ArrayList<Product>)list;
 	}
 
+	public ArrayList<RecipeBoard> moreRecipe(RecipeBoard rb, int start, int end) {
+		rb.setStart(start);
+		rb.setEnd(end);
+		List<RecipeBoard>list = sqlSession.selectList("recipe.selectMoreRecipe",rb);
+		return (ArrayList<RecipeBoard>)list;
+	}
+
+	public int recipeTotalCount(RecipeBoard rb) {
+		return sqlSession.selectOne("recipe.selectTotalCount", rb);
+	}
+
 
 
 }

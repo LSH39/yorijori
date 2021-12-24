@@ -315,3 +315,7 @@
 .checkImg span:hover {
 	cursor: pointer;
 }
+#recipeVideo{
+	width:710px;
+	margin: 0 auto;
+}

@@ -234,4 +234,13 @@ public class FreeboardService {
 			return result;
 		}
 
+		public int deleteFcLike(int fcNo, String memberId, int freeNo) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("fcNo", fcNo);
+			map.put("memberId", memberId);
+			map.put("freeNo", freeNo);
+			int result = dao.deleteFcLike(map);
+			return result;
+		}
+
 }

@@ -69,7 +69,9 @@
 		<c:when test="${sessionScope.m.memberLevel ==  3 }">
 			<a href="#" class="mypage">[${sessionScope.m.memberNickname }]님</a>
 	        <a href="/admin.do">관리자 페이지 </a>
-	        <a class="qna chat" id="chatAdmin">1:1문의하기 <span class="chatAlarm">+<span id="chatAdminAlarm"></span></span></a>
+	        <a class="qna chat" id="chatAdmin">1:1문의하기 
+	        <c:if test="${sessionScope.m.memberNo == 86 }"><span class="chatAlarm">+<span id="chatAdminAlarm"></span></span></c:if>
+	        </a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
 	       	<!-- LSH -->
 			<%@include file = "/WEB-INF/views/chat/chatAdmin.jsp" %>
@@ -115,7 +117,7 @@
            <li class="dropdown"><a href="#"><span>이벤트</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a class="nav-link" onclick="chkDate();">경연대회투표</a></li>
-              <li><a href="/contestResult.do">우승자 발표</a></li>
+              <li><a class="nav-link" onclick="chkDate2();">우승자 발표</a></li>
               <li><a href="/contestWinner.do">역대 우승자</a></li>
             </ul>
           </li>
@@ -128,11 +130,10 @@
             </ul>
           </li>
           <li>
-          <form action="/mainpagesearch.do" method="get" id="headersearchBar">
-          <input type="search" class="nav-link scrollto" id="header-mainsearch" name="keyword" placeholder="검색"></li>
-          <input type="hidden" name="reqPage" value=1>
+          <form action="/mainpageSearch.do" method="get" id="headersearchBar">
+          <input type="text" class="nav-link scrollto" id="header-mainsearch" name="keyword" placeholder="검색" autocomplete="off" style="color:#8E44AD;"></li>
           <input type="submit" id="headersearchsubmit" style="display: none;"></input>
-          <label for="headersearchsubmit"><img src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
+          <label for="headersearchsubmit"><img class="main-search-icon" src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
           </form>
           <li><a class="nav-link scrollto" href="/cart.do"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
           <li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
@@ -147,11 +148,11 @@
     
   </header><!-- End Header -->
   <form action="/recipeBoard.do" method="get">
-		<div class="recipe-category">
-			<div class="recipe-category-box">
+		<div class="main-recipe-category">
+			<div class="main-recipe-category-box">
 				<div>
 				<ul>
-					<li class="recipe-category-1">
+					<li class="main-recipe-category-1">
 						<h3>
 							<span>상황에 맞는 요리</span>
 						</h3>
@@ -184,7 +185,7 @@
 					</li>
 				</div>
 				<div>
-					<li class="recipe-category-2">
+					<li class="main-recipe-category-2">
 						<h3>
 							<span>재료별 요리</span>
 						</h3>
@@ -217,7 +218,7 @@
 					</li>		
 				</div>
 				<div>
-					<li class="recipe-category-3">
+					<li class="main-recipe-category-3">
 						<h3>
 							<span>난이도별 요리</span>
 						</h3>
@@ -236,31 +237,36 @@
 				</ul>
 				</div>
 			</div>
-			<div class="category-btn-area">
+			<div class="main-main-recipe-category-btn-area">
 				<button type="submit" class="recipe-btn-search">검색하기</button>
-				<button type="button" class="recipe-category-close">닫기</button>
+				<button type="button" class="main-recipe-category-close">닫기</button>
 			</div>
 		</div>
 	</form>
   </div>
   
-     <!-- 따라다니는 우측 퀵 메뉴 -->
-  <div class="quickmenu"> 
-  	<ul>
-  		<li><img src="/resources/img/mainpage/delivery.jpg" style="width:80px;height:110px;"> <a style="margin-bottom: 85px;">새벽배송</a></li>
-  		<li><a href="#"><img src="/resources/img/mainpage/basket.png"> 최근 본 상품</a></li>
-  		<li><a href="#"><img src="/resources/img/mainpage/q_mark.png"> 질문있어요</a></li>
-  		<li><a href="#"><img src="/resources/img/mainpage/message.png"> 내 메세지</a></li>
-  	</ul>
-  </div>
+     <!-- 따라다니는 우측 퀵 메뉴 (로그인시에만) -->
+  <c:choose>
+  	<c:when test="${not empty sessionScope.m }">
+  		<div class="quickmenu"> 
+		  	<ul>
+		  		<li><img src="/resources/img/mainpage/delivery.jpg" style="width:80px;height:110px;"> <a style="margin-bottom: 85px;">새벽배송</a></li>
+		  		<li><a href="/recentProducts.do?memberId=${sessionScope.m.memberId }"><img src="/resources/img/mainpage/basket.png"> 최근 본 상품</a></li>
+		  		<li><a href="/profile.do?memberId=${sessionScope.m.memberId }"><img src="/resources/img/mainpage/q_mark.png"> 내 프로필</a></li>
+		  		<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname }"><img src="/resources/img/mainpage/message.png"> 내 메세지</a></li>
+		  	</ul>
+		 </div>
+  	</c:when>
+  </c:choose>
+  
   
   <script>
   	function scrollrecipe(){
   		if($("html").scrollTop()==0){
-  			 $('.recipe-category').css("top","120px");
-  			$('.recipe-category').hide();
+  			 $('.main-recipe-category').css("top","120px");
+  			$('.main-recipe-category').hide();
   		}else{
-  			$('.recipe-category').css("top","80px");
+  			$('.main-recipe-category').css("top","80px");
   		}
   	}
   	$(document).scroll(function(){
@@ -270,26 +276,48 @@
   		scrollrecipe();
   	})
   	  $('#show-category').on('click', function(){
-  		  $('.recipe-category').toggle();
+  		  $('.main-recipe-category').toggle();
   	  });
-  	$('.recipe-category-close').on('click', function(){
-  		$('.recipe-category').hide();
+  	$('.main-recipe-category-close').on('click', function(){
+  		$('.main-recipe-category').hide();
   	})
-	  $('.recipe-category').on('click', 'input:radio', function () {
+	  $('.main-recipe-category').on('click', 'input:radio', function () {
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
   	
-  	//현재 일자 체크 (대회 투표기간 확인)
+	//현재 일자 체크 (대회 투표기간 확인)
   	function chkDate(){
   		var today = new Date();
   		var date = today.getDate();
-  		if(date >= 1 && date <= 15){
+  		if(date >= 1 && date <= 31){
   			location.href="/contestList.do?reqPage=1&orderIndex=0";
   		}else {
   			alert("대회 투표기간이 아닙니다.");
   		}
   		
   	}
+	
+	//현재 일자 체크 (우승자발표 날짜 확인)
+  	function chkDate2(){
+  		var today = new Date();
+  		var date = today.getDate();
+  		if(date >= 1 && date <= 31){
+  			location.href="/contestResult.do";
+  		}else {
+  			alert("우승자 발표기간이 아닙니다.");
+  		}
+  		
+  	}
+	
+	//검색어 글자 길이 제한 (2글자 이상)
+	$(".main-search-icon").on("click", function(){
+		var keyword = $("#header-mainsearch").val();
+		if(keyword.length < 2){
+			alert("두 글자 이상 입력해주세요.");
+			return false;
+		}
+	})
+	
   	//방문자수 기록용 쿠키 스크립트
   	function setCookie(cname,cvalue,exdays){
   	    var d = new Date();

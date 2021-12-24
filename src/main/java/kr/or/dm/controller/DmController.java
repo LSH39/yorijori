@@ -58,52 +58,9 @@ public class DmController {
 		return "dm/dmView";
 	}
 	
-	//클래스 뷰에서 AJAX로 문의하기
-	@ResponseBody
-	@RequestMapping(value="/selectDmListAjax.do", produces = "application/json;charset=utf-8")
-	public String dmView2(int classNo, String dmSender) {
-		int dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
-		ArrayList<Dm> list2 = service.selectOneDmList(dmRoomNo);
-		return new Gson().toJson(list2);
-	}
+
 	
-	//클래스 뷰에서 AJAX로 문의 작성
-	@ResponseBody
-	@RequestMapping(value="/dmSendAjax.do")
-	public int dmSendAjax(int classNo, String dmReceiver, String dmSender, String dmContent) {
-		//정보 가져와서  클래스랑 내가 쓴거 있는지 우선 검색
-		int dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
-		
-		int result = service.insertDm(classNo, dmReceiver, dmSender, dmContent, dmRoomNo);
-		if(result > 0) {
-			return 1;
-		}else {
-			return 0;			
-		}
-	}
-	
-	//문의 목록에서 조회하는거
-	@RequestMapping(value="/dmView1.do")
-	public String dmView1(int dmRoomNo, HttpSession session , Model model) {
-		
-		Member member = (Member)session.getAttribute("m");
-		String dmSender = member.getMemberNickname(); //나
 
-		ArrayList<Dm> list = service.selectOneDm(dmRoomNo); 
-		
-		/*
-		Member member = (Member)session.getAttribute("m");
-		String dmSender = member.getMemberNickname();
-		ArrayList<Dm> list = service.selectOneDm(classNo, dmSender);
-
-
-		System.out.println("dmSender : "+dmSender);
-		String receiver = service.selectOneNickname(classNo, dmSender);
-		 */
-		model.addAttribute("list", list);
-
-		return "dm/dmView1";
-	}
 	
 	//문의 작성
 	@ResponseBody
@@ -136,5 +93,49 @@ public class DmController {
 		}else {
 			return 0;
 		}
+	}
+	
+	//클래스 뷰에서 AJAX로 문의 작성 12-23
+	@ResponseBody
+	@RequestMapping(value="/dmSendAjax.do")
+	public int dmSendAjax(int classNo, String dmReceiver, String dmSender, String dmContent, int dmRoomNo) {
+		//정보 가져와서  클래스랑 내가 쓴거 있는지 우선 검색
+		//int dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
+		System.out.println("컨트롤러 최초시도"+dmRoomNo);
+		if(dmRoomNo == -1) { //최초 시도
+			dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
+			System.out.println("서비스에서 가져온거"+dmRoomNo);
+		}
+		int result = service.insertDm(classNo, dmReceiver, dmSender, dmContent, dmRoomNo);
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;			
+		}
+	}
+	
+	//채팅방 번호 받아서 출력(12-23)
+	@ResponseBody
+	@RequestMapping(value="/selectDmRoomNoAjax.do", produces = "application/json;charset=utf-8")
+	public String selectDmRoomNoAjax(int dmRoomNo, String dmSender) {
+		ArrayList<Dm> list3 = service.selectOneDmAjax(dmRoomNo, dmSender); 
+		return new Gson().toJson(list3);
+	}
+	
+	//클래스 뷰에서 목록 거쳐서 AJAX로 문의하기 12-23
+	@ResponseBody
+	@RequestMapping(value="/selectDmListAjax.do", produces = "application/json;charset=utf-8")
+	public String selectDmListAjax(int dmRoomNo, String dmSender) {
+		ArrayList<Dm> list2 = service.selectOneDmList(dmRoomNo);
+		return new Gson().toJson(list2);
+	}
+	
+	//클래스 뷰에서 바로 문의 (12-23)
+	@ResponseBody
+	@RequestMapping(value="/selectDmAjax.do", produces = "application/json;charset=utf-8")
+	public String selectDmAjax(int classNo, int dmRoomNo, String dmSender) {
+		int dmRoomNo2 = service.selectOneDmRoomNo(classNo, dmSender);
+		ArrayList<Dm> list4 = service.selectOneDmAjaxList(classNo, dmRoomNo2);
+		return new Gson().toJson(list4);
 	}
 }

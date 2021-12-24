@@ -30,8 +30,9 @@
 					
 			</div>
 			<div class="recipeFrm">
-				<label for="recipeVideo">동영상 링크</label>
-				<input type="text" name="recipeVideo" placeholder="동영상이 있으면 온라인 링크만 걸어주세요(생략가능)">
+				<label for="recipeVideo">유튜브 링크</label>
+				https://www.youtube.com/watch?v=
+				<input type="text" name="recipeVideo" placeholder="(생략가능)">
 			</div>
 			<div class="recipeFrm">
 				<p>음식정보</p>

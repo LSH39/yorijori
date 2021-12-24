@@ -3,17 +3,23 @@
 <mapper namespace="recipe">
  	<select id="selectRecipeList" parameterType="rb" resultType="rb">
  		select 
+ 		rownum,
+        r. * from
+        (select 
  			recipe_no as recipeNo, 
  			recipe_title as recipeTitle, 
  			filepath,
  			read_count as readCount,
  			recipe_time as recipeTime, 
  			recipe_level as recipeLevel,
+ 			situation,
+ 			material,
 		(select member_nickname from Member m  where m.member_no = r.recipe_writer) as nickname 
 		from recipe_board r 	
-		<if test="situation == null and material == null and recipeLevel == null">
-		where recipe_delete=1</if>
-	<trim suffix="and recipe_delete=1" >
+		<if test="situation == 0 and material == 0  and recipeLevel == 0">
+		where recipe_delete=1 order by 1 desc)r where rownum between 1 and 6	
+		</if>
+	<trim suffix="and recipe_delete=1 order by 1 desc )r where rownum between 1 and 6 " >
 	<choose>
 		<when test="situation gt 0 and material gt 0 and recipeLevel gt 0 ">
 		 where situation=#{situation} and  material=#{material} and recipe_level=#{recipeLevel}
@@ -157,6 +163,99 @@
  			milkit_delete as milkitDelte
  		from product where recipe_no=#{recipeNo} and milkit_delete=1
  	</select>
+ 	<select id="selectMoreRecipe" parameterType="rb" resultType="rb">
+ 		select * from
+        (select 
+        	rownum rnum,
+ 			recipe_no as recipeNo, 
+ 			recipe_title as recipeTitle, 
+ 			filepath,
+ 			read_count as readCount,
+ 			recipe_time as recipeTime, 
+ 			recipe_level as recipeLevel,
+ 			situation,
+ 			material,
+		(select member_nickname from Member m  where m.member_no = r.recipe_writer) as nickname 
+		from (select * from recipe_board	
+		<if test="situation == 0 and material == 0  and recipeLevel == 0">
+		where recipe_delete=1 order by 1 desc)r)r where rnum between #{start} and #{end}	
+		</if>
+	<trim suffix="and recipe_delete=1 order by 1 desc)r)r where rnum between #{start} and #{end}" >
+	<choose>
+		<when test="situation gt 0 and material gt 0 and recipeLevel gt 0 ">
+		 where situation=#{situation} and  material=#{material} and recipe_level=#{recipeLevel}
+		</when>
+		<when test="situation gt 0">
+			where situation=#{situation}
+			<if test="material gt 0">
+			and material=#{material}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>
+		<when test="material gt 0">
+			where material=#{material}
+			<if test="situation gt 0">
+			and situation=#{situation}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>
+		<when test="recipeLevel gt 0">
+			where recipe_level=#{recipeLevel}
+			<if test="material gt 0">
+			and material=#{material}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>		
+	</choose>
+</trim>	
+ 	</select>
+ 	<select id="selectTotalCount" parameterType="rb" resultType="_int">
+ 		select count(*) from recipe_board
+ 		<if test="situation == 0 and material == 0  and recipeLevel == 0">
+		where recipe_delete=1
+		</if>
+	<trim suffix="and recipe_delete=1 " >
+	<choose>
+		<when test="situation gt 0 and material gt 0 and recipeLevel gt 0 ">
+		 where situation=#{situation} and  material=#{material} and recipe_level=#{recipeLevel}
+		</when>
+		<when test="situation gt 0">
+			where situation=#{situation}
+			<if test="material gt 0">
+			and material=#{material}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>
+		<when test="material gt 0">
+			where material=#{material}
+			<if test="situation gt 0">
+			and situation=#{situation}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>
+		<when test="recipeLevel gt 0">
+			where recipe_level=#{recipeLevel}
+			<if test="material gt 0">
+			and material=#{material}
+			</if>
+			<if test="recipeLevel gt 0">
+			and recipe_level=#{recipeLevel}
+			</if>
+		</when>		
+	</choose>
+</trim>
+ 	</select>
+ 	
  	<!-- 성승민 프로필 연동 레시피 게시물 수 -->
  	<select id="selectOneReceipeCnt" parameterType="_int" resultType="_int">
  		select count(*) 

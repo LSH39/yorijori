@@ -17,6 +17,12 @@
 		<div id="title">
 			<div id="titleImg">
 				<img src="/resources/upload/product/${p.filepath }">
+				<c:choose>
+					<c:when test="${not empty sessionScope.m }">
+						<input type="hidden" name="memberId" class="memberId" value="${sessionScope.m.memberId }">
+					</c:when>
+				</c:choose>
+				<input type="hidden" name="productNo" class="productNo" value="${p.productNo }">
 				<c:if test="${sessionScope.m.memberNo == p.milkitWriter }">
 				 <p id="update"><a href="/updateMilkit.do?productNo=${p.productNo }">수정</a> <a href="/deleteMilkit.do?productNo=${p.productNo} "> 삭제</a></p>
 				 </c:if>
@@ -198,6 +204,22 @@
 				$(".pContent").css("display", "none");
 				$(".review").css("display", "none");
 				$(".recipe").css("display", "block");
+			});
+			
+			//최근 본 상품 기록용
+			$(function(){
+				var memberId = $(".memberId").val();
+				var productNo = $(".productNo").val();
+				if(memberId != null){
+					$.ajax({
+						url: "/insertRecentProduct.do",
+						method: "get",
+						data: {memberId:memberId, productNo:productNo},
+						success: function(data){
+							console.log(data);
+						}
+					});
+				}
 			});
 			
 	

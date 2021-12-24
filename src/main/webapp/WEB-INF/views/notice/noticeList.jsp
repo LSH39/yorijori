@@ -24,14 +24,18 @@
 					<ul class="nav flex-column">
 						<li class="nav-item active"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
 						<li class="nav-item"><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판 <span> &gt;</span></a></li>
-						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
+						<li class="nav-item"><a href="/randomMenuFrm.do">메뉴추천 <span> &gt;</span></a></li>
 					</ul>
 				</div>
 	      	</div>
 	      	<div class="col-10 main-content">
 	      		<div class="main-content-title">
 	      			<h2>공지게시판 <span> 요리조리의 새로운 소식과 유용한 정보를 한 곳에서 확인하세요.</span></h2>
-	      			<a href="noticeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
+	      			<c:choose>
+		      			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel eq 3 }">
+		      				<a href="noticeWriteFrm.do"><button class="btn-main">글 작성하기</button></a>
+		      			</c:when>
+	      			</c:choose>
 	      		</div>
 	      		<div class="board-table">
 	      			<div class="board-count">

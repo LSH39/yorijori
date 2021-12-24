@@ -38,17 +38,18 @@
 				<h5>강의 내용</h5>
 				<textarea name="classContent" class="form-control" id="classContent" cols="30" rows="10"></textarea>
 				<br>
-				글자수 : <span id="currByte">0</span>/3000bytes)
+				글자수 : <span id="currByte">0</span>/3000bytes
 				<h5>강의 장소(입력 안할시 비대면)</h5>
-				<input type="text" name="classLocation1" id="classLocation1" maxlength="100">
+				<input type="text" name="classLocation1" id="classLocation1" readonly>
 				<button type="button" id="addrSearch" class="btn btn-primary">주소검색</button>
 				<br> <input type="text" name="classLocation2" id="classLocation2" maxlength="100"><br>
 				<h5>강의 가격</h5>
 				<input type="text" name="classPrice" id="classPrice" maxlength="10">원<br>
 				<span class="result">　</span>
-				<h5>강의 정원</h5>
+				<h5>강의 정원(최소 10명 이상)</h5>
 				<input type="text" name="classNop" id="classNop" maxlength="10">명<br>
-				<h5>강의시간</h5>
+				<span class="result">　</span>
+				<h5>강의 시간</h5>
 				<input type="time" name="classStartTime" id="time1">부터<input type="time" name="classEndTime" id="time2">
 				<button type="button" id="btntest" class="btn-primary btn-sm">시간테스트</button>
 				<br>
@@ -57,15 +58,83 @@
 				<input type="date" name="classStart" id="classStart"><br><br>
 				<h5>클래스 종료일</h5>
 				<input type="date" name="classEnd" id="classEnd"><br><br>
-				<input
-					type="submit" value="등록" class="btn btn-danger">
-				<button type="button" id="chkHidden" class="btn btn-primary">히든값 확인 버튼</button>
+				<input type="submit" value="등록" class="btn btn-danger" id="classWrite">
+				<input type="hidden" id="arrVal">
 			</form>
 		</div>
 	</div>
 	<script>
 		$(function(){
+
+			//플래그 용도
+			var classTitleChk = false;
+			var classContentChk = false;
+			var classPriceChk = false;
+			var classNopChk = false;
+			var time1Chk = false;
+			var time2Chk = false;
+			var classStartChk = false;
+			var classEndChk = false;
+ 
+			//작성 필수 조건 확인
+			function chkWrite(){
+				var classTitleVal = $("#classTitle").val();
+				var classContentVal = $("#classContent").val();
+				var classPriceVal = $("#classPrice").val();
+				var classNopVal = $("#classNop").val();
+				var time1Val = $("#time1").val();
+				var time2Val = $("#time2").val();
+				var classStartVal = $("#classStart").val();
+				var classEndVal = $("#classEnd").val();
+				
+				if(classTitleVal == "" || classTitleChk == false){
+					alert("제목을 올바르게 입력해주세요.");
+					return false;
+				}else if(classContentVal == "" || classContentChk == false){
+					alert("내용을 글자수 제한에 알맞게 입력해주세요.");
+					return false;					
+				}else if(classPriceVal == "" || classPriceChk == false){
+					alert("가격을 올바르게 입력해주세요.");
+					return false;					
+				}else if(classNopVal == "" || classNopChk == false){
+					alert("인원수를 올바르게 입력해주세요.");
+					return false;					
+				}else if(time1Val == "" || time1Chk == false){
+					alert("시작 시간을 올바르게 입력해주세요.");
+					return false;					
+				}else if(time2Val == "" || time2Chk == false){
+					alert("마치는 시간을 올바르게 입력해주세요.");
+					return false;					
+				}else if(classStartVal == "" || classStartChk == false){
+					alert("시작 날짜를 올바르게 입력해주세요.");
+					return false;					
+				}else if(classEndVal == "" || classEndChk == false){
+					alert("종강 날짜를 올바르게 입력해주세요.");
+					return false;					
+				}else{
+					alert("테스트용 성공 뜨면 지움")
+					return true;
+				}
+			}
+			
+			//클래스 작성 버튼
+			$("#classWrite").click(function(){
+				return chkWrite();
+			});
+			
+			//클래스 제목
+			$("#classTitle").keyup(function(){
+				let classTitle = $(this).val();
+				if(classTitle == ""){
+					classTitleChk = false;
+				}else{
+					classTitleChk = true;					
+				}
+			});
+			
+			//다음 api 주소 검색
             $("#addrSearch").click(function(){
+            	$("#classLocation1").val("");
                 new daum.Postcode({
                 oncomplete: function(data) {
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
@@ -79,65 +148,79 @@
                 }
                 }).open();
             });
-
-            $("#btntest").click(function(){
-                let testRes1 = $("#time1").val();
-                let testRes2 = $("#time2").val();
-                console.log(typeof(testRes1));
-                if(testRes1 =='' || testRes2 == ''){
-                    alert("공백");
-                    return;
-                }
-                $("#timeHidden").val(testRes1+"부터"+testRes2);
-                console.log(testRes1+"부터"+testRes2);
+            
+			//상세주소 입력
+            $("#classLocation2").keyup(function(){
+            	let emptyChk = $("#classLocation1").val();
+            	if(emptyChk == ""){
+            		alert("주소 검색 부터 해주세요!");
+            		$(this).val("");
+            	}
             });
             
-
-
+			//강의 시작 시간
             $("#time1").change(function(){
                 let time1 = $("#time1").val();
                 let time2 = $("#time2").val();
                 if(time1 >= time2){
-                    $(".result").eq(1).html("시간을 올바르게 입력해주세요.");
-                    $(".result").eq(1).css("color", "red");
+                    $(".result").eq(2).html("시간을 올바르게 입력해주세요.");
+                    $(".result").eq(2).css("color", "red");
+                    time1Chk = false;
                 }else{
-                    $(".result").eq(1).html("올바르게 입력됐습니다.");
-                    $(".result").eq(1).css("color", "blue");                	
+                    $(".result").eq(2).html("올바르게 입력됐습니다.");
+                    $(".result").eq(2).css("color", "blue");                	
+                    time1Chk = true;
                 }
             });
 
+			//강의 끝나는 시간
             $("#time2").change(function(){
                 let time1 = $("#time1").val();
                 let time2 = $("#time2").val();
                 if(time1 >= time2){
-                    $(".result").eq(1).html("시간을 올바르게 입력해주세요.");
-                    $(".result").eq(1).css("color", "red");
+                    $(".result").eq(2).html("시간을 올바르게 입력해주세요.");
+                    $(".result").eq(2).css("color", "red");
+                    time2Chk = false;
                 }else{
-                    $(".result").eq(1).html("올바르게 입력됐습니다.");
-                    $(".result").eq(1).css("color", "blue");                    	
+                    $(".result").eq(2).html("올바르게 입력됐습니다.");
+                    $(".result").eq(2).css("color", "blue");
+                    time2Chk = true;
                 }
             });
-
-            $("#chkHidden").click(function(){
-                let testChk = $("#timeHidden").val();
-                console.log("체크 : "+testChk);
-            });
             
+			//강의 가격
             $("#classPrice").keyup(function(){
             	let price = $(this).val();
             	
             	let pricesub = price.substring(0,1);
             	console.log(pricesub);
             	
-            	if(price.substring(0, 1) != 0 && price % 10 == 0){
+            	if(price.substring(0, 1) != 0 && price % 10 == 0 && price > 0){
             		$(".result").eq(0).html("올바르게 입력됐습니다.");
-            		$(".result").eq(0).css("color", "blue");            		
+            		$(".result").eq(0).css("color", "blue");
+            		classPriceChk = true;
             	}else{            		
             		$(".result").eq(0).html("가격을 올바르게 입력해주세요");
             		$(".result").eq(0).css("color", "red");
+            		classPriceChk = false;
             	}
             });
             
+			//강의 인원수
+            $("#classNop").keyup(function(){
+            	let nop = $(this).val();
+            	if(nop >= 10){
+            		$(".result").eq(1).html("올바르게 입력됐습니다.");
+            		$(".result").eq(1).css("color", "blue");
+            		classNopChk = true;
+            	}else{
+            		$(".result").eq(1).html("인원수를 올바르게 입력해주세요.");
+            		$(".result").eq(1).css("color", "red");
+            		classNopChk = false;
+            	}
+            });
+            
+			//강의 시작 날짜
             $("#classStart").change(function(){
             	let classStart = $(this).val();
             	let classEnd = $("#classEnd").val();
@@ -148,16 +231,20 @@
             	if(classStart <= today){
             		console.log("날짜 오류");
             		$(this).val("");
+            		classStartChk = false;
             	}else if(classStart == "" || classEnd == ""){            		
             		console.log("둘 중 하나가 공백");
+            		classStartChk = false;
             	}else if(classStart >= classEnd){
             		console.log("시작일이 더 큼");
+            		classStartChk = false;
             	}else{
             		console.log("올바르게 입력됨");
+            		classStartChk = true;
             	} 
-            	
             });
             
+			//강의 종강 날짜
             $("#classEnd").change(function(){
             	let classEnd = $(this).val();
             	let classStart = $("#classStart").val();
@@ -168,27 +255,28 @@
             	if(classEnd <= today){
             		console.log("날짜 오류");
             		$(this).val("");
+            		classEndChk = false;
             	}else if(classStart == "" || classEnd == ""){            		
             		console.log("둘 중 하나가 공백");
+            		classEndChk = false;
             	}else if(classStart >= classEnd){
             		console.log("시작일이 더 큼");
+            		classEndChk = false;
             	}else{
             		console.log("올바르게 입력됨");
+            		classEndChk = true;
             	}
             });
 			
-			
+			//강의 내용
             $("#classContent").summernote({
 				height : 400,
 				lang : "ko-KR",
 				callbacks : {
-					onImageUpload : function(files){
-						//uploadImage(files[0],this);
-						
+					onImageUpload : function(files){						
 						for(let i = files.length-1 ; i>=0 ; i--){
 							uploadImage(files[i], this);
 						}
-						
 					},
 					onChange : function(e){
 						setTimeout(function(){
@@ -197,8 +285,8 @@
 			            	let classContentLen = classContent.length;
             				let currByte = 0;
             	
-			            	console.log(classContent);
-            				console.log(classContentLen);
+			            	//console.log(classContent);
+            				//console.log(classContentLen);
             				
                             for(let i=0; i<classContentLen; i++){
                                 let charEach = classContent.charAt(i);
@@ -215,16 +303,20 @@
                             if(currByte > maxByte){
                             	$("#currByte").html(currByte);
                             	$("#currByte").css("color", "red");
+                            	classContentChk = false;
                             }else{
                             	$("#currByte").html(currByte);
-                            	$("#currByte").css("color", "blue");                            	
-                            }
+                            	$("#currByte").css("color", "blue");
+                            	classContentChk = true;
+                            }                            
 							
 						}, 200);
 					}
 				}
             });
             
+			var arr = new Array();
+			
             function uploadImage(file, el) {
     			data = new FormData();
     			data.append("file", file);
@@ -237,8 +329,16 @@
     				processData : false,
     				success : function(data) {
     					$(el).summernote('editor.insertImage', data.url);
+    					
+    					console.log(data.filename+" "+data.filepath);
+    					arr.push({filename:data.filename, filepath:data.filepath});
+    					console.log(arr);
+    					
+    					let a = $("#arrVal").val(arr);
+    					console.log(a);
     				}
     			});
+    				
     		}
             
 		});	

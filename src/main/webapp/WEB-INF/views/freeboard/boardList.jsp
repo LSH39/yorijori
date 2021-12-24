@@ -24,7 +24,7 @@
 					<ul class="nav flex-column">
 						<li class="nav-item"><a href="/noticeList.do?reqPage=1">공지사항 <span> &gt;</span></a></li>
 						<li class="nav-item active"><a href="/freeboardList.do?reqPage=1&orderIndex=0">자유게시판 <span> &gt;</span></a></li>
-						<li class="nav-item"><a href="#">추천메뉴 <span> &gt;</span></a></li>
+						<li class="nav-item"><a href="/randomMenuFrm.do">메뉴추천 <span> &gt;</span></a></li>
 					</ul>
 				</div>
 	      	</div>
@@ -70,7 +70,14 @@
 										</a>
 									</td>
 									<td>${f.freeLikeCount }</td>
-									<td>${f.memberNickname }</td>
+									<c:choose>
+										<c:when test="${f.memberNickname eq null }">
+											<td>탈퇴회원</td>
+										</c:when>
+										<c:otherwise>
+											<td>${f.memberNickname }</td>
+										</c:otherwise>
+									</c:choose>
 									<td>${f.regDate }</td>
 									<td>${f.freeReadcount }</td>
 								</tr>

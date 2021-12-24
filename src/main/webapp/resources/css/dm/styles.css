@@ -32,7 +32,8 @@ body {
   font-family: "TmoneyRoundWindRegular", sans-serif;
 }
 
-.main-screen {
+.main-screen,
+.main-screen__list {
   padding: 0px var(--horizontal-space);
 }
 

@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.jsoup.select.Evaluator.IsEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.service.RecipeService;
+import kr.or.recipe.model.vo.Category;
 import kr.or.recipe.model.vo.FileVo;
 import kr.or.recipe.model.vo.Material;
 import kr.or.recipe.model.vo.RecipeBoard;
@@ -38,6 +40,13 @@ public class RecipeController {
 	@RequestMapping(value = "/recipeBoard.do")
 	public String recipeBoard(RecipeBoard rb, Model model) {
 		ArrayList<RecipeBoard> list = service.selectRecipeList(rb);
+		int totalCount = service.recipeTotalCount(rb);
+		Category c = new Category();
+		c.setLevelNum(rb.getRecipeLevel());
+		c.setMaterialNum(rb.getMaterial());
+		c.setSituationNum(rb.getSituation());
+		model.addAttribute("c",c );
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("list", list);
 		return "recipe/recipeBoard";
 	}
@@ -79,10 +88,10 @@ public class RecipeController {
 		}
 		if (result > 0) {
 			model.addAttribute("msg", "등록성공");
-			model.addAttribute("loc", "/recipeBoard.jsp");
+			model.addAttribute("loc", "/");
 		} else {
 			model.addAttribute("msg", "등록실패");
-			model.addAttribute("loc", "/recipeBoard.jsp");
+			model.addAttribute("loc", "/");
 		}
 		return "common/msg";
 	}
@@ -242,5 +251,12 @@ public class RecipeController {
 		}
 		return "common/msg";
 
+	}
+	@ResponseBody
+	@RequestMapping(value = "/moreRecipe.do" ,produces = "application/json;charset=utf-8")
+	public String moreRecipe(RecipeBoard rb,int start) {
+		ArrayList<RecipeBoard>list = service.moreRecipe(start,rb);
+		return new Gson().toJson(list);
+		
 	}
 }

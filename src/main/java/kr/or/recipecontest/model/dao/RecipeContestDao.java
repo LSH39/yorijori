@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.recipe.model.vo.RecipeBoard;
+import kr.or.recipecontest.model.vo.ContestViewData;
 import kr.or.recipecontest.model.vo.RecipeContest;
 
 @Repository
@@ -51,6 +53,31 @@ public class RecipeContestDao {
 		map.put("searchword", searchword);
 		int totalCount = sqlSession.selectOne("recipecontest.searchCount", map);
 		return totalCount;
+	}
+
+	public ArrayList<ContestViewData> selectRecipeList(HashMap<String,Object> map) {
+		List<ContestViewData> list = sqlSession.selectList("recipecontest.selectRecipeList", map);
+		return (ArrayList<ContestViewData>) list;
+	}
+
+	public int deleteContestRecipe(int enteredNo) {
+		int result = sqlSession.delete("recipecontest.deleteContestRecipe", enteredNo);
+		return result;
+	}
+
+	public int insertContestRecipe(HashMap<String, Object> map) {
+		int result = sqlSession.insert("recipecontest.insertContestRecipe", map);
+		return result;
+	}
+
+	public ArrayList<RecipeContest> selectContestRecipeList() {
+		List<RecipeContest> list = sqlSession.selectList("recipecontest.selectContestRecipeList");
+		return (ArrayList<RecipeContest>) list;
+	}
+
+	public int insertContestRecipe(int recipeNo) {
+		int result = sqlSession.insert("recipecontest.insertContest", recipeNo);
+		return result;
 	}
 
 }
