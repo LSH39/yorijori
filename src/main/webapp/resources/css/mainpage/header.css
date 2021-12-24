@@ -170,6 +170,17 @@ a:hover{
 .main-product-price{
 	color: #A51200;
 }
+#main-newproducts .swiper-wrapper{
+	overflow:visible;
+	height: 280px;
+}
+#main-newproducts .clients-slider{
+	overflow:visible;
+	height: 280px;
+}
+#main-newproducts{
+	height: 600px;
+}
 
 /*--------------------------------------------------------------
 # 클래스 섹션
