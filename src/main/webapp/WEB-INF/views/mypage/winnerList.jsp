@@ -139,7 +139,7 @@
 
 }
 .winnerName{
-height:50px;
+height:60px;
 width:240px;
 overflow:hidden;
 }
