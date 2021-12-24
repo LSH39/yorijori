@@ -104,3 +104,23 @@
 .container input[type="checkbox"]:checked+span{
     background-image: url(/resources/img/login/checkbox_p.png);
 }
+
+.pw_div{
+	position: relative;
+}
+#pw_hidden,#pw_hidden2{
+    display: none;
+}
+#pw_hidden+span,#pw_hidden2+span{
+    position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 25px;
+	right: 10px;
+    background: url(/resources/img/login/pw_hidden.png);
+    background-size: cover;
+    cursor: pointer;
+}
+#pw_hidden:checked+span,#pw_hidden2:checked+span{
+    background-image: url(/resources/img/login/pw_show.png);
+}
