@@ -77,7 +77,7 @@ th,td{
 #delivery tr:nth-child(4)>th{
     vertical-align: top;
 }
-.light_btn{
+.light_btn, .toss_light_btn{
     width: 150px;
     height: 40px;
     border-width: 2px;
@@ -232,7 +232,16 @@ input[name=juso]:checked + label, input[name=payMethod]:checked + label{
     color: #ffffff;
     background-color: #8E44AD;
 }
-[name="orderPayOption"]:checked+label{
+#toss_light_btn_id:hover{
+    border: 2px solid #3182f6;
+    color: #f9fafb;
+    background-color: #3182f6;
+}
+[name="orderPayOption"]:nth-child(n+1):checked+label{
     color: #ffffff;
     background-color: #8E44AD;
+}
+[name="orderPayOption"]:nth-child(n+2):checked+label{
+    color: #f9fafb;
+    background-color: #3182f6;
 }

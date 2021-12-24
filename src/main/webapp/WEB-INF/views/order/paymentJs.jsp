@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <script>
 var orderPrice; var couponUse; var pointUse; var totalPrice;
+var f;
 $(function(){
     $("#memberAddr").click();
     $("#couponPrice").text("0");
@@ -111,29 +112,43 @@ $("#submitBtn").click(function(){
 	$("[name='orderSale']").val(Number(couponUse)+pointUse);
 	$("[name='orderPayment']").val(totalPrice);
 	
-	// impUid
+	var orderOption = $("[name='orderPayOption']:checked").val();  // radio 체크된 값 : checked로 가져오기
+	// impUid (결제id)
 	var postcode = $("[name='orderPostcode']").val();
 	var d = new Date();
 	var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 	var impUid = postcode+"_"+date;
-	$("[name='impUid']").val(impUid);
-	
+	$("[name='impUid']").val(impUid)
 	// 결제
-	IMP.init("imp73163939");  // 결제 API 사용을 위해 가맹점 식별코드 입력
-	IMP.request_pay({
-		merchant_uid : impUid,
-		name : "YORIJORI 결제",
-		amount : totalPrice,
-		buyer_email : "${m.memberEmail }",
-		buyer_name : "${m.memberName }",
-		buyer_phone : "${m.memberPhone }",
-	}, function(rsp){
-			if(rsp.success){
-				$("#order").submit();
-			}else{
-				alert("결제실패");
-			}
-	});
+	if(orderOption == 1){  // import;
+		IMP.init("imp73163939");  // 결제 API 사용을 위해 가맹점 식별코드 입력
+		IMP.request_pay({
+			merchant_uid : impUid,
+			name : "YORIJORI 결제",
+			amount : totalPrice,
+			buyer_email : "${m.memberEmail }",
+			buyer_name : "${m.memberName }",
+			buyer_phone : "${m.memberPhone }",
+		}, function(rsp){
+				if(rsp.success){
+					$("#order").submit();
+				}else{
+					alert("결제실패");
+				}
+		});		
+	}else if(orderOption == 2){  // toss
+		var form = $("#order").serialize();
+		var clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
+		var tossPayments = TossPayments(clientKey);
+		tossPayments.requestPayment('카드', {
+			  amount: totalPrice,
+			  orderId: impUid,
+			  orderName: 'YORIJORI 결제',
+			  customerName: "${m.memberName}",
+			  successUrl: "http://192.168.219.102/order.do?"+form,
+			  failUrl: "http://192.168.219.102/tossFail.do"
+		});
+	}
 	
 });
 

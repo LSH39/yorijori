@@ -19,6 +19,11 @@ import kr.or.order.model.vo.Order;
 public class OrderController {
 	@Autowired
 	private OrderService service;
+	// submitToss
+	private List<Integer> cartNoListToss;
+	private Order orderToss;
+	private String couponListToss;
+	private String pointToss;
 	
 	@RequestMapping(value="/paymentFrm.do")
 	public String orderCart(@RequestParam(value="checkNo") List<Integer> checkNo, int memberNo, Model model) {
@@ -43,5 +48,12 @@ public class OrderController {
 			model.addAttribute("loc","/cart.do");
 			return "common/msg";
 		}
+	}
+	
+	@RequestMapping(value="tossFail.do")
+	public String tossFail(Model model) {
+		model.addAttribute("msg","결제 실패");
+		model.addAttribute("loc", "/cart.do");
+		return "common/msg";
 	}
 }

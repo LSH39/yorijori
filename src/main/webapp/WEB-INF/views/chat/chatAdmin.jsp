@@ -91,7 +91,7 @@
 		
 	}
 	
-	 function reStartChat(){
+	function reStartChat(){
     	webSocketType = "reStart";
 		var data = {type:"reStart",memberNo:sessionMemberNo};
 	    ws.send(JSON.stringify(data));

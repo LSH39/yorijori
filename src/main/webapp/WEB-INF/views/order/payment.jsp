@@ -11,6 +11,7 @@
 <link href="/resources/css/order/Payment.css" rel="stylesheet" type="text/css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://js.tosspayments.com/v1"></script>
 </head>
 <body>
 	<%@include file = "/WEB-INF/views/common/header.jsp" %>
@@ -114,7 +115,7 @@
                                 <th>결제방법</th>
                                 <td>
                                     <input type="radio" name="orderPayOption" value="1" id="card1" checked><label class="light_btn radioLabel" for="card1">신용카드</label>
-                                    <input type="radio" name="orderPayOption" value="2" id="card2"><label class="light_btn radioLabel" for="card2">신용카드</label>
+                                    <input type="radio" name="orderPayOption" value="2" id="card2"><label class="toss_light_btn radioLabel" id="toss_light_btn_id" for="card2">TOSS</label>
                                 </td>
                             </tr>
                         </table>
