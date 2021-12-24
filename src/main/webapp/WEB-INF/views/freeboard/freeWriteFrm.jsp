@@ -32,7 +32,7 @@
 	      			<div class="form-group row">
 	      				<label for="inputTitle" class="col-sm-2 col-form-label">제목</label>
 	      				<div class="col-sm-4">
-	      					<input type="text" class="form-control" id="inputTitle" name="freeTitle" placeholder="제목">
+	      					<input type="text" class="form-control" id="inputTitle" name="freeTitle" placeholder="제목" required>
 	      				</div>
 	      				<label for="fileUpload" class="col-sm-2 col-form-label">첨부파일</label>
 	      				<div class="col-sm-4">
@@ -49,7 +49,7 @@
 	      			<div class="form-group row">
 	      				<label for="content" class="col-sm-2 col-form-label">내용</label>
 	      				<div class="col-sm-10">
-	      				<textarea class="form-control" name="freeContent" id="content" rows="20"></textarea>
+	      				<textarea class="form-control" name="freeContent" id="content" rows="20" required></textarea>
 						</div>	      			
 	      			</div>
 	      			<div class="form-group submitFrm">

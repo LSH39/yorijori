@@ -33,7 +33,7 @@
 	      				<label for="noticeTitle" class="col-sm-2 col-form-label">제목</label>
 	      				<input type="hidden" name="noticeNo" value="${n.noticeNo }" id="noticeNo">
 	      				<div class="col-sm-4">
-	      					<input type="text" class="form-control" id="noticeTitle" name="noticeTitle" value="${n.noticeTitle }">
+	      					<input type="text" class="form-control" id="noticeTitle" name="noticeTitle" value="${n.noticeTitle }" required>
 	      				</div>
 	      				<label for="filename" class="col-sm-2 col-form-label">첨부파일</label>
 	      				<div class="col-sm-4">
@@ -77,7 +77,7 @@
 	      			<div class="form-group row">
 	      				<label for="content" class="col-sm-2 col-form-label">내용</label>
 	      				<div class="col-sm-10">
-	      					<textarea class="form-control" name="noticeContent" id="content" rows="20">${n.noticeContent }</textarea>
+	      					<textarea class="form-control" name="noticeContent" id="content" rows="20" required>${n.noticeContent }</textarea>
 						</div>	      			
 	      			</div>
 	      		<div class="backTo">
