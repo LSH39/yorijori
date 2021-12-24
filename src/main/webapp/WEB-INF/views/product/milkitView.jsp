@@ -132,7 +132,6 @@
 			</c:forEach>		
 			</div>
 			<div class="recipe" style="display: none;">
-				<hr>
 				<c:forEach items="${p.rbList }" var="rb">
 					<div class="rbContent">
 						<c:if test="${sessionScope.m.memberNo != null}">
