@@ -134,3 +134,9 @@
 .none{
     display: none;
 }
+.milkit_a>*{
+	color : #444444;
+}
+.milkit_a:hover>*{
+	color : #8E44AD;
+}
