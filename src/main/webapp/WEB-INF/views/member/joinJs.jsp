@@ -7,6 +7,7 @@ var checkPhone=0; var checkBirth=0; var checkAddr=0; var checkFile=0; var checkB
 $(function(){
     $("#memberId").focus();
     $("#addressDetail").prop("readonly",true);
+    $("#pw_hidden").prop("checked", false);
 });
 
 function idCheck(obj) {
@@ -347,4 +348,17 @@ function textarea(num) {
     }
     $(".textarea").eq(num-1).css("display","block");
 }
+
+
+$("#pw_hidden+span").click(function(){
+	console.log($("#pw_hidden").is(":checked") == false);
+	if($("#pw_hidden").is(":checked") == false){
+		$(this).prev().prev().attr("type","text");
+		$("#pw_hidden").prop("checked", true);
+	}else{
+		$(this).prev().prev().attr("type","password");
+		$("#pw_hidden").prop("checked", false);
+	}
+});
+
 </script>

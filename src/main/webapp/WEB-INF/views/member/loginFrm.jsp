@@ -19,7 +19,10 @@
                 <h2 class="h2_txt">로그인</h2>
                 <form action="/login.do" method="POST">
                     <input type="text" name="memberId" class="input_txt" placeholder="아이디를 입력해주세요">
-                    <input type="password" name="memberPw" class="input_txt" placeholder="비밀번호를 입력해주세요">
+                    <div class="pw_div">
+	                    <input type="password" name="memberPw" class="input_txt" placeholder="비밀번호를 입력해주세요">
+	                    <input type="checkbox" id="pw_hidden"><span></span>
+                    </div>
                     <input type="submit" value="로그인" class="purple_btn">    
                 </form>
                 <p>또는</p>
@@ -47,9 +50,25 @@
     </div>
     
     <script>
+	    $(function(){
+	        $("[name='memberId']").focus();
+	        $("#pw_hidden").prop("checked", false);
+	    });
+	    
+	    $("#pw_hidden+span").click(function(){
+	    	console.log($("#pw_hidden").is(":checked") == false);
+	    	if($("#pw_hidden").is(":checked") == false){
+	    		$(this).prev().prev().attr("type","text");
+	    		$("#pw_hidden").prop("checked", true);
+	    	}else{
+	    		$(this).prev().prev().attr("type","password");
+	    		$("#pw_hidden").prop("checked", false);
+	    	}
+	    });
+    
+    	// kakao
 	 	// key
 		Kakao.init('e7a47deb2cb2e373f86a6aa99bf4fb5a');
-	    
 	    $(".kakao_btn").click(function(){
 			Kakao.Auth.login({
 			    success: function (response) {
