@@ -9,6 +9,10 @@
 <style>
 .allmember{
 text-align: center;}
+.container{
+margin-top: 30px;
+margin-bottom: 30px;
+}
 
 </style>
 </head>
@@ -155,7 +159,7 @@ text-align: center;}
     <div class="row">
     <div class="col-md-3">자기소개 : ${m.profileIntro }</div>
     <div class="col-md-3">포인트 : ${m.memberPoint }</div>
-    <div class="col-md-3">사유 : </div>
+    <div class="col-md-3">사유 : ${m.rc }</div>
     <div class="col-md-3"><button class="pointReset">포인트 초기화</button><input type="hidden" value="${m.memberNo }"></div>
     </div>
   	

@@ -27,4 +27,5 @@ public class Member2 {
 	private int boardCount;
 	private int recipeCount;
 	private int fcCount;
+	private String rc;
 }
