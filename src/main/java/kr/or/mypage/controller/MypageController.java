@@ -451,12 +451,12 @@ public class MypageController {
 			System.out.println("수량 : "+ms.getOrderOptionAmount());	
 			System.out.println("금액 : "+ms.getMilkitPrice());	
 			result =service.raisePoint(ms);
-			if (result == 0) {
-				model.addAttribute("msg", "포인트 적립 실패");
+			if (result > 0) {
+				model.addAttribute("msg", "포인트 적립 성공");
 			}
 			result =service.updatePoint(ms);
 			if (result == 0) {
-				model.addAttribute("msg", "포인트 적립 실패1");
+				model.addAttribute("msg", "포인트 적립 실패");
 			}
 		}	
 		System.out.println(ms.getMilkitWriter());
@@ -465,15 +465,29 @@ public class MypageController {
 		return "common/msg";
 	}
 
+	
 	@RequestMapping(value = "/cancelOrder.do")
-	public String deleteMember(int orderNo,Model model) {
-		
+	public String cancelOrder(int orderNo,int orderSale,int memberNo,Model model) {
+		System.out.println("orderNo"+orderNo);
+		System.out.println("orderNo"+orderSale);
+		System.out.println("orderNo"+memberNo);
 		int result = service.cancelOrder(orderNo);
 	    
 		if (result > 0) {
 			model.addAttribute("msg", "주문이 취소되었습니다.");
 		} else {
 			model.addAttribute("msg", "주문취소가 실패했습니다");
+		}
+		if(orderSale>0) {
+			result=service.returnPoint(orderSale,memberNo);
+			if (result > 0) {
+				model.addAttribute("msg", "포인트 반환이 완료되었습니다");
+			}
+			result =service.upPoint(orderSale,memberNo);
+			if (result == 0) {
+				model.addAttribute("msg", "포인트 반환이 실패했습니다");
+			}
+		
 		}
 		model.addAttribute("loc", "/");
 		return "common/msg";

@@ -137,7 +137,7 @@ margin-top:120px;
 							<div class="sellItem">
 
 								<img id="product"
-									src="/resources/upload/product/milkit_test.jpg"></span><br>
+									src="/resources/upload/product/${ms.filepath}"></span><br>
 							</div>
 
 							<div id="ii">
