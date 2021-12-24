@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.cart.model.vo.Cart;
 import kr.or.milkit.model.dao.MilkitDao;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
@@ -68,6 +69,9 @@ public class MilkitService {
 	}
 	public int updateMilkit(Product p) {
 		return dao.updateMilkit(p);
+	}
+	public int insertCart(Cart c) {
+		return dao.insertCart(c);
 	}
 	
 	

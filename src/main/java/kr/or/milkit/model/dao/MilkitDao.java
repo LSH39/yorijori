@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.cart.model.vo.Cart;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.review.model.vo.Review;
@@ -70,6 +71,10 @@ public class MilkitDao {
 
 	public int updateMilkit(Product p) {
 		return sqlSession.update("milkit.updateMilkit", p);
+	}
+
+	public int insertCart(Cart c) {
+		return sqlSession.insert("milkit.insertCart", c);
 	}
 
 

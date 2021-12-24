@@ -260,3 +260,38 @@
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
+#modal-wrap {
+	left: 40%;
+	z-index: 1;
+	width: 350px;
+	height: 150px;
+	position: fixed;
+	border-top: 5px solid #E0D8EF;
+	background-color:white;
+	text-align: center;
+	border-radius: 5px;
+	
+}
+#modal-wrap p {
+	margin-top:40px;
+	font-size: 18px;
+	font-weight: 900;
+}
+#modal-wrap button{
+	border:none;
+	margin: 10px;
+	width: 120px;
+	height: 35px;
+
+	background-color: #E0D8EF;
+	color: #8E44AD;
+}
+#modal-wrpa a{
+	color:#8E44AD;
+}
+#modal-wrap a:hover{
+	color: #C4BFE3;
+}
+#modal-wrap button:hover{
+	color:#C4BFE3;
+}

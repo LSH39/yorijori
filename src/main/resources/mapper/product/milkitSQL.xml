@@ -126,4 +126,7 @@
 	  	milkit_content=#{milkitContent},milkit_stock=#{milkitStock} 
   	where product_no=#{productNo}
   </update>
+  <insert id="insertCart" parameterType="cart">
+  	insert into cart values(cart_seq.nextval,#{memberNo},#{productNo},#{productAmount},#{productPrice})
+  </insert>
 </mapper>
