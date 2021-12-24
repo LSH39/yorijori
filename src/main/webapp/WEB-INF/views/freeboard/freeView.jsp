@@ -275,8 +275,7 @@
   	  			$(this).hide();
   	  			$(this).prev().hide();
   	  			$(this).parent().prev().show();
-  	  			fcContentBox.empty();
-  	  			fcContentBox.html(fcContent);
+  	  			fcContentBox.html("<textarea rows='3' cols='110' class='fcContent-o' readonly>"+fcContent+"</textarea>");
   	  		});
   		});
   		//댓글 수정 완료
