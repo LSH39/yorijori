@@ -156,14 +156,17 @@
 			</div>
 		</div>
 		<script>
-			var productAmount = 0;
-			var productPrice = 0;
+			var productAmount = 1;
+			var productPrice = ${p.milkitPrice};
 			$("#count>button").click(
 					function() {
 						productAmount = Number($("#amount").html());
-						if ($(this).html() == "+") {
+						if($(this).html() == "+" && productAmount>9){
+							alert("최대 구매수량은 10개입니다.")
+						}
+						else if ($(this).html() == "+"  ) {
 							$("#amount").html(++ productAmount);
-
+								
 						} else {
 							if (productAmount != 1) {
 								$("#amount").html(-- productAmount);
