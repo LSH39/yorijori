@@ -180,6 +180,8 @@
 		rb.recipe_writer as recipeWriter,
 		rb.filePath,
 		m.member_nickname as memberNickName,
+        m.profile_Path as profilePath,
+        m.member_Id as memberId,
 		( select count(*) from contest_vote where contest_no=cr.contest_no ) as
 		voteCount
 		from contest_recipe cr,recipe_board rb,member m
@@ -220,7 +222,6 @@
 
 	</select>
 	<select id="followList" resultType="fol" parameterType="_int">
-
 		select a.recipe_Writer as recipeWriter
 		, a.recipe_Title as recipeTitle
 		, a.filepath as filepath
@@ -229,10 +230,13 @@
 		, (select count(*)from recipe_like where recipe_no=a.recipe_no) as cnt
 		, (select member_nickName from member where member_no =
 		a.recipe_writer) as memberNickname,
+        (select member_Id from member where member_no =
+		a.recipe_writer) as memberId,
 		(select profile_path from member where member_no=recipe_writer)as profilePath
 		from recipe_board a
 		where a.recipe_writer in (SELECT follow_no from follow where
 		member_no=#{memberNo})
+	
 
 	</select>
 	<select id="followCount" resultType="_int" parameterType="_int">
@@ -480,7 +484,7 @@
 	</select>
 
 	<select id="myCouponList" resultType="mcou" parameterType="map">
-		select *
+			select *
 		from
 		(select rownum as rnum,
 		c.*
@@ -496,9 +500,11 @@
 		couponUse
 		from
 		coupon c,coupon_list cl where c.coupon_No =cl.coupon_no and
-		member_No=#{memberNo} order by coupon_end desc)c)
+		member_No=104  and cl.coupon_use=0 order by coupon_end desc)c)
 		where rnum between
 		#{start} and #{end}
+	
+
 	</select>
 
 	<select id="couponCount" resultType="_int" parameterType="map">
@@ -632,7 +638,13 @@
 
 	</select>
 	<select id="totalPoint" resultType="_int" parameterType="map">
-		select nvl(sum(point_amount),0) as sumPoint from point where member_no=#{memberNo} and point_level=1
+	
+	select 
+     (
+   (select nvl(sum(point_amount),0) as sumPoint from point  where member_no=#{memberNo} and point_level=1) - 
+    (select nvl(sum(point_amount),0) as sumPoint from point  where member_no=#{memberNo} and point_level=2))as totalPoint
+
+   from dual
 
 	</select>
 
@@ -814,5 +826,15 @@
 		delete from order_tbl where order_no=#{orderNo}
 
 	</delete>
+	
+		<insert id="returnPoint" parameterType="map">
+	insert into point values (POINT_SEQ.nextval,#{memberNo} ,1,#{orderSale} ,sysdate,'주문취소완료')
+	</insert>
+	
+		<update id="upPoint" parameterType="map">
+		update member set member_point= member_point+#{orderSale} where
+		member_No=#{memberNo}
+
+	</update>
 </mapper>
 

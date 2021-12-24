@@ -111,7 +111,7 @@ color:red;
 						<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지 안읽음</b></a></li>
+							<li><a href="/mydmList.do?dmReceiver=${sessionScope.m.memberNickname}">내 쪽지함<span>&gt;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="count">${sessionScope.rm.dmCount}쪽지</b></a></li>
 						</c:otherwise>
 						</c:choose>
 						

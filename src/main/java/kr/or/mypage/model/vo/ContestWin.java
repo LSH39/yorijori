@@ -11,6 +11,8 @@ private String contestMonth;
 private int contestResult;
 private int recipeWriter;
 private String memberNickName;
+private String memberId;
+private String profilePath;
 private String filePath;
 private String recipeTitle;
 }

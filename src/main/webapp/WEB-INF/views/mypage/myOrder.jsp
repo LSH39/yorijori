@@ -28,12 +28,12 @@
 .foodI{
 background-color:rgb(244, 244, 191);
 height:220px;
-width:300px;
+width:270px;
 float: left;
 }
 .orders{
     height:220px;
-    width:300px;
+    width:330px;
     float: left;
     background-color: rgb(244, 244, 191);
 
@@ -68,7 +68,7 @@ float: left;
     height:185px;
 }
 #milkit{
-    width:200px;
+    width:180px;
     height:150px;
     margin-left: 50px;
 
@@ -120,12 +120,14 @@ $(function() {
     $(".reClick").click(function() {
     	var index =$(".reClick").index(this);
     	var orderNo =$(this).next().val();
+    	var orderSale =$(this).next().next().val();
+    	var memberNo =$(this).next().next().next().val();
 	$.ajax({
 		url:"cancelOrder.do",
 		type:"post",
-		data : {orderNo:orderNo},
+		data : {orderNo:orderNo,memberNo:memberNo,orderSale:orderSale},
 		success: function(data){
-			alert("주문이 취소되었습니다")
+			alert("주문이 취소되었습니다.");
 			
 		},
 		error:function(){
@@ -178,9 +180,15 @@ $(function() {
 								<span class="pay"><b id="m">결제방식: </b>&emsp;${mo.card}</span><br>
 								<span class="it_info1"><b id="m">배송비: </b>&emsp;무료배송</span><br>
 								<span class="it_info1"><b id="m">결제금액:</b>&emsp;${mo.orderPayment }원</span>&emsp;<br>
-								 <span class="it_info1"><b id="m">결제번호: </b>&emsp;${mo.impUid }</span>&emsp;<br>
-								  <span class="it_info1"><b id="m">할인금액: </b>&emsp;${mo.orderSale }원 할인</span>&emsp;<br>
+								 <span class="it_info1"><b id="m">결제번호: </b>&emsp;${mo.impUid }</span>&emsp;<br>								
+								  <c:choose>
+				                  	<c:when test="${ not empty mo.orderRequest}">
 								<span class="it_info1"><b id="m">요청사항: </b>&emsp;${mo.orderRequest }</span>&emsp;<br>
+								</c:when>
+								<c:otherwise>
+								<span class="it_info1"><b id="m">요청사항: </b>&emsp;없음</span>&emsp;<br>
+								</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="rebutton">
 								<div class="detailOrder">
@@ -192,6 +200,8 @@ $(function() {
 								<div class="review">
 									<input type="button" value="주문취소" class="reClick">
 									<input type="hidden" value="${mo.orderNo }" >
+									<input type="hidden" value="${mo.orderSale }" >
+									<input type="hidden" value="${mo.memberNo}" >
 								</div>
 								</c:when>
 								<c:otherwise>

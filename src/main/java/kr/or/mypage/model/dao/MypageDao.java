@@ -317,6 +317,22 @@ public class MypageDao {
 	public int cancelOrderList(int orderNo) {
 		return sqlSession.delete("mypage.cancelOrderList",orderNo);
 	}
+	
+	//포인트 반환해주기
+	public int returnPoint(int orderSale, int memberNo) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("orderSale", orderSale);
+		map.put("memberNo", memberNo);
+		return sqlSession.insert("mypage.returnPoint",map);
+	}
+	
+	//포인트 재적립(마이페이지)
+	public int upPoint(int orderSale, int memberNo) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("orderSale", orderSale);
+		map.put("memberNo", memberNo);
+		return sqlSession.insert("mypage.upPoint",map);
+	}
 }
 	
 

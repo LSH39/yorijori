@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import kr.or.cart.model.vo.Cart;
 import kr.or.milkit.model.service.MilkitService;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.FileVo;
@@ -175,5 +176,10 @@ public class MilkitController {
 		}
 		return "common/msg";
 	}
-
+		@ResponseBody
+		@RequestMapping(value = "/insertCart.do")
+		public int insertCart(Cart c) {
+			int result = service.insertCart(c);
+			return result;
+		}
 }

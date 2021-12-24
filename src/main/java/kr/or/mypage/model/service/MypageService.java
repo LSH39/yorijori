@@ -723,6 +723,20 @@ public class MypageService {
 			}
 			return result;
 		}
+        //포인트 되돌려주기
+		public int returnPoint(int orderSale, int memberNo) {
+			int result =dao.returnPoint(orderSale,memberNo);
+			return result;
+		}
+         //포인트 재적립(마이페이지)
 
 	
+		public int upPoint(int orderSale, int memberNo) {
+			int result =dao.upPoint(orderSale,memberNo);
+			return result;
+		}
+	
+		
+		
+
 }

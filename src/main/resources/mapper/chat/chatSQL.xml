@@ -47,4 +47,8 @@
 	<select id="keywordList" resultType="string">
 		select chat_keyword as chatKeyword from chatbot
 	</select>
+	
+	<select id="adminMemberNo" parameterType="string" resultType="_int">
+		select member_no as memberNo from member where member_id=#{adminId}
+	</select>
 </mapper>

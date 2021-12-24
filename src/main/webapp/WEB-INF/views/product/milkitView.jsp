@@ -8,12 +8,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/css/product/milkitView.css">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript"	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="main">
+	
+		<div id="modal-wrap" style="display:none;">	
+					<p>장바구니에 담겼습니다.</p>
+				<div id="modal-btn">
+					<button id="reportBtn"><a href="/cart.do">장바구니 가기</a></button>
+					<button id="cancelBtn">계속 쇼핑하기</button>
+				</div>	
+	
+		</div>
+		
+	<input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
 		<div id="title">
 			<div id="titleImg">
 				<img src="/resources/upload/product/${p.filepath }">
@@ -51,9 +61,7 @@
 							value="${p.milkitPrice}" />원</span>
 				</p>
 				<c:if test="${p.milkitStock != 0 }">
-					<button id="cart">
-						<a href="#">장바구니 담기</a>
-					</button>
+					<button id="cart">장바구니 담기</button>
 				</c:if>
 				<c:if test="${p.milkitStock eq 0 }">
 					<button id="soldOut">
@@ -148,23 +156,27 @@
 			</div>
 		</div>
 		<script>
+			var productAmount = 1;
+			var productPrice = ${p.milkitPrice};
 			$("#count>button").click(
 					function() {
-						var currAmount = Number($("#amount").html());
-						if ($(this).html() == "+") {
-							$("#amount").html(++currAmount);
-
+						productAmount = Number($("#amount").html());
+						if($(this).html() == "+" && productAmount>9){
+							alert("최대 구매수량은 10개입니다.")
+						}
+						else if ($(this).html() == "+"  ) {
+							$("#amount").html(++ productAmount);
+								
 						} else {
-							if (currAmount != 1) {
-								$("#amount").html(--currAmount);
+							if (productAmount != 1) {
+								$("#amount").html(-- productAmount);
 							}
 						}
 
 						var price = Number($("#milkitPrice").val());
-						console.log(price);
-						var totalPrice = currAmount * price;
+						 productPrice =  productAmount * price;
 						$("#totalPrice").html(
-								totalPrice.toLocaleString('ko-KR') + "원");
+								productPrice.toLocaleString('ko-KR') + "원");
 					});
 			window.onload = function() {
 				$(".view").eq(0).css("font-size", "28px");
@@ -221,8 +233,35 @@
 					});
 				}
 			});
+			$("#cart").click(function() {
+				var memberNo = $("#loginCheck").val();
+				var productNo = ${p.productNo};
+				
+				if(memberNo != ""){
+					$.ajax({
+						url:"/insertCart.do",
+						data:{productNo:productNo,
+							memberNo:memberNo,
+							productPrice:productPrice,
+							productAmount:productAmount},
+						type:"post",
+						success:function(data){
+							if(data==1){
+								$("#modal-wrap").css("display","block");
+							}else{
+								alert("장바구니 담기 실패");
+							}
+						}
+					});
+				}else{
+					alert("로그인 후 이용해주세요");
+					$(location).attr("href","/loginFrm.do");
+				}
+			});
+			$("#cancelBtn").click(function() {
+				$("#modal-wrap").hide();
+			});
 			
-	
 		</script>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

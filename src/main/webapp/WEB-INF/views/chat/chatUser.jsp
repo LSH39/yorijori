@@ -20,6 +20,7 @@
    
 <script>
 	var sessionMemberNo = ${sessionScope.m.memberNo};
+	var adminNo;
 	var sendMsg;
 	var sendTextBefore;
 	var ws;
@@ -81,6 +82,10 @@
 	
 	function appendChat(textMsg){
 		var msg = JSON.parse(textMsg);
+		// adminNo
+		if(msg.adminNo != null){
+			adminNo = msg.adminNo;
+		}
 		// alarm
 		if($("#chatFrmUser").prop("on") == false){
 			$("#chatUserAlarm").text(msg.alarm);
@@ -90,8 +95,6 @@
 			if(msg.appendMsg != "noAnswer") {
 				$("#chatUserTbl").append(msg.appendMsg);
 	    		$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-			}else if(msg.appendMsg == "openChat"){
-				// openChat
 			}else{  // chatbot 호출
 				var sMsg = "<tr><td class='sendText'><div>"+sendMsg+"</div></td></tr>";
 				$("#chatUserTbl").append(sMsg);
@@ -116,7 +119,7 @@
 		if(chatbotCheck != 1){
 			if(sendMsg.trim() != ""){  // 문자열에서 공백 제거한 값 != ""
 			    var sender = sessionMemberNo;
-			    var receiver = 86;
+			    var receiver = adminNo;
 			    var data = {type:"chat", chatSend:sender, chatReceive:receiver, chatContent:sendMsg};
 			    ws.send(JSON.stringify(data));
 			}

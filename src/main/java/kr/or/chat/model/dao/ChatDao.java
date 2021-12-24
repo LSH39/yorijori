@@ -64,4 +64,8 @@ public class ChatDao {
 		return sqlSession.selectOne("member.searchMemberNickname", receiveNo);
 	}
 	
+	public int adminMemberNo(String adminId) {
+		return sqlSession.selectOne("chat.adminMemberNo", adminId);
+	}
+	
 }
