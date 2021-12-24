@@ -223,3 +223,14 @@ a:hover{
 	margin-right: 20px;
 	color: rgb(196, 191, 227);
 }
+#main-newclasses{
+	height: 600px;
+}
+#main-newclasses .swiper-wrapper{
+	overflow:visible;
+	height: 280px;
+}
+#main-newclasses .classes-slider{
+	overflow:visible;
+	height: 280px;
+}
