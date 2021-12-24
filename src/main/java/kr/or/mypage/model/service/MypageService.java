@@ -414,7 +414,7 @@ public class MypageService {
     /*찜 레시피 페이징*/
 	public MyLikeRecipePageData likeRecipeList(int reqPage,int memberNo) {
 		//필요한 정보 - 페이지당 게시물 개수
-		int numPerPage = 1;
+		int numPerPage = 6;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 

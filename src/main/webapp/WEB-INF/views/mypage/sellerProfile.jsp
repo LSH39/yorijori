@@ -241,7 +241,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원닉네임</td>
 								<td><input type="text" name="memberNickname" id="memberNickname"
-									onfocus="this.placeholder=''" value="${rm.memberNickname }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberNickname }" readonly></td>
 							</tr>
 							<tr>
 								<td>휴대폰번호</td>
