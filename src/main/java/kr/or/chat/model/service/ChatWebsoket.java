@@ -28,6 +28,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 		private int adminOpenUser;  // 관리자와 대화중인 memberNo 
 		private HashMap<Integer, Integer> alarmList;   // header 알림표시
 		private HashMap<Integer, Integer> adminAlarm;  // adminHome 알림표시
+		private int adminNo;
 
 		public ChatWebsoket() {
 			super();
@@ -41,6 +42,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 		@Override
 		public void afterConnectionEstablished(WebSocketSession session) throws Exception{
 			sessionList.add(session);
+			adminNo = dao.adminMemberNo("adminchat01");
 		}
 		
 		// 웹소켓 데이터 받으면
@@ -63,7 +65,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 					alarmList.put(memberNo, 0);
 				}
 				
-				if(memberNo != 86) {  // 일반/전문가
+				if(memberNo != adminNo) {  // 일반/전문가
 					int alarm = element.getAsJsonObject().get("alarm").getAsInt();
 					alarmList.put(memberNo, alarm);
 					ArrayList<Chat> chatList = service.chatUserList(memberNo);
@@ -118,13 +120,14 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 				JsonObject obj = new JsonObject();
 				obj.addProperty("alarm", alarmList.get(memberNo));
 				obj.addProperty("appendMsg", appendMsg);
+				obj.addProperty("adminNo", Integer.toString(adminNo));
 				session.sendMessage(new TextMessage(obj.toString()));
 				
 			// open chat
 			}else if(type.equals("openChat")) {
 				int memberNo = element.getAsJsonObject().get("memberNo").getAsInt();
 				int totalAlarm = 0;
-				if(memberNo == 86) {  // 관리자
+				if(memberNo == adminNo) {  // 관리자
 					Set<Integer> keySet = adminAlarm.keySet();
 					for (Integer key : keySet) {
 						totalAlarm += adminAlarm.get(key);
@@ -136,7 +139,6 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 				}
 				JsonObject obj = new JsonObject();
 				obj.addProperty("alarm", alarmList.get(memberNo));
-				obj.addProperty("appendMsg", "openChat");
 				session.sendMessage(new TextMessage(obj.toString()));
 				
 			// close chat - admin
@@ -147,7 +149,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 			}else if(type.equals("chat")) {
 				int chatSend = element.getAsJsonObject().get("chatSend").getAsInt();
 				int chatReceive = 0;
-				if(chatSend == 86) {  // 관리자가 보내면
+				if(chatSend == adminNo) {  // 관리자가 보내면
 					String selectUser = element.getAsJsonObject().get("selectUser").getAsString();
 					chatReceive = dao.selectMemberNo(selectUser);
 				}else {
@@ -190,7 +192,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 							}
 							sendDate = newChat.getStrDate();
 							JsonObject obj = new JsonObject();
-							if(chatSend == 86) {
+							if(chatSend == adminNo) {
 								int totalAlarm = 0;
                             	Set<Integer> keySet = adminAlarm.keySet();
                 				for (Integer key : keySet) {
@@ -207,7 +209,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 							if(newChat.getStrDate() == receiveDate){
 								receiverMsg += "<tr><td class='receiveText'><div>"+newChat.getChatContent()+"</div></td></tr>";
                     		}else{
-                    			if(chatReceive==86) {  // 받는사람 = 관리자
+                    			if(chatReceive==adminNo) {  // 받는사람 = 관리자
                     				if(chatSend == adminOpenUser) {
                     					receiverMsg += "<tr><th class='receive'><p class='userId'>"+newChat.getMemberNickname()+"</p><span>"+newChat.getStrDate()+"</span></th></tr>";
                     					receiverMsg += "<tr><td class='receiveText'><div>"+newChat.getChatContent()+"</div></td></tr>";
@@ -225,7 +227,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
                     		receiveDate = newChat.getStrDate();
                     		JsonObject obj = new JsonObject();
                     		// alarm
-                    		if(chatReceive==86) {
+                    		if(chatReceive==adminNo) {
                 				int totalAlarm = 0;
                             	Set<Integer> keySet = adminAlarm.keySet();
                 				for (Integer key : keySet) {

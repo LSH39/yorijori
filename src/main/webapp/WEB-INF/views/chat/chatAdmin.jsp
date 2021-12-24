@@ -33,6 +33,7 @@
 
 <script>
 	var sessionMemberNo = ${sessionScope.m.memberNo};
+	var adminNo;
 	var selectUser;
 	var sendMsg;
 	var sendTextBefore;
@@ -44,6 +45,7 @@
         $("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatFrmAdmin").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
+	    $.ajax()
         ws = new WebSocket("ws://192.168.219.102/chatWebsoket.do");
         ws.onopen = startChat;  // ws.onopen 은 웹소켓 연결시 자동으로 실행됨
         ws.onmessage = receiveMsg;
@@ -51,7 +53,7 @@
     });
 
     $("#chatAdmin").click(function(){
-    	if(sessionMemberNo == 86){
+    	if(sessionMemberNo == adminNo){
 	    	openChat();
 			// chat
 	        if($("#chatFrmAdminHome").prop("on") == false){
@@ -111,6 +113,10 @@
 	
 	function appendChat(textMsg){
 		var msg = JSON.parse(textMsg);
+		// adminNo
+		if(msg.adminNo != null){
+			adminNo = msg.adminNo;
+		}
 		// alarm
 		//if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
 			$("#chatAdminAlarm").text(msg.alarm);
@@ -119,7 +125,6 @@
 		if(msg.appendMsg == "noMsg"){
 			$("#chatAdmin").click();  // close
 			$("#chatAdmin").click();  // open
-		}else if(msg.appendMsg == "openChat"){
 		}else{
 			if(webSocketType == "start" || webSocketType == "reStart"){
 				$("#chatAdminHomeTbl").append(msg.appendMsg);
