@@ -22,6 +22,9 @@
 	margin: 0;
 	padding: 0;
 }
+.fc-like{
+	margin-top: 10px;
+}
 .fcwriter-profile p{
 	font-size: 14px;
 	color: #ADADAD;

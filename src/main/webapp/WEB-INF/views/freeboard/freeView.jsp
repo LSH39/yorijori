@@ -148,7 +148,14 @@
 	      															<img src="resources/upload/member_profile/${fc.profilePath }" style="width: 50px; height: 50px;" class="fcProfile">
 	      														</td>
 	      														<td>
-	      														<h6>${fc.memberNickname }</h6>
+	      														<c:choose>
+	      														<c:when test="${fc.memberLevel == 3 }">
+	      															<h6>${fc.memberNickname } [관리자]</h6>
+	      														</c:when>
+	      														<c:otherwise>
+	      															<h6>${fc.memberNickname }</h6>
+	      														</c:otherwise>
+	      														</c:choose>
 	      														</td>
 	      													</tr>
 	      													<tr>
@@ -157,7 +164,7 @@
 	      												</table>
 	      											</div>
 	      											<div class="contentBox" style="text-align:left;">
-	      												<textarea rows="4" cols="110" class="fcContent-o" readonly>${fc.fcContent }</textarea>
+	      												<textarea rows="3" cols="110" class="fcContent-o" readonly>${fc.fcContent }</textarea>
 	      											</div>
 	      										</td>
 	      										<td class="fcLike">

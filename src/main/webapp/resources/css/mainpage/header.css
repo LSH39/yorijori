@@ -175,8 +175,8 @@ a:hover{
 	height: 280px;
 }
 #main-newproducts .clients-slider{
-	overflow:visible;
 	height: 280px;
+	overflow: visible;
 }
 #main-newproducts{
 	height: 600px;
