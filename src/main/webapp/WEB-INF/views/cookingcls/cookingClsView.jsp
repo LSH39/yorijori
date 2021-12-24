@@ -188,6 +188,7 @@
 				//location.reload();
 				$(".reviewTable").load(location.href+" .reviewTable");
 				$(".writeSection").load(location.href+" .writeSection");
+				$(".reviewScore").load(location.href+" .reviewScore");
 				
 				},
 				complete : function(){
@@ -208,6 +209,7 @@
 				success : function(data){
 					$(".reviewTable").load(location.href+" .reviewTable");
 					$(".writeSection").load(location.href+" .writeSection");
+					$(".reviewScore").load(location.href+" .reviewScore");
 				}
 			});
 			
@@ -652,7 +654,7 @@
 					</c:forEach>
 					</div>
 					<h3>리뷰 부분</h3>
-						<h5>클래스의 평점은 ${reviewAvg }</h5>
+						<h5 class="reviewScore">클래스의 평점은 ${reviewAvg }</h5>
 					<div class="reviewSection">
 						<c:choose>
 							<c:when test="${not empty list }">
@@ -683,7 +685,7 @@
 							</table>
 							</c:when>
 							<c:otherwise>
-								<table class="table">
+								<table class="table reviewTable">
 									<tr>
 										<th style="text-align:center;">등록된 리뷰가 없어요!</th>
 									</tr>

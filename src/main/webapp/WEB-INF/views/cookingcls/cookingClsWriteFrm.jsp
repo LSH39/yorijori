@@ -184,6 +184,7 @@
                 }else{
                     $(".result").eq(2).html("올바르게 입력됐습니다.");
                     $(".result").eq(2).css("color", "blue");
+                    time1Chk = true;
                     time2Chk = true;
                 }
             });
@@ -264,6 +265,7 @@
             		classEndChk = false;
             	}else{
             		console.log("올바르게 입력됨");
+            		classStartChk = true;
             		classEndChk = true;
             	}
             });

@@ -17,8 +17,9 @@
 	<div class="main">
     <h1>레시피</h1>
 	<div id="recipeList">
-	
-	
+		
+		<input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
+		
 		<c:forEach items="${list }" var="rb" varStatus="i">	 	
 	     <div class="recipe">
 	     <c:if test="${sessionScope.m.memberNo != null }">
@@ -68,7 +69,8 @@
 		 	var situation = ${c.situationNum};
 		 	var material = ${c.materialNum};
 		 	var recipeLevel = ${c.levelNum};
-		 	
+		 	var loginCheck = $("#loginCheck").val();
+		 	console.log(loginCheck);
 			$.ajax({
 				url : "/moreRecipe.do",
 				data : {start:start,
@@ -80,7 +82,7 @@
 				success : function(data){			
 					for(var i=0;i<data.length;i++){
 						var html ="";
-						if(${sessionScope.m.memberNo == null}){
+						if(loginCheck == null){
 							html += "<div class='recipe'><a href='/recipeView.do?recipeNo="+data[i].recipeNo+"&memberNo=0'>";
 							html += "<img src='/resources/upload/product/"+data[i].filepath+"'>";
 							html +=" <p class='name'>"+data[i].nickname+"</p> <p class='title'>"+data[i].recipeTitle+"</p>"; 
@@ -97,7 +99,7 @@
 							html +="</div></div></a></div>";
 							$("#moreRecipe").append(html);	
 						}else{
-							html += "<div class='recipe'><a href='/recipeView.do?recipeNo="+data[i].recipeNo+"&memberNo="+${sessionScope.m.memberNo}+"'>";
+							html += "<div class='recipe'><a href='/recipeView.do?recipeNo="+data[i].recipeNo+"&memberNo="+loginCheck+"'>";
 							html += "<img src='/resources/upload/product/"+data[i].filepath+"'>";
 							html +=" <p class='name'>"+data[i].nickname+"</p> <p class='title'>"+data[i].recipeTitle+"</p>"; 
 							html += "<div class='info'><div><p class='infoText'>조회수</p> <p>"+data[i].readCount+"회</p></div> ";
