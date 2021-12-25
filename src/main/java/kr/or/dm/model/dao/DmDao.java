@@ -97,5 +97,11 @@ public class DmDao {
 		return sqlSession.selectOne("direct.incDmRoomNo");
 	}
 
+	//안읽은 메세지수 (12-26)
+	public int selectDmCnt(HashMap<String, Object> map1) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("direct.selectDmCnt", map1);
+	}
+
 
 }

@@ -337,7 +337,11 @@
 							b+="<div class='user-component__last'>";
 							b+="<span class='user-component__time'>"+data[i].dmDate.substring(11, 16)+"</span>";
 							if(dmSender == data[i].dmReceiver && data[i].dmReadFlag == 0){
-								b+="<div class='dm-badge'>x</div>";
+								if(data[i].dmCnt > 10){
+									b+="<div class='dm-badge over-100'>99+</div>";									
+								}else if(data[i].dmCnt > 0 && data[i].dmCnt < 100){
+									b+="<div class='dm-badge from-1to99'>"+data[i].dmCnt+"</div>";								
+								}
 							}else{
 								b+="<div class='dm-no-badge'>x</div>";							
 							}

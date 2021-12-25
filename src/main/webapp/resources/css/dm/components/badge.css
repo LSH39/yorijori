@@ -1,14 +1,10 @@
 .dm-badge {
-  width: 15px;
-  height: 15px;
-  background-color: tomato;
-  border-radius: 50%;
   color: white;
-  /*font-weight: 600;*/
+  background-color: tomato;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .dm-no-badge {
@@ -16,4 +12,16 @@
   height: 25px;
   display: flex;
   text-indent: -9999px;
+}
+
+.over-100{
+  width: 30px;
+  height: 20px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.from-1to99{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
