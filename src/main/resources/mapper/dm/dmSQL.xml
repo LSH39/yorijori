@@ -160,6 +160,7 @@
 			dm_spic as dmSpic
 		from dm 
 		where dm_room_no=#{dmRoomNo}
+		order by dm_no asc
 	</select>
 	
 	<!-- 클래스 뷰에서 바로 해당 클래스 문의 조회 -->
