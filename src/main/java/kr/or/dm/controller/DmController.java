@@ -34,7 +34,7 @@ public class DmController {
 		return "dm/dmList";
 	}
 	
-	//클래스 뷰에서 문의 목록 ajax테스트 
+	//클래스 뷰에서 문의 목록 ajax테스트 (12-25r)
 	@ResponseBody
 	@RequestMapping(value="/dmAjaxList.do", produces = "application/json;charset=utf-8")
 	public String dmAjaxList(String dmSender, int memberLevel) {

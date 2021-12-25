@@ -39,8 +39,14 @@ public class CookingClsService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		
+
 		ArrayList<CookingCls> list = dao.selectAllClass(map);
+		/*
+		for (int i = 0; i < list.size(); i++) {
+			double t = dao.avgReviewRate(list.get(i).getClassNo());
+			list.get(i).setClassRate(t);
+		}
+		*/
 		
 		int totalCount = dao.totalCount();
 		
