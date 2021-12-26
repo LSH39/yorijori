@@ -138,6 +138,7 @@ $("#payBtn").click(function(){
         }else{
         	$("#checkA").prop("disabled", true);
         	selectbox.eq(i).prop("disabled", true);
+
         }
     }
     if(arr.length != 0){
