@@ -11,9 +11,9 @@
         (select ccc.* from
        (select
             cc.*,
-            (select member_nickname from member m where recipeWriterNo=m.member_no) as memberNickname,
-            (select member_id from member m where recipeWriterNo=m.member_no) as memberId,
-            (select profile_path from member m where recipeWriterNo=m.member_no) as profilePath    
+            (select member_nickname from member m where memberNo=m.member_no) as memberNickname,
+            (select member_id from member m where memberNo=m.member_no) as memberId,
+            (select profile_path from member m where memberNo=m.member_no) as profilePath    
             from
        (select
         cr.contest_no as contestNo,
@@ -58,9 +58,9 @@
         (select ccc.* from
        (select
             cc.*,
-            (select member_nickname from member m where recipeWriterNo=m.member_no) as memberNickname,
-            (select member_id from member m where recipeWriterNo=m.member_no) as memberId,
-            (select profile_path from member m where recipeWriterNo=m.member_no) as profilePath    
+            (select member_nickname from member m where memberNo=m.member_no) as memberNickname,
+            (select member_id from member m where memberNo=m.member_no) as memberId,
+            (select profile_path from member m where memberNo=m.member_no) as profilePath    
             from
        (select
         cr.contest_no as contestNo,
