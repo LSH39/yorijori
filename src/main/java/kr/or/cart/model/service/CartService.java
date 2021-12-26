@@ -28,7 +28,7 @@ public class CartService {
 					checkNo = 1;
 					break;
 				}
-			}//
+			}
 			if(checkNo != 1) {
 				productNo[i] = pNo;
 				newCartList.add(cartList.get(i));
