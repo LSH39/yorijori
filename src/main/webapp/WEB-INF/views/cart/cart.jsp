@@ -45,13 +45,14 @@
 												   	<td><img src="/resources/upload/product/${c.productFilepath }"></td>
 												   	<td class="infoTd" onClick="location.href='/milkitView.do?productNo=${c.productNo }&recipeNo=${c.recipeNo }'">
 												       	<p>[ ${c.sellerNickname } ]</p>
-												       	<p>${c.milkitName }</p>
+												       	<p class="milkitName">${c.milkitName }</p>
 												       	<p><span>${c.milkitPrice }</span>원</p>
 												   	</td>
 												   	<td>
 												       	<span class="less"></span><span class="count">${c.productAmount }</span><span class="more"></span>
 												       	<button type="button" class="gray_btn changeCart">수량변경</button>
 												       	<span class="none">${c.cartNo }</span>
+												       	<span class="none productNo">${c.productNo }</span>
 												   	</td>
 												   	<td><span></span>원</td>
 												</tr>

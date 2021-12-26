@@ -15,7 +15,7 @@
 </head>
 <body>
 	<%@include file = "/WEB-INF/views/common/header.jsp" %>
-	<div class="container">
+	<div class="container" id="container">
         <p class="top_txt">주문서</p>
         <form action="/order.do" id="order" method="post">
             <table id="order">
