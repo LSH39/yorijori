@@ -6,7 +6,6 @@ ul{
 }
 ul>li{
 	float: left;
-	box-shadow: 1px 1px 7px #999;
 }
 .result-banner{
 	text-align: center;
@@ -57,6 +56,7 @@ ul>li{
 	width: 18%;
 	margin: 20px 30px;
 	text-align: center;
+	box-shadow: 1px 1px 7px #999;
 }
 .resultTitle {
 	margin-top: 5px;

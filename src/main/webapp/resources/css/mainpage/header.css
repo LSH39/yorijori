@@ -196,6 +196,7 @@ a:hover{
 	background: #FFF;
 	padding: 15px;
 	box-shadow : 2px 2px 7px #999;
+	height: auto;
 }
 .main-newclasses .swiper-pagination {
   margin-top: 15px;
@@ -231,9 +232,9 @@ a:hover{
 	color: rgb(196, 191, 227);
 }
 #main-newclasses{
-	height: 600px;
+	height: 660px;
 }
 #main-newclasses .swiper-wrapper{
 	overflow:visible;
-	height: 280px;
+	height: 400px;
 }
