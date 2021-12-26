@@ -6,64 +6,158 @@
 <head>
 <link rel="stylesheet" href="resources/summernote/summernote-lite.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<!-- 
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=3034a6bde601c666de71198a328eaa3e"></script>
- -->
-<!--  -->
-
-
-<!--  -->
 <meta charset="UTF-8">
 <title>쿠킹클래스 작성</title>
-<style>
-</style>
-
+<link rel="stylesheet" href="resources/css/cookingcls/clsWrite.css">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<script src="resources/summernote/jquery-3.3.1.js"></script>
-	<script src="resources/summernote/summernote-lite.js"></script>
-	<script src="resources/summernote/lang/summernote-ko-KR.js"></script>
-	<div class="container">
-		<div>
-			<h1>요리 클래스 등록</h1>
-		</div>
-		<div>
-			<form action="/cookingClsWrite.do" method="post" enctype="multipart/form-data">
-				<!-- 전문가 닉네임 히든값 -->
-				<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }">
-				<h5>강의 제목</h5>
-				<input type="text" name="classTitle" class="form-control" id="classTitle" maxlength="33" class="input-group input-group-sm"><br>
-				<h5>강의 내용</h5>
-				<textarea name="classContent" class="form-control" id="classContent" cols="30" rows="10"></textarea>
-				<br>
-				글자수 : <span id="currByte">0</span>/3000bytes
-				<h5>강의 장소(입력 안할시 비대면)</h5>
-				<input type="text" name="classLocation1" id="classLocation1" readonly>
-				<button type="button" id="addrSearch" class="btn btn-primary">주소검색</button>
-				<br> <input type="text" name="classLocation2" id="classLocation2" maxlength="100"><br>
-				<h5>강의 가격</h5>
-				<input type="text" name="classPrice" id="classPrice" maxlength="10">원<br>
-				<span class="result">　</span>
-				<h5>강의 정원(최소 10명 이상)</h5>
-				<input type="text" name="classNop" id="classNop" maxlength="10">명<br>
-				<span class="result">　</span>
-				<h5>강의 시간</h5>
-				<input type="time" name="classStartTime" id="time1">부터<input type="time" name="classEndTime" id="time2">
-				<button type="button" id="btntest" class="btn-primary btn-sm">시간테스트</button>
-				<br>
-				<span class="result">　</span><br>
-				<h5>클래스 시작일</h5>
-				<input type="date" name="classStart" id="classStart"><br><br>
-				<h5>클래스 종료일</h5>
-				<input type="date" name="classEnd" id="classEnd"><br><br>
-				<input type="submit" value="등록" class="btn btn-danger" id="classWrite">
-				<input type="file" name="thumbFile" id="classThumbnail" accept=".gif, .jpg, .jpeg, .png">
-				<input type="hidden" id="arrVal">
-			</form>
-		</div>
-	</div>
+	<c:choose>
+		<c:when test="${empty sessionScope.m || sessionScope.m.memberLevel ne 2 }">
+			<script>
+				alert("올바른 접근이 아닙니다!");
+				location.href = "/";
+			</script>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/WEB-INF/views/common/header.jsp" />
+			<script src="resources/summernote/jquery-3.3.1.js"></script>
+			<script src="resources/summernote/summernote-lite.js"></script>
+			<script src="resources/summernote/lang/summernote-ko-KR.js"></script>
+			<div class="container">
+				<div>
+					<h1>요리 클래스 등록</h1>
+				</div>
+				<div>
+					<form action="/cookingClsWrite.do" method="post" enctype="multipart/form-data">
+						<!-- 전문가 닉네임 히든값 -->
+						<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }">
+						<div class="form-group row mb-4">
+							<div class="col-sm-12">
+								<label for="classTitle"><h5>클래스 제목</h5></label>
+								<input type="text" name="classTitle" class="form-control" id="classTitle" maxlength="300" class="input-group input-group-sm">
+								제목 글자수 테스트용 최종 제출시 이거 지워야함 :<span id="titleByte">0</span>/300bytes
+							</div>
+						</div>
+						<div class="form-group row mb-4">
+							<div class="col-sm-6">
+								<h5><label for="classThumbnail">썸네일 이미지</label></h5>
+								<input type="file" name="thumbFile" class="form-control" id="classThumbnail" accept=".gif, .jpg, .jpeg, .png">
+							</div>
+						</div>
+						<div class="form-group row mb-4">
+							<div class="col-sm-12">
+								<h5>클래스 내용</h5>
+								<textarea name="classContent" class="form-control" id="classContent" cols="30" rows="10"></textarea>
+							</div>
+						</div>
+						<br>
+						내용 글자수 테스트용 최종 제출시 이거 지워야함 : <span id="currByte">0</span>/3000bytes
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<h5>클래스 장소(입력 안할시 비대면)</h5>
+							</div>
+							<div class="col-sm-6">
+								<label for="classPrice"><h5>클래스 가격</h5></label>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-4">
+								<input type="text" name="classLocation1" id="classLocation1" class="form-control" readonly>					
+							</div>
+							<div class="col-sm-2">
+								<button type="button" id="addrSearch" class="btn clsfrm-btn">주소검색</button>
+							</div>
+							<div class="col-sm-4">
+								<input type="text" name="classPrice" id="classPrice" class="form-control" maxlength="10">
+								
+							</div>
+							<div class="col-sm-2 time-range"><h4>원</h4></div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+							<span class="result">　</span>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<h5>클래스 정원(최소 10명 이상)</h5>
+							</div>
+							
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-4">
+								<input type="text" name="classLocation2" id="classLocation2" class="form-control" maxlength="100">
+							</div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-4">
+								<input type="text" name="classNop" id="classNop" class="form-control" maxlength="10">
+							</div>
+							<div class="col-sm-2 time-range"><h4>명</h4></div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+							<span class="result">　</span>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<h5>클래스 시간</h5>
+							</div>
+							<div class="col-sm-6">
+								<h5>클래스 날짜</h5>
+							</div>
+						</div>
+						<div class="form-group row mb-2">
+							<div class="col-sm-4">
+								<input type="time" name="classStartTime" id="time1" class="form-control">
+							</div>
+							<div class="col-sm-2 time-range">
+								<h4>부터</h4>
+							</div>
+							<div class="col-sm-4">
+								<input type="date" name="classStart" id="classStart" class="form-control">
+							</div>
+							<div class="col-sm-2 time-range">
+								<h4>부터</h4>
+							</div>
+						</div>
+						<div class="form-group row mb-2">
+							<div class="col-sm-4">
+								<input type="time" name="classEndTime" id="time2" class="form-control">
+							</div>
+							<div class="col-sm-2 time-range">
+								<h4>까지</h4>
+							</div>
+							<div class="col-sm-4">
+								<input type="date" name="classEnd" id="classEnd" class="form-control">
+							</div>
+							<div class="col-sm-2 time-range">
+								<h4>까지</h4>
+							</div>
+						</div>
+						<div class="form-group row mb-2">
+							<div class="col-sm-6">
+								<span class="result">　</span>
+							</div>
+							<div class="col-sm-6">
+								<span class="result">　</span>
+							</div>
+						</div>				
+						<div class="row justify-content-md-center">
+							<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+								<input type="submit" value="등록" class="btn clsfrm-btn col-2" id="classWrite">
+							</div>
+						</div>
+		
+						<input type="hidden" id="arrVal">
+					</form>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
 	<script>
 		$(function(){
 
@@ -146,12 +240,35 @@
 			
 			//클래스 제목
 			$("#classTitle").keyup(function(){
-				let classTitle = $(this).val();
-				if(classTitle == ""){
-					classTitleChk = false;
-				}else{
-					classTitleChk = true;					
-				}
+    	    	const titleByte = 300; //varchar2 300이니까 300
+	    		let classTitle = $(this).val();
+				let currentByte = 0;
+            	let classTitleLen = classTitle.length;
+				
+                for(let i = 0 ; i < classTitleLen ; i++){
+                    let titleCharAt = classTitle.charAt(i);
+                    let titleUnicode = escape(titleCharAt) //유니코드 형식으로 변환 u1234 이런식
+                    if(titleUnicode.length>4){
+                        // 한글 : oracle 11xe는 한글이 3Byte
+                        currentByte += 3;
+                    }else{
+                        // 영문,숫자,특수문자 : 1Byte
+                        currentByte += 1;
+                    }
+                }
+                
+                if(classTitle == ""){
+                	classTitleChk = false;
+                }else if(currentByte > titleByte){
+                	$("#titleByte").html(currentByte);
+                	$("#titleByte").css("color", "red");
+                	classTitleChk = false;
+                }else{
+                	$("#titleByte").html(currentByte);
+                	$("#titleByte").css("color", "blue");
+                	classTitleChk = true;
+                } 
+				
 			});
 			
 			//다음 api 주소 검색
@@ -180,7 +297,7 @@
             	}
             });
             
-			//강의 시작 시간
+			//클래스 시작 시간
             $("#time1").change(function(){
                 let time1 = $("#time1").val();
                 let time2 = $("#time2").val();
@@ -195,7 +312,7 @@
                 }
             });
 
-			//강의 끝나는 시간
+			//클래스 끝나는 시간
             $("#time2").change(function(){
                 let time1 = $("#time1").val();
                 let time2 = $("#time2").val();
@@ -211,7 +328,7 @@
                 }
             });
             
-			//강의 가격
+			//클래스 가격
             $("#classPrice").keyup(function(){
             	let price = $(this).val();
             	
@@ -229,10 +346,10 @@
             	}
             });
             
-			//강의 인원수
+			//클래스 인원수
             $("#classNop").keyup(function(){
             	let nop = $(this).val();
-            	if(nop >= 10){
+            	if(nop.substring(0, 1) != 0 && nop >= 10){
             		$(".result").eq(1).html("올바르게 입력됐습니다.");
             		$(".result").eq(1).css("color", "blue");
             		classNopChk = true;
@@ -243,7 +360,7 @@
             	}
             });
             
-			//강의 시작 날짜
+			//클래스 시작 날짜
             $("#classStart").change(function(){
             	let classStart = $(this).val();
             	let classEnd = $("#classEnd").val();
@@ -251,7 +368,7 @@
             	var date = new Date();
             	var today = date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0"+date.getDate()).slice(-2);
             	
-            	if(classStart <= today){
+            	if(classStart <= today+1){
             		console.log("날짜 오류");
             		$(this).val("");
             		classStartChk = false;
@@ -267,7 +384,7 @@
             	} 
             });
             
-			//강의 종강 날짜
+			//클래스 종강 날짜
             $("#classEnd").change(function(){
             	let classEnd = $(this).val();
             	let classStart = $("#classStart").val();
@@ -275,7 +392,7 @@
             	var date = new Date();
             	var today = date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0"+date.getDate()).slice(-2);
             	
-            	if(classEnd <= today){
+            	if(classEnd <= today+2){
             		console.log("날짜 오류");
             		$(this).val("");
             		classEndChk = false;
@@ -292,7 +409,7 @@
             	}
             });
 			
-			//강의 내용
+			//클래스 내용
             $("#classContent").summernote({
 				height : 400,
 				lang : "ko-KR",
@@ -304,32 +421,29 @@
 					},
 					onChange : function(e){
 						setTimeout(function(){
-		        	    	let maxByte = 3000; //varchar2 3000이니까 3000
+		        	    	const contentByte = 3000; //varchar2 3000이니까 3000
         		    		let classContent = $("#classContent").val();
 			            	let classContentLen = classContent.length;
-            				let currByte = 0;
-            	
-			            	//console.log(classContent);
-            				//console.log(classContentLen);
+            				let currentByte = 0;
             				
-                            for(let i=0; i<classContentLen; i++){
-                                let charEach = classContent.charAt(i);
-                                let charUni = escape(charEach) //유니코드 형식으로 변환 u1234 이런식
-                                if(charUni.length>4){
+                            for(let i=0 ; i < classContentLen ; i++){
+                                let contentCharAt = classContent.charAt(i);
+                                let contentUnicode = escape(contentCharAt) //유니코드 형식으로 변환 u1234 이런식
+                                if(contentUnicode.length>4){
                                     // 한글 : oracle 11xe는 한글이 3Byte
-                                    currByte += 3;
+                                    currentByte += 3;
                                 }else{
                                     // 영문,숫자,특수문자 : 1Byte
-                                    currByte += 1;
+                                    currentByte += 1;
                                 }
                             }
                             
-                            if(currByte > maxByte){
-                            	$("#currByte").html(currByte);
+                            if(currentByte > contentByte){
+                            	$("#currByte").html(currentByte);
                             	$("#currByte").css("color", "red");
                             	classContentChk = false;
                             }else{
-                            	$("#currByte").html(currByte);
+                            	$("#currByte").html(currentByte);
                             	$("#currByte").css("color", "blue");
                             	classContentChk = true;
                             }                            
