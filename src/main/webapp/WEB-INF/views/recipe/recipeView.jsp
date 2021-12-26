@@ -123,13 +123,13 @@
 				</c:if>
 			</div>
 			<c:forEach items="${list}" var="rc">
-				<div>
+				 <div class="comments">
 					<img src="/resources/img/recipe/person.png" width="30px"> <span
-						class="rcNmae">${rc.nickname }</span> <span class="rcDate">${rc.rcDate }</span>
+						class="rcName">${rc.nickname }</span> <span class="rcDate">${rc.rcDate }</span>
 					<p class="rcContents">${rc.rcContentBr }</p>
 					<textarea id="updateContent" name="rcContent" class="form-control"
 						style="display: none;">${rc.rcContent }</textarea>
-					<button style="display: none;">수정완료</button>
+					<button style="display: none;" id="updateBtn">수정완료</button>
 					<c:if test="${sessionScope.m.memberNo == rc.memberNo}">
 						<p class="commentsBtn">
 							<a href="javascript:void(0)"
@@ -168,7 +168,7 @@
 							<img src="/resources/upload/product/${p.filepath }">
 							<p class="pTitle">${p.milkitName }</p>
 							<p class="pComment">${p.milkitComment}</p>
-							<p class="mPrice">${p.milkitPrice }</p>
+							<p class="mPrice"><fmt:formatNumber value="${p.milkitPrice}" />원</p>
 						</a>
 					</c:if>
 					<c:if test="${sessionScope.m.memberNo == null}">
@@ -179,7 +179,7 @@
 							<p class="pComment">${p.milkitComment}</p>
 							<p class="mPrice">
 								<fmt:formatNumber value="${p.milkitPrice}" />
-								원</span>
+								원
 							</p>
 						</a>
 					</c:if>

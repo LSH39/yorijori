@@ -47,7 +47,7 @@
 				<input type="hidden" id="milkitPrice" value="${p.milkitPrice }">
 				<hr>
 				<p>
-					<span class="boldTxt">판매자</span> <span class="thinTxt">${p.nickname }</span>
+					<span class="boldTxt">판매자</span> <span class="thinTxt"><a href="/profile.do?memberId=${p.memberId }" >${p.nickname }</a></span>
 				</p>
 				<p id="order">
 					<span class="boldTxt">구매수량</span> <span id="count">
