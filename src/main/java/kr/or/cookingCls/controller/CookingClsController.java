@@ -60,7 +60,8 @@ public class CookingClsController {
 		return "cookingcls/cookingClsWriteFrm";
 	}
 	
-	//쿠킹 클래스 작성
+	/*
+	//쿠킹 클래스 작성 백업
 	@RequestMapping(value="/cookingClsWrite.do")
 	public String cookingClsWrite(CookingCls ccls, Model model) {
 		int result = service.insertCookingCls(ccls);
@@ -73,6 +74,67 @@ public class CookingClsController {
 		}
 		return "common/msg";
 	}
+	*/
+	
+	//썸네일 있는 클래스 작성 (12-25)
+	@RequestMapping(value="/cookingClsWrite.do")
+	public String cookingClsWrite(CookingCls ccls, MultipartFile thumbFile, HttpServletRequest request, Model model) {
+		if(thumbFile.isEmpty()) {
+			System.out.println("파일 비어있음");
+		}else {
+			
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/cookingcls/");
+			String filename = thumbFile.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extension = filename.substring(filename.indexOf("."));
+			String filepath = null;
+			int cnt = 0;
+			
+			while(true) {
+				if(cnt == 0) {
+					filepath = onlyFilename + extension;
+				} else {
+					filepath = onlyFilename + "_" + cnt + extension; //중복 될 경우
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				cnt++;
+			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				//업로드 속도증가를 위한 보조스트림
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				//파일 업로드
+				byte[] bytes = thumbFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			ccls.setClassThumbnailFilename(filename);
+			ccls.setClassThumbnailFilepath(filepath);
+			
+		}
+		int result = service.insertCookingCls(ccls);
+		
+		if(result > 0) {
+			model.addAttribute("msg", "작성 성공");
+			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");
+		}else {
+			model.addAttribute("msg", "작성 실패");
+			model.addAttribute("loc", "/cookingClsList.do?reqPage=1");			
+		}
+		return "common/msg";
+	}
+	
 	
 	/*
 	@RequestMapping(value="/cookingClsWrite.do")
@@ -253,7 +315,61 @@ public class CookingClsController {
 	
 	//쿠킹 클래스 수정
 	@RequestMapping(value="/cookingClsUpdate.do")
-	public String CookingClsListUpdate(CookingCls ccls, Model model) {
+	public String CookingClsListUpdate(CookingCls ccls, MultipartFile thumbFile, HttpServletRequest request, String preFilepath, String preFilename, int delFlag, Model model) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/cookingcls/");
+		if(preFilepath != null && delFlag == 1) {
+			String delPath = savePath + preFilepath;
+			File delFile = new File(delPath);
+			if(delFile.isFile()) {
+				delFile.delete();
+			}
+		}
+		
+		if(thumbFile.isEmpty() && delFlag == 0) {
+			ccls.setClassThumbnailFilename(preFilename);
+			ccls.setClassThumbnailFilepath(preFilepath);
+		}else if(!thumbFile.isEmpty()) {
+			
+			String filename = thumbFile.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extension = filename.substring(filename.indexOf("."));
+			String filepath = null;
+			int cnt = 0;
+			
+			while(true) {
+				if(cnt == 0) {
+					filepath = onlyFilename + extension;
+				} else {
+					filepath = onlyFilename + "_" + cnt + extension;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				cnt++;
+			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				//업로드 속도증가를 위한 보조스트림
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				//파일 업로드
+				byte[] bytes = thumbFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			ccls.setClassThumbnailFilename(filename);
+			ccls.setClassThumbnailFilepath(filepath);
+			
+		}
+		
 		int result = service.updateOneClass(ccls);
 		if(result > 0) {
 			model.addAttribute("msg", "수정 성공!");

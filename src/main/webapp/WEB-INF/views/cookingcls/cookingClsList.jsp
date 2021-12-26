@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>쿠킹클래스 목록</title>
+<link rel="stylesheet" href="resources/css/cookingcls/clsWrite.css">
 <style>
 .page-item.active .page-link {
    	background-color: #9F90CF !important;
@@ -15,6 +16,11 @@
 .page-link {
     color: #9F90CF !important;
     }
+    
+.page-link:focus{
+	box-shadow: 0 0 0 0.25rem rgb(32 13 253 / 25%) !important;
+	border-color: rgb(159, 144, 207) !important;
+}
     	
 .main-grid{
     display: grid;
@@ -180,8 +186,8 @@
 
 .class-start{
     min-width: 20px;
-    height: 20px;
-    border-radius: 3px;
+    height: 25px;
+    border-radius: 5px;
     padding-left: 6px;
     padding-right: 6px;
     background-color: rgb(248, 248, 248);
@@ -195,7 +201,7 @@
 }
 
 .class-start > div{
-	font-size: 9px;
+	font-size: 13px;
     line-height: 12px;
     letter-spacing: normal;
     margin: 0px;
@@ -228,92 +234,74 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<h1>쿠킹클래스 목록</h1>
-		<div>
-			<ul class="grid-list">
-				<!-- 
-				<li>
-					<div>
-						<a href="1" class="class-img">
-							<div class="img-container">
-								<div class="class-img-span">
-									<span>										
-										<img src="./resources/img/cookingcls/3.jpg" class="image-source">
-									</span>
-								</div>
-								<div>
-									<div class="class-nickname">
-										<p>xxxx</p>
+	<div class="container"  style="margin-bottom:50px;margin-top:50px;">
+		<c:choose>
+			<c:when test="${empty list }">
+				<div style="min-height:600px;display:flex;flex-direction: column;align-items: center;">
+					<img src="./resources/img/cookingcls/classtest.jpg">
+					<h1>개설된 클래스가 없습니다!</h1>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<h1>쿠킹클래스 목록</h1>
+				<div>
+					<ul class="grid-list">
+					<c:forEach items="${list }" var="ccls">
+						<li>
+							<div style="margin-bottom:50px;margin-top:50px;">
+								<a href="/cookingClsView.do?classNo=${ccls.classNo}" class="class-img">
+									<div class="img-container">
+										<div class="class-img-span">
+											<span>
+												<c:choose>
+													<c:when test="${empty ccls.classThumbnailFilepath && empty ccls.classThumbnailFilename }">
+														<img src="./resources/img/cookingcls/classtest.jpg" class="image-source">
+													</c:when>
+													<c:otherwise>
+														<img src="./resources/upload/cookingcls/${ccls.classThumbnailFilepath }" class="image-source">
+													</c:otherwise>
+												</c:choose>										
+											</span>
+										</div>
+										<div>
+											<div class="class-nickname">
+												<p>${ccls.memberNickname }<span class="vertified"></span></p>
+											</div>
+											<div class="class-title">${ccls.classTitle }</div>
+										</div>
+										<div class="class-line"></div>
+										<div class="class-price">
+											<div>
+												<p>${ccls.classPrice }원</p>
+											</div>
+										</div>
+										<div class="class-start">
+											<div>${ccls.classStart } 부터 시작</div>
+										</div>
 									</div>
-									<div class="class-title">aaaaa}</div>
-								</div>
-								<div class="class-line"></div>
-								<div class="class-price">
-									<div>
-										<p>555원</p>
-									</div>
-								</div>
-								<div class="class-start">
-									<div>123 부터 시작</div>
-								</div>
+								</a>
 							</div>
-						</a>
-					</div>
-				</li>
-				 -->
-			<c:forEach items="${list }" var="ccls">
-				<li>
-					<div>
-						<a href="/cookingClsView.do?classNo=${ccls.classNo}" class="class-img">
-							<div class="img-container">
-								<div class="class-img-span">
-									<span>
-										<c:choose>
-											<c:when test="${empty ccls.classThumbnailFilepath && empty ccls.classThumbnailFilename }">
-												<img src="./resources/img/cookingcls/a.jpg" class="image-source">
-											</c:when>
-											<c:otherwise>
-												<img src="./resources/upload/cookingcls/${ccls.classThumbnailFilepath }" class="image-source">
-											</c:otherwise>
-										</c:choose>										
-									</span>
-								</div>
-								<div>
-									<div class="class-nickname">
-										<p>${ccls.memberNickname }<span class="vertified"></span></p>
-									</div>
-									<div class="class-title">${ccls.classTitle }</div>
-								</div>
-								<div class="class-line"></div>
-								<div class="class-price">
-									<div>
-										<p>${ccls.classPrice }원</p>
-									</div>
-								</div>
-								<div class="class-start">
-									<div>${ccls.classStart } 부터 시작</div>
-								</div>
-							</div>
-						</a>
-					</div>
-				</li>
-			</c:forEach>
-			</ul>
-		</div>
-		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		<!-- 전문가 레벨 2 -->
-			<c:if test="${sessionScope.m.memberLevel eq 2 }">		
-	  			<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4" style="background-color:#8E44AD;">클래스 작성</a>
-			</c:if>
-		</div>
-		<div>
-  			<c:if test="${not empty sessionScope.m }">
-				<a href="/cookingRsrvList.do">예약내역</a>  				
-  			</c:if>
-  			<a href="/profile.do?memberId=x">회원프로필테스트</a>
-		</div>
-		<div id="pageNavi">${pageNavi }</div>
+						</li>
+					</c:forEach>
+					</ul>
+				</div>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		
+					<c:if test="${sessionScope.m.memberLevel eq 2 }">		
+			  			<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4 clsfrm-btn">클래스 작성</a>
+					</c:if>
+				</div>
+				<div>
+		  			<c:if test="${not empty sessionScope.m }">
+						<a href="/cookingRsrvList.do">예약내역</a>  				
+		  			</c:if>
+		  			<a href="/profile.do?memberId=x">회원프로필테스트</a>
+				</div>
+				<div id="pageNavi">${pageNavi }</div>
+			</c:otherwise>
+		</c:choose>
+
+
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
