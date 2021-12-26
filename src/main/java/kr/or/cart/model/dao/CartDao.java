@@ -30,4 +30,5 @@ public class CartDao {
 	public int selectStock(int productNo) {
 		return sqlSession.selectOne("cart.selectStock",productNo);
 	}
+	
 }
