@@ -28,7 +28,8 @@ public class RecipeBoard {
 	private int reportCheck;
 	private int likeCnt;
 	private ArrayList<Product>pList;
-
+	private String profile;
+	private String memberId;
 	private int start;
 	private int end;
 	

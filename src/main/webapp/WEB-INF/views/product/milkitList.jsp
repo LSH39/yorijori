@@ -16,6 +16,7 @@
 <div class="main">
 <h1>밀키트</h1>
 <input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
+<input type="hidden" id="levelCheck" value="${sessionScope.m.memberLevel }" >
 	<p id="total">총  <fmt:formatNumber value="${totalCount}"/>개</p>
 		<div id="make"><button >밀키트 만들기</button></div>
 	<div class="milkitList">
@@ -70,10 +71,13 @@
 		});
 	 $("#make").click(function() {
 		var login = $("#loginCheck").val();
+		var level = $("#levelCheck").val();
 		console.log(login);
 		if(login == ""){
 			alert("로그인 후 이용해주세요");
 			$(location).attr("href","/loginFrm.do");	
+		}else if(!(level == 2 || level == 3)){
+			alert("밀키트 작성이 가능한 등급이 아닙니다.");
 		}else{
 			$(location).attr("href","/milkitFrm1.do?memberNo="+login);
 		}	

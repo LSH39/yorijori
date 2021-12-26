@@ -82,6 +82,8 @@
  			recipe_time as recipeTime, 
  			recipe_level as recipeLevel,
  			(select member_nickname from member m where m.member_no=r.recipe_writer)as nickname,
+ 			(select profile_path from member m where m.member_no=r.recipe_writer)as profile,
+ 			(select member_id from member m where m.member_no=r.recipe_writer)as memberId,
             (select count(*) from recipe_like rr where rr.recipe_no = r.recipe_no and rr.member_no=#{memberNo}) as likeCheck,
             (select count(*) from recipe_report rp where rp.recipe_no = r.recipe_no and rp.member_no=#{memberNo}) as reportCheck
  		from recipe_board r where recipe_no=#{recipeNo}
