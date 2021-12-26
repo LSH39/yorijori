@@ -23,6 +23,17 @@ public class DmService {
 		map.put("dmSender", dmSender);
 		map.put("memberLevel", memberLevel);
 		ArrayList<Dm> list = dao.selectAllDm(map);
+		
+		for(Dm dm : list) {
+			HashMap<String, Object> map1 = new HashMap<String, Object>();
+			map1.put("dmSender", dmSender);
+			map1.put("dmRoomNo", dm.getDmRoomNo());
+			System.out.println(dm.getDmRoomNo());
+			
+			int cnt = dao.selectDmCnt(map1); 
+			System.out.println("안읽은개수 : "+cnt);
+			dm.setDmCnt(cnt);
+		}
 
 		return list;
 	}
