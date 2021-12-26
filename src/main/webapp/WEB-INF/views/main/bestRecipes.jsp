@@ -49,17 +49,17 @@
 	      									</span>
 	      									<c:choose>
 	      										<c:when test="${r.recipeLevel eq 1 }">
-	      											하
+	      											상
 	      										</c:when>
 	      										<c:when test="${r.recipeLevel eq 2 }">
 	      											중
 	      										</c:when>
 	      										<c:otherwise>
-	      											상
+	      											하
 	      										</c:otherwise>
 	      									</c:choose> 
 	      									</h5>
-	      									<h5><span class="rLevel">요리시간 :</span> <span>${r.recipeTime }</span>분</h5>
+	      									<h5><span class="rLevel">요리시간 :</span> <span>${r.recipeTime }</span></h5>
 	      									<div class="likeCount">
 	      										<h5>좋아요</h5>
 	      										<i class="bi bi-heart-fill" style="color:#D4A7FF;"></i>
