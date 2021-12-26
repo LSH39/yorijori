@@ -51,5 +51,12 @@
 		from review
 		where class_no=#{classNo} and member_nickname=#{sessionMemberNickname} and review_flag=2
 	</select>
+	
+	<!-- 리뷰삭제 후 클래스 번호조회 -->
+	<select id="selectClassNo" parameterType="_int" resultType="_int">
+		select class_no as classNo
+		from review
+		where review_no=#{reviewNo}
+	</select>
 </mapper>
 

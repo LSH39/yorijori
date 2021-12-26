@@ -289,13 +289,11 @@
 		
 		//문의 목록 AJAX시작 12-23 클래스뷰에서 
 		$(".ajaxList, .toList").click(function(){
+			dmClassNoVal = -1;
 			$(".dmView").hide();
 			$(".dmList").toggle();
 			let dmSender = $("#memberNickname").val();
 			let memberLevel = $("#memberLevel").val();
-			
-			console.log(dmSender);
-			console.log(memberLevel);
 			
 			$.ajax({
 				url : "/dmAjaxList.do",
@@ -312,7 +310,7 @@
 	
 						for (var i = 0; i < data.length; i++) {
 							let b = "";
-							b+="<a class='link' href='#'>";
+							b+="<a class='link'>";
 							b+="<div class='user-component'>";
 							b+="<div class='user-component__column'>";
 							if(dmSender == data[i].dmReceiver){ //상대방이 나한테 보낸 메세지
@@ -339,7 +337,11 @@
 							b+="<div class='user-component__last'>";
 							b+="<span class='user-component__time'>"+data[i].dmDate.substring(11, 16)+"</span>";
 							if(dmSender == data[i].dmReceiver && data[i].dmReadFlag == 0){
-								b+="<div class='dm-badge'>x</div>";
+								if(data[i].dmCnt > 10){
+									b+="<div class='dm-badge over-100'>99+</div>";									
+								}else if(data[i].dmCnt > 0 && data[i].dmCnt < 100){
+									b+="<div class='dm-badge from-1to99'>"+data[i].dmCnt+"</div>";								
+								}
 							}else{
 								b+="<div class='dm-no-badge'>x</div>";							
 							}
@@ -413,6 +415,7 @@
 		
 		//문의하기 바로 눌렀을때 이전내용 보여줌 12-23
 		$(document).on("click", ".doDm", function(){
+			classNoVal = -1;
 			$(".dmList").hide();
 			$(".dmView").toggle();
 			let dmReceiver = $(".alt-header__title").html($("#clsMemberNickname").val()); //상대방
@@ -420,6 +423,11 @@
 			let classNo = $("#classNo").val(); //해당 클래스 번호
 			console.log("dmRoomNo 번호는 과연 "+dmRoomNo);
 			$(".main-chat").empty();
+			
+			//테스트
+			classNoVal = classNo;
+			console.log("문의하기 눌럿을때 : "+classNoVal);
+			
 			$.ajax({
 				url : "/selectDmAjax.do",
 				type : "post",
@@ -475,11 +483,11 @@
 		
 		//문의 글 함수 방번호 있는거 12-23
     	function sendMsg(){
-			//let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
 			let dmReceiver = $(".alt-header__title").html(); //상대방
 			let dmSender = $("#memberNickname").val(); //나
 			let classNo = $("#classNo").val(); //해당 클래스 번호
 			let dmContent = $(".dmContent").val(); //문의 내용
+			
 			
 			console.log("목록 위에 있는 닉네임 "+dmReceiver);
 			console.log("나 "+dmSender);
@@ -491,33 +499,57 @@
 			//메세지 작성을 할때 필요한 것
 			//1. dmReceiver, dmSender<-sessionScope.m.memberId, (classNo)로 사용할것, dmContent
 			if(dmContent != ""){
-
+				
+					
+				//내 클래스에서 목록 받으면 클릭했을때 숫자가 대신 받아짐 
+				//
+				if(classNo == $("#classNo").val() && dmClassNoVal == -1){
+					classNo = classNo;
+					console.log("같은 classNo :"+classNo);
+					console.log("같은 dmClassNoVal :"+dmClassNoVal);
+				}else{
+					classNo = dmClassNoVal;
+					console.log("다른 classNo :"+classNo);
+					console.log("다른 dmClassNoVal :"+dmClassNoVal);
+				}
+				
+				
 				//내용 공백 아닐때
 				$.ajax({
 					url : "/dmSendAjax.do",
 					type : "post",
 					data : {classNo:classNo, dmReceiver:dmReceiver, dmSender:dmSender, dmContent:dmContent, dmRoomNo:dmRoomNo},
 					success : function(data){
-						if(data==1){
+						if(data!=0){
 							console.log("성공!(테스트용)");
+							
 						}else if(data==0){
 							console.log("실패!(테스트용)");						
 						}
+						
 						//$(".main-screen").load(location.href+" .main-screen");
 						//location.reload();
 						
 						//var dmSender = $("#memberNickname").val(); //나
 						//var classNo = $("#classNo").val(); //해당 클래스 번호
 						
+						//dm번호를 리턴 시키면 
+						
+						console.log("dmRoomNo이 뭔데요? "+dmRoomNo);
+						dmRoomNo = data;
+						console.log("세탁한 dmRoomNo은요 "+dmRoomNo);
 						$.ajax({
 							url : "/selectDmListAjax.do",
 							type : "post",
 							data : {dmRoomNo:dmRoomNo, dmSender:dmSender },
 							success : function(data){
+								
 								$(".main-chat").empty();
+								
 								for (var i = 0; i < data.length; i++) {
 									if(dmSender != data[i].dmSender){
 										if(data[i].dmSpic == undefined){
+											
 											$(".main-chat").append("<div class='message-row'>"+
 												"<img src='./resources/img/dm/classtest.jpg'/>"+
 												"<div class='message-row__content'>"+
@@ -525,7 +557,9 @@
 												"<div class='message__info'>"+
 								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
 								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+										
 										}else{
+											
 											$(".main-chat").append("<div class='message-row'>"+
 												"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
 												"<div class='message-row__content'>"+
@@ -533,102 +567,30 @@
 												"<div class='message__info'>"+
 								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
 								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+
 										}
 									}else if(dmSender == data[i].dmSender){
+										
 										$(".main-chat").append("<div class='message-row message-row--own'>"+
 												"<div class='message-row__content'>"+
 												"<div class='message__info'>"+
 								            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
 								           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
+									
 									}
 								}
 								$(".main-screen").scrollTop($(".main-screen").height()+4000);
 							}
 						});
+						
+						
 					}
 				});		
 			}
 
     	}
 		
-		/*
-		//문의 글 함수
-    	function sendMsg(){
-			//let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
-			let dmReceiver = $(".alt-header__title").html(); //상대방
-			let dmSender = $("#memberNickname").val(); //나
-			let classNo = $("#classNo").val(); //해당 클래스 번호
-			let dmContent = $(".dmContent").val(); //문의 내용
-			
-			console.log(dmReceiver);
-			console.log(dmSender);
-			console.log(classNo);
-			console.log(dmContent);
-			
-			//메세지 작성을 할때 필요한 것
-			//1. dmReceiver, dmSender<-sessionScope.m.memberId, (classNo)로 사용할것, dmContent
-			if(dmContent != ""){
-				//내용 공백 아닐때
-				$.ajax({
-					url : "/dmSendAjax.do",
-					type : "post",
-					data : {classNo:classNo, dmReceiver:dmReceiver, dmSender:dmSender, dmContent:dmContent},
-					success : function(data){
-						if(data==1){
-							console.log("성공!(테스트용)");
-						}else if(data==0){
-							console.log("실패!(테스트용)");						
-						}
-						//$(".main-screen").load(location.href+" .main-screen");
-						//location.reload();
-						
-						var dmSender = $("#memberNickname").val(); //나
-						var classNo = $("#classNo").val(); //해당 클래스 번호
-						
-						$(".main-chat").empty();
-						$.ajax({
-							url : "/selectDmListAjax.do",
-							type : "post",
-							data : {classNo:classNo, dmSender:dmSender },
-							success : function(data){
-								for (var i = 0; i < data.length; i++) {
-									if(dmSender != data[i].dmSender){
-										if(data[i].dmSpic == undefined){
-											$(".main-chat").append("<div class='message-row'>"+
-												"<img src='./resources/img/dm/classtest.jpg'/>"+
-												"<div class='message-row__content'>"+
-												"<span class='message__author'>"+data[i].dmSender+"</span>"+
-												"<div class='message__info'>"+
-								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
-								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
-										}else{
-											$(".main-chat").append("<div class='message-row'>"+
-												"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
-												"<div class='message-row__content'>"+
-												"<span class='message__author'>"+data[i].dmSender+"</span>"+
-												"<div class='message__info'>"+
-								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
-								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
-										}
-									}else if(dmSender == data[i].dmSender){
-										$(".main-chat").append("<div class='message-row message-row--own'>"+
-												"<div class='message-row__content'>"+
-												"<div class='message__info'>"+
-								            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
-								           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
-									}
-								}
-								$(".main-screen").scrollTop($(".main-screen").height()+4000);
-							}
-						});
-					}
-				});				
-			}
-    	}
-		*/
-		
 
-		
 		//빨강 버튼 누를때 숨김
 		$(".screen-header_dot").click(function(){
 			$(".dmList").hide();

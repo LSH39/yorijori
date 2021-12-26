@@ -160,6 +160,7 @@
 			dm_spic as dmSpic
 		from dm 
 		where dm_room_no=#{dmRoomNo}
+		order by dm_no asc
 	</select>
 	
 	<!-- 클래스 뷰에서 바로 해당 클래스 문의 조회 -->
@@ -193,6 +194,13 @@
 		select 
 			dm_room_seq.nextval 
 		from dual
+	</select>
+	
+	<!-- 안읽은 메세지 개수 조회 -->
+	<select id="selectDmCnt" parameterType="map" resultType="_int">
+		select count(dm_no)
+		from dm
+		where dm_read_flag=0 and dm_room_no=#{dmRoomNo} and dm_receiver=#{dmSender}
 	</select>
 
 </mapper>

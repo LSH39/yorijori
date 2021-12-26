@@ -59,6 +59,7 @@
 				<h5>클래스 종료일</h5>
 				<input type="date" name="classEnd" id="classEnd"><br><br>
 				<input type="submit" value="등록" class="btn btn-danger" id="classWrite">
+				<input type="file" name="thumbFile" id="classThumbnail" accept=".gif, .jpg, .jpeg, .png">
 				<input type="hidden" id="arrVal">
 			</form>
 		</div>
@@ -120,6 +121,27 @@
 			//클래스 작성 버튼
 			$("#classWrite").click(function(){
 				return chkWrite();
+			});
+			
+			//썸네일 이미지
+			$("#classThumbnail").change(function(){
+				var fileVal = $(this).val();
+				var pathPoint = fileVal.lastIndexOf('.');
+				var filePoint = fileVal.substring(pathPoint+1, this.length);
+				var fileType = filePoint.toLowerCase();
+				var fileSize = 10 * 1024 * 1024; //10메가
+				if(fileType == 'jpg' || fileType == 'png' || fileType == 'jpeg' || fileType == 'gif'){
+				var uploadFileSize = this.files[0].size;
+					if(uploadFileSize > fileSize){
+						alert("이미지 업로드 용량은 10MB 이하로 가능합니다.");
+						$("#classThumbnail").val("");
+					}
+				}else if(fileVal == ""){
+					
+				}else{
+					alert("프로필 사진은 이미지 파일만 가능합니다.");
+					$("#classThumbnail").val("");
+				}
 			});
 			
 			//클래스 제목
