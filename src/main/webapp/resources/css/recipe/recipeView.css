@@ -335,7 +335,7 @@
 	width: 1000px;
 	margin: 0 auto;
 	margin-top: 50px;
-	text-align: center;
+
 }
 
 .rcInput form {
@@ -385,7 +385,7 @@
 }
 
 .rcContents {
-	margin-top: 20px;
+	margin-top: 15px;
 	border: 2px solid #4d4d4d;
 	padding: 20px;
 }

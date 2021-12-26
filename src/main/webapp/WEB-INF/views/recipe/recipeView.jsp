@@ -217,18 +217,21 @@
 			$(".rcList").css("display", "none");
 			$(".contentsWrap").css("display", "block");
 			$(".product").css("display", "none");
-		})
+			$("#recipeVideo").css("display", "block");
+		});
 		$(".view").eq(1).click(function() {
 			selectOne(1)
 			$(".rcList").css("display", "block");
 			$(".contentsWrap").css("display", "none");
 			$(".product").css("display", "none");
+			$("#recipeVideo").css("display", "none");
 		});
 		$(".view").eq(2).click(function() {
 			selectOne(2)
 			$(".rcList").css("display", "none");
 			$(".contentsWrap").css("display", "none");
 			$(".product").css("display", "block");
+			$("#recipeVideo").css("display", "none");
 		});
 
 		$("#insertBtn").click(function() {
