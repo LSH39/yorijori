@@ -232,9 +232,10 @@ a:hover{
 	color: rgb(196, 191, 227);
 }
 #main-newclasses{
-	height: 660px;
+	height: 720px;
 }
 #main-newclasses .swiper-wrapper{
 	overflow:visible;
 	height: 400px;
+	padding: 30px 5px;
 }

@@ -246,7 +246,7 @@
       },
       992: {
         slidesPerView: 4,
-        spaceBetween: 60
+        spaceBetween: 50
       }
     }
   });
