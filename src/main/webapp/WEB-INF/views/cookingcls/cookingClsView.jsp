@@ -26,6 +26,9 @@
 		position:static;
 		padding-right: 12px;
 		padding-left: 12px;
+    	border-radius: 3px;
+    	box-shadow: rgb(41 42 43 / 16%) 0px 2px 6px -2px;
+    	border: 1px solid rgb(255, 255, 255);
 		box-sizing: border-box;
 	}
 	
@@ -35,6 +38,7 @@
 		padding-right: 12px;
 		padding-left: 12px;
 		box-sizing: border-box;
+
 	}
 	
 	.right-stick{
@@ -42,8 +46,7 @@
 		position: sticky;
 		position: -webkit-sticky;
 		top:100px;
-		padding-right: 4px;
-		padding-left: 4px;
+		padding: 4px;
 		overflow: auto;
 	}
 	
@@ -124,7 +127,29 @@
 	}
 
 	.class-content{
-		overflow:hidden;
+		min-height: 500px;
+		overflow: hidden;
+	}
+	
+	.container{
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	
+	.clsfrm-btn{
+	background-color: rgb(159, 144, 207) !important;
+	border-color: rgb(159, 144, 207) !important;
+	color: #fff !important;
+	}
+	
+	.clsfrm-btn:focus{
+		box-shadow: 0 0 0 0.25rem rgb(32 13 253 / 25%) !important;
+		border-color: rgb(159, 144, 207) !important;
+	}
+	
+	.clsfrm-btn:active, .clsfrm-btn:hover{
+		background-color: rgb(121 109 159) !important;
+		border-color: rgb(159, 144, 207) !important;
 	}
 	
 </style>
@@ -213,11 +238,6 @@
 				}
 			});
 			
-		});
-		
-		//내 클래스 예약할때
-		$("#noPayBtn").click(function(){
-			alert("자신의 클래스는 수강이 안됩니다!");
 		});
 		
 		//클래스 이미 예약했을때
@@ -605,18 +625,18 @@
 
 	<div class="container">
 		<div>
-		<h1>쿠킹클래스 뷰</h1>
+		<h1 style="margin-bottom:50px;">쿠킹클래스 뷰</h1>
 			<div class="class-wrap">
 				<div class="left position-static">
 					<div class="class-content">
-					<h5>내용은 ${ccls.classContent }</h5>
+					<h5> ${ccls.classContent }</h5>
 					<c:forEach items="${ccls.clsFileList }" var="f">
 					<h1>파일 이름 : ${f.classFilepath }</h1>
 						<img src="./resources/upload/cookingcls/${f.classFilepath }">
 					</c:forEach>
 					</div>
-					<h3>리뷰 부분</h3>
-						<h5 class="reviewScore">클래스의 평점은 ${reviewAvg }</h5>
+					<h3>후기</h3>
+						<h5 class="reviewScore">평점 : ${reviewAvg }</h5>
 					<div class="reviewSection">
 						<c:choose>
 							<c:when test="${not empty list }">
@@ -666,7 +686,7 @@
 									
 									<c:choose>
 										<c:when test="${ empty sessionScope.m }">
-											<input type="text" id="needToLogin" class="form-control" readonly value="로그인해주세요!">
+											<input type="text" id="needToLogin" class="form-control" readonly value="로그인 해주세요!">
 										</c:when>
 										<c:otherwise>
 											<input type="text" name="reviewContent" id="reviewContent" class="form-control">
@@ -692,7 +712,7 @@
 												<button type="button" id="reviewRsrv" class="btn btn-secondary btn-md">작성</button>
 											</c:when>
 											<c:when test="${rsrvChk eq true and reviewChk eq false}">
-												<button type="button" id="reviewWrite" class="btn btn-danger btn-md">작성</button>											
+												<button type="button" id="reviewWrite" class="btn btn-md clsfrm-btn">작성</button>											
 											</c:when>
 											<c:when test="${rsrvChk eq true and reviewChk eq true}">
 												<button type="button" id="reviewAlrdy" class="btn btn-secondary btn-md">작성</button>											
@@ -712,8 +732,9 @@
 						<div class="right-stick-content">
 							<h5>제목 : <span id="classTitle">${ccls.classTitle }</span></h5>
 							<h5>클래스 강사 : ${ccls.memberNickname }<span class="vertified">정품</span></h5>
+							<h5>강의 기간 : ${ccls.classStart } ~ ${ccls.classEnd }</h5>
 							<h5>가격 : <span class="classPrice">${ccls.classPrice }</span>원</h5>
-							<h5>강의시간 : 
+							<h5>강의 시간 : 
 							<c:choose>
 							<c:when test="${ccls.classStartTime.substring(0, 2) lt 12 }">
 							오전&nbsp;${ccls.classStartTime }
@@ -768,7 +789,13 @@
 										<button type="button" class="btn btn-secondary btn-lg" >마감!</button>
 									</c:when>
 									<c:when test="${sessionScope.m.memberNickname eq ccls.memberNickname}">
-										<button type="button" id="noPayBtn" class="btn btn-danger btn-lg" >수강하기</button>
+										<div class="mt-4 d-grid gap-8 d-md-flex justify-content-md-between">
+											<a href="/cookingClsUpdateFrm.do?classNo=${ccls.classNo }" id="" class="btn btn-light btn-lg" >수정하기</a>
+											<a href="/cookingClsDelete.do?classNo=${ccls.classNo }" class="btn btn-danger btn-lg" >삭제하기</a>							
+										</div>
+										<div class="d-grid gap-2 mt-2">
+											<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의목록확인</button>
+										</div>
 									</c:when>
 									<c:when test="${empty sessionScope.m  }">									
 										<a href="/loginFrm.do" class="btn btn-warning btn-lg" >로그인 하세요!</a>
@@ -777,28 +804,20 @@
 										<button type="button" id="alreadyPayBtn" class="btn btn-secondary btn-lg" >등록완료</button>									
 									</c:when>
 									<c:otherwise>
-										<button type="button" id="payBtn" class="btn btn-primary btn-lg" >수강하기</button>
+										<button type="button" id="payBtn" class="btn btn-lg clsfrm-btn" >수강하기</button>
 									</c:otherwise>
 								</c:choose>
 							</div>
 							<c:if test="${not empty sessionScope.m && ccls.memberNickname != sessionScope.m.memberNickname}">
-							<div class="d-grid gap-2 mt-4">
+							<div class="d-grid gap-2 mt-2">
 							<!-- 
 								<a href="/dmView.do?classNo=${ccls.classNo }" class="btn btn-primary btn-lg" >문의하기</a>
 							 -->
-							<c:if test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
-								<a class="btn btn-primary btn-lg doDm" >AJAX로 문의</a>
-							</c:if>
+								<c:if test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
+									<a class="btn btn-lg doDm clsfrm-btn" >문의 하기</a>
+									<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 목록 확인</button>
+								</c:if>
 							</div>
-							</c:if>
-							<div class="d-grid gap-2 mt-4">
-								<button type="button" class="btn btn-primary btn-lg ajaxList">문의목록확인</button>
-							</div>
-							<c:if test="${sessionScope.m.memberNickname eq ccls.memberNickname }">
-								<div class="mt-4 d-grid gap-8 d-md-flex justify-content-md-between">
-									<a href="/cookingClsUpdateFrm.do?classNo=${ccls.classNo }" id="" class="btn btn-secondary btn-lg" >수정하기</a>
-									<a href="/cookingClsDelete.do?classNo=${ccls.classNo }" class="btn btn-danger btn-lg" >삭제하기</a>							
-								</div>
 							</c:if>
 						</div>
 					</div>
