@@ -315,77 +315,86 @@
 .checkImg span:hover {
 	cursor: pointer;
 }
-#recipeVideo{
-	width:710px;
+
+#recipeVideo {
+	width: 710px;
 	margin: 0 auto;
 }
-.rbList{
-	margin-top:20px;
+
+.rbList {
+	margin-top: 20px;
 }
-#profile{
-	width:60px;
-	height:60px;
+
+#profile {
+	width: 60px;
+	height: 60px;
 	border-radius: 30px;
 }
-   .rcList{
-            width: 1000px;
-            margin: 0 auto;
-            margin-top: 50px;
-            
-        }
-        .rcInput form{
-            margin: 0 auto;
-            text-align: center;
-            display: flex;
-          
-        }
-     
-        .rcInput textarea{
-            width: 800px;
-            resize:none;
-            height: 80px;
-            
-        }
-        #insertBtn{
-            border:none;
-            height: 80px;
-            width: 150px;
-            margin-left: 50px;
-            font-size: 30px;
-            font-weight: 900;
-            background-color:  #E0D8EF;
-            color: white;
 
-            border-radius: 5px; 
-        }
-        #insertBtn:hover{
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-        .comments{
-           
-            width: 800px;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-        .rcName{
-            font-size: 24px;
-            font-weight: 900;
-            margin-left: 10px;
-        }
-        .rcDate{
-            float: right;
-        }
-        .rcContents{
-            margin-top: 20px;
-            border: 2px solid #4d4d4d;
-            padding: 20px;
-        }
-        #updateBtn{
-        border:none;
-        margin-top:20px;
-           
-        }
-        #updateContent{
-         margin-top:20px;
-        }
+.rcList {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.rcInput form {
+	margin: 0 auto;
+	text-align: center;
+	display: flex;
+}
+
+.rcInput textarea {
+	width: 800px;
+	resize: none;
+	height: 80px;
+}
+
+#insertBtn {
+	border: none;
+	height: 80px;
+	width: 150px;
+	margin-left: 50px;
+	font-size: 30px;
+	font-weight: 900;
+	background-color: #E0D8EF;
+	color: white;
+	border-radius: 5px;
+}
+
+#insertBtn:hover {
+	box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px
+		rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+.comments {
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.rcName {
+	font-size: 24px;
+	font-weight: 900;
+	margin-left: 10px;
+}
+
+.rcDate {
+	float: right;
+}
+
+.rcContents {
+	margin-top: 20px;
+	border: 2px solid #4d4d4d;
+	padding: 20px;
+}
+
+#updateBtn {
+	border: none;
+	margin-top: 20px;
+}
+
+#updateContent {
+	margin-top: 20px;
+}

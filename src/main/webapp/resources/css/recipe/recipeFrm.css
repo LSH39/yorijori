@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+.main {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 80px;
+	margin-bottom: 100px;
+}
+.main h1{
+	text-align: center;
+	margin-bottom: 50px;
+}
+.recipeFrm {
+	margin-top: 25px;
+	overflow: hidden;
+}
+
+.recipeFrm label {
+	width: 200px;
+	float: left;
+	font-size: 20px;
+	font-weight: 800;
+	border-left: 3px solid #E0D8EF;
+	border-radius: 2px;
+	padding-left: 10px;
+}
+
+.recipeFrm input {
+	height: 40px;
+	width: 500px;
+}
+
+.recipeFrm:nth-of-type(4) input {
+	width: 300px;
+}
+
+.recipeFrm:nth-of-type(5) p {
+	font-weight: 900;
+	margin-top: 30px;
+}
+
+#recipeFrm1 input {
+	width: 300px;
+}
+
+#recipeFrm2 input {
+	width: 200px;
+}
+
+#plusBtn {
+	color: #8E44AD;
+	font-weight: 800;
+	display: block;
+	width: 140px;
+	height: 40px;
+	border: 2px solid #8E44AD;
+	font-size: 15px;
+	border-radius: 4px;
+	text-align: center;
+	padding-top: 6px;
+	background-color: white;
+	margin-left: 135px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+#plusBtn:hover {
+	color: white;
+	background-color: #8E44AD;
+	font-weight: 900;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+#plusBtn2 {
+	color: #8E44AD;
+	font-weight: 800;
+	display: block;
+	width: 140px;
+	height: 40px;
+	border: 2px solid #8E44AD;
+	font-size: 15px;
+	border-radius: 4px;
+	text-align: center;
+	background-color: white;
+	padding-top: 6px;
+	margin-top : 20px;
+	margin-bottom: 30px;
+	margin-top: 20px;
+}
+
+#plusBtn2:hover {
+	color: white;
+	background-color: #8E44AD;
+	font-weight: 900;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.recipeFrm:nth-of-type(6) label {
+	font-weight: 900;
+	margin-top: 5px;
+}
+
+.recipeFrm select {
+	font-weight: 900;
+	padding: 10px;
+	width: 200px;
+	margin-right: 10px;
+}
+
+.recipeFrm textarea {
+	resize: none;
+	width: 500px;
+	height: 150px;
+	margin-bottom: 10px;
+}
+
+#btn {
+	width: 350px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+#submitBtn {
+	width: 350px;
+	border: none;
+	height: 50px;
+	background-color: #C4BFE3;
+	font-size: 18px;
+	color: white;
+	border-radius: 3px;
+	margin: 0 auto;
+}
+
+
+
+.cookOrder {
+	margin-top: 30px;
+}
+.cookOrder p{
+	font-weight: 900;
+	font-size: 15px;
+}
+.materialBox{
+	margin-top: 10px;
+}
