@@ -498,7 +498,7 @@
 		couponUse
 		from
 		coupon c,coupon_list cl where c.coupon_No =cl.coupon_no and
-		member_No=#{memberNo} and cl.coupon_use=0 order by coupon_end desc)c)
+		member_No=104  and cl.coupon_use=0 order by coupon_end desc)c)
 		where rnum between
 		#{start} and #{end}
 	
