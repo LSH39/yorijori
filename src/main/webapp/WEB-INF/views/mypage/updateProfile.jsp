@@ -206,6 +206,15 @@ function loadImg(obj) {
 			});	
 				
 		});
+		function subBtn() {
+			if($("input[name='upfile']").val()==""){
+				alert("변경할 파일을 선택해주세요");
+				return false;
+			}
+		
+		}
+			
+
 	</script>
 </head>
 <body>
@@ -240,6 +249,7 @@ function loadImg(obj) {
 							<c:when test="${not empty m.profilePath }">
 								<img src="resources/img/mypage/file.png" width="16px" class="delFile">
 								<span class="delFile">${m.profilePath}</span>
+							
 								<button type="button" id="delBtn"
 									class="btn btn-primary btn-sm delFile">바꾸기</button>
 
@@ -255,10 +265,14 @@ function loadImg(obj) {
 
 							</tr>
 						</table>
+					
 						<div class="buttons">
 						 
-							<button type="submit" id="delbutton">프로필 변경</button>
+							<button type="submit" id="delbutton" onclick="return subBtn()">프로필 변경</button>
 						</div>
+						
+			
+						
 					</div>
 				</form>
 			</div>

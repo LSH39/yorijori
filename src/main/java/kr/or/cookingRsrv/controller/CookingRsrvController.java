@@ -69,7 +69,7 @@ public class CookingRsrvController {
 		int result = service.cancelCookingRsrv(classNo);
 		if(result > 0) {
 			model.addAttribute("msg", "취소 성공!");
-			model.addAttribute("loc", "/");
+			model.addAttribute("loc", "/cookingRsrvList.do");
 		}else {
 			model.addAttribute("msg", "취소 실패!");
 			model.addAttribute("loc", "/");			

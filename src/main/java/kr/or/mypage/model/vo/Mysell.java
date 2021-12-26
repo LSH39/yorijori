@@ -44,7 +44,7 @@ public class Mysell {
 		if(orderPayOption == 1) {
 			return "신용카드";
 		}else if(orderPayOption == 2) {
-			return "무통장입금";
+			return "TOSS";
 	
 		}else {
 			return null;

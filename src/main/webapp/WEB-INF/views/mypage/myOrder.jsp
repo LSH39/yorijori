@@ -81,7 +81,7 @@ float: left;
 }
 .pagenation{
 
-margin-left : 400px;
+margin-left : 550px;
 margin-top:100px;
 }
 .pagenation ul{
@@ -127,6 +127,7 @@ $(function() {
 		type:"post",
 		data : {orderNo:orderNo,memberNo:memberNo,orderSale:orderSale},
 		success: function(data){
+			location.href="myOrderList.do?memberNo="+memberNo+"&reqPage=1";
 			alert("주문이 취소되었습니다.");
 			
 		},

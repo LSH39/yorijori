@@ -25,6 +25,7 @@ public class Member {
 	private String withdrawDate;
 	private int memberBlack;
 	private int followerCount; //팔로워수
+	private String profilePathNew;
 	
 	public String getGrade(){
 		if(memberLevel == 1) {
