@@ -155,8 +155,6 @@ $("#payBtn").click(function(){
         		stockCheck = 1;
         	}
         }else{
-        	//$("#checkA").prop("disabled", true);
-        	//selectbox.eq(i).prop("disabled", true);
         }
     }
     if(stockCheck == 1){
