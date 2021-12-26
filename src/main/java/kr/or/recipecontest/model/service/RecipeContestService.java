@@ -10,6 +10,7 @@ import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipecontest.model.dao.RecipeContestDao;
 import kr.or.recipecontest.model.vo.ContestPageData;
 import kr.or.recipecontest.model.vo.ContestViewData;
+import kr.or.recipecontest.model.vo.ContestWinnerData;
 import kr.or.recipecontest.model.vo.RecipeContest;
 
 @Service
@@ -170,9 +171,16 @@ public class RecipeContestService {
 		return result;
 	}
 
-	public ArrayList<RecipeContest> selectContestRecipeList() {
-		ArrayList<RecipeContest> list = dao.selectContestRecipeList();
-		return list;
+	public ContestWinnerData updateContestWinners() {
+		ArrayList<RecipeContest> oneTwoThree = dao.selectContestRecipeList();
+		ArrayList<RecipeContest> special = dao.updateSpecialWinners();
+		if(!oneTwoThree.isEmpty()) {
+			dao.updateContestWinners(oneTwoThree);
+		}
+		ContestWinnerData cwd = new ContestWinnerData();
+		cwd.setOneTwoThree(oneTwoThree);
+		cwd.setSpecial(special);
+		return cwd;
 	}
 
 	public int insertContestRecipe(int recipeNo, int enteredNo) {
@@ -181,6 +189,15 @@ public class RecipeContestService {
 		}
 		int result = dao.insertContestRecipe(recipeNo);
 		return result;
+	}
+
+	public ContestWinnerData selectContestRecipeList() {
+		ArrayList<RecipeContest> oneTwoThree = dao.selectContestRecipeList();
+		ArrayList<RecipeContest> special = dao.selectSpecialWinners();
+		ContestWinnerData cwd = new ContestWinnerData();
+		cwd.setOneTwoThree(oneTwoThree);
+		cwd.setSpecial(special);
+		return cwd;
 	}
 
 }

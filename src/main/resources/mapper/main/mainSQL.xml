@@ -31,7 +31,8 @@
 			class_rate as classRate,
 			class_start as classStart,
 			class_status as classStatus,
-			class_location1 as classLocation1
+			class_location1 as classLocation1,
+			class_thumbnail_filepath as classThumbnailFilepath
 		from cooking_class
 		where class_title like '%' || #{keyword} || '%'
 		order by class_no desc
@@ -114,7 +115,8 @@
 			class_end as classEnd,
 			class_nop as classNop,
 			class_status as classStatus,
-			class_location1 as classLocation1
+			class_location1 as classLocation1,
+			class_thumbnail_filepath as classThumbnailFilepath
 		from cooking_class
 		where class_status = 1
         order by class_no desc

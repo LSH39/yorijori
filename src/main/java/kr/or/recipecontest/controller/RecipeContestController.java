@@ -13,6 +13,7 @@ import kr.or.recipe.model.vo.RecipeBoard;
 import kr.or.recipecontest.model.service.RecipeContestService;
 import kr.or.recipecontest.model.vo.ContestPageData;
 import kr.or.recipecontest.model.vo.ContestViewData;
+import kr.or.recipecontest.model.vo.ContestWinnerData;
 import kr.or.recipecontest.model.vo.RecipeContest;
 
 @Controller
@@ -33,8 +34,9 @@ public class RecipeContestController {
 	
 	@RequestMapping(value="/contestResult.do")
 	public String contestResult(Model model) {
-		ArrayList<RecipeContest> list = service.selectContestRecipeList();
-		model.addAttribute("list", list);
+		ContestWinnerData cwd = service.selectContestRecipeList();
+		model.addAttribute("oneTwoThree", cwd.getOneTwoThree());
+		model.addAttribute("special", cwd.getSpecial());
 		return "recipecontest/contestResult";
 	}
 	

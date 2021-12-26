@@ -71,13 +71,55 @@ public class RecipeContestDao {
 	}
 
 	public ArrayList<RecipeContest> selectContestRecipeList() {
-		List<RecipeContest> list = sqlSession.selectList("recipecontest.selectContestRecipeList");
-		return (ArrayList<RecipeContest>) list;
+		List<RecipeContest> oneTwoThree = sqlSession.selectList("recipecontest.selectContestRecipeList");
+		return (ArrayList<RecipeContest>) oneTwoThree;
 	}
 
 	public int insertContestRecipe(int recipeNo) {
 		int result = sqlSession.insert("recipecontest.insertContest", recipeNo);
 		return result;
+	}
+
+	public int updateContestWinners(ArrayList<RecipeContest> oneTwoThree) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int count = 0;
+		for(int i=0;i<3;i++) {
+			int rank = i+1;
+			map.put("winner", oneTwoThree.get(i));
+			map.put("rank", rank);
+			int result = sqlSession.update("recipecontest.updateContestWinners", map);
+			count += result;
+			sqlSession.insert("recipecontest.insertWinnerHistory", map);
+			if(i <= 1) {
+				map.put("point", 200000);
+				sqlSession.update("recipecontest.updateMemberPoints", map);
+			} else if (i == 2) {
+				map.put("point", 100000);
+				sqlSession.update("recipecontest.updateMemberPoints", map);
+			}
+		}
+		return count;
+	}
+
+	public ArrayList<RecipeContest> updateSpecialWinners() {
+		List<RecipeContest> special = sqlSession.selectList("recipecontest.selectSpecialWinners");
+		if(!special.isEmpty()) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			for(int i=0; i<special.size(); i++) {
+				map.put("winner", special.get(i));
+				map.put("rank", 4);
+				map.put("point", 10000);
+				sqlSession.update("recipecontest.updateContestWinners", map);
+				sqlSession.update("recipecontest.updateMemberPoints", map);
+			}
+			
+		}
+		return (ArrayList<RecipeContest>) special;
+	}
+
+	public ArrayList<RecipeContest> selectSpecialWinners() {
+		List<RecipeContest> special = sqlSession.selectList("recipecontest.selectSpecialWinners");
+		return (ArrayList<RecipeContest>) special;
 	}
 
 }

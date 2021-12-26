@@ -55,7 +55,7 @@
 	</beans:bean>
 	
 	<tx:annotation-driven/>
-
+	<!-- 예약작업 어노테이션방식 사용 선언 -->
 	<task:annotation-driven/>
 	
 	<!-- gmail -->
