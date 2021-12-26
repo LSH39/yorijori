@@ -36,7 +36,7 @@
 		      						<c:forEach items="${recipeList }" var="r" varStatus="i">
 		      							<li>
 		      								<a href="/recipeView.do?recipeNo=${r.recipeNo }&memberNo=0">
-		      									<div class="resultPic"><img src="resources/upload/recipeboard/${r.filepath }" style="width: 150px;height:150px;"></div>
+		      									<div class="resultPic"><img src="resources/upload/recipe/${r.filepath }" style="width: 200px;height:150px;"></div>
 		      									<div class="resultTitle"><h5>${r.recipeTitle }</h5></div>
 		      								</a>
 		      							</li>
@@ -57,7 +57,7 @@
 		      						<c:forEach items="${productList }" var="p" varStatus="i">
 		      							<li>
 		      								<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=${p.recipeNo }">
-		      									<div class="resultPic"><img src="resources/upload/product/${p.filepath }" style="width: 150px;height:150px;"></div>
+		      									<div class="resultPic"><img src="resources/upload/product/${p.filepath }" style="width: 200px;height:150px;"></div>
 		      									<div class="resultTitle"><h5>${p.milkitName }</h5></div>
 		      								</a>
 		      							</li>
@@ -109,7 +109,7 @@
 		      						<c:forEach items="${classList }" var="c" varStatus="i">
 		      							<li>
 		      								<a href="/classView.do?classNo=${c.classNo }">
-		      									<div class="resultPic"><img src="https://img.icons8.com/officel/80/000000/cooking-pot.png"/></div>
+		      									<div class="resultPic"><img src="resources/upload/cookingcls/${c.classThumbnailFilepath }" style="width: 200px;height:150px;"></div>
 		      									<div class="resultTitle"><h5>${c.classTitle }</h5></div>
 		      									<div class="resultContent"><h6>평점 : ${c.classRate }</h6></div>
 		      									<div class="resultContent"><p>시작일 : ${c.classTitle }</p></div>

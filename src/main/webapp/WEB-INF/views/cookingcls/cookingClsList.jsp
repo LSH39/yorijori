@@ -268,8 +268,15 @@
 						<a href="/cookingClsView.do?classNo=${ccls.classNo}" class="class-img">
 							<div class="img-container">
 								<div class="class-img-span">
-									<span>										
-										<img src="./resources/img/cookingcls/a.jpg" class="image-source">
+									<span>
+										<c:choose>
+											<c:when test="${empty ccls.classThumbnailFilepath && empty ccls.classThumbnailFilename }">
+												<img src="./resources/img/cookingcls/a.jpg" class="image-source">
+											</c:when>
+											<c:otherwise>
+												<img src="./resources/upload/cookingcls/${ccls.classThumbnailFilepath }" class="image-source">
+											</c:otherwise>
+										</c:choose>										
 									</span>
 								</div>
 								<div>

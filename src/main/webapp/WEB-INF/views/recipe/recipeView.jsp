@@ -71,7 +71,10 @@
 			</c:if>
 		</c:if>
 		<div class="rbList">
+		 	<a href="/profile.do?memberId=${rb.memberId }">
+			<img  src="/resources/upload/member_profile/${rb.profile }" id="profile">
 			<p id="rbName">${rb.nickname }</p>
+			</a>
 			<p id="rbTitle">${rb.recipeTitle }</p>
 			<p id="rbSub">${rb.subhead }</p>
 			<div class="rbImg">

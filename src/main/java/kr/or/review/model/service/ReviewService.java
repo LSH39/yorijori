@@ -29,6 +29,7 @@ public class ReviewService {
 	public int insertReview(Review review) {
 		// TODO Auto-generated method stub
 		int result = dao.insertReview(review);
+		dao.updateReviewAvgRate(review.getClassNo());
 		return result;
 	}
 
@@ -36,7 +37,9 @@ public class ReviewService {
 	@Transactional
 	public int deleteReview(int reviewNo) {
 		// TODO Auto-generated method stub
+		int classNo = dao.selectClassNo(reviewNo);
 		int result = dao.deleteReview(reviewNo);
+		dao.updateReviewAvgRate(classNo);
 		return result;
 	}
 }
