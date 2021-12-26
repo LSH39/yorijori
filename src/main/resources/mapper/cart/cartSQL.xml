@@ -25,4 +25,5 @@
 	<select id="selectStock" parameterType="_int" resultType="_int">
 		SELECT MILKIT_STOCK AS stock FROM PRODUCT WHERE PRODUCT_NO=#{productNo}
 	</select>
+	
 </mapper>
