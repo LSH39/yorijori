@@ -16,6 +16,8 @@
 <div class="main">
 <h1>밀키트</h1>
 <input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
+<input type="hidden" id="levelCheck" value="${sessionScope.m.memberLevel }" >
+
 	<p id="total">총  <fmt:formatNumber value="${totalCount}"/>개</p>
 		<div id="make"><button >밀키트 만들기</button></div>
 	<div class="milkitList">
