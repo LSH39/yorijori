@@ -16,7 +16,25 @@ public class CartService {
 	private CartDao dao;
 
 	public ArrayList<Cart> cartList(int memberNo) {
-		return dao.cartList(memberNo);
+		ArrayList<Cart> cartList = dao.cartList(memberNo);
+		// 중복 상품 표시 X
+		ArrayList<Cart> newCartList = new ArrayList<Cart>();
+		int [] productNo = new int[cartList.size()];
+		int checkNo = 0;
+		for(int i=0; i<cartList.size(); i++) {
+			int pNo = cartList.get(i).getProductNo();
+			for(int j=0; j<productNo.length; j++) {
+				if(productNo[j] == pNo) {
+					checkNo = 1;
+					break;
+				}
+			}
+			if(checkNo != 1) {
+				productNo[i] = pNo;
+				newCartList.add(cartList.get(i));
+			}
+		}
+		return newCartList;
 	}
 	
 	@Transactional
@@ -33,5 +51,9 @@ public class CartService {
 			result += result2;
 		}
 		return result;
+	}
+
+	public int selectStock(int productNo) {
+		return dao.selectStock(productNo);
 	}
 }

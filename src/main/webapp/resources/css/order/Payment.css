@@ -1,11 +1,12 @@
-.container{
+.container, #container{
     width: 1100px;
     margin: 0 auto;
 }
-.container>p{
+.container>p, #container>p{
     font-size: 32px;
     font-weight: bold;
     text-align: center;
+    padding-top: 80px;
 }
 #order, #delivery, #point, #pay, #coupon{
     width: 1100px;

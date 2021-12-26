@@ -129,7 +129,7 @@ color: #9F90CF;
 		<div class="main-content">
 		     <h3 id="h_hotel">내 포인트</h3><h5 id="comments">보유하고 계신 포인트를 한 눈에 확인 하실 수 있습니다.</h5>
                 <div id="line2"></div><br>
-                <div class="point">현재 총포인트<b>${totalPoint}원</b></div>
+                <div class="point">현재 총 보유포인트<b>${sessionScope.m.memberPoint}원</b></div>
                 <div class="use"> 사용한 포인트<b>${usePoint}원</b></div><br>
               
    

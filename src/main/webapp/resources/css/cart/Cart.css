@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 .content{
-    margin: 100px 0px 100px 0px;
+    margin: 30px 0px 100px 0px;
 }
 .container input[type="checkbox"]+span {
     display: inline-block;

@@ -26,4 +26,8 @@ public class CartDao {
 	public int deleteCart(int cartNo) {
 		return sqlSession.delete("cart.deleteCart",cartNo);
 	}
+
+	public int selectStock(int productNo) {
+		return sqlSession.selectOne("cart.selectStock",productNo);
+	}
 }

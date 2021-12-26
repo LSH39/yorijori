@@ -29,8 +29,6 @@ function countPrice(){
         var count = $(".count").eq(i).text();
         var total = Number(price)*Number(count);
         $(".infoTd").eq(i).next().next().children().text(total);
-        console.log(price);
-        console.log(total);
     }
 }
 // checkbox
@@ -131,23 +129,47 @@ $("#deleteCart").click(function(){
 // 결제
 $("#payBtn").click(function(){
     var arr = [];
+    var stockCheck = 0;
     for(var i=1; i<selectbox.length; i++){
         if(selectbox.eq(i).is(":checked") == true){
         	var cartNo = selectbox.eq(i).parent().next().text();
-            arr.push(cartNo);
+        	var milkitName = $(".milkitName").eq(i-1).text();
+        	var productNo = $(".productNo").eq(i-1).text();
+        	var amount = $(".count").eq(i-1).text();
+        	var stock;
+        	$.ajax({
+        		type: "post",
+        		url: "/selectStock.do",
+        		async : false,  // 비동기
+        		data: {productNo:productNo},
+        		success: function(data){
+        			stock=data;
+        		}
+        	});
+        	if(stock<amount){
+        		alert("["+milkitName+"]의 재고가 ["+stock+"]입니다. 수량을 변경해주세요.");
+        		stockCheck = 0;
+        		break;
+        	}else{
+        		arr.push(cartNo);
+        		stockCheck = 1;
+        	}
         }else{
-        	$("#checkA").prop("disabled", true);
-        	selectbox.eq(i).prop("disabled", true);
+        	//$("#checkA").prop("disabled", true);
+        	//selectbox.eq(i).prop("disabled", true);
         }
     }
-    if(arr.length != 0){
-    	$("#paymentFrm").submit();
-    }else{
-    	alert("선택된 상품이 없습니다.");
-    	$("#checkA").prop("disabled", false);
-    	for(var i=1; i<selectbox.length; i++){
-            selectbox.eq(i).prop("disabled", false);
-        }
+    if(stockCheck == 1){
+	    if(arr.length != 0){
+	    	$("#paymentFrm").submit();
+	    }else{
+	    	alert("선택된 상품이 없습니다.");
+	    	$("#checkA").prop("disabled", false);
+	    	for(var i=1; i<selectbox.length; i++){
+	            selectbox.eq(i).prop("disabled", false);
+	        }
+	    }    	
     }
+    
 });
 </script>
