@@ -31,6 +31,9 @@ public class MembershipService {
 		 }
 		 return result;
 	}
+	public int selectMembership(int memberNo) {
+		return dao.selectMembershipNo(memberNo);
+	}
 }
 
 
