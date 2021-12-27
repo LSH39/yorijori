@@ -36,7 +36,7 @@
 	      				<label for="inputTitle" class="col-sm-2 col-form-label">제목</label>
 	      				<input type="hidden" name="freeNo" value="${freeNo }" id="freeNo">
 	      				<div class="col-sm-4">
-	      					<input type="text" class="form-control" id="inputTitle" name="freeTitle" value="${fb.freeTitle }">
+	      					<input type="text" class="form-control" id="inputTitle" name="freeTitle" value="${fb.freeTitle }" required>
 	      				</div>
 	      				<label for="fileUpload" class="col-sm-2 col-form-label">첨부파일</label>
 	      				<div class="col-sm-4">
@@ -66,7 +66,7 @@
 	      			<div class="form-group row">
 	      				<label for="content" class="col-sm-2 col-form-label">내용</label>
 	      				<div class="col-sm-10">
-	      				<textarea class="form-control" name="freeContent" id="content" rows="20">${fb.freeContent }</textarea>
+	      				<textarea class="form-control" name="freeContent" id="content" rows="20" required>${fb.freeContent }</textarea>
 						</div>	      			
 	      			</div>
 	      			<div class="form-group submitFrm">

@@ -7,6 +7,7 @@ public class MyCookingRsrv {
 	
 	private int rsrvNo;
 	private String memberNickname;
+	private int memberNo;
 	private String classTitle;
 	private int classCurrNop;
 	private String classStart;
@@ -17,6 +18,8 @@ public class MyCookingRsrv {
 	private String classLocation1;
 	private String classLocation2;
 	private int classStatus;
+	private int cancelFlag;
+	private int classNo;
 
 	public String getClassStu(){
 		if(classStatus == 1) {

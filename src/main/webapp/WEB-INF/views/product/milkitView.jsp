@@ -22,7 +22,9 @@
 				</div>	
 	
 		</div>
-		
+		<c:if test="${p.memberLevel eq 3 }">
+		<p id="win">경연대회 우승작</p>
+		</c:if>
 	<input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
 		<div id="title">
 			<div id="titleImg">
@@ -47,7 +49,7 @@
 				<input type="hidden" id="milkitPrice" value="${p.milkitPrice }">
 				<hr>
 				<p>
-					<span class="boldTxt">판매자</span> <span class="thinTxt">${p.nickname }</span>
+					<span class="boldTxt">판매자</span> <span class="thinTxt"><a href="/profile.do?memberId=${p.memberId }" >${p.nickname }</a></span>
 				</p>
 				<p id="order">
 					<span class="boldTxt">구매수량</span> <span id="count">
@@ -132,7 +134,6 @@
 			</c:forEach>		
 			</div>
 			<div class="recipe" style="display: none;">
-				<hr>
 				<c:forEach items="${p.rbList }" var="rb">
 					<div class="rbContent">
 						<c:if test="${sessionScope.m.memberNo != null}">

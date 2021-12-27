@@ -94,7 +94,9 @@
   		milkit_date as milkitDate,
   		milkit_stock as milkitStock,
   		milkit_delete as milkitDelete,
-  		(select member_nickname from member m where m.member_no=p.milkit_writer)as nickname
+  		(select member_nickname from member m where m.member_no=p.milkit_writer)as nickname,
+  		(select member_id from member m where m.member_no=p.milkit_writer)as memberId,
+  		(select member_level from member m where m.member_no=p.milkit_writer)as memberLevel
   	from product p where product_no=#{productNo}
   </select>
   <select id="selectReview" parameterType="_int" resultType="review">

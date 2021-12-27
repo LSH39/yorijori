@@ -106,18 +106,14 @@
 	float: right;
 }
 
-#cart>a {
-
-}
-
 #cart {
+	width: 420px;
 	margin-top: 10px;
 	margin-left: 90px;
 	background-color: #9A86B3;
 	border: none;
 	border-radius: 3px;
-	float: right;
-	width: 420px;
+	float: right;	
 	height: 50px;
 	line-height: 50px;
 	font-size: 24px;
@@ -239,7 +235,8 @@
 }
 
 .rbContent img {
-	width: 550px;
+	width: 300px;
+	height:150px;
 	margin: 30px;
 	border-radius: 15px;
 }
@@ -294,4 +291,19 @@
 }
 #modal-wrap button:hover{
 	color:#C4BFE3;
+}
+#win{
+	margin:0 auto;
+	margin-bottom:30px;
+	 box-shadow :3px 3px 3px 3px rgba(214, 212, 212,0.8);
+	font-size: 20px;
+	font-weight: 900;
+	text-align:center;
+	
+	border: 3px solid rgba(142,68,173,0.5);
+	
+	color:#8E44AD;
+	width: 220px;
+	padding: 10px;
+	
 }

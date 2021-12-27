@@ -115,6 +115,14 @@ function loadImg(obj) {
 			});	
 				
 		});
+		function subBtn() {
+			if($("#profileIntro").val()=="" || $("#memberName").val()=="" || $("#memberEmail").val()=="" || $("#memberPhone").val()==""
+				|| $("#memberBirth").val()==""|| $("#postcode").val()==""|| $("#addressRoad").val()==""|| $("#addressDetail").val()==""){
+				alert("빈칸 없이 작성해주세요");
+				return false;
+			}
+		
+		}
 	</script>
 </head>
 <body>
@@ -155,7 +163,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원아이디</td>
 								<td><input type="text" name="memberId" id="memberId"
-									onfocus="this.placeholder=''" value="${rm.memberId }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberId }" readonly></td>
 							</tr>
 						
 							<tr>
@@ -173,7 +181,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원닉네임</td>
 								<td><input type="text" name="memberNickname" id="memberNickname"
-									onfocus="this.placeholder=''" value="${rm.memberNickname }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberNickname }" readonly></td>
 							</tr>
 						
 							<tr>
@@ -254,7 +262,7 @@ function loadImg(obj) {
 
               </table>
               
-              <button type="submit" id="update">수정하기</button>
+              <button type="submit" id="update" onclick="return subBtn()">수정하기</button>
               
         </form>
       </div>

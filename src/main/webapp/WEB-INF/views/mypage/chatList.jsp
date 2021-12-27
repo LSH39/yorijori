@@ -56,7 +56,7 @@
 #time{
     text-align: right;
 }
-#name{
+.name{
     font-weight: 600;
 }
 .noCou{
@@ -66,6 +66,14 @@ margin-top:120px;
 
 }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+$(function(){
+$(".mypageChat").eq(0).click(function(){
+	$("#chatUser").click();
+});
+});
+</script>
 </head>
 <body>
   <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -99,13 +107,13 @@ margin-top:120px;
 							<div class="dmC">
 								<table class="dContent">
 									<tr>
-										<td id="name">${mc.chatSend}</td>
+										<td class="name">${mc.chatSend}</td>
 									</tr>
 									<tr>
-										<td><a href="#">${mc.chatContent }</a></td>
+										<td><a class="mypageChat">${mc.chatContent }</a></td>
 									</tr>
 									<tr>
-										<td id="time">${mc.chatDate }</td>
+										<td id="time">${mc.chatDateStr }</td>
 									</tr>
 								</table>
 							</div>

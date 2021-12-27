@@ -184,6 +184,13 @@ $(function() {
 
 
 });
+function subBtn() {
+	if($("input[name='upfile']").val()==""){
+		alert("수정할 자격증 파일을 선택해주세요");
+		return false;
+	}
+
+}
 
 </script>
 </head>
@@ -236,7 +243,7 @@ $(function() {
 						</table>
 						<div class="buttons">
 						 
-							<button type="submit" id="delbutton">자격증바꾸기</button>
+							<button type="submit" id="delbutton" onclick="return subBtn()">자격증바꾸기</button>
 						</div>
 					</div>
 				</form>

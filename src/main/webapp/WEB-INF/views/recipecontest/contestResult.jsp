@@ -117,60 +117,56 @@
       		<div class="winners-profile col-sm-9">
       			<ul>
       				<li>
-      					<a href="/recipeView.do?recipeNo=${list[0].recipeNo }&memberNo=0">
-      						<div><img src="resources/upload/recipe/${list[0].recipePath }" style="width:250px;height:200px;"></div>
-      						<div><h4>${list[0].recipeTitle }</h4></div>
+      					<a href="/recipeView.do?recipeNo=${oneTwoThree[0].recipeNo }&memberNo=0">
+      						<div><img src="resources/upload/recipe/${oneTwoThree[0].recipePath }" style="width:250px;height:200px;"></div>
+      						<div><h4>${oneTwoThree[0].recipeTitle }</h4></div>
       					</a>
-      					<a href="/profile.do?memberId=${list[0].memberId } ">
-      						<div class="profile-pic"><img src="resources/upload/member_profile/${list[0].profilePath }" style="width: 100px;height:100px;"></div>
-      						<div><h4>${list[0].memberId }</h4></div>
+      					<a href="/profile.do?memberId=${oneTwoThree[0].memberId } ">
+      						<div class="profile-pic"><img src="resources/upload/member_profile/${oneTwoThree[0].profilePath }" style="width: 100px;height:100px;"></div>
+      						<div><h4>${oneTwoThree[0].memberId }</h4></div>
       					</a>
-      					<div class="total-vote"><h5>${list[0].voteCount } </h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
+      					<div class="total-vote"><h5>${oneTwoThree[0].voteCount } </h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
       				</li>
       				<li>
-      					<a href="/recipeView.do?recipeNo=${list[1].recipeNo }&memberNo=0">
-      						<div><img src="resources/upload/recipe/${list[1].recipePath }" style="width:250px;height:200px;"></div>
-      						<div><h4>${list[1].recipeTitle }</h4></div>
+      					<a href="/recipeView.do?recipeNo=${oneTwoThree[1].recipeNo }&memberNo=0">
+      						<div><img src="resources/upload/recipe/${oneTwoThree[1].recipePath }" style="width:250px;height:200px;"></div>
+      						<div><h4>${oneTwoThree[1].recipeTitle }</h4></div>
       					</a>
-      					<a href="/profile.do?memberId=${list[1].memberId }">
-      						<div class="profile-pic"><img src="resources/upload/member_profile/${list[1].profilePath }" style="width: 100px;height:100px;"></div>
-      						<div><h4>${list[1].memberId }</h4></div>
+      					<a href="/profile.do?memberId=${oneTwoThree[1].memberId }">
+      						<div class="profile-pic"><img src="resources/upload/member_profile/${oneTwoThree[1].profilePath }" style="width: 100px;height:100px;"></div>
+      						<div><h4>${oneTwoThree[1].memberId }</h4></div>
       					</a>
       					<div class="total-vote">
-      						<h5>${list[1].voteCount }</h5>
+      						<h5>${oneTwoThree[1].voteCount }</h5>
       						<img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;">
       					</div>
       				</li>
       				<li>
-      					<a href="/recipeView.do?recipeNo=${list[2].recipeNo }&memberNo=0">
-      						<div><img src="resources/upload/recipe/${list[2].recipePath }" style="width:250px;height:200px;"></div>
-      						<div><h4>${list[2].recipeTitle }</h4></div>
+      					<a href="/recipeView.do?recipeNo=${oneTwoThree[2].recipeNo }&memberNo=0">
+      						<div><img src="resources/upload/recipe/${oneTwoThree[2].recipePath }" style="width:250px;height:200px;"></div>
+      						<div><h4>${oneTwoThree[2].recipeTitle }</h4></div>
       					</a>
-      					<a href="/profile.do?memberId=${list[2].memberId }">
-      						<div class="profile-pic"><img src="resources/upload/member_profile/${list[2].profilePath }" style="width: 100px;height:100px;"></div>
-      						<div><h4>${list[2].memberId }</h4></div>
+      					<a href="/profile.do?memberId=${oneTwoThree[2].memberId }">
+      						<div class="profile-pic"><img src="resources/upload/member_profile/${oneTwoThree[2].profilePath }" style="width: 100px;height:100px;"></div>
+      						<div><h4>${oneTwoThree[2].memberId }</h4></div>
       					</a>
-      					<div class="total-vote"><h5>${list[2].voteCount }</h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
+      					<div class="total-vote"><h5>${oneTwoThree[2].voteCount }</h5><img src="resources/img/recipecontest/vote-before.png" style="width:30px;height:30px;"></div>
       				</li>
       			</ul>
       		</div>
       		<div class="special-winners col-sm-3">
-      		<c:choose>
-      			<c:when test="${list[0].voteCount >= 30 }">
+      			<c:choose>
+      				<c:when test="${not empty special }">
       				<ul class="winners">
-					  <c:forEach items="${list }" var="w" varStatus="i">
-					  	<c:choose>
-					  		<c:when test="${w.voteCount >= 30 }">
-					  			<li>${list[i].memberId }</li>
-					  		</c:when>
-					  	</c:choose>
+      					<c:forEach items="${special }" var="s" varStatus="i">
+					  			<li>${s.memberId }</li>
 					  </c:forEach>
 					</ul>
-      			</c:when>
-      			<c:otherwise>
-      			</c:otherwise>
-      		</c:choose>
-      			
+      				</c:when>
+      				<c:otherwise>
+      					특별상 시상자가 없어요.
+      				</c:otherwise>
+      			</c:choose>	
       		</div>
       	</div>
       	<div class="prize-tower row">

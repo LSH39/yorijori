@@ -10,7 +10,7 @@
 #line2 {
 	background-color: gray;
 	height: 3px;
-	width: 875px;
+	width: 90px;
 }
 
 /* 메인 콘텐츠 설정 */
@@ -56,20 +56,19 @@ background-color:rgb(196, 191, 227);
 				<tr>
 					<th>예약번호</th>
 					<th>요리클래스</th>
-					<th>클래스시작일</th>
-					<th>수강료</th>
+					<th>클래스시작일</th>			
 					<th>수업시간</th>
 					<th>수업장소</th>
-					<th>예약수정</th>
-					<th>예약취소</th>
+					<th></th>
+				
 				</tr>
 				<c:forEach items="${list}" var="mcr" varStatus="i">
 					<tr>
 						<td>${mcr.rsrvNo }</td>
 						<td>${mcr.classTitle }</td>
 						<td>${mcr.classStart }</td>
-						<td>${mcr.classPrice }원</td>
 						<td>${mcr.classStartTime }분~ ${mcr.classEndTime}분</td>
+						
 						<c:choose>
 							<c:when test="${empty mcr.classLocation1}">
 								<td>비대면</td>
@@ -78,13 +77,18 @@ background-color:rgb(196, 191, 227);
 								<td>${mcr.classLocation1}</td>
 							</c:otherwise>
 						</c:choose>
-
-						<td><button value="수정" id="modify">
-								<a href="#">수정</a>
-							</button></td>
-						<td><button value="취소" id="delete">
-								<a href="#">삭제</a>
-							</button></td>
+						
+						<td>
+							<c:choose>
+								<c:when test="${mcr.cancelFlag eq 1 }">
+									<button type="button" class="btn btn-secondary btn-sm">취소완료</button>
+									<a href="/deleteCookingRsrv.do?rsrvNo=${mcr.rsrvNo }" class="btn btn-danger btn-sm">내역삭제</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/cancelCookingRsrv.do?classNo=${mcr.classNo }" class="btn btn-danger btn-sm">취소하기</a>
+								</c:otherwise>
+							</c:choose>
+							</td>
 					</tr>
 
 				</c:forEach>

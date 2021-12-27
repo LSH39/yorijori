@@ -1,6 +1,8 @@
 package kr.or.mypage.model.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,6 +148,12 @@ public class MypageService {
 
 	public ArrayList<Mychat> myChatList(int chatReceive) {
 		ArrayList<Mychat> list = dao.myChatList(chatReceive);
+		for(int i=0; i<list.size(); i++) {
+			Date beforeDate = list.get(i).getChatDate();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			String newDate = simpleDateFormat.format(beforeDate);
+			list.get(i).setChatDateStr(newDate);
+		}
 		return list;
 	}
 
@@ -414,7 +422,7 @@ public class MypageService {
     /*찜 레시피 페이징*/
 	public MyLikeRecipePageData likeRecipeList(int reqPage,int memberNo) {
 		//필요한 정보 - 페이지당 게시물 개수
-		int numPerPage = 1;
+		int numPerPage = 6;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 

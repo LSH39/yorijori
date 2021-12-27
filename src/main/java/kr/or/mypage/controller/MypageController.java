@@ -276,8 +276,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/myPoint.do")
 	public String myPoint(int memberNo, Model model,int reqPage) {
-		System.out.println("회원번호 :"+memberNo);
-		System.out.println("페이지번호 :"+reqPage);
+	
 		MyPointPageData ppd =service.pointList(reqPage,memberNo);
 		model.addAttribute("list", ppd.getList());
 		model.addAttribute("pageNavi",ppd.getPageNavi());
@@ -371,9 +370,12 @@ public class MypageController {
 	@RequestMapping(value="/updateProfile.do")
 	public String updateProfile(Model model, Member m,MultipartFile upfile, HttpServletRequest request, String oldFilepath) {
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member_profile/");
+		System.out.println("oldFilepath:"+oldFilepath);
+		System.out.println("upfile:"+upfile.getOriginalFilename());
 
 		//기존 파일 삭제
 		if(oldFilepath != null) {
+			
 			String fullPath = savePath + m.getProfilePath();
 			File f = new File(fullPath);
 			if(f.isFile()) {
@@ -452,10 +454,17 @@ public class MypageController {
 			System.out.println("금액 : "+ms.getMilkitPrice());	
 			result =service.raisePoint(ms);
 			if (result > 0) {
-				model.addAttribute("msg", "포인트 적립 성공");
+				model.addAttribute("msg", "포인트 내역추가");
+			}else
+			{
+				model.addAttribute("msg", "포인트 내역추가 실패");
 			}
-			result =service.updatePoint(ms);
-			if (result == 0) {
+			System.out.println("회원번호:"+ms.getMemberNo());
+			 int  result1 =service.updatePoint(ms);
+			if (result1 > 0) {
+				model.addAttribute("msg", "포인트 적립성공");
+			}else
+			{
 				model.addAttribute("msg", "포인트 적립 실패");
 			}
 		}	
@@ -469,8 +478,8 @@ public class MypageController {
 	@RequestMapping(value = "/cancelOrder.do")
 	public String cancelOrder(int orderNo,int orderSale,int memberNo,Model model) {
 		System.out.println("orderNo"+orderNo);
-		System.out.println("orderNo"+orderSale);
-		System.out.println("orderNo"+memberNo);
+		System.out.println("orderSale"+orderSale);
+		System.out.println("memberNo"+memberNo);
 		int result = service.cancelOrder(orderNo);
 	    
 		if (result > 0) {
@@ -478,17 +487,24 @@ public class MypageController {
 		} else {
 			model.addAttribute("msg", "주문취소가 실패했습니다");
 		}
+
 		if(orderSale>0) {
 			result=service.returnPoint(orderSale,memberNo);
 			if (result > 0) {
-				model.addAttribute("msg", "포인트 반환이 완료되었습니다");
+				model.addAttribute("msg", "포인트 취소성공");
+			}else {
+				model.addAttribute("msg", "포인트 취소실패");
 			}
-			result =service.upPoint(orderSale,memberNo);
-			if (result == 0) {
-				model.addAttribute("msg", "포인트 반환이 실패했습니다");
+			System.out.println("회원번호:"+memberNo);
+			int result1 =service.upPoint(orderSale,memberNo);
+			if (result1 > 0) {
+				model.addAttribute("msg", "포인트 반환성공");
+			}else
+			{
+				model.addAttribute("msg", "포인트 반환 실패");
 			}
-		
-		}
+		}	
+
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}

@@ -40,7 +40,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="mainImg">
 			<img src="/resources/upload/recipe/${rb.filepath }" id="titleImg">
 			<div id="count">
@@ -71,7 +70,10 @@
 			</c:if>
 		</c:if>
 		<div class="rbList">
+		 	<a href="/profile.do?memberId=${rb.memberId }">
+			<img  src="/resources/upload/member_profile/${rb.profile }" id="profile">
 			<p id="rbName">${rb.nickname }</p>
+			</a>
 			<p id="rbTitle">${rb.recipeTitle }</p>
 			<p id="rbSub">${rb.subhead }</p>
 			<div class="rbImg">
@@ -120,13 +122,13 @@
 				</c:if>
 			</div>
 			<c:forEach items="${list}" var="rc">
-				<div>
+				 <div class="comments">
 					<img src="/resources/img/recipe/person.png" width="30px"> <span
-						class="rcNmae">${rc.nickname }</span> <span class="rcDate">${rc.rcDate }</span>
+						class="rcName">${rc.nickname }</span> <span class="rcDate">${rc.rcDate }</span>
 					<p class="rcContents">${rc.rcContentBr }</p>
 					<textarea id="updateContent" name="rcContent" class="form-control"
 						style="display: none;">${rc.rcContent }</textarea>
-					<button style="display: none;">수정완료</button>
+					<button style="display: none;" id="updateBtn">수정완료</button>
 					<c:if test="${sessionScope.m.memberNo == rc.memberNo}">
 						<p class="commentsBtn">
 							<a href="javascript:void(0)"
@@ -156,7 +158,7 @@
 		</div>
 
 		<div class="product" style="display: none;">
-			<hr>
+			
 			<c:forEach items="${rb.PList }" var="p">
 				<div class="milkit">
 					<c:if test="${sessionScope.m.memberNo != null}">
@@ -165,7 +167,7 @@
 							<img src="/resources/upload/product/${p.filepath }">
 							<p class="pTitle">${p.milkitName }</p>
 							<p class="pComment">${p.milkitComment}</p>
-							<p class="mPrice">${p.milkitPrice }</p>
+							<p class="mPrice"><fmt:formatNumber value="${p.milkitPrice}" />원</p>
 						</a>
 					</c:if>
 					<c:if test="${sessionScope.m.memberNo == null}">
@@ -176,7 +178,7 @@
 							<p class="pComment">${p.milkitComment}</p>
 							<p class="mPrice">
 								<fmt:formatNumber value="${p.milkitPrice}" />
-								원</span>
+								원
 							</p>
 						</a>
 					</c:if>
@@ -214,18 +216,21 @@
 			$(".rcList").css("display", "none");
 			$(".contentsWrap").css("display", "block");
 			$(".product").css("display", "none");
-		})
+			$("#recipeVideo").css("display", "block");
+		});
 		$(".view").eq(1).click(function() {
 			selectOne(1)
 			$(".rcList").css("display", "block");
 			$(".contentsWrap").css("display", "none");
 			$(".product").css("display", "none");
+			$("#recipeVideo").css("display", "none");
 		});
 		$(".view").eq(2).click(function() {
 			selectOne(2)
 			$(".rcList").css("display", "none");
 			$(".contentsWrap").css("display", "none");
 			$(".product").css("display", "block");
+			$("#recipeVideo").css("display", "none");
 		});
 
 		$("#insertBtn").click(function() {

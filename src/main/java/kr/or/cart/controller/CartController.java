@@ -59,4 +59,11 @@ public class CartController {
 			return "0";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/selectStock.do")
+	public int selectStock(int productNo) {
+		int stock = service.selectStock(productNo);
+		return stock;
+	}
 }

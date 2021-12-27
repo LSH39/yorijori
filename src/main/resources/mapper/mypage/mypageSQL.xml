@@ -66,7 +66,6 @@
 	<update id="updateMember" parameterType="m">
 		update member set
 		member_email=#{memberEmail},
-		member_nickName=#{memberNickname},
 		member_phone=#{memberPhone},
 		member_birth=#{memberBirth},
 		postcode=#{postcode},
@@ -123,9 +122,11 @@
 		cc.class_location1 as
 		classLocation1,
 		cc.class_location2 as classLocation2,
-		cc.class_Status as classStatus
-		,cr.rsrv_no as rsrvNo,
-		cr.member_nickname as memberNickname
+		cc.class_Status as classStatus,
+		cr.rsrv_no as rsrvNo,
+		cr.member_nickname as memberNickname,
+		cr.cancel_Flag as cancelFlag,
+		cc.class_no as classNo
 		from
 		cooking_rsrv cr,cooking_class cc
 		where cc.class_no =cr.class_no and
@@ -178,10 +179,10 @@
 		cr.contest_month as contestMonth,
 		rb.recipe_title as recipeTitle,
 		rb.recipe_writer as recipeWriter,
+        rb.recipe_no as recipeNo,
 		rb.filePath,
 		m.member_nickname as memberNickName,
-        m.profile_Path as profilePath,
-        m.member_Id as memberId,
+        m.member_id as memberId,
 		( select count(*) from contest_vote where contest_no=cr.contest_no ) as
 		voteCount
 		from contest_recipe cr,recipe_board rb,member m
@@ -191,7 +192,6 @@
 		order by contest_month asc
 
 	</select>
-
 	<select id="myItem" resultType="mi" parameterType="_int">
 		select
 		product_no as productNo,
@@ -204,8 +204,6 @@
 		milkit_stock as milkitStock
 		from product
 		where milkit_writer=#{memberNo}
-
-
 	</select>
 
 	<select id="myBoard" resultType="fb" parameterType="_int">
@@ -222,7 +220,8 @@
 
 	</select>
 	<select id="followList" resultType="fol" parameterType="_int">
-		select a.recipe_Writer as recipeWriter
+
+			select a.recipe_Writer as recipeWriter
 		, a.recipe_Title as recipeTitle
 		, a.filepath as filepath
 		, a.subhead as subhead
@@ -230,13 +229,12 @@
 		, (select count(*)from recipe_like where recipe_no=a.recipe_no) as cnt
 		, (select member_nickName from member where member_no =
 		a.recipe_writer) as memberNickname,
-        (select member_Id from member where member_no =
+         (select member_Id from member where member_no =
 		a.recipe_writer) as memberId,
 		(select profile_path from member where member_no=recipe_writer)as profilePath
 		from recipe_board a
 		where a.recipe_writer in (SELECT follow_no from follow where
 		member_no=#{memberNo})
-	
 
 	</select>
 	<select id="followCount" resultType="_int" parameterType="_int">
@@ -250,7 +248,7 @@
 		(select profile_path from member where member_no=a.chat_send)as profilePath,
 		a.chat_receive as chatReceive,
 		a.chat_content as chatContent,
-		to_date(a.chat_date,'yyyy-mm-dd') as chatDate
+		a.chat_date as chatDate
 
 		from chat a
 		, (select chat_send , max(chat_no) as chat_no
@@ -500,7 +498,7 @@
 		couponUse
 		from
 		coupon c,coupon_list cl where c.coupon_No =cl.coupon_no and
-		member_No=104  and cl.coupon_use=0 order by coupon_end desc)c)
+		member_No=#{memberNo} and cl.coupon_use=0 order by coupon_end desc)c)
 		where rnum between
 		#{start} and #{end}
 	
@@ -509,7 +507,7 @@
 
 	<select id="couponCount" resultType="_int" parameterType="map">
 		select
-		count(*)from coupon_List where member_no=#{memberNo}
+		count(*)from coupon_List where member_no=#{memberNo} and coupon_use=0 
 
 	</select>
 	<select id="myContestList" resultType="myc" parameterType="map">
@@ -632,7 +630,7 @@
 		point_content as pointContent,
 		point_date as pointDate
 		from point
-		where member_no=#{memberNo} order by point_date desc)p
+		where member_no=#{memberNo} order by point_no desc)p
 		)
 		where rnum between #{start} and #{end}
 
@@ -795,7 +793,8 @@
 		milkitWriter,
 		c.recipe_no as recipeNo,
 		c.milkit_name as milkitName,
-		c.milkit_price as milkitPrice
+		c.milkit_price as milkitPrice,
+        c.filepath as filepath
 		from order_option a,order_tbl b,product c
 		where
 
@@ -803,6 +802,7 @@
 		c.milkit_writer=#{milkitWriter} order by a.order_no desc)s)
 		where rnum
 		between #{start} and #{end}
+	
 
 	</select>
 	<select id="SellCount" resultType="_int" parameterType="_int">
@@ -837,4 +837,3 @@
 
 	</update>
 </mapper>
-

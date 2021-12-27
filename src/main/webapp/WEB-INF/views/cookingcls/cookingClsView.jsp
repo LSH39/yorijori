@@ -26,6 +26,9 @@
 		position:static;
 		padding-right: 12px;
 		padding-left: 12px;
+    	border-radius: 3px;
+    	box-shadow: rgb(41 42 43 / 16%) 0px 2px 6px -2px;
+    	border: 1px solid rgb(255, 255, 255);
 		box-sizing: border-box;
 	}
 	
@@ -35,6 +38,7 @@
 		padding-right: 12px;
 		padding-left: 12px;
 		box-sizing: border-box;
+
 	}
 	
 	.right-stick{
@@ -42,8 +46,7 @@
 		position: sticky;
 		position: -webkit-sticky;
 		top:100px;
-		padding-right: 4px;
-		padding-left: 4px;
+		padding: 4px;
 		overflow: auto;
 	}
 	
@@ -124,12 +127,38 @@
 	}
 
 	.class-content{
-		overflow:hidden;
+		min-height: 500px;
+		overflow: hidden;
+	}
+	
+	.container{
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	
+	.clsfrm-btn{
+	background-color: rgb(159, 144, 207) !important;
+	border-color: rgb(159, 144, 207) !important;
+	color: #fff !important;
+	}
+	
+	.clsfrm-btn:focus{
+		box-shadow: 0 0 0 0.25rem rgb(32 13 253 / 25%) !important;
+		border-color: rgb(159, 144, 207) !important;
+	}
+	
+	.clsfrm-btn:active, .clsfrm-btn:hover{
+		background-color: rgb(121 109 159) !important;
+		border-color: rgb(159, 144, 207) !important;
 	}
 	
 </style>
 <script>
 	$(function(){
+		var prePriceComma = $(".classPrice").html();
+		var postPriceComma = prePriceComma.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$(".classPrice").html(postPriceComma);
+		
 		var dmRoomNo = -1;
 		var dmClassNoVal = -1;
 		
@@ -215,11 +244,6 @@
 			
 		});
 		
-		//내 클래스 예약할때
-		$("#noPayBtn").click(function(){
-			alert("자신의 클래스는 수강이 안됩니다!");
-		});
-		
 		//클래스 이미 예약했을때
 		$("#alreadyPayBtn").click(function(){
 			alert("이미 예약한 클래스 입니다!");
@@ -262,7 +286,7 @@
 				buyer_postcode : "99999" //구매자 우편번호
 			},function(rsp){
 				if(rsp.success){
-					alert("결제 성공성공");
+					alert("결제가 완료됐습니다!");
 					//성공시 로직(db결제정보 insert -> 사용자 화면 처리)
 					console.log("카드 승인 번호 "+rsp.apply_num);
 				}else{
@@ -289,13 +313,11 @@
 		
 		//문의 목록 AJAX시작 12-23 클래스뷰에서 
 		$(".ajaxList, .toList").click(function(){
+			dmClassNoVal = -1;
 			$(".dmView").hide();
 			$(".dmList").toggle();
 			let dmSender = $("#memberNickname").val();
 			let memberLevel = $("#memberLevel").val();
-			
-			console.log(dmSender);
-			console.log(memberLevel);
 			
 			$.ajax({
 				url : "/dmAjaxList.do",
@@ -312,7 +334,7 @@
 	
 						for (var i = 0; i < data.length; i++) {
 							let b = "";
-							b+="<a class='link' href='#'>";
+							b+="<a class='link'>";
 							b+="<div class='user-component'>";
 							b+="<div class='user-component__column'>";
 							if(dmSender == data[i].dmReceiver){ //상대방이 나한테 보낸 메세지
@@ -339,7 +361,11 @@
 							b+="<div class='user-component__last'>";
 							b+="<span class='user-component__time'>"+data[i].dmDate.substring(11, 16)+"</span>";
 							if(dmSender == data[i].dmReceiver && data[i].dmReadFlag == 0){
-								b+="<div class='dm-badge'>x</div>";
+								if(data[i].dmCnt > 99){
+									b+="<div class='dm-badge over-100'>99+</div>";									
+								}else if(data[i].dmCnt > 0 && data[i].dmCnt < 100){
+									b+="<div class='dm-badge from-1to99'>"+data[i].dmCnt+"</div>";								
+								}
 							}else{
 								b+="<div class='dm-no-badge'>x</div>";							
 							}
@@ -413,6 +439,7 @@
 		
 		//문의하기 바로 눌렀을때 이전내용 보여줌 12-23
 		$(document).on("click", ".doDm", function(){
+			classNoVal = -1;
 			$(".dmList").hide();
 			$(".dmView").toggle();
 			let dmReceiver = $(".alt-header__title").html($("#clsMemberNickname").val()); //상대방
@@ -420,6 +447,11 @@
 			let classNo = $("#classNo").val(); //해당 클래스 번호
 			console.log("dmRoomNo 번호는 과연 "+dmRoomNo);
 			$(".main-chat").empty();
+			
+			//테스트
+			classNoVal = classNo;
+			console.log("문의하기 눌럿을때 : "+classNoVal);
+			
 			$.ajax({
 				url : "/selectDmAjax.do",
 				type : "post",
@@ -475,11 +507,11 @@
 		
 		//문의 글 함수 방번호 있는거 12-23
     	function sendMsg(){
-			//let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
 			let dmReceiver = $(".alt-header__title").html(); //상대방
 			let dmSender = $("#memberNickname").val(); //나
 			let classNo = $("#classNo").val(); //해당 클래스 번호
 			let dmContent = $(".dmContent").val(); //문의 내용
+			
 			
 			console.log("목록 위에 있는 닉네임 "+dmReceiver);
 			console.log("나 "+dmSender);
@@ -491,33 +523,57 @@
 			//메세지 작성을 할때 필요한 것
 			//1. dmReceiver, dmSender<-sessionScope.m.memberId, (classNo)로 사용할것, dmContent
 			if(dmContent != ""){
-
+				
+					
+				//내 클래스에서 목록 받으면 클릭했을때 숫자가 대신 받아짐 
+				//
+				if(classNo == $("#classNo").val() && dmClassNoVal == -1){
+					classNo = classNo;
+					console.log("같은 classNo :"+classNo);
+					console.log("같은 dmClassNoVal :"+dmClassNoVal);
+				}else{
+					classNo = dmClassNoVal;
+					console.log("다른 classNo :"+classNo);
+					console.log("다른 dmClassNoVal :"+dmClassNoVal);
+				}
+				
+				
 				//내용 공백 아닐때
 				$.ajax({
 					url : "/dmSendAjax.do",
 					type : "post",
 					data : {classNo:classNo, dmReceiver:dmReceiver, dmSender:dmSender, dmContent:dmContent, dmRoomNo:dmRoomNo},
 					success : function(data){
-						if(data==1){
+						if(data!=0){
 							console.log("성공!(테스트용)");
+							
 						}else if(data==0){
 							console.log("실패!(테스트용)");						
 						}
+						
 						//$(".main-screen").load(location.href+" .main-screen");
 						//location.reload();
 						
 						//var dmSender = $("#memberNickname").val(); //나
 						//var classNo = $("#classNo").val(); //해당 클래스 번호
 						
+						//dm번호를 리턴 시키면 
+						
+						console.log("dmRoomNo이 뭔데요? "+dmRoomNo);
+						dmRoomNo = data;
+						console.log("세탁한 dmRoomNo은요 "+dmRoomNo);
 						$.ajax({
 							url : "/selectDmListAjax.do",
 							type : "post",
 							data : {dmRoomNo:dmRoomNo, dmSender:dmSender },
 							success : function(data){
+								
 								$(".main-chat").empty();
+								
 								for (var i = 0; i < data.length; i++) {
 									if(dmSender != data[i].dmSender){
 										if(data[i].dmSpic == undefined){
+											
 											$(".main-chat").append("<div class='message-row'>"+
 												"<img src='./resources/img/dm/classtest.jpg'/>"+
 												"<div class='message-row__content'>"+
@@ -525,7 +581,9 @@
 												"<div class='message__info'>"+
 								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
 								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+										
 										}else{
+											
 											$(".main-chat").append("<div class='message-row'>"+
 												"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
 												"<div class='message-row__content'>"+
@@ -533,102 +591,30 @@
 												"<div class='message__info'>"+
 								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
 								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
+
 										}
 									}else if(dmSender == data[i].dmSender){
+										
 										$(".main-chat").append("<div class='message-row message-row--own'>"+
 												"<div class='message-row__content'>"+
 												"<div class='message__info'>"+
 								            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
 								           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
+									
 									}
 								}
 								$(".main-screen").scrollTop($(".main-screen").height()+4000);
 							}
 						});
+						
+						
 					}
 				});		
 			}
 
     	}
 		
-		/*
-		//문의 글 함수
-    	function sendMsg(){
-			//let dmReceiver = $("#clsMemberNickname").val(); //클래스 개설자
-			let dmReceiver = $(".alt-header__title").html(); //상대방
-			let dmSender = $("#memberNickname").val(); //나
-			let classNo = $("#classNo").val(); //해당 클래스 번호
-			let dmContent = $(".dmContent").val(); //문의 내용
-			
-			console.log(dmReceiver);
-			console.log(dmSender);
-			console.log(classNo);
-			console.log(dmContent);
-			
-			//메세지 작성을 할때 필요한 것
-			//1. dmReceiver, dmSender<-sessionScope.m.memberId, (classNo)로 사용할것, dmContent
-			if(dmContent != ""){
-				//내용 공백 아닐때
-				$.ajax({
-					url : "/dmSendAjax.do",
-					type : "post",
-					data : {classNo:classNo, dmReceiver:dmReceiver, dmSender:dmSender, dmContent:dmContent},
-					success : function(data){
-						if(data==1){
-							console.log("성공!(테스트용)");
-						}else if(data==0){
-							console.log("실패!(테스트용)");						
-						}
-						//$(".main-screen").load(location.href+" .main-screen");
-						//location.reload();
-						
-						var dmSender = $("#memberNickname").val(); //나
-						var classNo = $("#classNo").val(); //해당 클래스 번호
-						
-						$(".main-chat").empty();
-						$.ajax({
-							url : "/selectDmListAjax.do",
-							type : "post",
-							data : {classNo:classNo, dmSender:dmSender },
-							success : function(data){
-								for (var i = 0; i < data.length; i++) {
-									if(dmSender != data[i].dmSender){
-										if(data[i].dmSpic == undefined){
-											$(".main-chat").append("<div class='message-row'>"+
-												"<img src='./resources/img/dm/classtest.jpg'/>"+
-												"<div class='message-row__content'>"+
-												"<span class='message__author'>"+data[i].dmSender+"</span>"+
-												"<div class='message__info'>"+
-								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
-								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
-										}else{
-											$(".main-chat").append("<div class='message-row'>"+
-												"<img src='./resources/upload/member_profile/"+data[i].dmSpic+"'/>"+
-												"<div class='message-row__content'>"+
-												"<span class='message__author'>"+data[i].dmSender+"</span>"+
-												"<div class='message__info'>"+
-								            	"<span class='message__bubble'>"+data[i].dmContent+"</span>"+
-								           		"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span></div></div></div>");
-										}
-									}else if(dmSender == data[i].dmSender){
-										$(".main-chat").append("<div class='message-row message-row--own'>"+
-												"<div class='message-row__content'>"+
-												"<div class='message__info'>"+
-								            	"<span class='message__time'>"+data[i].dmDate.substring(11, 16)+"</span>"+
-								           		"<span class='message__bubble'>"+data[i].dmContent+"</span></div></div></div>");
-									}
-								}
-								$(".main-screen").scrollTop($(".main-screen").height()+4000);
-							}
-						});
-					}
-				});				
-			}
-    	}
-		*/
-		
 
-		
 		//빨강 버튼 누를때 숨김
 		$(".screen-header_dot").click(function(){
 			$(".dmList").hide();
@@ -643,18 +629,18 @@
 
 	<div class="container">
 		<div>
-		<h1>쿠킹클래스 뷰</h1>
+		<h1 style="margin-bottom:50px;">요리 클래스</h1>
 			<div class="class-wrap">
 				<div class="left position-static">
 					<div class="class-content">
-					<h5>내용은 ${ccls.classContent }</h5>
+					<h5> ${ccls.classContent }</h5>
 					<c:forEach items="${ccls.clsFileList }" var="f">
 					<h1>파일 이름 : ${f.classFilepath }</h1>
 						<img src="./resources/upload/cookingcls/${f.classFilepath }">
 					</c:forEach>
 					</div>
-					<h3>리뷰 부분</h3>
-						<h5 class="reviewScore">클래스의 평점은 ${reviewAvg }</h5>
+					<h3>후기</h3>
+						<h5 class="reviewScore">평점 : ${reviewAvg }</h5>
 					<div class="reviewSection">
 						<c:choose>
 							<c:when test="${not empty list }">
@@ -704,7 +690,7 @@
 									
 									<c:choose>
 										<c:when test="${ empty sessionScope.m }">
-											<input type="text" id="needToLogin" class="form-control" readonly value="로그인해주세요!">
+											<input type="text" id="needToLogin" class="form-control" readonly value="로그인 해주세요!">
 										</c:when>
 										<c:otherwise>
 											<input type="text" name="reviewContent" id="reviewContent" class="form-control">
@@ -730,7 +716,7 @@
 												<button type="button" id="reviewRsrv" class="btn btn-secondary btn-md">작성</button>
 											</c:when>
 											<c:when test="${rsrvChk eq true and reviewChk eq false}">
-												<button type="button" id="reviewWrite" class="btn btn-danger btn-md">작성</button>											
+												<button type="button" id="reviewWrite" class="btn btn-md clsfrm-btn">작성</button>											
 											</c:when>
 											<c:when test="${rsrvChk eq true and reviewChk eq true}">
 												<button type="button" id="reviewAlrdy" class="btn btn-secondary btn-md">작성</button>											
@@ -750,8 +736,9 @@
 						<div class="right-stick-content">
 							<h5>제목 : <span id="classTitle">${ccls.classTitle }</span></h5>
 							<h5>클래스 강사 : ${ccls.memberNickname }<span class="vertified">정품</span></h5>
+							<h5>강의 기간 : ${ccls.classStart } ~ ${ccls.classEnd }</h5>
 							<h5>가격 : <span class="classPrice">${ccls.classPrice }</span>원</h5>
-							<h5>강의시간 : 
+							<h5>강의 시간 : 
 							<c:choose>
 							<c:when test="${ccls.classStartTime.substring(0, 2) lt 12 }">
 							오전&nbsp;${ccls.classStartTime }
@@ -806,7 +793,13 @@
 										<button type="button" class="btn btn-secondary btn-lg" >마감!</button>
 									</c:when>
 									<c:when test="${sessionScope.m.memberNickname eq ccls.memberNickname}">
-										<button type="button" id="noPayBtn" class="btn btn-danger btn-lg" >수강하기</button>
+										<div class="mt-4 d-grid gap-8 d-md-flex justify-content-md-between">
+											<a href="/cookingClsUpdateFrm.do?classNo=${ccls.classNo }" id="" class="btn btn-light btn-lg" >수정하기</a>
+											<a href="/cookingClsDelete.do?classNo=${ccls.classNo }" class="btn btn-danger btn-lg" >삭제하기</a>							
+										</div>
+										<div class="d-grid gap-2 mt-2">
+											<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의목록확인</button>
+										</div>
 									</c:when>
 									<c:when test="${empty sessionScope.m  }">									
 										<a href="/loginFrm.do" class="btn btn-warning btn-lg" >로그인 하세요!</a>
@@ -815,28 +808,20 @@
 										<button type="button" id="alreadyPayBtn" class="btn btn-secondary btn-lg" >등록완료</button>									
 									</c:when>
 									<c:otherwise>
-										<button type="button" id="payBtn" class="btn btn-primary btn-lg" >수강하기</button>
+										<button type="button" id="payBtn" class="btn btn-lg clsfrm-btn" >수강하기</button>
 									</c:otherwise>
 								</c:choose>
 							</div>
 							<c:if test="${not empty sessionScope.m && ccls.memberNickname != sessionScope.m.memberNickname}">
-							<div class="d-grid gap-2 mt-4">
+							<div class="d-grid gap-2 mt-2">
 							<!-- 
 								<a href="/dmView.do?classNo=${ccls.classNo }" class="btn btn-primary btn-lg" >문의하기</a>
 							 -->
-							<c:if test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
-								<a class="btn btn-primary btn-lg doDm" >AJAX로 문의</a>
-							</c:if>
+								<c:if test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
+									<a class="btn btn-lg doDm clsfrm-btn" >문의 하기</a>
+									<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 목록 확인</button>
+								</c:if>
 							</div>
-							</c:if>
-							<div class="d-grid gap-2 mt-4">
-								<button type="button" class="btn btn-primary btn-lg ajaxList">문의목록확인</button>
-							</div>
-							<c:if test="${sessionScope.m.memberNickname eq ccls.memberNickname }">
-								<div class="mt-4 d-grid gap-8 d-md-flex justify-content-md-between">
-									<a href="/cookingClsUpdateFrm.do?classNo=${ccls.classNo }" id="" class="btn btn-secondary btn-lg" >수정하기</a>
-									<a href="/cookingClsDelete.do?classNo=${ccls.classNo }" class="btn btn-danger btn-lg" >삭제하기</a>							
-								</div>
 							</c:if>
 						</div>
 					</div>

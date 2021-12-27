@@ -20,9 +20,9 @@ public class MyContest {
 		}else if(contestResult == 3) {
 			return "3등";
 		}else if(contestResult == 4) {
-			return "4등";
+			return "투표수 30이상";
 		}else if(contestResult == 9) {
-			return "탈락";
+			return "참가";
 		}else if(contestResult == 0) {
 			return "투표진행중";
 		}else {

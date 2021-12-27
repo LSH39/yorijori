@@ -53,9 +53,9 @@
 	      			<ul>
 	      				<c:forEach items="${list }" var="r" varStatus="i">
 	      				<li class="recipe">
-	      					<a href="/recipeView.do?recipeNo=${r.recipeNo }">
+	      					<a href="/recipeView.do?recipeNo=${r.recipeNo }&memberNo=0">
 	      						<div class="img-box">
-	      							<img src="resources/upload/recipe/${r.recipePath }" style="width:300px;height:320px;">
+	      							<img src="resources/upload/recipe/${r.recipePath }" style="width:300px;height:240px;">
 	      						</div>
 	      						<div class="recipe-info">
 	      							<div class="recipe-title"><h4>${r.recipeTitle }</h4></div>

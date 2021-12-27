@@ -188,7 +188,7 @@
             <c:forEach items="${productList }" var="p" begin="0" end="7">
             <div class="swiper-slide">
             	<a href="/milkitView.do?productNo=${p.productNo }&recipeNo=0">
-            		<img src="resources/upload/product/${p.filepath }" class="img-fluid" style="width:250px;height:180px;" alt="">
+            		<img src="resources/upload/product/${p.filepath }" style="width:250px;height:180px;" alt="">
             		<h5>${p.milkitName }</h5>
             		<h6> 
             			<span class="main-product-price"><fmt:formatNumber value="${p.milkitPrice}" pattern="#,###"/></span>원
@@ -359,7 +359,7 @@
             <c:forEach items="${classList }" var="c" begin="0" end="7">
             <div class="swiper-slide">
             	<a href="/cookingClsView.do?classNo=${c.classNo }">
-            		<img src="resources/img/mainpage/cooking-cls.jpg" class="img-fluid" alt="">
+            		<img src="resources/upload/cookingcls/${c.classThumbnailFilepath }" style="width:250px;height:180px; alt="">
             		<h5>${c.classTitle }</h5>
             		<h6>평점 <span class="main-classrate"><i class="bi bi-star-fill"></i>${c.classRate }</span></h6>
             		<h6><span>수강인원: ${c.classNop }</span></h6>

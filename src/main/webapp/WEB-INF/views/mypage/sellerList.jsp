@@ -161,8 +161,9 @@
   }
   
 .pagenation{
- margin-left:400px;
+ margin-left:550px;
  margin-top:100px;
+  margin-bottom:10px;
 }
 .pagenation ul{
 align-self: center;
@@ -235,13 +236,13 @@ function orderDetail(orderNo){
 								</div>
 								<div class="sellItem">
 									<span class="it"><b id="m">●상품번호:</b>&emsp;${ms.productNo}번
-										상품●</span>&emsp;<br> <span class="it_info1">&emsp;<img
-										id="product" src="/resources/upload/product/milkit_test.jpg"></span><br>
+										상품●</span>&emsp;<br> <span class="it_info1">&emsp;
+										<img id="product" src="/resources/upload/product/${ms.filepath}"></span><br>
 
 									<%--hidden 값으로 숨기는 값들 --%>
 									<input type="hidden" value="${ms.orderOptionNo}"name="orderOptionNo" id="orderOptionNo">
 										 <input type="hidden" value="${sessionScope.m.memberNo}" name="milkitWriter" id="milkitWriter"> 
-										 	 <input type="hidden" value="${sessionScope.m.memberNo}" name="memberNo" id="memberNo"> 
+										 	 <input type="hidden" value="${ms.memberNo}" name="memberNo" id="memberNo"> 
 										 <input type="hidden" value="${ms.orderOptionAmount}" name="orderOptionAmount" id="orderOptionAmount"> 
 										 <input type="hidden" value="${ms.milkitPrice}" name="milkitPrice" id="milkitPrice">
 									<input type="hidden" name="reqPage" value="${reqPage }">

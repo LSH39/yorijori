@@ -51,11 +51,14 @@ public class CookingRsrvController {
 	
 	//쿠킹 클래스 내역 삭제
 	@RequestMapping(value="/deleteCookingRsrv.do")
-	public String deleteCookingRsrv(int rsrvNo, Model model) {
+	public String deleteCookingRsrv(int rsrvNo, Model model, HttpSession session) {
+		Member member = (Member)session.getAttribute("m");
+		int memberNo = member.getMemberNo();
 		int result = service.deleteCookingRsrv(rsrvNo);
 		if(result > 0) {
 			model.addAttribute("msg", "내역 삭제 성공!");
-			model.addAttribute("loc", "/cookingRsrvList.do");
+			//model.addAttribute("loc", "/cookingRsrvList.do");
+			model.addAttribute("loc", "myclass.do?memberNo="+memberNo);
 		}else {
 			model.addAttribute("msg", "내역 삭제 실패!");
 			model.addAttribute("loc", "/");			
@@ -65,11 +68,14 @@ public class CookingRsrvController {
 	
 	//쿠킹 클래스 예약 취소 (성승민 12-08)
 	@RequestMapping(value="/cancelCookingRsrv.do")
-	public String cancelCookingRsrv(int classNo, Model model) {
+	public String cancelCookingRsrv(int classNo, Model model, HttpSession session) {
+		Member member = (Member)session.getAttribute("m");
+		int memberNo = member.getMemberNo();
 		int result = service.cancelCookingRsrv(classNo);
 		if(result > 0) {
 			model.addAttribute("msg", "취소 성공!");
-			model.addAttribute("loc", "/");
+			//model.addAttribute("loc", "/cookingRsrvList.do");
+			model.addAttribute("loc", "/myclass.do?memberNo="+memberNo);
 		}else {
 			model.addAttribute("msg", "취소 실패!");
 			model.addAttribute("loc", "/");			

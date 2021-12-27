@@ -116,7 +116,7 @@ color:red;
 						<li><a href="/myRecipe.do?recipeWriter=${sessionScope.m.memberNo }">내 작성 레시피<span>&gt;</span></a></li>
 						<li><a href="/myitemReview.do?memberNo=${sessionScope.m.memberNickname }">구매밀키트 후기<span>&gt;</span></a></li>
 					    <li><a href="/myBoardList.do?freeWriter=${sessionScope.m.memberId }&reqPage=1" id="lf-click">내 작성 게시글<span>&gt;</span></a></li>
-						 	<li><a href="/myPoint.do?memberNo=104&reqPage=1">포인트 내역<span>&gt;</span></a></li>             
+						<li><a href="/myPoint.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">포인트 내역<span>&gt;</span></a></li>                
 					</ul>
 				</li>
 				<li><span><b>클래스/판매</b></span>

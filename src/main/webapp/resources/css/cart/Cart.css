@@ -134,3 +134,10 @@
 .none{
     display: none;
 }
+.infoTd>*{
+	color : #444444;
+}
+.infoTd:hover>*{
+	color : #8E44AD;
+	cursor : pointer;
+}

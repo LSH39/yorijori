@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+
  <style>
 #line2 {
 	background-color: gray;
@@ -81,7 +81,7 @@ float: left;
 }
 .pagenation{
 
-margin-left : 400px;
+margin-left:400px;
 margin-top:100px;
 }
 .pagenation ul{
@@ -108,7 +108,13 @@ margin-top:120px;
 }
 
 </style>
-<script>
+
+
+</head>
+<body>
+  <jsp:include page="/WEB-INF/views/common/header.jsp" />
+  <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+  <script>
 function orderDetail(orderNo){
 	   location.href="/detailOrder.do?orderNo="+orderNo;
 	}
@@ -127,6 +133,7 @@ $(function() {
 		type:"post",
 		data : {orderNo:orderNo,memberNo:memberNo,orderSale:orderSale},
 		success: function(data){
+			location.href="myOrderList.do?memberNo="+memberNo+"&reqPage=1";
 			alert("주문이 취소되었습니다.");
 			
 		},
@@ -143,10 +150,6 @@ $(function() {
 });
 
 </script>
-
-</head>
-<body>
-  <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="main">
    	  <c:choose>
 		<c:when test="${sessionScope.m.memberLevel==1}">

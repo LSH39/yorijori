@@ -40,7 +40,7 @@
 	      					<c:when test="${not empty list }">
 	      						<c:forEach items="${list }" var="r" begin="0" end="11">
 	      							<li>
-	      								<a href="/recipeView.do?boardNo=${r.recipeNo }&memberNo=0">
+	      								<a href="/recipeView.do?recipeNo=${r.recipeNo }&memberNo=0">
 	      									<img src="resources/upload/recipe/${r.recipePath }">
 	      									<h4>${r.recipeTitle }</h4>
 	      									<h5><span class="rContent">${r.recipeContent }</span></h5>
@@ -49,13 +49,13 @@
 	      									</span>
 	      									<c:choose>
 	      										<c:when test="${r.recipeLevel eq 1 }">
-	      											하
+	      											상
 	      										</c:when>
 	      										<c:when test="${r.recipeLevel eq 2 }">
 	      											중
 	      										</c:when>
 	      										<c:otherwise>
-	      											상
+	      											하
 	      										</c:otherwise>
 	      									</c:choose> 
 	      									</h5>

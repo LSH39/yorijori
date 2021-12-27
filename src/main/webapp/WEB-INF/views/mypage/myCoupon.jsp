@@ -24,6 +24,7 @@ margin-bottom:40px;
 /* 메인 콘텐츠 설정 */
 .main-content{
     width: 875px;
+  
     
 }
 .retable {

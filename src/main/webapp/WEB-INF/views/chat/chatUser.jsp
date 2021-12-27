@@ -31,7 +31,7 @@
 	$(function(){
 	    $("#chatFrmUser").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
-	    ws = new WebSocket("ws://192.168.219.102/chatWebsoket.do");
+	    ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
 		ws.onopen = startChat;
 		ws.onmessage = receiveMsg;
         ws.onclose = endChat;

@@ -77,7 +77,7 @@
 		</c:when>
 		<c:when test="${sessionScope.m.memberLevel ==  1 }">
 			<a href="/mypage.do?memberNickname=${sessionScope.m.memberNickname }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
-	        <a href="/membershipView.do" class="subscribe" style="color:#8E44AD;">월간구독</a>
+	        <a href="/membershipView.do?memberNo=${sessionScope.m.memberNo }" class="subscribe" style="color:#8E44AD;">월간구독</a>
 	        <a class="qna chat" id="chatUser">1:1문의하기 <span class='chatAlarm'>+<span id='chatUserAlarm'></span></span></a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
 	       	<!-- LSH -->
@@ -85,7 +85,7 @@
 		</c:when>
        	<c:otherwise>
 	       	<a href="/selPage.do?memberNickname=${sessionScope.m.memberNickname }" class="mypage">[${sessionScope.m.memberNickname }]님</a>
-	        <a href="#" class="subscribe" style="color:#8E44AD;">월간구독</a>
+	        <a href="/membershipView.do?memberNo=${sessionScope.m.memberNo }" class="subscribe" style="color:#8E44AD;">월간구독</a>
 	        <a class="qna chat" id="chatUser">1:1문의하기 <span class='chatAlarm'>+<span id='chatUserAlarm'></span></span></a>
 	       	<a href="/logout.do" class="logout">로그아웃</a>
 	       	<!-- LSH -->
@@ -135,8 +135,16 @@
           <label for="headersearchsubmit"><img class="main-search-icon" src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
           </form>
           <li><a class="nav-link scrollto" href="/cart.do"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
-          <li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
+          <c:choose>
+          <c:when test="${not empty sessionScope.m }">
+          	<li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
+          </c:when>
+          <c:otherwise>
+          	<li><a class="getstarted scrollto" onclick="loginAlert();">레시피 작성</a></li>
+          </c:otherwise>
+          </c:choose>
           
+   
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -284,11 +292,18 @@
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
   	
-	//현재 일자 체크 (대회 투표기간 확인)
+	
+  	//로그인 alert
+  	function loginAlert(){
+  		alert("로그인 해주세요.");
+  		location.href="/loginFrm.do";
+  	}
+  	
+  	//현재 일자 체크 (대회 투표기간 확인)
   	function chkDate(){
   		var today = new Date();
   		var date = today.getDate();
-  		if(date >= 1 && date <= 31){
+  		if(date >= 1 && date <= 20){
   			location.href="/contestList.do?reqPage=1&orderIndex=0";
   		}else {
   			alert("대회 투표기간이 아닙니다.");
@@ -300,7 +315,7 @@
   	function chkDate2(){
   		var today = new Date();
   		var date = today.getDate();
-  		if(date >= 1 && date <= 31){
+  		if(date >= 25 && date <= 31){
   			location.href="/contestResult.do";
   		}else {
   			alert("우승자 발표기간이 아닙니다.");
@@ -382,4 +397,3 @@
   	}
   	//쿠키 스크립트 끝
   </script>
-

@@ -185,7 +185,6 @@ function loadImg(obj) {
 			});	
 			
 		     $("#delBtn").click(function() {
-				//alert("수정하시겠습니까?");
 				$(".delFile").hide();
 				$(this).next().show();
 				//$("[name=status]").val(2);
@@ -193,6 +192,16 @@ function loadImg(obj) {
 		
 	
 		});
+		
+		function subBtn() {
+			if($("#profileIntro").val()=="" || $("#memberName").val()=="" || $("#memberEmail").val()=="" || $("#memberPhone").val()==""
+				|| $("#memberBirth").val()==""|| $("#postcode").val()==""|| $("#addressRoad").val()==""|| $("#addressDetail").val()==""){
+				alert("빈칸 없이 작성해주세요");
+				return false;
+			}
+		
+		}
+			
 	</script>
 </head>
 <body>
@@ -241,7 +250,7 @@ function loadImg(obj) {
 							<tr>
 								<td>회원닉네임</td>
 								<td><input type="text" name="memberNickname" id="memberNickname"
-									onfocus="this.placeholder=''" value="${rm.memberNickname }"></td>
+									onfocus="this.placeholder=''" value="${rm.memberNickname }" readonly></td>
 							</tr>
 							<tr>
 								<td>휴대폰번호</td>
@@ -321,7 +330,7 @@ function loadImg(obj) {
 
               </table>
               <div class="buttonBox">
-              <button type="submit" value="수정하기" id="update">수정하기</button>
+              <button type="submit" value="수정하기" id="update" onclick="return subBtn()">수정하기</button>
               </div>
             
   

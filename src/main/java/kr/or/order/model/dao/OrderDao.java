@@ -45,6 +45,10 @@ public class OrderDao {
 		return sqlSession.insert("order.orderOptionInsert",oo);
 	}
 
+	public int updateProductStock(OrderOption oo) {
+		return sqlSession.update("order.updateProductStock",oo);
+	}
+	
 	public int deleteCart(Integer cartNo) {
 		return sqlSession.delete("order.cartDelete", cartNo);
 	}
@@ -60,7 +64,5 @@ public class OrderDao {
 	public int pointUpdate(Point p) {
 		return sqlSession.update("order.pointUpdate", p);
 	}
-
-	
 	
 }

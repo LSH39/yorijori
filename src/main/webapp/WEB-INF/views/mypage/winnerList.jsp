@@ -139,7 +139,7 @@
 
 }
 .winnerName{
-height:50px;
+height:60px;
 width:240px;
 overflow:hidden;
 }
@@ -183,7 +183,7 @@ overflow:hidden;
                <c:forEach items="${list}" var="ct" varStatus="i">
               <div class="win">
                  <img id="win" src="resources/img/mypage/win.jpeg"><h5 class="ww">총 ${ct.voteCount}표</h5>
-                <a href="#"> 
+                <a href="/recipeView.do?recipeNo=${ct.recipeNo}&memberNo=0"> 
                     <img id="recipeI" src="resources/upload/recipe/${ct.filePath}">
                 </a>
                 <div id="winners">

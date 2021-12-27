@@ -15,6 +15,7 @@ public class Cart {
 	private int productPrice;
 	// 추가
 	private String sellerNickname;
+	private int recipeNo;
 	private String milkitName;
 	private int milkitPrice;
 	private String productFilepath;

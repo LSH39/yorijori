@@ -8,6 +8,7 @@ $(function(){
     $("#memberId").focus();
     $("#addressDetail").prop("readonly",true);
     $("#pw_hidden").prop("checked", false);
+    $("#pw_hidden2").prop("checked", false);
 });
 
 function idCheck(obj) {
@@ -351,13 +352,22 @@ function textarea(num) {
 
 
 $("#pw_hidden+span").click(function(){
-	console.log($("#pw_hidden").is(":checked") == false);
 	if($("#pw_hidden").is(":checked") == false){
 		$(this).prev().prev().attr("type","text");
 		$("#pw_hidden").prop("checked", true);
 	}else{
 		$(this).prev().prev().attr("type","password");
 		$("#pw_hidden").prop("checked", false);
+	}
+});
+
+$("#pw_hidden2+span").click(function(){
+	if($("#pw_hidden2").is(":checked") == false){
+		$(this).prev().prev().attr("type","text");
+		$("#pw_hidden2").prop("checked", true);
+	}else{
+		$(this).prev().prev().attr("type","password");
+		$("#pw_hidden2").prop("checked", false);
 	}
 });
 

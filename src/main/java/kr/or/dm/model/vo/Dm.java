@@ -14,5 +14,6 @@ public class Dm {
 	private int dmRoomNo;
 	private String dmDate;
 	private String dmRpic;
-	private String dmSpic;	
+	private String dmSpic;
+	int dmCnt;
 }

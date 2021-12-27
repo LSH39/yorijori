@@ -23,6 +23,8 @@ public class CookingCls {
 	private String classEndTime;
 	private String classLocation1;
 	private String classLocation2;
+	private String classThumbnailFilename;
+	private String classThumbnailFilepath;
 	private ArrayList<CookingClsPicVO> clsFileList;
 	
 	//줄바꿈 적용 시키려고 만든 getter
