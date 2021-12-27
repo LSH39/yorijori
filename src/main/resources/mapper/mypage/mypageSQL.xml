@@ -507,7 +507,7 @@
 
 	<select id="couponCount" resultType="_int" parameterType="map">
 		select
-		count(*)from coupon_List where member_no=#{memberNo}
+		count(*)from coupon_List where member_no=#{memberNo} and coupon_use=0 
 
 	</select>
 	<select id="myContestList" resultType="myc" parameterType="map">
