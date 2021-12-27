@@ -307,3 +307,32 @@
 	padding: 10px;
 	
 }
+
+/*성승민 css 추가*/
+.clsfrm-btn{
+background-color: rgb(159, 144, 207) !important;
+border-color: rgb(159, 144, 207) !important;
+color: #fff !important;
+}
+	
+.clsfrm-btn:focus{
+	box-shadow: 0 0 0 0.25rem rgb(32 13 253 / 25%) !important;
+	border-color: rgb(159, 144, 207) !important;
+}
+	
+.clsfrm-btn:active, .clsfrm-btn:hover{
+	background-color: rgb(121 109 159) !important;
+	border-color: rgb(159, 144, 207) !important;
+}
+
+.review-content{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.review-content > span{
+	display: table-cell;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

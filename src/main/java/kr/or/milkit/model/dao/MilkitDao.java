@@ -77,5 +77,25 @@ public class MilkitDao {
 		return sqlSession.insert("milkit.insertCart", c);
 	}
 
+	
+	//성승민 밀키트 리뷰 12 27
+	public ArrayList<Review> selectReviewPlist(int productNo) {
+		// TODO Auto-generated method stub
+		List<Review> list = sqlSession.selectList("review.selectReviewPlist", productNo);
+		return (ArrayList<Review>) list;
+	}
+
+	//리뷰 작성 했는지 확인
+	public Review selectOneReviewpChk(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("review.selectOneReviewpChk", map);
+	}
+
+	//밀키트 구매했고 배송완료 4번인지 
+	public int selectOnePurchaseChk(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("review.selectOnePurchaseChk", map);
+	}
+
 
 }

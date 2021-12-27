@@ -97,6 +97,23 @@
   .tb2-td{
     text-align:center;
   }
+  
+/*성승민 css 추가*/
+.clsfrm-btn{
+background-color: rgb(159, 144, 207) !important;
+border-color: rgb(159, 144, 207) !important;
+color: #fff !important;
+}
+	
+.clsfrm-btn:focus{
+	box-shadow: 0 0 0 0.25rem rgb(32 13 253 / 25%) !important;
+	border-color: rgb(159, 144, 207) !important;
+}
+	
+.clsfrm-btn:active, .clsfrm-btn:hover{
+	background-color: rgb(121 109 159) !important;
+	border-color: rgb(159, 144, 207) !important;
+}
 
 </style>
     <script>
@@ -141,15 +158,34 @@
                         <td class="tb2-td">주문수량</td>
                         <td class="tb2-td">주문상태</td>
                     </tr>
-                         <c:forEach items="${list}" var="mo" varStatus="i">
+                    <c:forEach items="${list}" var="mo" varStatus="i">
                     <tr class="tb2-tr2">
                         <td class="tb2-td"><img src="resources/upload/product/${mo.filepath}" id="sort" ></td>
                         <td class="tb2-td">${mo.milkitName}</td>
                         <td class="tb2-td">${mo.milkitPrice}원</td>
                         <td class="tb2-td">${mo.orderOptionAmount}개</td>
-                        <td class="tb2-td">${mo.status}</td>
+                       <c:choose>
+                       <c:when test="${mo.status ne '배송완료' && mo.reviewNo ne -1}">
+                       	<td class="tb2-td">
+	                    		${mo.status}                        		
+                       	</td>
+                       	</c:when>
+                       	<c:when test="${mo.status eq '배송완료' && mo.reviewNo eq -1}">
+    	                	<td class="tb2-td">
+	                    		${mo.status}                        		
+                     			<div style="position:relative;">
+		                    		<a href="/milkitView.do?productNo=${mo.productNo }&recipeNo=${mo.recipeNo }" style="position:absolute;top:10px;right:6%;" class="btn clsfrm-btn">리뷰 작성</a>                    		
+                       			</div>
+	                    	</td>
+                       	</c:when>
+                      	<c:otherwise>
+                       	<td class="tb2-td">
+	                    	${mo.status}
+                       	</td>
+                       	</c:otherwise>
+                       	</c:choose>
                     </tr>
-                  </c:forEach>
+                  	</c:forEach>
                     
                     
                     </table>

@@ -39,6 +39,8 @@ public class Myorder {
 	//주문취소가능여부
 	private String cancleOrder;
 	
+	//성승민 리뷰번호
+	private int reviewNo;
 	
 	public String getCard(){
 		if(orderPayOption == 1) {

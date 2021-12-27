@@ -317,7 +317,8 @@
 
 
 	</select>
-
+	
+	<!-- 김효원 기존 상세 주문 백업 
 	<select id="detailOrder" parameterType="_int" resultType="mo">
 		select
 		a.ORDER_OPTION_NO as orderOptionNo,
@@ -343,6 +344,7 @@
 		b.IMP_UID as impUid,
 		a.ORDER_STATUS as
 		orderStatus,
+		c.recipe_no as recipeNo,
 		c.milkit_name as milkitName ,
 		c.milkit_price as
 		milkitPrice,
@@ -353,8 +355,47 @@
 		where
 		a.order_no =b.order_no and a.product_no =c.product_no and
 		b.order_no=#{orderNo}
-
 	</select>
+	-->
+	
+	<!-- 성승민 상세조회 -->
+	<select id="detailOrder" parameterType="_int" resultType="mo">
+		select
+		a.ORDER_OPTION_NO as orderOptionNo,
+		a.ORDER_NO as orderNo,
+		a.PRODUCT_NO as productNo,
+		a.ORDER_OPTION_AMOUNT as orderOptionAmount,
+		b.MEMBER_NO as memberNo,
+		b.ORDER_NAME as orderName,
+		b.ORDER_EMAIL as orderEmail,
+		b.ORDER_PHONE as orderPhone,
+		b.ORDER_POSTCODE as orderPostcode,
+		b.ORDER_ADDR_ROAD as orderAddrRoad,
+		b.ORDER_ADDR_DETAIL as orderAddrDetail,
+		b.ORDER_REQUEST as orderRequest,
+		b.ORDER_PAY_OPTION as orderPayOption,
+		b.ORDER_PRICE as orderPrice,
+		b.ORDER_SALE as orderSale,
+		b.ORDER_PAYMENT as orderPayment,
+		b.IMP_UID as impUid,
+		a.ORDER_STATUS as orderStatus,
+		c.recipe_no as recipeNo,
+		c.milkit_name as milkitName,
+		c.milkit_price as milkitPrice,
+		c.filepath,
+        nvl(review_no, -1) as reviewNo
+        
+		from
+		order_option a, order_tbl b, product c
+        left outer join review r
+        on(c.product_no = r.product_no)
+        
+		where
+		a.order_no = b.order_no and a.product_no = c.product_no and
+		b.order_no = #{orderNo}
+		order by order_option_no asc
+	</select>
+	
 	<select id="sellerList" resultType="ms" parameterType="_int">
 		select
 		a.ORDER_OPTION_NO as orderOptionNo,

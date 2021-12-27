@@ -49,4 +49,27 @@ public class ReviewController {
 		}
 	}
 	
+	//밀키트 리뷰 작성 AJAX사용
+	@ResponseBody
+	@RequestMapping(value="/insertPurchaseReview.do")
+	public int insertPurchaseReview(Review review, Model model) {
+		int result = service.insertPurchaseReview(review);
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	//밀키트 리뷰 삭제 AJAX사용
+	@ResponseBody
+	@RequestMapping(value="/deletePurchaseReview.do")
+	public int deletePurchaseReview(int reviewNo) {
+		int result = service.deletePurchaseReview(reviewNo);
+		if(result > 0) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 }

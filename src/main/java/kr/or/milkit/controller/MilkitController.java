@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.or.cart.model.vo.Cart;
+import kr.or.member.model.vo.Member;
 import kr.or.milkit.model.service.MilkitService;
 import kr.or.milkit.model.vo.Product;
 import kr.or.recipe.model.vo.FileVo;
@@ -124,9 +126,25 @@ public class MilkitController {
 		return new Gson().toJson(list);	
 	}
 	@RequestMapping(value="/milkitView.do")
-	public String milkitView(int productNo,int recipeNo,Model model) {
+	public String milkitView(int productNo,int recipeNo, Model model, HttpSession session) {
+		Member member = (Member)session.getAttribute("m");
+		//상품 번호 받아서 해당 리뷰 출력
+		ArrayList<Review> list = service.selectReviewPlist(productNo);
+		
+		//로그인 된 상태면
+		if(member != null) {
+			String sessionMemberNickname = member.getMemberNickname(); //로그인한 내 닉네임
+			int sessionMemberNo = member.getMemberNo(); //로그인한 내 회원번호
+			boolean reviewChk = service.selectOneReviewpChk(productNo, sessionMemberNickname); //리뷰썼는지
+			int orderStat = service.selectOnePurchaseChk(productNo, sessionMemberNo); //밀키트 구매했는지
+			System.out.println(reviewChk);
+			System.out.println(orderStat);
+			model.addAttribute("reviewChk", reviewChk);			
+			model.addAttribute("orderStat", orderStat);			
+		}
 		Product p = service.selectOneProduct(productNo, recipeNo);
 		model.addAttribute("p", p);
+		model.addAttribute("list", list);
 		return "/product/milkitView";
 	}
 	@RequestMapping(value = "/deleteMilkit.do")

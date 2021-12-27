@@ -74,5 +74,48 @@ public class MilkitService {
 		return dao.insertCart(c);
 	}
 	
+	//성승민 밀키트 리뷰 추가 12 27
+	public ArrayList<Review> selectReviewPlist(int productNo) {
+		// TODO Auto-generated method stub
+		ArrayList<Review> list = dao.selectReviewPlist(productNo);
+		return list;
+	}
+	
+	//성승민 리뷰 작성 여부 확인
+	public boolean selectOneReviewpChk(int productNo, String sessionMemberNickname) {
+		// TODO Auto-generated method stub
+		boolean reviewChk = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("sessionMemberNickname", sessionMemberNickname);
+		Review review = dao.selectOneReviewpChk(map);
+		if(review != null) {
+			//리뷰 작성했을때
+			reviewChk=true;
+		}else {
+			//리뷰 작성 안했을때
+			reviewChk=false;
+		}
+		return reviewChk;
+	}
+	
+	//성승민 밀키트 구매 여부 확인
+	public int selectOnePurchaseChk(int productNo, int sessionMemberNo) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("sessionMemberNo", sessionMemberNo);
+		System.out.println("물건번호 : "+productNo);
+		System.out.println("물건회원번호 : "+sessionMemberNo);
+		int orderStat = dao.selectOnePurchaseChk(map);
+		System.out.println("서비스에서 몇 나오냐"+orderStat);
+		if(orderStat == 4) {
+			return orderStat;
+		}else {
+			orderStat = -1;
+			return orderStat;
+		}
+	}
+	
 	
 }

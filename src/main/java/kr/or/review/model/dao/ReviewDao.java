@@ -28,13 +28,13 @@ public class ReviewDao {
 		return sqlSession.insert("review.insertReview", review);
 	}
 
-	//리부 삭제
+	//리뷰 삭제
 	public int deleteReview(int reviewNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("review.deleteReview", reviewNo);
 	}
 
-	//점수갱신
+	//점수 갱신
 	public void updateReviewAvgRate(int classNo) {
 		// TODO Auto-generated method stub
 		sqlSession.update("cookingcls.updateReviewAvgRate", classNo);
@@ -45,6 +45,18 @@ public class ReviewDao {
 	public int selectClassNo(int classNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("review.selectClassNo", classNo);
+	}
+
+	//밀키트 리뷰 작성 AJAX사용
+	public int insertPurchaseReview(Review review) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("review.insertPurchaseReview", review);
+	}
+
+	//밀키트 리뷰 삭제 AJAX사용
+	public int deletePurchaseReview(int reviewNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("deletePurchaseReview", reviewNo);
 	}
 	
 	

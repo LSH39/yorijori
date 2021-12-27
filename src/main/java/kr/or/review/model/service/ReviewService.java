@@ -42,4 +42,20 @@ public class ReviewService {
 		dao.updateReviewAvgRate(classNo);
 		return result;
 	}
+
+	//밀키트 리뷰 작성 AJAX사용
+	@Transactional
+	public int insertPurchaseReview(Review review) {
+		// TODO Auto-generated method stub
+		int result = dao.insertPurchaseReview(review);
+		return result;
+	}
+
+	//밀키트 리뷰 삭제 AJAX사용
+	@Transactional
+	public int deletePurchaseReview(int reviewNo) {
+		// TODO Auto-generated method stub
+		int result = dao.deletePurchaseReview(reviewNo);
+		return result;
+	}
 }
