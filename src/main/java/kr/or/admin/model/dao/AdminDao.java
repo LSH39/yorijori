@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.Prev;
 import kr.or.admin.model.vo.Ranking;
+import kr.or.admin.model.vo.Report;
 import kr.or.admin.model.vo.VisitCount;
 import kr.or.coupon.model.vo.Coupon;
 import kr.or.freeboard.model.vo.Freeboard;
@@ -287,6 +288,12 @@ public class AdminDao {
 		int result = sqlSession.update("member.rePermission",arr);
 		return result;
 		
+	}
+
+
+	public ArrayList<Report> selectReport() {
+		List list = sqlSession.selectList("member.selectReport");
+		return (ArrayList<Report>) list;
 	}
 
 

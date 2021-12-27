@@ -10,6 +10,7 @@
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
 		<typeAlias type="kr.or.admin.model.vo.Prev" alias="prev"/>
 		<typeAlias type="kr.or.admin.model.vo.VisitCount" alias="vc"/>
+		<typeAlias type="kr.or.admin.model.vo.Report" alias="report2"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>

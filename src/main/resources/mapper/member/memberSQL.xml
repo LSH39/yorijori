@@ -183,7 +183,7 @@ member_black as memberBlack,
 (select count(*) from recipe_board where recipe_writer = member_no)recipeCount,
 (select count(*) from freeboard_comment where fc_writer = member_id)fcCount
 ,
-(select report_comment from recipe_report where recipe_report.member_no = member.member_no and rownum=1 )rc
+(select report_comment from (member)m1 join recipe_board on(member_no=recipe_writer) join recipe_report using(recipe_no) where member.member_no = m1.member_no and rownum=1 )rc
 from member order by enrollDate desc) where memberBlack = #{level}
 
 <if test="detail==1">
@@ -457,4 +457,7 @@ and memberLevel = 5
 		member_pw=#{memberPw}
 
 	</update>
+	<select id="selectReport" resultType="report2">
+	select member.member_no as memberNo,member.member_id as memberId,recipe_no as recipeNo,recipe_title as recipeTitle, report_comment as reportComment from recipe_report join recipe_board using(recipe_no) join member on (recipe_writer = member.member_no) where member_black =0 and rownum <![CDATA[<=]]>5
+	</select>
 </mapper>
