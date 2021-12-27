@@ -52,7 +52,7 @@
 }
 .noCou{
 color:gray;
-margin-left:350px;
+
 margin-top:120px;
 
 }
