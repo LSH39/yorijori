@@ -303,7 +303,7 @@
   	function chkDate(){
   		var today = new Date();
   		var date = today.getDate();
-  		if(date >= 1 && date <= 20){
+  		if(date >= 1 && date <= 31){
   			location.href="/contestList.do?reqPage=1&orderIndex=0";
   		}else {
   			alert("대회 투표기간이 아닙니다.");
@@ -311,11 +311,13 @@
   		
   	}
 	
-	//현재 일자 체크 (우승자발표 날짜 확인)
+	//현재 일자 체크 (우승자발표 날짜 및 시간 확인 25일 12시 30분 오픈)
   	function chkDate2(){
   		var today = new Date();
   		var date = today.getDate();
-  		if(date >= 25 && date <= 31){
+  		var hours = today.getHours(); //시간
+  		var minutes = today.getMinutes();
+  		if((date >= 25 && hours >= 12 && minutes >=30) || date>= 26 && date <= 31){
   			location.href="/contestResult.do";
   		}else {
   			alert("우승자 발표기간이 아닙니다.");

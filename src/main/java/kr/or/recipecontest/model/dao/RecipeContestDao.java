@@ -83,13 +83,12 @@ public class RecipeContestDao {
 	public int updateContestWinners(ArrayList<RecipeContest> oneTwoThree) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int count = 0;
-		for(int i=0;i<3;i++) {
-			int rank = i+1;
+		for(int i=0;i<oneTwoThree.size();i++) {
+			int rank = i+1; //0번째는 1등, 1번째 2등, 2번째 3등
 			map.put("winner", oneTwoThree.get(i));
 			map.put("rank", rank);
 			int result = sqlSession.update("recipecontest.updateContestWinners", map);
 			count += result;
-			sqlSession.insert("recipecontest.insertWinnerHistory", map);
 			if(i <= 1) {
 				map.put("point", 200000);
 				sqlSession.update("recipecontest.updateMemberPoints", map);
@@ -101,17 +100,14 @@ public class RecipeContestDao {
 		return count;
 	}
 
-	public ArrayList<RecipeContest> updateSpecialWinners() {
-		List<RecipeContest> special = sqlSession.selectList("recipecontest.selectSpecialWinners");
-		if(!special.isEmpty()) {
+	public ArrayList<RecipeContest> updateSpecialWinners(ArrayList<RecipeContest> special) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			for(int i=0; i<special.size(); i++) {
 				map.put("winner", special.get(i));
 				map.put("rank", 4);
 				map.put("point", 10000);
-				sqlSession.update("recipecontest.updateContestWinners", map);
 				sqlSession.update("recipecontest.updateMemberPoints", map);
-			}
+				sqlSession.update("recipeContest.updateContestWinners", map);
 			
 		}
 		return (ArrayList<RecipeContest>) special;

@@ -71,18 +71,18 @@
 			});
 		});
 	 $("#make").click(function() {
-		var login = $("#loginCheck").val();
-		var level = $("#levelCheck").val();
-		if(login == ""){
-			alert("로그인 후 이용해주세요");
-			$(location).attr("href","/loginFrm.do");	
-		}else if(!(level==2 || level == 3)){
-			alert("밀키트 작성이 불가능한 등급입니다.");
-		}else{
-			$(location).attr("href","/milkitFrm1.do?memberNo="+login);
-		}	
-		
-	});
+			var login = $("#loginCheck").val();
+			var level = $("#levelCheck").val();
+			if(login == ""){
+				alert("로그인 후 이용해주세요");
+				$(location).attr("href","/loginFrm.do");	
+			}else if(!(level==2 || level == 3 )){
+				alert("밀키트 작성이 불가능한 등급입니다.");
+			}else{
+				$(location).attr("href","/milkitFrm1.do?memberNo="+login);
+			}	
+			
+		});
 	 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

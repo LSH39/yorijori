@@ -171,16 +171,16 @@ public class RecipeContestService {
 		return result;
 	}
 
-	public ContestWinnerData updateContestWinners() {
+	public void updateContestWinners() {
 		ArrayList<RecipeContest> oneTwoThree = dao.selectContestRecipeList();
-		ArrayList<RecipeContest> special = dao.updateSpecialWinners();
+		ArrayList<RecipeContest> special = dao.selectSpecialWinners();
+		if(!special.isEmpty()) {
+			dao.updateSpecialWinners(special);
+		}
 		if(!oneTwoThree.isEmpty()) {
 			dao.updateContestWinners(oneTwoThree);
 		}
-		ContestWinnerData cwd = new ContestWinnerData();
-		cwd.setOneTwoThree(oneTwoThree);
-		cwd.setSpecial(special);
-		return cwd;
+
 	}
 
 	public int insertContestRecipe(int recipeNo, int enteredNo) {

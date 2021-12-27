@@ -41,13 +41,13 @@
 		<span id="stock">재고수량</span>
 		<input type="text" id="milkitStock" name="milkitStock"  value="${p.milkitStock}"> 개		
 		</div>
-		
+		<p id="comment"></p>
 		<div class="milkitFrm">
 		<label for="summernote">상세설명</label>
 		</div>
 		<textarea id="summernote" name="milkitContent" >${p.milkitContent}</textarea>
 		
-		<div id="updateBtn"><input type="submit" value="수정하기" ></div>
+		<div id="updateBtn"><input type="submit" value="수정하기" onclick="return subBtn()"></div>
 		</form>
 	</div>
 <script>
@@ -99,6 +99,34 @@ function sendFile(file, el) {
 			}
 	});
 }
+
+function subBtn() {
+	  $("#comment").html("");
+	  var result = true;
+	  var priceReg = /^[0-9]{1,}$/;
+    var priceVal = $("#milkitPrice").val();
+    if(!(priceReg.test(priceVal))){
+       $("#comment").html("숫자만 입력해주세요");
+       $("#comment").css("color","red");
+       result = false;
+    }
+    var stockReg = /^[0-9]{1,}$/;
+    var stockVal = $("#milkitStock").val();
+    if(!(stockReg.test(stockVal))){
+  	  $("#comment").html("숫자만 입력해주세요");
+        $("#comment").css("color","red");
+        result = false;
+    }
+	if(result == false){
+		console.log(result);
+		alert("양식을 확인해주세요");
+		return false;
+	}
+	if($("#milkitName").val()=="" || $("#milkitComment").val()==""  || $("#summernote").val()==""){
+		 alert("빈칸없이 작성해주세요"); 
+		 return false;
+	}
+	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

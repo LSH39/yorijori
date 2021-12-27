@@ -102,7 +102,7 @@
             	IMP.init("imp82081944"); //결제api 가맹점 식별코드
     			IMP.request_pay({
     				merchant_uid : impUid, //거래아이디
-    				name : "membership결제", //결제 이름 설정
+    				name : "${membershipLevel} 결제", //결제 이름 설정
     				amount :"${membershipPrice}", //결제 금액
     				buyer_email : memberEmail, //구매자 이메일
     				buyer_name: name, //구매자 이름

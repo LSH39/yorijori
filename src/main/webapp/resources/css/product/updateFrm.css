@@ -13,7 +13,8 @@
 
 }
 .milkitFrm {
-	height: 80px;
+	margin-top: 25px;
+	overflow: hidden;
 	
 }
 .milkitFrm label {
@@ -36,11 +37,11 @@
 .milkitFrm:first-of-type input{
 	width: 400px;
 }
-.milkitFrm:nth-of-type(3)  {
-	height: 200px;
-	
+.milkitFrm:nth-of-type(5) label{
+	margin-bottom: 30px;
 }
 .milkitFrm:nth-of-type(3) img{
+	max-width:200px;
 	max-height: 150px;
 }
 #updateBtn{
