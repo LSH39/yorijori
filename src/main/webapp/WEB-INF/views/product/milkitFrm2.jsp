@@ -31,22 +31,23 @@
 		<div class="milkitFrm">
 		<label >대표이미지</label>	
 		<input type="file" id="uploadImg" name="uploadImg" accept=".jpg,.jpeg,.png,.gif" onchange="loadImg(this);"><br>
-		<img id="img" width="200px" height="150px">
+		<img id="img" >
 		</div>
 		<div class="milkitFrm">
 		<span class="priceWrap">
 		<label for="milkitPrice">가격</label>
-		<input type="text" id="milkitPrice" name="milkitPrice" value="${p.milkitPrice}"> 원
+		<input type="text" id="milkitPrice" name="milkitPrice" placeholder="숫자만 입력해주세요"> 원
+		
 		</span>
 		<span id="stock">재고수량</span>
-		<input type="text" id="milkitStock" name="milkitStock"  value="${p.milkitStock}"> 개
-		
+		<input type="text" id="milkitStock" name="milkitStock" placeholder="숫자만 입력해주세요"> 개
 		</div>
+		<p id="comment"></p>
 		<div class="milkitFrm">
-		<label for="summernote">상세설명</label>
+		<label>상세설명</label>
 		</div>
 		<textarea id="summernote" name="milkitContent" ></textarea>
-		<div id="insertBtn"><input type="submit" value="등록하기"></div>
+		<div id="insertBtn"><input type="submit" value="등록하기" onclick="return subBtn()"></div>
 		</form>
 	</div>
 	<script>
@@ -94,7 +95,33 @@
 				}
 		});
 	}
-	
+	function subBtn() {
+		  $("#comment").html("");
+		  var result = true;
+		  var priceReg = /^[0-9]{1,}$/;
+          var priceVal = $("#milkitPrice").val();
+          if(!(priceReg.test(priceVal))){
+             $("#comment").html("숫자만 입력해주세요");
+             $("#comment").css("color","red");
+             result = false;
+          }
+          var stockReg = /^[0-9]{1,}$/;
+          var stockVal = $("#milkitStock").val();
+          if(!(stockReg.test(stockVal))){
+        	  $("#comment").html("숫자만 입력해주세요");
+              $("#comment").css("color","red");
+              result = false;
+          }
+	 	if(result == false){
+	 		console.log(result);
+	 		alert("양식을 확인해주세요");
+	 		return false;
+	 	}
+		if($("#milkitName").val()=="" || $("#milkitComment").val()=="" || $("#uploadImg").val()=="" || $("#summernote").val()==""){
+			 alert("빈칸없이 작성해주세요"); 
+			 return false;
+		}
+		}
 	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
