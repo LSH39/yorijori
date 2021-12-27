@@ -24,5 +24,6 @@ public class Product {
 	private ArrayList<Review> rList;
 	private ArrayList<RecipeBoard> rbList;
 	private String memberId;
+	private int memberLevel;
 }
 

@@ -22,7 +22,9 @@
 				</div>	
 	
 		</div>
-		
+		<c:if test="${p.memberLevel eq 3 }">
+		<p id="win">경연대회 우승작</p>
+		</c:if>
 	<input type="hidden" id="loginCheck" value="${sessionScope.m.memberNo }">
 		<div id="title">
 			<div id="titleImg">
