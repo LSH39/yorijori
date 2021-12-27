@@ -32,7 +32,7 @@
         </select>
         <p class="comment">매 달 2만원 상당의 인기 밀키트를 <br>
             배송해드립니다.</p>
-        <input type="hidden" name="membershipLevel" value="standard">
+        <input type="hidden" name="membershipLevel" value="STANDARD">
         <button type="submit" >구독하기</button>
         </form>
     </div>
@@ -47,7 +47,7 @@
         </select>
         <p class="comment">매 달 3만원 상당의 인기 밀키트를 <br>
             배송해드립니다.</p>
-         <input type="hidden" name="membershipLevel" value="premium">
+         <input type="hidden" name="membershipLevel" value="PREMIUM">
          <button type="submit" >구독하기</button>
          </form>
     </div>
