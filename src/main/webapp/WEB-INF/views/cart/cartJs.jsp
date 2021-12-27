@@ -147,7 +147,7 @@ $("#payBtn").click(function(){
         		}
         	});
         	if(stock<amount){
-        		alert("["+milkitName+"]의 재고가 ["+stock+"]입니다. 수량을 변경해주세요.");
+        		alert("[ "+milkitName+" ]의 재고가 [ "+stock+" ]개입니다.\n수량을 변경해주세요.");
         		stockCheck = 0;
         		break;
         	}else{
@@ -157,16 +157,16 @@ $("#payBtn").click(function(){
         }else{
         }
     }
-    if(stockCheck == 1){
-	    if(arr.length != 0){
-	    	$("#paymentFrm").submit();
-	    }else{
-	    	alert("선택된 상품이 없습니다.");
-	    	$("#checkA").prop("disabled", false);
-	    	for(var i=1; i<selectbox.length; i++){
-	            selectbox.eq(i).prop("disabled", false);
-	        }
-	    }    	
+    if(arr.length == 0){
+    	alert("선택된 상품이 없습니다.");
+    	$("#checkA").prop("disabled", false);
+    	for(var i=1; i<selectbox.length; i++){
+            selectbox.eq(i).prop("disabled", false);
+        }
+    }else{
+    	if(stockCheck == 1){
+    	    	$("#paymentFrm").submit();
+        }
     }
     
 });
