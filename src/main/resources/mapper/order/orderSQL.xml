@@ -32,12 +32,15 @@
 		select product_no as productNo, product_amount as orderOptionAmount
 		from cart where cart_no=#{cartNo}
 	</select>
-	<delete id="cartDelete" parameterType="_int">
-		delete from cart where cart_no=#{cartNo}
-	</delete>
 	<insert id="orderOptionInsert" parameterType="oo">
 		insert into order_option values(order_option_seq.nextval, #{orderNo}, #{productNo}, #{orderOptionAmount}, 1)
 	</insert>
+	<update id="updateProductStock" parameterType="oo">
+		update product set milkit_stock=milkit_stock-#{orderOptionAmount} where product_no=#{productNo}
+	</update>
+	<delete id="cartDelete" parameterType="_int">
+		delete from cart where cart_no=#{cartNo}
+	</delete>
 	<update id="memberCouponUpdate" parameterType="_int">
 		update coupon_list set coupon_use=1, coupon_date=to_char(sysdate,'yyyy-mm-dd') where coupon_list_no=#{couponNo}
 	</update>
