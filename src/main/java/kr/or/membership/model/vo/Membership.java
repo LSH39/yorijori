@@ -6,7 +6,7 @@ import lombok.Data;
 public class Membership {
 	private int membershipNo;
 	private String membershipLevel;
-	private String membershipDate;
+	private int membershipDate;
 	private int membershipPrice;
 
 }

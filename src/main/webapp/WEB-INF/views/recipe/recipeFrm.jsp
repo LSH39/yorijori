@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/recipe/recipeFrm.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
@@ -30,14 +31,14 @@
 					
 			</div>
 			<div class="recipeFrm">
-				<label for="recipeVideo">유튜브 링크(생략가능)</label>
+				<label for="recipeVideo">유튜브 링크<br>(생략가능)</label>
 				https://youtu.be/
 				<input type="text" name="recipeVideo" placeholder="xsTFsunt6-8">
 			</div>
-			<div class="recipeFrm">
-				<p>음식정보</p>
+		<div class="recipeFrm">
+				<label>음식정보</label>
 				<div id="recipeFrm1">
-					<label for="foodName">음식이름</label>
+					<p>음식이름</p>
 					<input type="text" id="foodName" name="foodName" placeholder="음식명을 입력하세요">
 					 <input type="text" id="recipeTime" name="recipeTime"
 						placeholder="조리시간 예) 60분">소요
@@ -56,12 +57,13 @@
 						<input type="text" name="mNameList" placeholder="예) 닭가슴살">
 						<input type="text" name="mAmountList" placeholder="예) 300g">
 					</div>
-					<div id="newInput"></div>
+					
+					<div class="newInput"></div>
 					<p id="plusBtn">재료추가</p>
+            </div>
 				</div>
-			</div>
 			<div class="recipeFrm">
-				<p>카테고리</p>
+				<label>카테고리</label>
 				<select name="situation" id="situation">
 					<option selected value="">상황별</option>
 					<option value="1">술안주</option>
@@ -90,16 +92,17 @@
 				</select>
 			</div>
 			<div class="recipeFrm">
+			<label>조리방법</label>
 				<div class="cookOrder">
-					<p>STEP1</p>
+					<p style="margin-top: 50px;">STEP1</p>
 					<textarea name="rContentList"></textarea>
-					<input type="file" name="files" accept=".jpg,.jpeg,.png,.gif"
-						multiple> <img class="recipeImg">
+					<input type="file" name="files" accept=".jpg,.jpeg,.png,.gif" 
+						multiple> 
 				</div>
 				<div class="newContent"></div>
 				<p id="plusBtn2">순서추가</p>
 			</div>
-			<input type="submit" value="등록하기" onclick="return subBtn()">
+			<div id="btn"><input type="submit" value="등록하기" onclick="return subBtn()" id="submitBtn"></div>
 		</form>
 	</div>
 	<script>
@@ -144,22 +147,23 @@
 			}
 			}
 			
-		$(function() {
-
+		$(function() {	
+			var orderNum = 1;
 			
 			$("#plusBtn").click(function() {
+				console.log("22");
 				var mHTML = "<div class='materialBox'>"
 				+ "<input type='text' name='mNameList'>" 
 				+ " <input type='text'  name='mAmountList' > </div>";
-				$("#newInput").append(mHTML);
+				console.log(mHTML);
+				$(".newInput").append(mHTML);
 			});
 			
-				var orderNum = 1;
+				
 			$("#plusBtn2").click(function() {
 				var contentHTML = "<div class='cookOrder'> <p>STEP"+(++orderNum)+"</p>"
 					+ "<textarea name='rContentList' '></textarea >"
-					+ " <input type='file' name='files' accept='.jpg,.jpeg,.png,.gif' multiple>"
-					+ "<img class='recipeImg'></div>";
+					+ " <input type='file' name='files' accept='.jpg,.jpeg,.png,.gif' multiple></div>";
 				$(".newContent").append(contentHTML);
 				
 		});

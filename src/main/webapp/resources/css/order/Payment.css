@@ -83,7 +83,11 @@ th,td{
     height: 40px;
     border-width: 2px;
 }
+#memberAddr{
+	margin-top: 0px;
+}
 #newAddr{
+	margin-top: 0px;
     margin-left: 20px;
 }
 [name="orderPostcode"]{
@@ -232,6 +236,9 @@ input[name=juso]:checked + label, input[name=payMethod]:checked + label{
     border: 2px solid #8E44AD;
     color: #ffffff;
     background-color: #8E44AD;
+}
+#toss_light_btn_id{
+	margin-left: 10px;
 }
 #toss_light_btn_id:hover{
     border: 2px solid #3182f6;

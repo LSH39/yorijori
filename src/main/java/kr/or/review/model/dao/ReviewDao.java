@@ -33,6 +33,19 @@ public class ReviewDao {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("review.deleteReview", reviewNo);
 	}
+
+	//점수갱신
+	public void updateReviewAvgRate(int classNo) {
+		// TODO Auto-generated method stub
+		sqlSession.update("cookingcls.updateReviewAvgRate", classNo);
+		
+	}
+
+	//클래스조회
+	public int selectClassNo(int classNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("review.selectClassNo", classNo);
+	}
 	
 	
 }
