@@ -159,7 +159,7 @@
 		</div>
 
 		<div class="product" style="display: none;">
-			<hr>
+			
 			<c:forEach items="${rb.PList }" var="p">
 				<div class="milkit">
 					<c:if test="${sessionScope.m.memberNo != null}">
