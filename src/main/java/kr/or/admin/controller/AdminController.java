@@ -21,6 +21,7 @@ import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
 import kr.or.admin.model.vo.Prev;
 import kr.or.admin.model.vo.Ranking;
+import kr.or.admin.model.vo.Report;
 import kr.or.coupon.model.vo.Coupon;
 import kr.or.freeboard.model.vo.Freeboard;
 import kr.or.notice.model.vo.Notice;
@@ -37,7 +38,9 @@ public class AdminController {
 	@RequestMapping(value="/admin.do")
 	public String admin(Model model) {
 		ArrayList<Notice> list = service.selectNotice();
+		ArrayList<Report> list2 = service.selectReport();
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
 		return "admin/admin";
 	}
 	@RequestMapping(value="/allmember.do")

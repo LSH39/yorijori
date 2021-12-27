@@ -10,6 +10,7 @@
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="c"/>
 		<typeAlias type="kr.or.admin.model.vo.Prev" alias="prev"/>
 		<typeAlias type="kr.or.admin.model.vo.VisitCount" alias="vc"/>
+		<typeAlias type="kr.or.admin.model.vo.Report" alias="report2"/>
 
 		<typeAlias type="kr.or.cart.model.vo.Cart" alias="cart"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="chat"/>
@@ -49,7 +50,7 @@
 		<typeAlias type="kr.or.recipe.model.vo.RecipeReport" alias="report"/>
 		<typeAlias type="kr.or.recipe.model.vo.RecipeLike" alias="rlike"/>
 		<typeAlias type="kr.or.milkit.model.vo.Product" alias="product"/>
-		<typeAlias type="kr.or.membership.model.vo.Membership" alias="membership"/>
+				<typeAlias type="kr.or.membership.model.vo.Membership" alias="membership"/>
 		<typeAlias type="kr.or.membership.model.vo.SubPayment" alias="subpayment"/>
 		<!-- 김민지 별칭 끝 -->
 

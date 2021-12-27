@@ -14,12 +14,13 @@
  			recipe_level as recipeLevel,
  			situation,
  			material,
-		(select member_nickname from Member m  where m.member_no = r.recipe_writer) as nickname 
+		(select member_nickname from Member m  where m.member_no = r.recipe_writer) as nickname,
+		 (select member_black from member m where m.member_no=r.recipe_writer )as black
 		from recipe_board r 	
 		<if test="situation == 0 and material == 0  and recipeLevel == 0">
-		where recipe_delete=1 order by 1 desc)r where rownum between 1 and 6	
+		where recipe_delete=1 order by 1 desc)r where black=0 and rownum between 1 and 6	
 		</if>
-	<trim suffix="and recipe_delete=1 order by 1 desc )r where rownum between 1 and 6 " >
+	<trim suffix="and recipe_delete=1 order by 1 desc )r where black=0 and rownum between 1 and 6 " >
 	<choose>
 		<when test="situation gt 0 and material gt 0 and recipeLevel gt 0 ">
 		 where situation=#{situation} and  material=#{material} and recipe_level=#{recipeLevel}

@@ -31,9 +31,17 @@ margin-bottom: 30px;
 	 <div class="col-md-10">
 	 <h2>관리자 페이지</h2>
 	 <div style="background-color: #F7F7E5; height: 200px;">
-        <div style="float: left;">
-            <img src="resources/img/mainpage/logo_header.png" style="width: 200px;">
-      	고민중
+        <div style="float: left; padding-left:30px; padding-top:10px;">
+        <h5>신고 레시피</h5>
+        <table>
+        <c:forEach items="${list2}" var="item">
+        <tr>
+        <td>
+         <a href="/recipeView.do?recipeNo=${item.recipeNo }&memberNo=${item.memberNo}">제목 :${item.recipeTitle } // 사유 : ${item.reportComment } // 작성자 아이디 : ${item.memberId }</a>
+        </td>
+        </tr>
+        </c:forEach>
+           </table>
         
         </div>
         

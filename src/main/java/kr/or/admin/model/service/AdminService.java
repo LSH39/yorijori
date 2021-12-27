@@ -13,6 +13,7 @@ import kr.or.admin.model.vo.Member2;
 import kr.or.admin.model.vo.MemberPageData;
 import kr.or.admin.model.vo.Prev;
 import kr.or.admin.model.vo.Ranking;
+import kr.or.admin.model.vo.Report;
 import kr.or.coupon.model.vo.Coupon;
 import kr.or.notice.model.vo.Notice;
 
@@ -287,6 +288,12 @@ public class AdminService {
 	public int rePermission(String memberNo) {
 		int result = dao.rePermission(memberNo);
 		return result;
+	}
+
+	public ArrayList<Report> selectReport() {
+		ArrayList<Report> list2 = dao.selectReport();
+		
+		return list2;
 	}
 	
 	

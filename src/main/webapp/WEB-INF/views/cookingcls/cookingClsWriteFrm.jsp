@@ -23,9 +23,9 @@
 			<script src="resources/summernote/jquery-3.3.1.js"></script>
 			<script src="resources/summernote/summernote-lite.js"></script>
 			<script src="resources/summernote/lang/summernote-ko-KR.js"></script>
-			<div class="container">
+			<div class="container" style="margin-bottom:50px;margin-top:50px;">
 				<div>
-					<h1>요리 클래스 등록</h1>
+					<h1 style="margin-bottom:50px;">요리 클래스 등록</h1>
 				</div>
 				<div>
 					<form action="/cookingClsWrite.do" method="post" enctype="multipart/form-data">
@@ -80,7 +80,9 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<h5>상세 주소</h5>
+							</div>
 							<div class="col-sm-6">
 								<h5>클래스 정원(최소 10명 이상)</h5>
 							</div>
@@ -316,7 +318,7 @@
             $("#time2").change(function(){
                 let time1 = $("#time1").val();
                 let time2 = $("#time2").val();
-                if(time1 >= time2){
+                if(time1+3600 >= time2){
                     $(".result").eq(2).html("시간을 올바르게 입력해주세요.");
                     $(".result").eq(2).css("color", "red");
                     time2Chk = false;
