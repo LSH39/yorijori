@@ -22,4 +22,8 @@ public class MembershipDao {
 	public int insertSubPayment(SubPayment sp) {
 		return sqlSession.insert("membership.insertSubPayment",sp);
 	}
+
+	public int selectMembershipNo(int memberNo) {
+		return sqlSession.selectOne("membership.selectMembership",memberNo);
+	}
 }

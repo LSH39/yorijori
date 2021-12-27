@@ -10,4 +10,7 @@
 	<insert id="insertSubPayment" parameterType="subpayment">
 		insert into sub_payment values(subpayment_seq.nextval,#{memberNo},#{membershipNo},#{payAmount},to_char(sysdate,'yyyy-mm-dd'),#{membershipEnd},#{impNo},#{memberName},#{memberPhone},#{postcode},#{addressRoad},#{addressDetail})
 	</insert> 
+	<select id="selectMembership" parameterType="_int" resultType="_int">
+		select count(*) as count from sub_payment where member_no=#{memberNo} 
+	</select>
 </mapper>

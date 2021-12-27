@@ -40,7 +40,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="mainImg">
 			<img src="/resources/upload/recipe/${rb.filepath }" id="titleImg">
 			<div id="count">
