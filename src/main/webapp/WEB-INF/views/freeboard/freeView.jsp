@@ -169,7 +169,7 @@
 	      										</td>
 	      										<td class="fcLike">
 	      											<div class="fc-like">
-		      											<img src="resources/img/freeboard/spoonknife.png" style="width:30px;height:30px;" class="fcLike">
+		      											<img src="resources/img/freeboard/spoonknife.png" style="width:30px;height:30px;">
 		      											<p>추천 <span class="fcLikeCount">${fc.fcLikeCount }</span></p>
 		      											<input type="hidden" value="${fc.fcNo }" class="fcNo">
 	      											</div>
@@ -219,6 +219,7 @@
 			return false;
 		}
   	}
+  	
   	$(function(){
   		$("#freeLike").on("click", function(){
   	  		var memberId = $("#fcWriter").val();
@@ -246,6 +247,46 @@
   	  			alert("회원만 추천이 가능합니다. 로그인 해주세요.");
   	  		}
   	  	});
+  		
+  		//댓글 추천여부 확인
+  		var memberId = $("#fcWriter").val();
+  		var freeNo = $("#freeNo").val();
+  		if(memberId != null){
+  			$.ajax({
+  				url: "/fcLikeCheck.do",
+  				type: "get",
+  				data: {memberId: memberId, freeNo:freeNo},
+  				success: function(data){
+  					console.log(data);
+  					var fcNo = $(".fcNo");
+  					console.log(fcNo);
+  					for(var i=0;i<data.length;i++){
+  						for(var j=0; j<fcNo.length;j++){
+  							if(fcNo.eq(j).val() == data[i].fcNo){
+  	  							var fcLikeCount = fcNo.eq(j).prev().children().html();
+  	  							fcNo.eq(j).parent().addClass("fc-unlike");
+  	  							fcNo.eq(j).prev().html("<span class='fcLikeCount'>"+fcLikeCount + " "+" 추천취소 </span>");
+  	  						}
+  						}
+  						
+  					}
+  				}
+  			});
+  		}
+  		
+  		
+  		//댓글 추천 or 비추천
+  		$(".fc-like").on("click", function(){
+  			var freeNo = $("#freeNo").val();
+	  		var fcNo = $(this).children(".fcNo").val();
+	  		var memberId = $("#fcWriter").val();
+  			if(!$(this).hasClass("fc-unlike")){
+  	  			location.href="/insertFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
+  			} else if ($(this).hasClass("fc-unlike")){
+  	  			location.href="/deleteFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
+  			}
+  		});
+  		
   		
   		//댓글 삭제
   		$(".comment-del").on("click", function(){
@@ -286,46 +327,7 @@
   			location.href="/updateFc.do?fcNo="+fcNo+"&fcContent="+fcContent+"&freeNo="+freeNo;
   		});
   		
-  		//댓글 추천여부 확인
-  		var memberId = $("#fcWriter").val();
-  		var freeNo = $("#freeNo").val();
-  		if(memberId != null){
-  	 		$.ajax({
-				url: "/fcLikeCheck.do",
-				type: "get",
-				data: {memberId:memberId, freeNo:freeNo},
-				success: function(data){
-					var list = data;
-					console.log(list);
-					if(list != null){
-						for(var i=0;i<list.length;i++){
-							var fcNo = $(".fcNo");
-							var fcLikeCount = fcNo.prev().children().html();
-							if(fcNo.val() == list[i].fcNo){
-								fcNo.parent().removeClass("fc-like");
-								fcNo.parent().addClass("fc-unlike");
-								fcNo.prev("p").html("<span class='fcLikeCount'>"+fcLikeCount+"</span> 추천취소");
-							}
-						}
-						
-						}
-				}
-		
-  			});
-  		}
-  		
-  		
-  		//댓글 추천 or 비추천
-  		$(".fc-like").on("click", function(){
-  			var freeNo = $("#freeNo").val();
-	  		var fcNo = $(this).children(".fcNo").val();
-	  		var memberId = $("#fcWriter").val();
-  			if($(this).hasClass("fc-like")){
-  	  			location.href="/insertFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
-  			} else if ($(this).hasClass("fc-unlike")){
-  	  			location.href="/deleteFcLike.do?fcNo="+fcNo+"&memberId="+memberId+"&freeNo="+freeNo;
-  			}
-  		});
+  	
   		
   		//파일다운로드 제한
   		$(".filedown").on("click", function(){
