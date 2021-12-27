@@ -155,6 +155,10 @@
 </style>
 <script>
 	$(function(){
+		var prePriceComma = $(".classPrice").html();
+		var postPriceComma = prePriceComma.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$(".classPrice").html(postPriceComma);
+		
 		var dmRoomNo = -1;
 		var dmClassNoVal = -1;
 		
@@ -282,7 +286,7 @@
 				buyer_postcode : "99999" //구매자 우편번호
 			},function(rsp){
 				if(rsp.success){
-					alert("결제 성공성공");
+					alert("결제가 완료됐습니다!");
 					//성공시 로직(db결제정보 insert -> 사용자 화면 처리)
 					console.log("카드 승인 번호 "+rsp.apply_num);
 				}else{
@@ -625,7 +629,7 @@
 
 	<div class="container">
 		<div>
-		<h1 style="margin-bottom:50px;">쿠킹클래스 뷰</h1>
+		<h1 style="margin-bottom:50px;">요리 클래스</h1>
 			<div class="class-wrap">
 				<div class="left position-static">
 					<div class="class-content">

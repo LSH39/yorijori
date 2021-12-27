@@ -108,7 +108,7 @@ public class DmController {
 		}
 		int result = service.insertDm(classNo, dmReceiver, dmSender, dmContent, dmRoomNo);
 		if(result > 0) {
-			return 1;
+			return dmRoomNo;
 		}else {
 			return 0;			
 		}
