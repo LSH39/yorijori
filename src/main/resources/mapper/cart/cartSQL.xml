@@ -18,4 +18,9 @@
 	<delete id="deleteCart" parameterType="_int">
 		delete from cart where cart_no=#{cartNo}
 	</delete>
+	
+	<select id="selectStock" parameterType="_int" resultType="_int">
+		SELECT MILKIT_STOCK AS stock FROM PRODUCT WHERE PRODUCT_NO=#{productNo}
+	</select>
+	
 </mapper>

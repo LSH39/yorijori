@@ -604,7 +604,14 @@ main{
         		<c:forEach items="${list }" var="rb">
         			<li>
         				<div>
+        				<c:choose>
+        					<c:when test="${empty sessionScope.m }">
+        					<a href="/recipeView.do?recipeNo=${rb.recipeNo }&memberNo=0">
+        					</c:when>
+        					<c:otherwise>
         					<a href="/recipeView.do?recipeNo=${rb.recipeNo }&memberNo=${sessionScope.m.memberNo}">
+        					</c:otherwise>
+        				</c:choose>
         						<div class="img-container">
         								<c:if test="${not empty rb.recipeVideo }">
 			        						<div class="videolink-container">

@@ -81,7 +81,7 @@ float: left;
 }
 .pagenation{
 
-margin-left : 550px;
+margin-left:400px;
 margin-top:100px;
 }
 .pagenation ul{

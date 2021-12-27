@@ -37,7 +37,7 @@
         </form>
     </div>
     <div >
-    <form action="/premium.do" method="post" id="premium">
+    <form action="/premiumFrm.do" method="post" id="premium">
         <img src="/resources/img/membership/premium.jpg">
         <p class="name">PREMIUM</p>
         <select name="membershipPrice">
