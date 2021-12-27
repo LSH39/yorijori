@@ -49,13 +49,13 @@
 	      									</span>
 	      									<c:choose>
 	      										<c:when test="${r.recipeLevel eq 1 }">
-	      											하
+	      											상
 	      										</c:when>
 	      										<c:when test="${r.recipeLevel eq 2 }">
 	      											중
 	      										</c:when>
 	      										<c:otherwise>
-	      											상
+	      											하
 	      										</c:otherwise>
 	      									</c:choose> 
 	      									</h5>

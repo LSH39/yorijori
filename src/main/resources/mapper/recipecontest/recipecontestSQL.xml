@@ -11,9 +11,9 @@
         (select ccc.* from
        (select
             cc.*,
-            (select member_nickname from member m where recipeWriterNo=m.member_no) as memberNickname,
-            (select member_id from member m where recipeWriterNo=m.member_no) as memberId,
-            (select profile_path from member m where recipeWriterNo=m.member_no) as profilePath    
+            (select member_nickname from member m where memberNo=m.member_no) as memberNickname,
+            (select member_id from member m where memberNo=m.member_no) as memberId,
+            (select profile_path from member m where memberNo=m.member_no) as profilePath    
             from
        (select
         cr.contest_no as contestNo,
@@ -22,7 +22,7 @@
         cr.contest_result as contestResult,
         cr.contest_month as contestMonth,
         cr.recipe_delete as recipeDelete,
-        (select recipe_writer from recipe_board r where r.recipe_no=cr.recipe_no) as recipeWriterNo,
+        (select recipe_writer from recipe_board r where r.recipe_no=cr.recipe_no) as memberNo,
         (select recipe_title from recipe_board r where r.recipe_no=cr.recipe_no) as recipeTitle,
         (select filepath from recipe_board r where r.recipe_no=cr.recipe_no) as recipePath,
         (select subhead from recipe_board r where r.recipe_no=cr.recipe_no) as recipeContent,
@@ -58,9 +58,9 @@
         (select ccc.* from
        (select
             cc.*,
-            (select member_nickname from member m where recipeWriterNo=m.member_no) as memberNickname,
-            (select member_id from member m where recipeWriterNo=m.member_no) as memberId,
-            (select profile_path from member m where recipeWriterNo=m.member_no) as profilePath    
+            (select member_nickname from member m where memberNo=m.member_no) as memberNickname,
+            (select member_id from member m where memberNo=m.member_no) as memberId,
+            (select profile_path from member m where memberNo=m.member_no) as profilePath    
             from
        (select
         cr.contest_no as contestNo,
@@ -69,7 +69,7 @@
         cr.contest_result as contestResult,
         cr.contest_month as contestMonth,
         cr.recipe_delete as recipeDelete,
-        (select recipe_writer from recipe_board r where r.recipe_no=cr.recipe_no) as recipeWriterNo,
+        (select recipe_writer from recipe_board r where r.recipe_no=cr.recipe_no) as memberNo,
         (select recipe_title from recipe_board r where r.recipe_no=cr.recipe_no) as recipeTitle,
         (select filepath from recipe_board r where r.recipe_no=cr.recipe_no) as recipePath,
         (select subhead from recipe_board r where r.recipe_no=cr.recipe_no) as recipeContent,
@@ -165,22 +165,53 @@
 		values (contest_seq.nextval, #{recipeNo}, 0, to_char(sysdate, 'yyyy-mm'), 1, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
 	<select id="selectContestRecipeList" resultType="rc">
-		  select rrr.* from    
+		  select * from 
+         (select rownum as rnum, rrr.* from    
     (select rr.*, m.member_nickname as memberNickname, m.member_id as memberId, m.profile_path as profilePath from
     (select cr.contest_no as contestNo, cr.RECIPE_NO as recipeNo, cr.ENTER_DATE as enterDate, 
     cr.CONTEST_RESULT as contestResult, cr.CONTEST_MONTH as contestMonth, 
-    cr.RECIPE_DELETE as recipeDelete, r.recipe_writer, r.recipe_title as recipeTitle, r.subhead as recipeContent, 
+    cr.RECIPE_DELETE as recipeDelete, r.recipe_writer as memberNo, r.recipe_title as recipeTitle, r.subhead as recipeContent, 
     r.filepath as recipePath, (select count(*) from contest_vote where contest_no=cr.contest_no) as voteCount 
         from contest_recipe cr
         left join recipe_board r
         on cr.RECIPE_NO=r.recipe_no
         where contest_month like to_char(sysdate, 'yyyy-mm') || '%')rr
     left join member m
-    on rr.recipe_writer=m.member_no)rrr
-    order by voteCount desc, contestNo
+    on memberNo=m.member_no)rrr
+    order by voteCount desc, contestNo)w
+    where rnum between 1 and 3
 	</select>
 	<insert id="insertContest" parameterType="_int">
 		insert into contest_recipe
 		values (contest_seq.nextval, #{recipeNo}, 0, to_char(sysdate, 'yyyy-mm'), 1, sysdate)
 	</insert>
+	<update id="updateContestWinners" parameterType="map">
+		update contest_recipe
+		set contest_result = #{rank}
+		where contest_no = #{winner.contestNo}
+	</update>
+	<insert id="insertWinnerHistory" parameterType="map">
+		insert into contest_win values (contestwin_seq.nextval, #{winner.contestNo}, #{winner.voteCount}, to_char(sysdate, 'yyyy-mm'), #{winner.memberNo}, #{winner.recipeTitle} )
+	</insert>
+	<select id="selectSpecialWinners" resultType="rc">
+		<![CDATA[
+		select rrr.* from    
+    (select rr.*, m.member_nickname as memberNickname, m.member_id as memberId, m.profile_path as profilePath from
+    (select cr.contest_no as contestNo, cr.RECIPE_NO as recipeNo, cr.ENTER_DATE as enterDate, 
+    cr.CONTEST_RESULT as contestResult, cr.CONTEST_MONTH as contestMonth, 
+    cr.RECIPE_DELETE as recipeDelete, r.recipe_writer as memberNo, r.recipe_title as recipeTitle, r.subhead as recipeContent, 
+    r.filepath as recipePath, (select count(*) from contest_vote where contest_no=cr.contest_no) as voteCount 
+        from contest_recipe cr
+        left join recipe_board r
+        on cr.RECIPE_NO=r.recipe_no
+        where contest_month like to_char(sysdate, 'yyyy-mm') || '%')rr
+    left join member m
+    on memberNo=m.member_no)rrr
+    where voteCount >= 30 ]]>
+	</select>
+	<update id="updateMemberPoints" parameterType="map">
+		update member
+		set member_point = member_point + #{point} 
+		where member_no = #{winner.memberNo}
+	</update>
 </mapper>

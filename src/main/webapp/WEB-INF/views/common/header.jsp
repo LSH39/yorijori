@@ -135,9 +135,14 @@
           <label for="headersearchsubmit"><img class="main-search-icon" src="/resources/img/mainpage/search_icon.png" style="width: 25px; height: 25px; top: 13px; left: 74%; position: absolute;"></label>
           </form>
           <li><a class="nav-link scrollto" href="/cart.do"><img src="resources/img/mainpage/cart.png" class="img-fluid" style="width: 40px;"></a></li>
-          <c:if test="${sessionScope.m.memberNo != null }">
-          <li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
-          </c:if>
+           <c:choose>
+          <c:when test="${not empty sessionScope.m }">
+          	<li><a class="getstarted scrollto" href="/recipeWrite.do">레시피 작성</a></li>
+          </c:when>
+          <c:otherwise>
+          	<li><a class="getstarted scrollto" onclick="loginAlert();">레시피 작성</a></li>
+          </c:otherwise>
+          </c:choose>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -285,7 +290,7 @@
 	    $(this).parent('label').parent('li').toggleClass('checked', this.checked);
 	  });
   	
-	//현재 일자 체크 (대회 투표기간 확인)
+  //현재 일자 체크 (대회 투표기간 확인)
   	function chkDate(){
   		var today = new Date();
   		var date = today.getDate();

@@ -359,7 +359,7 @@
             <c:forEach items="${classList }" var="c" begin="0" end="7">
             <div class="swiper-slide">
             	<a href="/cookingClsView.do?classNo=${c.classNo }">
-            		<img src="resources/img/mainpage/cooking-cls.jpg" class="img-fluid" alt="">
+            		<img src="resources/upload/cookingcls/${c.classThumbnailFilepath }" style="width:250px;height:180px; alt="">
             		<h5>${c.classTitle }</h5>
             		<h6>평점 <span class="main-classrate"><i class="bi bi-star-fill"></i>${c.classRate }</span></h6>
             		<h6><span>수강인원: ${c.classNop }</span></h6>

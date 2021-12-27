@@ -196,6 +196,7 @@ a:hover{
 	background: #FFF;
 	padding: 15px;
 	box-shadow : 2px 2px 7px #999;
+	height: auto;
 }
 .main-newclasses .swiper-pagination {
   margin-top: 15px;
@@ -236,4 +237,5 @@ a:hover{
 #main-newclasses .swiper-wrapper{
 	overflow:visible;
 	height: 280px;
+	padding: 30px 5px;
 }
