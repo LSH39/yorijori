@@ -214,9 +214,10 @@
 			$.ajax({
 				url: "/getRecipeList.do",
 				type: "get",
-				data: {memberNo:memberNo, year:year, month:month},
+				data: {memberNo:memberNo},
 				success: function(data){
 					var list = data;
+					console.log(data);
 					if(list.length == 0){
 						written = false;	
 					} else {

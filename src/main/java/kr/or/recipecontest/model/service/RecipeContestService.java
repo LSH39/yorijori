@@ -147,11 +147,9 @@ public class RecipeContestService {
 		return searchResult;
 	}
 
-	public ArrayList<ContestViewData> selectRecipeList(int memberNo, int year, int month) {
+	public ArrayList<ContestViewData> selectRecipeList(int memberNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
-		map.put("year", year);
-		map.put("month", month);
 		ArrayList<ContestViewData> list = dao.selectRecipeList(map);
 		return list;
 	}
