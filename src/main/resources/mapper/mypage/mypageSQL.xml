@@ -877,4 +877,40 @@
 		member_No=#{memberNo}
 
 	</update>
+	
+	<select id="totalmembership" resultType="_int" parameterType="map">
+		select
+		count(*) from sub_payment a
+		where a.member_no=#{memberNo}
+	</select>
+
+	<select id="selectmembership" parameterType="map" resultType="mym">
+        select *
+		  from (select rownum as rnum, 
+		               mem.*
+		          from (select
+								a.membership_no as membershipNo,
+								a.membership_level as membershipLevel,
+								a.membership_date as membershipDate,
+								a.membership_price as membershipPrice,
+								b.payment_No as paymentNo,
+								b.member_no as memberNo,
+								b.pay_amount as payAmount,
+								b.pay_date  as payDate,
+								b.membership_end as membershipEnd, 
+								b.imp_no as impNo,
+								b.member_name as memberName,
+								b.member_phone as  memberPhone,
+								b.postcode,
+								b.address_road as addressRoad,
+								b.address_detail  as addressDetail,
+                                (select count(*) from sub_payment p where membership_end <![CDATA[>= to_char(sysdate,'yyyy-mm-dd') and p.payment_no=b.payment_no) as subStatus]]>
+			               from membership a,sub_payment b
+			              where b.membership_no=a.membership_no and b.member_no=#{memberNo}) mem
+		              )
+		where rnum
+		between #{start} and #{end}
+
+
+	</select>
 </mapper>
