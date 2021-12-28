@@ -45,7 +45,7 @@ public class RecipeController {
 		c.setLevelNum(rb.getRecipeLevel());
 		c.setMaterialNum(rb.getMaterial());
 		c.setSituationNum(rb.getSituation());
-		model.addAttribute("c",c );
+		model.addAttribute("c", c);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("list", list);
 		return "recipe/recipeBoard";
@@ -63,32 +63,33 @@ public class RecipeController {
 		FileVo upFile = uploadFile(uploadImg, savepath);
 		rb.setFilepath(upFile.getFilepath());
 		int recipeNo = service.insertRecipe(rb);
-		int result= 0;
-		if(recipeNo>0) {
+		int result = 0;
+		if (recipeNo > 0) {
 			String[] mNameList = request.getParameterValues("mNameList");
 			for (int i = 0; i < mNameList.length; i++) {
 				m.setMAmount(m.getMAmountList()[i]);
 				m.setMaterialName(m.getMNameList()[i]);
-				result = service.insertMaterial(m,recipeNo);
-		}
+				result = service.insertMaterial(m, recipeNo);
+			}
 			if (files[0].isEmpty()) {
 
 			} else {
-				String savepath2 = request.getSession().getServletContext().getRealPath("/resources/upload/recipeContent/");
-					String[] rContentList = request.getParameterValues("rContentList");
-					for(int i=0; i<rContentList.length;i++) {
-						if(files[i].isEmpty()) {
-							
-						}else {
+				String savepath2 = request.getSession().getServletContext()
+						.getRealPath("/resources/upload/recipeContent/");
+				String[] rContentList = request.getParameterValues("rContentList");
+				for (int i = 0; i < rContentList.length; i++) {
+					if (files[i].isEmpty()) {
+
+					} else {
 						upFile = uploadFile(files[i], savepath2);
 						rc.setFilename(upFile.getFilename());
 						rc.setFilepath(upFile.getFilepath());
 						rc.setRecipeContent(rc.getRContentList()[i]);
-						result = service.insertContent(rc,recipeNo);
-						}
+						result = service.insertContent(rc, recipeNo);
 					}
-					
-				}	
+				}
+
+			}
 		}
 		if (result > 0) {
 			model.addAttribute("msg", "등록성공");
@@ -99,6 +100,7 @@ public class RecipeController {
 		}
 		return "common/msg";
 	}
+
 	private FileVo uploadFile(MultipartFile file, String savepath) {
 		String filename = file.getOriginalFilename();
 		String onlyfilename = filename.substring(0, filename.indexOf("."));
@@ -212,7 +214,8 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "updateRecipeFrm.do")
-	public String updateRecipeFrm(RecipeBoard rb, Material m, RecipeContent rc, MultipartFile uploadImg, Model model,HttpServletRequest request,MultipartFile[] files) {
+	public String updateRecipeFrm(RecipeBoard rb, Material m, RecipeContent rc, MultipartFile uploadImg, Model model,
+			HttpServletRequest request, MultipartFile[] files) {
 		String filename = uploadImg.getOriginalFilename();
 		String savepath = request.getSession().getServletContext().getRealPath("/resources/upload/recipe/");
 		String filepath = rb.getFilepath();
@@ -226,68 +229,76 @@ public class RecipeController {
 				} else {
 					System.out.println("파일 삭제 실패");
 				}
-			}else {
+			} else {
 				FileVo fv = uploadFile(uploadImg, savepath);
 				rb.setFilepath(fv.getFilepath());
 			}
 		}
 		int result = service.updateRecipe(rb);
-		if(result>0) {
-		String[] mNoList = request.getParameterValues("mNoList");
-		for (int i = 0; i < mNoList.length; i++) {
-			m.setMaterialNo(Integer.parseInt(m.getMNoList()[i]));
-			m.setMAmount(m.getMAmountList()[i]);
-			m.setMaterialName(m.getMNameList()[i]);
-			result = service.updateMaterial(m);
-		}	
-		String[] mNameList2 = request.getParameterValues("mNameList2");
-		for (int i = 0; i < mNameList2.length; i++) {
-			m.setMAmount(m.getMAmountList2()[i]);
-			m.setMaterialName(m.getMNameList2()[i]);
-			result = service.insertMaterial(m,recipeNo);
-	}
-		String[] rContentList = request.getParameterValues("rContentList");
-		for (int i = 0; i < rContentList.length; i++) {
-			rc.setRFileNo(Integer.parseInt(rc.getRcNoList()[i]));
-			rc.setRecipeContent(rc.getRContentList()[i]);
-			result = service.updateRecipeContent(rc);			
-		}
-		if (files[0].isEmpty()) {
-			System.out.println("엥");
-		} else {
-				System.out.println(recipeNo);
-				String[] rContentList2 = request.getParameterValues("rContentList2");
-				for(int i=0; i<rContentList2.length;i++) {
-					if(files[i].isEmpty()) {
-						
-					}else {
-					String savepath2 = request.getSession().getServletContext().getRealPath("/resources/upload/recipeContent/");
+		if (result > 0) {
+			String[] mNoList = request.getParameterValues("mNoList");
+			for (int i = 0; i < mNoList.length; i++) {
+				m.setMaterialNo(Integer.parseInt(m.getMNoList()[i]));
+				m.setMAmount(m.getMAmountList()[i]);
+				m.setMaterialName(m.getMNameList()[i]);
+				result = service.updateMaterial(m);
+			}
+			String[] mNameList2 = request.getParameterValues("mNameList2");
+			for (int i = 0; i < mNameList2.length; i++) {
+				m.setMAmount(m.getMAmountList2()[i]);
+				m.setMaterialName(m.getMNameList2()[i]);
+				String mName = m.getMaterialName();
+				if (mName != "") {
+					result = service.insertMaterial(m, recipeNo);
+				} else {
+					System.out.println(m.getMaterialName());
+				}
+
+			}
+			String[] rContentList = request.getParameterValues("rContentList");
+			for (int i = 0; i < rContentList.length; i++) {
+				rc.setRFileNo(Integer.parseInt(rc.getRcNoList()[i]));
+				rc.setRecipeContent(rc.getRContentList()[i]);
+				result = service.updateRecipeContent(rc);
+			}
+
+			String[] rContentList2 = request.getParameterValues("rContentList2");
+			for (int i = 0; i < rContentList2.length; i++) {
+				rc.setRecipeContent(rc.getRContentList2()[i]);
+				String content = rc.getRecipeContent();
+				if(content != "") {
+					
+				
+				if (files[i].isEmpty()) {
+
+				} else {
+					String savepath2 = request.getSession().getServletContext()
+							.getRealPath("/resources/upload/recipeContent/");
 					FileVo upFile = uploadFile(files[i], savepath2);
 					rc.setFilename(upFile.getFilename());
 					rc.setFilepath(upFile.getFilepath());
-					rc.setRecipeContent(rc.getRContentList2()[i]);
-					result = service.insertContent(rc,recipeNo);
-					}
+					result = service.insertContent(rc, recipeNo);
 				}
-				
-			}	
-				
-		if(result>0) {
-			model.addAttribute("msg", "수정완료");
-			model.addAttribute("loc", "/recipeBoard.do");
-		}else {
-			model.addAttribute("msg", "수정실패");
-			model.addAttribute("loc", "/recipeBoard.do");
-		}
+			}else{
+				System.out.println(content);
+			}
+			}
+			if (result > 0) {
+				model.addAttribute("msg", "수정완료");
+				model.addAttribute("loc", "/recipeBoard.do");
+			} else {
+				model.addAttribute("msg", "수정실패");
+				model.addAttribute("loc", "/recipeBoard.do");
+			}
 		}
 		return "common/msg";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value = "/moreRecipe.do" ,produces = "application/json;charset=utf-8")
-	public String moreRecipe(RecipeBoard rb,int start) {
-		ArrayList<RecipeBoard>list = service.moreRecipe(start,rb);
+	@RequestMapping(value = "/moreRecipe.do", produces = "application/json;charset=utf-8")
+	public String moreRecipe(RecipeBoard rb, int start) {
+		ArrayList<RecipeBoard> list = service.moreRecipe(start, rb);
 		return new Gson().toJson(list);
-		
+
 	}
 }
