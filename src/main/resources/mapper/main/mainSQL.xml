@@ -169,7 +169,7 @@
 	        where (recipe_title like '%' || '돈까스' || '%' or recipe_title like '%' || '돈가스' || '%' or recipe_title like '%' || '텐동' || '%' or recipe_title like '%' || '튀김' || '%')
 	        	</when>
 	        	<when test="_parameter == 4"> <!-- 몸보신 -->
-	        where recipe_title like '%' || '삼계탕' || '%' or food_name like '%' || '탕' or food_name like '%' || '전골' || '%' or subhead like '%' || '원기' || '%'
+	        where recipe_title like '%' || '삼계탕' || '%' or food_name like '%' || '탕' or food_name like '%' || '전골' || '%' or subhead like '%' || '원기' || '%' or subhead like '%' || '기력' || '%'
 	        	</when>
 	        	<when test="_parameter == 5"> <!-- 다이어트 -->
 	        where situation=2 or recipe_title like '%' || '샐러드' || '%'

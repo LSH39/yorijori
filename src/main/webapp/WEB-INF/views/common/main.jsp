@@ -441,21 +441,23 @@
   		  
   		  //팔로우 여부 확인
     		var memberNo = $("#loginMemberNo").val();
+  		  	var memberNick = $(".memberNick");
     		if(memberNo != null){
     	 		$.ajax({
 	  				url: "/followCheck.do",
 	  				type: "get",
 	  				data: {memberNo:memberNo},
 	  				success: function(data){
-	  					if(data.length>0){
-	  						var list = data;
-	  						for(var i=0;i<list.length; i++){
-	  							var label = $('.memberNick:contains('+list[i].followingNick+')').parent().children('.main-follow').children('.main-follow-stat');
-	  							label.html("팔로우중");
-	  							label.css("color", "#8E44AD").css("font-weight", "bolder");
+	  						for(var i=0;i<data.length; i++){
+	  							for(var j=0; j<memberNick.length;j++){
+	  								if(data[i].followingNick == memberNick.eq(j).html()){
+	  									var label = memberNick.eq(j).parent().nextAll('.main-follow').children('.main-follow-stat');
+	  									label.html("팔로우중");
+	  									label.css("color", "#8E44AD").css("font-weight", "bolder");
+	  								}
+	  							}
+	  							
 	  						}
-	  						
-	  					}
 	  				}
   		
     			});
