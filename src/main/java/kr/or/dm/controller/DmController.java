@@ -50,7 +50,7 @@ public class DmController {
 		ArrayList<Dm> list = service.selectOneDm(classNo, dmSender);
 
 
-		System.out.println("dmSender : "+dmSender);
+//		System.out.println("dmSender : "+dmSender);
 		String receiver = service.selectOneNickname(classNo, dmSender);
 		model.addAttribute("list", list);
 		model.addAttribute("classNo", classNo);
@@ -78,12 +78,12 @@ public class DmController {
 			dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender); //문의방 숫자
 		}
 
-		System.out.println("dmRoomNo "+dmRoomNo);
-		System.out.println("classNo "+classNo);
-		System.out.println("dmReceiver "+dmReceiver);
-		System.out.println("dmSender "+dmSender);
-		System.out.println("dmContent "+dmContent);
-		System.out.println("classNoNickname "+classNoNickname);
+//		System.out.println("dmRoomNo "+dmRoomNo);
+//		System.out.println("classNo "+classNo);
+//		System.out.println("dmReceiver "+dmReceiver);
+//		System.out.println("dmSender "+dmSender);
+//		System.out.println("dmContent "+dmContent);
+//		System.out.println("classNoNickname "+classNoNickname);
 		
 
 		
@@ -101,10 +101,10 @@ public class DmController {
 	public int dmSendAjax(int classNo, String dmReceiver, String dmSender, String dmContent, int dmRoomNo) {
 		//정보 가져와서  클래스랑 내가 쓴거 있는지 우선 검색
 		//int dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
-		System.out.println("컨트롤러 최초시도"+dmRoomNo);
+		//System.out.println("컨트롤러 최초시도"+dmRoomNo);
 		if(dmRoomNo == -1) { //최초 시도
 			dmRoomNo = service.selectOneDmRoomNo(classNo, dmSender);
-			System.out.println("서비스에서 가져온거"+dmRoomNo);
+			//System.out.println("서비스에서 가져온거"+dmRoomNo);
 		}
 		int result = service.insertDm(classNo, dmReceiver, dmSender, dmContent, dmRoomNo);
 		if(result > 0) {
