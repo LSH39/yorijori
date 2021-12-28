@@ -166,6 +166,7 @@
 		display: table-cell;
     	overflow: hidden;
     	text-overflow: ellipsis;
+    	white-space: nowrap;
 	}
 </style>
 <script>
@@ -683,12 +684,12 @@
 					<div class="reviewSection">
 						<c:choose>
 							<c:when test="${not empty list }">
-								<table class="table reviewTable">
+								<table class="table reviewTable" style="font-size: 14px;">
 								<tr>
 									<th style="width: 7%;">번호</th>
-									<th style="width: 55%;">내용</th>
-									<th style="width: 13%;">닉네임</th>
-									<th style="width: 15%;">평점</th>
+									<th style="width: 52%;">내용</th>
+									<th style="width: 22%;">닉네임</th>
+									<th style="width: 14%;">평점</th>
 									<th style="width: 5%;"></th>
 								</tr>
 								<c:forEach items="${list }" var="review" varStatus="i">
@@ -761,7 +762,7 @@
 						
 						<table class="table table-borderless">
 							<tr>
-								<td colspan="2" class="col-8">
+								<td colspan="2" class="col-8" style="width:71%">
 									<input type="hidden" name="classNo" value="${ccls.classNo }" id="classNo">
 									<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }" id="memberNickname">
 									<input type="hidden" name="memberLevel" value="${sessionScope.m.memberLevel }" id="memberLevel">
@@ -773,11 +774,11 @@
 											<input type="text" id="needToLogin" class="form-control" readonly value="로그인 해주세요!">
 										</c:when>
 										<c:otherwise>
-											<input type="text" name="reviewContent" id="reviewContent" class="form-control" maxlength="999">
+											<input type="text" name="reviewContent" id="reviewContent" class="form-control" maxlength="100">
 										</c:otherwise>
 									</c:choose>
 								</td>							
-								<td class="col-2">
+								<td class="col-2" style="width:17%">
 									<select class="form-select form-select-md" name="reviewRate" id="reviewRate">
 										<option value="1">★☆☆☆☆</option>
 										<option value="2">★★☆☆☆</option>
@@ -786,7 +787,7 @@
 										<option value="5">★★★★★</option>
 									</select>
 								</td>							
-								<td class="col-2">
+								<td class="col-2" style="width:12%">
 									<div class="d-grid gap-2 writeSection">
 										<c:choose>
 											<c:when test="${empty sessionScope.m }">
