@@ -94,7 +94,6 @@
 					<input type="hidden" name="rcNoList" value="${rc.RFileNo }">
 					<textarea name="rContentList">${rc.recipeContent}</textarea><br>
 					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">
-					<input type='file' name='files' accept='.jpg,.jpeg,.png,.gif' multiple style="display:none;">
 					<span>${rc.filepath }</span>					
 				</div>
 			</c:forEach>
@@ -121,6 +120,8 @@
 		function subBtn() {
 			var mName = $("input[name='mNameList']").length;
 			var rContent = $("textarea[name='rContentList']").length;
+			var mName2 = $("input[name='mNameList2']").length;
+			var rContent2 = $("textarea[name='rContentList2']").length;
 			
 			for(i=0; i<rContent; i++){
 				if($("textarea[name='rContentList']").eq(i).val()==""){
@@ -128,15 +129,26 @@
 					return false;
 				}
 			}
+			for(i=0; i<rContent2; i++){
+				if($("textarea[name='rContentList2']").eq(i).val()==""){
+					alert("조리순서를 빈칸없이 작성해주세요");
+					return false;
+				}
+			}
 			
 			for(i=0; i<mName;i++){
-				if($("input[name='mNameList']").eq(i).val()==""){
+				if($("input[name='mNameList']").eq(i).val()=="" ){
 					alert("재료이름를 빈칸없이 작성해주세요");
 					return false;
 				}
 			}	
-			
-		 	if($("#recipeTitle").val()=="" || $("#subhead").val()=="" ||  $("#foodname").val()=="" ){
+			for(i=0; i<mName2;i++){
+				if($("input[name='mNameList2']").eq(i).val()=="" ){
+					alert("재료이름를 빈칸없이 작성해주세요");
+					return false;
+				}
+			}	
+		 	if($("#recipeTitle").val()=="" || $("#subhead").val()=="" ||  $("#foodname").val()=="" || $("#recipeTime").val() =="" ){
 		 		     alert("빈칸없이 작성해주세요"); 
 					 return false;
 				}else if( $("#situation").val()=="" || $("#material").val()=="" || $("#recipeLevel").val()=="" ){

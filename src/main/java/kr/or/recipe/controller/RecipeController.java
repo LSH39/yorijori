@@ -92,10 +92,10 @@ public class RecipeController {
 		}
 		if (result > 0) {
 			model.addAttribute("msg", "등록성공");
-			model.addAttribute("loc", "/");
+			model.addAttribute("loc", "/recipeBoard.do");
 		} else {
 			model.addAttribute("msg", "등록실패");
-			model.addAttribute("loc", "/");
+			model.addAttribute("loc", "/recipeBoard.do");
 		}
 		return "common/msg";
 	}
@@ -240,6 +240,12 @@ public class RecipeController {
 			m.setMaterialName(m.getMNameList()[i]);
 			result = service.updateMaterial(m);
 		}	
+		String[] mNameList2 = request.getParameterValues("mNameList2");
+		for (int i = 0; i < mNameList2.length; i++) {
+			m.setMAmount(m.getMAmountList2()[i]);
+			m.setMaterialName(m.getMNameList2()[i]);
+			result = service.insertMaterial(m,recipeNo);
+	}
 		String[] rContentList = request.getParameterValues("rContentList");
 		for (int i = 0; i < rContentList.length; i++) {
 			rc.setRFileNo(Integer.parseInt(rc.getRcNoList()[i]));
@@ -247,14 +253,15 @@ public class RecipeController {
 			result = service.updateRecipeContent(rc);			
 		}
 		if (files[0].isEmpty()) {
-
+			System.out.println("엥");
 		} else {
-			String savepath2 = request.getSession().getServletContext().getRealPath("/resources/upload/recipeContent/");
+				System.out.println(recipeNo);
 				String[] rContentList2 = request.getParameterValues("rContentList2");
 				for(int i=0; i<rContentList2.length;i++) {
 					if(files[i].isEmpty()) {
 						
 					}else {
+					String savepath2 = request.getSession().getServletContext().getRealPath("/resources/upload/recipeContent/");
 					FileVo upFile = uploadFile(files[i], savepath2);
 					rc.setFilename(upFile.getFilename());
 					rc.setFilepath(upFile.getFilepath());
@@ -267,10 +274,10 @@ public class RecipeController {
 				
 		if(result>0) {
 			model.addAttribute("msg", "수정완료");
-			model.addAttribute("loc", "/");
+			model.addAttribute("loc", "/recipeBoard.do");
 		}else {
 			model.addAttribute("msg", "수정실패");
-			model.addAttribute("loc", "/");
+			model.addAttribute("loc", "/recipeBoard.do");
 		}
 		}
 		return "common/msg";
