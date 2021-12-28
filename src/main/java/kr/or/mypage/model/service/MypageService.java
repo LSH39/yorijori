@@ -30,6 +30,8 @@ import kr.or.mypage.model.vo.MySellPageData;
 import kr.or.mypage.model.vo.Mychat;
 import kr.or.mypage.model.vo.MycontestPagedata;
 import kr.or.mypage.model.vo.Mydm;
+import kr.or.mypage.model.vo.Mymembership;
+import kr.or.mypage.model.vo.MymembershipPageData;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.MyorderPageData;
 import kr.or.mypage.model.vo.Mypoint;
@@ -743,6 +745,63 @@ public class MypageService {
 			int result =dao.upPoint(orderSale,memberNo);
 			return result;
 		}
+		
+        //멤버십 구독내역
+		public MymembershipPageData membershipList(int reqPage, int memberNo) {
+			//페이지당 게시물 개수
+			int numPerPage = 5;
+			int end = reqPage * numPerPage;
+			int start = end - numPerPage + 1;
+
+			//한 페이지
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("memberNo", memberNo);
+			map.put("start", start);
+			map.put("end", end);
+			ArrayList<Mymembership> list = dao.selectmembership(map);
+
+			//페이지 네비게이션 제작
+			int totalCount = dao.totalmembership(memberNo);
+			int totalPage = 0;
+
+			if(totalCount%numPerPage == 0) {
+				totalPage = totalCount/numPerPage;
+			} else {
+				totalPage = totalCount/numPerPage+1;
+			}
+			int pageNaviSize = 5;
+			int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+
+			String pageNavi = "<ul class='pagination'>";
+
+			if(pageNo != 1) {
+				pageNavi += "<li class=\"page\">";
+				pageNavi += "<a class=\"page-link\" href='/myMembership.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>&lt;</a></li>";
+			}
+			for(int i=0;i<pageNaviSize;i++){
+				if(pageNo == reqPage) {
+					pageNavi += "<li class=\"page\">";
+					pageNavi += "<a class='page-link' href='/myMembership.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+				} else {
+					pageNavi += "<li class='page'>";
+					pageNavi += "<a class='page-link' href='/myMembership.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+					pageNavi += pageNo+"</a></li>";
+				}
+				pageNo++;
+				if(pageNo>totalPage) {
+					break;
+				}
+			}
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page'>";
+				pageNavi += "<a class='page-link' href='/myMembership.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+				pageNavi += "&gt;</a></li>";
+			}
+			pageNavi += "</ul>";
+			MymembershipPageData mem = new MymembershipPageData(list,pageNavi,start,totalCount);
+			return mem;
+		}
+
 	
 		
 		

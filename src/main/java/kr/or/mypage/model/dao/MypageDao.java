@@ -22,6 +22,7 @@ import kr.or.mypage.model.vo.MyContest;
 import kr.or.mypage.model.vo.MyItem;
 import kr.or.mypage.model.vo.Mychat;
 import kr.or.mypage.model.vo.Mydm;
+import kr.or.mypage.model.vo.Mymembership;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.Mypoint;
 import kr.or.mypage.model.vo.Mysell;
@@ -332,6 +333,17 @@ public class MypageDao {
 		map.put("orderSale", orderSale);
 		map.put("memberNo", memberNo);
 		return sqlSession.insert("mypage.upPoint",map);
+	}
+	
+	//멤버십 구매내역조회
+	public ArrayList<Mymembership> selectmembership(HashMap<String, Object> map) {
+		List<Mymembership> list = sqlSession.selectList("mypage.selectmembership", map);
+		return (ArrayList<Mymembership>) list;
+	}
+	//구독권 개수
+	public int totalmembership(int memberNo) {
+		int totalCount = sqlSession.selectOne("mypage.totalmembership",memberNo);
+		return totalCount;
 	}
 }
 	

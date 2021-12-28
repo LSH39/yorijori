@@ -31,6 +31,7 @@ import kr.or.mypage.model.vo.MyPointPageData;
 import kr.or.mypage.model.vo.MySellPageData;
 import kr.or.mypage.model.vo.Mychat;
 import kr.or.mypage.model.vo.MycontestPagedata;
+import kr.or.mypage.model.vo.MymembershipPageData;
 import kr.or.mypage.model.vo.Myorder;
 import kr.or.mypage.model.vo.MyorderPageData;
 import kr.or.mypage.model.vo.Mysell;
@@ -52,7 +53,7 @@ public class MypageController {
 		ReadMember rm =service.mypage(memberNickname);
         session.setAttribute("rm", rm);
 	    model.addAttribute("rm", rm);
-	
+	    
 		//Member m = service.mypage(memberId);
        //model.addAttribute("m", m);
 		return "mypage/mypage";
@@ -64,6 +65,7 @@ public class MypageController {
 		ReadMember rm =service.seller(memberNickname);
 		   session.setAttribute("rm", rm);
 			model.addAttribute("rm", rm);
+			
 		//Member m = service.sellerPage(memberId);
 		//model.addAttribute("m", m);
 		return "mypage/sellerProfile";
@@ -507,6 +509,18 @@ public class MypageController {
 
 		model.addAttribute("loc", "/");
 		return "common/msg";
+	}
+	
+	//내 구독권내역조회
+	@RequestMapping(value = "/myMembership.do")
+	public String myMembership(int memberNo,Model model,int reqPage) {
+		MymembershipPageData mem =service.membershipList(reqPage,memberNo);
+		model.addAttribute("list", mem.getList());
+		model.addAttribute("pageNavi", mem.getPageNavi());
+		model.addAttribute("start", mem.getStart());
+		model.addAttribute("totalCount", mem.getTotalCount());
+		return "mypage/membership";
+
 	}
 }
 

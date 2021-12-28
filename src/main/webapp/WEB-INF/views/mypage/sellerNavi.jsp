@@ -100,6 +100,7 @@ color:red;
 						<li><a href="/profilePath.do?memberId=${sessionScope.m.memberId }">프로필 사진 바꾸기<span>&gt;</span></a></li>
 						<li><a href="/selPath.do?memberId=${sessionScope.m.memberId }">자격증조회 및 변경<span>&gt;</span></a></li>
 						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 주문내역<span>&gt;</span></a></li>
+							<li><a href="/myMembership.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">구독권 구매내역<span>&gt;</span></a></li>
 						<li><a href="/mycouponList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">쿠폰함<span>&gt;</span></a></li>
 						<li><a href="/delSelFrm.do?">회원탈퇴<span>&gt;</span></a></li>
 					    	<c:choose>

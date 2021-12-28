@@ -91,7 +91,12 @@
 color:red;
 
 }
+.menu{
+	 background-color:rgb(177, 109, 204);
+
+}
 </style>
+
 </head>
 <body>
 <div class="main-left-box">
@@ -102,6 +107,7 @@ color:red;
 						<li><a href="/mypage.do?memberNickname=${sessionScope.m.memberNickname }">내정보 조회 및 수정<span>&gt;</span></a></li>
 						<li><a href="/profilePath.do?memberId=${sessionScope.m.memberId }">프로필 사진 바꾸기<span>&gt;</span></a></li>
 						<li><a href="/myOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">내 구매내역<span>&gt;</span></a></li>
+						<li><a href="/myMembership.do?memberNo=${sessionScope.m.memberNo }&reqPage=1" id="lf-click">구독권 구매내역<span>&gt;</span></a></li>
 						<li><a href="/mycouponList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">내 쿠폰함<span>&gt;</span></a></li>
 						<li><a href="/deleteFrm.do?">회원탈퇴<span>&gt;</span></a></li>
 						<li><a href="/myContestList.do?recipeWriter=${sessionScope.m.memberNo }&reqPage=1">참여한 경연대회<span>&gt;</span></a></li>

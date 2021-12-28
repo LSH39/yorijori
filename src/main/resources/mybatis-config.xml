@@ -74,7 +74,8 @@
 		<typeAlias type="kr.or.milkit.model.vo.Product" alias="pd" />
 		<typeAlias type="kr.or.mypage.model.vo.followCount" alias="f"/>      
         <typeAlias type="kr.or.mypage.model.vo.Mypoint" alias="mp"/>   
-         <typeAlias type="kr.or.member.model.vo.ReadMember" alias="rm"/>    
+         <typeAlias type="kr.or.member.model.vo.ReadMember" alias="rm"/>   
+         <typeAlias alias="mym" type="kr.or.mypage.model.vo.Mymembership"/> 
 	</typeAliases>
 </configuration>
 
