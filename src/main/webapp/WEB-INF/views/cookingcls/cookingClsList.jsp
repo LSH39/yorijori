@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <title>쿠킹클래스 목록</title>
 <link rel="stylesheet" href="resources/css/cookingcls/clsWrite.css">
+<script type="text/javascript"	src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+	$(function(){
+		$(".lv2only").click(function(){
+			alert("조리꾼만 작성 가능합니다!");
+		});
+	});
+</script>
 <style>
 .page-item.active .page-link {
    	background-color: #9F90CF !important;
@@ -286,16 +294,15 @@
 					</ul>
 				</div>
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		
-					<c:if test="${sessionScope.m.memberLevel eq 2 }">		
-			  			<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4 clsfrm-btn">클래스 작성</a>
-					</c:if>
-				</div>
-				<div>
-		  			<c:if test="${not empty sessionScope.m }">
-						<a href="/cookingRsrvList.do">예약내역</a>  				
-		  			</c:if>
-		  			<a href="/profile.do?memberId=x">회원프로필테스트</a>
+					<c:choose>
+						<c:when test="${sessionScope.m.memberLevel eq 2 }">
+				  			<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4 clsfrm-btn">클래스 작성</a>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-secondary lv2only">클래스 작성</button>
+						</c:otherwise>
+
+					</c:choose>
 				</div>
 				<div id="pageNavi">${pageNavi }</div>
 			</c:otherwise>

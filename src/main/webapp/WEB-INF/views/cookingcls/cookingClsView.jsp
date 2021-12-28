@@ -152,6 +152,21 @@
 		border-color: rgb(159, 144, 207) !important;
 	}
 	
+	.star img {
+		width: 15px;
+	}
+	
+	.review-content{
+    	display: table;
+    	table-layout: fixed;
+	    width: 100%;
+	}
+
+	.review-content > span{
+		display: table-cell;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+	}
 </style>
 <script>
 	$(function(){
@@ -646,25 +661,66 @@
 							<c:when test="${not empty list }">
 								<table class="table reviewTable">
 								<tr>
-									<th>번호</th>
-									<th>내용</th>
-									<th>아이디</th>
-									<th>평점</th>
-									<th></th>
+					<th style="width: 7%;">번호</th>
+					<th style="width: 55%;">내용</th>
+					<th style="width: 13%;">닉네임</th>
+					<th style="width: 15%;">평점</th>
+					<th style="width: 5%;"></th>
 								</tr>
 								<c:forEach items="${list }" var="review" varStatus="i">
 								<tr>
 									<td>${i.count }</td>
-									<td>${review.reviewContent }</td>
+									<td>
+										<div class="review-content">
+											<span>${review.reviewContent }</span>
+										</div>
+									</td>
 									<td>${review.memberNickname }</td>
-									<td>${review.reviewRate }</td>
-									<td>									
-										<c:if test="${sessionScope.m.memberNickname eq review.memberNickname }">											
-											<!-- 
-											<a class="btn-close deleteReview" href="/reviewDelete.do?reviewNo=${review.reviewNo }" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X</a>
-											 -->
-											<a class="btn-close reviewDelete" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X<input type="hidden" class="deleteLinkVal" value="${review.reviewNo }"></a>
-										</c:if>
+									<td>
+										<div class="star">								
+										<c:choose>
+											<c:when test="${review.reviewRate eq 5}">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">	
+											</c:when>
+											<c:when test="${review.reviewRate eq 4}">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-off.png">	
+											</c:when>
+											<c:when test="${review.reviewRate eq 3}">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-off.png">
+												<img src="/resources/img/cookingcls/star-off.png">	
+											</c:when>
+											<c:when test="${review.reviewRate eq 2}">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-off.png">
+												<img src="/resources/img/cookingcls/star-off.png">
+												<img src="/resources/img/cookingcls/star-off.png">	
+											</c:when>
+											<c:when test="${review.reviewRate eq 1}">
+												<img src="/resources/img/cookingcls/star-on.png">
+												<img src="/resources/img/cookingcls/star-off.png">
+												<img src="/resources/img/cookingcls/star-off.png">
+												<img src="/resources/img/cookingcls/star-off.png">
+												<img src="/resources/img/cookingcls/star-off.png">	
+											</c:when>
+										</c:choose>
+										</div>
+									</td>
+									<td>	
+									<c:if test="${sessionScope.m.memberNickname eq review.memberNickname }">											
+										<a class="btn-close reviewDelete" style="text-indent:-9999px; display:inline-flex; width:1em; height:24px; padding:0px;">X<input type="hidden" class="deleteLinkVal" value="${review.reviewNo }"></a>
+									</c:if>
 									</td>
 								</tr>
 								</c:forEach>
