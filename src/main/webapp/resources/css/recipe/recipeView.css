@@ -217,11 +217,13 @@
 	margin-top: 100px;
 }
 
-.
+
 .contents {
 	width: 1000px;
 	margin: 0 auto;
-	margin-bottom: 50px;
+	margin-bottom: 50px;	
+	display: block;
+	box-sizing: border-box;
 	overflow: hidden;
 }
 
@@ -241,6 +243,8 @@
 	float: left;
 	padding-left: 50px;
 	font-size: 25px;
+		
+	overflow: hidden;
 }
 
 .conNum {
@@ -255,6 +259,7 @@
 	font-weight: 900;
 	color: white;
 	margin-top: 10px;
+	overflow: hidden;
 }
 
 .contents hr {

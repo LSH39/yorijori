@@ -163,15 +163,15 @@
 		$(function() {
 			$("#plusBtn").click(function() {
 				var mHTML = "<div class='materialBox'>"
-				+ "<input type='text' name='mNameList2' value=''>" 
-				+ " <input type='text'  name='mAmountList2' value='' > </div>";
+				+ "<input type='text' name='mNameList'>" 
+				+ " <input type='text'  name='mAmountList'> </div>";
 				$("#newInput").append(mHTML);
 			});
 			
 			var orderNum = ${num};
 			$("#plusBtn2").click(function() {
 				var contentHTML = "<div class='cookOrder'> <p>STEP"+(++orderNum)+"</p>"
-					+ "<textarea name='rContentList2' ></textarea >"
+					+ "<textarea name='rContentList' ></textarea >"
 					+ " <input type='file' name='files' accept='.jpg,.jpeg,.png,.gif' multiple>"
 					+ "<img class='recipeImg'></div>";
 				$(".newContent").append(contentHTML);
