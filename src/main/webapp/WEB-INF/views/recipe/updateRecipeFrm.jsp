@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/recipe/recipeFrm.css"> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
@@ -35,9 +36,9 @@
 				<input type="text" name="recipeVideo" value="${rb.recipeVideo }">
 			</div>
 			<div class="recipeFrm">
-				<p>음식정보</p>
+				<label>음식정보</label>
 				<div id="recipeFrm1">
-					<label for="foodName">음식이름</label>
+					<p>음식이름</p>
 					<input type="text" id="foodName" name="foodName" value="${rb.foodName }">
 					 <input type="text" id="recipeTime" name="recipeTime"
 						value="${rb.recipeTime }">소요
@@ -91,14 +92,15 @@
 				<c:set var="num" value="${num+1 }"></c:set>			
 					<p>STEP${i.count }</p>
 					<input type="hidden" name="rcNoList" value="${rc.RFileNo }">
-					<textarea name="rContentList">${rc.recipeContent}</textarea>
-					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">					
+					<textarea name="rContentList">${rc.recipeContent}</textarea><br>
+					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">
+					<span>${rc.filepath }</span>					
 				</div>
 			</c:forEach>
 				<div class="newContent"></div>
 				<p id="plusBtn2">순서추가</p>
 			</div>
-			<input type="submit" value="등록하기" onclick="return subBtn()">
+			<div id="btn"><input type="submit" id="submitBtn" value="등록하기" onclick="return subBtn()"></div>
 		</form>
 		</div>
 		<script>

@@ -756,6 +756,9 @@ section {
   display: flex;
   margin-left: 15%;
 }
+.team .main-myself{
+	padding-left: 20%;
+}
 .team .member .social a {
   color: #919191;
   transition: 0.3s;
