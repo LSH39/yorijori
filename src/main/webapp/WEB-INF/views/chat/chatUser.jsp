@@ -28,9 +28,7 @@
 	var alarm = 0;
 	var startNo = 0;
 	var enter = 0;
-	var chat_audio = new Audio('/resources/mp3/Chat_sound.mp3');
 	
-	//var alarm;
 	$(function(){
 	    $("#chatFrmUser").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
@@ -56,7 +54,6 @@
 	});
 	
 	function startChat(){
-		//alarm = 0;
 	    var data = {type:"start",memberNo:sessionMemberNo};
 	   	ws.send(JSON.stringify(data));
 	   	chatbotCheck = 0;
@@ -69,7 +66,6 @@
 	}
 	
 	function reStartChat(){
-		//var alarm = 0;
 		$("#chatUserAlarm").text(alarm);
 	    var data = {type:"reStart",memberNo:sessionMemberNo};
 	   	ws.send(JSON.stringify(data));
@@ -93,19 +89,12 @@
 		// alarm
 		if($("#chatFrmUser").prop("on") == false){
 			$("#chatUserAlarm").text(msg.alarm);
-			alarm = msg.alarm;
 		}
 		// chat
-		if(msg.appendMsg.length != 0){
+		if(msg.appendMsg != "noListMsg"){
 			if(msg.appendMsg != "noAnswer") {
 				$("#chatUserTbl").append(msg.appendMsg);
 	    		$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-	    		// sound
-	    		/*
-	    		if($("#chatFrmUser").prop("on") == false && startNo>0){
-	        		chat_audio.play();
-	    		}
-	    		*/
 			}else{  // chatbot 호출
 				var sMsg = "<tr><td class='sendText'><div>"+sendMsg+"</div></td></tr>";
 				$("#chatUserTbl").append(sMsg);
@@ -130,7 +119,7 @@
 		if(chatbotCheck != 1){
 			if(sendMsg.trim() != ""){  // 문자열에서 공백 제거한 값 != ""
 			    var sender = sessionMemberNo;
-			    var receiver = adminNo;
+			    var receiver = Number(adminNo);
 			    var data = {type:"chat", chatSend:sender, chatReceive:receiver, chatContent:sendMsg};
 			    ws.send(JSON.stringify(data));
 			}
@@ -191,4 +180,5 @@
         	sendMsg = sendMsgBr;
         }
 	});
+	
 </script>

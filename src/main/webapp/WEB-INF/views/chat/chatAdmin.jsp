@@ -41,7 +41,6 @@
 	var webSocketType;
 	var startNo = 0;
 	var enter = 0;
-	var chat_audio = new Audio('/resources/mp3/Chat_sound.mp3');
 	
     $(function(){
         $("#chatFrmAdminHome").css("display","none").prop("on",false);
@@ -97,7 +96,7 @@
 	}
 	
 	function reStartChat(){
-    	webSocketType = "reStart";
+		webSocketType = "reStart";
 		var data = {type:"reStart",memberNo:sessionMemberNo};
 	    ws.send(JSON.stringify(data));
 	}
@@ -115,6 +114,7 @@
 	}
 	
 	function appendChat(textMsg){
+		console.log(webSocketType);
 		var msg = JSON.parse(textMsg);
 		// adminNo
 		if(msg.adminNo != null){
@@ -122,19 +122,12 @@
 		}
 		// alarm
 		$("#chatAdminAlarm").text(msg.alarm);
-		/*
-		if(msg.alarm!=0){
-			// sound
-			console.log(msg.alarm);
-			if($("#chatFrmAdminHome").prop("on") == false && startNo>0){
-		    	chat_audio.play();
-	    	}
-		}
-		*/
 		// chat
-		if(msg.appendMsg == "noMsg"){
-			$("#chatAdmin").click();  // close
-			$("#chatAdmin").click();  // open
+		if(msg.appendMsg == "addListMsg"){
+			if($("#chatFrmAdmin").prop("on") == false){
+				$("#chatAdmin").click();  // close
+				$("#chatAdmin").click();  // open				
+			}
 		}else{
 			if(webSocketType == "start" || webSocketType == "reStart"){
 				$("#chatAdminHomeTbl").append(msg.appendMsg);
@@ -143,7 +136,6 @@
 		        $("#chatAdminHomeTbl").children().remove();
 				$("#chatAdminTbl").append(msg.appendMsg);
 				$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
-				
 			}
 		}
 		// enter
