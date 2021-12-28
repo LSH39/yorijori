@@ -113,7 +113,6 @@
 	}
 	
 	function appendChat(textMsg){
-		console.log(webSocketType);
 		var msg = JSON.parse(textMsg);
 		// adminNo
 		if(msg.adminNo != null){
