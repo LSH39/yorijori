@@ -25,13 +25,15 @@
 	var sendTextBefore;
 	var ws;
 	var chatbotCheck = 0;
+	var alarm = 0;
 	var startNo = 0;
 	var enter = 0;
-	//var alarm;
+	
 	$(function(){
 	    $("#chatFrmUser").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
-	    ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+	    //ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+	    ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
 		ws.onopen = startChat;
 		ws.onmessage = receiveMsg;
         ws.onclose = endChat;
@@ -52,8 +54,7 @@
 	});
 	
 	function startChat(){
-		var alarm = 0;
-	    var data = {type:"start",memberNo:sessionMemberNo, alarm:alarm};
+	    var data = {type:"start",memberNo:sessionMemberNo};
 	   	ws.send(JSON.stringify(data));
 	   	chatbotCheck = 0;
 	}
@@ -65,15 +66,14 @@
 	}
 	
 	function reStartChat(){
-		var alarm = 0;
 		$("#chatUserAlarm").text(alarm);
-	    var data = {type:"reStart",memberNo:sessionMemberNo, alarm:alarm};
+	    var data = {type:"reStart",memberNo:sessionMemberNo};
 	   	ws.send(JSON.stringify(data));
 	   	chatbotCheck = 0;
 	}
 	
 	function openChat(){
-		var alarm = 0;
+		alarm = 0;
 		$("#chatUserAlarm").text(alarm);
 	    var data = {type:"openChat",memberNo:sessionMemberNo, alarm:alarm};
 	   	ws.send(JSON.stringify(data));
@@ -83,7 +83,7 @@
 	function appendChat(textMsg){
 		var msg = JSON.parse(textMsg);
 		// adminNo
-		if(msg.adminNo != null){
+		if(msg.adminNo != 0){
 			adminNo = msg.adminNo;
 		}
 		// alarm
@@ -91,7 +91,7 @@
 			$("#chatUserAlarm").text(msg.alarm);
 		}
 		// chat
-		if(msg.appendMsg.length != 0){
+		if(msg.appendMsg != "noListMsg"){
 			if(msg.appendMsg != "noAnswer") {
 				$("#chatUserTbl").append(msg.appendMsg);
 	    		$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
@@ -119,7 +119,7 @@
 		if(chatbotCheck != 1){
 			if(sendMsg.trim() != ""){  // 문자열에서 공백 제거한 값 != ""
 			    var sender = sessionMemberNo;
-			    var receiver = adminNo;
+			    var receiver = Number(adminNo);
 			    var data = {type:"chat", chatSend:sender, chatReceive:receiver, chatContent:sendMsg};
 			    ws.send(JSON.stringify(data));
 			}
@@ -180,4 +180,5 @@
         	sendMsg = sendMsgBr;
         }
 	});
+	
 </script>

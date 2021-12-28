@@ -35,7 +35,7 @@
 							<div class="col-sm-12">
 								<label for="classTitle"><h5>클래스 제목</h5></label>
 								<input type="text" name="classTitle" class="form-control" id="classTitle" maxlength="300" class="input-group input-group-sm" value="${ccls.classTitle }">
-								제목 글자수 테스트용 최종 제출시 이거 지워야함 :<span id="titleByte">0</span>/300bytes
+								제목 글자수 :<span id="titleByte">0</span>/300bytes
 							</div>
 						</div>
 						<div class="form-group row mb-4">
@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<br>
-						내용 글자수 테스트용 최종 제출시 이거 지워야함 : <span id="currByte">0</span>/3000bytes
+						내용 글자수 : <span id="currByte">0</span>/3000bytes
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<h5>클래스 장소(입력 안할시 비대면)</h5>
@@ -329,12 +329,19 @@
             $("#time1").change(function(){
                 let time1 = $("#time1").val();
                 let time2 = $("#time2").val();
+                let time1Val = new Date("01/01/2021 " + time1);
+                let time2Val = new Date("01/01/2021 " + time2);
+                let dif = (time2Val - time1Val)/1000;
+                
+                console.log(dif);
                 if(time1 >= time2){
                     $(".result").eq(2).html("시간을 올바르게 입력해주세요.");
                     $(".result").eq(2).css("color", "red");
                     time1Chk = false;
-                	classUpdateChk = false;
-
+                }else if(dif<10800){
+                    $(".result").eq(2).html("끝나는 시간과의 차이는 최소 3시간 이상이어야 합니다.");
+                    $(".result").eq(2).css("color", "red");
+                    time1Chk = false;                	
                 }else{
                     $(".result").eq(2).html("올바르게 입력됐습니다.");
                     $(".result").eq(2).css("color", "blue");                	
@@ -346,18 +353,21 @@
             $("#time2").change(function(){
                 let time1 = $("#time1").val();
                 let time2 = $("#time2").val();
-                if(time1 >= time2){
-                    $(".result").eq(2).html("시간을 올바르게 입력해주세요.");
+                let time1Val = new Date("01/01/2021 " + time1);
+                let time2Val = new Date("01/01/2021 " + time2);
+                let dif = (time2Val - time1Val)/1000;
+
+                if(dif<10800){
+                    $(".result").eq(2).html("시작 시간과의 차이는 3시간 이상이어야 합니다.");
                     $(".result").eq(2).css("color", "red");
                     time2Chk = false;
-                	classUpdateChk = false;
-
                 }else{
                     $(".result").eq(2).html("올바르게 입력됐습니다.");
                     $(".result").eq(2).css("color", "blue");
                     time1Chk = true;
                     time2Chk = true;
                 }
+
             });
             
 			//클래스 가격
@@ -404,24 +414,33 @@
             	var date = new Date();
             	var today = date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0"+date.getDate()).slice(-2);
             	
-            	if(classStart <= today+1){
+            	let classStartVal = new Date(classStart);
+            	let classEndVal = new Date(classEnd);
+            	
+            	let dif = (classEndVal-classStartVal)/(3600*24*1000);
+				let startDif = parseInt((classStartVal-date)/(3600*24*1000))+1;
+				let endDif = parseInt((classEndVal-date)/(3600*24*1000))+1;
+            	
+            	if(startDif <= 1){
             		console.log("날짜 오류");
             		$(this).val("");
+            		$(".result").eq(3).html("날짜를 올바르게 입력해주세요.");
+            		$(".result").eq(3).css("color", "red");
             		classStartChk = false;
-                	classUpdateChk = false;
-
             	}else if(classStart == "" || classEnd == ""){            		
             		console.log("둘 중 하나가 공백");
+            		$(".result").eq(3).html("나머지 날짜를 올바르게 입력해주세요.");
+            		$(".result").eq(3).css("color", "red");
             		classStartChk = false;
-                	classUpdateChk = false;
-
             	}else if(classStart >= classEnd){
             		console.log("시작일이 더 큼");
+            		$(".result").eq(3).html("시작일이 더 큽니다.");
+            		$(".result").eq(3).css("color", "red");
             		classStartChk = false;
-                	classUpdateChk = false;
-
             	}else{
             		console.log("올바르게 입력됨");
+            		$(".result").eq(3).html("올바르게 입력됐습니다.");
+            		$(".result").eq(3).css("color", "blue");
             		classStartChk = true;
             	} 
             });
@@ -434,24 +453,43 @@
             	var date = new Date();
             	var today = date.getFullYear()+"-"+("0"+(date.getMonth()+1)).slice(-2)+"-"+("0"+date.getDate()).slice(-2);
             	
-            	if(classEnd <= today+2){
+            	let classStartVal = new Date(classStart);
+            	let classEndVal = new Date(classEnd);
+            	
+            	let dif = (classEndVal-classStartVal)/(3600*24*1000);
+				let startDif = parseInt((classStartVal-date)/(3600*24*1000))+1;
+				let endDif = parseInt((classEndVal-date)/(3600*24*1000))+1;
+				
+				console.log(dif);
+				console.log(startDif);
+				console.log(endDif);
+
+            	
+            	if(endDif <= startDif+3){
             		console.log("날짜 오류");
             		$(this).val("");
+            		$(".result").eq(3).html("날짜를 올바르게 입력해주세요.");
+            		$(".result").eq(3).css("color", "red");
             		classEndChk = false;
-                	classUpdateChk = false;
-
             	}else if(classStart == "" || classEnd == ""){            		
             		console.log("둘 중 하나가 공백");
+            		$(".result").eq(3).html("나머지 날짜를 올바르게 입력해주세요.");
+            		$(".result").eq(3).css("color", "red");
             		classEndChk = false;
-                	classUpdateChk = false;
-
             	}else if(classStart >= classEnd){
             		console.log("시작일이 더 큼");
+            		$(".result").eq(3).html("시작 날짜를 올바르게 입력해주세요");
+            		$(".result").eq(3).css("color", "red");
             		classEndChk = false;
-                	classUpdateChk = false;
-
+            	}else if(dif <= 6){
+            		$(this).val("");
+            		$(".result").eq(3).html("시작 날짜와의 차이가 일주일 이상이어야 합니다.");
+            		$(".result").eq(3).css("color", "red");
+            		classEndChk = false;            		
             	}else{
             		console.log("올바르게 입력됨");
+            		$(".result").eq(3).html("올바르게 입력됐습니다.");
+            		$(".result").eq(3).css("color", "blue");
             		classStartChk = true;
             		classEndChk = true;
             	}

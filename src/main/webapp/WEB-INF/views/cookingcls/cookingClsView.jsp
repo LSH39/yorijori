@@ -263,6 +263,11 @@
 		$("#alreadyPayBtn").click(function(){
 			alert("이미 예약한 클래스 입니다!");
 		});
+		
+		//조리꾼은 다른 조리꾼 클래스 수강 불가능
+		$(".mlv2").click(function(){
+			alert("수강 불가능합니다!");
+		});
 	
 		//리뷰 이미 작성했을때
 		$(document).on("click", "#reviewAlrdy", function(){
@@ -452,6 +457,7 @@
 		
 		
 		
+		
 		//문의하기 바로 눌렀을때 이전내용 보여줌 12-23
 		$(document).on("click", ".doDm", function(){
 			classNoVal = -1;
@@ -633,7 +639,10 @@
 		//빨강 버튼 누를때 숨김
 		$(".screen-header_dot").click(function(){
 			$(".dmList").hide();
-			//$(".dmList").empty();
+		});
+		
+		$(".dot-hide").click(function(){
+			$(".dmView").hide();
 		});
 		
 	});
@@ -661,11 +670,11 @@
 							<c:when test="${not empty list }">
 								<table class="table reviewTable">
 								<tr>
-					<th style="width: 7%;">번호</th>
-					<th style="width: 55%;">내용</th>
-					<th style="width: 13%;">닉네임</th>
-					<th style="width: 15%;">평점</th>
-					<th style="width: 5%;"></th>
+									<th style="width: 7%;">번호</th>
+									<th style="width: 55%;">내용</th>
+									<th style="width: 13%;">닉네임</th>
+									<th style="width: 15%;">평점</th>
+									<th style="width: 5%;"></th>
 								</tr>
 								<c:forEach items="${list }" var="review" varStatus="i">
 								<tr>
@@ -854,7 +863,7 @@
 											<a href="/cookingClsDelete.do?classNo=${ccls.classNo }" class="btn btn-danger btn-lg" >삭제하기</a>							
 										</div>
 										<div class="d-grid gap-2 mt-2">
-											<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의목록확인</button>
+											<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 목록 확인</button>
 										</div>
 									</c:when>
 									<c:when test="${empty sessionScope.m  }">									
@@ -862,6 +871,9 @@
 									</c:when>
 									<c:when test="${rsrvChk eq true }">
 										<button type="button" id="alreadyPayBtn" class="btn btn-secondary btn-lg" >등록완료</button>									
+									</c:when>
+									<c:when test="${sessionScope.m.memberLevel eq 2 }">
+										<button type="button" class="btn btn-secondary mlv2">수강하기</button>
 									</c:when>
 									<c:otherwise>
 										<button type="button" id="payBtn" class="btn btn-lg clsfrm-btn" >수강하기</button>
@@ -924,7 +936,7 @@
 	
 	<!-- 문의 답변 시작 -->
 	<div class="dmView posRight">
-		<div id="chat-screen">
+		<div id="chat-screen" class="a-test">
 			<div class="alt-header-ajax">
 		      	<div class="alt-header__column">
 		        	<a class="link" href="#">
@@ -939,7 +951,7 @@
 		        		<i class="fas fa-search fa-1x"></i>
 		        	</a>
 		        	<a class="link" href="#">
-		        		<i class="fas fa-sliders-h fa-1x"></i>
+		        		<i class="fas fa-circle dot-hide" style="color:tomato;"></i>
 		        	</a>
 		      	</div>
 	    	</div>
