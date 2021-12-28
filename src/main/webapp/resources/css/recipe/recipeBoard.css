@@ -54,10 +54,11 @@
 }
 
 .title {
-	font-size: 30px;
+	font-size: 1.5em;
 	font-weight: 600;
 	margin-top:10px;
 	max-height: 90px;
+	overflow: hidden;
 }
 
 .name {
