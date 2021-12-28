@@ -31,8 +31,8 @@ public class CookingRsrvService {
 		if(classNop > classCnt) {
 			int result1 = dao.incCookingClsNop(classNo);
 			result = dao.insertCookingRsrv(map);
-			System.out.println(result);
-			System.out.println(result1);
+//			System.out.println(result);
+//			System.out.println(result1);
 		}else {
 			return -1;
 		}

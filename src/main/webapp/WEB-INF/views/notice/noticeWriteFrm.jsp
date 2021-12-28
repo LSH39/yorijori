@@ -31,7 +31,7 @@
 	      			<div class="form-group row">
 	      				<label for="inputTitle" class="col-sm-2 col-form-label">제목</label>
 	      				<div class="col-sm-4">
-	      					<input type="text" class="form-control" id="inputTitle" name="noticeTitle" placeholder="제목" required>
+	      					<input type="text" class="form-control" id="inputTitle" name="noticeTitle" placeholder="제목" required maxlength="30">
 	      				</div>
 	      				<label for="fileUpload" class="col-sm-2 col-form-label">첨부파일</label>
 	      				<div class="col-sm-4">

@@ -758,7 +758,7 @@
 											<input type="text" id="needToLogin" class="form-control" readonly value="로그인 해주세요!">
 										</c:when>
 										<c:otherwise>
-											<input type="text" name="reviewContent" id="reviewContent" class="form-control">
+											<input type="text" name="reviewContent" id="reviewContent" class="form-control" maxlength="999">
 										</c:otherwise>
 									</c:choose>
 								</td>							
@@ -966,7 +966,7 @@
 	    	<div class="reply">
       			<div class="reply__column"><i class="far fa-plus-square"></i></div>
       			<div class="reply__column">
-        			<input type="text" placeholder="메세지를 입력해주세요" class="dmContent">
+        			<input type="text" placeholder="메세지를 입력해주세요" class="dmContent" maxlength="299">
         			<button type="button" id="message__send">
           			<i class="fas fa-paper-plane"></i>
         			</button>

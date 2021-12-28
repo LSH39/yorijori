@@ -137,8 +137,6 @@ public class MilkitController {
 			int sessionMemberNo = member.getMemberNo(); //로그인한 내 회원번호
 			boolean reviewChk = service.selectOneReviewpChk(productNo, sessionMemberNickname); //리뷰썼는지
 			int orderStat = service.selectOnePurchaseChk(productNo, sessionMemberNo); //밀키트 구매했는지
-			System.out.println(reviewChk);
-			System.out.println(orderStat);
 			model.addAttribute("reviewChk", reviewChk);			
 			model.addAttribute("orderStat", orderStat);			
 		}
