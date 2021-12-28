@@ -22,6 +22,7 @@ public class CartService {
 		int [] productNo = new int[cartList.size()];
 		int checkNo = 0;
 		for(int i=0; i<cartList.size(); i++) {
+			checkNo = 0;
 			int pNo = cartList.get(i).getProductNo();
 			for(int j=0; j<productNo.length; j++) {
 				if(productNo[j] == pNo) {

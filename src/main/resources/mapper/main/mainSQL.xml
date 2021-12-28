@@ -6,9 +6,10 @@
 			recipe_no as recipeNo,
 			recipe_writer as recipeWriter,
 			recipe_title as recipeTitle,
+			recipe_delete,
 			filepath
 		from recipe_board
-        where recipe_title like '%' || #{keyword} || '%'
+        where recipe_title like '%' || #{keyword} || '%' and recipe_delete=1
         order by recipe_no desc
 	</select>
 	<select id="selectMemberList" parameterType="String" resultType="m">
@@ -152,6 +153,7 @@
             (select m.member_nickname from member m where r.recipe_writer=m.member_no) as memberNickname,
             r.filepath as recipePath,
             r.recipe_time as recipeTime,
+            r.recipe_delete as recipeDelete,
             r.recipe_level as recipeLevel,
             r.situation,
             r.material as ingredient,
@@ -160,22 +162,22 @@
             from recipe_board r
 	       <choose>
 	           <when test="_parameter == 1"> <!-- 쉬운 술안주 -->
-	        where situation=1 and recipe_level=1
+	        where recipe_delete=1 and situation=1 and recipe_level in (3,2)
 	        	</when>
 	        	<when test="_parameter == 2"> <!-- 분식 -->
-	        where food_name like '%' || '떡볶이' or food_name like '%' || '김밥' or food_name like '%' || '라면'
+	        where recipe_delete=1 and food_name like '%' || '떡볶이' or food_name like '%' || '김밥' or food_name like '%' || '라면' or food_name like '%' || '순대'
 	        	</when>
 	        	<when test="_parameter == 3"> <!-- 튀김요리 -->
-	        where (recipe_title like '%' || '돈까스' or recipe_title like '%' || '튀김' || '%') and recipe_level in (1, 2)
+	        where  recipe_delete=1 and (recipe_title like '%' || '돈까스' || '%' or recipe_title like '%' || '돈가스' || '%' or recipe_title like '%' || '텐동' || '%' or recipe_title like '%' || '튀김' || '%')
 	        	</when>
 	        	<when test="_parameter == 4"> <!-- 몸보신 -->
-	        where recipe_title like '%' || '삼계탕' || '%' or food_name like '%' || '탕' or food_name like '%' || '전골' || '%' or subhead like '%' || '원기' || '%'
+	        where  recipe_delete=1 and recipe_title like '%' || '삼계탕' || '%' or food_name like '%' || '탕' or food_name like '%' || '전골' || '%' or subhead like '%' || '원기' || '%' or subhead like '%' || '기력' || '%'
 	        	</when>
 	        	<when test="_parameter == 5"> <!-- 다이어트 -->
-	        where situation=2 or recipe_title like '%' || '샐러드' || '%'
+	        where  recipe_delete=1 and (situation=2 or recipe_title like '%' || '샐러드' || '%')
 	        	</when>
 	        	<when test="_parameter == 6"> <!-- 베이킹 -->
-	        where (situation=5 or food_name like '%' || '쿠키' || '%' or food_name like '%' || '케이크' || '%' or food_name like '%' || '머핀' || '%') and recipe_level in (1, 2)
+	        where  recipe_delete=1 and (recipe_title like '%' || '쿠키' || '%' or recipe_title like '%' || '케이크' || '%' or food_name like '%' || '쿠키' || '%' or food_name like '%' || '케이크' || '%' or food_name like '%' || '스콘' || '%' or food_name like '%' || '마카롱' || '%' or food_name like '%' || '머핀' || '%')
 	        	</when>
 	        </choose>
         order by likeCount desc, readCount desc   

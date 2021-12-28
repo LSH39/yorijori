@@ -183,7 +183,7 @@ color: #fff !important;
     	                	<td class="tb2-td">
 	                    		${mo.status}                        		
                      			<div style="position:relative;">
-		                    		<a href="/milkitView.do?productNo=${mo.productNo }&recipeNo=${mo.recipeNo }" style="position:absolute;top:10px;right:6%;" class="btn clsfrm-btn">리뷰 작성</a>                    		
+		                    		<a href="/milkitView.do?productNo=${mo.productNo }&recipeNo=${mo.recipeNo }" style="position:absolute;top:10px;right:6%;font-size: 13px;" class="btn clsfrm-btn">리뷰 작성</a>                    		
                        			</div>
 	                    	</td>
                        	</c:when>

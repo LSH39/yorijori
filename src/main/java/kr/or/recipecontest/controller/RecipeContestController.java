@@ -71,8 +71,8 @@ public class RecipeContestController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/getRecipeList.do")
-	public ArrayList<ContestViewData> selectRecipeList(Model model, int year, int month, int memberNo) {
-		ArrayList<ContestViewData> list = service.selectRecipeList(memberNo, year, month);
+	public ArrayList<ContestViewData> selectRecipeList(Model model, int memberNo) {
+		ArrayList<ContestViewData> list = service.selectRecipeList(memberNo);
 		return list;
 	}
 	

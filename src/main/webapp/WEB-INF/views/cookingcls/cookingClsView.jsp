@@ -166,6 +166,7 @@
 		display: table-cell;
     	overflow: hidden;
     	text-overflow: ellipsis;
+    	white-space: nowrap;
 	}
 </style>
 <script>
@@ -300,13 +301,27 @@
 				name : classTitle, //결제 이름 설정함
 				amount : 100, //결제 금액 테스트용이니까 100원
 				buyer_email : "forestwowch@gmail.com", //구매자 이메일
-				buyer_name : "성승민",
-				buyer_phone : "010-5104-4638", //구매자 핸드폰 번호
-				buyer_addr : "인천광역시", //구매자 주소
-				buyer_postcode : "99999" //구매자 우편번호
+				buyer_name : "${sessionScope.m.memberName}",
+				buyer_phone : "${sessionScope.m.memberPhone}", //구매자 핸드폰 번호
+				buyer_addr : "${sessionScope.m.addressRoad} ${sessionScope.m.addressDetail}", //구매자 주소
+				buyer_postcode : "${sessionScope.m.postcode}" //구매자 우편번호
 			},function(rsp){
 				if(rsp.success){
-					alert("결제가 완료됐습니다!");
+					$.ajax({
+						url : "/insertCookingRsrv.do",
+						type : "post",
+						data : {memberNickname : memberNickname, memberNo : memberNo, classNo : classNo, impUid : impUid, classNop : classNop},
+						success : function(data){
+							console.log(data);
+							if(data==1){
+								alert("결제가 완료됐습니다!");
+								location.reload();
+							}else if(data==0){
+								alert("인원수 초과");
+								location.href="/";
+							}
+						}
+					});
 					//성공시 로직(db결제정보 insert -> 사용자 화면 처리)
 					console.log("카드 승인 번호 "+rsp.apply_num);
 				}else{
@@ -524,6 +539,7 @@
 		//문의글 내용 화살표 클릭하거나
 		$("#message__send").click(function(){
 			sendMsg();
+			$(".dmContent").val("");
 		});
 		
 		//문의 글 함수 방번호 있는거 12-23
@@ -668,12 +684,12 @@
 					<div class="reviewSection">
 						<c:choose>
 							<c:when test="${not empty list }">
-								<table class="table reviewTable">
+								<table class="table reviewTable" style="font-size: 14px;">
 								<tr>
 									<th style="width: 7%;">번호</th>
-									<th style="width: 55%;">내용</th>
-									<th style="width: 13%;">닉네임</th>
-									<th style="width: 15%;">평점</th>
+									<th style="width: 52%;">내용</th>
+									<th style="width: 22%;">닉네임</th>
+									<th style="width: 14%;">평점</th>
 									<th style="width: 5%;"></th>
 								</tr>
 								<c:forEach items="${list }" var="review" varStatus="i">
@@ -746,7 +762,7 @@
 						
 						<table class="table table-borderless">
 							<tr>
-								<td colspan="2" class="col-8">
+								<td colspan="2" class="col-8" style="width:71%">
 									<input type="hidden" name="classNo" value="${ccls.classNo }" id="classNo">
 									<input type="hidden" name="memberNickname" value="${sessionScope.m.memberNickname }" id="memberNickname">
 									<input type="hidden" name="memberLevel" value="${sessionScope.m.memberLevel }" id="memberLevel">
@@ -758,11 +774,11 @@
 											<input type="text" id="needToLogin" class="form-control" readonly value="로그인 해주세요!">
 										</c:when>
 										<c:otherwise>
-											<input type="text" name="reviewContent" id="reviewContent" class="form-control" maxlength="999">
+											<input type="text" name="reviewContent" id="reviewContent" class="form-control" maxlength="100">
 										</c:otherwise>
 									</c:choose>
 								</td>							
-								<td class="col-2">
+								<td class="col-2" style="width:17%">
 									<select class="form-select form-select-md" name="reviewRate" id="reviewRate">
 										<option value="1">★☆☆☆☆</option>
 										<option value="2">★★☆☆☆</option>
@@ -771,7 +787,7 @@
 										<option value="5">★★★★★</option>
 									</select>
 								</td>							
-								<td class="col-2">
+								<td class="col-2" style="width:12%">
 									<div class="d-grid gap-2 writeSection">
 										<c:choose>
 											<c:when test="${empty sessionScope.m }">

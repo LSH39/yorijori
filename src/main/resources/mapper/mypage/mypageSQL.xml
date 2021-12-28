@@ -318,7 +318,7 @@
 
 	</select>
 	
-	<!-- 김효원 기존 상세 주문 백업 
+	<!-- 김효원 기존 상세 주문 백업  -->
 	<select id="detailOrder" parameterType="_int" resultType="mo">
 		select
 		a.ORDER_OPTION_NO as orderOptionNo,
@@ -355,10 +355,16 @@
 		where
 		a.order_no =b.order_no and a.product_no =c.product_no and
 		b.order_no=#{orderNo}
+		order by order_option_no asc
 	</select>
-	-->
 	
-	<!-- 성승민 상세조회 -->
+	<select id="selectMyReviewNo" parameterType="map" resultType="_int">
+	select 
+		nvl(max(review_no), -1) 
+	from review 
+	where product_no=#{productNo} and member_nickname=#{sessionMemberNickname}
+	</select>
+	<!-- 성승민 상세조회
 	<select id="detailOrder" parameterType="_int" resultType="mo">
 		select
 		a.ORDER_OPTION_NO as orderOptionNo,
@@ -395,6 +401,7 @@
 		b.order_no = #{orderNo}
 		order by order_option_no asc
 	</select>
+	 -->
 	
 	<select id="sellerList" resultType="ms" parameterType="_int">
 		select

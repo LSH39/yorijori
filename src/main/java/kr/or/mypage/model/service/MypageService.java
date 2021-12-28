@@ -172,8 +172,18 @@ public class MypageService {
 		return mo;
 	}
 
-	public ArrayList<Myorder> orderDetail(int orderNo) {
+	public ArrayList<Myorder> orderDetail(int orderNo, String sessionMemberNickname) {
 		ArrayList<Myorder> list = dao.orderDetail(orderNo);
+		
+		for(Myorder myorder : list) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("productNo", myorder.getProductNo());
+			map.put("sessionMemberNickname", sessionMemberNickname);
+
+			int prNo = dao.selectRvProductNo(map);
+			myorder.setReviewNo(prNo);
+		}
+		
 		return list;
 	}
 /*
