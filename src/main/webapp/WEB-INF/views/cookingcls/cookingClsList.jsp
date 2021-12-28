@@ -249,6 +249,17 @@
 					<img src="./resources/img/cookingcls/classtest.jpg">
 					<h1>개설된 클래스가 없습니다!</h1>
 				</div>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<c:choose>
+						<c:when test="${sessionScope.m.memberLevel eq 2 }">
+				  			<a href="/cookingClsWriteFrm.do" class="btn btn-primary me-lg-4 clsfrm-btn">클래스 작성</a>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-secondary lv2only">클래스 작성</button>
+						</c:otherwise>
+
+					</c:choose>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<h1>쿠킹클래스 목록</h1>
