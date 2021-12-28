@@ -9,7 +9,7 @@
   		food_name as foodName,
   		filepath,
   		subhead
-  	from recipe_board where recipe_writer=#{memberNo}
+  	from recipe_board where recipe_writer=#{memberNo} and recipe_delete=1
   </select>
   <select id="selectMilkitList1" resultType="product">
 	select 

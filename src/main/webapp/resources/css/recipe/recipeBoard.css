@@ -57,6 +57,7 @@
 	font-size: 30px;
 	font-weight: 600;
 	margin-top:10px;
+	max-height: 90px;
 }
 
 .name {
