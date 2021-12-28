@@ -145,8 +145,8 @@ $("#submitBtn").click(function(){
 			  orderId: impUid,
 			  orderName: 'YORIJORI 결제',
 			  customerName: "${m.memberName}",
-			  successUrl: "http://192.168.219.102/order.do?"+form,
-			  failUrl: "http://192.168.219.102/tossFail.do"
+			  successUrl: "http://khdsa1.iptime.org:18080/order.do?"+form,
+			  failUrl: "http://khdsa1.iptime.org:18080/tossFail.do"
 		});
 	}
 	
