@@ -67,6 +67,11 @@ margin-left:300px;
 margin-top:120px;
 
 }
+.dd{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -102,13 +107,13 @@ margin-top:120px;
                 
                 <div class="pr">
                     <a href="/recipeView.do?recipeNo=${fol.recipeNo}&memberNo=${fol.recipeWriter}"> 
-                         <img id="itemI" src="resources/upload/product/${fol.filepath }">
+                         <img id="itemI" src="resources/upload/recipe/${fol.filepath }">
                     </a>
                 </div>
                 <div class="pw">
                    <h5 style="color: rgb(126, 30, 166);"> 좋아요 ${fol.cnt }개</h5>
-                    <h5>#${fol.recipeTitle}</h5>
-                    <h5>#${fol.subhead}</h5>
+                    <h5 class="dd">#${fol.recipeTitle}</h5>
+                    <h5 class="dd">#${fol.subhead}</h5>
                 </div>
 
             </div>

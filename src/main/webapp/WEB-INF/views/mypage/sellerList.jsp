@@ -190,6 +190,11 @@ margin-left:350px;
 margin-top:120px;
 
 }
+.mil{
+overflow: hidden;
+  text-overflow: ellipsis;
+   white-space: nowrap;
+   }
 </style>
 <script>
 function orderDetail(orderNo){
@@ -250,7 +255,7 @@ function orderDetail(orderNo){
 								</div>
 
 								<div class="orderInfo">
-									<span class="it_info1"><b id="m">밀키트: </b>&emsp;${ms.milkitName}</span><br>
+									<span class="mil"><b id="m">밀키트: </b>&emsp;${ms.milkitName}</span><br>
 									<span class="it_info1"><b id="m">주문수량: </b>&emsp;${ms.orderOptionAmount}개</span>&emsp;<br>
 									<span class="it_info1"><b id="m">결제금액: </b>&emsp;${ms.milkitPrice*ms.orderOptionAmount}원</span><br>
 

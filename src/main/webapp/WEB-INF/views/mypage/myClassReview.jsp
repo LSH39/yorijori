@@ -61,10 +61,16 @@ margin-top:120px;
 }
 .name{
 width:200px;
+overflow: hidden;
+text-overflow: ellipsis;
+ white-space: nowrap;
 
 }
 .con{
 width:260px;
+overflow: hidden;
+text-overflow: ellipsis;
+ white-space: nowrap;
 }
 
 
@@ -95,7 +101,6 @@ width:120px;
                  <table  id="rti">
                 <tr>
                     <th class="rno">후기번호</th>
-                    <th class="no">클래스번호</th>
                     <th class="name">요리클래스이름</th>
                     <th class="con">리뷰내용</th>
                     <th class="sc">평점</th>
@@ -110,7 +115,6 @@ width:120px;
                   
                   <tr>
                     <td class="rno">${mreview.reviewNo}</td>
-                    <td class="no">${mreview.classNo}</td>
                     <td class="name">${mreview.classTitle}</td>
                     <td class="con">${mreview.reviewContent }</td>
                     <c:choose>

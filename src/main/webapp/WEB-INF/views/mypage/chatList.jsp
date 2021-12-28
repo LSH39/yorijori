@@ -65,6 +65,12 @@ margin-left:300px;
 margin-top:120px;
 
 }
+.mypageChat{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script>

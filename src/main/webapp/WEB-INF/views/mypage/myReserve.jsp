@@ -32,6 +32,15 @@
   }
 th{
 background-color:rgb(196, 191, 227);
+
+}
+.s{
+text-align:center;
+}
+.over{
+  overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
 }
 </style>
 </head>
@@ -54,19 +63,17 @@ background-color:rgb(196, 191, 227);
             <div id="line2"></div><br>
             <table border="1" class="classForm">
 				<tr>
-					<th>예약번호</th>
-					<th>요리클래스</th>
-					<th>클래스시작일</th>			
-					<th>수업시간</th>
-					<th>수업장소</th>
+					<th class="s">예약번호</th>
+					<th class="s">요리클래스</th>		
+					<th class="s">수업시간</th>
+					<th class="s">수업장소</th>
 					<th></th>
 				
 				</tr>
 				<c:forEach items="${list}" var="mcr" varStatus="i">
 					<tr>
 						<td>${mcr.rsrvNo }</td>
-						<td>${mcr.classTitle }</td>
-						<td>${mcr.classStart }</td>
+						<td class="over">${mcr.classTitle }</td>
 						<td>${mcr.classStartTime }분~ ${mcr.classEndTime}분</td>
 						
 						<c:choose>
@@ -74,7 +81,7 @@ background-color:rgb(196, 191, 227);
 								<td>비대면</td>
 							</c:when>
 							<c:otherwise>
-								<td>${mcr.classLocation1}</td>
+								<td class="over">${mcr.classLocation1}</td>
 							</c:otherwise>
 						</c:choose>
 						

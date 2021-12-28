@@ -38,6 +38,7 @@
 #del,#upd{
     background-color: rgb(196, 191, 227);
     border: none;
+    margin-right:40px;
 }
 #rti{
     width: 800px;
@@ -58,10 +59,16 @@ margin-top:120px;
 }
 .name{
 width:200px;
+overflow: hidden;
+text-overflow: ellipsis;
+ white-space: nowrap;
 
 }
 .con{
 width:260px;
+overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
 }
 
 
@@ -92,7 +99,6 @@ width:120px;
                  <table  id="rti">
                 <tr>
                     <th class="rno">후기번호</th>
-                    <th class="no">밀키트번호</th>
                     <th class="name">밀키트 이름</th>
                     <th class="con">리뷰내용</th>
                     <th class="sc">리뷰평점</th>
@@ -107,7 +113,6 @@ width:120px;
                   
                   <tr>
                     <td class="rno">${ireview.reviewNo}</td>
-                    <td class="no">${ireview.productNo}</td>
                     <td class="name">${ireview.milkitName}</td>
                     <td class="con">${ireview.reviewContent }</td>
                       <c:choose>
@@ -133,8 +138,11 @@ width:120px;
               </table>
 
               <div class="butt">
-                <input type="button" value="수정" id="upd">
-                <input type="button" value="삭제" id="del">
+              
+               <a href="/milkitView.do?productNo=${ireview.productNo}&recipeNo=${ireview.recipeNo}">
+                <input type="button" value="후기 보러가기" id="upd"></a>
+               
+                
               </div>
               </div>
              </c:forEach>

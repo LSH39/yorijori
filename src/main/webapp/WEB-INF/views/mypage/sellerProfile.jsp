@@ -227,10 +227,18 @@ function loadImg(obj) {
           <div class="myInfo">
                 <form action="/updateSeller.do" method="post">
         			<table class="mine" border="1">
-							<tr>
+								<tr>
 								<td>회원소개</td>
+								<c:choose>
+								<c:when test= "${empty rm.profileIntro }">
 								<td><input type="text" name="profileIntro" id="profileIntro"
-									onfocus="this.placeholder=''" value="${rm.profileIntro}"></td>
+									onfocus="this.placeholder=''" value="안녕하세요"></td>
+							</c:when>
+							<c:otherwise>
+								<td><input type="text" name="profileIntro" id="profileIntro"
+									onfocus="this.placeholder=''" value="${rm.profileIntro }"></td>
+							</c:otherwise>
+							</c:choose>
 							</tr>
 							<tr>
 								<td>회원아이디</td>

@@ -105,6 +105,12 @@ margin-left:350px;
 margin-top:120px;
 
 }
+.item{
+  overflow: hidden;
+  text-overflow: ellipsis;
+   white-space: nowrap;
+
+}
 </style>
 </head>
 <body>
@@ -142,7 +148,7 @@ margin-top:120px;
 
 							<div id="ii">
 								<span class="it_info1"><b id="it1">상품번호 :</b>&emsp;${ms.productNo}</span><br>
-								<span class="it_info1"><b id="it1">밀키트이름 :</b>&emsp;${ms.milkitName}</span><br>
+								<span class="item"><b id="it1">밀키트이름 :</b>&emsp;${ms.milkitName}</span><br>
 								<span class="it_info1"><b id="it1">밀키트가격 :</b>&emsp;${ms.milkitPrice}원</span>&emsp;<br>
 								<span class="it_info1"><b id="it1">등록일:</b>&emsp;${ms.milkitDate}</span>&emsp;<br>
 								<span class="it_info1"><b id="it1">재고 :</b>&emsp;${ms.milkitStock}개남음</span>&emsp;<br>

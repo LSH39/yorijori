@@ -48,6 +48,18 @@ margin-left:300px;
 margin-top:120px;
 
 }
+.tte{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+.tte{
+overflow: hidden;
+  text-overflow: ellipsis;
+   white-space: nowrap;
+   width:250px;
+   }
 </style>
 </head>
 <body>
@@ -77,7 +89,7 @@ margin-top:120px;
                    <img id="itemI" src="/resources/upload/recipe/${rb.filepath}">
                 </a>
                 <div id="items">
-                    <span class="it_info1"><b id="it1">#</b>${rb.recipeTitle}</span><br>
+                    <span class="tte"><b id="it1">#</b>${rb.recipeTitle}</span><br>
                     <span class="it_info1"><b id="it1">#</b>난이도 ${rb.level}</span><br>
                     <span class="it_info1"><b id="it1">#</b>${rb.recipeTime}조리</span><br>   
                 </div>

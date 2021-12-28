@@ -12,4 +12,5 @@ public class MyItemReview {
 	private int reviewRate;
 	private String reviewDate;
 	private String milkitName;
+	private int recipeNo;
 }

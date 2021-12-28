@@ -163,8 +163,8 @@
 		r.REVIEW_RATE as
 		reviewRate,
 		r.REVIEW_DATE as reviewDate,
-		p.milkit_name
-		as milkitName
+		p.milkit_name as milkitName,
+		p.recipe_no as recipeNo
 		from review r,product p
 		where r.product_NO =p.product_no
 		and r.member_nickname=#{memberNickname} and

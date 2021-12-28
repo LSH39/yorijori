@@ -112,7 +112,7 @@ color:red;
 						</c:otherwise>
 						</c:choose>
 						<li><a href="/myChatList.do?chatReceive=${sessionScope.m.memberNo }">내 채팅내역<span>&gt;</span></a></li>
-						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follwer 게시글<span>&gt;</span></a></li>
+						<li><a href="/followList.do?memberNo=${sessionScope.m.memberNo }">follower 게시글<span>&gt;</span></a></li>
 						<li><a href="/myLikeList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">찜한 레시피<span>&gt;</span></a></li>			
 						<li><a href="/myRecipe.do?recipeWriter=${sessionScope.m.memberNo }">내 작성 레시피<span>&gt;</span></a></li>
 						<li><a href="/myitemReview.do?memberNo=${sessionScope.m.memberNickname }">구매밀키트 후기<span>&gt;</span></a></li>
