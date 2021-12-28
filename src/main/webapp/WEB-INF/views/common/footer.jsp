@@ -10,7 +10,8 @@
       	<a href="#"><span>개인정보취급방침</span></a> |
       	<a href="#"><span>1:1문의</span></a> |
       	<a href="#"><span>인재채용</span></a> |
-      	<a href="#"><span>대량주문문의</span></a>
+      	<a href="#"><span>대량주문문의</span></a> |
+      	<a href="/storeList.do"><span>오프라인 매장</span></a>
       </div>
       <div class="footer-companyinfo">
       	<pre>주식회사 요리하조 대표 | 이윤수     주소 | 서울특별시 영등포구 선유동2로57 이레빌딩 19F</pre>

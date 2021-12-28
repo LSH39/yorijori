@@ -37,46 +37,46 @@
 	$(function(){
 		//좌표
 		const seoulPos = new naver.maps.LatLng(37.5016547, 127.0261282);
-		const kyeonggiPos = new naver.maps.LatLng(37.2994457, 126.971016);
-		const incheonPos = new naver.maps.LatLng(37.3813382, 126.6527299);
+		const kyeonggiPos = new naver.maps.LatLng(37.20065462924724, 127.09789671402015);
+		const incheonPos = new naver.maps.LatLng(37.3818040889175, 126.65776461239007);
 		const chungnamPos = new naver.maps.LatLng(36.3701615, 127.3373161);
-		const kwangjuPos = new naver.maps.LatLng(35.1895075, 126.8207759);
-		const busanPos = new naver.maps.LatLng(35.1559829, 129.0564109);
+		const kwangjuPos = new naver.maps.LatLng(35.16056863692235, 126.88265768652336);
+		const busanPos = new naver.maps.LatLng(36.8194985142584, 127.1560887704907);
 		
 		//서울
 		var seoulOptions = {
 		    center: seoulPos,
-		    zoom: 16
+		    zoom: 17
 		};
 		
 		//경기
 		var kyeonggiOptions = {
 		    center: kyeonggiPos,
-		    zoom: 16
+		    zoom: 17
 		};
 		
 		//인천
 		var incheonOptions = {
 		    center: incheonPos,
-		    zoom: 16
+		    zoom: 17
 		};
 		
 		//충남
 		var chungnamOptions = {
 		    center: chungnamPos,
-		    zoom: 16
+		    zoom: 17
 		};
 		
 		//광주
 		var kwangjuOptions = {
 		    center: kwangjuPos,
-		    zoom: 16
+		    zoom: 17
 		};
 		
 		//부산
 		var busanOptions = {
 		    center: busanPos,
-		    zoom: 16
+		    zoom: 17
 		};
 	
 		var seoul = new naver.maps.Map('seoul', seoulOptions);
