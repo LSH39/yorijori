@@ -300,13 +300,27 @@
 				name : classTitle, //결제 이름 설정함
 				amount : 100, //결제 금액 테스트용이니까 100원
 				buyer_email : "forestwowch@gmail.com", //구매자 이메일
-				buyer_name : "성승민",
-				buyer_phone : "010-5104-4638", //구매자 핸드폰 번호
-				buyer_addr : "인천광역시", //구매자 주소
-				buyer_postcode : "99999" //구매자 우편번호
+				buyer_name : "${sessionScope.m.memberName}",
+				buyer_phone : "${sessionScope.m.memberPhone}", //구매자 핸드폰 번호
+				buyer_addr : "${sessionScope.m.addressRoad} ${sessionScope.m.addressDetail}", //구매자 주소
+				buyer_postcode : "${sessionScope.m.postcode}" //구매자 우편번호
 			},function(rsp){
 				if(rsp.success){
-					alert("결제가 완료됐습니다!");
+					$.ajax({
+						url : "/insertCookingRsrv.do",
+						type : "post",
+						data : {memberNickname : memberNickname, memberNo : memberNo, classNo : classNo, impUid : impUid, classNop : classNop},
+						success : function(data){
+							console.log(data);
+							if(data==1){
+								alert("결제가 완료됐습니다!");
+								location.reload();
+							}else if(data==0){
+								alert("인원수 초과");
+								location.href="/";
+							}
+						}
+					});
 					//성공시 로직(db결제정보 insert -> 사용자 화면 처리)
 					console.log("카드 승인 번호 "+rsp.apply_num);
 				}else{
