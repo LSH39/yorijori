@@ -18,7 +18,7 @@ public class MembershipController {
 	public String membershipView(int memberNo,Model model) {
 		int result = service.selectMembership(memberNo);
 		if(result>0) {
-			model.addAttribute("msg", "이미 구매한 구독권이 있습니다.");
+			model.addAttribute("msg", "이미 이용중인 구독권이 있습니다.");
 			model.addAttribute("loc", "/");
 			return "common/msg";
 		}else {
