@@ -594,7 +594,7 @@ main{
         							<span>
         								<c:choose>
         									<c:when test="${not empty rb.filepath }">
-												<img src="./resources/upload/recipeContent/${rb.filepath }" class="image-source">
+												<img src="./resources/upload/recipe/${rb.filepath }" class="image-source">
         									</c:when>
         									<c:otherwise>
 												<img src="./resources/img/recipe/person.png" class="image-source">        									
