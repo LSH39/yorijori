@@ -227,6 +227,7 @@ label[for="searchsubmit"]:hover{
 	right: 40px;
 	background:#fff;
 	margin: 0;
+	z-index: 80;
 	}
 .quickmenu ul {
 	position:relative;
