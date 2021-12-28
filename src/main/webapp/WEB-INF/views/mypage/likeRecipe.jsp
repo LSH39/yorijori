@@ -22,7 +22,7 @@
 .recipe{
     width: 400px;
     height:250px;
-      background-color:pink;
+      background-color:rgb(234, 217, 241);
     margin-right: 20px;
     margin-bottom: 40px;
     float: left;

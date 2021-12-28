@@ -44,6 +44,7 @@
 	margin: 0 auto;
 	margin-top: 50px;
 	overflow: hidden;
+	margin-bottom:20px;
 }
 
 .main>div {
