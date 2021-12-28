@@ -235,8 +235,11 @@
 
 #pageNavi{
 	display: flex;
-	justify-content: center;
+	justify-content: center;	
 }
+
+
+/**/
 
 </style>
 </head>
