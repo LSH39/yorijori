@@ -41,12 +41,14 @@
 	var webSocketType;
 	var startNo = 0;
 	var enter = 0;
+	
     $(function(){
         $("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatFrmAdmin").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
 	    $.ajax()
-        ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+        //ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+	    ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
         ws.onopen = startChat;  // ws.onopen 은 웹소켓 연결시 자동으로 실행됨
         ws.onmessage = receiveMsg;
         ws.onclose = endChat;
@@ -94,7 +96,7 @@
 	}
 	
 	function reStartChat(){
-    	webSocketType = "reStart";
+		webSocketType = "reStart";
 		var data = {type:"reStart",memberNo:sessionMemberNo};
 	    ws.send(JSON.stringify(data));
 	}
@@ -112,19 +114,20 @@
 	}
 	
 	function appendChat(textMsg){
+		console.log(webSocketType);
 		var msg = JSON.parse(textMsg);
 		// adminNo
 		if(msg.adminNo != null){
 			adminNo = msg.adminNo;
 		}
 		// alarm
-		//if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
-			$("#chatAdminAlarm").text(msg.alarm);
-		//}
+		$("#chatAdminAlarm").text(msg.alarm);
 		// chat
-		if(msg.appendMsg == "noMsg"){
-			$("#chatAdmin").click();  // close
-			$("#chatAdmin").click();  // open
+		if(msg.appendMsg == "addListMsg"){
+			if($("#chatFrmAdmin").prop("on") == false){
+				$("#chatAdmin").click();  // close
+				$("#chatAdmin").click();  // open				
+			}
 		}else{
 			if(webSocketType == "start" || webSocketType == "reStart"){
 				$("#chatAdminHomeTbl").append(msg.appendMsg);

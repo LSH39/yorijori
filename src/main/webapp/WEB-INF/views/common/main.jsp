@@ -47,19 +47,16 @@
         
           <!-- Slide 3 -->
         <div class="carousel-item" style="background-image: url(resources/img/mainpage/mainbanner_4.jpg)">
-          <a href="/membershipView.do">
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown" style="font-family: 'Noto Sans KR', serif; font-weight: 700; font-size: 42px; color: black;">신선한 샐러드도 이제는 배송 받자!</h2>
               <h4 class="animate__animated animate__fadeInDown" style="font-family: 'TmoneyRoundWindRegular', sans-serif; font-size: 28px; color: black; margin-top: 5px;">요리조리 밀키트로 간편하게 해결</h4>
             </div>
           </div>
-          </a>
         </div> 
         
         <!-- Slide 4 -->
         <div class="carousel-item active" style="background-image: url(resources/img/mainpage/mainbanner_3.jpg)">
-          <a href="/membershipView.do">
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown" style="margin-bottom: 0; color: #FF8554; margin-left: 90px;">YORIJORI</h2>
@@ -67,7 +64,6 @@
               <p class="animate__animated animate__fadeInUp" style="font-family: 'TmoneyRoundWindRegular', sans-serif; color: #FF8554; margin-left: 90px;">오직 회원만 누리는 공식몰 단독 혜택</p>
             </div>
           </div>
-          </a>
         </div>
 
       </div>

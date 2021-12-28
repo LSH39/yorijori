@@ -66,39 +66,43 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 				}
 				
 				if(memberNo != adminNo) {  // 일반/전문가
-					int alarm = element.getAsJsonObject().get("alarm").getAsInt();
-					alarmList.put(memberNo, alarm);
 					ArrayList<Chat> chatList = service.chatUserList(memberNo);
-	            	for(int i=0; i<chatList.size();i++){
-	            		int chatNo = chatList.get(i).getChatNo();
-	            		int chatSend = chatList.get(i).getChatSend();
-	            		int chatReceive = chatList.get(i).getChatReceive();
-	            		String chatContent = chatList.get(i).getChatContent();
-	            		String chatDate = chatList.get(i).getStrDate();
-	                	if(chatReceive == memberNo){
-	                		if(chatDate.equals(receiveDate)){
-	                			appendMsg += "<tr><td class='receiveText'><div>"+chatContent+"</div></td></tr>";
-	                		}else{
-	                    		appendMsg += "<tr><th class='receive'><div><img src='/resources/img/about/logo_header.png'><span>"+chatDate+"</span></div></th></tr>";
-		    					appendMsg += "<tr><td class='receiveText'><div>"+chatContent+"</div></td></tr>";		                    			
-	                		}
-	                		receiveDate = chatDate;
-	                	}else{
-	                		if(chatDate.equals(sendDate)){
-	                			appendMsg += "<tr><td class='sendText'><div>"+chatContent+"</div></td></tr>";
-	                		}else{
-	                    		appendMsg += "<tr><th class='send'><div><span>"+chatDate+"</span></div></th></tr>";
-								appendMsg += "<tr><td class='sendText'><div>"+chatContent+"</div></td></tr>";		                    			
-	                		}
-	                		sendDate = chatDate;
-	                	}
+					if(chatList.size()==0) {
+						appendMsg = "noListMsg";
+					}else {
+						for(int i=0; i<chatList.size();i++){
+							int chatNo = chatList.get(i).getChatNo();
+							int chatSend = chatList.get(i).getChatSend();
+							int chatReceive = chatList.get(i).getChatReceive();
+							String chatContent = chatList.get(i).getChatContent();
+							String chatDate = chatList.get(i).getStrDate();
+							if(chatReceive == memberNo){
+								if(chatDate.equals(receiveDate)){
+									appendMsg += "<tr><td class='receiveText'><div>"+chatContent+"</div></td></tr>";
+								}else{
+									appendMsg += "<tr><th class='receive'><div><img src='/resources/img/about/logo_header.png'><span>"+chatDate+"</span></div></th></tr>";
+									appendMsg += "<tr><td class='receiveText'><div>"+chatContent+"</div></td></tr>";		                    			
+								}
+								receiveDate = chatDate;
+							}else{
+								if(chatDate.equals(sendDate)){
+									appendMsg += "<tr><td class='sendText'><div>"+chatContent+"</div></td></tr>";
+								}else{
+									appendMsg += "<tr><th class='send'><div><span>"+chatDate+"</span></div></th></tr>";
+									appendMsg += "<tr><td class='sendText'><div>"+chatContent+"</div></td></tr>";		                    			
+								}
+								sendDate = chatDate;
+							}
+						}
 	            	}
             	}else {  // 관리자
-            		Set<Integer> keySet = adminAlarm.keySet();
-					for (Integer key : keySet) {
-						totalAlarm += adminAlarm.get(key);
-					}
-					alarmList.put(memberNo, totalAlarm);
+            		if(!adminAlarm.isEmpty()) {
+            			Set<Integer> keySet = adminAlarm.keySet();
+    					for (Integer key : keySet) {
+    						totalAlarm += adminAlarm.get(key);
+    					}
+    					alarmList.put(memberNo, totalAlarm);
+            		}
             		ArrayList<Chat> chatList = service.chatAdminHomeList(memberNo);
             		appendMsg += "<colgroup><col style='width:80%'/><col style='width:20%'/></colgroup><tbody>";
             		for(int i=0; i<chatList.size(); i++) {
@@ -153,7 +157,8 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 					String selectUser = element.getAsJsonObject().get("selectUser").getAsString();
 					chatReceive = dao.selectMemberNo(selectUser);
 				}else {
-					chatReceive = element.getAsJsonObject().get("chatReceive").getAsInt();
+					//chatReceive = element.getAsJsonObject().get("chatReceive").getAsInt();
+					chatReceive = adminNo;
 					if(chatSend != adminOpenUser) {  // 관리자와 대화중인 유저가 아니면
 						if(adminAlarm.get(chatSend) == null) {
 							adminAlarm.put(chatSend, 0);
@@ -215,7 +220,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
                     					receiverMsg += "<tr><td class='receiveText'><div>"+newChat.getChatContent()+"</div></td></tr>";
                     					adminAlarm.remove(chatSend);
                     				}else {
-                    					receiverMsg = "noMsg";
+                    					receiverMsg = "addListMsg";
                     					int reA = adminAlarm.get(chatSend);
                 						adminAlarm.put(chatSend, ++reA);
                     				}
