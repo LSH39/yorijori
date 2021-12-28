@@ -148,7 +148,6 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 			// close chat - admin
 			}else if(type.equals("closeChat")) {
 				adminOpenUser = 0;
-				
 			// chat enter
 			}else if(type.equals("chat")) {
 				int chatSend = element.getAsJsonObject().get("chatSend").getAsInt();
