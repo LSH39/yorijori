@@ -222,8 +222,12 @@ public class MypageController {
 	}
 	//주문상세 내역
 	@RequestMapping(value = "/detailOrder.do")
-	public String detailOrder(int orderNo, Model model) {
-		ArrayList<Myorder> list= service.orderDetail(orderNo);
+	public String detailOrder(int orderNo, HttpSession session, Model model) {
+		
+		Member member = (Member)session.getAttribute("m");
+		String sessionMemberNickname = member.getMemberNickname();
+		
+		ArrayList<Myorder> list= service.orderDetail(orderNo, sessionMemberNickname);
 		model.addAttribute("list", list);
 		DetailOrder dd = service.myOrderDetail(orderNo);
 		model.addAttribute("dd", dd);
