@@ -25,6 +25,7 @@
 	var sendTextBefore;
 	var ws;
 	var chatbotCheck = 0;
+	var alarm = 0;
 	var startNo = 0;
 	var enter = 0;
 	var chat_audio = new Audio('/resources/mp3/Chat_sound.mp3');
@@ -55,8 +56,8 @@
 	});
 	
 	function startChat(){
-		var alarm = 0;
-	    var data = {type:"start",memberNo:sessionMemberNo, alarm:alarm};
+		//alarm = 0;
+	    var data = {type:"start",memberNo:sessionMemberNo};
 	   	ws.send(JSON.stringify(data));
 	   	chatbotCheck = 0;
 	}
@@ -68,15 +69,15 @@
 	}
 	
 	function reStartChat(){
-		var alarm = 0;
+		//var alarm = 0;
 		$("#chatUserAlarm").text(alarm);
-	    var data = {type:"reStart",memberNo:sessionMemberNo, alarm:alarm};
+	    var data = {type:"reStart",memberNo:sessionMemberNo};
 	   	ws.send(JSON.stringify(data));
 	   	chatbotCheck = 0;
 	}
 	
 	function openChat(){
-		var alarm = 0;
+		alarm = 0;
 		$("#chatUserAlarm").text(alarm);
 	    var data = {type:"openChat",memberNo:sessionMemberNo, alarm:alarm};
 	   	ws.send(JSON.stringify(data));
@@ -92,6 +93,7 @@
 		// alarm
 		if($("#chatFrmUser").prop("on") == false){
 			$("#chatUserAlarm").text(msg.alarm);
+			alarm = msg.alarm;
 		}
 		// chat
 		if(msg.appendMsg.length != 0){
