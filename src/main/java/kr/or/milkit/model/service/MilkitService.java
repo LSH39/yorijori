@@ -105,10 +105,7 @@ public class MilkitService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("productNo", productNo);
 		map.put("sessionMemberNo", sessionMemberNo);
-		System.out.println("물건번호 : "+productNo);
-		System.out.println("물건회원번호 : "+sessionMemberNo);
 		int orderStat = dao.selectOnePurchaseChk(map);
-		System.out.println("서비스에서 몇 나오냐"+orderStat);
 		if(orderStat == 4) {
 			return orderStat;
 		}else {
