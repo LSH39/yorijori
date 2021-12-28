@@ -72,12 +72,12 @@
                     </div>
                     <hr id="line">
                     <div class="bottom">
-                        <label><input type="checkbox" onclick="checkAll();"><span></span><p id="p3_txt">약관 전체 동의</p></label><br>
-                        <label><input type="checkbox" onclick="check();"><span></span><p class="bottom_p">만 14세 이상입니다</p><span class="agree">(필수)</span></label><br>
-                        <label><input type="checkbox" onclick="check();"><span></span><p class="bottom_p">요리조리 약관 동의</p><span class="agree">(필수)</span></label><p class="agree_info" onclick="textarea(1);">내용보기</p><br>
-                        <label><input type="checkbox" onclick="check();"><span></span><p class="bottom_p">전자금융거래 약관 동의</p><span class="agree">(필수)</span></label><p class="agree_info" onclick="textarea(2);">내용보기</p><br>
-                        <label><input type="checkbox" onclick="check();"><span></span><p class="bottom_p">개인정보수집 및 이용에 대한 안내</p><span class="agree">(필수)</span></label><p class="agree_info" onclick="textarea(3);">내용보기</p><br>
-                        <label><input type="checkbox" onclick="check();" name="consentCheck"><span></span><p class="bottom_p">이벤트/마케팅 수신 동의 (선택)</p></label><p class="agree_info" onclick="textarea(4);">내용보기</p><br>
+                        <label><input type="checkbox" class="joinCheckbox" onclick="checkAll();"><span></span><p id="p3_txt">약관 전체 동의</p></label><br>
+                        <label><input type="checkbox" class="joinCheckbox" onclick="check();"><span></span><p class="bottom_p">만 14세 이상입니다</p><span class="agree">(필수)</span></label><br>
+                        <label><input type="checkbox" class="joinCheckbox" onclick="check();"><span></span><p class="bottom_p">요리조리 약관 동의</p><span class="agree">(필수)</span></label><p class="agree_info" onclick="textarea(1);">내용보기</p><br>
+                        <label><input type="checkbox" class="joinCheckbox" onclick="check();"><span></span><p class="bottom_p">전자금융거래 약관 동의</p><span class="agree">(필수)</span></label><p class="agree_info" onclick="textarea(2);">내용보기</p><br>
+                        <label><input type="checkbox" class="joinCheckbox" onclick="check();"><span></span><p class="bottom_p">개인정보수집 및 이용에 대한 안내</p><span class="agree">(필수)</span></label><p class="agree_info" onclick="textarea(3);">내용보기</p><br>
+                        <label><input type="checkbox" class="joinCheckbox" onclick="check();" name="consentCheck"><span></span><p class="bottom_p">이벤트/마케팅 수신 동의 (선택)</p></label><p class="agree_info" onclick="textarea(4);">내용보기</p><br>
 
 						<%@include file = "/WEB-INF/views/member/joinText.jsp" %>
 

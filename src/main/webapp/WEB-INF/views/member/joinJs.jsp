@@ -315,7 +315,7 @@ function fileChange(file){
 }
 
 
-var selectbox = $("input[type='checkbox']");
+var selectbox = $(".joinCheckbox");
 function checkAll(){
     if(selectbox.eq(0).is(":checked") == true){
         for(var i=0; i<selectbox.length; i++){
