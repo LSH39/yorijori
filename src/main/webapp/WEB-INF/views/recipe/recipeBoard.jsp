@@ -83,8 +83,8 @@
 					for(var i=0;i<data.length;i++){
 						var html ="";
 						if(loginCheck == null){
-							html += "<div class='recipe'><a href='/recipeView.do?recipeNo="+data[i].recipeNo+"&memberNo=0'>";
-							html += "<img src='/resources/upload/product/"+data[i].filepath+"'>";
+							html += "<div class='recipe'><a href='/recipeView.do?recipeNo="+data[i].recipeNo+"&memberNo='0'>";
+							html += "<img src='/resources/upload/recipe/"+data[i].filepath+"'>";
 							html +=" <p class='name'>"+data[i].nickname+"</p> <p class='title'>"+data[i].recipeTitle+"</p>"; 
 							html += "<div class='info'><div><p class='infoText'>조회수</p> <p>"+data[i].readCount+"회</p></div> ";
 							html +="<div>  <p class='infoText'>조리시간</p> <p>"+data[i].recipeTime+"</p></div>";
