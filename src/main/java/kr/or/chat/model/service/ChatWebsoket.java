@@ -64,6 +64,7 @@ public class ChatWebsoket  extends TextWebSocketHandler{
 				if(alarmList.get(memberNo)==null) {
 					alarmList.put(memberNo, 0);
 				}
+				System.out.println(alarmList.get(memberNo));
 				
 				if(memberNo != adminNo) {  // 일반/전문가
 					int alarm = element.getAsJsonObject().get("alarm").getAsInt();

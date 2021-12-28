@@ -41,12 +41,15 @@
 	var webSocketType;
 	var startNo = 0;
 	var enter = 0;
+	var chat_audio = new Audio('/resources/mp3/Chat_sound.mp3');
+	
     $(function(){
         $("#chatFrmAdminHome").css("display","none").prop("on",false);
         $("#chatFrmAdmin").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
 	    $.ajax()
-        ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+        //ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+	    ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
         ws.onopen = startChat;  // ws.onopen 은 웹소켓 연결시 자동으로 실행됨
         ws.onmessage = receiveMsg;
         ws.onclose = endChat;
@@ -118,9 +121,16 @@
 			adminNo = msg.adminNo;
 		}
 		// alarm
-		//if(($("#chatFrmAdminHome").prop("on") == false) && ($("#chatFrmAdmin").prop("on") == false)){
-			$("#chatAdminAlarm").text(msg.alarm);
-		//}
+		$("#chatAdminAlarm").text(msg.alarm);
+		/*
+		if(msg.alarm!=0){
+			// sound
+			console.log(msg.alarm);
+			if($("#chatFrmAdminHome").prop("on") == false && startNo>0){
+		    	chat_audio.play();
+	    	}
+		}
+		*/
 		// chat
 		if(msg.appendMsg == "noMsg"){
 			$("#chatAdmin").click();  // close
@@ -133,6 +143,7 @@
 		        $("#chatAdminHomeTbl").children().remove();
 				$("#chatAdminTbl").append(msg.appendMsg);
 				$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
+				
 			}
 		}
 		// enter

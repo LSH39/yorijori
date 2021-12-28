@@ -27,11 +27,14 @@
 	var chatbotCheck = 0;
 	var startNo = 0;
 	var enter = 0;
+	var chat_audio = new Audio('/resources/mp3/Chat_sound.mp3');
+	
 	//var alarm;
 	$(function(){
 	    $("#chatFrmUser").css("display","none").prop("on",false);
 	    $(".chatAlarm").css("display","inline");
-	    ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+	    //ws = new WebSocket("ws://khdsa1.iptime.org:18080/chatWebsoket.do");
+	    ws = new WebSocket("ws://192.168.219.101/chatWebsoket.do");
 		ws.onopen = startChat;
 		ws.onmessage = receiveMsg;
         ws.onclose = endChat;
@@ -83,7 +86,7 @@
 	function appendChat(textMsg){
 		var msg = JSON.parse(textMsg);
 		// adminNo
-		if(msg.adminNo != null){
+		if(msg.adminNo != 0){
 			adminNo = msg.adminNo;
 		}
 		// alarm
@@ -95,6 +98,12 @@
 			if(msg.appendMsg != "noAnswer") {
 				$("#chatUserTbl").append(msg.appendMsg);
 	    		$(".scrollBottom").scrollTop($(".scrollBottom")[0].scrollHeight);  // div scroll bottom으로
+	    		// sound
+	    		/*
+	    		if($("#chatFrmUser").prop("on") == false && startNo>0){
+	        		chat_audio.play();
+	    		}
+	    		*/
 			}else{  // chatbot 호출
 				var sMsg = "<tr><td class='sendText'><div>"+sendMsg+"</div></td></tr>";
 				$("#chatUserTbl").append(sMsg);
