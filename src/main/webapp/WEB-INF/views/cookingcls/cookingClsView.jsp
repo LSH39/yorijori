@@ -849,7 +849,7 @@
 							</c:choose>
 							<div class="d-grid gap-2 mt-4">
 								<c:if test="${not empty ccls.classLocation1 && not empty ccls.classLocation2}">
-									<button type="button" class="btn btn-danger btn-lg showLoc" data-bs-toggle="modal" data-bs-target="#exampleModal">장소보기</button>
+									<button type="button" class="btn clsfrm-btn btn-lg showLoc" data-bs-toggle="modal" data-bs-target="#exampleModal">장소보기</button>
 								</c:if>
 							</div>
 							<div class="d-grid gap-2 mt-4">
@@ -863,7 +863,7 @@
 											<a href="/cookingClsDelete.do?classNo=${ccls.classNo }" class="btn btn-danger btn-lg" >삭제하기</a>							
 										</div>
 										<div class="d-grid gap-2 mt-2">
-											<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 목록 확인</button>
+											<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 확인</button>
 										</div>
 									</c:when>
 									<c:when test="${empty sessionScope.m  }">									
@@ -887,7 +887,7 @@
 							 -->
 								<c:if test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
 									<a class="btn btn-lg doDm clsfrm-btn" >문의 하기</a>
-									<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 목록 확인</button>
+									<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 확인</button>
 								</c:if>
 							</div>
 							</c:if>

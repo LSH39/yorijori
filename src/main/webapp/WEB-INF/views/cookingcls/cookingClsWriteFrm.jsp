@@ -209,7 +209,6 @@
 					alert("종강 날짜를 올바르게 입력해주세요.");
 					return false;					
 				}else{
-					alert("테스트용 성공 뜨면 지움")
 					return true;
 				}
 			}

@@ -9,6 +9,12 @@
 <meta charset="UTF-8">
 <title>쿠킹클래스 수정</title>
 <link rel="stylesheet" href="resources/css/cookingcls/clsWrite.css">
+<style>
+	.container{
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+</style>
 </head>
 <body>
 	<c:choose>
@@ -25,7 +31,7 @@
 			<script src="resources/summernote/lang/summernote-ko-KR.js"></script>
 			<div class="container">
 				<div>
-					<h1>요리 클래스 수정</h1>
+					<h1 style="margin-bottom:50px;">요리 클래스 수정</h1>
 				</div>
 				<div>
 					<form action="/cookingClsUpdate.do" method="post" enctype="multipart/form-data">
@@ -160,6 +166,7 @@
 						</div>				
 						<div class="row justify-content-md-center">
 							<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+								<a href="/cookingClsList.do?reqPage=1" class="btn clsfrm-btn col-2">취소</a>
 								<input type="submit" value="등록" class="btn clsfrm-btn col-2" id="classWrite">
 							</div>
 						</div>
