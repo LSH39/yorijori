@@ -12,4 +12,7 @@ public class Material {
 	private String []mNoList;
 	private String[] mNameList;
 	private String[] mAmountList;
+	
+	private String[] mNameList2;
+	private String[] mAmountList2;
 }

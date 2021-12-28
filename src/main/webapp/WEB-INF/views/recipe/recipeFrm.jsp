@@ -39,7 +39,7 @@
 				<label>음식정보</label>
 				<div id="recipeFrm1">
 					<p>음식이름</p>
-					<input type="text" id="foodName" name="foodName" placeholder="음식명을 입력하세요">
+					<input type="text" id="foodName" name="foodName" placeholder="음식명을 입력하세요" maxlength="20">
 					 <input type="text" id="recipeTime" name="recipeTime"
 						placeholder="조리시간 예) 60분">소요
 				</div>

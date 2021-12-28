@@ -12,6 +12,7 @@ public class RecipeContent {
 	
 	private String[] rcNoList;
 	private String[] rContentList;
+	private String[] rContentList2;
 
 	public String getrContentBr() {
 		return recipeContent.replaceAll("\r\n", "<br>");

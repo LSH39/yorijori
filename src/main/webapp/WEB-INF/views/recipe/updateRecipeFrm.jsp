@@ -94,6 +94,7 @@
 					<input type="hidden" name="rcNoList" value="${rc.RFileNo }">
 					<textarea name="rContentList">${rc.recipeContent}</textarea><br>
 					<img src="/resources/upload/recipeContent/${rc.filepath }" width="150px">
+					<input type='file' name='files' accept='.jpg,.jpeg,.png,.gif' multiple style="display:none;">
 					<span>${rc.filepath }</span>					
 				</div>
 			</c:forEach>
@@ -147,15 +148,15 @@
 		$(function() {
 			$("#plusBtn").click(function() {
 				var mHTML = "<div class='materialBox'>"
-				+ "<input type='text' name='mNameList'>" 
-				+ " <input type='text'  name='mAmountList' > </div>";
+				+ "<input type='text' name='mNameList2'>" 
+				+ " <input type='text'  name='mAmountList2' > </div>";
 				$("#newInput").append(mHTML);
 			});
 			
 			var orderNum = ${num};
 			$("#plusBtn2").click(function() {
 				var contentHTML = "<div class='cookOrder'> <p>STEP"+(++orderNum)+"</p>"
-					+ "<textarea name='rContentList' '></textarea >"
+					+ "<textarea name='rContentList2' '></textarea >"
 					+ " <input type='file' name='files' accept='.jpg,.jpeg,.png,.gif' multiple>"
 					+ "<img class='recipeImg'></div>";
 				$(".newContent").append(contentHTML);
