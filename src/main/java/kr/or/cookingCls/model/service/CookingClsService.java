@@ -166,8 +166,8 @@ public class CookingClsService {
 		// TODO Auto-generated method stub
 		boolean rsrvChk = false;
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println("서비스 : "+classNo);
-		System.out.println("서비스 : "+sessionMemberNo);
+		//System.out.println("서비스 : "+classNo);
+		//System.out.println("서비스 : "+sessionMemberNo);
 		map.put("classNo", classNo);
 		map.put("sessionMemberNo", sessionMemberNo);
 		CookingRsrv crsrv = dao.selectOneRsrvChk(map);

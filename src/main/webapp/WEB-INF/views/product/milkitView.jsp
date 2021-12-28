@@ -141,7 +141,7 @@
 				<tr>
 					<th style="width: 7%;">번호</th>
 					<th style="width: 55%;">내용</th>
-					<th style="width: 13%;">닉네임</th>
+					<th style="width: 18%;">닉네임</th>
 					<th style="width: 15%;">평점</th>
 					<th style="width: 5%;"></th>
 				</tr>

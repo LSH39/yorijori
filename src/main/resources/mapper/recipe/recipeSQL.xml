@@ -272,12 +272,12 @@
 	 	from
 			(select rownum as rnum, rb.*
 				from(
-				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt
+				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt, recipe_delete as recipeDelete
 					from recipe_board 
 					left outer join recipe_like
 					using(recipe_no) 
-					where recipe_writer in #{memberNo}
-					group by recipe_no, recipe_writer, filepath, read_count, recipe_video
+					where recipe_writer in #{memberNo} and recipe_delete = 1
+					group by recipe_no, recipe_writer, filepath, read_count, recipe_video, recipe_delete
 				order by recipe_no desc) rb )) 
 		where rnum between 1 and 15
  	</select>
@@ -288,12 +288,12 @@
 	 	from
 			(select rownum as rnum, rb.*
 				from(
-				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt
+				(select recipe_no as recipeNo, recipe_writer as recipeWriter, filepath, read_count as readCount, recipe_video as recipeVideo, count(like_no) likeCnt, recipe_delete as recipeDelete
 					from recipe_board 
 					left outer join recipe_like
 					using(recipe_no) 
-					where recipe_writer in #{memberNo}
-					group by recipe_no, recipe_writer, filepath, read_count, recipe_video
+					where recipe_writer in #{memberNo} and recipe_delete = 1
+					group by recipe_no, recipe_writer, filepath, read_count, recipe_video, recipe_delete
 				order by recipe_no desc) rb )) 
 		where rnum between #{start} and #{end}
  	</select>

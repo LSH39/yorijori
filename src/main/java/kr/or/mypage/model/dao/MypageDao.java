@@ -345,6 +345,12 @@ public class MypageDao {
 		int totalCount = sqlSession.selectOne("mypage.totalmembership",memberNo);
 		return totalCount;
 	}
+	
+	//상품번호조회
+	public int selectRvProductNo(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("selectMyReviewNo", map);
+	}
 }
 	
 

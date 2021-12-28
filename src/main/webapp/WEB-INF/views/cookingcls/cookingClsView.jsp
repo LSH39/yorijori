@@ -538,6 +538,7 @@
 		//문의글 내용 화살표 클릭하거나
 		$("#message__send").click(function(){
 			sendMsg();
+			$(".dmContent").val("");
 		});
 		
 		//문의 글 함수 방번호 있는거 12-23
