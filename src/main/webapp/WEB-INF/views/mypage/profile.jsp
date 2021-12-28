@@ -540,7 +540,7 @@ main{
 		                <div class="profile-intro">
 		                	<c:choose>
 		                		<c:when test="${empty member.profileIntro }">
-		        		            <h2>자기 소개가 없습니다.</h2>
+		        		            <h2>안녕하세요.</h2>
 		                		</c:when>
 		                		<c:otherwise>
 				                    <h2>${member.profileIntro }</h2>

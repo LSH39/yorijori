@@ -138,7 +138,7 @@
 				}
 			}	
 			
-		 	if($("#recipeTitle").val()=="" || $("#subhead").val()=="" || $("#uploadImg").val()=="" || $("#foodname").val()==""){
+		 	if($("#recipeTitle").val()=="" || $("#subhead").val()=="" || $("#uploadImg").val()=="" || $("#foodname").val()=="" || $("#recipeTime").val() ==""){
 					 alert("빈칸없이 작성해주세요"); 
 					 return false;
 				}else if( $("#situation").val()=="" || $("#material").val()=="" || $("#recipeLevel").val()=="" ){
