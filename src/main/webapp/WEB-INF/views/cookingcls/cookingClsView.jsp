@@ -901,10 +901,15 @@
 							<!-- 
 								<a href="/dmView.do?classNo=${ccls.classNo }" class="btn btn-primary btn-lg" >문의하기</a>
 							 -->
-								<c:if test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
+							 	<c:choose>
+							 		<c:when test="${sessionScope.m.memberLevel eq 2 }">
+										<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 확인</button>				 		
+							 		</c:when>
+								<c:when test="${sessionScope.m.memberNickname ne ccls.memberNickname && not empty sessionScope.m }">
 									<a class="btn btn-lg doDm clsfrm-btn" >문의 하기</a>
 									<button type="button" class="btn btn-lg ajaxList clsfrm-btn">문의 확인</button>
-								</c:if>
+								</c:when>
+							 	</c:choose>
 							</div>
 							</c:if>
 						</div>
