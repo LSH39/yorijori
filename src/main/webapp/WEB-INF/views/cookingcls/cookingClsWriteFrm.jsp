@@ -234,7 +234,7 @@
 				}else if(fileVal == ""){
 					
 				}else{
-					alert("프로필 사진은 이미지 파일만 가능합니다.");
+					alert("썸네일 사진은 이미지 파일만 가능합니다.");
 					$("#classThumbnail").val("");
 				}
 			});
