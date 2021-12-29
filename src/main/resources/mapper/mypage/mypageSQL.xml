@@ -180,7 +180,8 @@
 		rb.recipe_title as recipeTitle,
 		rb.recipe_writer as recipeWriter,
         rb.recipe_no as recipeNo,
-		rb.filePath,
+		rb.filePath ,
+		 m.profile_path as profilePath,
 		m.member_nickname as memberNickName,
         m.member_id as memberId,
 		( select count(*) from contest_vote where contest_no=cr.contest_no ) as
@@ -318,7 +319,7 @@
 
 	</select>
 	
-	<!-- 김효원 기존 상세 주문 백업  -->
+	 <!--  김효원 기존 상세 주문 백업 -->
 	<select id="detailOrder" parameterType="_int" resultType="mo">
 		select
 		a.ORDER_OPTION_NO as orderOptionNo,
@@ -355,16 +356,17 @@
 		where
 		a.order_no =b.order_no and a.product_no =c.product_no and
 		b.order_no=#{orderNo}
-		order by order_option_no asc
 	</select>
 	
+		<!-- 성승민 상세조회 -->
 	<select id="selectMyReviewNo" parameterType="map" resultType="_int">
 	select 
 		nvl(max(review_no), -1) 
 	from review 
 	where product_no=#{productNo} and member_nickname=#{sessionMemberNickname}
 	</select>
-	<!-- 성승민 상세조회
+	
+	<!-- 성승민 상세조회 
 	<select id="detailOrder" parameterType="_int" resultType="mo">
 		select
 		a.ORDER_OPTION_NO as orderOptionNo,
@@ -401,8 +403,7 @@
 		b.order_no = #{orderNo}
 		order by order_option_no asc
 	</select>
-	 -->
-	
+	-->
 	<select id="sellerList" resultType="ms" parameterType="_int">
 		select
 		a.ORDER_OPTION_NO as orderOptionNo,
@@ -436,7 +437,7 @@
 		order_option a,order_tbl b,product c
 		where
 		a.order_no =b.order_no and a.product_no=c.product_no and
-		c.milkit_writer=103
+		c.milkit_writer=${milkitWriter}
 
 
 	</select>
@@ -878,7 +879,7 @@
 	</delete>
 	
 		<insert id="returnPoint" parameterType="map">
-	insert into point values (POINT_SEQ.nextval,#{memberNo} ,1,#{orderSale} ,sysdate,'주문취소완료')
+	insert into point values (POINT_SEQ.nextval,#{memberNo} ,1,#{orderSale} ,to_char(sysdate,'yyyy-mm-dd'),'주문취소완료')
 	</insert>
 	
 		<update id="upPoint" parameterType="map">

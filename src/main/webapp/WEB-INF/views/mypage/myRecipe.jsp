@@ -52,14 +52,9 @@ margin-top:120px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
+ display:block;
 }
-.tte{
-overflow: hidden;
-  text-overflow: ellipsis;
-   white-space: nowrap;
-   width:250px;
-   }
+
 </style>
 </head>
 <body>

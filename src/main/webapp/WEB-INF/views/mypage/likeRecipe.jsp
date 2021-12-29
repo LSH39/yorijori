@@ -54,7 +54,7 @@ margin-top:120px;
 }
 .pagenation{
 margin-top:200px;
-margin-left:370px;
+margin-left:600px;
 }
 
 .pagenation a{
@@ -69,13 +69,13 @@ color: #9F90CF;
 overflow:hidden;
 text-overflow: ellipsis;
  white-space: nowrap;
-
- background-color:yellow;
+  display:block;
 }
 .title{
 overflow:hidden;
 text-overflow: ellipsis;
  white-space: nowrap;
+ display:block;
 
 }
 </style>

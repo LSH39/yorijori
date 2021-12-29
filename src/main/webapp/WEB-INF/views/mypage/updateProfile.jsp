@@ -39,15 +39,15 @@
 	margin-top: 20px;
 }
 /* 메인 영역 */
-.main {
+.main1 {
 	width: 1200px;
 	margin: 0 auto;
 	margin-top: 50px;
 	overflow: hidden;
-	margin-bottom:20px;
+	margin-bottom:40px;
 }
 
-.main>div {
+.main1>div {
 	float: left;
 }
 /* 메인 내부 서브 네비 */
@@ -220,7 +220,7 @@ function loadImg(obj) {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="main">
+	<div class="main1">
 		<c:choose>
 			<c:when test="${sessionScope.m.memberLevel==1}">
 				<jsp:include page="/WEB-INF/views/mypage/memberNavi.jsp" />

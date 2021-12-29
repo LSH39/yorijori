@@ -141,7 +141,7 @@ margin-top:120px;
 							
 						</tr>
 						<tr>
-							<td id="content"><a href="#">${md.dmContent }</a></td>
+							<td id="content">${md.dmContent }</td>
 						</tr>
 						<tr>
 							<td id="time">${md.dmDate}</td>

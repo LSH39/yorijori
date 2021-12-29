@@ -58,11 +58,11 @@
 .win{
     width: 250px;
     height:430px;
-    background-color:rgb(240, 240, 191);
+    background-color:rgb(250, 250, 186);
     float: left;
     margin-left: 30px;
     margin-right: 10px;
-    margin-top: 20px;
+    margin-top: 50px;
     
 }
 #recipeI{
@@ -192,7 +192,7 @@ overflow:hidden;
                 </div>
                 <div class="winnerName">
                 <a href="/profile.do?memberId=${ct.memberId }">
-                  <span ><img id="wina" src="resources/upload/member_profile/${ct.profilePath} ">&emsp;<b>(우승)${ct.memberNickName }</b></span>&emsp;
+                  <span ><img id="wina" src="resources/upload/member_profile/${ct.profilePath }" >&emsp;<b>(우승)${ct.memberNickName }</b></span>&emsp;
               </a>
               </div>
               </div>

@@ -43,7 +43,8 @@
 	width: 1200px;
 	margin: 0 auto;
 	margin-top: 50px;
-	overflow: hidden;
+	
+	margin-bottom:40px;
 }
 
 .main>div {
