@@ -243,34 +243,32 @@ public class RecipeController {
 				m.setMaterialName(m.getMNameList()[i]);
 				result = service.updateMaterial(m);
 			}
-			String[] mNameList2 = request.getParameterValues("mNameList2");
-			for (int i = 0; i < mNameList2.length; i++) {
-				m.setMAmount(m.getMAmountList2()[i]);
-				m.setMaterialName(m.getMNameList2()[i]);
-				String mName = m.getMaterialName();
-				if (mName != "") {
+			String[] mNameList = request.getParameterValues("mNameList");
+			int noNum = mNoList.length;
+			if(mNameList.length>mNoList.length) {
+			
+				for (int i = noNum; i < mNameList.length; i++) {
+					m.setMAmount(m.getMAmountList()[i]);
+					m.setMaterialName(m.getMNameList()[i]);				
 					result = service.insertMaterial(m, recipeNo);
-				} else {
-					System.out.println(m.getMaterialName());
 				}
-
-			}
-			String[] rContentList = request.getParameterValues("rContentList");
-			for (int i = 0; i < rContentList.length; i++) {
+	
+			}	
+			
+			String [] rcNoList = request.getParameterValues("rcNoList");
+			for (int i = 0; i < rcNoList.length; i++) {
 				rc.setRFileNo(Integer.parseInt(rc.getRcNoList()[i]));
 				rc.setRecipeContent(rc.getRContentList()[i]);
 				result = service.updateRecipeContent(rc);
 			}
-
-			String[] rContentList2 = request.getParameterValues("rContentList2");
-			for (int i = 0; i < rContentList2.length; i++) {
-				rc.setRecipeContent(rc.getRContentList2()[i]);
-				String content = rc.getRecipeContent();
-				if(content != "") {
-					
-				
+			int rcNo = rcNoList.length;
+			String[] rContentList = request.getParameterValues("rContentList");
+			if(rcNoList.length<rContentList.length) {		
+			
+			for (int i = rcNo; i < rContentList.length; i++) {
+				rc.setRecipeContent(rc.getRContentList()[i]);
+			
 				if (files[i].isEmpty()) {
-
 				} else {
 					String savepath2 = request.getSession().getServletContext()
 							.getRealPath("/resources/upload/recipeContent/");
@@ -278,9 +276,8 @@ public class RecipeController {
 					rc.setFilename(upFile.getFilename());
 					rc.setFilepath(upFile.getFilepath());
 					result = service.insertContent(rc, recipeNo);
-				}
-			}else{
-				System.out.println(content);
+			
+			}
 			}
 			}
 			if (result > 0) {

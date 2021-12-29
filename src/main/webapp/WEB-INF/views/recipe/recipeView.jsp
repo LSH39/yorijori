@@ -152,8 +152,9 @@
 					<div class="conNum">${i.count }</div>
 					<div class="conText">${rc.rContentBr }</div>
 					<img src="/resources/upload/recipeContent/${rc.filepath }">
-					<hr>
+					
 				</div>
+				
 			</c:forEach>
 		</div>
 
