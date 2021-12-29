@@ -77,10 +77,10 @@ public class MilkitController {
 		int result = service.insertMilkit(p);
 		if(result>0) {
 			model.addAttribute("msg", "등록성공");
-			model.addAttribute("loc", "/milkitList.do");
+			model.addAttribute("loc", "/milkitList.do?boardNo=1");
 		}else {
 			model.addAttribute("msg", "등록실패");
-			model.addAttribute("loc", "/milkitList.do");
+			model.addAttribute("loc", "/milkitList.do?boardNo=1");
 		}
 		
 		return "common/msg";
@@ -185,10 +185,10 @@ public class MilkitController {
 		int result = service.updateMilkit(p);
 		if(result>0) {
 		model.addAttribute("msg", "수정 성공");
-		model.addAttribute("loc", "/milkitList.do");
+		model.addAttribute("loc", "/milkitList.do?boardNo=1");
 		}else {
 			model.addAttribute("msg", "수정 실패");
-			model.addAttribute("loc", "/milkitList.do");
+			model.addAttribute("loc", "/milkitList.do?boardNo=1");
 		}
 		return "common/msg";
 	}
