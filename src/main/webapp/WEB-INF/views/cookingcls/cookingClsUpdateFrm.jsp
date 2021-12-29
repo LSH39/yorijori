@@ -100,7 +100,7 @@
 						<div class="form-group row">
 							<div class="col-sm-6"></div>
 							<div class="col-sm-6">
-								<h5>클래스 정원(최소 10명 이상)</h5>
+								<h5>클래스 정원(최소 40명 이상)</h5>
 							</div>
 							
 						</div>
@@ -122,10 +122,10 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6">
-								<h5>클래스 시간</h5>
+								<h5>클래스 시간(최소 3시간 이상)</h5>
 							</div>
 							<div class="col-sm-6">
-								<h5>클래스 날짜</h5>
+								<h5>클래스 날짜<span style="color:gray;">(기간은 최소 일주일, 시작 날짜는 이틀 뒤 부터 선택 가능)</span></h5>
 							</div>
 						</div>
 						<div class="form-group row mb-2">
@@ -400,7 +400,7 @@
 			//클래스 인원수
             $("#classNop").keyup(function(){
             	let nop = $(this).val();
-            	if(nop.substring(0, 1) != 0 && nop >= 10){
+            	if(nop.substring(0, 1) != 0 && nop >= 40){
             		$(".result").eq(1).html("올바르게 입력됐습니다.");
             		$(".result").eq(1).css("color", "blue");
             		classNopChk = true;

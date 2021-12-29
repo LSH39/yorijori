@@ -84,7 +84,7 @@
 								<h5>상세 주소</h5>
 							</div>
 							<div class="col-sm-6">
-								<h5>클래스 정원(최소 10명 이상)</h5>
+								<h5>클래스 정원(최소 40명 이상)</h5>
 							</div>
 							
 						</div>
@@ -364,7 +364,7 @@
 			//클래스 인원수
             $("#classNop").keyup(function(){
             	let nop = $(this).val();
-            	if(nop.substring(0, 1) != 0 && nop >= 10){
+            	if(nop.substring(0, 1) != 0 && nop >= 40){
             		$(".result").eq(1).html("올바르게 입력됐습니다.");
             		$(".result").eq(1).css("color", "blue");
             		classNopChk = true;
