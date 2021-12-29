@@ -105,7 +105,7 @@
 		situation,
 		material
 		from recipe_board
-		where recipe_writer=#{memberNo}
+		where recipe_writer=#{memberNo} and recipe_delete=1
 
 	</select>
 	<select id="myClass" parameterType="_int" resultType="mcr">
@@ -235,12 +235,12 @@
 		(select profile_path from member where member_no=recipe_writer)as profilePath
 		from recipe_board a
 		where a.recipe_writer in (SELECT follow_no from follow where
-		member_no=#{memberNo})
+		member_no=#{memberNo})  and a.recipe_delete=1
 
 	</select>
 	<select id="followCount" resultType="_int" parameterType="_int">
 		select count(*) from recipe_board where recipe_writer in (SELECT follow_no
-		from follow where member_no=#{memberNo})
+		from follow where member_no=#{memberNo} and recipe_delete=1)
 
 	</select>
 	<select id="chatList" resultType="mc" parameterType="_int">
@@ -619,7 +619,7 @@
 
 		select count(*) from recipe_board rb,recipe_like rl
 		where
-		rb.recipe_no=rl.recipe_no and rl.member_no=#{memberNo}
+		rb.recipe_no=rl.recipe_no and rl.member_no=#{memberNo} and rb.recipe_delete=1
 	</select>
 
 	<select id="likeRecipe" resultType="lr" parameterType="map">
@@ -645,7 +645,7 @@
 		memberNickname
 		from recipe_board rb,recipe_like rl where
 		rb.recipe_no=rl.recipe_no and
-		rl.member_no=#{memberNo} order by
+		rl.member_no=#{memberNo} and rb.recipe_delete=1 order by
 		recipe_date desc)r)
 
 		where rnum between #{start} and #{end}
