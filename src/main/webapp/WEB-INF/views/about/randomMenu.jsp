@@ -212,9 +212,9 @@
         if(number==8){
             return;
         }else if(number<8){
+            number += 1;
             $("#num").text(number);
             $(".textInput").eq(number).css("display","block");
-            number += 1;
             wheelDraw();
         }
     });
